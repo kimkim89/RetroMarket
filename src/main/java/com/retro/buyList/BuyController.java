@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.Getter;
+
 @Controller
 @RequestMapping("/buy/*")
 public class BuyController {
@@ -21,5 +23,12 @@ public class BuyController {
 		return mav;
 	}
 	
+	//구매 페이지 이동
+	@RequestMapping(value = "buyPage")
+	public ModelAndView buyPage() {
+		
+		mav.setViewName("checkout");
+		return mav;
+	}
 	
 }

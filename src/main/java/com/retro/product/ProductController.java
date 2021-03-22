@@ -29,4 +29,11 @@ public class ProductController {
 		return mav;
 	}	
 	
+	//상품 상세보기
+	@RequestMapping(value = "productDetail")
+	public ModelAndView productDetail() {
+		mav.setViewName("product-detatils");
+		return mav;
+	}
+	
 }

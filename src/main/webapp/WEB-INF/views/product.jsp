@@ -72,7 +72,7 @@
                         </form>
                     </div>
                 </div>
-                <!-- Nav Card -->
+                <!-- Nav Card 상품리스트 시작 -->
                 <div class="tab-content" id="nav-tabContent">
                     <!-- card one -->
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -82,7 +82,7 @@
                             <div class="popular-img">
                                 <img src="${contextPath}/resources/assets/img/gallery/s1.GIF" alt="">
                                 <div class="img-cap">
-                                    <span>상품 보기</span>
+                                    <a href="${contextPath}/product/productDetail"><span>상품 보기</span></a>
                                 </div>
                                 <div class="favorit-items">
                                     <span class="flaticon-heart"></span>

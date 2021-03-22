@@ -24,13 +24,8 @@
                         <!-- Header Right -->
                         <div class="header-right">
                             <ul>
-                                <li>
-                                    <div class="nav-search search-switch">
-                                        <span class="flaticon-search"></span>
-                                    </div>
-                                </li>
                                 <li> <a href="${contextPath}/member/login"><span class="flaticon-user"></span></a></li>
-                                <li><a href="${contextPath}/product/temporary"><span class="flaticon-shopping-cart"></span></a> </li>
+                                <li><a href="${contextPath}/buy/cartList"><span class="flaticon-shopping-cart"></span></a> </li>
                             </ul>
                         </div>
                     </div>

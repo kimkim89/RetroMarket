@@ -4,6 +4,6 @@
 
 <configuration>
 	<typeAliases>
-	
+		<typeAlias type="com.retro.member.MemberVO" alias="memberVO"/>
 	</typeAliases>
 </configuration>

@@ -5,13 +5,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Watch shop | eCommers</title>
-    <%@ include file="./include/Top.jsp" %>
+    <title>돼지 김민지</title>
+    <%@ include file="../include/Top.jsp" %>
 </head>
 <body>
     <header>
         <!-- Header Start -->
-        <jsp:include page="./include/TopNavi.jsp" />
+        <jsp:include page="../include/TopNavi.jsp" />
         <!-- Header End -->
     </header>
     <main>
@@ -20,11 +20,11 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6">
-                        <div class="login_part_text text-center">
-                            <div class="login_part_text_iner">
-                                <h2>회원이 아니야 ?</h2>
-                                <p>There are advances being made in science and technology
-                                    everyday, and a good example of this is the</p>
+                        <div class="login_part_text text-center" style="min-width: 100%; background-image: none; background-color: #3a4f77e8;">
+                            <div class="login_part_text_iner" >
+                                <h2>아직 회원이 아니신가요? ?</h2>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;지금 회원가입 하면 바삭바삭한 혜택이 한 가득!! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>             
+									1분만에 회원가입 하고!   간식사고!   적립받자!</p>
                                 <a href="${contextPath}/member/joinPage" class="btn_3">가입하러 가기</a>
                             </div>
                         </div>
@@ -45,12 +45,12 @@
                                     <div class="col-md-12 form-group">
                                         <div class="creat_account d-flex align-items-center">
                                             <input type="checkbox" id="f-option" name="selector">
-                                            <label for="f-option">Remember me</label>
+                                            <label for="f-option">ID 기억하기</label>
                                         </div>
                                         <button type="button" value="submit" class="btn_3">
                                             	로그인
                                         </button>
-                                        <a class="lost_pass" href="#">ID/비밀번호 찾기</a>
+                                        <a class="lost_pass" href="${contextPath}/member/findPage">ID/비밀번호 찾기</a>
                                     </div>
                                 </form>
                             </div>
@@ -64,7 +64,7 @@
     <footer>
         
     </footer>
-    	<jsp:include page="./include/Footer2.jsp" />
+    	<jsp:include page="../include/Footer2.jsp" />
 </body>
     
 </html>
