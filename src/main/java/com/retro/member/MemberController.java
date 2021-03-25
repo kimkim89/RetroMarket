@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -58,13 +60,33 @@ public class MemberController {
 	}	
 	
 	//회원가입
-	@RequestMapping(value = "userJoin")
+	@RequestMapping(value = "userJoin", method= RequestMethod.POST)
 	public ModelAndView userjoin(MemberVO memberVO) {
 		memberService.userJoin(memberVO);
 		
 		mav.setViewName("redirect:/index/main");
 		return mav;
 	}
+	
+	//ID 중복 확인
+	@RequestMapping(value = "idcheck", method= RequestMethod.POST)
+	@ResponseBody
+	public int idcheck(String id) {
+		// 0: 사용가능 아이디 , 1: 존재하는 아이디
+		int result = 0; 
+		result  = memberService.idcheck(id);
+		return result;
+	}
 		
+	//닉네임 중복 확인
+	@RequestMapping(value = "nicknameCheck", method= RequestMethod.POST)
+	@ResponseBody
+	public int nicknameCheck(String nickname) {
+		// 0: 사용가능 닉네임 , 1: 존재하는 닉네임
+		int result = 0; 
+		result  = memberService.nicknameCheck(nickname);
+		return result;
+	}	
+	
 	
 }
