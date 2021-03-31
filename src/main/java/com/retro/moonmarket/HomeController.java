@@ -19,7 +19,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
-		
+//		String notice = "";
+//		mav.addObject("notice", notice);
 		mav.setViewName("index");
 		return mav;
 	}

@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Component
 public class MemberVO {
-	
+	//멤버 테이블
 	private String id;
 	private String name;
 	private String pwd;
@@ -15,6 +15,8 @@ public class MemberVO {
 	private String email;
 	private String address1;
 	private String address2;
+	private String address3;
 	private String phone;
+	private String authkey;
 	
 }
