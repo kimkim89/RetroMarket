@@ -21,13 +21,13 @@
     			
     			if(answer == "Confidence") {
     				alert("정답입니다! 감사합니다 🙂");
-    				location.href="${contextPath}/index/challenge";
+    				location.href="${contextPath}/index/beHero";
     			} else if(answer == "") {
     				alert("때론 정답이 아닌 믿음이 예상치 못한 기적을 만들어 내기도 하죠 🙂 감사합니다");
-    				location.href="${contextPath}/index/challenge";
+    				location.href="${contextPath}/index/beHero";
     			} else if(answer == "Just Do It") {
     				alert("Just Do It 👊");
-    				location.href="${contextPath}/index/challenge";
+    				location.href="${contextPath}/index/beHero";
     			} else {
     				alert("실패(패배)의 참 뜻은 다시 도전해보라는 의미 아닐까요? 🙂");
     				$("#Anything").val("");
@@ -64,12 +64,12 @@
                 
                 <div class="Greetings">
                 	인생은 Birth에서 Death로가는 수많은<mark>Choice</mark> 연속이다.<br>
-                	쥬다(ZUDA)에 지원한 엄성문 이라고합니다. <br><br>
+                	스타트업 ! 히어로(HERO)에 지원하는 엄성문 이라고합니다. <br><br>
                 </div>
                 
                 <br>
                 <div class="Choice">
-                	Q1. 제가 추가 하고싶었던 C는 무엇일까요?
+                	Q1. 정답을 입력해주시면 이동합니다.!
                 </div>
                 <div class="Challenge" style="width: 50%;">
 	                <form class="Funny">
@@ -94,7 +94,7 @@
                     <div class="col-xl-7 col-lg-8 col-md-7">
                         <div class="footer-copy-right">
                             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Nice Meet You <b>Im Nothing But I Can Be Anything!!</b> | This Site is made 🙂  by <b><mark>Developer Moon</mark></b>
+  Nice Meet You <b>Im Nothing But I Can Anything!!</b> | This Site is made 🙂  by <b><mark>Developer Moon</mark></b>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>                  
                         </div>
                     </div>

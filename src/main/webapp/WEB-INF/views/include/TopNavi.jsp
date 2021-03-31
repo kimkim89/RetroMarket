@@ -9,7 +9,7 @@
                     <div class="menu-wrapper">
                         <!-- Logo -->
                         <div class="logo" >
-                            <a href="#" id="zzz"><img src="${contextPath}/resources/assets/img/logo/kmj.GIF" alt="" style="height: 75px; border-radius: 70%;"></a>
+                            <a href="${contextPath}/index/main" id="zzz"><img src="${contextPath}/resources/assets/img/logo/MainLogo1.png" alt="" style="height: 75px; "></a>
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu d-none d-lg-block">
@@ -17,7 +17,7 @@
                                 <ul id="navigation">  
                                     <li><a href="${contextPath}/index/main">메인</a></li>
                                     <li class="hot"><a href="${contextPath}/product/productList">상품</a></li>
-                                    <li><a href="${contextPath}/product/temporary">Contac Developer</a></li>
+                                    <li><a href="${contextPath}/product/temporary">Contact Developer</a></li>
                                 </ul>
                             </nav>
                         </div>

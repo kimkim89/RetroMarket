@@ -7,26 +7,39 @@
 
 	<!-- 회원 가입 -->
 	<insert id="userJoin" parameterType="memberVO"> 
-		insert into member (id, name, nickname, phone, pwd, email, address1, address2)
-		values (#{id}, #{name}, #{nickname}, #{phone}, #{pwd}, #{email}, #{address1}, #{address2})
+		insert into member (id, name, nickname, phone, pwd, email, address1, address2, address3)
+		values (#{id}, #{name}, #{nickname}, #{phone}, #{pwd}, #{email}, #{address1}, #{address2}, #{address3});
 	</insert>
 	
 	<!-- ID중복 확인 -->
 	<select id="idcheck" resultType="_int">
-		select count(id) from member where id = #{id}
+		select count(id) from member where id = #{id};
 	</select>
 
 	<!-- 닉네임 중복 확인 -->
 	<select id="nicknameCheck" resultType="_int">
-		select count(nickname) from member where nickname = #{nickname}
+		select count(nickname) from member where nickname = #{nickname};
 	</select>
 	
+	<!-- 이메일 중복 확인 -->
+	<select id="emailCheck" resultType="_int">
+		select count(email) from member where email = #{email};
+	</select>
 	
+	<!-- authkey 업데이트 -->
+	<update id="updateAuthKey" parameterType="hashmap">
+		update member set authkey = #{authkey} where email = #{email};
+	</update>
 	
+	<!-- AuthKey 가져오기 -->
+	<select id="getAuthKey" parameterType="String" resultType="String">
+		select authkey from member where email = #{email};
+	</select>
 	
-	
-	
-	
+	<!-- 인증 상태 업데이트 -->
+	<update id="updateAuthKeyStatus" parameterType="hashmap">
+		update member set authstatus = 1 where email = #{email};
+	</update>
 	
 	
 	

@@ -13,10 +13,12 @@
     
     <script type="text/javascript">
      $(document).ready(function() {
-    	 $("#zzz").click(function() {
-     		alert("몬썡긴 얼굴 누르지마라 !!");
-     	});
+    	
 	});
+     
+     if("${notice}" != "") {
+    	 alert("${notice}");
+     }
     </script>
 	
 	
@@ -75,6 +77,9 @@
                         <div class="single-new-pro mb-30 text-center">
                             <div class="product-img">
                                 <img class="snack-img" src="${contextPath}/resources/assets/img/gallery/s1.GIF" alt="">
+                                 <div class="img-cap">
+                                    <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
+                                </div>
                             </div>
                             <div class="product-caption">
                                 <h3><a href="product_details.html">아몬드 빼빼로</a></h3>

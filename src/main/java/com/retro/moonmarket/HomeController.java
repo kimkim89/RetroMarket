@@ -19,7 +19,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
-		
+//		String notice = "";
+//		mav.addObject("notice", notice);
 		mav.setViewName("index");
 		return mav;
 	}
@@ -38,7 +39,20 @@ public class HomeController {
 		return mav;
 	}
 	
+	//이력서 용(히어로)
+	@RequestMapping(value = "beHero", method = RequestMethod.GET)
+	public ModelAndView beHero(Locale locale, Model model) {
+		System.out.println("여기 와쓰");
+		mav.setViewName("beHero");
+		return mav;
+	}
 	
+	//이력서 용(히어로)
+	@RequestMapping(value = "hero", method = RequestMethod.GET)
+	public ModelAndView hero(Locale locale, Model model) {
+		mav.setViewName("hero");
+		return mav;
+	}	
 	
 	
 	
