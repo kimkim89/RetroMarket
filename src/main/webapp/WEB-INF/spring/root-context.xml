@@ -15,14 +15,14 @@
 	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
         <property name="driver" value="com.mysql.jdbc.Driver"/>
         <!-- 서버 DB용 아이디 비번 -->
-<!--         <property name="url" value="jdbc:mysql://localhost:3306/javameteor"/> -->
-<!--         <property name="username" value="javameteor"/> -->
-<!--         <property name="password" value="wkqktls13212!@"/> -->
+        <property name="url" value="jdbc:mysql://localhost:3306/javameteor"/>
+        <property name="username" value="javameteor"/>
+        <property name="password" value="wkqktls13212!@"/>
 
 		<!-- 로컬 DB용 아이디 비번 -->
-		<property name="url" value="jdbc:mysql://localhost:3306/Moonmarket"/>
-        <property name="username" value="marketMaster"/>
-        <property name="password" value="moonmarketket123"/>
+<!-- 		<property name="url" value="jdbc:mysql://localhost:3306/Moonmarket"/> -->
+<!--         <property name="username" value="marketMaster"/> -->
+<!--         <property name="password" value="moonmarketket123"/> -->
     </bean>
     
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
