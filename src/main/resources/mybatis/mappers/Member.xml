@@ -41,6 +41,10 @@
 		update member set authstatus = 1 where email = #{email};
 	</update>
 	
+	<!-- 비밀번호 일치 여부 확인 -->
+	<select id="pwdCheck" resultType="String">
+		select pwd from member where id = #{id};
+	</select>
 	
 	
 </mapper>

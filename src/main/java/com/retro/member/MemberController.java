@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,12 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private MailSendService mss;
+	
+	@RequestMapping(value = "test")
+	public void test() {
+		
+		System.out.println("왔다 ");
+	}
 	
 	//로그인 페이지 이동
 	@RequestMapping(value = "login")
@@ -105,7 +113,7 @@ public class MemberController {
 	@ResponseBody
 	public int idcheck(String id) {
 		// 0: 사용가능 아이디 , 1: 존재하는 아이디
-		int result = 0; 
+		int result = 0;
 		result  = memberService.idcheck(id);
 		return result;
 	}
@@ -152,7 +160,37 @@ public class MemberController {
 		return mav;
 	}
 	
+	//회원 로그인
+	@RequestMapping(value = "userLogin")
+	public ModelAndView userLogin(MemberVO memberVO, HttpServletRequest request, RedirectAttributes attributes) {
+		ModelAndView mav = new ModelAndView();
+		
+		System.out.println("와쓰");
+		
+		HashMap<String, Object> map = memberService.userLogin(memberVO, request, attributes);
+		
+		mav.addObject("notice", map.get("notice"));
+		mav.setViewName((String) map.get("viewPages"));
+		return mav;
+	}
 	
+	//회원 로그아웃
+	@RequestMapping(value = "logout")
+	public ModelAndView logout(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		request.getSession().removeAttribute("user_id");
+		mav.setViewName("redirect:/index/main");
+		return mav;
+	}
+	
+	//마이페이지 이동
+	@RequestMapping(value = "mypage")
+	public ModelAndView mypage() {
+		// 세션에 유저아이디값으로 DB에서 정보 긁어와서 뿌려주기 ㅇㅇㅇㅇㅇㅇㅇㅇ
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/myPage");
+		return mav;
+	}
 	
 	
 	

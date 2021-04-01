@@ -24,8 +24,16 @@
                         <!-- Header Right -->
                         <div class="header-right">
                             <ul>
+                             <c:choose>
+                            	<c:when test="${user_id != null}">
+                            	<li><b>${user_id}</b>님 반갑습니다.</li>
+                            	<li> <a href="${contextPath}/member/mypage"><span class="flaticon-user"></span></a></li>
+                            	<li><a href="${contextPath}/buy/cartList"><span class="flaticon-shopping-cart"></span></a> </li>
+                            	</c:when>
+                            	<c:otherwise>
                                 <li> <a href="${contextPath}/member/login"><span class="flaticon-user"></span></a></li>
-                                <li><a href="${contextPath}/buy/cartList"><span class="flaticon-shopping-cart"></span></a> </li>
+                                </c:otherwise>
+                             </c:choose>
                             </ul>
                         </div>
                     </div>

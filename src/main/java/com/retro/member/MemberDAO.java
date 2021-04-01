@@ -50,4 +50,9 @@ public class MemberDAO {
 
 	}
 
+	//비밀번호 일치여부 확인
+	public String pwdCheck(String id) {
+		return sqlSession.selectOne("mapper.Member.pwdCheck", id);
+	}
+
 }
