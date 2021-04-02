@@ -5,11 +5,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />     
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US" dir="ltr">
 
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
@@ -26,7 +26,6 @@
 	<div class="wrapper">
 	
 		<jsp:include page="./include/sidebar.jsp" />
-	
 			<main class="content">
 				<div class="container-fluid p-0">
 
