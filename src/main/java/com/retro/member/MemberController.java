@@ -41,8 +41,6 @@ public class MemberController {
 		return mav;
 	}
 	
-	//로그인 기능 -> 이메일 인증 안되어있으면 인증 먼저해달라고 알림 설정
-	
 	//회원가입 페이지 이동
 	@RequestMapping(value = "joinPage")
 	public ModelAndView joinPage() {
