@@ -139,13 +139,15 @@ public class MemberController {
 	}		
 	
 	//이메일 인증 확인
-	@RequestMapping(value = "signUpConfirm")
+	@RequestMapping(value = "signUpConfirm", method= RequestMethod.GET)
 	public ModelAndView signUpConfirm(@RequestParam Map<String, String> map, RedirectAttributes attributes) {
 		ModelAndView mav = new ModelAndView();
-		
+		System.out.println("와쓰");
 		//이메일 인증 authKey와 DB authKey일치 여부 확인
 		String emailAuthKey = map.get("authKey");
 		String email = map.get("email");
+		System.out.println(emailAuthKey);
+		System.out.println(email);
 		//DB authKey 가져오기
 		String authKey = memberService.getAuthKey(email);
 		String notice = "";
