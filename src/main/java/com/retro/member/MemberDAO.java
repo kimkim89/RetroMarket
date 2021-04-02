@@ -55,4 +55,9 @@ public class MemberDAO {
 		return sqlSession.selectOne("mapper.Member.pwdCheck", id);
 	}
 
+	//이메일 인증여부 확인
+	public int emailStatusCheck(String id) {
+		return sqlSession.selectOne("mapper.Member.emailStatusCheck", id);
+	}
+
 }

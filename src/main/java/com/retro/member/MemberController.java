@@ -163,12 +163,9 @@ public class MemberController {
 	//회원 로그인
 	@RequestMapping(value = "userLogin")
 	public ModelAndView userLogin(MemberVO memberVO, HttpServletRequest request, RedirectAttributes attributes) {
+		
 		ModelAndView mav = new ModelAndView();
-		
-		System.out.println("와쓰");
-		
 		HashMap<String, Object> map = memberService.userLogin(memberVO, request, attributes);
-		
 		mav.addObject("notice", map.get("notice"));
 		mav.setViewName((String) map.get("viewPages"));
 		return mav;
