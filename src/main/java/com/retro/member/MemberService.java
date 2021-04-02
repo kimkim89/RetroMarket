@@ -64,25 +64,29 @@ public class MemberService {
 		//아이디 존재 여부 0 : 회원x 1 : 회원
 		int idCheck =  memberDAO.idcheck(memberVO.getId());
 		
+		
 		//아이디 존재여부 확인	
 		if(idCheck == 1) {
+			int emailCheck = memberDAO.emailStatusCheck(memberVO.getId());
 			String pwd = usersha256.encrypt(memberVO.getPwd());
-			System.out.println(pwd);
-			System.out.println(memberDAO.pwdCheck(memberVO.getId()));
 			//비밀번호 일치여부 확인
 			if(pwd.equals(memberDAO.pwdCheck(memberVO.getId()))) {
-				request.getSession().setAttribute("user_id", memberVO.getId());
-				viewPages = "redirect:/index/main";
+				//이메일 인증 확인
+				if(emailCheck != 1) {
+					notice = "이메일 인증이 되지 않았습니다. 메일인증을 진행해주세요.";
+					viewPages = "member/login";
+				} else {
+					request.getSession().setAttribute("user_id", memberVO.getId());
+					viewPages = "redirect:/index/main";
+				}
 			} else {
 				notice = "비밀번호가 틀렸습니다.";
 				viewPages = "member/login";
 			}
-			
 		} else {
 			notice = "입력하신 ID의 정보가 없습니다.";
 			viewPages = "member/login";
 		}
-		
 		map.put("notice", notice);
 		map.put("viewPages", viewPages);
 		return map;

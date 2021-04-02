@@ -41,8 +41,6 @@ public class MemberController {
 		return mav;
 	}
 	
-	//로그인 기능 -> 이메일 인증 안되어있으면 인증 먼저해달라고 알림 설정
-	
 	//회원가입 페이지 이동
 	@RequestMapping(value = "joinPage")
 	public ModelAndView joinPage() {
@@ -139,13 +137,15 @@ public class MemberController {
 	}		
 	
 	//이메일 인증 확인
-	@RequestMapping(value = "signUpConfirm")
+	@RequestMapping(value = "signUpConfirm", method= RequestMethod.GET)
 	public ModelAndView signUpConfirm(@RequestParam Map<String, String> map, RedirectAttributes attributes) {
 		ModelAndView mav = new ModelAndView();
-		
+		System.out.println("와쓰");
 		//이메일 인증 authKey와 DB authKey일치 여부 확인
 		String emailAuthKey = map.get("authKey");
 		String email = map.get("email");
+		System.out.println(emailAuthKey);
+		System.out.println(email);
 		//DB authKey 가져오기
 		String authKey = memberService.getAuthKey(email);
 		String notice = "";
@@ -163,12 +163,9 @@ public class MemberController {
 	//회원 로그인
 	@RequestMapping(value = "userLogin")
 	public ModelAndView userLogin(MemberVO memberVO, HttpServletRequest request, RedirectAttributes attributes) {
+		
 		ModelAndView mav = new ModelAndView();
-		
-		System.out.println("와쓰");
-		
 		HashMap<String, Object> map = memberService.userLogin(memberVO, request, attributes);
-		
 		mav.addObject("notice", map.get("notice"));
 		mav.setViewName((String) map.get("viewPages"));
 		return mav;

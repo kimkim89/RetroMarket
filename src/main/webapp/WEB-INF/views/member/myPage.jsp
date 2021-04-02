@@ -9,9 +9,15 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
+		
 		$("#logout_btn").click(function() {
 			location.href = "${contextPath}/member/logout";
 		});
+		
+		$("#admin_btn").click(function() {
+			location.href = "${contextPath}/admin/adminIndex";
+		});
+		
 	});
 
 </script>
@@ -31,6 +37,9 @@
 	</div>
 	<div align="center">
 	<button id="logout_btn" type="button" style="color: black;"> 로그아웃</button>
+	</div>
+	<div align="center">
+	<button id="admin_btn" type="button" style="color: black;"> 관리자 페이지 이동</button>
 	</div>
 
 	<footer> </footer>

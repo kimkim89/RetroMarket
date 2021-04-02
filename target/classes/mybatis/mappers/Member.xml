@@ -46,5 +46,10 @@
 		select pwd from member where id = #{id};
 	</select>
 	
+	<!-- 이메일 인증 여부 확인 -->
+	<select id="emailStatusCheck" resultType="_int">
+		select authstatus from member where id = #{id};
+	</select>
+	
 	
 </mapper>
