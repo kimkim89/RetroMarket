@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />   
 <nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.html">
@@ -18,25 +22,25 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile.html">
+						<a class="sidebar-link" href="${contextPath}/admin/adminMember">
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">회원관리</span>
             </a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-settings.html">
+						<a class="sidebar-link" href="${contextPath}/admin/adminSales">
               <i class="align-middle" data-feather="settings"></i> <span class="align-middle">매출관리</span>
             </a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-invoice.html">
+						<a class="sidebar-link" href="${contextPath}/admin/adminVisitorLog">
               <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">방문자로그</span>
             </a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-blank.html">
+						<a class="sidebar-link" href="${contextPath}/admin/adminPoint">
               <i class="align-middle" data-feather="book"></i> <span class="align-middle">포인트 관리</span>
             </a>
 					</li>
@@ -45,17 +49,18 @@
 						Tools & Components
 					</li>
 					<li class="sidebar-item">
-						<a data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
+						<a href="${contextPath}/admin/adminProduct" data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
               <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">상품 관리</span>
             </a>
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="ui-alerts.html">재고 관리</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="ui-buttons.html">주문 관리</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/admin/adminProduct">상품 관리</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/admin/adminInventory">재고 관리</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/admin/adminOrder">주문 관리</a></li>
 						</ul>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="icons-feather.html">
+						<a class="sidebar-link" href="${contextPath}/admin/adminEvent">
               <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">이벤트 관리</span>
             </a>
 					</li>

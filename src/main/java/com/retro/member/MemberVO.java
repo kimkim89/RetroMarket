@@ -2,12 +2,9 @@ package com.retro.member;
 
 import org.springframework.stereotype.Component;
 
+import lombok.Data;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
+@Data
 @Component
 public class MemberVO {
 	//멤버 테이블
