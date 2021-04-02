@@ -25,7 +25,7 @@
 <body>
 	<div class="wrapper">
 	
-		<jsp:include page="./include/sidebar.jsp" />
+		<%@ include file="./include/sidebar.jsp" %>
 			<main class="content">
 				<div class="container-fluid p-0">
 
