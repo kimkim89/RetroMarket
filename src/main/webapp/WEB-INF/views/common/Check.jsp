@@ -46,52 +46,52 @@ $(document).ready(function () {
 	//공백 체크 및 가입 완료
 	$("#join-btn").click(function () {
 		
-		if($("#name").val() == "") {
+		if($("#name").val().replace(/(\s*)/g, "") == "") {
 			alert("이름을 입력해주세요");
 			$("#name").focus();
 			return false;
-		} else if($("#id").val() == "") {
+		} else if($("#id").val().replace(/(\s*)/g, "") == "") {
 			alert("ID를 입력해주세요.");
 			$("#id").focus();
 			return false;
-		} else if($("#nickname").val() == "") {
+		} else if($("#nickname").val().replace(/(\s*)/g, "") == "") {
 			alert("닉네임을 입력해주세요.");
 			$("#nickname").focus();
 			return false;
-		}  else if($("#pwd").val() == "") {
+		}  else if($("#pwd").val().replace(/(\s*)/g, "") == "") {
 			alert("비밀번호를 입력해주세요.");
 			$("#pwd").focus();
 			return false;
-		}  else if($("#pwdCheck").val() == "") {
+		}  else if($("#pwdCheck").val().replace(/(\s*)/g, "") == "") {
 			alert("비멀번호 확인란을 입력해주세요.");
 			$("#pwdCheck").focus();
 			return false;
-		} else if($("#email").val() == "") {
+		} else if($("#email").val().replace(/(\s*)/g, "") == "") {
 			alert("이메일을 입력해주세요.");
 			emailCheck = 0;
 			$("#email").focus();
 			return false;
-		} else if($("#address1").val() == "") {
+		} else if($("#address1").val().replace(/(\s*)/g, "") == "") {
 			alert("우편번호를 입력해주세요.");
 			$("#address1").focus();
 			return false;
-		} else if($("#address2").val() == "") {
+		} else if($("#address2").val().replace(/(\s*)/g, "") == "") {
 			alert("상세주소를 입력해주세요.");
 			$("#address2").focus();
 			return false;
-		} else if($("#phone").val() == "") {
+		} else if($("#phone").val().replace(/(\s*)/g, "") == "") {
 			alert("휴대폰번호를 입력해주세요.");
 			$("#phone").focus();
 			return false;
-		} else if($("#address1").val() == "") {
+		} else if($("#address1").val().replace(/(\s*)/g, "") == "") {
 			alert("우편번호를 입력해주세요.");
 			$("#address1").focus();
 			return false;
-		} else if($("#address2").val() == "") {
+		} else if($("#address2").val().replace(/(\s*)/g, "") == "") {
 			alert("주소를 입력해주세요.");
 			$("#address2").focus();
 			return false;
-		} else if($("#address3").val() == "") {
+		} else if($("#address3").val().replace(/(\s*)/g, "") == "") {
 			alert("상세주소를 입력해주세요.");
 			$("#address3").focus();
 			return false;
@@ -107,7 +107,8 @@ $(document).ready(function () {
 	
 	//ID 정규식
 	$("#id").blur(function() {
-		var id = $(this).val();
+		var id = $("#id").val().replace(/(\s*)/g, "");
+		$(this).val(id);
 		var str = "";
 		var idCheck = /^[a-z]+[a-z0-9]{5,19}$/g;
 		

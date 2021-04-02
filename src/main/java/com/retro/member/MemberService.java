@@ -1,9 +1,14 @@
 package com.retro.member;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
 public class MemberService {
@@ -47,7 +52,44 @@ public class MemberService {
 	//인증 상태 업데이트
 	public int updateAuthKeyStatus(String email) {
 		return memberDAO.updateAuthKeyStatus(email);
+	}
+
+	//회원 로그인
+	public HashMap<String, Object> userLogin(MemberVO memberVO, HttpServletRequest request, RedirectAttributes attributes) {
+		UserSha256 usersha256 = new UserSha256();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String notice = "";
+		String viewPages = "";
 		
+		//아이디 존재 여부 0 : 회원x 1 : 회원
+		int idCheck =  memberDAO.idcheck(memberVO.getId());
+		
+		
+		//아이디 존재여부 확인	
+		if(idCheck == 1) {
+			int emailCheck = memberDAO.emailStatusCheck(memberVO.getId());
+			String pwd = usersha256.encrypt(memberVO.getPwd());
+			//비밀번호 일치여부 확인
+			if(pwd.equals(memberDAO.pwdCheck(memberVO.getId()))) {
+				//이메일 인증 확인
+				if(emailCheck != 1) {
+					notice = "이메일 인증이 되지 않았습니다. 메일인증을 진행해주세요.";
+					viewPages = "member/login";
+				} else {
+					request.getSession().setAttribute("user_id", memberVO.getId());
+					viewPages = "redirect:/index/main";
+				}
+			} else {
+				notice = "비밀번호가 틀렸습니다.";
+				viewPages = "member/login";
+			}
+		} else {
+			notice = "입력하신 ID의 정보가 없습니다.";
+			viewPages = "member/login";
+		}
+		map.put("notice", notice);
+		map.put("viewPages", viewPages);
+		return map;
 	}
 
 	
