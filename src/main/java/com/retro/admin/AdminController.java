@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/admin/*")
 public class AdminController {
 	
-	//관리자 페이지 이동
+	//관리자 페이지 이동 ddd
 	@RequestMapping(value = "adminIndex")
 	public ModelAndView adminIndex() {
 		ModelAndView mav = new ModelAndView();
