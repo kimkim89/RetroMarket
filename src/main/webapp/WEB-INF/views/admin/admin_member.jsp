@@ -64,16 +64,18 @@
 											</tr>
 										</thead>
 										<tbody>
+										<c:forEach var="List" items="${memberList}">
 											<tr>
 												<th scope="row">#</th>
-												<td>1</td>
-												<td>2</td>
-												<td>3</td>
-												<td>4</td>
-												<td>5</td>												
+												<td>${List.name}</td>
+												<td>${List.phone }</td>
+												<td>${List.email }</td>
+												<td>${List.address1 }</td>
+												<td>${List.address2 }</td>												
 												<td><a href="#"><i class="align-middle" data-feather="edit-2"></i></a></td>
 												<td><a href="#"><i class="align-middle" data-feather="trash"></i></a></td>
 											</tr>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>

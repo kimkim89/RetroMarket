@@ -1,5 +1,9 @@
 package com.retro.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,24 +14,24 @@ import com.retro.member.MemberVO;
 @RequestMapping("/admin/*")
 public class AdminController {
 	
-	//관리자 페이지 이동 ddd
+	
+	//관리자 페이지 이동
 	@RequestMapping(value = "adminIndex")
 	public ModelAndView adminIndex() {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("왔는데 ? ");
 		mav.setViewName("admin/admin_main");
 		return mav;
 	}
 	
-	//회원관리
+	//회원관리 페이지 이동
 	@RequestMapping(value = "adminMember")
 	public ModelAndView adminMember() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/admin_member");
+		
 		return mav;
 	}
 	
-	//매출관리
+	//매출관리 페이지 이동
 	@RequestMapping(value = "adminSales")
 	public ModelAndView adminSales() {
 		ModelAndView mav = new ModelAndView();
@@ -35,7 +39,7 @@ public class AdminController {
 		return mav;
 	}
 	
-	//방문자로그
+	//방문자로그 페이지 이동
 	@RequestMapping(value = "adminVisitorLog")
 	public ModelAndView adminVisitorLog() {
 		ModelAndView mav = new ModelAndView();
@@ -43,7 +47,7 @@ public class AdminController {
 		return mav;
 	}	
 	
-	//포인트 관리
+	//포인트 관리 페이지 이동
 	@RequestMapping(value = "adminPoint")
 	public ModelAndView adminPoint() {
 		ModelAndView mav = new ModelAndView();
@@ -51,7 +55,7 @@ public class AdminController {
 		return mav;
 	}	
 	
-	//상품관리
+	//상품관리 페이지 이동
 	@RequestMapping(value = "adminProduct")
 	public ModelAndView adminProduct() {
 		ModelAndView mav = new ModelAndView();
@@ -59,7 +63,7 @@ public class AdminController {
 		return mav;
 	}	
 	
-	//재고관리
+	//재고관리 페이지 이동
 	@RequestMapping(value = "adminInventory")
 	public ModelAndView adminInventory() {
 		ModelAndView mav = new ModelAndView();
@@ -67,7 +71,7 @@ public class AdminController {
 		return mav;
 	}	
 	
-	//주문관리
+	//주문관리 페이지 이동
 	@RequestMapping(value = "adminOrder")
 	public ModelAndView adminOrder() {
 		ModelAndView mav = new ModelAndView();
@@ -75,7 +79,7 @@ public class AdminController {
 		return mav;
 	}
 	
-	//이벤트관리
+	//이벤트관리 페이지 이동
 	@RequestMapping(value = "adminEvent")
 	public ModelAndView adminEvent() {
 		ModelAndView mav = new ModelAndView();

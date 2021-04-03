@@ -60,4 +60,9 @@ public class MemberDAO {
 		return sqlSession.selectOne("mapper.Member.emailStatusCheck", id);
 	}
 
+	//ID 찾기
+	public String idFindExecute(String email) {
+		return sqlSession.selectOne("mapper.Member.idFindExecute", email);
+	}
+
 }
