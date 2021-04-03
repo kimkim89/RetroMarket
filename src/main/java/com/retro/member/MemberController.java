@@ -189,7 +189,13 @@ public class MemberController {
 		return mav;
 	}
 	
-	
+	//ID 찾기
+	@RequestMapping(value ="idFindExecute")
+	public ModelAndView idFindExecute() {
+		ModelAndView mav = new ModelAndView();
+		
+		return mav;
+	}
 	
 	
 	

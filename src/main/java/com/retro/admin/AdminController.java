@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.retro.member.MemberVO;
+
 @Controller
 @RequestMapping("/admin/*")
 public class AdminController {
@@ -13,9 +15,7 @@ public class AdminController {
 	public ModelAndView adminIndex() {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("왔는데 ? ");
-		
-		mav.setViewName("admin/index");
-		
+		mav.setViewName("admin/admin_main");
 		return mav;
 	}
 	
