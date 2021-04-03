@@ -60,7 +60,7 @@
 	</header>
 	<main>
 		
-		<!--================ 회원가입 =================-->
+		<!--================ ID 찾기 =================-->
 		<section class="cart_area section_padding" style="padding: 110px 0px;">
 			<div class="container" style="max-width: 500px;">
 				<div class="cart_inner" style="max-width: 92%; margin-left: 2%;">
@@ -68,7 +68,7 @@
 					<hr style="margin-top: -1rem;">
 					<form action="#" id="id_find">
 						<div class="mt-10">
-							<input type="email" id="email" name="first_name" placeholder="Email" onfocus="this.placeholder = ''"
+							<input type="email" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = 'Email'" required class="single-input">
 						</div>
 						<div id="emailCheck-Reuslt">
@@ -82,7 +82,7 @@
 				</div>
 			</div>
 		</section>
-		<!--================ 회원 가입 끝 =================-->
+		<!--================ ID 찾기 =================-->
 	</main>
 	
 	<footer> </footer>

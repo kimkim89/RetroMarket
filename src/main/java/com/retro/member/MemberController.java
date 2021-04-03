@@ -191,9 +191,17 @@ public class MemberController {
 	
 	//ID 찾기
 	@RequestMapping(value ="idFindExecute")
-	public ModelAndView idFindExecute() {
+	public ModelAndView idFindExecute(@RequestParam String email) {
 		ModelAndView mav = new ModelAndView();
-		
+		String findid = memberService.idFindExecute(email);
+		String notion = "";
+		if(findid == null) {
+			notion = "일치하는 아이디가 없습니다.";
+		} else {
+			notion = "회원님의 아이디는 <mark>"+findid+"</mark>입니다.";
+		}
+		mav.addObject("notion", notion);
+		mav.setViewName("/member/idFindExecute");
 		return mav;
 	}
 	

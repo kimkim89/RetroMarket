@@ -92,6 +92,11 @@ public class MemberService {
 		return map;
 	}
 
+	//ID 찾기
+	public String idFindExecute(String email) {
+		return memberDAO.idFindExecute(email);
+	}
+
 	
 	
 	
