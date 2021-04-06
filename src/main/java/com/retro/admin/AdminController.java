@@ -26,7 +26,7 @@ public class AdminController {
 		
 		//List<MemberVO> memberList = new ArrayList<MemberVO>();
 		
-		mav.setViewName("admin/index");
+		mav.setViewName("admin/admin_main");
 		
 		return mav;
 	}
@@ -77,7 +77,7 @@ public class AdminController {
 		System.out.println("test: " + wu);
 		MemberVO memInfo = adminService.adminMemberInfo(id);
 		mav.addObject("memInfo", memInfo);
-		mav.addObject("wu", wu);
+		mav.addObject("wu", wu); //요론거 뭔지 주석 설명 ~ 변수명 뭔지 몰라몰라 wu하면 몰라 
 		mav.setViewName("admin/admin_member_form");
 		return mav;
 	}

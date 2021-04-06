@@ -32,7 +32,6 @@ public class MailSendService {
 		Random random = new Random();
 		StringBuffer buffer = new StringBuffer();
 		int num = 0;
-		
 		//난수 생성
 		while(buffer.length() < size ) {
 			num = random.nextInt(10);
@@ -41,7 +40,7 @@ public class MailSendService {
 		return buffer.toString();
 	}
 	
-	//인증메일 보내기
+	//인증메일 보내기 (링크 / 회원가입)
 	public String sendAuthMail(String email) {
 		//6자리 난수 인증번호 생성
 		String authKey = getKey(6);
@@ -68,10 +67,33 @@ public class MailSendService {
 		}
 		System.out.println("왔는데 ?");
 		return authKey;
-		
 	}
 	
-	
+	//인증메일 보내기 (인증번호 / 비밀번호 찾기)
+	public String sendAuthMailPw(String email) {
+		//6자리 난수 인증번호 생성
+		String authKey = getKey(6);
+		MimeMessage message = mailSender.createMimeMessage();
+		String mailContent = "비밀번호 찾기 인증 번호는 <b>" + authKey + "</b>입니다.";
+		
+		//인증메일 보내기
+		try {
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			
+			messageHelper.setSubject("아맞다매점 비밀번호 찾기 인증메일 입니다!");
+			messageHelper.setText(mailContent, true);
+			messageHelper.setFrom("moonspub0326@gmail.com", "관리자");
+			messageHelper.setTo(email);
+			mailSender.send(message);
+		} catch (MessagingException e) {
+			System.out.println("1");
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			System.out.println("2");
+			e.printStackTrace();
+		}
+		return authKey;
+	}	
 	
 	
 	

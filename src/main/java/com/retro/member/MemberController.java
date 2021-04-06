@@ -205,7 +205,13 @@ public class MemberController {
 		return mav;
 	}
 	
-	
+	//PW 찾기
+	@RequestMapping(value = "pwFindExecute", method = RequestMethod.POST)
+	public ModelAndView pwFindExecute(@RequestParam("id") String id, @RequestParam("email") String email) {
+		System.out.println("id : " + id);
+		System.out.println("email : " + email);
+		return null;
+	}
 	
 	
 }

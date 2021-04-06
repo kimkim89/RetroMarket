@@ -83,6 +83,10 @@
             </button>
 					</div>
 				</form>
+				<div>
+				<!-- 20210406 임시 버튼 -->
+				 <a href="${contextPath}/index/main">사용자 페이지이동</a>
+				</div>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">

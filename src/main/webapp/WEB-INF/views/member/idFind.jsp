@@ -26,7 +26,7 @@
 
 	$(document).ready(function () {
 		
-		$("#join-btn").click(function() {
+		$("#find_btn").click(function() {
 			if($("#email").val() != "") {
 				var email = $("#email").val().replace(/(\s*)/g, "");
 				var emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
@@ -75,7 +75,7 @@
 						
 						</div>
 						<div align="center" style=" margin-top: 15px;">
-							<a href="javascript:;" class="genric-btn info-border radius" id="join-btn" style="width: 100%;">아이디 찾기</a>
+							<a href="javascript:;" class="genric-btn info-border radius" id="find_btn" style="width: 100%;">아이디 찾기</a>
 							<a href="${contextPath}/member/pwFind" style="color: black; float: left; font-size: 15px;">비밀번호가 기억나지 않으세요??</a>
 						</div>
 					</form>
