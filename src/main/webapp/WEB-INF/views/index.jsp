@@ -7,7 +7,7 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>돼지 김민지</title>
+    <title>Geeks in the Purple</title>
     
     <%@ include file="./include/Top.jsp" %>
     

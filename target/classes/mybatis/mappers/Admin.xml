@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.Admin">
+	
+	<!-- 모든 회원정보 출력 -->
+	<select id="adminMemberList" resultType="memberVO">
+		<![CDATA[
+		select * from member order by id;
+		]]>
+	</select>
+	
+	<!-- 회원등록 -->
+	<insert id="adminMemInsert" parameterType="memberVO">
+		<![CDATA[
+		insert into member (id, name, nickname, phone, pwd, email, address1, address2, address3, status, level, role_check, authstatus)
+		values (#{id}, #{name}, #{nickname}, #{phone}, #{pwd}, #{email}, #{address1}, #{address2}, #{address3}, 1, #{level}, #{role_check}, 1);
+		]]>
+	</insert>
+	
+	<!-- 특정 회원정보 출력 -->
+	<select id="adminMemberInfo" resultType="memberVO" parameterType="String">
+		<![CDATA[
+		select * from member where id = #{id};
+		]]>
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="adminMemUpdate" parameterType="memberVO">
+		<![CDATA[
+		update member 
+		set name = #{name}, nickname = #{nickname}, phone = #{phone}, pwd = #{pwd}, 
+		    email = #{email}, address1 = #{address1}, address2 = #{address2}, address3 = #{address3}, level = #{level} 
+		where id = #{id};
+		]]>
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<delete id="adminMemDel" parameterType="String">
+		<![CDATA[
+		delete from member where id = #{id};
+		]]>
+	</delete>
+	
+</mapper>
