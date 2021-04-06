@@ -1,15 +1,9 @@
 package com.retro.admin;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.List;
-=======
 import javax.servlet.http.HttpServletRequest;
->>>>>>> fb62fe4b6c14f49c4e2ea9d4245f417bc411fff1
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,36 +12,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.retro.member.MemberVO;
 import com.retro.member.UserSha256;
 
-import com.retro.member.MemberVO;
-
 @Controller
 @RequestMapping("/admin/*")
 public class AdminController {
-	
-<<<<<<< HEAD
-	
-	//관리자 페이지 이동
-	@RequestMapping(value = "adminIndex")
-	public ModelAndView adminIndex() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/admin_main");
-		return mav;
-	}
-	
-	//회원관리 페이지 이동
-	@RequestMapping(value = "adminMember")
-	public ModelAndView adminMember() {
-		ModelAndView mav = new ModelAndView();
-		
-		return mav;
-	}
-	
-	//매출관리 페이지 이동
-=======
+
 	@Autowired
 	AdminService adminService;
 	
-	//관리자 페이지 이동 ddd
+	//관리자 페이지 이동
 	@RequestMapping(value = "adminIndex")
 	public ModelAndView adminIndex() {
 		ModelAndView mav = new ModelAndView();
@@ -68,7 +40,6 @@ public class AdminController {
 		return mav;
 	}
 	
-//-----------
 	//회원등록페이지
 	@RequestMapping(value = "adminRegister")
 	public ModelAndView adminRegister() {		
@@ -146,14 +117,7 @@ public class AdminController {
 		return mav;
 	}
 
-	
-//--------------
-
-	
-	
-	
-	//매출관리
->>>>>>> fb62fe4b6c14f49c4e2ea9d4245f417bc411fff1
+	//매출 관리 페이지 이동
 	@RequestMapping(value = "adminSales")
 	public ModelAndView adminSales() {
 		ModelAndView mav = new ModelAndView();
