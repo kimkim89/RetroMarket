@@ -17,9 +17,17 @@
 
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
-	<title>Profile | AdminKit Demo</title>
+	<title>회원관리</title>
 
 <link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
+
+<script type="text/javascript">
+	//알림 메시지
+	if("${msg}" != "") {
+	 	alert("${msg}");
+	 }
+</script>
+
 </head>
 
 <body>
@@ -47,23 +55,25 @@
 				            			</button>&nbsp;&nbsp; 				            			
 									</div>									
 								</form>		
-								<button class="btn btn-info" style="float:right;">회원등록</button>						
+								<button type="button" class="btn btn-info" style="float:right;" onclick="registerPage();">회원등록</button>						
 								</div>
 								<div class="table-responsive">
 									<table class="table mb-0">
-										<thead>
+										<thead>										
 											<tr>
 												<th scope="col">#</th>
 												<th scope="col">아이디</th>
 												<th scope="col">이름</th>
 												<th scope="col">닉네임</th>
 												<th scope="col">연락처</th>
-												<th scope="col">이메일</th>												
+												<th scope="col">이메일</th>
+												<th scope="col">포인트</th>										
 												<th class="col">수정</th>
 												<th class="col">삭제</th>
 											</tr>
 										</thead>
 										<tbody>
+<<<<<<< HEAD
 										<c:forEach var="List" items="${memberList}">
 											<tr>
 												<th scope="row">#</th>
@@ -76,6 +86,21 @@
 												<td><a href="#"><i class="align-middle" data-feather="trash"></i></a></td>
 											</tr>
 										</c:forEach>
+=======
+										<c:forEach var="List" items="${memberList}" varStatus="status">											
+											<tr>
+												<th scope="row">${status.count}</th>
+												<td>${List.id}</td>
+												<td>${List.name}</td>
+												<td>${List.nickname}</td>
+												<td>${List.phone}</td>
+												<td>${List.email}</td>
+												<td>POINT</td>											
+												<td><a href="${contextPath}/admin/adminMemberInfo?wu=u&id=${List.id}"><i class="align-middle" data-feather="edit-2"></i></a></td>
+												<td><a href="${contextPath}/admin/adminMemDel?id=${List.id}"><i class="align-middle" data-feather="trash"></i></a></td>
+											</tr>
+										</c:forEach>	
+>>>>>>> fb62fe4b6c14f49c4e2ea9d4245f417bc411fff1
 										</tbody>
 									</table>
 								</div>
@@ -117,6 +142,12 @@
 	</div>
 
 	<script src="${contextPath}/resources/admin/js/app.js"></script>
+	<!-- 20210403 페이지 이동 -->
+	<script>
+	function registerPage() {
+		location.href="${contextPath}/admin/adminRegister";
+	}
+	</script>
 
 </body>
 

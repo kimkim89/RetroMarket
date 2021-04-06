@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>돼지 김민지</title>
+<title>회원가입</title>
 <%@ include file="../include/Top.jsp"%>
 <!-- 다음 우편 API -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
