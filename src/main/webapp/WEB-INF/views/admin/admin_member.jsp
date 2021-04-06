@@ -73,20 +73,6 @@
 											</tr>
 										</thead>
 										<tbody>
-<<<<<<< HEAD
-										<c:forEach var="List" items="${memberList}">
-											<tr>
-												<th scope="row">#</th>
-												<td>${List.name}</td>
-												<td>${List.phone }</td>
-												<td>${List.email }</td>
-												<td>${List.address1 }</td>
-												<td>${List.address2 }</td>												
-												<td><a href="#"><i class="align-middle" data-feather="edit-2"></i></a></td>
-												<td><a href="#"><i class="align-middle" data-feather="trash"></i></a></td>
-											</tr>
-										</c:forEach>
-=======
 										<c:forEach var="List" items="${memberList}" varStatus="status">											
 											<tr>
 												<th scope="row">${status.count}</th>
@@ -100,7 +86,6 @@
 												<td><a href="${contextPath}/admin/adminMemDel?id=${List.id}"><i class="align-middle" data-feather="trash"></i></a></td>
 											</tr>
 										</c:forEach>	
->>>>>>> fb62fe4b6c14f49c4e2ea9d4245f417bc411fff1
 										</tbody>
 									</table>
 								</div>

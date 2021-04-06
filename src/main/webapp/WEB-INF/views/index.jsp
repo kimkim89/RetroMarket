@@ -42,11 +42,11 @@
                         <div class="row justify-content-between align-items-center">
                             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                                 <div class="hero__caption">
-                                    <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">돼지 김민지의 <br>군것질 매점</h1>
+                                    <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">그 때 그시절 <br>추억의 매점</h1>
                                     <p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">브이콘 먹는 소리 내지마라.</p>
                                     <!-- Hero-btn -->
                                     <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s" data-duration="2000ms">
-                                        <a href="industries.html" class="btn hero-btn">간식 메뉴 보러가기</a>
+                                        <a href="${contextPath}/product/productList" class="btn hero-btn">간식 메뉴 보러가기</a>
                                     </div>
                                 </div>
                             </div>
