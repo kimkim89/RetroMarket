@@ -24,7 +24,8 @@
 </style>
 <script type="text/javascript">
 
-	$(document).ready(function () {
+//아이디 , 이메일 정규식 체크 20210406
+$(document).ready(function () {
 	
 	$("#find_btn").click(function() {
 		
@@ -34,21 +35,19 @@
 			var str = "";
 			var idCheck = /^[a-z]+[a-z0-9]{5,19}$/g;
 			
+			//아이디 정규식 체크 
 			if(!id.match(idCheck)) {
 				$("#id").val("");
 				$("#id").focus();
-				$("#id-Reuslt").html("<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: #66b1e6;'>아이디 형식이 잘못되었습니다.</p>");
-			} else {
-				alert("오케이");
+				$("#idCheck-Reuslt").html("<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: #66b1e6;'>아이디 형식이 잘못되었습니다.</p>");
 				return false;
-				$("#idCheck-Reuslt").empty();
-				$("#id_find").attr("action", "${contextPath}/member/idFindExecute");
-				$("#id_find").submit();
-			}
+			}  
 		} else {
-			alert("이메일 입력란을 작성해주세요.");
+			alert("아이디 입력란을 작성해주세요.");
+			$("#id").focus();
+			return false;
 		}
-		
+			
 		if($("#email").val() != "") {
 			var email = $("#email").val().replace(/(\s*)/g, "");
 			var emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
@@ -57,16 +56,12 @@
 				$("#email").val("");
 				$("#email").focus();
 				$("#emailCheck-Reuslt").html("<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: #66b1e6;'>이메일 형식이 잘못되었습니다.</p>");
-			} else {
-				$("#emailCheck-Reuslt").empty();
-				$("#id_find").attr("action", "${contextPath}/member/idFindExecute");
-				$("#id_find").submit();
-			}
+			} 
 		} else {
 			alert("이메일 입력란을 작성해주세요.");
+			$("#email").focus();
+			return false;
 		}
-		
-		
 		
 	});
 	
@@ -98,7 +93,7 @@
 								onblur="this.placeholder = 'Id'" required
 								class="single-input">
 						</div>
-						<div id="idCheck-Result">
+						<div id="idCheck-Reuslt">
 						
 						</div>
 						<div class="mt-10">
