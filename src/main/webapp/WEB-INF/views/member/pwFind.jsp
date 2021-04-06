@@ -56,6 +56,7 @@ $(document).ready(function () {
 				$("#email").val("");
 				$("#email").focus();
 				$("#emailCheck-Reuslt").html("<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: #66b1e6;'>이메일 형식이 잘못되었습니다.</p>");
+				return false;
 			} 
 		} else {
 			alert("이메일 입력란을 작성해주세요.");
@@ -63,6 +64,8 @@ $(document).ready(function () {
 			return false;
 		}
 		
+		$("#pwFind_form").attr("action", "${contextPath}/member/pwFindExecute");
+		$("#pwFind_form").submit();
 	});
 	
 });
@@ -86,9 +89,9 @@ $(document).ready(function () {
 				<div class="cart_inner" style="max-width: 92%; margin-left: 2%;">
 					<h3 class="mb-30" style="text-align-last: center;">비밀번호 찾기</h3>
 					<hr style="margin-top: -1rem;">
-					<form action="#">
+					<form action="#" method="post" id="pwFind_form">
 						<div class="mt-10">
-							<input type="text" name="first_name" placeholder="Id" id="id"
+							<input type="text" name="id" placeholder="Id" id="id"
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = 'Id'" required
 								class="single-input">
@@ -97,7 +100,7 @@ $(document).ready(function () {
 						
 						</div>
 						<div class="mt-10">
-							<input type="email" id="email" name="first_name" placeholder="Email"
+							<input type="email" id="email" name="email" placeholder="Email"
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = 'Email'" required
 								class="single-input">
@@ -106,7 +109,7 @@ $(document).ready(function () {
 						
 						</div>
 						<div align="center" style=" margin-top: 15px;">
-							<a href="javascript:;" class="genric-btn info-border radius" id="find_btn" style="width: 100%; ">비밀번호 찾기</a>
+							<a href="javascript:;" class="genric-btn info-border radius" id="find_btn" style="width: 100%; ">인증번호 보내기</a>
 							<a href="${contextPath}/member/idFind" style="color: black; float: left; font-size: 15px;">아이디가가 기억나지 않으세요??</a>
 						</div>
 					</form>
