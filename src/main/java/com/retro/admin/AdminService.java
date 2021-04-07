@@ -38,6 +38,11 @@ public class AdminService {
 	public void adminMemDel(String id) {
 		adminDAO.adminMemDel(id);
 	}
+	
+	//전체 회원 수
+	public int countMem() {
+		return adminDAO.countMem();
+	}
 
 	//페이징출력
 	/*public List selectMem(String searchField, String search, int pageFirst, int pageSize) {

@@ -40,6 +40,11 @@ public class AdminDAO {
 		sqlSession.delete("mapper.Admin.adminMemDel", id);
 	}
 	
+	//전체 회원 수
+	public int countMem() {
+		return sqlSession.selectOne("mapper.Admin.countMem");
+	}
+	
 	//페이징 출력
 	/*public List selectMem(HashMap map) {
 		return sqlSession.selectList("mapper.Admin.selectMem", map);

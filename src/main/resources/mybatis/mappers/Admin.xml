@@ -45,7 +45,7 @@
 		]]>
 	</delete>
 	
-	<!-- 회원수 출력 -->	
+	<!-- 모든 회원수 출력 -->	
 	<select id="countMem" resultType="int">
 		<![CDATA[
 		select count(*) from member;
@@ -53,10 +53,10 @@
 	</select>
 	
 	<!-- 페이징 처리 후 회원 조회 -->
-	<!-- <select id="selectMem" resultType="memberVO">
+	<select id="selectMem" resultType="memberVO">
 		<![CDATA[
-		select * from member where #{searchKey} like #{keyword} order by id limit #{pageFirst}, #{pageSize}
+		select * from member order by id limit #{pageFirst}, #{pageSize};		
 		]]>
-	</select>-->
+	</select>
 	
 </mapper>
