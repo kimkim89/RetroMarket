@@ -65,7 +65,6 @@ public class MailSendService {
 			System.out.println("2");
 			e.printStackTrace();
 		}
-		System.out.println("왔는데 ?");
 		return authKey;
 	}
 	
@@ -80,7 +79,7 @@ public class MailSendService {
 		try {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			
-			messageHelper.setSubject("아맞다매점 비밀번호 찾기 인증메일 입니다!");
+			messageHelper.setSubject("아맞다매점 비밀번호 찾기 인증번호 입니다!");
 			messageHelper.setText(mailContent, true);
 			messageHelper.setFrom("moonspub0326@gmail.com", "관리자");
 			messageHelper.setTo(email);

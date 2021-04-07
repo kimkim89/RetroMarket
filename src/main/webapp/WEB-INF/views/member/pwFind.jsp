@@ -24,9 +24,14 @@
 </style>
 <script type="text/javascript">
 
+if("${notice}" != "") {
+	alert("${notice}");
+}
+
 //아이디 , 이메일 정규식 체크 20210406
 $(document).ready(function () {
 	
+	//20210408 여기까지 작업함
 	$("#find_btn").click(function() {
 		
 		if($("#id").val() != "") {
@@ -41,7 +46,9 @@ $(document).ready(function () {
 				$("#id").focus();
 				$("#idCheck-Reuslt").html("<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: #66b1e6;'>아이디 형식이 잘못되었습니다.</p>");
 				return false;
-			}  
+			} else {
+				$("#idCheck-Reuslt").empty();
+			}
 		} else {
 			alert("아이디 입력란을 작성해주세요.");
 			$("#id").focus();
@@ -57,17 +64,42 @@ $(document).ready(function () {
 				$("#email").focus();
 				$("#emailCheck-Reuslt").html("<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: #66b1e6;'>이메일 형식이 잘못되었습니다.</p>");
 				return false;
-			} 
+			} else {
+				$("#emailCheck-Reuslt").empty();
+			}
 		} else {
 			alert("이메일 입력란을 작성해주세요.");
 			$("#email").focus();
 			return false;
 		}
+		//아이디, 이메일 가입여부 체크 20210408		
+		$.ajax({
+			url : "${contextPath}/member/idemailCheck",
+			type : "post",
+			data : {"id":id,
+					"email":email},
+			success : function(result) {
+				alert(result.notice);
+				if(result.resultNumber == 1) {
+					$("#verification_code").html("<input type='email' id='email' name='email' placeholder='인증번호를 입력해주세요'class='single-input'>");
+					$("#find_btn").attr("id", "pwFind_btn");
+					$("#pwFind_btn").text("비밀번호 찾기");
+				}
+			},
+			error : function() {
+				alert("통신 실패");
+			}
+			
+		});
 		
-		$("#pwFind_form").attr("action", "${contextPath}/member/pwFindExecute");
-		$("#pwFind_form").submit();
+		
 	});
 	
+	$(document).on("click", "#pwFind_btn", function() {
+		alert("오예");
+	});
+//		$("#pwFind_form").attr("action", "${contextPath}/member/pwFindExecute");
+//		$("#pwFind_form").submit();
 });
 
 </script>
@@ -106,6 +138,9 @@ $(document).ready(function () {
 								class="single-input">
 						</div>
 						<div id="emailCheck-Reuslt">
+						
+						</div>
+						<div id= "verification_code" style="margin-top: 1%;">
 						
 						</div>
 						<div align="center" style=" margin-top: 15px;">

@@ -97,6 +97,14 @@ public class MemberService {
 		return memberDAO.idFindExecute(email);
 	}
 
+	//아이디, 이메일 일치여부
+	public int idemailCheck(String id, String email) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("email", email);
+		return memberDAO.idemailCheck(map);
+	}
+
 	
 	
 	
