@@ -218,6 +218,12 @@
 		return false;
 	}
 	
+	function adminMember() {
+		document.memberForm.action="${contextPath}/admin/adminMember";
+		document.getElementById('memberForm').submit();
+		return false;
+	}
+	
 </script>	
 	
 </head>
@@ -250,7 +256,7 @@
 												<div class="row">
 													<div class="mb-3 col-md-6">
 														<label class="form-label" for="id">아이디</label>
-														<input type="text" class="form-control" name="id" id="id" value="${memInfo.id}">
+														<input type="text" class="form-control" name="id" id="id" value="${memInfo.id}" <c:if test="${wu=='u'}">readonly</c:if>>
 													</div>
 												</div>
 												<div class="row">
@@ -288,14 +294,11 @@
 													<input type="text" class="form-control" name="address1" id="address1" placeholder="우편번호" value="${memInfo.address1}" readonly>
 													<div  class="mt-10 flex-member" >
 														<a href="javascript:;" id="addressFind" class="btn btn-primary" onclick="addressFind();">주소 검색</a>
-													</div>													
-													
+													</div>	
 												<!-- 우편 번호 체크 -->
 												 <div id="address1Check-Reuslt">
 													
 												 </div>
-
-													
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="address2">주소</label>
@@ -317,11 +320,11 @@
 												<c:when test="${wu=='u'}">
 													<button type="button" class="btn btn-primary" onclick="adminMemUpdate();">수정</button>
 												</c:when>	
-												<c:otherwise>											
+												<c:when test="${wu=='i'}">											
 													<button type="button" class="btn btn-primary" onclick="adminMemInsert();">등록</button>
-												</c:otherwise>	
+												</c:when>	
 											</c:choose>
-											
+													<button type="button" class="btn btn-primary" onclick="adminMember();">목록</button>									
 											</form>
 										</div>
 									</div>

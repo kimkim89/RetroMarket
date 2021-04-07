@@ -31,7 +31,7 @@ public class AdminController {
 		return mav;
 	}
 	
-	//회원관리 목록-20210403
+	//회원관리 목록
 	@RequestMapping(value = "adminMember")
 	public ModelAndView adminMember() {
 		ModelAndView mav = new ModelAndView();		
@@ -44,6 +44,10 @@ public class AdminController {
 	@RequestMapping(value = "adminRegister")
 	public ModelAndView adminRegister() {		
 		ModelAndView mav = new ModelAndView();
+		//회원등록인지 수정인지 구분해주는 구분자 => wu
+		//i=> 회원등록, u=> 회원수정
+		String wu = "i";
+		mav.addObject("wu", wu);
 		mav.setViewName("admin/admin_member_form");		
 		return mav;
 	}
@@ -73,11 +77,12 @@ public class AdminController {
 	public ModelAndView adminMemberInfo(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String id = (String)request.getParameter("id");
+		//회원등록인지 수정인지 구분해주는 구분자 => wu
+		//i=> 회원등록, u=> 회원수정
 		String wu = (String)request.getParameter("wu");
-		System.out.println("test: " + wu);
 		MemberVO memInfo = adminService.adminMemberInfo(id);
 		mav.addObject("memInfo", memInfo);
-		mav.addObject("wu", wu); //요론거 뭔지 주석 설명 ~ 변수명 뭔지 몰라몰라 wu하면 몰라 
+		mav.addObject("wu", wu);
 		mav.setViewName("admin/admin_member_form");
 		return mav;
 	}

@@ -1,5 +1,6 @@
 package com.retro.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,15 @@ public class AdminService {
 		adminDAO.adminMemDel(id);
 	}
 
+	//페이징출력
+	/*public List selectMem(String searchField, String search, int pageFirst, int pageSize) {
+		HashMap map = new HashMap();
+		map.put("searchField", searchField);
+		map.put("search", '%'+search+'%');
+		map.put("pageFirst", pageFirst);
+		map.put("pageSize", pageSize);
+		return adminDAO.selectMem(map);
+	}*/
 	
 
 }

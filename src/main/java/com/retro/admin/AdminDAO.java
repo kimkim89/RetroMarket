@@ -1,5 +1,6 @@
 package com.retro.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -38,5 +39,10 @@ public class AdminDAO {
 	public void adminMemDel(String id) {
 		sqlSession.delete("mapper.Admin.adminMemDel", id);
 	}
-
+	
+	//페이징 출력
+	/*public List selectMem(HashMap map) {
+		return sqlSession.selectList("mapper.Admin.selectMem", map);
+	}*/
+	
 }
