@@ -65,4 +65,9 @@ public class MemberDAO {
 		return sqlSession.selectOne("mapper.Member.idFindExecute", email);
 	}
 
+	//아이디, 이메일 일치여부
+	public int idemailCheck(Map<String, Object> map) {
+		return sqlSession.selectOne("mapper.Member.idemailCheck", map);
+	}
+
 }

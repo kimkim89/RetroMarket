@@ -56,8 +56,10 @@
 		select id from member where email = #{email};
 	</select>
 	
-	
-	
+	<!-- ID, Email 일치 여부 -->
+	<select id="idemailCheck" parameterType="HashMap" resultType="_int">
+		select count(1) from member where id = #{id} and email = #{email}
+	</select>
 	
 	
 	
