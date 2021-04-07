@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -205,12 +206,32 @@ public class MemberController {
 		return mav;
 	}
 	
-	//PW 찾기
-	@RequestMapping(value = "pwFindExecute", method = RequestMethod.POST)
-	public ModelAndView pwFindExecute(@RequestParam("id") String id, @RequestParam("email") String email) {
-		System.out.println("id : " + id);
-		System.out.println("email : " + email);
-		return null;
+	//PW 찾기(인증메일 보내기) 20210407
+	@RequestMapping(value = "idemailCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> idemailCheck(@RequestParam("id") String id, @RequestParam("email") String email) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String notice = "";
+		int resultNumber = 0; // 0 : 불일치 , 1 : 일치
+		System.out.println("왔엉");
+		//아이디 , 이메일 일치여부  20210407
+		if(memberService.idemailCheck(id, email) == 1) {
+			System.out.println("일치");
+			//메일 보내기
+			
+			notice = "이메일로 인증번호를 발송드렸습니다. 인증번호 확인 후 인증번호를 입력해주세요.";
+			resultNumber = 1;
+			map.put("notice", notice);
+			map.put("resultNumber", resultNumber);
+			
+		} else { //아이디 이메일 일치하지않을 때
+			System.out.println("불일치");
+			notice = "등록되지않은 아이디 또는 이메일입니다.";
+			resultNumber = 0;
+			map.put("notice", notice);
+			map.put("resultNumber", resultNumber);
+		}
+		return map;
 	}
 	
 	
