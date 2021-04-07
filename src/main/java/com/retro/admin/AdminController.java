@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.retro.common.PagingService;
 import com.retro.member.MemberVO;
 import com.retro.member.UserSha256;
 
@@ -18,6 +20,7 @@ public class AdminController {
 
 	@Autowired
 	AdminService adminService;
+	PagingService pagingService;
 	
 	//관리자 페이지 이동
 	@RequestMapping(value = "adminIndex")
@@ -31,10 +34,15 @@ public class AdminController {
 		return mav;
 	}
 	
-	//회원관리 목록-20210403
+	//회원관리 목록
 	@RequestMapping(value = "adminMember")
 	public ModelAndView adminMember() {
-		ModelAndView mav = new ModelAndView();		
+		ModelAndView mav = new ModelAndView();	
+		/**20210408 목요일에 페이징 처리 예정**/
+		pagingService.paging(1, 10, 3, 3);
+		
+		
+		
 		mav.addObject("memberList", adminService.adminMemberList());		
 		mav.setViewName("admin/admin_member");
 		return mav;
@@ -44,6 +52,10 @@ public class AdminController {
 	@RequestMapping(value = "adminRegister")
 	public ModelAndView adminRegister() {		
 		ModelAndView mav = new ModelAndView();
+		//회원등록인지 수정인지 구분해주는 구분자 => wu
+		//i=> 회원등록, u=> 회원수정
+		String wu = "i";
+		mav.addObject("wu", wu);
 		mav.setViewName("admin/admin_member_form");		
 		return mav;
 	}
@@ -70,24 +82,26 @@ public class AdminController {
 	
 	//회원정보 수정페이지 요청
 	@RequestMapping(value = "adminMemberInfo", method = RequestMethod.GET)
-	public ModelAndView adminMemberInfo(HttpServletRequest request) {
+	public ModelAndView adminMemberInfo(@RequestParam("id") String id, @RequestParam("wu") String wu) {
 		ModelAndView mav = new ModelAndView();
-		String id = (String)request.getParameter("id");
-		String wu = (String)request.getParameter("wu");
-		System.out.println("test: " + wu);
+					
 		MemberVO memInfo = adminService.adminMemberInfo(id);
 		mav.addObject("memInfo", memInfo);
-		mav.addObject("wu", wu); //요론거 뭔지 주석 설명 ~ 변수명 뭔지 몰라몰라 wu하면 몰라 
+		//회원등록인지 수정인지 구분해주는 구분자 => wu
+		//i=> 회원등록, u=> 회원수정
+		mav.addObject("wu", wu);
 		mav.setViewName("admin/admin_member_form");
 		return mav;
 	}
 	
 	//회원정보 수정
 	@RequestMapping(value = "adminMemUpdate")
-	public ModelAndView adminMemUpdate(MemberVO memberVO, RedirectAttributes attributes) {
+	public ModelAndView adminMemUpdate(MemberVO memberVO, HttpServletRequest request ,RedirectAttributes attributes) {
 		ModelAndView mav = new ModelAndView();
 		UserSha256 userSha256 = new UserSha256();
-		
+		String pwd = "";
+		pwd = (String)request.getParameter(pwd);
+			
 		// 회원 비밀번호 SHA-256방식 암호화
 		String encrypassword = userSha256.encrypt(memberVO.getPwd());
 		memberVO.setPwd(encrypassword);	

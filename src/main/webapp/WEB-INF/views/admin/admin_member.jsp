@@ -67,6 +67,7 @@
 												<th scope="col">닉네임</th>
 												<th scope="col">연락처</th>
 												<th scope="col">이메일</th>
+												<th scope="col">회원등급</th>
 												<th scope="col">포인트</th>										
 												<th class="col">수정</th>
 												<th class="col">삭제</th>
@@ -81,6 +82,19 @@
 												<td>${List.nickname}</td>
 												<td>${List.phone}</td>
 												<td>${List.email}</td>
+												<td>
+													<c:choose>
+														<c:when test="${List.level == 1}">
+															일반회원
+														</c:when>
+														<c:when test="${List.level == 2}">
+															VIP회원
+														</c:when>
+														<c:when test="${List.level == 3}">
+															VVIP회원
+														</c:when>
+													</c:choose>
+												</td>
 												<td>POINT</td>											
 												<td><a href="${contextPath}/admin/adminMemberInfo?wu=u&id=${List.id}"><i class="align-middle" data-feather="edit-2"></i></a></td>
 												<td><a href="${contextPath}/admin/adminMemDel?id=${List.id}"><i class="align-middle" data-feather="trash"></i></a></td>
@@ -90,9 +104,36 @@
 									</table>
 								</div>
 							</div>
-						</div>
+						</div>						
 					</div>
-
+						<nav aria-label="Page navigation example">
+							<ul class="pagination pagination-md">
+								<c:if test="${map.blockFirst != 1}">
+								<li class="page-item"><a class="page-link" href="#">1</a></li>
+								</c:if>
+								<c:forEach begin="${map.blockFirst != 1}" end="${map.blockLast}" var="i">
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								</c:forEach>
+								<c:if test="${map.totalPage != map.blockLast}">
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								</c:if>
+							</ul>
+						</nav>					
+					
+					
+					
+					
+<!-- 						<nav aria-label="Page navigation example"> -->
+<!-- 							<ul class="pagination pagination-md"> -->
+<!-- 								<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a></li> -->
+<!-- 								<li class="page-item"><a class="page-link" href="#">1</a></li> -->
+<!-- 								<li class="page-item active"><a class="page-link" href="#">2</a></li> -->
+<!-- 								<li class="page-item"><a class="page-link" href="#">3</a></li> -->
+<!-- 								<li class="page-item"><a class="page-link" href="#">4</a></li> -->
+<!-- 								<li class="page-item"><a class="page-link" href="#">5</a></li> -->
+<!-- 								<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li> -->
+<!-- 							</ul> -->
+<!-- 						</nav> -->
 				</div>
 			</main>
 
