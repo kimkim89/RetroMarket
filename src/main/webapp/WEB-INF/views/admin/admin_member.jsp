@@ -35,7 +35,8 @@
 		<jsp:include page="./include/sidebar.jsp" />
 			<main class="content">
 				<div class="container-fluid p-0">
-					<h1 class="h3 mb-3">회원정보관리</h1>
+					<h1 class="h3 mb-3">회원정보관리</h1><br>
+					<h2 class="h3 mb-3">Total: ${memCount}</h2>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
@@ -108,32 +109,17 @@
 					</div>
 						<nav aria-label="Page navigation example">
 							<ul class="pagination pagination-md">
-								<c:if test="${map.blockFirst != 1}">
-								<li class="page-item"><a class="page-link" href="#">1</a></li>
+								<c:if test="${map.blockFirst != 1}">								
+								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowpage=${map.blockFirst-1}"><i class="fas fa-angle-left"></i></a></li>								
 								</c:if>
-								<c:forEach begin="${map.blockFirst != 1}" end="${map.blockLast}" var="i">
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<c:forEach begin="${map.blockFirst}" end="${map.blockLast}" varStatus="i">
+								<li class="page-item"><a href="${contextPath}/admin/adminMember?nowpage=${i.count}" class="page-link" >${i.count}</a></li>
 								</c:forEach>
 								<c:if test="${map.totalPage != map.blockLast}">
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowpage=${map.blockFirst+1}"><i class="fas fa-angle-right"></i></a></li>
 								</c:if>
 							</ul>
-						</nav>					
-					
-					
-					
-					
-<!-- 						<nav aria-label="Page navigation example"> -->
-<!-- 							<ul class="pagination pagination-md"> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">1</a></li> -->
-<!-- 								<li class="page-item active"><a class="page-link" href="#">2</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">4</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">5</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li> -->
-<!-- 							</ul> -->
-<!-- 						</nav> -->
+						</nav>	
 				</div>
 			</main>
 

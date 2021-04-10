@@ -1,5 +1,9 @@
 package com.retro.admin;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +23,8 @@ import com.retro.member.UserSha256;
 public class AdminController {
 
 	@Autowired
-	AdminService adminService;
-	PagingService pagingService;
+	private AdminService adminService;
+	private PagingService pagingService;
 	
 	//관리자 페이지 이동
 	@RequestMapping(value = "adminIndex")
@@ -36,14 +40,25 @@ public class AdminController {
 	
 	//회원관리 목록
 	@RequestMapping(value = "adminMember")
-	public ModelAndView adminMember() {
+	public ModelAndView adminMember(@RequestParam(defaultValue = "1") int nowPage, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();	
-		/**20210408 목요일에 페이징 처리 예정**/
-		pagingService.paging(1, 10, 3, 3);
+		PagingService pagingService = new PagingService();
+		HashMap<String, Object> map = new HashMap<String, Object>();		
 		
+		//private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+				
+		int memCount = adminService.countMem();
 		
+		map = pagingService.pagingList(1, memCount, 4, 3);
+		int pageFirst = Integer.parseInt((String) map.get("pageFirst").toString());
+		int pageSize = Integer.parseInt(map.get("pageSize").toString());
+	
+		List memberList = adminService.pagingList(pageFirst, pageSize);
 		
-		mav.addObject("memberList", adminService.adminMemberList());		
+		//mav.addObject("memberList", adminService.adminMemberList());		
+		mav.addObject("memberList", memberList);
+		mav.addObject("memCount", memCount);
+		mav.addObject("map", map);
 		mav.setViewName("admin/admin_member");
 		return mav;
 	}

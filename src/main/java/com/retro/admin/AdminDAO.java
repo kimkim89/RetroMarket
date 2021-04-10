@@ -46,8 +46,8 @@ public class AdminDAO {
 	}
 	
 	//페이징 출력
-	/*public List selectMem(HashMap map) {
-		return sqlSession.selectList("mapper.Admin.selectMem", map);
-	}*/
+	public List pagingList(HashMap map) {
+		return sqlSession.selectList("mapper.Admin.pagingList", map);
+	}
 	
 }

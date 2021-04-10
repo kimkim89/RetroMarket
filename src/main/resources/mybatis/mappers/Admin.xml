@@ -53,7 +53,7 @@
 	</select>
 	
 	<!-- 페이징 처리 후 회원 조회 -->
-	<select id="selectMem" resultType="memberVO">
+	<select id="pagingList" resultType="memberVO" parameterType="java.util.HashMap">
 		<![CDATA[
 		select * from member order by id limit #{pageFirst}, #{pageSize};		
 		]]>
