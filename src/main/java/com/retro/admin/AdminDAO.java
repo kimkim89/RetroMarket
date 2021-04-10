@@ -3,6 +3,7 @@ package com.retro.admin;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.mapping.ParameterMapping;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,8 +46,21 @@ public class AdminDAO {
 		return sqlSession.selectOne("mapper.Admin.countMem");
 	}
 	
-	//페이징 출력
-	public List pagingList(HashMap map) {
+	//페이징처리된 목록 출력
+	public List pagingList(HashMap<String, Object> map) {
+				
+		//20210411 parameter가 HashMap인데 interger과 string 타입이 다 있을 때 - pageFirst는 integer, keyword는 string
+		//Object param = map.get(parameterMapping.getProperty().toString()); 처럼 object 타입으로 형 변환 시켜야함
+		// mapper에 있는 쿼리 구문 찍음 ↓
+		String sql = sqlSession.getConfiguration().getMappedStatement("mapper.Admin.pagingList").getBoundSql(map).getSql();
+		List<ParameterMapping> parameterMappings = sqlSession.getConfiguration().getMappedStatement("mapper.Admin.pagingList").getBoundSql(map).getParameterMappings();
+		
+		for (ParameterMapping parameterMapping : parameterMappings) {
+            Object param = map.get(parameterMapping.getProperty().toString());
+            sql = sql.replaceFirst("\\?", "'" + param.toString() + "'");
+        }
+        System.out.println("sql : " + sql);
+	
 		return sqlSession.selectList("mapper.Admin.pagingList", map);
 	}
 	
