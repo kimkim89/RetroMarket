@@ -82,8 +82,9 @@ $(document).ready(function () {
 				alert(result.notice);
 				if(result.resultNumber == 1) {
 					$("#verification_code").html("<input type='email' id='email' name='email' placeholder='인증번호를 입력해주세요'class='single-input'>");
-					$("#find_btn").attr("id", "pwFind_btn");
-					$("#pwFind_btn").text("비밀번호 찾기");
+					$("#find_btn").remove();
+					$("#btn_div").prepend("<a href='javascript:;' class='genric-btn info-border radiu' id='pwFind_btn' style='width: 100%;'>비밀번호 찾기</a>");
+					
 				}
 			},
 			error : function() {
@@ -97,9 +98,10 @@ $(document).ready(function () {
 	
 	$(document).on("click", "#pwFind_btn", function() {
 		alert("오예");
+		$("#pwFind_form").attr("action", "${contextPath}/member/pwFindExecute");
+		$("#pwFind_form").submit();
 	});
-//		$("#pwFind_form").attr("action", "${contextPath}/member/pwFindExecute");
-//		$("#pwFind_form").submit();
+
 });
 
 </script>
@@ -143,10 +145,11 @@ $(document).ready(function () {
 						<div id= "verification_code" style="margin-top: 1%;">
 						
 						</div>
-						<div align="center" style=" margin-top: 15px;">
+						<div align="center" id="btn_div" style=" margin-top: 15px;">
 							<a href="javascript:;" class="genric-btn info-border radius" id="find_btn" style="width: 100%; ">인증번호 보내기</a>
 							<a href="${contextPath}/member/idFind" style="color: black; float: left; font-size: 15px;">아이디가가 기억나지 않으세요??</a>
 						</div>
+						
 					</form>
 				</div>
 			</div>
