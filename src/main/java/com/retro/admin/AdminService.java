@@ -44,6 +44,15 @@ public class AdminService {
 		return adminDAO.countMem();
 	}
 
+	//페이징 출력
+	public List pagingList(int pageFirst, int pageSize) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pageFirst", pageFirst);
+		map.put("pageSize", pageSize);
+		return adminDAO.pagingList(map);
+	}
+	
+	
 	//페이징출력
 	/*public List selectMem(String searchField, String search, int pageFirst, int pageSize) {
 		HashMap map = new HashMap();
