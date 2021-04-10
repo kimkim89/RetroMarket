@@ -96,6 +96,7 @@ $(document).ready(function () {
 		
 	});
 	
+	//비밀번호 찾기 실행
 	$(document).on("click", "#pwFind_btn", function() {
 		alert("오예");
 		$("#pwFind_form").attr("action", "${contextPath}/member/pwFindExecute");

@@ -141,7 +141,6 @@ public class MemberController {
 	@RequestMapping(value = "signUpConfirm", method= RequestMethod.GET)
 	public ModelAndView signUpConfirm(@RequestParam Map<String, String> map, RedirectAttributes attributes) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("와쓰");
 		//이메일 인증 authKey와 DB authKey일치 여부 확인
 		String emailAuthKey = map.get("authKey");
 		String email = map.get("email");
@@ -216,7 +215,10 @@ public class MemberController {
 		//아이디 , 이메일 일치여부  20210407
 		if(memberService.idemailCheck(id, email) == 1) {
 			
-			//메일 보내기
+			//메일 보내기 (비동기 방식 으로 진행)
+			String authKey = mss.sendAuthMailPw(email);
+			
+			System.out.println(authKey);
 			notice = "이메일로 인증번호를 발송드렸습니다. 인증번호 확인 후 인증번호를 입력해주세요.";
 			resultNumber = 1;
 			map.put("notice", notice);
