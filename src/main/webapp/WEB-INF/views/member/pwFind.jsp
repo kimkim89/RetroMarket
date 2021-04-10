@@ -84,7 +84,6 @@ $(document).ready(function () {
 					$("#verification_code").html("<input type='email' id='email' name='email' placeholder='인증번호를 입력해주세요'class='single-input'>");
 					$("#find_btn").remove();
 					$("#btn_div").prepend("<a href='javascript:;' class='genric-btn info-border radiu' id='pwFind_btn' style='width: 100%;'>비밀번호 찾기</a>");
-					
 				}
 			},
 			error : function() {
@@ -149,6 +148,7 @@ $(document).ready(function () {
 						<div align="center" id="btn_div" style=" margin-top: 15px;">
 							<a href="javascript:;" class="genric-btn info-border radius" id="find_btn" style="width: 100%; ">인증번호 보내기</a>
 							<a href="${contextPath}/member/idFind" style="color: black; float: left; font-size: 15px;">아이디가가 기억나지 않으세요??</a>
+							<a href="${contextPath}/ascTest/AsyncTest" style="color: black;">비동기 테스트</a>
 						</div>
 						
 					</form>

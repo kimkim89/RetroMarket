@@ -19,6 +19,11 @@
 	</filter-mapping>
 	<!-- 한글처리 -->
 	
+	
+	<!-- 비동기 처리 -->
+	<async-supported>true</async-supported>
+	<!-- 비동기 처리 -->
+	
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
