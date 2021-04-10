@@ -18,52 +18,7 @@
 	};
 
 
-	function memberRegister() {
-		
-
-		if($("#level").val() == "") {
-			alert("회원등급을 선택해주세요.");
-			$("#level").focus();
-			return false;
-		} else if($("#id").val().replace(/(\s*)/g, "") == "") {
-			alert("ID를 입력해주세요.");
-			$("#id").focus();
-			return false;
-		} else if($("#name").val().replace(/(\s*)/g, "") == "") {
-			alert("이름을 입력해주세요");
-			$("#name").focus();
-			return false;
-		} else if($("#nickname").val().replace(/(\s*)/g, "") == "") {
-			alert("닉네임을 입력해주세요.");
-			$("#nickname").focus();
-			return false;
-		}  else if($("#pwd").val().replace(/(\s*)/g, "") == "") {
-			alert("비밀번호를 입력해주세요.");
-			$("#pwd").focus();
-			return false;
-		} else if($("#phone").val().replace(/(\s*)/g, "") == "") {
-			alert("연락처를 입력해주세요.");
-			$("#phone").focus();
-			return false;
-		} else if($("#email").val().replace(/(\s*)/g, "") == "") {
-			alert("이메일을 입력해주세요.");
-			$("#email").focus();
-			return false;		
-		} else if($("#address1").val().replace(/(\s*)/g, "") == "") {
-			alert("우편번호를 입력해주세요.");
-			$("#address1").focus();
-			return false;
-		} else if($("#address2").val().replace(/(\s*)/g, "") == "") {
-			alert("주소를 입력해주세요.");
-			$("#address2").focus();
-			return false;
-		} else if($("#address3").val().replace(/(\s*)/g, "") == "") {
-			alert("상세주소를 입력해주세요.");
-			$("#address3").focus();
-			return false;
-		}
-		
-		
+	$(document).ready(function() {
 		
 		//ID 정규식
 		$("#id").blur(function() {
@@ -206,17 +161,70 @@
 			}
 		});
 		
-		document.memberForm.action="${contextPath}/admin/adminMemInsert";
-		document.getElementById('memberForm').submit();
-		return false;
+		function adminMemInsert() {
+			
+
+			if($("#level").val() == "") {
+				alert("회원등급을 선택해주세요.");
+				$("#level").focus();
+				return false;
+			} else if($("#id").val().replace(/(\s*)/g, "") == "") {
+				alert("ID를 입력해주세요.");
+				$("#id").focus();
+				return false;
+			} else if($("#name").val().replace(/(\s*)/g, "") == "") {
+				alert("이름을 입력해주세요");
+				$("#name").focus();
+				return false;
+			} else if($("#nickname").val().replace(/(\s*)/g, "") == "") {
+				alert("닉네임을 입력해주세요.");
+				$("#nickname").focus();
+				return false;
+			}  else if($("#pwd").val().replace(/(\s*)/g, "") == "") {
+				alert("비밀번호를 입력해주세요.");
+				$("#pwd").focus();
+				return false;
+			} else if($("#phone").val().replace(/(\s*)/g, "") == "") {
+				alert("연락처를 입력해주세요.");
+				$("#phone").focus();
+				return false;
+			} else if($("#email").val().replace(/(\s*)/g, "") == "") {
+				alert("이메일을 입력해주세요.");
+				$("#email").focus();
+				return false;		
+			} else if($("#address1").val().replace(/(\s*)/g, "") == "") {
+				alert("우편번호를 입력해주세요.");
+				$("#address1").focus();
+				return false;
+			} else if($("#address2").val().replace(/(\s*)/g, "") == "") {
+				alert("주소를 입력해주세요.");
+				$("#address2").focus();
+				return false;
+			} else if($("#address3").val().replace(/(\s*)/g, "") == "") {
+				alert("상세주소를 입력해주세요.");
+				$("#address3").focus();
+				return false;
+			}
+						
+			document.memberForm.action="${contextPath}/admin/adminMemInsert";
+			document.getElementById('memberForm').submit();
+			return false;				
+		}			
 		
-	}
+		function adminMemUpdate() {
+			document.memberForm.action="${contextPath}/admin/adminMemUpdate";
+			document.getElementById('memberForm').submit();
+			return false;
+		}
+		
+		function adminMember() {
+			document.memberForm.action="${contextPath}/admin/adminMember";
+			document.getElementById('memberForm').submit();
+			return false;
+		}
+		
+	});
 	
-	function adminMemUpdate() {
-		document.memberForm.action="${contextPath}/admin/adminMemUpdate";
-		document.getElementById('memberForm').submit();
-		return false;
-	}
 	
 </script>	
 	
@@ -250,7 +258,10 @@
 												<div class="row">
 													<div class="mb-3 col-md-6">
 														<label class="form-label" for="id">아이디</label>
-														<input type="text" class="form-control" name="id" id="id" value="${memInfo.id}">
+														<input type="text" class="form-control" name="id" id="id" value="${memInfo.id}" <c:if test="${wu=='u'}">readonly</c:if>>
+													</div>
+													<div id="idCheck-Reuslt">
+													
 													</div>
 												</div>
 												<div class="row">
@@ -288,14 +299,11 @@
 													<input type="text" class="form-control" name="address1" id="address1" placeholder="우편번호" value="${memInfo.address1}" readonly>
 													<div  class="mt-10 flex-member" >
 														<a href="javascript:;" id="addressFind" class="btn btn-primary" onclick="addressFind();">주소 검색</a>
-													</div>													
-													
+													</div>	
 												<!-- 우편 번호 체크 -->
 												 <div id="address1Check-Reuslt">
 													
 												 </div>
-
-													
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="address2">주소</label>
@@ -317,11 +325,11 @@
 												<c:when test="${wu=='u'}">
 													<button type="button" class="btn btn-primary" onclick="adminMemUpdate();">수정</button>
 												</c:when>	
-												<c:otherwise>											
+												<c:when test="${wu=='i'}">											
 													<button type="button" class="btn btn-primary" onclick="adminMemInsert();">등록</button>
-												</c:otherwise>	
+												</c:when>	
 											</c:choose>
-											
+													<button type="button" class="btn btn-primary" onclick="adminMember();">목록</button>									
 											</form>
 										</div>
 									</div>

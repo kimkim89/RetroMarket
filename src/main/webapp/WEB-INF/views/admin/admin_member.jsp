@@ -35,7 +35,8 @@
 		<jsp:include page="./include/sidebar.jsp" />
 			<main class="content">
 				<div class="container-fluid p-0">
-					<h1 class="h3 mb-3">회원정보관리</h1>
+					<h1 class="h3 mb-3">회원정보관리</h1><br>
+					<h2 class="h3 mb-3">Total: ${memCount}</h2>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
@@ -67,6 +68,7 @@
 												<th scope="col">닉네임</th>
 												<th scope="col">연락처</th>
 												<th scope="col">이메일</th>
+												<th scope="col">회원등급</th>
 												<th scope="col">포인트</th>										
 												<th class="col">수정</th>
 												<th class="col">삭제</th>
@@ -81,6 +83,19 @@
 												<td>${List.nickname}</td>
 												<td>${List.phone}</td>
 												<td>${List.email}</td>
+												<td>
+													<c:choose>
+														<c:when test="${List.level == 1}">
+															일반회원
+														</c:when>
+														<c:when test="${List.level == 2}">
+															VIP회원
+														</c:when>
+														<c:when test="${List.level == 3}">
+															VVIP회원
+														</c:when>
+													</c:choose>
+												</td>
 												<td>POINT</td>											
 												<td><a href="${contextPath}/admin/adminMemberInfo?wu=u&id=${List.id}"><i class="align-middle" data-feather="edit-2"></i></a></td>
 												<td><a href="${contextPath}/admin/adminMemDel?id=${List.id}"><i class="align-middle" data-feather="trash"></i></a></td>
@@ -90,9 +105,21 @@
 									</table>
 								</div>
 							</div>
-						</div>
+						</div>						
 					</div>
-
+						<nav aria-label="Page navigation example">
+							<ul class="pagination pagination-md">
+								<c:if test="${map.blockFirst != 1}">								
+								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowpage=${map.blockFirst-1}"><i class="fas fa-angle-left"></i></a></li>								
+								</c:if>
+								<c:forEach begin="${map.blockFirst}" end="${map.blockLast}" varStatus="i">
+								<li class="page-item"><a href="${contextPath}/admin/adminMember?nowpage=${i.count}" class="page-link" >${i.count}</a></li>
+								</c:forEach>
+								<c:if test="${map.totalPage != map.blockLast}">
+								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowpage=${map.blockFirst+1}"><i class="fas fa-angle-right"></i></a></li>
+								</c:if>
+							</ul>
+						</nav>	
 				</div>
 			</main>
 
