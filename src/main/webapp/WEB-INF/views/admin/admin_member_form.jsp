@@ -211,19 +211,21 @@
 			return false;				
 		}			
 		
-		function adminMemUpdate() {
-			document.memberForm.action="${contextPath}/admin/adminMemUpdate";
-			document.getElementById('memberForm').submit();
-			return false;
-		}
-		
 		function adminMember() {
 			document.memberForm.action="${contextPath}/admin/adminMember";
 			document.getElementById('memberForm').submit();
 			return false;
 		}
 		
+		
 	});
+	
+	// 회원 정보 수정
+	function adminMemUpdate() {
+		document.memberForm.action="${contextPath}/admin/adminMemUpdate";
+		document.getElementById('memberForm').submit();
+		return false;
+	}
 	
 	
 </script>	
@@ -323,13 +325,13 @@
 												</div>
 											<c:choose>
 												<c:when test="${wu=='u'}">
-													<button type="button" class="btn btn-primary" onclick="adminMemUpdate();">수정</button>
+													<button type="button" class="btn btn-primary" id="testt" onclick="adminMemUpdate()">수정</button>
 												</c:when>	
 												<c:when test="${wu=='i'}">											
-													<button type="button" class="btn btn-primary" onclick="adminMemInsert();">등록</button>
+													<button type="button" class="btn btn-primary" onclick="adminMemInsert()">등록</button>
 												</c:when>	
 											</c:choose>
-													<button type="button" class="btn btn-primary" onclick="adminMember();">목록</button>									
+													<button type="button" class="btn btn-primary" onclick="adminMember()">목록</button>	
 											</form>
 										</div>
 									</div>
