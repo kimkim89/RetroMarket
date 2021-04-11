@@ -7,11 +7,13 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
-
-import com.sun.mail.util.logging.MailHandler;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Service
 public class MailSendService {
@@ -41,6 +43,7 @@ public class MailSendService {
 	}
 	
 	//인증메일 보내기 (링크 / 회원가입)
+	@Async
 	public String sendAuthMail(String email) {
 		//6자리 난수 인증번호 생성
 		String authKey = getKey(6);
@@ -69,7 +72,9 @@ public class MailSendService {
 	}
 	
 	//인증메일 보내기 (인증번호 / 비밀번호 찾기)
+	@Async
 	public String sendAuthMailPw(String email) {
+		System.out.println("뭔데 대체 : " + email);
 		//6자리 난수 인증번호 생성
 		String authKey = getKey(6);
 		MimeMessage message = mailSender.createMimeMessage();
@@ -91,6 +96,7 @@ public class MailSendService {
 			System.out.println("2");
 			e.printStackTrace();
 		}
+		System.out.println("이메일 보내기 완료!!!!!!!!!!!!!");
 		return authKey;
 	}	
 	
