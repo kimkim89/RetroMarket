@@ -5,6 +5,11 @@
    
 <mapper namespace="mapper.Member">
 
+	<!-- Test -->
+	<select id="Test" parameterType="HashMap" resultType="memberVO">
+		select * from memeber
+	</select>
+	
 	<!-- 회원 가입 -->
 	<insert id="userJoin" parameterType="memberVO"> 
 		insert into member (id, name, nickname, phone, pwd, email, address1, address2, address3)

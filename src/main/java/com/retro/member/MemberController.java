@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.retro.common.AsyncRequest;
+import com.retro.common.HashMake;
 import com.retro.common.MailSendService;
 
 @Controller
@@ -82,27 +83,17 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		UserSha256 userSha256 = new UserSha256();
 		
-		System.out.println("암호화 전 암호 : " + memberVO.getPwd());
-		
 		// 회원 비밀번호 SHA-256방식 암호화
 		String encrypassword = userSha256.encrypt(memberVO.getPwd());
 		memberVO.setPwd(encrypassword);
-		System.out.println("암호화 후 암호 : " + memberVO.getPwd());
-		
 		// 회원 정보 insert
 		memberService.userJoin(memberVO);
 		String notice = "";
+		
 		//임의의 authKey생성 & 이메일 발송
 		//메일 보내기 (비동기 방식 으로 진행)
-		String authKey = mss.sendAuthMail(memberVO.getEmail());
-		memberVO.setAuthkey(authKey);
+		mss.sendAuthMail(memberVO.getEmail());
 		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("email", memberVO.getEmail());
-		map.put("authkey", memberVO.getAuthkey());
-		
-		//DB에 authKey 업데이트
-		memberService.updateAuthKey(map);
 		notice = "회원가입이 완료되었습니다! 이메일 인증 후 이용해주세요!";
 		attributes.addFlashAttribute("notice", notice);
 		mav.setViewName("redirect:/member/login");
@@ -141,7 +132,7 @@ public class MemberController {
 	
 	//이메일 인증 확인
 	@RequestMapping(value = "signUpConfirm", method= RequestMethod.GET)
-	public ModelAndView signUpConfirm(@RequestParam Map<String, String> map) {
+	public ModelAndView signUpConfirm(@RequestParam Map<String, String> map, RedirectAttributes attributes) {
 		ModelAndView mav = new ModelAndView();
 		//이메일 인증 authKey와 DB authKey일치 여부 확인
 		String emailAuthKey = map.get("authKey");
@@ -154,13 +145,13 @@ public class MemberController {
 		System.out.println("2 " + authKey);
 		String notice = "";
 		//일치시 인증상태 업데이트
-//		if(authKey.equals(emailAuthKey)) {
-//			if(memberService.updateAuthKeyStatus(email) == 1) {
-//				notice = "이메일 인증이 완료되었습니다. 아맞다 매점의 회원가입을 축하드립니다! 로그인후 이용해 주세요☺";
-//				mav.setViewName("redirect:/member/login");
-//			} 
-//		} 
-		mav.addObject("notice", notice);
+		if(authKey.equals(emailAuthKey)) {
+			if(memberService.updateAuthKeyStatus(email) == 1) {
+				notice = "이메일 인증이 완료되었습니다. 아맞다 매점의 회원가입을 축하드립니다! 로그인후 이용해 주세요☺";
+				mav.setViewName("redirect:/member/login");
+			} 
+		}
+		attributes.addFlashAttribute("notice", notice);
 		return mav;
 	}
 	
@@ -213,23 +204,31 @@ public class MemberController {
 	@RequestMapping(value = "idemailCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> idemailCheck(@RequestParam("id") String id, @RequestParam("email") String email) {
+		//인증번호 암호화
+		UserSha256 sha256 = new UserSha256();
+		//인증번호 (난수) 생성
+		HashMake hmk = new HashMake();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		String notice = "";
 		int resultNumber = 0; // 0 : 불일치 , 1 : 일치
 		//아이디 , 이메일 일치여부  20210407
 		if(memberService.idemailCheck(id, email) == 1) {
 			System.out.println(email);
+			System.out.println(id);
 			
+			String authKey = hmk.getKey(6);
 			//메일 보내기 (비동기 방식 으로 진행)
-			String authKey = mss.sendAuthMailPw(email);
+			mss.sendAuthMailPw(email, authKey);
+			String authHash = sha256.encrypt(authKey);
 			
 			//비동기 방법2
 //			asc.mailTest(email);
-			
 			notice = "이메일로 인증번호를 발송드렸습니다. 인증번호 확인 후 인증번호를 입력해주세요.";
 			resultNumber = 1;
 			map.put("notice", notice);
 			map.put("resultNumber", resultNumber);
+			map.put("authHash", authHash);
 			
 		} else { //아이디 이메일 일치하지않을 때
 			notice = "등록되지않은 아이디 또는 이메일입니다.";
@@ -238,6 +237,26 @@ public class MemberController {
 			map.put("resultNumber", resultNumber);
 		}
 		return map;
+	}
+	
+	//인증번호 검증
+	@RequestMapping(value = "pwFindExecute", method = RequestMethod.POST)
+	public ModelAndView pwFindExecute(@RequestParam String authNum, @RequestParam String authHash ) {
+		ModelAndView mav = new ModelAndView();
+		UserSha256 sha256 = new UserSha256();
+		
+		//인증 번호 (서버단에서 검증 후) 일치 -> 비밀번호 변경 페이지 이동, 일치 하지 않으면 비밀번호 찾기 페이지로 다시 보내주기 (+알림창)
+		
+		
+		//인증 번호 일치 여부 구현
+		System.out.println("사용자 입력번호 : "+ authNum);
+		sha256.encrypt(authNum);
+		System.out.println("해쉬 후 사용자 입력 번호 : " + authNum);
+		System.out.println("해쉬 번호" + authHash);
+		
+		
+		
+		return null;
 	}
 	
 }
