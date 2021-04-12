@@ -29,7 +29,7 @@ public class AsyncRequest {
 	// 메일 보내기 비동기 20210411
 	public void mailTest(String email) {
 		System.out.println("뭔데 : " + email);
-		mss.sendAuthMailPw(email);
+//		mss.sendAuthMailPw(email);
 	}
 	
 }

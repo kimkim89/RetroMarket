@@ -11,7 +11,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 	
-	<!-- 마이 바티스 -->		
+	<!-- 마이 바티스 -->
 	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
         <property name="driver" value="com.mysql.jdbc.Driver"/>
         <!-- 서버 DB용 아이디 비번 -->

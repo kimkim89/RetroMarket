@@ -57,6 +57,7 @@ public class MemberDAO {
 
 	//이메일 인증여부 확인
 	public int emailStatusCheck(String id) {
+		System.out.println("이메일 인증 여부 확인"+sqlSession.selectOne("mapper.Member.emailStatusCheck", id));
 		return sqlSession.selectOne("mapper.Member.emailStatusCheck", id);
 	}
 
