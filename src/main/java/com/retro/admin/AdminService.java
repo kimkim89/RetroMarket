@@ -44,24 +44,25 @@ public class AdminService {
 		return adminDAO.countMem();
 	}
 
-	//페이징 출력
+	/*//페이징 출력
 	public List pagingList(int pageFirst, int pageSize) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("pageFirst", pageFirst);
 		map.put("pageSize", pageSize);
 		return adminDAO.pagingList(map);
-	}
+	}*/
 	
 	
-	//페이징출력
-	/*public List selectMem(String searchField, String search, int pageFirst, int pageSize) {
+	//페이징처리된 목록 출력
+	public List pagingList(String searchField, String keyword, int pageFirst, int pageSize) {
 		HashMap map = new HashMap();
+				
 		map.put("searchField", searchField);
-		map.put("search", '%'+search+'%');
+		map.put("keyword", '%'+keyword+'%');
 		map.put("pageFirst", pageFirst);
 		map.put("pageSize", pageSize);
-		return adminDAO.selectMem(map);
-	}*/
+		return adminDAO.pagingList(map);
+	}
 	
 
 }

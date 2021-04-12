@@ -54,9 +54,8 @@
 	
 	<!-- 페이징 처리 후 회원 조회 -->
 	<select id="pagingList" resultType="memberVO" parameterType="java.util.HashMap">
-		<![CDATA[
-		select * from member order by id limit #{pageFirst}, #{pageSize};		
-		]]>
-	</select>
-	
+		select * from member
+		where ${searchField} like #{keyword}
+ 		order by id limit ${pageFirst}, ${pageSize};
+	</select>	
 </mapper>
