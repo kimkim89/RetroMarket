@@ -46,16 +46,20 @@
 	</delete>
 	
 	<!-- 모든 회원수 출력 -->	
-	<select id="countMem" resultType="int">
-		<![CDATA[
-		select count(*) from member;
-		]]>
+	<select id="countMem" resultType="int" parameterType="java.util.HashMap">
+		select count(*) from member
+		<if test="keyword != null"	>
+		where ${searchField} like #{keyword} 
+		</if>		
+		;
 	</select>
 	
 	<!-- 페이징 처리 후 회원 조회 -->
 	<select id="pagingList" resultType="memberVO" parameterType="java.util.HashMap">
 		select * from member
+		<if test="keyword != ''">
 		where ${searchField} like #{keyword}
+ 		</if>
  		order by id limit ${pageFirst}, ${pageSize};
 	</select>	
 </mapper>

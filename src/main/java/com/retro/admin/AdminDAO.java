@@ -42,7 +42,7 @@ public class AdminDAO {
 	}
 	
 	//전체 회원 수
-	public int countMem() {
+	public int countMem(HashMap<String, Object> map) {
 		return sqlSession.selectOne("mapper.Admin.countMem");
 	}
 	
