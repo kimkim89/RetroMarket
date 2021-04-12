@@ -40,8 +40,11 @@ public class AdminService {
 	}
 	
 	//전체 회원 수
-	public int countMem() {
-		return adminDAO.countMem();
+	public int countMem(String searchField, String keyword) {
+		HashMap map = new HashMap();
+		map.put("searchField", searchField);
+		map.put("keyword", '%'+keyword+'%');
+		return adminDAO.countMem(map);
 	}
 
 	/*//페이징 출력
