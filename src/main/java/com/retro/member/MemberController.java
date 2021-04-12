@@ -141,7 +141,7 @@ public class MemberController {
 	
 	//이메일 인증 확인
 	@RequestMapping(value = "signUpConfirm", method= RequestMethod.GET)
-	public ModelAndView signUpConfirm(@RequestParam Map<String, String> map, RedirectAttributes attributes) {
+	public ModelAndView signUpConfirm(@RequestParam Map<String, String> map) {
 		ModelAndView mav = new ModelAndView();
 		//이메일 인증 authKey와 DB authKey일치 여부 확인
 		String emailAuthKey = map.get("authKey");
@@ -158,7 +158,7 @@ public class MemberController {
 				mav.setViewName("redirect:/member/login");
 			} 
 		} 
-		attributes.addFlashAttribute("notice", notice);
+		mav.addObject("notice", notice);
 		return mav;
 	}
 	
