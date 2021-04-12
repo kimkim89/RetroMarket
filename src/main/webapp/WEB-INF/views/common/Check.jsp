@@ -101,7 +101,6 @@ $(document).ready(function () {
 		} else {
 			$("#joinForm").attr("action", "${contextPath}/member/userJoin");
 			$("#joinForm").submit();
-			alert("이메일 발송중 입니다 조금만 기다려주세요 ");
 		}
 	});
 	
