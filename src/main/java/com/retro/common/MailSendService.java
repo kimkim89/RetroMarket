@@ -41,7 +41,7 @@ public class MailSendService {
 		}
 		return buffer.toString();
 	}
-	
+	//+"<a href ='http://javameteor.cafe24.com/member/signUpConfirm?email="
 	//인증메일 보내기 (링크 / 회원가입)
 	@Async
 	public String sendAuthMail(String email) {
@@ -49,7 +49,7 @@ public class MailSendService {
 		String authKey = getKey(6);
 		MimeMessage message = mailSender.createMimeMessage();
 		String mailContent = "<h1>[아맞다!매점 회원 가입 이메일 인증]</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
-							+"<a href ='http://javameteor.cafe24.com/member/signUpConfirm?email="
+							+"<a href ='http://localhost:8090/moonmarket/member/signUpConfirm?email="
 							+ email + "&authKey=" + authKey + "' target='_blenk'>이메일 인증 확인</a>";
 		
 		//인증메일 보내기

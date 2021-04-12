@@ -150,14 +150,16 @@ public class MemberController {
 		System.out.println(email);
 		//DB authKey 가져오기
 		String authKey = memberService.getAuthKey(email);
+		System.out.println("1 " + emailAuthKey);
+		System.out.println("2 " + authKey);
 		String notice = "";
 		//일치시 인증상태 업데이트
-		if(authKey.equals(emailAuthKey)) {
-			if(memberService.updateAuthKeyStatus(email) == 1) {
-				notice = "이메일 인증이 완료되었습니다. 아맞다 매점의 회원가입을 축하드립니다! 로그인후 이용해 주세요☺";
-				mav.setViewName("redirect:/member/login");
-			} 
-		} 
+//		if(authKey.equals(emailAuthKey)) {
+//			if(memberService.updateAuthKeyStatus(email) == 1) {
+//				notice = "이메일 인증이 완료되었습니다. 아맞다 매점의 회원가입을 축하드립니다! 로그인후 이용해 주세요☺";
+//				mav.setViewName("redirect:/member/login");
+//			} 
+//		} 
 		mav.addObject("notice", notice);
 		return mav;
 	}
