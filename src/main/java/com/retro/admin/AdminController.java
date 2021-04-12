@@ -1,9 +1,7 @@
 package com.retro.admin;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,20 +38,23 @@ public class AdminController {
 	
 	//회원관리 목록
 	@RequestMapping(value = "adminMember")
-	public ModelAndView adminMember(@RequestParam(defaultValue = "1") int nowPage, HttpServletRequest request) {
+	public ModelAndView adminMember(@RequestParam(defaultValue = "1") int nowPage, 
+									@RequestParam(defaultValue = "") String searchField, 
+									@RequestParam(defaultValue = "") String keyword) {
 		ModelAndView mav = new ModelAndView();	
 		PagingService pagingService = new PagingService();
 		HashMap<String, Object> map = new HashMap<String, Object>();		
+		int pageSizeToPaging = 4;
+		int blockSizeToBlockSize = 3;
 		
-		//private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-				
 		int memCount = adminService.countMem();
 		
-		map = pagingService.pagingList(1, memCount, 4, 3);
-		int pageFirst = Integer.parseInt((String) map.get("pageFirst").toString());
+		map = pagingService.pagingList(nowPage, memCount, pageSizeToPaging, blockSizeToBlockSize);
+		int pageFirst = Integer.parseInt(map.get("pageFirst").toString());
 		int pageSize = Integer.parseInt(map.get("pageSize").toString());
 	
-		List memberList = adminService.pagingList(pageFirst, pageSize);
+		//List memberList = adminService.pagingList(pageFirst, pageSize);
+		List memberList = adminService.pagingList(searchField, keyword, pageFirst, pageSize);
 		
 		//mav.addObject("memberList", adminService.adminMemberList());		
 		mav.addObject("memberList", memberList);

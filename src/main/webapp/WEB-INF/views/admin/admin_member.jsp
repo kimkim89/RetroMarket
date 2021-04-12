@@ -26,10 +26,14 @@
 	if("${msg}" != "") {
 	 	alert("${msg}");
 	 }
+	
+	function adminMemberList() {
+		document.getElementById('memList').submit();
+		return false;
+	}
 </script>
 
 </head>
-
 <body>
 	<div class="wrapper">
 		<jsp:include page="./include/sidebar.jsp" />
@@ -41,17 +45,17 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-								<form class="d-none d-sm-inline-block">				
+								<form name="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminMember" method="get">				
 									<div class="input-group input-group-navbar">
-										<select class="form-select" aria-label="Default select example">
-										  <option selected>회원정보</option>
-										  <option value="1">아이디</option>
-										  <option value="2">이름</option>
-										  <option value="3">연락처</option>
-										  <option value="3">이메일</option>
+										<select name="searchField" class="form-select" aria-label="Default select example">
+										  
+										  <option value="id">아이디</option>
+										  <option value="name">이름</option>
+										  <option value="phone">연락처</option>
+										  <option value="email">이메일</option>
 										</select>&nbsp;&nbsp; 
-										<input type="text" class="form-control" placeholder="" aria-label="Search">																				
-										<button class="btn" type="button">
+										<input type="text" name="keyword" class="form-control" placeholder="" aria-label="Search">																				
+										<button type="button" class="btn" onclick="adminMemberList();">
 				              			<i class="align-middle" data-feather="search"></i>
 				            			</button>&nbsp;&nbsp; 				            			
 									</div>									
@@ -75,9 +79,17 @@
 											</tr>
 										</thead>
 										<tbody>
-										<c:forEach var="List" items="${memberList}" varStatus="status">											
+									<c:choose>
+										<c:when test="${map.nowPage!=1}">
+											<c:set var="num" value="${map.nowPage+(3*(map.nowPage-1))}" />
+										</c:when>
+										<c:when test="${map.nowPage == 1}">
+											<c:set var="num" value="1"/>
+										</c:when>
+									</c:choose>
+										<c:forEach var="List" items="${memberList}" varStatus="status">	
 											<tr>
-												<th scope="row">${status.count}</th>
+												<th scope="row">${num}</th>
 												<td>${List.id}</td>
 												<td>${List.name}</td>
 												<td>${List.nickname}</td>
@@ -100,6 +112,7 @@
 												<td><a href="${contextPath}/admin/adminMemberInfo?wu=u&id=${List.id}"><i class="align-middle" data-feather="edit-2"></i></a></td>
 												<td><a href="${contextPath}/admin/adminMemDel?id=${List.id}"><i class="align-middle" data-feather="trash"></i></a></td>
 											</tr>
+										<c:set var="num" value="${num+1}"/>
 										</c:forEach>	
 										</tbody>
 									</table>
@@ -110,13 +123,13 @@
 						<nav aria-label="Page navigation example">
 							<ul class="pagination pagination-md">
 								<c:if test="${map.blockFirst != 1}">								
-								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowpage=${map.blockFirst-1}"><i class="fas fa-angle-left"></i></a></li>								
+								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockFirst-1}"><i class="fas fa-angle-left"></i></a></li>								
 								</c:if>
-								<c:forEach begin="${map.blockFirst}" end="${map.blockLast}" varStatus="i">
-								<li class="page-item"><a href="${contextPath}/admin/adminMember?nowpage=${i.count}" class="page-link" >${i.count}</a></li>
+								<c:forEach begin="${map.blockFirst}" end="${map.blockLast}" var="i">
+								<li class="page-item"><a href="${contextPath}/admin/adminMember?nowPage=${i}" class="page-link" >${i}</a></li>
 								</c:forEach>
 								<c:if test="${map.totalPage != map.blockLast}">
-								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowpage=${map.blockFirst+1}"><i class="fas fa-angle-right"></i></a></li>
+								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockLast+1}"><i class="fas fa-angle-right"></i></a></li>
 								</c:if>
 							</ul>
 						</nav>	
@@ -151,7 +164,6 @@
 				</div>
 			</footer>
 		</div>
-	</div>
 
 	<script src="${contextPath}/resources/admin/js/app.js"></script>
 	<!-- 20210403 페이지 이동 -->
