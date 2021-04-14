@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -18,7 +17,6 @@ public class MemberService {
 	
 	//회원 가입
 	public void userJoin(MemberVO memberVO) {
-		
 		memberDAO.userJoin(memberVO);
 		
 	}
@@ -63,7 +61,6 @@ public class MemberService {
 		
 		//아이디 존재 여부 0 : 회원x 1 : 회원
 		int idCheck =  memberDAO.idcheck(memberVO.getId());
-		
 		
 		//아이디 존재여부 확인	
 		if(idCheck == 1) {
