@@ -49,6 +49,8 @@ public class AdminController {
 		
 		int memCount = adminService.countMem(searchField, keyword);
 		
+		System.out.println(memCount);
+		
 		System.out.println("member Count : " + memCount);
 		map = pagingService.pagingList(nowPage, memCount, pageSizeToPaging, blockSizeToBlockSize);
 		int pageFirst = Integer.parseInt(map.get("pageFirst").toString());

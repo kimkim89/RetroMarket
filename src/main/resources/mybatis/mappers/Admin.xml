@@ -46,9 +46,9 @@
 	</delete>
 	
 	<!-- 모든 회원수 출력 -->	
-	<select id="countMem" resultType="int" parameterType="java.util.HashMap">
+	<select id="countMem" resultType="int" parameterType="hashMap">
 		select count(*) from member
-		<if test="keyword != null"	>
+		<if test="search"	>
 		where ${searchField} like #{keyword} 
 		</if>		
 		;
