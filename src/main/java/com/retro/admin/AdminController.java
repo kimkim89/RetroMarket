@@ -61,6 +61,8 @@ public class AdminController {
 		mav.addObject("memberList", memberList);
 		mav.addObject("memCount", memCount);
 		mav.addObject("map", map);
+		mav.addObject("searchField", searchField);
+		mav.addObject("keyword", keyword);
 		mav.setViewName("admin/admin_member");
 		return mav;
 	}
