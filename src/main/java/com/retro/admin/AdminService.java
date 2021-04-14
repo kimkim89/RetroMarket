@@ -43,7 +43,7 @@ public class AdminService {
 	public int countMem(String searchField, String keyword) {
 		HashMap map = new HashMap();
 		map.put("searchField", searchField);
-		map.put("keyword", '%'+keyword+'%');
+		map.put("keyword", keyword);
 		return adminDAO.countMem(map);
 	}
 
@@ -52,7 +52,7 @@ public class AdminService {
 		HashMap map = new HashMap();
 				
 		map.put("searchField", searchField);
-		map.put("keyword", '%'+keyword+'%');
+		map.put("keyword", keyword);
 		map.put("pageFirst", pageFirst);
 		map.put("pageSize", pageSize);
 		return adminDAO.pagingList(map);
