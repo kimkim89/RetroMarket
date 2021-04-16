@@ -42,8 +42,8 @@ public class AdminDAO {
 	}
 	
 	//전체 회원 수
-	public int countMem() {
-		return sqlSession.selectOne("mapper.Admin.countMem");
+	public int countMem(HashMap<String, Object> map) {
+		return sqlSession.selectOne("mapper.Admin.countMem", map);
 	}
 	
 	//페이징처리된 목록 출력

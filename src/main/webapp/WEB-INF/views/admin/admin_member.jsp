@@ -45,7 +45,8 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-								<form name="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminMember" method="get">				
+								<form name="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminMember" method="get">
+																					
 									<div class="input-group input-group-navbar">
 										<select name="searchField" class="form-select" aria-label="Default select example">
 										  
@@ -123,13 +124,13 @@
 						<nav aria-label="Page navigation example">
 							<ul class="pagination pagination-md">
 								<c:if test="${map.blockFirst != 1}">								
-								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockFirst-1}"><i class="fas fa-angle-left"></i></a></li>								
+								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i class="fas fa-angle-left"></i></a></li>								
 								</c:if>
 								<c:forEach begin="${map.blockFirst}" end="${map.blockLast}" var="i">
-								<li class="page-item"><a href="${contextPath}/admin/adminMember?nowPage=${i}" class="page-link" >${i}</a></li>
+								<li class="page-item"><a href="${contextPath}/admin/adminMember?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a></li>
 								</c:forEach>
 								<c:if test="${map.totalPage != map.blockLast}">
-								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockLast+1}"><i class="fas fa-angle-right"></i></a></li>
+								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockLast+1}&searchField=${searchField}&keyword=${keyword}"><i class="fas fa-angle-right"></i></a></li>
 								</c:if>
 							</ul>
 						</nav>	
