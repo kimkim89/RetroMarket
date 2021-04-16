@@ -247,14 +247,18 @@
 											<form name="memberForm" id="memberForm" method="POST">
 												<input type="hidden" name="regStatus" value="" >												
 												<div class="row">
-													<div class="mb-3 col-md-4">
+													<div class="mb-3 col-md-4"  style="display:inline-block;">
 														<label class="form-label" for="level">회원등급</label>
 														<select class="form-select" name="level" id="level">
 														  <option value="" >회원등급선택</option>
 														  <option value="1" <c:if test="${memInfo.level == 1}">selected</c:if>>일반회원</option>
 														  <option value="2" <c:if test="${memInfo.level == 2}">selected</c:if>>VIP회원</option>
 														  <option value="3" <c:if test="${memInfo.level == 3}">selected</c:if>>VVIP회원</option>
-														</select>
+														</select>														
+													</div>
+													<div class="mb-3 col-md-4" style="display:inline-block;">
+														<label class="form-label" for="point">적립금</label>
+														<input type="text" class="form-control" name="point" id="point" placeholder="포인트" value="20000점">
 													</div>
 												</div>
 												<div class="row">
@@ -299,14 +303,14 @@
 												<div class="mb-3 col-md-2">
 													<label class="form-label" for="address1">우편번호</label>
 													<input type="text" class="form-control" name="address1" id="address1" placeholder="우편번호" value="${memInfo.address1}" readonly>
-													<div  class="mt-10 flex-member" >
-														<a href="javascript:;" id="addressFind" class="btn btn-primary" onclick="addressFind();">주소 검색</a>
-													</div>	
-												<!-- 우편 번호 체크 -->
+												</div>
+												<div  class="mb-3 col-md-2" style="display:inline-block;">
+													<a href="javascript:;" id="addressFind" class="btn btn-primary" onclick="addressFind();">주소 검색</a>
+												</div>													
 												 <div id="address1Check-Reuslt">
 													
 												 </div>
-												</div>
+												<!-- 우편 번호 체크 -->
 												<div class="mb-3">
 													<label class="form-label" for="address2">주소</label>
 													<input type="text" class="form-control" name="address2" id="address2" placeholder="주소" value="${memInfo.address2}" readonly>
