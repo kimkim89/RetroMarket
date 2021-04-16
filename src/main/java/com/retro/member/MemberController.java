@@ -202,7 +202,7 @@ public class MemberController {
 	
 	//PW 찾기(인증메일 보내기) 20210407
 	@RequestMapping(value = "idemailCheck", method = RequestMethod.POST)
-	@ResponseBody
+	@ResponseBody 
 	public Map<String, Object> idemailCheck(@RequestParam("id") String id, @RequestParam("email") String email) {
 		//인증번호 암호화
 		UserSha256 sha256 = new UserSha256();
