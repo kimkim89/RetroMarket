@@ -1,5 +1,6 @@
 package com.retro.member;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -50,25 +51,30 @@ public class MemberDAO {
 
 	}
 
-	//비밀번호 일치여부 확인
+	// 비밀번호 일치여부 확인
 	public String pwdCheck(String id) {
 		return sqlSession.selectOne("mapper.Member.pwdCheck", id);
 	}
 
-	//이메일 인증여부 확인
+	// 이메일 인증여부 확인
 	public int emailStatusCheck(String id) {
 		System.out.println("이메일 인증 여부 확인"+sqlSession.selectOne("mapper.Member.emailStatusCheck", id));
 		return sqlSession.selectOne("mapper.Member.emailStatusCheck", id);
 	}
 
-	//ID 찾기
+	// ID 찾기
 	public String idFindExecute(String email) {
 		return sqlSession.selectOne("mapper.Member.idFindExecute", email);
 	}
 
-	//아이디, 이메일 일치여부
+	// 아이디, 이메일 일치여부
 	public int idemailCheck(Map<String, Object> map) {
 		return sqlSession.selectOne("mapper.Member.idemailCheck", map);
+	}
+
+	// 비밀번호 변경(비밀번호 찾기)
+	public int pwChange(Map<String, Object> map) {
+		return sqlSession.update("mapper.Member.pwChange", map);
 	}
 
 }

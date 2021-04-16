@@ -220,6 +220,7 @@ public class MemberController {
 			String authKey = hmk.getKey(6);
 			//메일 보내기 (비동기 방식 으로 진행)
 			mss.sendAuthMailPw(email, authKey);
+			//인증키 일치여부 해쉬
 			String authHash = sha256.encrypt(authKey);
 			
 			//비동기 방법2
@@ -229,7 +230,7 @@ public class MemberController {
 			map.put("notice", notice);
 			map.put("resultNumber", resultNumber);
 			map.put("authHash", authHash);
-			
+			map.put("email", email);
 		} else { //아이디 이메일 일치하지않을 때
 			notice = "등록되지않은 아이디 또는 이메일입니다.";
 			resultNumber = 0;
@@ -241,22 +242,41 @@ public class MemberController {
 	
 	//인증번호 검증
 	@RequestMapping(value = "pwFindExecute", method = RequestMethod.POST)
-	public ModelAndView pwFindExecute(@RequestParam String authNum, @RequestParam String authHash ) {
+	public ModelAndView pwFindExecute(@RequestParam String authNum, @RequestParam String authHash, @RequestParam String email,
+									  				HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		UserSha256 sha256 = new UserSha256();
-		
-		//인증 번호 (서버단에서 검증 후) 일치 -> 비밀번호 변경 페이지 이동, 일치 하지 않으면 비밀번호 찾기 페이지로 다시 보내주기 (+알림창)
-		
-		
+		String notice = "";
+		//이전 페이지
+//		String referer = request.getHeader("Referer"); // Referer 이전 페이지에 대한 정보가 전부 들어있는 헤더
 		//인증 번호 일치 여부 구현
-		System.out.println("사용자 입력번호 : "+ authNum);
-		sha256.encrypt(authNum);
-		System.out.println("해쉬 후 사용자 입력 번호 : " + authNum);
-		System.out.println("해쉬 번호" + authHash);
-		
-		
-		
-		return null;
+		String pwCheck = sha256.encrypt(authNum);
+		if(pwCheck.equals(authHash)) {
+			mav.addObject("email", email);
+			mav.setViewName("/member/pwChange");
+		} else {
+			notice = "인증번호가 일치하지 않습니다";
+			mav.addObject("notice", notice);
+			mav.setViewName("/member/pwFind");
+		}
+		//비밀번호 변경 페이지 이동 - > 입력 받고 (유효성 , 정규식) -> 디비 변경 쿼리
+		return mav;
 	}
+	
+	//비밀번호 변경 실행
+	@RequestMapping(value = "pwChange", method = RequestMethod.POST)
+	public ModelAndView pwChange(@RequestParam String pwd, @RequestParam String email, RedirectAttributes attributes) {
+		ModelAndView mav = new ModelAndView();
+		String notice = "";
+		notice = memberService.pwChange(pwd, email);
+		attributes.addFlashAttribute("notice", notice);
+		mav.setViewName("redirect:/member/login");
+		return mav;
+	}
+	
+	
+	
+	
+	
 	
 }

@@ -93,7 +93,6 @@ public class MailSendService {
 	//인증메일 보내기 (인증번호 / 비밀번호 찾기)
 	@Async
 	public String sendAuthMailPw(String email, String authKey) {
-		//6자리 난수 인증번호 생성
 		MimeMessage message = mailSender.createMimeMessage();
 		String mailContent = "비밀번호 찾기 인증 번호는 <b>" + authKey + "</b>입니다.";
 		
