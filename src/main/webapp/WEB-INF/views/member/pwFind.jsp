@@ -80,7 +80,6 @@ $(document).ready(function () {
 					"email":email},
 			success : function(result) {
 				alert(result.notice);
-				
 				if(result.resultNumber == 1) {
 					$("#verification_code").html("<input type='email' id='authNum' name='authNum' placeholder='인증번호를 입력해주세요'class='single-input'>");
 					$("#verification_code").append("<input type='hidden' id='authHash' name='authHash' value='"+result.authHash+"' class='single-input'>");
@@ -93,8 +92,6 @@ $(document).ready(function () {
 			}
 			
 		});
-		
-		
 	});
 	
 	//비밀번호 찾기 실행

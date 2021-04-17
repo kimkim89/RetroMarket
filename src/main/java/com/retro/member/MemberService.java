@@ -102,6 +102,25 @@ public class MemberService {
 		return memberDAO.idemailCheck(map);
 	}
 
+	// 비밀번호 변경(비밀번호 찾기)
+	public String pwChange(String pwd, String email) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		UserSha256 usersha256 = new UserSha256();
+		String hashPwd = usersha256.encrypt(pwd);
+		map.put("hashPwd", hashPwd);
+		map.put("email", email);
+		String notice = "";
+		System.out.println(memberDAO.pwChange(map) == 1);
+		if(memberDAO.pwChange(map) == 1) {
+			System.out.println("완료");
+			notice = "비밀번호변경이 완료되었습니다. 로그인 후 이용해주세요";
+			return notice;
+		} else {
+			System.out.println("미완료");
+			return notice = "비밀번호변경을 다시 시도해주세요";
+		}
+	}
+
 	
 	
 	
