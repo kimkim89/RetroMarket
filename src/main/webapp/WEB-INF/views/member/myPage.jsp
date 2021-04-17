@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <%@ include file="../include/Top.jsp"%>
 <script type="text/javascript">
 
@@ -12,6 +11,10 @@
 		
 		$("#logout_btn").click(function() {
 			location.href = "${contextPath}/member/logout";
+		});
+		
+		$("#myPage_btn").click(function() {
+			location.href = "${contextPath}/member/myPageR";
 		});
 		
 		$("#admin_btn").click(function() {
@@ -29,17 +32,20 @@
 		<jsp:include page="../include/TopNavi.jsp" />
 		<!-- Header End -->
 	</header>
-	<div align="center">
+	<div align="center" style="margin-top: 5%;">
 		<h2>업데이트 중입니다.</h2>
 	</div>
 	<div align="center">
 		${user_id}님의 마이페이지입니다. 
 	</div>
-	<div align="center">
+	<div align="center" style="margin-top: 1%;">
 	<button id="logout_btn" type="button" style="color: black;"> 로그아웃</button>
 	</div>
-	<div align="center">
+	<div align="center" style="margin-top: 1%;">
 	<button id="admin_btn" type="button" style="color: black;"> 관리자 페이지 이동</button>
+	</div>
+	<div align="center" style="margin-top: 1%;">
+	<button id="myPage_btn" type="button" style="color: black;"> 마이 페이지 이동</button>
 	</div>
 
 	<footer> </footer>
