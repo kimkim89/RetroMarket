@@ -10,67 +10,8 @@
 </head>
 <body>
     <header>
-        <!-- Header Start -->
-        <div class="header-area">
-            <div class="main-header header-sticky">
-                <div class="container-fluid">
-                    <div class="menu-wrapper">
-                        <!-- Logo -->
-                        <div class="logo">
-                            <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
-                        </div>
-                        <!-- Main-menu -->
-                        <div class="main-menu d-none d-lg-block">
-                            <nav>                                                
-                                <ul id="navigation">  
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="shop.html">shop</a></li>
-                                    <li><a href="about.html">about</a></li>
-                                    <li class="hot"><a href="#">Latest</a>
-                                        <ul class="submenu">
-                                            <li><a href="shop.html"> Product list</a></li>
-                                            <li><a href="product_details.html"> Product Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="blog.html">Blog</a>
-                                        <ul class="submenu">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="submenu">
-                                            <li><a href="login.html">Login</a></li>
-                                            <li><a href="cart.html">Cart</a></li>
-                                            <li><a href="elements.html">Element</a></li>
-                                            <li><a href="confirmation.html">Confirmation</a></li>
-                                            <li><a href="checkout.html">Product Checkout</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <!-- Header Right -->
-                        <div class="header-right">
-                            <ul>
-                                <li>
-                                    <div class="nav-search search-switch">
-                                        <span class="flaticon-search"></span>
-                                    </div>
-                                </li>
-                                <li> <a href="login.html"><span class="flaticon-user"></span></a></li>
-                                <li><a href="cart.html"><span class="flaticon-shopping-cart"></span></a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Mobile Menu -->
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+         <!-- Header Start -->
+        <jsp:include page="../include/TopNavi.jsp" />
         <!-- Header End -->
     </header>
     <main>
@@ -81,7 +22,7 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="hero-cap text-center">
-                                <h2>Blog</h2>
+                                <h2>My Page</h2>
                             </div>
                         </div>
                     </div>
@@ -93,15 +34,11 @@
         <section class="blog_area section-padding">
             <div class="container">
                 <div class="row">
-                
-                    <div class="col-lg-8 mb-5 mb-lg-0">
-                    dd
-                    </div>
-                    
-                    <div class="col-lg-4">
+                	
+                	<div class="col-lg-4">
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget post_category_widget">
-                                <h4 class="widget_title">Category</h4>
+                                <h4 class="widget_title">회원 정보</h4>
                                 <ul class="list cat-list">
                                     <li>
                                         <a href="#" class="d-flex">
@@ -192,6 +129,12 @@
                             </aside>
                         </div>
                     </div>
+                
+                    <div class="col-lg-8 mb-5 mb-lg-0">
+                    dd
+                    </div>
+                    
+                    
                 </div>
             </div>
         </section>
