@@ -5,8 +5,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Watch shop | eCommers</title>
     <%@ include file="../include/Top.jsp"%>
+    <style type="text/css">
+    
+     #profile_img {
+     	 display: block; margin: 0px auto; 
+     }
+    
+    </style>
 </head>
 <body>
     <header>
@@ -34,107 +40,13 @@
         <section class="blog_area section-padding">
             <div class="container">
                 <div class="row">
-                	
-                	<div class="col-lg-4">
-                        <div class="blog_right_sidebar">
-                            <aside class="single_sidebar_widget post_category_widget">
-                                <h4 class="widget_title">회원 정보</h4>
-                                <ul class="list cat-list">
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Resaurant food</p>
-                                            <p>(37)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Travel news</p>
-                                            <p>(10)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Modern technology</p>
-                                            <p>(03)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Product</p>
-                                            <p>(11)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Inspiration</p>
-                                            <p>21</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Health Care (21)</p>
-                                            <p>09</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </aside>
-
-                            <aside class="single_sidebar_widget instagram_feeds">
-                                <h4 class="widget_title">Instagram Feeds</h4>
-                                <ul class="instagram_row flex-wrap">
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="${contextPath}/resources/assets/img/post/post_5.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="${contextPath}/resources/assets/img/post/post_6.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="${contextPath}/resources/assets/img/post/post_7.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="${contextPath}/resources/assets/img/post/post_8.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="${contextPath}/resources/assets/img/post/post_9.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="${contextPath}/resources/assets/img/post/post_10.png" alt="">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </aside>
-
-                            <aside class="single_sidebar_widget newsletter_widget">
-                                <h4 class="widget_title">Newsletter</h4>
-
-                                <form action="#">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
-                                    </div>
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                        type="submit">Subscribe</button>
-                                </form>
-                            </aside>
-                        </div>
-                    </div>
-                
+                	<jsp:include page="./include/myPageSide.jsp" />
                     <div class="col-lg-8 mb-5 mb-lg-0">
-                    dd
+							<div class="col-md-4" id="profile_img">
+									<div class="single-gallery-image" style="background: url(${contextPath}/resources/assets/img/elements/g1.jpg); border-radius: 100px;" >
+									</div>
+							</div>
                     </div>
-                    
-                    
                 </div>
             </div>
         </section>
