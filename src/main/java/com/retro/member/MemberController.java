@@ -263,7 +263,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//비밀번호 변경 실행
+	// 비밀번호 변경 실행
 	@RequestMapping(value = "pwChange", method = RequestMethod.POST)
 	public ModelAndView pwChange(@RequestParam String pwd, @RequestParam String email, RedirectAttributes attributes) {
 		ModelAndView mav = new ModelAndView();
@@ -274,7 +274,14 @@ public class MemberController {
 		return mav;
 	}
 	
-	
+	// 마이페이지 이동
+	@RequestMapping(value = "myPageR", method = RequestMethod.GET)
+	public ModelAndView myPageR() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("/member/myPageR");
+		return mav;
+	}
 	
 	
 	
