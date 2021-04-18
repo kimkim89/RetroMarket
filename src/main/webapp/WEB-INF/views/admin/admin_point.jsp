@@ -27,43 +27,44 @@
 		<jsp:include page="./include/sidebar.jsp" />
 			<main class="content">
 				<div class="container-fluid p-0">
-					<h1 class="h3 mb-3">Tables</h1>
+					<h1 class="h3 mb-3">포인트 관리</h1>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Always responsive</h5>
-									<h6 class="card-subtitle text-muted">Across every breakpoint, use <code>.table-responsive</code> for horizontally scrolling tables.</h6>
+									<h5 class="card-title">회원 적립금 내역</h5>
 								</div>
 								<div class="table-responsive">
 									<table class="table mb-0">
 										<thead>
 											<tr>
 												<th scope="col">#</th>
-												<th scope="col">Heading</th>
-												<th scope="col">Heading</th>
-												<th scope="col">Heading</th>
-												<th scope="col">Heading</th>
-												<th scope="col">Heading</th>
-												<th scope="col">Heading</th>
-												<th scope="col">Heading</th>
-												<th scope="col">Heading</th>
-												<th scope="col">Heading</th>
+												<th scope="col">회원ID</th>
+												<th scope="col">종류</th>
+												<th scope="col">내용</th>
+												<th scope="col">적립금</th>
+												<th scope="col">일시</th>												
 											</tr>
 										</thead>
 										<tbody>
+									<c:choose>
+										<c:when test="${map.nowPage!=1}">
+											<c:set var="num" value="${map.nowPage+(3*(map.nowPage-1))}" />
+										</c:when>
+										<c:when test="${map.nowPage == 1}">
+											<c:set var="num" value="1"/>
+										</c:when>
+									</c:choose>
+										<c:forEach var="List" items="${pointList}" varStatus="status">	
 											<tr>
 												<th scope="row">1</th>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
+												<td>${List.mem_id}</td>
+												<td>${List.mp_point_type}</td>
+												<td>${List.mp_content}</td>
+												<td>${List.mp_point}</td>
+												<td>${List.mp_datetime}</td>												
 											</tr>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>

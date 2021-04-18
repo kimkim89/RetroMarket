@@ -61,5 +61,45 @@
 		where ${searchField} like concat('%', #{keyword}, '%')
 		</if>
 		order by joindate desc limit #{pageFirst}, #{pageSize};
+	</select>
+	
+	<!-- 모든 포인트 입력 데이터 수 -->	
+	<select id="countPoint" resultType="int" parameterType="java.util.HashMap">
+		select count(*) from member_point		
+		<if test="searchField != '' "	>
+		where ${searchField} like concat('%', #{keyword}, '%')
+		</if>
+		order by mp_idx desc;
 	</select>	
+	
+	<!-- 포인트 내역 출력 -->
+	<select id="pointList" resultType="pointVO">
+		select * from member_point
+		<if test="searchField != '' ">
+		where ${searchField} like concat('%', #{keyword}, '%')
+		</if>
+		order by mp_idx desc limit #{pageFirst}, #{pageSize};
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
