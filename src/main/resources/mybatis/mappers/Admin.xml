@@ -69,11 +69,11 @@
 		<if test="searchField != '' "	>
 		where ${searchField} like concat('%', #{keyword}, '%')
 		</if>
-		order by mp_idx desc;
+		;
 	</select>	
 	
 	<!-- 포인트 내역 출력 -->
-	<select id="pointList" resultType="pointVO">
+	<select id="pointList" resultType="pointVO" parameterType="java.util.HashMap">
 		select * from member_point
 		<if test="searchField != '' ">
 		where ${searchField} like concat('%', #{keyword}, '%')

@@ -69,11 +69,11 @@ public class AdminService {
 		map.put("searchField", searchField);
 		map.put("keyword", keyword);
 		
-		return adminDAO.countMem(map);
+		return adminDAO.countPoint(map);
 	}
 	
 	//회원 포인트 내역 출력
-	public List pointList(String searchField, String keyword, int pageFirst, int pageSize) {
+	public List<PointVO> pointList(String searchField, String keyword, int pageFirst, int pageSize) {
 		HashMap map = new HashMap();
 		
 		map.put("searchField", searchField);
