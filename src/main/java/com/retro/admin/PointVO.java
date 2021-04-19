@@ -1,5 +1,11 @@
 package com.retro.admin;
 
+import org.springframework.stereotype.Component;
+
+import lombok.Data;
+
+@Data
+@Component
 public class PointVO {
 	//포인트 테이블
 	private int mp_idx;
