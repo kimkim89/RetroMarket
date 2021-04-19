@@ -34,6 +34,24 @@
 								<div class="card-header">
 									<h5 class="card-title">회원 적립금 내역</h5>
 								</div>
+								<div class="card-header">
+								<form name="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminMember" method="get">
+																					
+									<div class="input-group input-group-navbar">
+										<select name="searchField" class="form-select" aria-label="Default select example">										  
+										  <option value="id">아이디</option>
+										  <option value="name">이름</option>
+										  <option value="phone">연락처</option>
+										  <option value="email">이메일</option>
+										</select>&nbsp;&nbsp; 
+										<input type="text" name="keyword" class="form-control" placeholder="" aria-label="Search">																				
+										<button type="button" class="btn btn-info" onclick="adminMemberList();" style="color:blue;">
+				              			검색
+				            			</button>&nbsp;&nbsp; 				            			
+									</div>									
+								</form>		
+								<button type="button" class="btn btn-info" style="float:right;" onclick="registerPage();">회원등록</button>						
+								</div>
 								<div class="table-responsive">
 									<table class="table mb-0">
 										<thead>
@@ -71,6 +89,19 @@
 							</div>
 						</div>
 					</div>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination pagination-md">
+							<c:if test="${map.blockFirst != 1}">								
+							<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i class="fas fa-angle-left"></i></a></li>								
+							</c:if>
+							<c:forEach begin="${map.blockFirst}" end="${map.blockLast}" var="i">
+							<li class="page-item"><a href="${contextPath}/admin/adminMember?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a></li>
+							</c:forEach>
+							<c:if test="${map.totalPage != map.blockLast}">
+							<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockLast+1}&searchField=${searchField}&keyword=${keyword}"><i class="fas fa-angle-right"></i></a></li>
+							</c:if>
+						</ul>
+					</nav>	
 				</div>
 			</main>
 

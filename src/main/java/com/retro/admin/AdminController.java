@@ -167,10 +167,9 @@ public class AdminController {
 		int pageFirst = Integer.parseInt(map.get("pageFirst").toString());
 		int pageSize = Integer.parseInt(map.get("pageSize").toString());
 	
-		List pointList = adminService.pagingList(searchField, keyword, pageFirst, pageSize);
-		
+				
 		//mav.addObject("memberList", adminService.adminMemberList());		
-		mav.addObject("pointList", pointList);
+		mav.addObject("pointList", adminService.pagingList(searchField, keyword, pageFirst, pageSize));
 		mav.addObject("pointRows", pointRows);
 		mav.addObject("map", map);
 		mav.addObject("searchField", searchField);
