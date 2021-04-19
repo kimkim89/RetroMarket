@@ -45,12 +45,11 @@
 										  <option value="email">이메일</option>
 										</select>&nbsp;&nbsp; 
 										<input type="text" name="keyword" class="form-control" placeholder="" aria-label="Search">																				
-										<button type="button" class="btn btn-info" onclick="adminMemberList();" style="color:blue;">
+										<button type="button" class="btn btn-info" onclick="" style="color:blue;">
 				              			검색
 				            			</button>&nbsp;&nbsp; 				            			
 									</div>									
-								</form>		
-								<button type="button" class="btn btn-info" style="float:right;" onclick="registerPage();">회원등록</button>						
+								</form>														
 								</div>
 								<div class="table-responsive">
 									<table class="table mb-0">
@@ -61,7 +60,8 @@
 												<th scope="col">종류</th>
 												<th scope="col">내용</th>
 												<th scope="col">적립금</th>
-												<th scope="col">일시</th>												
+												<th scope="col">일시</th>	
+												<th scope="col">수정</th>																							
 											</tr>
 										</thead>
 										<tbody>
@@ -75,13 +75,21 @@
 									</c:choose>
 										<c:forEach var="List" items="${pointList}" varStatus="status">	
 											<tr>
-												<th scope="row">1</th>
-												<td>${List.mem_id}</td>
-												<td>${List.mp_point_type}</td>
+												<th scope="row">${num}</th>
+												<td>${List.id}</td>
+												<td>
+													<c:choose>
+														<c:when test="${List.mp_point_type==1}">회원가입</c:when>
+														<c:when test="${List.mp_point_type==2}">상품평</c:when>
+														<c:when test="${List.mp_point_type==3}">이벤트</c:when>
+													</c:choose>
+												</td>
 												<td>${List.mp_content}</td>
 												<td>${List.mp_point}</td>
-												<td>${List.mp_datetime}</td>												
+												<td>${List.mp_datetime}</td>
+												<td><button type="button" class="btn btn-info" style="background-color:#138496;">수정</button></td>											
 											</tr>
+											<c:set var="num" value="${num+1}"/>
 										</c:forEach>
 										</tbody>
 									</table>
@@ -92,13 +100,13 @@
 					<nav aria-label="Page navigation example">
 						<ul class="pagination pagination-md">
 							<c:if test="${map.blockFirst != 1}">								
-							<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i class="fas fa-angle-left"></i></a></li>								
+							<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminPoint?nowPage=${map.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i class="fas fa-angle-left"></i></a></li>								
 							</c:if>
 							<c:forEach begin="${map.blockFirst}" end="${map.blockLast}" var="i">
-							<li class="page-item"><a href="${contextPath}/admin/adminMember?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a></li>
+							<li class="page-item"><a href="${contextPath}/admin/adminPoint?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a></li>
 							</c:forEach>
 							<c:if test="${map.totalPage != map.blockLast}">
-							<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockLast+1}&searchField=${searchField}&keyword=${keyword}"><i class="fas fa-angle-right"></i></a></li>
+							<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminPoint?nowPage=${map.blockLast+1}&searchField=${searchField}&keyword=${keyword}"><i class="fas fa-angle-right"></i></a></li>
 							</c:if>
 						</ul>
 					</nav>	

@@ -72,8 +72,8 @@ public class AdminDAO {
 	//회원 포인트 내역 출력
 	public List pointList(HashMap<String, Object> map) {
 		// mapper에 있는 쿼리 구문 찍음 ↓
-		String sql = sqlSession.getConfiguration().getMappedStatement("mapper.Admin.pagingList").getBoundSql(map).getSql();
-		List<ParameterMapping> parameterMappings = sqlSession.getConfiguration().getMappedStatement("mapper.Admin.pagingList").getBoundSql(map).getParameterMappings();
+		String sql = sqlSession.getConfiguration().getMappedStatement("mapper.Admin.pointList").getBoundSql(map).getSql();
+		List<ParameterMapping> parameterMappings = sqlSession.getConfiguration().getMappedStatement("mapper.Admin.pointList").getBoundSql(map).getParameterMappings();
 		
 		for (ParameterMapping parameterMapping : parameterMappings) {
             Object param = map.get(parameterMapping.getProperty().toString());

@@ -69,7 +69,7 @@
 		<if test="searchField != '' "	>
 		where ${searchField} like concat('%', #{keyword}, '%')
 		</if>
-		order by mp_idx desc;
+		;
 	</select>	
 	
 	<!-- 포인트 내역 출력 -->

@@ -1,5 +1,7 @@
 package com.retro.admin;
 
+import java.sql.Timestamp;
+
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -13,4 +15,5 @@ public class PointVO {
 	private int mp_point;
 	private int mp_point_type;
 	private String mp_content;
+	private Timestamp mp_datetime;
 }

@@ -48,7 +48,8 @@
 								<form name="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminMember" method="get">
 																					
 									<div class="input-group input-group-navbar">
-										<select name="searchField" class="form-select" aria-label="Default select example">										  
+										<select name="searchField" class="form-select" aria-label="Default select example">
+										  
 										  <option value="id">아이디</option>
 										  <option value="name">이름</option>
 										  <option value="phone">연락처</option>

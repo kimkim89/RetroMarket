@@ -49,7 +49,7 @@ public class AdminController {
 		
 		int memCount = adminService.countMem(searchField, keyword);
 		
-		System.out.println("member Count : " + memCount);
+		//System.out.println("member Count : " + memCount);
 		map = pagingService.pagingList(nowPage, memCount, pageSizeToPaging, blockSizeToBlockSize);
 		int pageFirst = Integer.parseInt(map.get("pageFirst").toString());
 		int pageSize = Integer.parseInt(map.get("pageSize").toString());
@@ -162,14 +162,15 @@ public class AdminController {
 		int blockSizeToBlockSize = 3;
 		
 		int pointRows = adminService.countPoint(searchField, keyword);
-		
+		System.out.println("point row Count : " + pointRows);
 		map = pagingService.pagingList(nowPage, pointRows, pageSizeToPaging, blockSizeToBlockSize);
 		int pageFirst = Integer.parseInt(map.get("pageFirst").toString());
 		int pageSize = Integer.parseInt(map.get("pageSize").toString());
 	
-				
+		List pointList = adminService.pointList(searchField, keyword, pageFirst, pageSize);
+		
 		//mav.addObject("memberList", adminService.adminMemberList());		
-		mav.addObject("pointList", adminService.pagingList(searchField, keyword, pageFirst, pageSize));
+		mav.addObject("pointList", pointList);
 		mav.addObject("pointRows", pointRows);
 		mav.addObject("map", map);
 		mav.addObject("searchField", searchField);
