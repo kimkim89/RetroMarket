@@ -288,6 +288,8 @@ public class MemberController {
 	public ModelAndView memberInfoModify() {
 		ModelAndView mav = new ModelAndView();
 		
+		mav.setViewName("/member/member_modify");
+		return mav;
 	}
 	
 	
