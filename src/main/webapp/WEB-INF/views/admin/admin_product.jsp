@@ -20,6 +20,9 @@
 	<title>상품 관리</title>
 
 	<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
+	<style>
+		.form-control{ width:50%;height:auto; }
+	</style>
 </head>
 
 <body>
@@ -74,59 +77,39 @@
 									<div class="card">
 										<div class="card-header">
 
-											<h5 class="card-title mb-0">Private info</h5>
+											<h5 class="card-title mb-0"><font style="color:red;">*상품 정보를 등록해주세요.</font></h5>
 										</div>
 										<div class="card-body">
 											<form>
 												<div class="row">
 													<div class="mb-3 col-md-6">
 														<label class="form-label" for="inputFirstName">상품 타입</label>
-														<input type="text" class="form-control" id="inputFirstName" placeholder="First name">
+														<input type="text" class="form-control" id="mk_product_category">
 													</div>
 													<div class="mb-3 col-md-6">
 														<label class="form-label" for="inputLastName">상품 종류</label>
-														<input type="text" class="form-control" id="inputLastName" placeholder="Last name">
+														<input type="text" class="form-control" id="mk_product_type">
 													</div>
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="inputEmail4">상품명</label>
-													<input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+													<input type="email" class="form-control" id="mk_product_name">
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="inputAddress">상품 가격</label>
-													<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+													<input type="text" class="form-control" id="mk_product_price">
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="inputAddress2">재고량</label>
-													<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+													<input type="text" class="form-control" id="mk_inventory">
 												</div>
 												
-												
+												<c:forEach var="i" begin="1" end="5"> 
 												<div class="mb-3">
-													<label class="form-label" for="inputAddress2">상품 이미지1</label>
-													<input type="file" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="inputAddress2">상품 이미지2</label>
-													<input type="file" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="inputAddress2">상품 이미지3</label>
-													<input type="file" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="inputAddress2">상품 이미지4</label>
-													<input type="file" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="inputAddress2">상품 이미지5</label>
-													<input type="file" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="inputAddress2">상품 이미지5</label>
-													<textarea id="content" name="content"></textarea>
-												</div>
-												
+													<label class="form-label" for="inputAddress2">상품 이미지${i}</label>
+													<input type="file" class="form-control" id="mk_upfile${i}">
+												</div>							
+												</c:forEach>
 												
 												
 												<button type="submit" class="btn btn-primary">Save changes</button>
