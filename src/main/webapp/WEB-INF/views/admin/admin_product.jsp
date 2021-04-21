@@ -48,25 +48,7 @@
 							        </a>
 									<a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
 							          	상품 등록
-							        </a>
-									<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-							          Privacy and safety
-							        </a>
-									<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-							          Email notifications
-							        </a>
-									<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-							          Web notifications
-							        </a>
-									<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-          Widgets
-        </a>
-									<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-          Your data
-        </a>
-									<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-          Delete account
-        </a>
+							        </a>									
 								</div>
 							</div>
 						</div>
@@ -82,41 +64,53 @@
 										<div class="card-body">
 											<form>
 												<div class="row">
-													<div class="mb-3 col-md-6">
-														<label class="form-label" for="inputFirstName">상품 타입</label>
-														<input type="text" class="form-control" id="mk_product_category">
-													</div>
-													<div class="mb-3 col-md-6">
-														<label class="form-label" for="inputLastName">상품 종류</label>
-														<select name="mk_product_type" id="mk_product_type">
-															<option>과자</option>
-															<option>사탕/초콜렛</option>
-															<option>음료</option>															
-														</select>
+													<div class="mb-3 col-md-4"  style="display:inline-block;">
+														<label class="form-label" for="level">상품 분류</label>
+														<select class="form-select" name="mk_product_category" id="mk_product_category">
+														  <option value="" >상품 분류</option>
+														  <option value="1">신상품</option>
+														  <option value="2">인기상품</option>
+														  <option value="3">할인상품</option>														   
+														</select>														
 													</div>
 												</div>
-												<div class="mb-3">
-													<label class="form-label" for="inputEmail4">상품명</label>
-													<input type="email" class="form-control" id="mk_product_name">
+												<div class="row">
+													<div class="mb-3 col-md-4"  style="display:inline-block;">
+														<label class="form-label" for="level">상품 종류</label>
+														<select class="form-select" name="mk_product_type" id="mk_product_type">
+														  <option value="" >상품 종류</option>
+														  <option value="1">스낵</option>
+														  <option value="2">젤리</option>
+														  <option value="3">캔디</option>
+														   <option value="4">기타</option>
+														</select>														
+													</div>
 												</div>
 												<div class="mb-3">
-													<label class="form-label" for="inputAddress">상품 가격(원)</label>
-													<input type="text" class="form-control" id="mk_product_price">
+													<label class="form-label" for="mk_product_name">상품명</label>
+													<input type="email" class="form-control" name="mk_product_name" id="mk_product_name">
 												</div>
 												<div class="mb-3">
-													<label class="form-label" for="inputAddress2">재고량</label>
-													<input type="text" class="form-control" id="mk_inventory">
+													<label class="form-label" for="mk_product_price">상품 가격(원)</label>
+													<input type="text" class="form-control" name="mk_product_price" id="mk_product_price">
 												</div>
-												
-												<c:forEach var="i" begin="1" end="5"> 
 												<div class="mb-3">
-													<label class="form-label" for="inputAddress2">상품 이미지${i}</label>
-													<input type="file" class="form-control" id="mk_upfile${i}">
+													<label class="form-label" for="mk_inventory">재고량</label>
+													<input type="text" class="form-control" name="mk_inventory" id="mk_inventory">
+												</div>
+												<div class="mb-3">
+													<label class="form-label" for="mk_product_thumb">상품 썸네일(상품목록용)</label>
+													<input type="file" class="form-control" name="mk_product_thumb" id="mk_product_thumb">
+												</div>		
+												<div class="mb-3">
+													<label class="form-label" for="mk_upfile">상품 이미지(상품상세보기)</label>
+													<input type="file" class="form-control" name="mk_upfile" id="mk_upfile">
 												</div>							
-												</c:forEach>
-												
-												
-												<button type="submit" class="btn btn-primary">Save changes</button>
+												<div class="mb-3">
+													<label class="form-label" for="mk_content">상품 설명</label>
+													<textarea class="form-control" name="mk_content" id="mk_content"></textarea>
+												</div>	
+												<button type="submit" class="btn btn-primary">등록</button>
 											</form>
 										</div>
 									</div>
