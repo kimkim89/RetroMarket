@@ -287,7 +287,6 @@ public class MemberController {
 	@RequestMapping(value = "memberInfoModify", method = RequestMethod.GET)
 	public ModelAndView memberInfoModify() {
 		ModelAndView mav = new ModelAndView();
-		
 		mav.setViewName("/member/member_modify");
 		return mav;
 	}
