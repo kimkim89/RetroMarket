@@ -49,7 +49,7 @@ public class AdminController {
 		
 		int memCount = adminService.countMem(searchField, keyword);
 		
-		System.out.println("member Count : " + memCount);
+		//System.out.println("member Count : " + memCount);
 		map = pagingService.pagingList(nowPage, memCount, pageSizeToPaging, blockSizeToBlockSize);
 		int pageFirst = Integer.parseInt(map.get("pageFirst").toString());
 		int pageSize = Integer.parseInt(map.get("pageSize").toString());
@@ -150,6 +150,36 @@ public class AdminController {
 		return mav;
 	}
 
+	//포인트 관리 페이지 이동
+	@RequestMapping(value = "adminPoint")
+	public ModelAndView adminPoint( @RequestParam(defaultValue = "1") int nowPage, 
+									@RequestParam(defaultValue = "") String searchField, 
+									@RequestParam(defaultValue = "") String keyword) {
+		ModelAndView mav = new ModelAndView();
+		PagingService pagingService = new PagingService();
+		HashMap<String, Object> map = new HashMap<String, Object>();		
+		int pageSizeToPaging = 4;
+		int blockSizeToBlockSize = 3;
+		
+		int pointRows = adminService.countPoint(searchField, keyword);
+		System.out.println("point row Count : " + pointRows);
+		map = pagingService.pagingList(nowPage, pointRows, pageSizeToPaging, blockSizeToBlockSize);
+		int pageFirst = Integer.parseInt(map.get("pageFirst").toString());
+		int pageSize = Integer.parseInt(map.get("pageSize").toString());
+	
+		List pointList = adminService.pointList(searchField, keyword, pageFirst, pageSize);
+		
+		//mav.addObject("memberList", adminService.adminMemberList());		
+		mav.addObject("pointList", pointList);
+		mav.addObject("pointRows", pointRows);
+		mav.addObject("map", map);
+		mav.addObject("searchField", searchField);
+		mav.addObject("keyword", keyword);
+		
+		mav.setViewName("admin/admin_point");
+		return mav;
+	}	
+	
 	//매출 관리 페이지 이동
 	@RequestMapping(value = "adminSales")
 	public ModelAndView adminSales() {
@@ -163,14 +193,6 @@ public class AdminController {
 	public ModelAndView adminVisitorLog() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/admin_visit_log");
-		return mav;
-	}	
-	
-	//포인트 관리 페이지 이동
-	@RequestMapping(value = "adminPoint")
-	public ModelAndView adminPoint() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/admin_point");
 		return mav;
 	}	
 	

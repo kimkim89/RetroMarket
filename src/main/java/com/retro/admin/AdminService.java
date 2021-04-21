@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.retro.member.MemberVO;
+import com.retro.admin.PointVO;
 
 @Service
 public class AdminService {
@@ -42,8 +43,10 @@ public class AdminService {
 	//전체 회원 수
 	public int countMem(String searchField, String keyword) {
 		HashMap map = new HashMap();
+		
 		map.put("searchField", searchField);
 		map.put("keyword", keyword);
+		
 		return adminDAO.countMem(map);
 	}
 
@@ -55,7 +58,30 @@ public class AdminService {
 		map.put("keyword", keyword);
 		map.put("pageFirst", pageFirst);
 		map.put("pageSize", pageSize);
+		
 		return adminDAO.pagingList(map);
+	}
+	
+	//모든 포인트 입력 데이터 수
+	public int countPoint(String searchField, String keyword) {
+		HashMap map = new HashMap();
+		
+		map.put("searchField", searchField);
+		map.put("keyword", keyword);
+		
+		return adminDAO.countPoint(map);
+	}
+	
+	//회원 포인트 내역 출력
+	public List<PointVO> pointList(String searchField, String keyword, int pageFirst, int pageSize) {
+		HashMap map = new HashMap();
+		
+		map.put("searchField", searchField);
+		map.put("keyword", keyword);
+		map.put("pageFirst", pageFirst);
+		map.put("pageSize", pageSize);
+		
+		return adminDAO.pointList(map);
 	}
 	
 
