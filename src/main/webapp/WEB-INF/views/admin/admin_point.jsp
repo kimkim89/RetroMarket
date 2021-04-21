@@ -35,7 +35,7 @@
 									<h5 class="card-title">회원 적립금 내역</h5>
 								</div>
 								<div class="card-header">
-								<form name="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminMember" method="get">
+								<form name="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminPoint" method="get">
 																					
 									<div class="input-group input-group-navbar">
 										<select name="searchField" class="form-select" aria-label="Default select example">										  
@@ -45,23 +45,26 @@
 										  <option value="email">이메일</option>
 										</select>&nbsp;&nbsp; 
 										<input type="text" name="keyword" class="form-control" placeholder="" aria-label="Search">																				
-										<button type="button" class="btn btn-info" onclick="" style="color:blue;">
+										<button type="submit" class="btn btn-info" onclick="" style="color:blue;">
 				              			검색
 				            			</button>&nbsp;&nbsp; 				            			
-									</div>									
-								</form>														
+									</div>																	
+								</form>											
 								</div>
+								
+								
+								
+								
 								<div class="table-responsive">
 									<table class="table mb-0">
 										<thead>
-											<tr>
+											<tr>												
 												<th scope="col">#</th>
 												<th scope="col">회원ID</th>
 												<th scope="col">종류</th>
 												<th scope="col">내용</th>
 												<th scope="col">적립금</th>
-												<th scope="col">일시</th>	
-												<th scope="col">수정</th>																							
+												<th scope="col">일시</th>																																			
 											</tr>
 										</thead>
 										<tbody>
@@ -74,8 +77,8 @@
 										</c:when>
 									</c:choose>
 										<c:forEach var="List" items="${pointList}" varStatus="status">	
-											<tr>
-												<th scope="row">${num}</th>
+											<tr>												
+												<td scope="row">${num}</td>
 												<td>${List.id}</td>
 												<td>
 													<c:choose>
@@ -86,8 +89,7 @@
 												</td>
 												<td>${List.mp_content}</td>
 												<td>${List.mp_point}</td>
-												<td>${List.mp_datetime}</td>
-												<td><button type="button" class="btn btn-info" style="background-color:#138496;">수정</button></td>											
+												<td>${List.mp_datetime}</td>																							
 											</tr>
 											<c:set var="num" value="${num+1}"/>
 										</c:forEach>

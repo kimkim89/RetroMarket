@@ -17,9 +17,12 @@
 
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
-	<title>Settings | AdminKit Demo</title>
+	<title>상품 관리</title>
 
 	<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
+	<style>
+		.form-control{ width:50%;height:auto; }
+	</style>
 </head>
 
 <body>
@@ -29,32 +32,32 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3">Settings</h1>
+					<h1 class="h3 mb-3">상품관리</h1>
 
 					<div class="row">
 						<div class="col-md-3 col-xl-2">
 
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title mb-0">Profile Settings</h5>
+									<h5 class="card-title mb-0">상품관리(동적으로 변경)</h5>
 								</div>
 
 								<div class="list-group list-group-flush" role="tablist">
 									<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account" role="tab">
-          Account
-        </a>
+							          	상품 목록
+							        </a>
 									<a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
-          Password
-        </a>
+							          	상품 등록
+							        </a>
 									<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-          Privacy and safety
-        </a>
+							          Privacy and safety
+							        </a>
 									<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-          Email notifications
-        </a>
+							          Email notifications
+							        </a>
 									<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-          Web notifications
-        </a>
+							          Web notifications
+							        </a>
 									<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
           Widgets
         </a>
@@ -71,126 +74,61 @@
 						<div class="col-md-9 col-xl-10">
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="account" role="tabpanel">
-
 									<div class="card">
 										<div class="card-header">
 
-											<h5 class="card-title mb-0">Public info</h5>
-										</div>
-										<div class="card-body">
-											<form>
-												<div class="row">
-													<div class="col-md-8">
-														<div class="mb-3">
-															<label class="form-label" for="inputUsername">Username</label>
-															<input type="text" class="form-control" id="inputUsername" placeholder="Username">
-														</div>
-														<div class="mb-3">
-															<label class="form-label" for="inputUsername">Biography</label>
-															<textarea rows="2" class="form-control" id="inputBio" placeholder="Tell something about yourself"></textarea>
-														</div>
-													</div>
-													<div class="col-md-4">
-														<div class="text-center">
-															<img alt="Charles Hall" src="img/avatars/avatar.jpg" class="rounded-circle img-responsive mt-2" width="128" height="128" />
-															<div class="mt-2">
-																<span class="btn btn-primary"><i class="fas fa-upload"></i> Upload</span>
-															</div>
-															<small>For best results, use an image at least 128px by 128px in .jpg format</small>
-														</div>
-													</div>
-												</div>
-
-												<button type="submit" class="btn btn-primary">Save changes</button>
-											</form>
-
-										</div>
-									</div>
-
-									<div class="card">
-										<div class="card-header">
-
-											<h5 class="card-title mb-0">Private info</h5>
+											<h5 class="card-title mb-0"><font style="color:red;">*상품 정보를 등록해주세요.</font></h5>
 										</div>
 										<div class="card-body">
 											<form>
 												<div class="row">
 													<div class="mb-3 col-md-6">
-														<label class="form-label" for="inputFirstName">First name</label>
-														<input type="text" class="form-control" id="inputFirstName" placeholder="First name">
+														<label class="form-label" for="inputFirstName">상품 타입</label>
+														<input type="text" class="form-control" id="mk_product_category">
 													</div>
 													<div class="mb-3 col-md-6">
-														<label class="form-label" for="inputLastName">Last name</label>
-														<input type="text" class="form-control" id="inputLastName" placeholder="Last name">
+														<label class="form-label" for="inputLastName">상품 종류</label>
+														<select name="mk_product_type" id="mk_product_type">
+															<option>과자</option>
+															<option>사탕/초콜렛</option>
+															<option>음료</option>															
+														</select>
 													</div>
 												</div>
 												<div class="mb-3">
-													<label class="form-label" for="inputEmail4">Email</label>
-													<input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+													<label class="form-label" for="inputEmail4">상품명</label>
+													<input type="email" class="form-control" id="mk_product_name">
 												</div>
 												<div class="mb-3">
-													<label class="form-label" for="inputAddress">Address</label>
-													<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+													<label class="form-label" for="inputAddress">상품 가격(원)</label>
+													<input type="text" class="form-control" id="mk_product_price">
 												</div>
 												<div class="mb-3">
-													<label class="form-label" for="inputAddress2">Address 2</label>
-													<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+													<label class="form-label" for="inputAddress2">재고량</label>
+													<input type="text" class="form-control" id="mk_inventory">
 												</div>
-												<div class="row">
-													<div class="mb-3 col-md-6">
-														<label class="form-label" for="inputCity">City</label>
-														<input type="text" class="form-control" id="inputCity">
-													</div>
-													<div class="mb-3 col-md-4">
-														<label class="form-label" for="inputState">State</label>
-														<select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                  </select>
-													</div>
-													<div class="mb-3 col-md-2">
-														<label class="form-label" for="inputZip">Zip</label>
-														<input type="text" class="form-control" id="inputZip">
-													</div>
-												</div>
+												
+												<c:forEach var="i" begin="1" end="5"> 
+												<div class="mb-3">
+													<label class="form-label" for="inputAddress2">상품 이미지${i}</label>
+													<input type="file" class="form-control" id="mk_upfile${i}">
+												</div>							
+												</c:forEach>
+												
+												
 												<button type="submit" class="btn btn-primary">Save changes</button>
 											</form>
-
-										</div>
-									</div>
-
-								</div>
-								<div class="tab-pane fade" id="password" role="tabpanel">
-									<div class="card">
-										<div class="card-body">
-											<h5 class="card-title">Password</h5>
-
-											<form>
-												<div class="mb-3">
-													<label class="form-label" for="inputPasswordCurrent">Current password</label>
-													<input type="password" class="form-control" id="inputPasswordCurrent">
-													<small><a href="#">Forgot your password?</a></small>
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="inputPasswordNew">New password</label>
-													<input type="password" class="form-control" id="inputPasswordNew">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="inputPasswordNew2">Verify password</label>
-													<input type="password" class="form-control" id="inputPasswordNew2">
-												</div>
-												<button type="submit" class="btn btn-primary">Save changes</button>
-											</form>
-
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</main>
+			
+			
+			
 
 			<footer class="footer">
 				<div class="container-fluid">
