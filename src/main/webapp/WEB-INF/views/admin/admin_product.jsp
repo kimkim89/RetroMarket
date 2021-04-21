@@ -88,7 +88,11 @@
 													</div>
 													<div class="mb-3 col-md-6">
 														<label class="form-label" for="inputLastName">상품 종류</label>
-														<input type="text" class="form-control" id="mk_product_type">
+														<select name="mk_product_type" id="mk_product_type">
+															<option>과자</option>
+															<option>사탕/초콜렛</option>
+															<option>음료</option>															
+														</select>
 													</div>
 												</div>
 												<div class="mb-3">
@@ -96,7 +100,7 @@
 													<input type="email" class="form-control" id="mk_product_name">
 												</div>
 												<div class="mb-3">
-													<label class="form-label" for="inputAddress">상품 가격</label>
+													<label class="form-label" for="inputAddress">상품 가격(원)</label>
 													<input type="text" class="form-control" id="mk_product_price">
 												</div>
 												<div class="mb-3">
