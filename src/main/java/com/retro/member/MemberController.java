@@ -283,6 +283,13 @@ public class MemberController {
 		return mav;
 	}
 	
+	// 회원정보 수정 페이지 이동
+	@RequestMapping(value = "memberInfoModify", method = RequestMethod.GET)
+	public ModelAndView memberInfoModify() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/member/member_modify");
+		return mav;
+	}
 	
 	
 	

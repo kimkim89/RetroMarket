@@ -38,7 +38,6 @@
 		<!-- Header End -->
 	</header>
 	<main>
-		
 		<!--================ 회원가입 =================-->
 		<section class="cart_area section_padding" style="padding: 110px 0px;">
 			<div class="container" style="max-width: 830px;">

@@ -2,12 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<div class="col-lg-4">
+
+
+<div class="col-lg-2 mypage-table" >
 	<div class="blog_right_sidebar">
 		<aside class="single_sidebar_widget post_category_widget">
-			<h4 class="widget_title">회원 정보</h4>
+			<a href="${contextPath}/member/myPageR"><h4 class="widget_title">회원 정보</h4></a>
 			<ul class="list cat-list">
-				<li><a href="#" class="d-flex">
+				<li><a href="${contextPath}/member/memberInfoModify" class="d-flex">
 						<p>회원 정보 수정</p>
 				</a></li>
 				<li><a href="#" class="d-flex">
