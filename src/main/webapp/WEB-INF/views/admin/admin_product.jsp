@@ -110,7 +110,7 @@
 													<label class="form-label" for="mk_content">상품 설명</label>
 													<textarea class="form-control" name="mk_content" id="mk_content"></textarea>
 												</div>	
-												<button type="submit" class="btn btn-primary">등록</button>
+												<button type="submit" class="btn btn-primary">등록</button> 
 											</form>
 										</div>
 									</div>
