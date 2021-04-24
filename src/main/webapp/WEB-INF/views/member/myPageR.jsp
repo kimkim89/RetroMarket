@@ -14,6 +14,8 @@
 
 
 </style>
+
+
 </head>
 <body>
 	<header>
@@ -49,7 +51,7 @@
 							</div>
 						</div>
 						<!--? Shop Method Start-->
-							<div class="container" style="margin-top: 3%; margin-left: 10%;">
+							<div class="container" style="margin-top: 3%; margin-left: 10%; font-size: 25px">
 								<div class="method-wrapper">
 									<div class="row d-flex justify-content-between">
 										<div class="col-xl-4 col-lg-4 col-md-6">
