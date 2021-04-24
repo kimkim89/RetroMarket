@@ -9,7 +9,7 @@
 		<aside class="single_sidebar_widget post_category_widget">
 			<a href="${contextPath}/member/myPageR"><h4 class="widget_title">회원 정보</h4></a>
 			<ul class="list cat-list">
-				<li><a href="${contextPath}/member/memberInfoModify" class="d-flex">
+				<li><a href="${contextPath}/mypage/memberInfoModify" class="d-flex">
 						<p>회원 정보 수정</p>
 				</a></li>
 				<li><a href="#" class="d-flex">

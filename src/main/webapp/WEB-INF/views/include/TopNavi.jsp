@@ -16,7 +16,10 @@
                             <nav>                                                
                                 <ul id="navigation">  
                                     <li><a href="${contextPath}/index/main">메인</a></li>
-                                    <li class="hot"><a href="${contextPath}/product/productList">상품</a></li>
+                                    <li class="hot"><a href="${contextPath}/product/productList">인기 코너</a></li>
+                                    <li><a href="${contextPath}/product/productList">과자 코너</a></li>
+                                    <li><a href="${contextPath}/product/productList">젤리 코너</a></li>
+                                    <li><a href="${contextPath}/product/productList">캔디 코너</a></li>
                                     <li><a href="${contextPath}/product/temporary">Contact Developer</a></li>
                                 </ul>
                             </nav>

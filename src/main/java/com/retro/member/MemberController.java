@@ -137,12 +137,8 @@ public class MemberController {
 		//이메일 인증 authKey와 DB authKey일치 여부 확인
 		String emailAuthKey = map.get("authKey");
 		String email = map.get("email");
-		System.out.println(emailAuthKey);
-		System.out.println(email);
 		//DB authKey 가져오기
 		String authKey = memberService.getAuthKey(email);
-		System.out.println("1 " + emailAuthKey);
-		System.out.println("2 " + authKey);
 		String notice = "";
 		//일치시 인증상태 업데이트
 		if(authKey.equals(emailAuthKey)) {
@@ -274,22 +270,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	// 마이페이지 이동
-	@RequestMapping(value = "myPageR", method = RequestMethod.GET)
-	public ModelAndView myPageR() {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("/member/myPageR");
-		return mav;
-	}
 	
-	// 회원정보 수정 페이지 이동
-	@RequestMapping(value = "memberInfoModify", method = RequestMethod.GET)
-	public ModelAndView memberInfoModify() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/member/member_modify");
-		return mav;
-	}
 	
 	
 	
