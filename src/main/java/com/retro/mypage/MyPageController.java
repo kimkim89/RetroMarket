@@ -34,5 +34,13 @@ public class MyPageController {
 			mav.setViewName("/member/member_modify");
 			return mav;
 		}
+		
+		// 회원정보 수정 페이지 이동
+		@RequestMapping(value = "buyInfo", method = RequestMethod.GET)
+		public ModelAndView buyInfo() {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/member/buy_info");
+			return mav;
+		}		
 	
 }

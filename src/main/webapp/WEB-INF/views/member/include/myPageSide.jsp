@@ -15,7 +15,7 @@
 				<li><a href="#" class="d-flex">
 						<p>주문 내역 조회</p>
 				</a></li>
-				<li><a href="#" class="d-flex">
+				<li><a href="${contextPath}/mypage/buyInfo" class="d-flex">
 						<P>결제 내역 조회</P>
 				</a></li>
 				<li><a href="#" class="d-flex">
