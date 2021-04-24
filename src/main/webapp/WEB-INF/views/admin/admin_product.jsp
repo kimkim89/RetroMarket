@@ -35,91 +35,94 @@
 					<h1 class="h3 mb-3">상품관리</h1>
 
 					<div class="row">
-						<div class="col-md-3 col-xl-2">
-
+						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title mb-0">상품관리(동적으로 변경)</h5>
+								<form name="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminMember" method="get">																				
+									<div class="input-group input-group-navbar">
+										<select name="searchField" class="form-select" aria-label="Default select example">
+										  
+										  <option value="id">아이디</option>
+										  <option value="name">이름</option>
+										  <option value="phone">연락처</option>
+										  <option value="email">이메일</option>
+										</select>&nbsp;&nbsp; 
+										<input type="text" name="keyword" class="form-control" placeholder="" aria-label="Search">																				
+										<button type="button" class="btn" onclick="adminMemberList();">
+				              			<i class="align-middle" data-feather="search"></i>
+				            			</button>&nbsp;&nbsp; 				            			
+									</div>									
+								</form>
+								<button type="button" class="btn btn-info" style="float:right;" onclick="registerPage();">선택 삭제</button>						
+								<button type="button" class="btn btn-info" style="float:right; margin: auto 10px;" onclick="registerPage();">상품 등록</button>
 								</div>
-
-								<div class="list-group list-group-flush" role="tablist">
-									<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account" role="tab">
-							          	상품 목록
-							        </a>
-									<a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
-							          	상품 등록
-							        </a>									
+								<div class="table-responsive">
+									<table class="table mb-0"  style="border: 1px black !important;">
+										<thead>										
+											<tr>
+												<th scope="col"><input type="checkbox" name="del_check" id="del_check"/></th>
+												<th scope="col">#</th>
+												<th scope="col" >상품이미지</th>	
+												<th scope="col">상품정보</th>
+												<th scope="col">상품가격 및 재고량</th>
+												<th scope="col">등록날짜</th>											
+											</tr>
+										</thead>
+										<tbody>
+<%-- 									<c:choose> --%>
+<%-- 										<c:when test="${map.nowPage!=1}"> --%>
+<%-- 											<c:set var="num" value="${map.nowPage+(3*(map.nowPage-1))}" /> --%>
+<%-- 										</c:when> --%>
+<%-- 										<c:when test="${map.nowPage == 1}"> --%>
+<%-- 											<c:set var="num" value="1"/> --%>
+<%-- 										</c:when> --%>
+<%-- 									</c:choose> --%>
+<%-- 										<c:forEach var="List" items="${memberList}" varStatus="status">	 --%>
+											<tr>
+												
+												<td><input type="checkbox" name="del_check" id="del_check"/></td>
+												<td scope="row">1</td>
+												<td>
+													<table>
+														<tr>
+													<div class="col-6 col-md-4 col-lg-4 col-xl-3">
+														<img src="${contextPath}/resources/assets/img/blog/blog_2.png" class="img-fluid pr-2">
+													</div>
+													<td>
+													Product Name
+													</td>									
+												</td>
+												
+													</tr>
+													</table>
+												</td>
+												<td>
+													상품가격 및 재고량 칸
+												</td>
+												<td>
+													등록날짜
+												</td>							
+											</tr>
+<%-- 										<c:set var="num" value="${num+1}"/> --%>
+<%-- 										</c:forEach>	 --%>
+										</tbody>
+									</table>
 								</div>
 							</div>
-						</div>
-
-						<div class="col-md-9 col-xl-10">
-							<div class="tab-content">
-								<div class="tab-pane fade show active" id="account" role="tabpanel">
-									<div class="card">
-										<div class="card-header">
-
-											<h5 class="card-title mb-0"><font style="color:red;">*상품 정보를 등록해주세요.</font></h5>
-										</div>
-										<div class="card-body">
-											<form>
-												<div class="row">
-													<div class="mb-3 col-md-4"  style="display:inline-block;">
-														<label class="form-label" for="level">상품 분류</label>
-														<select class="form-select" name="mk_product_category" id="mk_product_category">
-														  <option value="" >상품 분류</option>
-														  <option value="1">신상품</option>
-														  <option value="2">인기상품</option>
-														  <option value="3">할인상품</option>														   
-														</select>														
-													</div>
-												</div>
-												<div class="row">
-													<div class="mb-3 col-md-4"  style="display:inline-block;">
-														<label class="form-label" for="level">상품 종류</label>
-														<select class="form-select" name="mk_product_type" id="mk_product_type">
-														  <option value="" >상품 종류</option>
-														  <option value="1">스낵</option>
-														  <option value="2">젤리</option>
-														  <option value="3">캔디</option>
-														   <option value="4">기타</option>
-														</select>														
-													</div>
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="mk_product_name">상품명</label>
-													<input type="email" class="form-control" name="mk_product_name" id="mk_product_name">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="mk_product_price">상품 가격(원)</label>
-													<input type="text" class="form-control" name="mk_product_price" id="mk_product_price">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="mk_inventory">재고량</label>
-													<input type="text" class="form-control" name="mk_inventory" id="mk_inventory">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="mk_product_thumb">상품 썸네일(상품목록용)</label>
-													<input type="file" class="form-control" name="mk_product_thumb" id="mk_product_thumb">
-												</div>		
-												<div class="mb-3">
-													<label class="form-label" for="mk_upfile">상품 이미지(상품상세보기)</label>
-													<input type="file" class="form-control" name="mk_upfile" id="mk_upfile">
-												</div>							
-												<div class="mb-3">
-													<label class="form-label" for="mk_content">상품 설명</label>
-													<textarea class="form-control" name="mk_content" id="mk_content"></textarea>
-													<script>
-														CKEDITOR.replace('mk_content');
-													</script>
-												</div>	
-												<button type="submit" class="btn btn-primary">등록</button> 
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						</div>						
+						<nav aria-label="Page navigation example">
+							<ul class="pagination pagination-md">
+								<c:if test="${map.blockFirst != 1}">								
+								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i class="fas fa-angle-left"></i></a></li>								
+								</c:if>
+								<c:forEach begin="${map.blockFirst}" end="${map.blockLast}" var="i">
+								<li class="page-item"><a href="${contextPath}/admin/adminMember?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a></li>
+								</c:forEach>
+								<c:if test="${map.totalPage != map.blockLast}">
+								<li class="page-item"><a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockLast+1}&searchField=${searchField}&keyword=${keyword}"><i class="fas fa-angle-right"></i></a></li>
+								</c:if>
+							</ul>
+						</nav>	
 					</div>
 				</div>
 			</main>
