@@ -40,7 +40,7 @@
 		</div>
 		<!--? Hero Area End-->
 		<!--================Blog Area =================-->
-		<section class="blog_area section-padding" style="margin: 3%;">
+		<section class="blog_area section-padding" style="margin: 0% 7% 0% 8%;;">
 			<div class="gallery-area">
 				<div class="row">
 					<jsp:include page="./include/myPageSide.jsp" />
@@ -53,26 +53,34 @@
 						<!--? Shop Method Start-->
 							<div class="container" style="margin-top: 3%; margin-left: 10%; font-size: 25px">
 								<div class="method-wrapper">
-									<div class="row d-flex justify-content-between">
+									<div class="row d-flex justify-content-between" style="font-size: 30px;">
 										<div class="col-xl-4 col-lg-4 col-md-6">
 											<div class="single-method mb-40">
 												<i class="ti-package"></i>
-												<h6>아이디</h6>
-												<p>z</p>
+												<h6 ><b>아이디</b></h6>
+												<p>${myInfo.id}</p>
 											</div>
 										</div>
 										<div class="col-xl-4 col-lg-4 col-md-6">
 											<div class="single-method mb-40">
 												<i class="fas fa-cheese"></i>
-												<h6>닉네임</h6>
-												<p>z</p>
+												<h6><b>닉네임</b></h6>
+												<p>${myInfo.nickname}</p>
 											</div>
 										</div>
 										<div class="col-xl-4 col-lg-4 col-md-6">
 											<div class="single-method mb-40">
 												<i class="far fa-grin"></i>
-												<h6>회원 등급</h6>
-												<p>z</p>
+												<h6><b>회원 등급</b></h6>
+												<c:if test="${myInfo.level == 1}">
+													<p>1학년</p>
+												</c:if>
+												<c:if test="${myInfo.level == 2}">
+													<p>2학년</p>
+												</c:if>
+												<c:if test="${myInfo.level == 3}">
+													<p>3학년</p>
+												</c:if>
 											</div>
 										</div>
 									</div>

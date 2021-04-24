@@ -26,13 +26,17 @@
 			$(this).val(id);
 			var str = "";
 			var idCheck = /^[a-z]+[a-z0-9]{5,19}$/g;
-			
-		   if(id != "") {
-		    if(!id.match(idCheck)) {
+			var wu = "${wu}"
+			if(wu != "u") {
+		   		if(id != "") {
+		    		if(!id.match(idCheck)) {
 		    	$('#id').val("");
 				$('#id').focus();
 				$("#idCheck-Reuslt").html("<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: #66b1e6;'>아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.</p>");
 		    } else {
+		    	
+		    		
+		    	
 			 $.ajax({ //ID 중복 체크
 				url : "${contextPath}/member/idcheck",
 				type : "post",
@@ -54,6 +58,7 @@
 		   } else {
 			   
 		   }
+			}
 			
 		});//ID중복체크 끝
 		
@@ -264,7 +269,8 @@
 												<div class="row">
 													<div class="mb-3 col-md-6">
 														<label class="form-label" for="id">아이디</label>
-														<input type="text" class="form-control" name="id" id="id" value="${memInfo.id}" <c:if test="${wu=='u'}">readonly</c:if>>
+														<input type="text" class="form-control" name="id" id="id" value="${memInfo.id}" 
+														<c:if test="${wu=='u'}">readonly="readonly"</c:if>>
 													</div>
 													<div id="idCheck-Reuslt">
 													

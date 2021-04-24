@@ -38,7 +38,7 @@
 		</div>
 		<!--? Hero Area End-->
 		<!--================Blog Area =================-->
-		<section class="blog_area section-padding" style="margin: 3%;">
+		<section class="blog_area section-padding" style="margin: 0% 7% 0% 8%;;">
 			<div class="gallery-area">
 				<div class="row">
 					<jsp:include page="./include/myPageSide.jsp" />
@@ -49,7 +49,7 @@
 							style="padding: 0px;">
 							<div class="container" style="max-width: 830px;">
 								<div class="cart_inner" style="max-width: 92%; margin-left: 2%;">
-									<h3 class="mb-30">회원 가입 하기</h3>
+									<h3 class="mb-30">회원 정보 수정</h3>
 									<form id="joinForm" action="#" method="post">
 										<div class="mt-10">
 											<input type="text" id="name" name="name" placeholder="이름"
@@ -58,7 +58,7 @@
 											<div id="nameCheck-Reuslt"></div>
 										</div>
 										<div class="mt-10">
-											<input type="text" id="id" name="id" placeholder="아이디"
+											<input type="text" id="id_pk" name="id_pk" placeholder="아이디" readonly="readonly"
 												required class="single-input">
 											<!-- ID 중복 체크 -->
 											<div id="idCheck-Reuslt"></div>
@@ -81,21 +81,7 @@
 											<!-- 비밀번호확인 체크 -->
 											<div id="pwdCheckCheck-Reuslt"></div>
 										</div>
-										<!-- 이메일 -->
-										<div class="flex">
-											<div class="mt-10" style="width: 60%;">
-												<input type="email" id="email" name="email"
-													placeholder="이메일" required class="single-input">
-												<!-- 이메일 체크 -->
-												<div id="emailCheck-Reuslt"></div>
-											</div>
-											<div class="mt-10 flex-member">
-												<a href="javascript:;" id="emailCheck"
-													class="genric-btn success-border radius">메일 체크</a>
-											</div>
-										</div>
-										<!-- 이메일 -->
-
+										
 										<!-- 우편 번호 -->
 										<div class="flex">
 											<div class="input-group-icon mt-10" style="width: 60%;">
@@ -150,7 +136,7 @@
 										</div>
 										<div align="center" style="margin-top: 15px;">
 											<a href="javascript:;" class="genric-btn info-border radius"
-												id="join-btn">가입하기</a> <a href="javascript:history.back()"
+												id="join-btn">수정하기</a> <a href="javascript:history.back()"
 												class="genric-btn warning-border radius">돌아가기</a>
 										</div>
 									</form>

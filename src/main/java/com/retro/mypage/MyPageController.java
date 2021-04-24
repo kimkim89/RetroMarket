@@ -1,8 +1,5 @@
 package com.retro.mypage;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.retro.member.MemberVO;
 
 @Controller
 @RequestMapping("mypage")
@@ -25,17 +20,9 @@ public class MyPageController {
 		@RequestMapping(value = "myPageR", method = RequestMethod.GET)
 		public ModelAndView myPageR(HttpServletRequest request, HttpSession session) {
 			ModelAndView mav = new ModelAndView();
-			MemberVO membervo = new MemberVO();
 			
 			String id = (String)session.getAttribute("user_id");
-
-			mypagservice.getInfo(membervo);
-			
-			Map<String, Object> userMap = new HashMap<String, Object>();
-			
-			userMap.put("user_id", id);
-//			userMap.put("", );
-			
+			mav.addObject("myInfo", mypagservice.getInfo(id));
 			mav.setViewName("/member/myPageR");
 			return mav;
 		}
