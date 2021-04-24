@@ -196,13 +196,7 @@ public class AdminController {
 		return mav;
 	}	
 	
-	//상품관리 페이지 이동
-	@RequestMapping(value = "adminProduct")
-	public ModelAndView adminProduct() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/admin_product");
-		return mav;
-	}	
+		
 	
 	//재고관리 페이지 이동
 	@RequestMapping(value = "adminInventory")
