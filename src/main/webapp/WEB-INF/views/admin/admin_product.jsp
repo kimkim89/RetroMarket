@@ -18,7 +18,7 @@
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
 	<title>상품 관리</title>
-
+	<script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
 	<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
 	<style>
 		.form-control{ width:50%;height:auto; }
@@ -109,6 +109,9 @@
 												<div class="mb-3">
 													<label class="form-label" for="mk_content">상품 설명</label>
 													<textarea class="form-control" name="mk_content" id="mk_content"></textarea>
+													<script>
+														CKEDITOR.replace('mk_content');
+													</script>
 												</div>	
 												<button type="submit" class="btn btn-primary">등록</button> 
 											</form>
