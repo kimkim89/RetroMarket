@@ -22,7 +22,7 @@
   overflow: hidden; 
   text-overflow: ellipsis;
   white-space: nowrap; 
-  background: #bcd1ff;
+  background: #d9e1f4;
   height: 70px;
 }
 
@@ -58,7 +58,7 @@
 						<div class="col-lg-8 mb-5 mb-lg-0" style="margin: 3%; margin-top: 1%;">
 								<!-- 20210426 주문 정보-->
 								<table class="table">
-									<thead>
+									<thead style="background: background: #fbf9ff;">
 										<tr align="center">
 											<th style="width:25%;">주문 정보</th>
 											<th style="width:45%">결제/취소/환불 내역</th>
@@ -67,7 +67,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr >
+										<tr>
 											<td align="center">
 												<div>
 													<p><b>요청일</b></p>
@@ -97,9 +97,9 @@
 											</td>
 											<td align="center" class="table-action" style="vertical-align: middle;">
 												<div>
-													<span><b>취소 완료</b></span><br>
+													<span><b>결제 완료</b></span><br>
 													<span>완료일</span><br>
-													<span>2099.12.30</span>
+													<span>2100.12.30</span>
 												</div>
 											</td>
 										</tr>
