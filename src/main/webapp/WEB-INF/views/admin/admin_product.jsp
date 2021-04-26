@@ -22,6 +22,25 @@
 	<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
 	<style>
 		.form-control{ width:50%;height:auto; }
+		
+		.flex-container {
+		    display: inline-flex;
+		    flex-direction: row;
+		}
+		
+		.flex-item {
+			width:200px;
+			height:165px;
+			border:1px solid red;
+		}
+		
+		.pr_info {
+			border:1px solid red;
+			width: 100px;
+			margin-left: 20px;				
+		}
+		
+		.pr_area{width: 600px;}
 	</style>
 </head>
 
@@ -57,10 +76,9 @@
 								<button type="button" class="btn btn-info" style="float:right; margin: auto 10px;" onclick="registerPage();">상품 등록</button>
 								</div>
 								<div class="table-responsive">
-									<table class="table mb-0"  style="border: 1px black !important;">
+									<table class="table mb-0">
 										<thead>										
-											<tr>
-												<th scope="col"><input type="checkbox" name="del_check" id="del_check"/></th>
+											<tr>												
 												<th scope="col">#</th>
 												<th scope="col" >상품이미지</th>	
 												<th scope="col">상품정보</th>
@@ -78,29 +96,28 @@
 <%-- 										</c:when> --%>
 <%-- 									</c:choose> --%>
 <%-- 										<c:forEach var="List" items="${memberList}" varStatus="status">	 --%>
-											<tr>
-												
+											<tr>												
 												<td><input type="checkbox" name="del_check" id="del_check"/></td>
 												<td scope="row">1</td>
 												<td>
-													<table>
-														<tr>
-													<div class="col-6 col-md-4 col-lg-4 col-xl-3">
-														<img src="${contextPath}/resources/assets/img/blog/blog_2.png" class="img-fluid pr-2">
-													</div>
-													<td>
-													Product Name
-													</td>									
-												</td>
-												
-													</tr>
-													</table>
-												</td>
-												<td>
-													상품가격 및 재고량 칸
-												</td>
-												<td>
-													등록날짜
+													<table style="border: 1px solid black;">
+														<tr style="vertical-align: middle;">
+															<td style="border: 1px solid blue;">
+															<div class="flex-container">
+																<div class="flex-item">
+																	<img src="${contextPath}/resources/assets/img/blog/blog_2.png" class="img-fluid pr-2">
+																</div>
+															
+																																									
+															<div class="flex-item pr_area">
+																<span class="pr_info">상품명 : Jelly</span><br>
+																<span class="pr_info">상품가격 : 50,000원</span><br>																
+																<span class="pr_info">등록날짜 : 2021.04.26(월)</span><br>
+															</div>
+															</div>
+															</td>
+														</tr>										
+													</table>													
 												</td>							
 											</tr>
 <%-- 										<c:set var="num" value="${num+1}"/> --%>
