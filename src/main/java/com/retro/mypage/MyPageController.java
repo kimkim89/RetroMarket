@@ -23,7 +23,7 @@ public class MyPageController {
 			
 			String id = (String)session.getAttribute("user_id");
 			mav.addObject("myInfo", mypagservice.getInfo(id));
-			mav.setViewName("/member/myPageR");
+			mav.setViewName("/mypage/myPageR");
 			return mav;
 		}
 		
@@ -31,7 +31,7 @@ public class MyPageController {
 		@RequestMapping(value = "memberInfoModify", method = RequestMethod.GET)
 		public ModelAndView memberInfoModify() {
 			ModelAndView mav = new ModelAndView();
-			mav.setViewName("/member/member_modify");
+			mav.setViewName("/mypage/member_modify");
 			return mav;
 		}
 		
@@ -39,7 +39,7 @@ public class MyPageController {
 		@RequestMapping(value = "buyInfo", method = RequestMethod.GET)
 		public ModelAndView buyInfo() {
 			ModelAndView mav = new ModelAndView();
-			mav.setViewName("/member/buy_info");
+			mav.setViewName("/mypage/buy_info");
 			return mav;
 		}		
 	
