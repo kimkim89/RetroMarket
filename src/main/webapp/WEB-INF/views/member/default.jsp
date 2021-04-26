@@ -38,7 +38,7 @@
 		</div>
 		<!--? Hero Area End-->
 		<!--================Blog Area =================-->
-		<section class="blog_area section-padding" style="margin: 3%;">
+		<section class="blog_area section-padding" style="margin: 0% 7% 0% 8%;;">
 			<div class="gallery-area">
 				<div class="row">
 					<jsp:include page="./include/myPageSide.jsp" />

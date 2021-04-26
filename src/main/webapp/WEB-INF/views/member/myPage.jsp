@@ -14,7 +14,7 @@
 		});
 		
 		$("#myPage_btn").click(function() {
-			location.href = "${contextPath}/member/myPageR";
+			location.href = "${contextPath}/mypage/myPageR";
 		});
 		
 		$("#admin_btn").click(function() {
