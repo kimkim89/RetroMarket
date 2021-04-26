@@ -110,9 +110,26 @@
 															
 																																									
 															<div class="flex-item pr_area">
-																<span class="pr_info">상품명 : Jelly</span><br>
-																<span class="pr_info">상품가격 : 50,000원</span><br>																
-																<span class="pr_info">등록날짜 : 2021.04.26(월)</span><br>
+																<table>
+																<tr class="pr_info">
+																	<th>상품명 : </th>
+																	<td colspan="2">Jelly</td>
+																	<th>원가 : </th>
+																	<td>50,000원</td>															
+																</tr>
+																<tr class="pr_info">
+																	<th>상품 카테고리 : </th>
+																	<td colspan="2">젤리</td>
+																	<th>상품 타입 : </th>
+																	<td colspan="2">인기상품</td>
+																</tr>																
+																
+																
+																<tr class="pr_info">															
+																	<th>등록날짜 : </th>
+																	<td>2021.04.26(월)</td>
+																</tr>
+																</table>
 															</div>
 															</div>
 															</td>
