@@ -65,30 +65,20 @@
 										&nbsp;&nbsp;
 									</div>
 								</form>
-								<button type="button" class="btn btn-info" style="float: right;"
-									onclick="registerPage();">선택 삭제</button>
-								<button type="button" class="btn btn-info"
-									style="float: right; margin: auto 10px;"
-									onclick="registerPage();">상품 등록</button>
+								<button type="button" class="btn btn-info" style="float: right;" onclick="">선택 삭제</button>
+								<button type="button" class="btn btn-info" style="float: right; margin: auto 10px;" onclick="">상품 등록</button>
 							</div>
-
+<br>
 							<div>
-								<div class="card">
-									<div class="card-header">
-										<h5 class="card-title">Bordered Table</h5>
-										<h6 class="card-subtitle text-muted">
-											Add
-											<code>.table-bordered</code>
-											for borders on all sides of the table and cells.
-										</h6>
-									</div>
+								<div class="card">									
 									<table class="table table-bordered">
 										<thead>
 											<tr>
 												<th><input type="checkbox" name="del_check_all" id="del_check_all" /></th>													
 												<th style="text-align:center;">#</th>
-												<th style="width: 80%;">상품정보</th>
-												<th style="width: 10%;">가격/재고</th>											
+												<th style="width: 60%;text-align:center;">상품정보</th>
+												<th style="width: 22%;text-align:center;">가격/재고</th>	
+												<th style="width: 12%;text-align:center;">설정</th>											
 											</tr>
 										</thead>
 										<tbody>
@@ -100,11 +90,10 @@
 														<div class="flex-item">
 															<img src="${contextPath}/resources/assets/img/blog/blog_2.png" style="width: 150px;">
 														</div>
-														<div class="flex-item">													
-															
-															<input type="text" class="form-control" value="하리보 젤리 " readonly style="width:150%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
-															<input type="text" class="form-control" value="상품 카테고리: 젤리류" readonly style="width:150%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
-															<input type="text" class="form-control" value="상품 타입: 이벤트상품 " readonly style="width:150%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+														<div class="flex-item">
+															<input type="text" class="form-control" value="하리보 젤리 " readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+															<input type="text" class="form-control" value="상품 카테고리: 젤리류" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+															<input type="text" class="form-control" value="상품 타입: 이벤트상품 " readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<select name="" class="form-select" aria-label="Default select example" style="margin-left:10px;">
 																<option value="">게시여부</option>
 																<option value="1">O</option>
@@ -113,8 +102,17 @@
 														</div>
 													</div>
 												</td>
-												<td>
-												
+												<td style="vertical-align: middle;">
+													<div class="flex-item">
+													<input type="text" class="form-control" value="재고량 " readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value="원가" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value="등록일 " readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value="수정일 " readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													</div>
+												</td>
+												<td style="vertical-align: middle;">
+													<button type="button" class="btn btn-info" style="margin-bottom:10px;" onclick="">선택 삭제</button><br>
+													<button type="button" class="btn btn-info" style="margin-bottom:10px;" onclick="">상품 등록</button>
 												</td>
 											</tr>
 										</tbody>
