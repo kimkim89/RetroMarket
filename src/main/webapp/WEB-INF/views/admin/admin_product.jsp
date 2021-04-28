@@ -24,23 +24,11 @@
 		.form-control{ width:50%;height:auto; }
 		
 		.flex-container {
-		    display: inline-flex;
-		    flex-direction: row;
+			display: inline-flex;
+			flex-direction: row;
 		}
 		
-		.flex-item {
-			width:200px;
-			height:165px;
-			border:1px solid red;
-		}
 		
-		.pr_info {
-			border:1px solid red;
-			width: 100px;
-			margin-left: 20px;				
-		}
-		
-		.pr_area{width: 600px;}
 	</style>
 </head>
 
@@ -75,74 +63,60 @@
 								<button type="button" class="btn btn-info" style="float:right;" onclick="registerPage();">선택 삭제</button>						
 								<button type="button" class="btn btn-info" style="float:right; margin: auto 10px;" onclick="registerPage();">상품 등록</button>
 								</div>
-								<div class="table-responsive">
-									<table class="table mb-0">
-										<thead>										
-											<tr>												
-												<th scope="col">#</th>
-												<th scope="col" >상품이미지</th>	
-												<th scope="col">상품정보</th>
-												<th scope="col">상품가격 및 재고량</th>
-												<th scope="col">등록날짜</th>											
+
+
+								<div>
+								<div class="card">
+									<div class="card-header">
+										<h5 class="card-title">Bordered Table</h5>
+										<h6 class="card-subtitle text-muted">Add <code>.table-bordered</code> for borders on all sides of the table and cells.</h6>
+									</div>
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th><input type="checkbox" name="del_check_all" id="del_check_all"/></th>
+												<th>#</th>
+												<th style="width:40%;">상품정보</th>
+												<th style="width:25%">상품가격 및 재고량</th>
+												<th class="d-none d-md-table-cell" style="width:25%">등록날짜</th>
+												<th>Actions</th>
 											</tr>
 										</thead>
 										<tbody>
-<%-- 									<c:choose> --%>
-<%-- 										<c:when test="${map.nowPage!=1}"> --%>
-<%-- 											<c:set var="num" value="${map.nowPage+(3*(map.nowPage-1))}" /> --%>
-<%-- 										</c:when> --%>
-<%-- 										<c:when test="${map.nowPage == 1}"> --%>
-<%-- 											<c:set var="num" value="1"/> --%>
-<%-- 										</c:when> --%>
-<%-- 									</c:choose> --%>
-<%-- 										<c:forEach var="List" items="${memberList}" varStatus="status">	 --%>
-											<tr>												
+											<tr>
 												<td><input type="checkbox" name="del_check" id="del_check"/></td>
-												<td scope="row">1</td>
-												<td>
-													<table style="border: 1px solid black;">
-														<tr style="vertical-align: middle;">
-															<td style="border: 1px solid blue;">
-															<div class="flex-container">
-																<div class="flex-item">
-																	<img src="${contextPath}/resources/assets/img/blog/blog_2.png" class="img-fluid pr-2">
+												<td>1</td>
+												<td style="vertical-align: middle;">
+													
+																											
+															<div class="flex-container">															
+																<div class= "flex-item">
+																	<img src="${contextPath}/resources/assets/img/blog/blog_2.png" style="width:150px;">
 																</div>
-															
-																																									
-															<div class="flex-item pr_area">
-																<table>
-																<tr class="pr_info">
-																	<th>상품명 : </th>
-																	<td colspan="2">Jelly</td>
-																	<th>원가 : </th>
-																	<td>50,000원</td>															
-																</tr>
-																<tr class="pr_info">
-																	<th>상품 카테고리 : </th>
-																	<td colspan="2">젤리</td>
-																	<th>상품 타입 : </th>
-																	<td colspan="2">인기상품</td>
-																</tr>																
+																<div class= "flex-item" >
 																
-																
-																<tr class="pr_info">															
-																	<th>등록날짜 : </th>
-																	<td>2021.04.26(월)</td>
-																</tr>
-																</table>
+																  	상품명: 하리보 젤리																
+																  	
+																</div>							
 															</div>
-															</div>
-															</td>
-														</tr>										
-													</table>													
-												</td>							
-											</tr>
-<%-- 										<c:set var="num" value="${num+1}"/> --%>
-<%-- 										</c:forEach>	 --%>
+													
+												</td>
+												
+												<td>5000원 / 500개</td>
+												<td class="d-none d-md-table-cell">2021.04.28</td>
+												<td class="table-action">
+													<a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+													<a href="#"><i class="align-middle" data-feather="trash"></i></a>
+												</td>
+											</tr>											
 										</tbody>
 									</table>
 								</div>
 							</div>
+							</div>
+							</div>
+							
+							
 						</div>						
 						<nav aria-label="Page navigation example">
 							<ul class="pagination pagination-md">
