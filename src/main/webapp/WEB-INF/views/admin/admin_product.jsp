@@ -24,7 +24,7 @@
 <script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
 <script>
 	function adminProdRegister() {
-		
+		location.href="${contextPath}/adminProd/adminProductRegister";
 	}
 </script>
 <link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
