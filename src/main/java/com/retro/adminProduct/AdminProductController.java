@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/admin/*")
+@RequestMapping("/adminProd/*")
 public class AdminProductController {
 	
 		//상품관리-목록 페이지

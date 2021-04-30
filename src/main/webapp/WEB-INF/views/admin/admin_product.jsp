@@ -22,8 +22,12 @@
 
 <title>상품 관리</title>
 <script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
-<link href="${contextPath}/resources/assets/admin/css/app.css"
-	rel="stylesheet">
+<script>
+	function adminProdRegister() {
+		
+	}
+</script>
+<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
 <style>
 .form-control {
 	width: 50%;
@@ -53,10 +57,8 @@
 										<select name="searchField" class="form-select"
 											aria-label="Default select example">
 
-											<option value="id">아이디</option>
-											<option value="name">이름</option>
-											<option value="phone">연락처</option>
-											<option value="email">이메일</option>
+											<option value="id">상품명</option>
+											<option value="name">상품번호</option>
 										</select>&nbsp;&nbsp; <input type="text" name="keyword"
 											class="form-control" placeholder="" aria-label="Search">
 										<button type="button" class="btn" onclick="adminMemberList();">
@@ -66,7 +68,7 @@
 									</div>
 								</form>
 								<button type="button" class="btn btn-info" style="float: right;" onclick="">선택 삭제</button>
-								<button type="button" class="btn btn-info" style="float: right; margin: auto 10px;" onclick="">상품 등록</button>
+								<button type="button" class="btn btn-info" style="float: right; margin: auto 10px;" onclick="adminProdRegister();">상품 등록</button>
 							</div>
 <br>
 							<div>
@@ -111,8 +113,8 @@
 													</div>
 												</td>
 												<td style="vertical-align: middle;">
-													<button type="button" class="btn btn-info" style="margin-bottom:10px;" onclick="">선택 삭제</button><br>
-													<button type="button" class="btn btn-info" style="margin-bottom:10px;" onclick="">상품 등록</button>
+													<button type="button" class="btn btn-info" style="margin-bottom:10px;margin-left:23px;" onclick="">삭제</button><br>
+													<button type="button" class="btn btn-info" style="margin-bottom:10px;margin-left:23px;" onclick="">수정</button>
 												</td>
 											</tr>
 										</tbody>
