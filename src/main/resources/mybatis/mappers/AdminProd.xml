@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.AdminProd">
+
+	<!-- 상품 등록(insert) -->
+	<insert id="adminProdReg">
+		insert into product_info 
+		values(#{mk_product_id}, #{mk_product_name}, #{mk_product_price}, #{mk_product_discount_price}, 
+			   #{mk_product_category}, #{mk_product_type}, #{mk_product_thumb}, #{mk_status}, #{mk_product_content}, #{mk_upfile},
+			   #{mk_inventory}, #{mk_register_date}, #{mk_modified_date}, #{mk_hit}, #{mk_like_count}, #{mk_writer_ip});	
+	</insert>
+
+
+ 
+ 
+ 
+</mapper>
