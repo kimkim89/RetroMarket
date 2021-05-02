@@ -35,24 +35,7 @@
 					<h1 class="h3 mb-3">상품관리</h1>
 
 					<div class="row">
-						<div class="col-md-3 col-xl-2">
-
-							<div class="card">
-								<div class="card-header">
-									<h5 class="card-title mb-0">상품관리(동적으로 변경)</h5>
-								</div>
-
-								<div class="list-group list-group-flush" role="tablist">
-									<a class="list-group-item list-group-item-action active" data-toggle="list" href="${contextPath}/admin/adminProduct" role="tab">
-							          	상품 목록
-							        </a>
-									<a class="list-group-item list-group-item-action" data-toggle="list" href="${contextPath}/admin/adminProductRegister" role="tab">
-							          	상품 등록
-							        </a>									
-								</div>
-							</div>
-						</div>
-
+						
 						<div class="col-md-9 col-xl-10">
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="account" role="tabpanel">
@@ -65,8 +48,17 @@
 											<form name="product_form" action="${contextPath}/admin/adminProductInsert" enctype="multipart/form-data" method="post">
 												<div class="row">
 													<div class="mb-3 col-md-4"  style="display:inline-block;">
-														<label class="form-label" for="level">상품 분류</label>
-														<select class="form-select" name="mk_product_category" id="mk_product_category">
+														<label class="form-label" for="mk_status">상품 분류</label>
+														<select class="form-select" name="mk_status" id="mk_status">
+														  <option value="1" >O</option>
+														  <option value="0">X</option>														  													   
+														</select>														
+													</div>
+												</div>
+												<div class="row">
+													<div class="mb-3 col-md-4"  style="display:inline-block;">
+														<label class="form-label" for="mk_product_type">상품 분류</label>
+														<select class="form-select" name="mk_product_type" id="mk_product_type">
 														  <option value="" >상품 분류</option>
 														  <option value="1">신상품</option>
 														  <option value="2">인기상품</option>
@@ -76,8 +68,8 @@
 												</div>
 												<div class="row">
 													<div class="mb-3 col-md-4"  style="display:inline-block;">
-														<label class="form-label" for="level">상품 종류</label>
-														<select class="form-select" name="mk_product_type" id="mk_product_type">
+														<label class="form-label" for="mk_product_category">상품 종류</label>
+														<select class="form-select" name="mk_product_category" id="mk_product_category">
 														  <option value="" >상품 종류</option>
 														  <option value="1">스낵</option>
 														  <option value="2">젤리</option>
@@ -89,6 +81,10 @@
 												<div class="mb-3">
 													<label class="form-label" for="mk_product_name">상품명</label>
 													<input type="email" class="form-control" name="mk_product_name" id="mk_product_name">
+												</div>
+												<div class="mb-3">
+													<label class="form-label" for="mk_product_id">상품코드</label>
+													<input type="email" class="form-control" name="mk_product_id" id="mk_product_id">
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="mk_product_price">상품 가격(원)</label>
