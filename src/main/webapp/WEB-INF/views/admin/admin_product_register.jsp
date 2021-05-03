@@ -45,10 +45,10 @@
 											<h5 class="card-title mb-0"><font style="color:red;">*상품 정보를 등록해주세요.</font></h5>
 										</div>
 										<div class="card-body">
-											<form name="product_form" action="${contextPath}/admin/adminProductInsert" enctype="multipart/form-data" method="post">
+											<form name="product_form" action="${contextPath}/admin/adminProductRegister" enctype="multipart/form-data" method="post">
 												<div class="row">
 													<div class="mb-3 col-md-4"  style="display:inline-block;">
-														<label class="form-label" for="mk_status">상품 분류</label>
+														<label class="form-label" for="mk_status">게시 여부</label>
 														<select class="form-select" name="mk_status" id="mk_status">
 														  <option value="1" >O</option>
 														  <option value="0">X</option>														  													   
