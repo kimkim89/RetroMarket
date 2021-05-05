@@ -18,12 +18,12 @@ public class AdminProductVO {
 	private int mk_product_type;
 	private String mk_original_thumb;
 	private String mk_stored_thumb;
-	private int mk_thumb_size;
+	private long mk_thumb_size;
 	private int mk_status;
 	private String mk_content;
 	private String mk_original_upfile; 
 	private String mk_stored_upfile;
-	private int mk_upfile_size;
+	private long mk_upfile_size;
 	private int mk_inventory;
 	private Timestamp mk_register_date;
 	private Timestamp mk_modified_date;

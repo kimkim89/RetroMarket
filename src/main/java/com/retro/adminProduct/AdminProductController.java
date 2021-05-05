@@ -49,6 +49,28 @@ public class AdminProductController {
 			
 			String path = "D:\\workspace_spring\\RetroSnackMarket\\src\\main\\webapp\\resources\\image";
 			
+			//썸네일 원본 파일명
+			String thumbOrigName = mf.getOriginalFilename();
+			//썸네일 서버 파일명
+			String thumbStoredName = path + System.currentTimeMillis() + thumbOrigName;
+			//썸네일 원본 파일 사이즈
+			long thumbFileSize = mf.getSize();
+			
+			
+			admProdVO.setMk_original_thumb(thumbOrigName);
+			admProdVO.setMk_stored_thumb(thumbStoredName);
+			admProdVO.setMk_thumb_size(thumbFileSize);
+			
+			try {
+	            mf.transferTo(new File(thumbStoredName));
+	        } catch (IllegalStateException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+			
 			
 			admProdService.adminProdInsert(admProdVO);
 			
