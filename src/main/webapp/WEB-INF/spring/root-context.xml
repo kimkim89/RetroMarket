@@ -49,6 +49,14 @@
             </props>
         </property>
     </bean>
-
+    
+    <!-- 파일 업로드 처리 관련 MultipartResolver 클래스 bean으로 등록, multipartResolver빈 : 들어오는 데이터 처리해줌 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- max upload size in bytes -->
+        <property name="maxUploadSize" value="5242880" /> <!-- 5MB -->
+        <!-- max size of file in memory (in bytes) -->
+        <property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+    </bean>
+    
 		
 </beans>
