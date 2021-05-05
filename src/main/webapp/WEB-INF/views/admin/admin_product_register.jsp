@@ -28,7 +28,7 @@
 <body>
 	<div class="wrapper">
 		<%@ include file="./include/sidebar.jsp" %>
-<!-- 
+
 			<main class="content">
 				<div class="container-fluid p-0">
 
@@ -118,7 +118,7 @@
 						</div>
 					</div>
 				</div>	
-			</main> -->
+			</main> 
 	
 <h1>파일 업로드</h1>
 <form name="fileForm" action="${contextPath}/adminProd/requestupload1" method="post" enctype="multipart/form-data">
