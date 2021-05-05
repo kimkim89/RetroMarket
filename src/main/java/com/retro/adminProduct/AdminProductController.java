@@ -3,8 +3,10 @@ package com.retro.adminProduct;
 import java.io.File;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -17,8 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/adminProd/*")
 public class AdminProductController {
 	
-	private static final String SAVE_PATH = "파일을 저장할 경로를 적어주세요";
-
+	@Autowired
+	private AdminProductService admProdService;
+	
 		//상품관리-목록 페이지
 		@RequestMapping(value = "adminProduct")
 		public ModelAndView adminProduct() {
@@ -35,6 +38,29 @@ public class AdminProductController {
 			mav.setViewName("admin/admin_product_register");
 			return mav;
 		}
+		
+		
+		//상품 정보 insert
+		@RequestMapping(value = "adminProdInsert", method=RequestMethod.POST)
+		public ModelAndView adminProdInsert(AdminProductVO admProdVO, MultipartHttpServletRequest mtfRequest, RedirectAttributes attributes) {
+			ModelAndView mav = new ModelAndView();
+			
+			MultipartFile mf = mtfRequest.getFile("mk_original_thumb");
+			
+			String path = "D:\\workspace_spring\\RetroSnackMarket\\src\\main\\webapp\\resources\\image";
+			
+			
+			admProdService.adminProdInsert(admProdVO);
+			
+			
+			
+			mav.setViewName("redirect:/adminProd/adminProduct");
+			return mav;
+		}
+		
+		
+		
+		
 		
 	 
 /*20210504 파일 업로드 테스트 중 */
