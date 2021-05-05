@@ -121,10 +121,10 @@
 			</main> -->
 	
 <h1>파일 업로드</h1>
-<form action="fileupload" method="post" enctype="multipart/form-data">
-    <input type="file" name="uploadfile" placeholder="파일 선택" /><br/>
-    <input type="submit" value="업로드">
-</form>			
+<form name="fileForm" action="${contextPath}/adminProd/requestupload1" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <input type="submit" value="전송" />
+</form>		
 			
 
 			<footer class="footer">

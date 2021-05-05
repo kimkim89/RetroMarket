@@ -1,24 +1,24 @@
 package com.retro.adminProduct;
 
-import org.apache.log4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 
 @Controller
 @RequestMapping("/adminProd/*")
 public class AdminProductController {
 	
-		public Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
-	
+	private static final String SAVE_PATH = "파일을 저장할 경로를 적어주세요";
+
 		//상품관리-목록 페이지
 		@RequestMapping(value = "adminProduct")
 		public ModelAndView adminProduct() {
@@ -36,39 +36,42 @@ public class AdminProductController {
 			return mav;
 		}
 		
-		//파일 업로드 테스트 중
-		@RequestMapping(value = "/fileupload", method = RequestMethod.POST)
-		public void upload(MultipartFile uploadfile) {
-			logger.info("upload() POST 호출");
-			//logger.info("파일 이름: {}", uploadfile.getOriginalFilename());
-			//logger.info("파일 크기: {}", uploadfile.getSize());
-
-		    saveFile(uploadfile);
-		}
-		 
+	 
+/*20210504 파일 업로드 테스트 중 */
+		
+		
+		
+		@RequestMapping(value = "requestupload1")
+	    public String requestupload1(MultipartHttpServletRequest mtfRequest, RedirectAttributes attributes) {
+			System.out.println("함수 타는지 확인 중....  :)");
 			
-		private String saveFile(MultipartFile file){
-		    // 파일 이름 변경
-		    UUID uuid = UUID.randomUUID();
-		    String saveName = uuid + "_" + file.getOriginalFilename();
+	        String src = mtfRequest.getParameter("src");
+	        System.out.println("src value : " + src);
+	        MultipartFile mf = mtfRequest.getFile("file");
 
-		    //logger.info("saveName: {}",saveName);
+	        String path = "D:\\test_image\\";
 
-		    // 저장할 File 객체를 생성(껍데기 파일)ㄴ
-		    //File saveFile = new File(UPLOAD_PATH,saveName); // 저장할 폴더 이름, 저장할 파일 이름
+	        String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+	        long fileSize = mf.getSize(); // 파일 사이즈
 
-		    try {
-		        //file.transferTo(saveFile); // 업로드 파일에 saveFile이라는 껍데기 입힘
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		        return null;
-		    }
+	        System.out.println("originFileName : " + originFileName);
+	        System.out.println("fileSize : " + fileSize);
 
-		    return saveName;
-		} // end saveFile(
+	        String safeFile = path + System.currentTimeMillis() + originFileName;
 
+	        try {
+	            mf.transferTo(new File(safeFile));
+	        } catch (IllegalStateException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
 
-		//---------테스트 끝
+	        return "redirect:/adminProd/adminProductRegister";
+	    }
+
 		
 		
 }
