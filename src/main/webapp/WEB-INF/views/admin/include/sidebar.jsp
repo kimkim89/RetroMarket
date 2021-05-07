@@ -49,11 +49,11 @@
 						Tools & Components
 					</li>
 					<li class="sidebar-item">
-						<a href="${contextPath}/admin/adminProduct" data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
+						<a href="${contextPath}/adminProd/adminProduct" data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
               <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">상품 관리</span>
             </a>
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/admin/adminProduct">상품 관리</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/adminProd/adminProduct">상품 관리</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/admin/adminInventory">재고 관리</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/admin/adminOrder">주문 관리</a></li>
 						</ul>
