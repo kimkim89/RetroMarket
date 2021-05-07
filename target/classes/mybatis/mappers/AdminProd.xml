@@ -17,7 +17,12 @@
 
 		<insert id="adminProdRegister">
 		insert into product_info 
-		values ("AAA1234","하리보 젤리 사탕",5000,4000,"젤리류","신상품",#{mk_original_thumb}, #{mk_stored_thumb}, #{mk_thumb_size}, 1, "테스트입니다.", "", "", "", 200, 0, 0, "test");
+						(mk_product_id, mk_product_name, mk_product_price, mk_product_discount_price, 
+						 mk_product_category, mk_product_type, mk_original_thumb, mk_stored_thumb, mk_thumb_size, mk_status, mk_content, 
+						 mk_original_upfile, mk_stored_upfile, mk_upfile_size, mk_inventory, 
+						mk_hit, mk_like_count, mk_writer_ip)
+						values 
+						("AAA1234","하리보 젤리 사탕",5000,4000,"젤리류","신상품",#{mk_original_thumb}, #{mk_stored_thumb}, #{mk_thumb_size}, 1, "테스트입니다.", "", "", 150, 200, 0, 0, "test");
 		</insert>
 
 

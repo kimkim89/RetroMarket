@@ -45,7 +45,7 @@
 											<h5 class="card-title mb-0"><font style="color:red;">*상품 정보를 등록해주세요.</font></h5>
 										</div>
 										<div class="card-body">
-											<form name="product_form" action="${contextPath}/admin/adminProductRegister" enctype="multipart/form-data" method="post">
+											<form name="product_form" action="${contextPath}/adminProd/adminProdInsert" enctype="multipart/form-data" method="post">
 												<div class="row">
 													<div class="mb-3 col-md-4"  style="display:inline-block;">
 														<label class="form-label" for="mk_status">게시 여부</label>
@@ -95,11 +95,11 @@
 													<input type="text" class="form-control" name="mk_inventory" id="mk_inventory">
 												</div>
 												<div class="mb-3">
-													<label class="form-label" for="mk_product_thumb">상품 썸네일(상품목록용)</label>
+													<label class="form-label" for=mk_original_thumb>상품 썸네일(상품목록용)</label>
 													<input type="file" class="form-control" name="mk_product_thumb" id="mk_product_thumb">
 												</div>		
 												<div class="mb-3">
-													<label class="form-label" for="mk_upfile">상품 이미지(상품상세보기)</label>
+													<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>
 													<input type="file" class="form-control" name="mk_upfile" id="mk_upfile">
 												</div>							
 												<div class="mb-3">
@@ -109,7 +109,7 @@
 														CKEDITOR.replace('mk_content');
 													</script>
 												</div>	
-												<button type="submit" class="btn btn-primary">등록</button> 
+												<input type="submit" class="btn btn-primary" value="등록"/>
 											</form>
 										</div>
 									</div>
@@ -120,12 +120,7 @@
 				</div>	
 			</main> 
 	
-<h1>파일 업로드</h1>
-<form name="fileForm" action="${contextPath}/adminProd/requestupload1" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <input type="submit" value="전송" />
-</form>		
-			
+
 
 			<footer class="footer">
 				<div class="container-fluid">
