@@ -50,8 +50,8 @@
 					</li>
 					<li class="sidebar-item">
 						<a href="${contextPath}/adminProd/adminProduct" data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
-              <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">상품 관리</span>
-            </a>
+              				<i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">상품 관리</span> 
+            			</a>
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
 							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/adminProd/adminProduct">상품 관리</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/admin/adminInventory">재고 관리</a></li>
@@ -61,10 +61,9 @@
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="${contextPath}/admin/adminEvent">
-              <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">이벤트 관리</span>
-            </a>
+              				<i class="align-middle" data-feather="coffee"></i> <span class="align-middle">이벤트 관리</span>
+            			</a>
 					</li>
-
 				</ul>
 			</div>
 		</nav>
@@ -72,8 +71,8 @@
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle d-flex">
-          <i class="hamburger align-self-center"></i>
-        </a>
+          		<i class="hamburger align-self-center"></i>
+        		</a>
 
 				<form class="d-none d-sm-inline-block">
 					<div class="input-group input-group-navbar">
@@ -225,11 +224,11 @@
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-toggle="dropdown">
                 <i class="align-middle" data-feather="settings"></i>
-              </a>
+              				</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
                 <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded mr-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
-              </a>
+              				</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle mr-1" data-feather="user"></i> Profile</a>
 								<a class="dropdown-item" href="#"><i class="align-middle mr-1" data-feather="pie-chart"></i> Analytics</a>
