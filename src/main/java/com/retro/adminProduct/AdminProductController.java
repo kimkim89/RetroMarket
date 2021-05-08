@@ -42,12 +42,14 @@ public class AdminProductController {
 		
 		//상품 정보 insert
 		@RequestMapping(value = "adminProdInsert", method=RequestMethod.POST)
-		public ModelAndView adminProdInsert(AdminProductVO admProdVO, MultipartHttpServletRequest mtfRequest, RedirectAttributes attributes) {
+		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, MultipartHttpServletRequest mtfRequest, RedirectAttributes attributes) {
 			ModelAndView mav = new ModelAndView();
 			
 			MultipartFile mf = mtfRequest.getFile("mk_original_thumb");
 			
 			String path = "D:\\workspace_spring\\RetroSnackMarket\\src\\main\\webapp\\resources\\image";
+			
+			System.out.println("mtfRequest: " + mf.getOriginalFilename());
 			
 			//썸네일 원본 파일명
 			String thumbOrigName = mf.getOriginalFilename();
@@ -57,9 +59,13 @@ public class AdminProductController {
 			long thumbFileSize = mf.getSize();
 			
 			
-			admProdVO.setMk_original_thumb(thumbOrigName);
-			admProdVO.setMk_stored_thumb(thumbStoredName);
-			admProdVO.setMk_thumb_size(thumbFileSize);
+						
+			
+			adminProdVO.setMk_original_thumb(thumbOrigName);
+			adminProdVO.setMk_stored_thumb(thumbStoredName);
+			adminProdVO.setMk_thumb_size(thumbFileSize);
+			
+			
 			
 			try {
 	            mf.transferTo(new File(thumbStoredName));
@@ -72,7 +78,7 @@ public class AdminProductController {
 	        }
 			
 			
-			admProdService.adminProdInsert(admProdVO);
+			admProdService.adminProdInsert(adminProdVO);
 			
 			
 			
