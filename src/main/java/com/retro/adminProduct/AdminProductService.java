@@ -10,7 +10,7 @@ public class AdminProductService {
 	AdminProductDAO admProdDAO;
 	
 	//상품 정보 insert
-	public void adminProdInsert(AdminProductVO admProdVO) {
-		admProdDAO.adminProdInsert(admProdVO);
+	public void adminProdInsert(AdminProductVO adminProdVO) {
+		admProdDAO.adminProdInsert(adminProdVO);
 	}
 }

@@ -10,8 +10,8 @@ public class AdminProductDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	public void adminProdInsert(AdminProductVO admProdVO) {
-		sqlSession.insert("mapper.AdminProd.adminProdInsert", "admProdVO");
+	public void adminProdInsert(AdminProductVO adminProdVO) {
+		sqlSession.insert("mapper.AdminProd.adminProdInsert", "adminProdVO");
 	}
 
 }
