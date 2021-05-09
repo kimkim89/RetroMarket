@@ -74,7 +74,7 @@
 														  <option value="1">스낵</option>
 														  <option value="2">젤리</option>
 														  <option value="3">캔디</option>
-														   <option value="4">기타</option>
+														  <option value="4">기타</option>
 														</select>														
 													</div>
 												</div>
