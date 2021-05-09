@@ -14,7 +14,7 @@
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
 	<title>회원관리</title>
@@ -28,9 +28,11 @@
 	 }
 	
 	function adminMemberList() {
-		document.getElementById('memList').submit();
+		document.getElementById('memList').submit(); // ??????????? getElementById인데 form 태그에 id값이 없네요 ?ㅇㅂㅇ?
 		return false;
 	}
+	
+	
 </script>
 
 </head>
@@ -45,6 +47,7 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
+								<!-- form태그에 id값 넣어주세욜 -->
 								<form name="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminMember" method="get">
 																					
 									<div class="input-group input-group-navbar">
@@ -115,7 +118,7 @@
 											</tr>
 										<c:set var="num" value="${num+1}"/>
 										</c:forEach>	
-										</tbody>
+										</tbody> 
 									</table>
 								</div>
 							</div>

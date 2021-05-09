@@ -12,7 +12,7 @@
 				<li><a href="${contextPath}/mypage/memberInfoModify" class="d-flex">
 						<p>회원 정보 수정</p>
 				</a></li>
-				<li><a href="#" class="d-flex">
+				<li><a href="${contextPath}/mypage/orderInfo" class="d-flex">
 						<p>주문 내역 조회</p>
 				</a></li>
 				<li><a href="${contextPath}/mypage/buyInfo" class="d-flex">
