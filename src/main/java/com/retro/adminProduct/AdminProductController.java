@@ -42,7 +42,7 @@ public class AdminProductController {
 		
 		//상품 정보 insert
 		@RequestMapping(value = "adminProdInsert", method=RequestMethod.POST)
-		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, MultipartHttpServletRequest mtfRequest, RedirectAttributes attributes) {
+		public ModelAndView adminProdInsert(@RequestParam AdminProductVO adminProdVO, @RequestParam MultipartHttpServletRequest mtfRequest, @RequestParam RedirectAttributes attributes) {
 			ModelAndView mav = new ModelAndView();
 			
 			MultipartFile mf = mtfRequest.getFile("mk_original_thumb");
@@ -58,9 +58,7 @@ public class AdminProductController {
 			//썸네일 원본 파일 사이즈
 			long thumbFileSize = mf.getSize();
 			
-			
-						
-			
+	
 			adminProdVO.setMk_original_thumb(thumbOrigName);
 			adminProdVO.setMk_stored_thumb(thumbStoredName);
 			adminProdVO.setMk_thumb_size(thumbFileSize);
@@ -95,7 +93,7 @@ public class AdminProductController {
 		
 		
 		
-		@RequestMapping(value = "requestupload1")
+		/*@RequestMapping(value = "requestupload1")
 	    public String requestupload1(MultipartHttpServletRequest mtfRequest, RedirectAttributes attributes) {
 			System.out.println("함수 타는지 확인 중....  :)");
 			
@@ -124,7 +122,7 @@ public class AdminProductController {
 	        }
 
 	        return "redirect:/adminProd/adminProductRegister";
-	    }
+	    }*/
 
 		
 		
