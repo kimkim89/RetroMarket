@@ -119,7 +119,7 @@
 												<div class="flex-container">
 													<div class= "flex-item"><img src="${contextPath}/resources/assets/img/Android.GIF" style="border: solid; 1px; width: 110px; height: 110px;"/></div>
 													&nbsp;&nbsp;<div class= "flex-item" style="margin-top: 5%; width: 340px;">
-													<input type="text" name="product_info" value="asdnkasdnklsdankladsnlkasd" readonly="readonly" class="single-input-secondary info-attribute">
+													<input type="text" name="product_info" value="asdnkasdnklsdanklaffffffffffffffffffffffffffffffffffdsnlkasd" readonly="readonly" class="single-input-secondary info-attribute">
 													</div>
 												</div>
 												<div style="margin-top: 2%; max-width: 455px;">

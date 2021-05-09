@@ -42,5 +42,35 @@ public class MyPageController {
 			mav.setViewName("/mypage/buy_info");
 			return mav;
 		}		
+		
+		// 주문내역 조회 페이지 이동
+		@RequestMapping(value = "orderInfo", method = RequestMethod.GET)
+		public ModelAndView orderInfo() {
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("/mypage/order_info");
+			return mav;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 }
