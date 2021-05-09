@@ -109,14 +109,6 @@
 														CKEDITOR.replace('mk_content');
 													</script>
 												</div>	
-<!-- 												임시 -->
-<!-- 												<div class="mb-3"> -->
-<!-- 													<label class="form-label" for="mk_content">상품 설명</label> -->
-<!-- 													<textarea class="form-control" name="mk_content" id="mk_content"></textarea> -->
-<!-- 													<script> -->
-// 														CKEDITOR.replace('mk_content');
-<!-- 													</script> -->
-<!-- 												</div>	 -->
 												<input type="submit" class="btn btn-primary" value="등록"/>
 											</form>
 										</div>

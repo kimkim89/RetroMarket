@@ -122,7 +122,7 @@
 									</div>
 								</div>
 							</div>
-
+					<!-- css 가로 정렬 테스트 -->
 							<!-- CSS 테스트 -->
 							<!-- 							<ul class="order_img_ul"> -->
 							<!-- 								<li class="order_img_li"><i class="fa fa-credit-card fa-4x" -->
@@ -137,7 +137,7 @@
 							<!-- 								<li class="order_img_li"><i class="fa fa-credit-card fa-4x" -->
 							<!-- 									aria-hidden="true" style="margin-top: 10%"></i></li> -->
 							<!-- 							</ul> -->
-
+					<!-- css 가로 정렬 테스트 -->
 						</div>
 						<!-- 20210510 주문 상태-->
 
