@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="${contextPath}/resources/assets/css/slick.css">
     <link rel="stylesheet" href="${contextPath}/resources/assets/css/nice-select.css">
     <link rel="stylesheet" href="${contextPath}/resources/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <!-- 아이콘 -->
     <script src="https://kit.fontawesome.com/6e10b642e0.js" ></script>
