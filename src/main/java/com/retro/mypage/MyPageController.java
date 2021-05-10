@@ -52,7 +52,14 @@ public class MyPageController {
 			return mav;
 		}
 		
-		
+		// 쿠폰 페이지
+		@RequestMapping(value = "couponAdd", method = RequestMethod.GET)
+		public ModelAndView couponAdd() {
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("/mypage/couponAdd");
+			return mav;
+		}
 		
 		
 		

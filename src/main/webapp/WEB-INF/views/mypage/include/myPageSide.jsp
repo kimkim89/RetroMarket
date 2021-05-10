@@ -18,7 +18,7 @@
 				<li><a href="${contextPath}/mypage/buyInfo" class="d-flex">
 						<P>결제 내역 조회</P>
 				</a></li>
-				<li><a href="#" class="d-flex">
+				<li><a href="${contextPath}/mypage/couponAdd" class="d-flex">
 						<p>할인 쿠폰</p>
 				</a></li>
 				<li><a href="#" class="d-flex">
