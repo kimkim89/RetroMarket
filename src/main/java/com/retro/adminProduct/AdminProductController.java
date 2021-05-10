@@ -3,6 +3,8 @@ package com.retro.adminProduct;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,20 +43,26 @@ public class AdminProductController {
 		
 		
 		//상품 정보 insert
-		@RequestMapping(value = "adminProdInsert", method=RequestMethod.POST)
+		@RequestMapping(value = "adminProdInsert", method= {RequestMethod.POST, RequestMethod.GET})
 		public ModelAndView adminProdInsert(@RequestParam AdminProductVO adminProdVO, @RequestParam MultipartHttpServletRequest mtfRequest, @RequestParam RedirectAttributes attributes) {
 			ModelAndView mav = new ModelAndView();
 			
+			System.out.println("확인중");
+			
 			MultipartFile mf = mtfRequest.getFile("mk_original_thumb");
 			
-			String path = "D:\\workspace_spring\\RetroSnackMarket\\src\\main\\webapp\\resources\\image";
+			String uploadPath = mtfRequest.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			
-			System.out.println("mtfRequest: " + mf.getOriginalFilename());
+			File makeFolder = new File(uploadPath);
+			if(!makeFolder.exists()) {
+				makeFolder.mkdirs();
+			}
 			
+										
 			//썸네일 원본 파일명
 			String thumbOrigName = mf.getOriginalFilename();
 			//썸네일 서버 파일명
-			String thumbStoredName = path + System.currentTimeMillis() + thumbOrigName;
+			String thumbStoredName = uploadPath + System.currentTimeMillis() + thumbOrigName;
 			//썸네일 원본 파일 사이즈
 			long thumbFileSize = mf.getSize();
 			
@@ -63,10 +71,10 @@ public class AdminProductController {
 			adminProdVO.setMk_stored_thumb(thumbStoredName);
 			adminProdVO.setMk_thumb_size(thumbFileSize);
 			
-			
+			File file = new File(uploadPath, thumbStoredName);
 			
 			try {
-	            mf.transferTo(new File(thumbStoredName));
+	            mf.transferTo(file);
 	        } catch (IllegalStateException e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();
