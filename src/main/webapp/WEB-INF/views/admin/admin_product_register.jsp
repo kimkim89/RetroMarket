@@ -80,11 +80,11 @@
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="mk_product_name">상품명</label>
-													<input type="email" class="form-control" name="mk_product_name" id="mk_product_name">
+													<input type="text" class="form-control" name="mk_product_name" id="mk_product_name">
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="mk_product_id">상품코드</label>
-													<input type="email" class="form-control" name="mk_product_id" id="mk_product_id">
+													<input type="text" class="form-control" name="mk_product_id" id="mk_product_id">
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="mk_product_price">상품 가격(원)</label>
@@ -100,7 +100,7 @@
 												</div>		
 												<div class="mb-3">
 													<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>
-													<input type="file" class="form-control" name="mk_upfile" id="mk_upfile">
+													<input type="file" class="form-control" name="mk_upfile" id="mk_original_upfile">
 												</div>							
 												<div class="mb-3">
 													<label class="form-label" for="mk_content">상품 설명</label>
