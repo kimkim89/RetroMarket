@@ -61,9 +61,23 @@ public class MyPageController {
 			return mav;
 		}
 		
+		// 최근 본 상품
+//		@RequestMapping(value = "couponAdd", method = RequestMethod.GET)
+//		public ModelAndView couponAdd() {
+//			ModelAndView mav = new ModelAndView();
+//			
+//			mav.setViewName("/mypage/couponAdd");
+//			return mav;
+//		}		
 		
-		
-		
+		// 장바구니 조회
+//		@RequestMapping(value = "couponAdd", method = RequestMethod.GET)
+//		public ModelAndView couponAdd() {
+//			ModelAndView mav = new ModelAndView();
+//			
+//			mav.setViewName("/mypage/couponAdd");
+//			return mav;
+//		}	
 		
 		
 		
