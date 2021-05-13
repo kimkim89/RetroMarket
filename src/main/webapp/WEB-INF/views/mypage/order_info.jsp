@@ -78,13 +78,13 @@
 						<!-- 20210510 주문 상태 -->
 
 						<div class="container" align="center"
-							style="margin-left: 2%; margin-bottom: 3%; padding-right: 0px;">
+							style="margin-left: 2%; margin-bottom: 1%; padding-right: 0px;">
 							<div class="row d-flex justify-content-between">
 								<div class="col-xl-2 col-lg-3 col-md-3 col-sm-7">
 									<div class="single-footer-caption mb-50">
-										<div class="footer-tittle">
-											<h4>결제 대기</h4>
-											<i class="fa fa-credit-card fa-3x icon_" aria-hidden="true"></i>
+										<div class="footer-tittle" style="color: yellowgreen;">
+											<h4 style="color: yellowgreen;">결제 대기</h4>
+											<i class="fa fa-credit-card fa-3x icon_" aria-hidden="true" ></i>
 										</div>
 									</div>
 								</div>
@@ -122,7 +122,7 @@
 									</div>
 								</div>
 							</div>
-
+					<!-- css 가로 정렬 테스트 -->
 							<!-- CSS 테스트 -->
 							<!-- 							<ul class="order_img_ul"> -->
 							<!-- 								<li class="order_img_li"><i class="fa fa-credit-card fa-4x" -->
@@ -137,7 +137,7 @@
 							<!-- 								<li class="order_img_li"><i class="fa fa-credit-card fa-4x" -->
 							<!-- 									aria-hidden="true" style="margin-top: 10%"></i></li> -->
 							<!-- 							</ul> -->
-
+					<!-- css 가로 정렬 테스트 -->
 						</div>
 						<!-- 20210510 주문 상태-->
 

@@ -37,12 +37,15 @@
         <div class="slider-area ">
             <div class="slider-active">
                 <!-- Single Slider -->
-                <div class="single-slider slider-height d-flex align-items-center slide-bg">
+                <div class="single-slider slider-height d-flex align-items-center slide-bg" style="background-color: rgb(236 234 245);">
                     <div class="container">
                         <div class="row justify-content-between align-items-center">
                             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                                 <div class="hero__caption">
-                                    <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">그 때 그시절 <br>추억의 매점</h1>
+                                    <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">
+                                    <font style="color:#1187CF">그 때</font> 
+                                    <font style="color:#D23460">그시절</font>  <br><font style="color:#D23460">추억의</font> 
+                                    <font style="color:#1187CF">매점</font> </h1>
                                     <p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">브이콘 먹는 소리 내지마라.</p>
                                     <!-- Hero-btn -->
                                     <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s" data-duration="2000ms">
@@ -52,7 +55,7 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 d-none d-sm-block">
                                 <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
-                                    <img src="${contextPath}/resources/assets/img/hero/zzz2.GIF" alt="" class=" heartbeat">
+                                    <img src="${contextPath}/resources/assets/img/newtro/mainewtro.jpg" style="width: 630px; height: 720px;" alt="" class=" heartbeat">
                                 </div>
                             </div>
                         </div>
