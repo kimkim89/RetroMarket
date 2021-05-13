@@ -2,6 +2,7 @@ package com.retro.adminProduct;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,9 +45,9 @@ public class AdminProductController {
 		
 		//상품 정보 insert
 		@RequestMapping(value = "adminProdInsert", method= {RequestMethod.POST, RequestMethod.GET})
-		public ModelAndView adminProdInsert(@RequestParam AdminProductVO adminProdVO, @RequestParam MultipartFile mf, @RequestParam HttpServletRequest request, @RequestParam RedirectAttributes attributes) {
+		public ModelAndView adminProdInsert(@RequestParam AdminProductVO adminProdVO, @RequestParam MultipartFile mf, @RequestParam HttpServletRequest request, RedirectAttributes attributes) {
 			ModelAndView mav = new ModelAndView();
-			
+						
 			System.out.println("확인중");
 			
 			
@@ -55,8 +56,7 @@ public class AdminProductController {
 			File makeFolder = new File(uploadPath);
 			if(!makeFolder.exists()) {
 				makeFolder.mkdirs();
-			}
-			
+			}			
 										
 			//썸네일 원본 파일명
 			String thumbOrigName = mf.getOriginalFilename();
@@ -66,9 +66,9 @@ public class AdminProductController {
 			long thumbFileSize = mf.getSize();
 			
 	
-			adminProdVO.setMk_original_thumb(thumbOrigName);
-			adminProdVO.setMk_stored_thumb(thumbStoredName);
-			adminProdVO.setMk_thumb_size(thumbFileSize);
+			//adminProdVO.setMk_original_thumb(thumbOrigName);
+			//adminProdVO.setMk_stored_thumb(thumbStoredName);
+			//adminProdVO.setMk_thumb_size(thumbFileSize);
 			
 			File file = new File(uploadPath, thumbStoredName);
 			
@@ -82,8 +82,9 @@ public class AdminProductController {
 	            e.printStackTrace();
 	        }
 			
-			
-			admProdService.adminProdInsert(adminProdVO);
+			//상품분류(신상품/인기상품/할인상품)
+			//admProdService.selectProdSort();
+			//admProdService.adminProdInsert(adminProdVO);
 			
 			
 			
@@ -95,41 +96,10 @@ public class AdminProductController {
 		
 		
 		
+		
+		
 	 
-/*20210504 파일 업로드 테스트 중 */
-		
-		
-		
-		/*@RequestMapping(value = "requestupload1")
-	    public String requestupload1(MultipartHttpServletRequest mtfRequest, RedirectAttributes attributes) {
-			System.out.println("함수 타는지 확인 중....  :)");
-			
-	        String src = mtfRequest.getParameter("src");
-	        System.out.println("src value : " + src);
-	        MultipartFile mf = mtfRequest.getFile("file");
 
-	        String path = "D:\\test_image\\";
-
-	        String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	        long fileSize = mf.getSize(); // 파일 사이즈
-
-	        System.out.println("originFileName : " + originFileName);
-	        System.out.println("fileSize : " + fileSize);
-
-	        String safeFile = path + System.currentTimeMillis() + originFileName;
-
-	        try {
-	            mf.transferTo(new File(safeFile));
-	        } catch (IllegalStateException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
-
-	        return "redirect:/adminProd/adminProductRegister";
-	    }*/
 
 		
 		
