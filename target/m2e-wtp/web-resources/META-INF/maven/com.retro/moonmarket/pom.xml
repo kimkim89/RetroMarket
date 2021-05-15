@@ -22,12 +22,6 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<!-- 파일 업로드 처리 : https://mvnrepository.com/artifact/commons-io/commons-io -->
-		<dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>2.8.0</version>
-		</dependency>		
 		<!-- 비동기 처리 관련 디펜던시 -->
 		<dependency>
 			<groupId>cglib</groupId>
