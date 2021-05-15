@@ -44,8 +44,12 @@ public class AdminProductController {
 		
 		
 		//상품 정보 insert
-		@RequestMapping(value = "adminProdInsert", method= {RequestMethod.POST, RequestMethod.GET})
-		public ModelAndView adminProdInsert(@RequestParam AdminProductVO adminProdVO, @RequestParam MultipartFile mf, @RequestParam HttpServletRequest request, RedirectAttributes attributes) {
+		@RequestMapping(value = "adminProdInsert", method = RequestMethod.POST)
+		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, 
+											@RequestParam("mk_original_thumb") MultipartFile file1, 
+											@RequestParam("mk_original_upfile") MultipartFile file2,
+											MultipartHttpServletRequest request
+											) {
 			ModelAndView mav = new ModelAndView();
 						
 			System.out.println("확인중");
@@ -59,21 +63,21 @@ public class AdminProductController {
 			}			
 										
 			//썸네일 원본 파일명
-			String thumbOrigName = mf.getOriginalFilename();
+			String thumbOrigName = file1.getOriginalFilename();
 			//썸네일 서버 파일명
 			String thumbStoredName = uploadPath + System.currentTimeMillis() + thumbOrigName;
 			//썸네일 원본 파일 사이즈
-			long thumbFileSize = mf.getSize();
+			long thumbFileSize = file1.getSize();
 			
 	
-			//adminProdVO.setMk_original_thumb(thumbOrigName);
-			//adminProdVO.setMk_stored_thumb(thumbStoredName);
-			//adminProdVO.setMk_thumb_size(thumbFileSize);
+			adminProdVO.setMk_original_thumb(thumbOrigName);
+			adminProdVO.setMk_stored_thumb(thumbStoredName);
+			adminProdVO.setMk_thumb_size(thumbFileSize);
 			
 			File file = new File(uploadPath, thumbStoredName);
 			
 			try {
-	            mf.transferTo(file);
+	            file1.transferTo(file);
 	        } catch (IllegalStateException e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();
