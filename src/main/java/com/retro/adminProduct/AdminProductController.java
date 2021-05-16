@@ -88,7 +88,7 @@ public class AdminProductController {
 			
 			//상품분류(신상품/인기상품/할인상품)
 			//admProdService.selectProdSort();
-			//admProdService.adminProdInsert(adminProdVO);
+			admProdService.adminProdInsert(adminProdVO);
 			
 			
 			
