@@ -55,6 +55,7 @@ public class AdminProductController {
 			System.out.println("확인중");
 			
 			
+			//String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			
 			File makeFolder = new File(uploadPath);
@@ -88,7 +89,7 @@ public class AdminProductController {
 			
 			//상품분류(신상품/인기상품/할인상품)
 			//admProdService.selectProdSort();
-			admProdService.adminProdInsert(adminProdVO);
+			//admProdService.adminProdInsert(adminProdVO);
 			
 			
 			
