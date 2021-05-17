@@ -46,15 +46,16 @@ public class AdminProductController {
 		//상품 정보 insert
 		@RequestMapping(value = "adminProdInsert", method = RequestMethod.POST)
 		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, 
-											@RequestParam("mk_original_thumb") MultipartFile file1, 
-											@RequestParam("mk_original_upfile") MultipartFile file2,
-											MultipartHttpServletRequest request
+											@RequestParam("original_thumb") MultipartFile file1, 
+											@RequestParam("original_upfile") MultipartFile file2,
+											HttpServletRequest request										
 											) {
 			ModelAndView mav = new ModelAndView();
 						
 			System.out.println("확인중");
 			
 			
+			//String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			
 			File makeFolder = new File(uploadPath);

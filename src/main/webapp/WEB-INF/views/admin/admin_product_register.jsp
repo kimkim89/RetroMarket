@@ -96,11 +96,11 @@
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for=mk_original_thumb>상품 썸네일(상품목록용)</label>
-													<input type="file" class="form-control" name="mk_original_thumb" id="mk_original_thumb" value="">
+													<input type="file" class="form-control" name="original_thumb" id="original_thumb" value="">
 												</div>		
 												<div class="mb-3">
 													<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>
-													<input type="file" class="form-control" name="mk_original_upfile" id="mk_original_upfile" value="">
+													<input type="file" class="form-control" name="original_upfile" id="original_upfile" value="">
 												</div>							
 												<div class="mb-3">
 													<label class="form-label" for="mk_content">상품 설명</label>
