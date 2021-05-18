@@ -51,12 +51,12 @@ public class AdminProductController {
 											HttpServletRequest request										
 											) {
 			ModelAndView mav = new ModelAndView();
-						
-			System.out.println("확인중");
-			
+				
 			
 			//String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
+			
+			System.out.println("파일경로 확인중:  " + uploadPath);
 			
 			File makeFolder = new File(uploadPath);
 			if(!makeFolder.exists()) {
@@ -75,8 +75,9 @@ public class AdminProductController {
 			adminProdVO.setMk_stored_thumb(thumbStoredName);
 			adminProdVO.setMk_thumb_size(thumbFileSize);
 			
-			File file = new File(uploadPath, thumbStoredName);
+			File file = new File(thumbStoredName);
 			
+			System.out.println("file?? :  " + file);
 			try {
 	            file1.transferTo(file);
 	        } catch (IllegalStateException e) {
