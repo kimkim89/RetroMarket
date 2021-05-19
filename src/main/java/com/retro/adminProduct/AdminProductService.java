@@ -22,9 +22,11 @@ public class AdminProductService {
 		//썸네일 원본 파일명
 		String thumbOrigName = file1.getOriginalFilename();
 		//썸네일 서버 파일명
-		String thumbStoredName = uploadPath + System.currentTimeMillis() + thumbOrigName;
+		String thumbStoredName = uploadPath + System.currentTimeMillis() + "_" + thumbOrigName;
 		//썸네일 원본 파일 사이즈
 		long thumbFileSize = file1.getSize();
+		
+		
 		
 
 		adminProdVO.setMk_original_thumb(thumbOrigName);
