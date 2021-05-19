@@ -2,6 +2,7 @@ package com.retro.adminProduct;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +39,11 @@ public class AdminProductController {
 		@RequestMapping(value = "adminProductRegister")
 		public ModelAndView adminProductRegister() {
 			ModelAndView mav = new ModelAndView();
+			
+			//상품분류(신상품/인기상품/할인상품)
+			List<AdminProductVO> prodSortList = admProdService.selectProdSort();
+			
+			mav.addObject("prodSortList", prodSortList);
 			mav.setViewName("admin/admin_product_register");
 			return mav;
 		}
@@ -51,47 +57,16 @@ public class AdminProductController {
 											HttpServletRequest request										
 											) {
 			ModelAndView mav = new ModelAndView();
-				
-			
-			//String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
+						
+			//서버 물리적 경로
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
-			
-			System.out.println("파일경로 확인중:  " + uploadPath);
-			
+				
 			File makeFolder = new File(uploadPath);
 			if(!makeFolder.exists()) {
 				makeFolder.mkdirs();
-			}			
-										
-			//썸네일 원본 파일명
-			String thumbOrigName = file1.getOriginalFilename();
-			//썸네일 서버 파일명
-			String thumbStoredName = uploadPath + System.currentTimeMillis() + thumbOrigName;
-			//썸네일 원본 파일 사이즈
-			long thumbFileSize = file1.getSize();
+			}
 			
-	
-			adminProdVO.setMk_original_thumb(thumbOrigName);
-			adminProdVO.setMk_stored_thumb(thumbStoredName);
-			adminProdVO.setMk_thumb_size(thumbFileSize);
-			
-			File file = new File(thumbStoredName);
-			
-			System.out.println("file?? :  " + file);
-			try {
-	            file1.transferTo(file);
-	        } catch (IllegalStateException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
-			
-			//상품분류(신상품/인기상품/할인상품)
-			//admProdService.selectProdSort();
-			//admProdService.adminProdInsert(adminProdVO);
-			
+			admProdService.adminProdInsert(adminProdVO, file1, file2, uploadPath);
 			
 			
 			mav.setViewName("redirect:/adminProd/adminProduct");

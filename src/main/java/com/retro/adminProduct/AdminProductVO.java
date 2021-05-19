@@ -31,6 +31,10 @@ public class AdminProductVO {
 	private int mk_like_count;
 	private String mk_writer_ip;
 	
+	private int ps_sort_id;
+	private String ps_sort_name;
+	private int ps_sort_order;
+	
 	
 	
 }
