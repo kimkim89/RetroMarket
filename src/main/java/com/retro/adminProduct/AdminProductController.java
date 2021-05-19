@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +58,8 @@ public class AdminProductController {
 											HttpServletRequest request										
 											) {
 			ModelAndView mav = new ModelAndView();
+			
+			//static Logger logger = Logger.getlogger
 						
 			//서버 물리적 경로
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
