@@ -59,10 +59,10 @@
 													<div class="mb-3 col-md-4"  style="display:inline-block;">
 														<label class="form-label" for="mk_product_type">상품 분류</label>
 														<select class="form-select" name="mk_product_type" id="mk_product_type">
-														  <option value="" >상품 분류</option>
-														  <option value="1">신상품</option>
-														  <option value="2">인기상품</option>
-														  <option value="3">할인상품</option>														   
+															<option value="" >상품 분류</option>
+														<c:forEach var="sortList" items="${prodSortList}" varStatus="status">														  
+														  	<option value="${sortList.ps_sort_id}">${sortList.ps_sort_name}</option>														  
+														</c:forEach>													   
 														</select>														
 													</div>
 												</div>
