@@ -2,6 +2,9 @@ package com.retro.adminProduct;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,32 +44,42 @@ public class AdminProductController {
 		
 		
 		//상품 정보 insert
-		@RequestMapping(value = "adminProdInsert", method=RequestMethod.POST)
-		public ModelAndView adminProdInsert(@RequestParam AdminProductVO adminProdVO, @RequestParam MultipartHttpServletRequest mtfRequest, @RequestParam RedirectAttributes attributes) {
+		@RequestMapping(value = "adminProdInsert", method = RequestMethod.POST)
+		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, 
+											@RequestParam("original_thumb") MultipartFile file1, 
+											@RequestParam("original_upfile") MultipartFile file2,
+											HttpServletRequest request										
+											) {
 			ModelAndView mav = new ModelAndView();
+				
 			
-			MultipartFile mf = mtfRequest.getFile("mk_original_thumb");
+			//String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
+			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			
-			String path = "D:\\workspace_spring\\RetroSnackMarket\\src\\main\\webapp\\resources\\image";
+			System.out.println("파일경로 확인중:  " + uploadPath);
 			
-			System.out.println("mtfRequest: " + mf.getOriginalFilename());
-			
+			File makeFolder = new File(uploadPath);
+			if(!makeFolder.exists()) {
+				makeFolder.mkdirs();
+			}			
+										
 			//썸네일 원본 파일명
-			String thumbOrigName = mf.getOriginalFilename();
+			String thumbOrigName = file1.getOriginalFilename();
 			//썸네일 서버 파일명
-			String thumbStoredName = path + System.currentTimeMillis() + thumbOrigName;
+			String thumbStoredName = uploadPath + System.currentTimeMillis() + thumbOrigName;
 			//썸네일 원본 파일 사이즈
-			long thumbFileSize = mf.getSize();
+			long thumbFileSize = file1.getSize();
 			
 	
 			adminProdVO.setMk_original_thumb(thumbOrigName);
 			adminProdVO.setMk_stored_thumb(thumbStoredName);
 			adminProdVO.setMk_thumb_size(thumbFileSize);
 			
+			File file = new File(thumbStoredName);
 			
-			
+			System.out.println("file?? :  " + file);
 			try {
-	            mf.transferTo(new File(thumbStoredName));
+	            file1.transferTo(file);
 	        } catch (IllegalStateException e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();
@@ -75,8 +88,9 @@ public class AdminProductController {
 	            e.printStackTrace();
 	        }
 			
-			
-			admProdService.adminProdInsert(adminProdVO);
+			//상품분류(신상품/인기상품/할인상품)
+			//admProdService.selectProdSort();
+			//admProdService.adminProdInsert(adminProdVO);
 			
 			
 			
@@ -88,41 +102,10 @@ public class AdminProductController {
 		
 		
 		
+		
+		
 	 
-/*20210504 파일 업로드 테스트 중 */
-		
-		
-		
-		/*@RequestMapping(value = "requestupload1")
-	    public String requestupload1(MultipartHttpServletRequest mtfRequest, RedirectAttributes attributes) {
-			System.out.println("함수 타는지 확인 중....  :)");
-			
-	        String src = mtfRequest.getParameter("src");
-	        System.out.println("src value : " + src);
-	        MultipartFile mf = mtfRequest.getFile("file");
 
-	        String path = "D:\\test_image\\";
-
-	        String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	        long fileSize = mf.getSize(); // 파일 사이즈
-
-	        System.out.println("originFileName : " + originFileName);
-	        System.out.println("fileSize : " + fileSize);
-
-	        String safeFile = path + System.currentTimeMillis() + originFileName;
-
-	        try {
-	            mf.transferTo(new File(safeFile));
-	        } catch (IllegalStateException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
-
-	        return "redirect:/adminProd/adminProductRegister";
-	    }*/
 
 		
 		
