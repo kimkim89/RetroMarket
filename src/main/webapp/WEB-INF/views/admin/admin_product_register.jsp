@@ -88,7 +88,7 @@
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="mk_product_price">상품 가격(원)</label>
-													<input type="text" class="form-control" name="mk_product_price" id="mk_product_price" value="">
+													<input type="number" class="form-control" name="mk_product_price" id="mk_product_price" value="">
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="mk_inventory">재고량</label>
