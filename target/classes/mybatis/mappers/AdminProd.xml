@@ -7,37 +7,13 @@
 <mapper namespace="mapper.AdminProd">
 
 	<!-- 상품 등록(insert) -->
-	 	<insert id="adminProdReg" parameterType="adminProdVO">
-	 		insert into product_info
-			values(#{mk_product_id}, #{mk_product_name}, #{mk_product_price}, #{mk_product_discount_price},
-	 			   #{mk_product_category}, #{mk_product_type}, #{mk_original_thumb}, #{mk_stored_thumb}, #{mk_thumb_size}, #{mk_status}, #{mk_content},
-				   #{mk_original_upfile}, #{mk_stored_upfile}, #{mk_upfile_size}, #{mk_inventory}, #{mk_register_date}, 
-				   #{mk_modified_date}, #{mk_hit}, #{mk_like_count}, #{mk_writer_ip});
-		</insert>
-
-<!-- 		<insert id="adminProdInsert"> -->
-<!-- 		insert into product_info  -->
-<!-- 						(mk_product_id, mk_product_name, mk_product_price, mk_product_discount_price,  -->
-<!-- 						 mk_product_category, mk_product_type, mk_original_thumb, mk_stored_thumb, mk_thumb_size, mk_status, mk_content,  -->
-<!-- 						 mk_original_upfile, mk_stored_upfile, mk_upfile_size, mk_inventory,  -->
-<!-- 						mk_hit, mk_like_count, mk_writer_ip) -->
-<!-- 						values  -->
-<!-- 						("AAA1234","하리보 젤리 사탕",5000,4000,"젤리류","신상품",#{mk_original_thumb}, #{mk_stored_thumb}, #{mk_thumb_size}, 1, "테스트입니다.", "", "", 150, 200, 0, 0, "test"); -->
-<!-- 		</insert> -->
-
-<!-- 		<insert id="adminProdInsert" parameterType="adminProdVO"> -->
-<!-- 			insert into product_info  -->
-<!-- 						(mk_product_id, mk_product_name, mk_original_thumb, mk_stored_thumb, mk_thumb_size) -->
-<!-- 						values  -->
-<!-- 						("AAA1234","하리보 젤리 사탕", #{mk_original_thumb}, #{mk_stored_thumb}, #{mk_thumb_size}); -->
-<!-- 		</insert> -->
-
-
-
-	<!-- 상품 타입(ex: 신상품, 할인상품, 이벤트 상품) -->
-	<select id="adminSortSelect">
-		select * from product_sort;	
-	</select>
+ 	<insert id="adminProdInsert" parameterType="adminProdVO">
+ 		insert into product_info
+		values(#{mk_product_id}, #{mk_product_name}, #{mk_product_price}, #{mk_product_discount_price},
+ 			   #{mk_product_category}, #{mk_product_type}, #{mk_original_thumb}, #{mk_stored_thumb}, #{mk_thumb_size}, #{mk_status}, #{mk_content},
+			   #{mk_original_upfile}, #{mk_stored_upfile}, #{mk_upfile_size}, #{mk_inventory}, #{mk_register_date}, 
+			   #{mk_modified_date}, #{mk_hit}, #{mk_like_count}, #{mk_writer_ip});
+	</insert>
 
 
 	<!-- 상품수정(update) -->
@@ -50,7 +26,7 @@
 	</update>
 
 	<!-- 상품 분류(신상품/인기상품/할인상품) -->
-	<select id="selectProdSort">
+	<select id="selectProdSort" resultType="adminProdVO">
 		select * from product_sort;	
 	</select>
  
