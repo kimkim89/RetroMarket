@@ -24,7 +24,7 @@
 				<li><a href="#" class="d-flex">
 						<p>최근 본 상품</p>
 				</a></li>
-				<li><a href="#" class="d-flex">
+				<li><a href="${contextPath}/mypage/wishList" class="d-flex">
 						<p>장바구니 조회</p>
 				</a></li>
 			</ul>
