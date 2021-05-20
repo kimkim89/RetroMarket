@@ -69,6 +69,15 @@ public class MyPageController {
 //			mav.setViewName("/mypage/couponAdd");
 //			return mav;
 //		}		
+		
+		// 장바구니 조회
+		@RequestMapping(value = "wishList", method = RequestMethod.GET)
+		public ModelAndView wishList() {
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("/mypage/wishList");
+			return mav;
+		}	
 
 		
 		
