@@ -45,7 +45,7 @@ public class AdminProductService {
             e.printStackTrace();
         }		
 		
-		System.out.println("testtest:  " + adminProdVO.getMk_product_price());
+		
 		admProdDAO.adminProdInsert(adminProdVO);
 	}
 	
