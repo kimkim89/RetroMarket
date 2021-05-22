@@ -14,7 +14,7 @@ public class AdminProductDAO {
 	
 	//상품 정보 insert
 	public void adminProdInsert(AdminProductVO adminProdVO) {
-		sqlSession.insert("mapper.AdminProd.adminProdInsert", "adminProdVO");
+		sqlSession.insert("mapper.AdminProd.adminProdInsert", adminProdVO);
 	}
 	
 	
