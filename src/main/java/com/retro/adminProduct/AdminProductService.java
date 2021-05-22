@@ -1,5 +1,6 @@
 package com.retro.adminProduct;
 
+import java.awt.PageAttributes.OriginType;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -26,17 +27,29 @@ public class AdminProductService {
 		//썸네일 원본 파일 사이즈
 		long thumbFileSize = file1.getSize();
 		
+		//상품 이미지 원본 파일명
+		String upfileOrigName = file2.getOriginalFilename();
+		//상품 이미지 서버 파일명
+		String upfileStoredName = uploadPath + System.currentTimeMillis() + "_" + upfileOrigName;
+		//상품 이미지 원본 파일 사이즈
+		long upfileFileSize = file2.getSize();
 		
-		
-
+		//썸네일 파일 정보 저장
 		adminProdVO.setMk_original_thumb(thumbOrigName);
 		adminProdVO.setMk_stored_thumb(thumbStoredName);
 		adminProdVO.setMk_thumb_size(thumbFileSize);
 		
-		File file = new File(thumbStoredName);
+		//상품 이미지 파일 정보 저장
+		adminProdVO.setMk_original_upfile(upfileOrigName);
+		adminProdVO.setMk_stored_upfile(upfileStoredName);
+		adminProdVO.setMk_upfile_size(upfileFileSize);
+		
+		File upload_file1 = new File(thumbStoredName);
+		File upload_file2 = new File(upfileStoredName);
 					
 		try {
-            file1.transferTo(file);
+            file1.transferTo(upload_file1);
+            file2.transferTo(upload_file2);
         } catch (IllegalStateException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -45,7 +58,7 @@ public class AdminProductService {
             e.printStackTrace();
         }		
 		
-		System.out.println("testtest:  " + adminProdVO.getMk_product_price());
+		
 		admProdDAO.adminProdInsert(adminProdVO);
 	}
 	
