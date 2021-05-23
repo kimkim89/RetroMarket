@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +18,8 @@ public class AdminProductService {
 	AdminProductDAO admProdDAO;
 	
 	//상품 정보 insert
-	public void adminProdInsert(AdminProductVO adminProdVO, MultipartFile file1, MultipartFile file2, String uploadPath) {
+	public void adminProdInsert(AdminProductVO adminProdVO, MultipartFile file1, MultipartFile file2, String uploadPath,
+								HttpServletRequest request) {
 		
 					
 									
@@ -57,6 +60,27 @@ public class AdminProductService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }		
+		
+		//상품 정보 작성자 IP주소 가져오기
+		String writer_ip = request.getHeader("X-Forwarded-For");	    
+
+	    if (writer_ip == null) {
+	    	writer_ip = request.getHeader("Proxy-Client-IP");	        
+	    }
+	    if (writer_ip == null) {
+	    	writer_ip = request.getHeader("WL-Proxy-Client-IP");	        
+	    }
+	    if (writer_ip == null) {
+	    	writer_ip = request.getHeader("HTTP_CLIENT_IP");	        
+	    }
+	    if (writer_ip == null) {
+	    	writer_ip = request.getHeader("HTTP_X_FORWARDED_FOR");	        
+	    }
+	    if (writer_ip == null) {
+	    	writer_ip = request.getRemoteAddr();	        
+	    }
+	    
+		adminProdVO.setMk_writer_ip(writer_ip);		
 		
 		
 		admProdDAO.adminProdInsert(adminProdVO);

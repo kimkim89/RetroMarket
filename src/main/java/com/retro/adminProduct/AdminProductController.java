@@ -63,13 +63,13 @@ public class AdminProductController {
 						
 			//서버 물리적 경로
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
-				
+			
 			File makeFolder = new File(uploadPath);
 			if(!makeFolder.exists()) {
 				makeFolder.mkdirs();
 			}
 			
-			admProdService.adminProdInsert(adminProdVO, file1, file2, uploadPath);
+			admProdService.adminProdInsert(adminProdVO, file1, file2, uploadPath, request);
 			
 			
 			mav.setViewName("redirect:/adminProd/adminProduct");
