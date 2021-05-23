@@ -51,7 +51,7 @@ public class AdminProductController {
 		
 		
 		//상품 정보 insert
-		@RequestMapping(value = "adminProdInsert", method = RequestMethod.POST)
+		@RequestMapping(value = "adminProdInsert", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, 
 											@RequestParam("original_thumb") MultipartFile file1, 
 											@RequestParam("original_upfile") MultipartFile file2,
