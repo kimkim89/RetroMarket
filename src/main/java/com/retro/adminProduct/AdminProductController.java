@@ -31,6 +31,10 @@ public class AdminProductController {
 		@RequestMapping(value = "adminProduct")
 		public ModelAndView adminProduct() {
 			ModelAndView mav = new ModelAndView();
+			
+			List<AdminProductVO> productList = admProdService.adminProductSelect();
+			
+			mav.addObject("productList", productList);
 			mav.setViewName("admin/admin_product");
 			return mav;
 		}
