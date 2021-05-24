@@ -84,6 +84,7 @@
 											</tr>
 										</thead>
 										<tbody>
+											<c:forEach var="prodList" items="${productList}" varStatus="status">
 											<tr>
 												<td><input type="checkbox" name="del_check" id="del_check" /></td>
 												<td style="text-align:center;">1</td>
@@ -106,10 +107,10 @@
 												</td>
 												<td style="vertical-align: middle;">
 													<div class="flex-item">
-													<input type="text" class="form-control" value="재고량 " readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
-													<input type="text" class="form-control" value="원가" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
-													<input type="text" class="form-control" value="등록일 " readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
-													<input type="text" class="form-control" value="수정일 " readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value="재고량 " value="${prodList.mk_inventory}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value="원가" value="${prodList.mk_product_price}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value="등록일 " value="${prodList.mk_register_date}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value="수정일 " value="${prodList.mk_modified_date}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
 													</div>
 												</td>
 												<td style="vertical-align: middle;">
@@ -117,6 +118,7 @@
 													<button type="button" class="btn btn-info" style="margin-bottom:10px;margin-left:23px;" onclick="">수정</button>
 												</td>
 											</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>

@@ -26,14 +26,14 @@ public class AdminProductService {
 		//썸네일 원본 파일명
 		String thumbOrigName = file1.getOriginalFilename();
 		//썸네일 서버 파일명
-		String thumbStoredName = uploadPath + System.currentTimeMillis() + "_" + thumbOrigName;
+		String thumbStoredName = System.currentTimeMillis() + "_" + thumbOrigName;
 		//썸네일 원본 파일 사이즈
 		long thumbFileSize = file1.getSize();
 		
 		//상품 이미지 원본 파일명
 		String upfileOrigName = file2.getOriginalFilename();
 		//상품 이미지 서버 파일명
-		String upfileStoredName = uploadPath + System.currentTimeMillis() + "_" + upfileOrigName;
+		String upfileStoredName = System.currentTimeMillis() + "_" + upfileOrigName;
 		//상품 이미지 원본 파일 사이즈
 		long upfileFileSize = file2.getSize();
 		
@@ -47,17 +47,15 @@ public class AdminProductService {
 		adminProdVO.setMk_stored_upfile(upfileStoredName);
 		adminProdVO.setMk_upfile_size(upfileFileSize);
 		
-		File upload_file1 = new File(thumbStoredName);
-		File upload_file2 = new File(upfileStoredName);
+		File upload_file1 = new File(uploadPath+thumbStoredName);
+		File upload_file2 = new File(uploadPath+upfileStoredName);
 					
 		try {
             file1.transferTo(upload_file1);
             file2.transferTo(upload_file2);
-        } catch (IllegalStateException e) {
-            // TODO Auto-generated catch block
+        } catch (IllegalStateException e) {            
             e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+        } catch (IOException e) {            
             e.printStackTrace();
         }		
 		
@@ -89,5 +87,10 @@ public class AdminProductService {
 	//상품 분류(신상품-1, 인기상품-2, 할인상품-3)
 	public List<AdminProductVO> selectProdSort() {
 		return admProdDAO.selectProdSort();
+	}
+	
+	//상품목록 Select
+	public List<AdminProductVO> adminProductSelect() {
+		return admProdDAO.adminProductSelect();
 	}
 }
