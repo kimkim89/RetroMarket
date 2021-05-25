@@ -94,9 +94,9 @@
 															<img src="${contextPath}/resources/assets/img/blog/blog_2.png" style="width: 150px;">
 														</div>
 														<div class="flex-item">
-															<input type="text" class="form-control" value="하리보 젤리 " readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
-															<input type="text" class="form-control" value="상품 카테고리: 젤리류" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
-															<input type="text" class="form-control" value="상품 타입: 이벤트상품 " readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+															<input type="text" class="form-control" value="${prodList.mk_product_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+															<input type="text" class="form-control" value="${prodList.mk_product_category}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+															<input type="text" class="form-control" value="${prodList.mk_product_type}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<select name="" class="form-select" aria-label="Default select example" style="margin-left:10px;">
 																<option value="">게시여부</option>
 																<option value="1">O</option>
@@ -107,10 +107,10 @@
 												</td>
 												<td style="vertical-align: middle;">
 													<div class="flex-item">
-													<input type="text" class="form-control" value="재고량 " value="${prodList.mk_inventory}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
-													<input type="text" class="form-control" value="원가" value="${prodList.mk_product_price}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
-													<input type="text" class="form-control" value="등록일 " value="${prodList.mk_register_date}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
-													<input type="text" class="form-control" value="수정일 " value="${prodList.mk_modified_date}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value="${prodList.mk_inventory}개" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value="${prodList.mk_product_price}원" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value="${prodList.mk_register_date}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value="${prodList.mk_modified_date}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
 													</div>
 												</td>
 												<td style="vertical-align: middle;">
