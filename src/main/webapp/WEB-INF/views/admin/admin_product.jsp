@@ -84,7 +84,8 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="prodList" items="${productList}" varStatus="status">
+											<c:forEach var="prodList" items="${productList}" varStatus="status">								
+												
 											<tr>
 												<td><input type="checkbox" name="del_check" id="del_check" /></td>
 												<td style="text-align:center;">1</td>
@@ -95,12 +96,30 @@
 														</div>
 														<div class="flex-item">
 															<input type="text" class="form-control" value="${prodList.mk_product_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
-															<input type="text" class="form-control" value="${prodList.mk_product_category}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+															
+														<c:set var="prod_category" value=""/>	
+														<c:choose>
+															
+															<c:when test="${prodList.mk_product_category == 1}">
+																
+															</c:when>
+															<c:when test="${prodList.mk_product_category == 2}">
+																
+															</c:when>
+															<c:when test="${prodList.mk_product_category == 3}">
+																
+															</c:when>
+															<c:when test="${prodList.mk_product_category == 4}">
+																
+															</c:when>
+														</c:choose>
+															
+															<input type="text" class="form-control" value="${prod_category}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<input type="text" class="form-control" value="${prodList.mk_product_type}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<select name="" class="form-select" aria-label="Default select example" style="margin-left:10px;">
 																<option value="">게시여부</option>
-																<option value="1">O</option>
-																<option value="0">X</option>											
+																<option value="1" <c:if test="${prodList.mk_status == 1}">selected</c:if>>O</option>
+																<option value="0" <c:if test="${prodList.mk_status == 0}">selected</c:if>>X</option>											
 															</select>
 														</div>
 													</div>
