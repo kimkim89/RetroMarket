@@ -99,8 +99,8 @@
 															<input type="text" class="form-control" value="${prodList.mk_product_type}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<select name="" class="form-select" aria-label="Default select example" style="margin-left:10px;">
 																<option value="">게시여부</option>
-																<option value="1">O</option>
-																<option value="0">X</option>											
+																<option value="1" <c:if test="${prodList.mk_status == 1}">selected</c:if>>O</option>
+																<option value="0" <c:if test="${prodList.mk_status == 0}">selected</c:if>>X</option>											
 															</select>
 														</div>
 													</div>
