@@ -98,5 +98,5 @@ public class AdminProductService {
 	public List<AdminProductVO> adminProductInfo() {
 		return admProdDAO.adminProductInfo();
 	}
-	}
+	
 }
