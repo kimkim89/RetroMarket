@@ -9,21 +9,27 @@
 	<!-- 상품 등록(insert) -->
  	<insert id="adminProdInsert" parameterType="adminProdVO">
  		insert into product_info
-		values(#{mk_product_id}, #{mk_product_name}, #{mk_product_price}, #{mk_product_discount_price},
+		values(#{mk_idx}, #{mk_product_id}, #{mk_product_name}, #{mk_product_price}, #{mk_product_discount_price},
  			   #{mk_product_category}, #{mk_product_type}, #{mk_original_thumb}, #{mk_stored_thumb}, #{mk_thumb_size}, #{mk_status}, #{mk_content},
-			   #{mk_original_upfile}, #{mk_stored_upfile}, #{mk_upfile_size}, #{mk_inventory}, #{mk_register_date}, 
-			   #{mk_modified_date}, #{mk_hit}, #{mk_like_count}, #{mk_writer_ip});
+			   #{mk_original_upfile}, #{mk_stored_upfile}, #{mk_upfile_size}, #{mk_inventory}, now(), 
+			   now(), 10, 20, #{mk_writer_ip});
 	</insert>
+	
+	<!-- 상품목록(select) -->
+	<select id="adminProductSelect" resultType="adminProdVO">
+		select * from product_info;	
+	</select>
+
 
 
 	<!-- 상품수정(update) -->
-	<update id="adminProdUpdate">
-		update product_info 
-		set mk_product_name, mk_product_price, mk_product_discount_price, mk_product_category, mk_product_type, mk_original_thumb, 
-			mk_stored_thumb, mk_thumb_size, mk_status, mk_content, mk_original_upfile, mk_stored_upfile, mk_upfile_size, mk_inventory, 
-			mk_hit, mk_like_count, mk_writer_ip
-		where mk_product_id = ${mk_product_id};
-	</update>
+<!-- 	<update id="adminProdUpdate"> -->
+<!-- 		update product_info  -->
+<!-- 		set mk_product_name, mk_product_price, mk_product_discount_price, mk_product_category, mk_product_type, mk_original_thumb,  -->
+<!-- 			mk_stored_thumb, mk_thumb_size, mk_status, mk_content, mk_original_upfile, mk_stored_upfile, mk_upfile_size, mk_inventory,  -->
+<!-- 			mk_hit, mk_like_count, mk_writer_ip -->
+<!-- 		where mk_product_id = ${mk_product_id}; -->
+<!-- 	</update> -->
 
 	<!-- 상품 분류(신상품/인기상품/할인상품) -->
 	<select id="selectProdSort" resultType="adminProdVO">

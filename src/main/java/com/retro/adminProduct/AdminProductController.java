@@ -31,6 +31,12 @@ public class AdminProductController {
 		@RequestMapping(value = "adminProduct")
 		public ModelAndView adminProduct() {
 			ModelAndView mav = new ModelAndView();
+			
+			List<AdminProductVO> productList = admProdService.adminProductSelect();
+			List<AdminProductVO> prodSortList = admProdService.selectProdSort();
+			
+			mav.addObject("prodSortList", prodSortList);
+			mav.addObject("productList", productList);
 			mav.setViewName("admin/admin_product");
 			return mav;
 		}
@@ -51,7 +57,7 @@ public class AdminProductController {
 		
 		
 		//상품 정보 insert
-		@RequestMapping(value = "adminProdInsert", method = RequestMethod.POST)
+		@RequestMapping(value = "adminProdInsert", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, 
 											@RequestParam("original_thumb") MultipartFile file1, 
 											@RequestParam("original_upfile") MultipartFile file2,
@@ -63,13 +69,13 @@ public class AdminProductController {
 						
 			//서버 물리적 경로
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
-				
+			
 			File makeFolder = new File(uploadPath);
 			if(!makeFolder.exists()) {
 				makeFolder.mkdirs();
 			}
 			
-			admProdService.adminProdInsert(adminProdVO, file1, file2, uploadPath);
+			admProdService.adminProdInsert(adminProdVO, file1, file2, uploadPath, request);
 			
 			
 			mav.setViewName("redirect:/adminProd/adminProduct");
