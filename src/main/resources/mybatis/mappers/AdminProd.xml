@@ -19,7 +19,11 @@
 	<select id="adminProductSelect" resultType="adminProdVO">
 		select * from product_info;	
 	</select>
-
+	
+	<!-- 상품 정보 (selet) -->
+	<select id="adminProductInfo" resultType="adminProdVO">
+		select * from product_info;
+	</select>
 
 
 	<!-- 상품수정(update) -->

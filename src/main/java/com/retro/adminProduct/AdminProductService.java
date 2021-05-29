@@ -93,4 +93,10 @@ public class AdminProductService {
 	public List<AdminProductVO> adminProductSelect() {
 		return admProdDAO.adminProductSelect();
 	}
+	
+	//상품정보 select
+	public List<AdminProductVO> adminProductInfo() {
+		return admProdDAO.adminProductInfo();
+	}
+	
 }
