@@ -101,7 +101,7 @@
 														<c:choose>
 															
 															<c:when test="${prodList.mk_product_category == 1}">
-																
+																${prod_category} = "스낵";
 															</c:when>
 															<c:when test="${prodList.mk_product_category == 2}">
 																
