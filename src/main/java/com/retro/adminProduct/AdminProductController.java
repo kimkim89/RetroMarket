@@ -33,9 +33,10 @@ public class AdminProductController {
 			ModelAndView mav = new ModelAndView();
 			
 			List<AdminProductVO> productList = admProdService.adminProductSelect();
-			List<AdminProductVO> prodSortList = admProdService.selectProdSort();
 			
-			mav.addObject("prodSortList", prodSortList);
+						
+				
+			
 			mav.addObject("productList", productList);
 			mav.setViewName("admin/admin_product");
 			return mav;
