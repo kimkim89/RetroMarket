@@ -94,9 +94,6 @@ public class AdminProductService {
 		return admProdDAO.adminProductSelect();
 	}
 	
-	//상품정보 select
-	public List<AdminProductVO> adminProductInfo() {
-		return admProdDAO.adminProductInfo();
-	}
+	
 	
 }

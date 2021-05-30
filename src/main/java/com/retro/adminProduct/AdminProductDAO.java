@@ -27,9 +27,6 @@ public class AdminProductDAO {
 		return sqlSession.selectList("mapper.AdminProd.adminProductSelect");
 	}
 	
-	//상품정보 select
-	public List<AdminProductVO> adminProductInfo() {
-		return sqlSession.selectList("mapper.AdminProd.adminProductInfo");
-	}
+	
 	
 }
