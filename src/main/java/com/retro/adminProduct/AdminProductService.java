@@ -93,4 +93,7 @@ public class AdminProductService {
 	public List<AdminProductVO> adminProductSelect() {
 		return admProdDAO.adminProductSelect();
 	}
+	
+	
+	
 }
