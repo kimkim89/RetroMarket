@@ -17,7 +17,7 @@
 	
 	<!-- 상품목록(select) -->
 	<select id="adminProductSelect" resultType="adminProdVO">
-		select pr_info.* from product_info as pr_info join product_sort as pr_sort on pr_info.mk_product_type = pr_sort.ps_sort_id;
+		select * from product_info as pr_info join product_sort as pr_sort on pr_info.mk_product_type = pr_sort.ps_sort_id;
 	</select>
 	
 	

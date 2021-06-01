@@ -18,12 +18,15 @@ public class AdminProductDAO {
 	}
 		
 	//상품 분류(신상품-1, 인기상품-2, 할인상품-3)
-	public List<AdminProductVO> selectProdSort() {
+	public List<AdminProductVO> selectProdSort() {		
 		return sqlSession.selectList("mapper.AdminProd.selectProdSort");
 	}
 
 	//상품목록 select
 	public List<AdminProductVO> adminProductSelect() {
+		System.out.println("김재인 바보");
+		System.out.println(sqlSession.selectList("mapper.AdminProd.adminProductSelect"));
+		
 		return sqlSession.selectList("mapper.AdminProd.adminProductSelect");
 	}
 	

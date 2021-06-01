@@ -95,7 +95,7 @@
 															<img src="${contextPath}/resources/assets/img/blog/blog_2.png" style="width: 150px;">
 														</div>
 														<div class="flex-item">
-															<input type="text" class="form-control" value="${prodList.mk_product_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+															<input type="text" class="form-control 빼세요" value="${prodList.mk_product_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
   															<input type="text" class="form-control" value="${prodList.ps_sort_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<input type="text" class="form-control" value="${prodList.mk_product_category}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<select name="" class="form-select" aria-label="Default select example" style="margin-left:10px;">
