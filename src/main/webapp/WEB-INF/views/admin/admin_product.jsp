@@ -110,8 +110,8 @@
 													<div class="flex-item">
 													<input type="text" class="form-control" value="${prodList.mk_inventory}개" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
 													<input type="text" class="form-control" value="${prodList.mk_product_price}원" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
-													<input type="text" class="form-control" value="${prodList.mk_register_date}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
-													<input type="text" class="form-control" value="${prodList.mk_modified_date}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value='<fmt:formatDate value="${prodList.mk_register_date}" pattern="yyyy-MM-dd hh:mm:ss"/>' readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value='<fmt:formatDate value="${prodList.mk_modified_date}" pattern="yyyy-MM-dd hh:mm:ss"/>' readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
 													</div>
 												</td>
 												<td style="vertical-align: middle;">
