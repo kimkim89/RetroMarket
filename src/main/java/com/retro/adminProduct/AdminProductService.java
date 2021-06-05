@@ -3,6 +3,7 @@ package com.retro.adminProduct;
 import java.awt.PageAttributes.OriginType;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,7 @@ public class AdminProductService {
 	public void adminProdInsert(AdminProductVO adminProdVO, MultipartFile file1, MultipartFile file2, String uploadPath,
 								HttpServletRequest request) {
 		
-					
-									
+		
 		//썸네일 원본 파일명
 		String thumbOrigName = file1.getOriginalFilename();
 		//썸네일 서버 파일명
@@ -93,4 +93,7 @@ public class AdminProductService {
 	public List<AdminProductVO> adminProductSelect() {
 		return admProdDAO.adminProductSelect();
 	}
+	
+	
+	
 }

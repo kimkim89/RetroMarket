@@ -17,9 +17,15 @@
 	
 	<!-- 상품목록(select) -->
 	<select id="adminProductSelect" resultType="adminProdVO">
-		select * from product_info;	
+		select * from product_info as pr_info join product_sort as pr_sort on pr_info.mk_product_type = pr_sort.ps_sort_id;
 	</select>
-
+	
+	<!-- 특정 회원정보 출력 -->
+	<select id="adminMemberInfo" resultType="memberVO" parameterType="String">
+		<![CDATA[
+		select * from product_info where mk_idx = #{mk_idx};
+		]]>
+	</select>
 
 
 	<!-- 상품수정(update) -->

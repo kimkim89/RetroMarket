@@ -95,27 +95,9 @@
 															<img src="${contextPath}/resources/assets/img/blog/blog_2.png" style="width: 150px;">
 														</div>
 														<div class="flex-item">
-															<input type="text" class="form-control" value="${prodList.mk_product_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
-															
-														<c:set var="prod_category" value=""/>	
-														<c:choose>
-															
-															<c:when test="${prodList.mk_product_category == 1}">
-																
-															</c:when>
-															<c:when test="${prodList.mk_product_category == 2}">
-																
-															</c:when>
-															<c:when test="${prodList.mk_product_category == 3}">
-																
-															</c:when>
-															<c:when test="${prodList.mk_product_category == 4}">
-																
-															</c:when>
-														</c:choose>
-															
-															<input type="text" class="form-control" value="${prod_category}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
-															<input type="text" class="form-control" value="${prodList.mk_product_type}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+															<input type="text" class="form-control 빼세요" value="${prodList.mk_product_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+  															<input type="text" class="form-control" value="${prodList.ps_sort_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+															<input type="text" class="form-control" value="${prodList.mk_product_category}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<select name="" class="form-select" aria-label="Default select example" style="margin-left:10px;">
 																<option value="">게시여부</option>
 																<option value="1" <c:if test="${prodList.mk_status == 1}">selected</c:if>>O</option>
@@ -128,8 +110,8 @@
 													<div class="flex-item">
 													<input type="text" class="form-control" value="${prodList.mk_inventory}개" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
 													<input type="text" class="form-control" value="${prodList.mk_product_price}원" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
-													<input type="text" class="form-control" value="${prodList.mk_register_date}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
-													<input type="text" class="form-control" value="${prodList.mk_modified_date}" readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value='<fmt:formatDate value="${prodList.mk_register_date}" pattern="yyyy-MM-dd hh:mm:ss"/>' readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
+													<input type="text" class="form-control" value='<fmt:formatDate value="${prodList.mk_modified_date}" pattern="yyyy-MM-dd hh:mm:ss"/>' readonly style="width:90%;height:auto;margin-bottom: -15px;"><br>
 													</div>
 												</td>
 												<td style="vertical-align: middle;">

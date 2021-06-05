@@ -31,12 +31,8 @@ public class AdminProductController {
 		@RequestMapping(value = "adminProduct")
 		public ModelAndView adminProduct() {
 			ModelAndView mav = new ModelAndView();
-			
-			List<AdminProductVO> productList = admProdService.adminProductSelect();
-			List<AdminProductVO> prodSortList = admProdService.selectProdSort();
-			
-			mav.addObject("prodSortList", prodSortList);
-			mav.addObject("productList", productList);
+		
+			mav.addObject("productList", admProdService.adminProductSelect());
 			mav.setViewName("admin/admin_product");
 			return mav;
 		}
@@ -46,6 +42,11 @@ public class AdminProductController {
 		@RequestMapping(value = "adminProductRegister")
 		public ModelAndView adminProductRegister() {
 			ModelAndView mav = new ModelAndView();
+			
+			//상품등록인지 수정인지 구분해주는 구분자 => wu
+			//i=> 상품등록, u=> 상품수정
+			String wu = "i";
+			mav.addObject("wu", wu);
 			
 			//상품분류(신상품/인기상품/할인상품)
 			List<AdminProductVO> prodSortList = admProdService.selectProdSort();
@@ -77,14 +78,35 @@ public class AdminProductController {
 			
 			admProdService.adminProdInsert(adminProdVO, file1, file2, uploadPath, request);
 			
-			
+			//List<AdminProductVO> productInfoList = admProdService.adminProductInfo();
+			//mav.addObject("productInfoList", productInfoList);
 			mav.setViewName("redirect:/adminProd/adminProduct");
 			return mav;
 		}
 		
 		
-		
-		
+		//상품정보 update
+		@RequestMapping(value = "adminProdUpdate", method = RequestMethod.POST, produces = "application/text; charset=utf-8")
+		public ModelAndView adminProdUpdate(AdminProductVO adminProdVO, 
+											@RequestParam("original_thumb") MultipartFile file1, 
+											@RequestParam("original_upfile") MultipartFile file2,
+											HttpServletRequest request										
+											) {
+			ModelAndView mav = new ModelAndView();
+			
+			//서버 물리적 경로
+			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
+			
+			File makeFolder = new File(uploadPath);
+			if(!makeFolder.exists()) {
+				makeFolder.mkdirs();
+			}
+			
+			admProdService.adminProductUpdate(adminProdVO, file1, file2, uploadPath, request);
+			
+			mav.setViewName("redirect:/adminProd/adminProduct");
+			return mav;
+		}
 		
 		
 		
