@@ -15,17 +15,19 @@
 			   now(), 10, 20, #{mk_writer_ip});
 	</insert>
 	
-	<!-- 상품목록(select) -->
+	<!-- 전체 상품목록(select) -->
 	<select id="adminProductSelect" resultType="adminProdVO">
-		select * from product_info as pr_info join product_sort as pr_sort on pr_info.mk_product_type = pr_sort.ps_sort_id;
+		select * from product_info as a 
+	    LEFT JOIN product_sort as b on a.mk_product_type = b.ps_sort_id 
+	    LEFT JOIN product_category as c on a.mk_product_category = c.pc_category_id 
+	    order by a.mk_idx desc;
 	</select>
 	
-	<!-- 특정 회원정보 출력 -->
-	<select id="adminMemberInfo" resultType="memberVO" parameterType="String">
-		<![CDATA[
-		select * from product_info where mk_idx = #{mk_idx};
-		]]>
+	<!-- 개별 상품정보 출력(select) -->
+	<select id="adminSelectOneProd" parameterType="int" resultType="adminProdVO">
+		select * from product_info as pr_info join product_sort as pr_sort on pr_info.mk_product_type = pr_sort.ps_sort_id where pr_info.mk_idx = #{mk_idx} order by pr_info.mk_idx desc;
 	</select>
+
 
 
 	<!-- 상품수정(update) -->
@@ -40,6 +42,11 @@
 	<!-- 상품 분류(신상품/인기상품/할인상품) -->
 	<select id="selectProdSort" resultType="adminProdVO">
 		select * from product_sort;	
+	</select>
+	
+	<!-- 상품 종류(스낵/젤리/캔디/기타) -->
+	<select id="selectProdCategory" resultType="adminProdVO">
+		select * from product_category;	
 	</select>
  
  

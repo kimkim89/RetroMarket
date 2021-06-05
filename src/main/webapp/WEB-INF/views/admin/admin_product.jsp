@@ -26,6 +26,10 @@
 	function adminProdRegister() {
 		location.href="${contextPath}/adminProd/adminProductRegister";
 	}
+	
+	function adminProdModify(product_num) {
+		location.href="${contextPath}/adminProd/adminProdModify/" + product_num + "?wu=u";
+	}
 </script>
 <link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
 <style>
@@ -38,6 +42,9 @@
 	display: inline-flex;
 	flex-direction: row;
 }
+
+/*삭제버튼색*/
+.btn_delete {background-color:red; border-color: red;}
 </style>
 </head>
 
@@ -67,7 +74,7 @@
 										&nbsp;&nbsp;
 									</div>
 								</form>
-								<button type="button" class="btn btn-info" style="float: right;" onclick="">선택 삭제</button>
+								<button type="button" class="btn btn-info btn_delete" style="float: right;" onclick="">선택 삭제</button>
 								<button type="button" class="btn btn-info" style="float: right; margin: auto 10px;" onclick="adminProdRegister();">상품 등록</button>
 							</div>
 <br>
@@ -84,18 +91,20 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="prodList" items="${productList}" varStatus="status">								
+										
+										<c:set var="num" value="1"/>
+										<c:forEach var="prodList" items="${productList}" varStatus="status">								
 												
 											<tr>
 												<td><input type="checkbox" name="del_check" id="del_check" /></td>
-												<td style="text-align:center;">1</td>
+												<td style="text-align:center;">${num}</td>
 												<td style="vertical-align: middle;">
 													<div class="flex-container">
 														<div class="flex-item">
-															<img src="${contextPath}/resources/assets/img/blog/blog_2.png" style="width: 150px;">
+															<img src="${contextPath}/resources/images/temporary/${prodList.mk_stored_thumb}" style="width: 150px;">
 														</div>
 														<div class="flex-item">
-															<input type="text" class="form-control 빼세요" value="${prodList.mk_product_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+															<input type="text" class="form-control" value="${prodList.mk_product_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
   															<input type="text" class="form-control" value="${prodList.ps_sort_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<input type="text" class="form-control" value="${prodList.mk_product_category}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<select name="" class="form-select" aria-label="Default select example" style="margin-left:10px;">
@@ -115,11 +124,12 @@
 													</div>
 												</td>
 												<td style="vertical-align: middle;">
-													<button type="button" class="btn btn-info" style="margin-bottom:10px;margin-left:23px;" onclick="">삭제</button><br>
-													<button type="button" class="btn btn-info" style="margin-bottom:10px;margin-left:23px;" onclick="">수정</button>
+													<button type="button" class="btn btn-info btn_delete" style="margin-bottom:10px;margin-left:23px;" onclick="">삭제</button><br>
+													<button type="button" class="btn btn-info" style="margin-bottom:10px;margin-left:23px;" onclick="adminProdModify(${prodList.mk_idx});">수정</button>
 												</td>
 											</tr>
-											</c:forEach>
+										<c:set var="num" value="${num+1}"/>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>

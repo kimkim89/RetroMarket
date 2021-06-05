@@ -21,15 +21,21 @@ public class AdminProductDAO {
 	public List<AdminProductVO> selectProdSort() {		
 		return sqlSession.selectList("mapper.AdminProd.selectProdSort");
 	}
+	
+	//상품 종류(스낵/젤리/캔디/기타)
+	public List<AdminProductVO> selectProdCategory() {		
+		return sqlSession.selectList("mapper.AdminProd.selectProdCategory");
+	}
 
-	//상품목록 select
+	//전체 상품목록 select
 	public List<AdminProductVO> adminProductSelect() {
-		System.out.println("김재인 바보");
-		System.out.println(sqlSession.selectList("mapper.AdminProd.adminProductSelect"));
-		
+		//System.out.println(sqlSession.selectList("mapper.AdminProd.adminProductSelect"));
 		return sqlSession.selectList("mapper.AdminProd.adminProductSelect");
 	}
 	
-	
+	//개별 상품정보 select
+	public List<AdminProductVO> adminSelectOneProd(int mk_idx) {
+		return sqlSession.selectList("mapper.AdminProd.adminSelectOneProd", mk_idx);
+	}
 	
 }
