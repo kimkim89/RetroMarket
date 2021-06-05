@@ -89,9 +89,19 @@ public class AdminProductService {
 		return admProdDAO.selectProdSort();
 	}
 	
-	//상품목록 Select
+	//상품 종류(스낵/젤리/캔디/기타)
+	public List<AdminProductVO> selectProdCategory() {		
+		return admProdDAO.selectProdCategory();
+	}
+	
+	//전체 상품목록 Select
 	public List<AdminProductVO> adminProductSelect() {
 		return admProdDAO.adminProductSelect();
+	}
+	
+	//개별 상품정보 select
+	public List<AdminProductVO> adminSelectOneProd(int mk_idx) {
+		return admProdDAO.adminSelectOneProd(mk_idx);
 	}
 	
 	

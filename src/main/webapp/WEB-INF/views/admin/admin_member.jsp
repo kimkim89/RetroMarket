@@ -28,7 +28,7 @@
 	 }
 	
 	function adminMemberList() {
-		document.getElementById('memList').submit(); // ??????????? getElementById인데 form 태그에 id값이 없네요 ?ㅇㅂㅇ?
+		document.getElementById('memList').submit(); 
 		return false;
 	}
 	
@@ -48,7 +48,7 @@
 							<div class="card">
 								<div class="card-header">
 								<!-- form태그에 id값 넣어주세욜 -->
-								<form name="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminMember" method="get">
+								<form name="memList" id="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminMember" method="get">
 																					
 									<div class="input-group input-group-navbar">
 										<select name="searchField" class="form-select" aria-label="Default select example">
