@@ -13,13 +13,21 @@
 }
 </style>
 <!-- 공백 및 유효성 체크 -->
-<%@include file="../common/Check.jsp" %>
+<%@include file="../common/modifyCheck.jsp" %>
 </head>
 <body>
 	<header>
 		<!-- Header Start -->
 		<jsp:include page="../include/TopNavi.jsp" />
 		<!-- Header End -->
+		
+		<script type="text/javascript">
+		
+			
+		
+		
+		</script>
+		
 	</header>
 	<main>
 		<!--? Hero Area Start-->
@@ -53,19 +61,19 @@
 									<form id="joinForm" action="#" method="post">
 										<div class="mt-10">
 											<input type="text" id="name" name="name" placeholder="이름"
-												required class="single-input">
+												readonly="readonly" value="${myInfo.name}" required class="single-input">
 											<!-- 이름 체크 -->
 											<div id="nameCheck-Reuslt"></div>
 										</div>
 										<div class="mt-10">
-											<input type="text" id="id_pk" name="id_pk" placeholder="아이디" readonly="readonly"
+											<input type="text" id="id_pk"  readonly="readonly" name="id_pk" placeholder="아이디" readonly="readonly" value="${myInfo.id}"
 												required class="single-input">
 											<!-- ID 중복 체크 -->
 											<div id="idCheck-Reuslt"></div>
 										</div>
 										<div class="mt-10">
 											<input type="text" id="nickname" name="nickname"
-												placeholder="닉네임" required class="single-input">
+												placeholder="닉네임" required class="single-input" >
 											<!-- 닉네임 중복 체크 -->
 											<div id="nickNameCheck-Reuslt"></div>
 										</div>
@@ -136,8 +144,10 @@
 										</div>
 										<div align="center" style="margin-top: 15px;">
 											<a href="javascript:;" class="genric-btn info-border radius"
-												id="join-btn">수정하기</a> <a href="javascript:history.back()"
+												id="join-btn">수정하기</a> 
+												<a href="javascript:history.back()"
 												class="genric-btn warning-border radius">돌아가기</a>
+												
 										</div>
 									</form>
 								</div>
