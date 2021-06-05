@@ -133,7 +133,7 @@ public class AdminProductController {
 				makeFolder.mkdirs();
 			}
 			
-			admProdService.adminProductUpdate(adminProdVO, file1, file2, uploadPath, request);
+//			admProdService.adminProductUpdate(adminProdVO, file1, file2, uploadPath, request);
 			
 			mav.setViewName("redirect:/adminProd/adminProduct");
 			return mav;

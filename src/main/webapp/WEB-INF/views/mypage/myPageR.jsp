@@ -71,16 +71,25 @@
 										<div class="col-xl-4 col-lg-4 col-md-6">
 											<div class="single-method mb-40">
 												<i class="far fa-grin"></i>
-												<h6><b>회원 등급</b></h6>
-												<c:if test="${myInfo.level == 1}">
-													<p>1학년</p>
-												</c:if>
-												<c:if test="${myInfo.level == 2}">
-													<p>2학년</p>
-												</c:if>
-												<c:if test="${myInfo.level == 3}">
-													<p>3학년</p>
-												</c:if>
+												<h6>
+												<b >회원 등급</b>
+												</h6>
+<%-- 												<c:if test="${myInfo.level == 1}"> --%>
+<!-- 													<p>1학년</p> -->
+<%-- 												</c:if> --%>
+<%-- 												<c:if test="${myInfo.level == 2}"> --%>
+<!-- 													<p>2학년</p> -->
+<%-- 												</c:if> --%>
+<%-- 												<c:if test="${myInfo.level == 3}"> --%>
+<!-- 													<p>3학년</p> -->
+<%-- 												</c:if> --%>
+												<c:forEach var="i" begin="1" end="3">
+													<c:if test="${myInfo.level == i}">
+														<p>${myInfo.level} 학년</p>
+													</c:if>
+												</c:forEach>
+												
+												
 											</div>
 										</div>
 									</div>

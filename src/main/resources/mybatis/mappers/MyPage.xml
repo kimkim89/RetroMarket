@@ -9,5 +9,15 @@
 		select * from member;
 	</select>
 	
+	<update id="ModifyAction" parameterType="hashMap">
+		<if test="type == 1">
+			update member set phone = #{mypageVO.phone} , address1 = #{mypageVO.address1} , 
+			address2 = #{mypageVO.address2} , address3 = #{mypageVO.address3} , nickname = #{mypageVO.nickname} where id = #{mypageVO.id}
+		</if>
+		<if test="type == 2">
+			update member set pwd = #{mypageVO.pwd} ,  phone = #{mypageVO.phone} , address1 = #{mypageVO.address1} , 
+			address2 = #{mypageVO.address2} , address3 = #{mypageVO.address3} , nickname = #{mypageVO.nickname} where id = #{mypageVO.id} 
+		</if>
+	</update>
 	
 </mapper>
