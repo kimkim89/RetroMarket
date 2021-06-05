@@ -43,6 +43,11 @@ public class AdminProductController {
 		public ModelAndView adminProductRegister() {
 			ModelAndView mav = new ModelAndView();
 			
+			//상품등록인지 수정인지 구분해주는 구분자 => wu
+			//i=> 상품등록, u=> 상품수정
+			String wu = "i";
+			mav.addObject("wu", wu);
+			
 			//상품분류(신상품/인기상품/할인상품)
 			List<AdminProductVO> prodSortList = admProdService.selectProdSort();
 			
