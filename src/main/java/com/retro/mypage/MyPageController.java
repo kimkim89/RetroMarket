@@ -5,24 +5,27 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.retro.member.UserSha256;
 
 @Controller
 @RequestMapping("mypage")
 public class MyPageController {
 
 	@Autowired
-	private MyPageService mypagservice;
+	private MyPageService myPageService;
 	
-	// 마이페이지 이동
+		// 마이페이지 이동
 		@RequestMapping(value = "myPageR", method = RequestMethod.GET)
 		public ModelAndView myPageR(HttpServletRequest request, HttpSession session) {
 			ModelAndView mav = new ModelAndView();
 			
 			String id = (String)session.getAttribute("user_id");
-			mav.addObject("myInfo", mypagservice.getInfo(id));
+			mav.addObject("myInfo", myPageService.getInfo(id));
 			mav.setViewName("/mypage/myPageR");
 			return mav;
 		}
@@ -42,13 +45,24 @@ public class MyPageController {
 				return mav;
 			}
 			
-			mav.addObject("myInfo", mypagservice.getInfo(user_id));
-			System.out.println(mypagservice.getInfo(user_id));
-			
-			
+			mav.addObject("myInfo", myPageService.getInfo(user_id));
 			mav.setViewName("/mypage/member_modify");
 			return mav;
 		}
+		
+		//회원정보 수정 
+		@RequestMapping(value= "modifyAction/{type}", method = RequestMethod.POST)
+		public ModelAndView modifyAction(MyPageVO mypageVO, 
+				@PathVariable("type") String type) {
+			
+			UserSha256 userSha256 = new UserSha256();
+			mypageVO.setPwd(userSha256.encrypt(mypageVO.getPwd()));
+			myPageService.modifyAction(mypageVO, type);
+			
+			return null;
+		}
+		
+		
 
 		//세션정보에 있는 유저아이디 Get(Refactor -> ExtractMethod)
 		public String getSessionUserId(HttpServletRequest request) {

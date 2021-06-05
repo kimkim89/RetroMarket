@@ -58,15 +58,7 @@ $(document).ready(function () {
 			alert("닉네임을 입력해주세요.");
 			$("#nickname").focus();
 			return false;
-		}  else if($("#pwd").val().replace(/(\s*)/g, "") == "") {
-			alert("비밀번호를 입력해주세요.");
-			$("#pwd").focus();
-			return false;
-		}  else if($("#pwdCheck").val().replace(/(\s*)/g, "") == "") {
-			alert("비멀번호 확인란을 입력해주세요.");
-			$("#pwdCheck").focus();
-			return false;
-		} else if($("#email").val().replace(/(\s*)/g, "") == "") {
+		}   else if($("#email").val().replace(/(\s*)/g, "") == "") {
 			alert("이메일을 입력해주세요.");
 			emailCheck = 0;
 			$("#email").focus();
@@ -95,51 +87,69 @@ $(document).ready(function () {
 			alert("상세주소를 입력해주세요.");
 			$("#address3").focus();
 			return false;
-		} else if(emailCheck == 0) {
-			alert("이메일 체크를 진행해주세요.");
-			$("#emailCheck").focus();
 		} else {
-			$("#joinForm").attr("action", "${contextPath}/member/userJoin");
-			$("#joinForm").submit();
+			submitf();
 		}
 	});
 	
-	//ID 정규식
-	$("#id").blur(function() {
-		var id = $("#id").val().replace(/(\s*)/g, "");
-		$(this).val(id);
-		var str = "";
-		var idCheck = /^[a-z]+[a-z0-9]{5,19}$/g;
+	function submitf() {
 		
-	   if(id != "") {
-	    if(!id.match(idCheck)) {
-	    	$('#id').val("");
-			$('#id').focus();
-			$("#idCheck-Reuslt").html("<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: #66b1e6;'>아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.</p>");
-	    } else {
-		 $.ajax({ //ID 중복 체크
-			url : "${contextPath}/member/idcheck",
-			type : "post",
-			data : {"id":id},
-			success : function(result) {
-				if (result == 0) { 
-					str = "<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: #66b1e6;'>사용 가능한 ID입니다.</p>"
-				} else {
-					$("#id").val("");
-					str = "<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: red;'><b>"+id+"</b>는(은)이미 존재하는 ID입니다.</p>"
-				}
-				$("#idCheck-Reuslt").html(str);
-			},
-			error : function () {
-				alert("통신 실패");
+		if($("#pwd").val().replace(/(\s*)/g, "") == "" && $("#pwdCheck").val().replace(/(\s*)/g, "") == "") {
+			//비밀번호 변경 x 
+	 		$("#modifyForm").attr("action", "${contextPath}/mypage/modifyAction/1");
+	 		$("#modifyForm").submit();
+		} else {
+			if($("#pwd").val().replace(/(\s*)/g, "") == "") {
+				alert("비밀번호 수정란을 작성해주세요")
+				$("#pwd").focus();
+			} else if($("#pwdCheck").val().replace(/(\s*)/g, "") == "") {
+				alert("비밀번호 확인 수정란을 작성해주세요")
+				$("#pwdCheck").focus();
+			} else {
+				//비밀번호 변경 o
+				$("#modifyForm").attr("action", "${contextPath}/mypage/modifyAction/2");
+		 		$("#modifyForm").submit();
 			}
-		 }); 
-	    }
-	   } else {
-		   
-	   }
+		}
 		
-	});//ID중복체크 끝
+	}
+	
+// 	//ID 정규식
+// 	$("#id").blur(function() {
+// 		var id = $("#id").val().replace(/(\s*)/g, "");
+// 		$(this).val(id);
+// 		var str = "";
+// 		var idCheck = /^[a-z]+[a-z0-9]{5,19}$/g;
+		
+// 	   if(id != "") {
+// 	    if(!id.match(idCheck)) {
+// 	    	$('#id').val("");
+// 			$('#id').focus();
+// 			$("#idCheck-Reuslt").html("<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: #66b1e6;'>아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.</p>");
+// 	    } else {
+// 		 $.ajax({ //ID 중복 체크
+// 			url : "${contextPath}/member/idcheck",
+// 			type : "post",
+// 			data : {"id":id},
+// 			success : function(result) {
+// 				if (result == 0) { 
+// 					str = "<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: #66b1e6;'>사용 가능한 ID입니다.</p>"
+// 				} else {
+// 					$("#id").val("");
+// 					str = "<p style='padding: 0 20px; font-size: 15px; margin-bottom: 0px; color: red;'><b>"+id+"</b>는(은)이미 존재하는 ID입니다.</p>"
+// 				}
+// 				$("#idCheck-Reuslt").html(str);
+// 			},
+// 			error : function () {
+// 				alert("통신 실패");
+// 			}
+// 		 }); 
+// 	    }
+// 	   } else {
+		   
+// 	   }
+		
+// 	});//ID중복체크 끝
 	
 	//닉네임 정규식
 	$("#nickname").blur(function() {
@@ -244,7 +254,6 @@ $(document).ready(function () {
 	//휴대폰번호 정규식
 	$("#phone").blur(function() {
 		if($("#phone").val() != "") {
-		console.log("뭐야");
 		var phone = $("#phone").val().replace(/(\s*)/g, "");
 		var phoneCheck = /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/;
 		$(this).val(phone);

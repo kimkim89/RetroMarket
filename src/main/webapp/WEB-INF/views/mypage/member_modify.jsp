@@ -6,6 +6,9 @@
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <%@ include file="../include/Top.jsp"%>
+<!-- 다음 우편 API -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="${contextPath}/resources/assets/js/DaumApi/AddressApi.js"></script>
 <style type="text/css">
 #profile_img {
 	display: block;
@@ -58,24 +61,27 @@
 							<div class="container" style="max-width: 830px;">
 								<div class="cart_inner" style="max-width: 92%; margin-left: 2%;">
 									<h3 class="mb-30">회원 정보 수정</h3>
-									<form id="joinForm" action="#" method="post">
+									<form id="modifyForm" action="#" method="post">
 										<div class="mt-10">
 											<input type="text" id="name" name="name" placeholder="이름"
 												readonly="readonly" value="${myInfo.name}" required class="single-input">
 											<!-- 이름 체크 -->
-											<div id="nameCheck-Reuslt"></div>
 										</div>
 										<div class="mt-10">
-											<input type="text" id="id_pk"  readonly="readonly" name="id_pk" placeholder="아이디" readonly="readonly" value="${myInfo.id}"
+											<input type="text" id="id"  readonly="readonly" name="id" placeholder="아이디" readonly="readonly" value="${myInfo.id}"
 												required class="single-input">
 											<!-- ID 중복 체크 -->
 											<div id="idCheck-Reuslt"></div>
 										</div>
 										<div class="mt-10">
 											<input type="text" id="nickname" name="nickname"
-												placeholder="닉네임" required class="single-input" >
+												placeholder="닉네임" required class="single-input" value="${myInfo.nickname}">
 											<!-- 닉네임 중복 체크 -->
-											<div id="nickNameCheck-Reuslt"></div>
+										</div>
+										<div class="mt-10">
+											<input type="text" id="email" name="email"
+												placeholder="닉네임" required class="single-input" value="${myInfo.email}">
+											<!-- 닉네임 중복 체크 -->
 										</div>
 										<div class="mt-10">
 											<input type="password" id="pwd" name="pwd" placeholder="비밀번호"
@@ -98,7 +104,7 @@
 												</div>
 												<input type="text" id="address1" name="address1"
 													placeholder="우편 번호" required class="single-input"
-													readonly="readonly">
+													readonly="readonly" value="${myInfo.address1}">
 
 												<!-- 우편 번호 체크 -->
 												<div id="address1Check-Reuslt"></div>
@@ -118,7 +124,7 @@
 											</div>
 											<input type="text" id="address2" name="address2"
 												placeholder="주소" required class="single-input"
-												readonly="readonly">
+												readonly="readonly" value="${myInfo.address2}">
 											<!-- 주소1 체크 -->
 											<div id="address2Check-Reuslt"></div>
 
@@ -131,14 +137,14 @@
 												<i class="fa fa-thumb-tack" aria-hidden="true"></i>
 											</div>
 											<input type="text" id="address3" name="address3"
-												placeholder="상세 주소" required class="single-input">
+												placeholder="상세 주소" required class="single-input" value="${myInfo.address3}">
 											<!-- 상세 주소 체크 -->
 											<div id="address3Check-Reuslt"></div>
 
 										</div>
 										<div class="mt-10">
 											<input type="text" id="phone" name="phone"
-												placeholder="휴대폰 번호" required class="single-input">
+												placeholder="휴대폰 번호" required class="single-input" value="${myInfo.phone}">
 											<!-- 휴대폰번호 체크 -->
 											<div id="phoneCheck-Reuslt"></div>
 										</div>
