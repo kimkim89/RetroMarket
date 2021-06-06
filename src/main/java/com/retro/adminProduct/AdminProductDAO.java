@@ -38,4 +38,9 @@ public class AdminProductDAO {
 		return sqlSession.selectList("mapper.AdminProd.adminSelectOneProd", mk_idx);
 	}
 	
+	//상품 삭제(delete)
+	public void adminProdDelete(int mk_idx) {
+		sqlSession.delete("mapper.AdminProd.adminProdDelete", mk_idx);
+	}
+	
 }

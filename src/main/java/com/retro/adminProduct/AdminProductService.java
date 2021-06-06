@@ -104,6 +104,11 @@ public class AdminProductService {
 		return admProdDAO.adminSelectOneProd(mk_idx);
 	}
 	
+	//상품 삭제(delete)
+	public void adminProdDelete(int mk_idx) {
+		admProdDAO.adminProdDelete(mk_idx);
+	}
+	
 	
 	
 }

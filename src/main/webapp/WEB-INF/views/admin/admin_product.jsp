@@ -30,6 +30,11 @@
 	function adminProdModify(product_num) {
 		location.href="${contextPath}/adminProd/adminProdModify/" + product_num + "?wu=u";
 	}
+	
+	function adminProdDelete(product_num) {
+		location.href="${contextPath}/adminProd/adminProdDelete/" + product_num;
+	}
+	
 </script>
 <link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
 <style>
@@ -45,6 +50,8 @@
 
 /*삭제버튼색*/
 .btn_delete {background-color:red; border-color: red;}
+.btn_blue {background-color: #2469ce; border-color: #2469ce;}
+
 </style>
 </head>
 
@@ -75,7 +82,7 @@
 									</div>
 								</form>
 								<button type="button" class="btn btn-info btn_delete" style="float: right;" onclick="">선택 삭제</button>
-								<button type="button" class="btn btn-info" style="float: right; margin: auto 10px;" onclick="adminProdRegister();">상품 등록</button>
+								<button type="button" class="btn btn-info btn_blue" style="float: right; margin: auto 10px;" onclick="adminProdRegister();">상품 등록</button>
 							</div>
 <br>
 							<div>
@@ -106,7 +113,7 @@
 														<div class="flex-item">
 															<input type="text" class="form-control" value="${prodList.mk_product_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
   															<input type="text" class="form-control" value="${prodList.ps_sort_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
-															<input type="text" class="form-control" value="${prodList.mk_product_category}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
+															<input type="text" class="form-control" value="${prodList.pc_category_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<select name="" class="form-select" aria-label="Default select example" style="margin-left:10px;">
 																<option value="">게시여부</option>
 																<option value="1" <c:if test="${prodList.mk_status == 1}">selected</c:if>>O</option>
@@ -124,8 +131,8 @@
 													</div>
 												</td>
 												<td style="vertical-align: middle;">
-													<button type="button" class="btn btn-info btn_delete" style="margin-bottom:10px;margin-left:23px;" onclick="">삭제</button><br>
-													<button type="button" class="btn btn-info" style="margin-bottom:10px;margin-left:23px;" onclick="adminProdModify(${prodList.mk_idx});">수정</button>
+													<button type="button" class="btn btn-info btn_delete" style="margin-bottom:10px;margin-left:23px;" onclick="adminProdDelete(${prodList.mk_idx});">삭제</button><br>
+													<button type="button" class="btn btn-info btn_blue" style="margin-bottom:10px;margin-left:23px;" onclick="adminProdModify(${prodList.mk_idx});">수정</button>
 												</td>
 											</tr>
 										<c:set var="num" value="${num+1}"/>
