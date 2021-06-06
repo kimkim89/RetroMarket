@@ -49,6 +49,9 @@
 		select * from product_category;	
 	</select>
  
- 
+ 	<!-- 상품 삭제 -->
+ 	<delete id="adminProdDelete" parameterType="int">
+ 		delete from product_info where mk_idx = #{mk_idx};
+ 	</delete>
  
 </mapper>

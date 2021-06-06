@@ -45,18 +45,19 @@ public class AdminProductController {
 			
 			ModelAndView mav = new ModelAndView();
 			
-			//상품등록인지 수정인지 구분해주는 구분자 => wu
+			/*//상품등록인지 수정인지 구분해주는 구분자 => wu
 			//i=> 상품등록, u=> 상품수정
 			String wu = "i";
-			mav.addObject("wu", wu);			
-			
+								
 			//상품분류(신상품/인기상품/할인상품)
 			List<AdminProductVO> prodSortList = admProdService.selectProdSort();				
-						
-			mav.addObject("prodSortList", prodSortList);
+					
+			mav.addObject("wu", wu);	
+			mav.addObject("prodSortList", prodSortList);*/
 			mav.setViewName("admin/admin_product_register");
 			return mav;
 		}
+		
 		
 		//상품관리-상품 수정 페이지 요청
 		@RequestMapping(value = "adminProdModify/{product_num}", method = RequestMethod.GET)
@@ -113,6 +114,14 @@ public class AdminProductController {
 			//mav.addObject("productInfoList", productInfoList);
 			mav.setViewName("redirect:/adminProd/adminProduct");
 			return mav;
+		}
+		
+		//상품 삭제(delete)
+		@RequestMapping(value="adminProdDelete/{product_num}", method = RequestMethod.GET)
+		public void adminProdDelete(@PathVariable("product_num") String product_num) {
+			//상품 인덱스 번호
+			int product_idx = Integer.parseInt(product_num);			
+			admProdService.adminProdDelete(product_idx);
 		}
 		
 		
