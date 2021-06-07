@@ -62,8 +62,10 @@
 															<label class="form-label" for="mk_product_type">상품 분류</label>
 															<select class="form-select" name="mk_product_type" id="mk_product_type">
 																<option value="" >상품 분류</option>
+															<c:set var="num" value="1"/>
 															<c:forEach var="sortList" items="${prodSortList}" varStatus="status">														  
-															  	<option value="${sortList.ps_sort_id}">${sortList.ps_sort_name}</option>														  
+															  	<option value="${sortList.ps_sort_id}" <c:if test="${prodList.mk_status == num}">selected</c:if>>${sortList.ps_sort_name}</option>														  
+															<c:set var="num" value="${num+1}"/>
 															</c:forEach>													   
 															</select>														
 														</div>
