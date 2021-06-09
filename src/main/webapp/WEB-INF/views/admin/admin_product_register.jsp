@@ -47,16 +47,16 @@
 										<div class="card-body">
 											<form name="product_form" action="${contextPath}/adminProd/adminProdInsert" enctype="multipart/form-data" method="post">
 												
-												<c:forEach var="prodList" items="${productList}" varStatus="status">
-													<div class="row">
-														<div class="mb-3 col-md-4"  style="display:inline-block;">
-															<label class="form-label" for="mk_status">게시 여부</label>
-															<select class="form-select" name="mk_status" id="mk_status">
-															  <option value="1" <c:if test="${prodList.mk_status == 1}">selected</c:if>>O</option>
-															  <option value="0" <c:if test="${prodList.mk_status == 0}">selected</c:if>>X</option>														  													   
-															</select>														
-														</div>
-													</div>
+												
+<!-- 													<div class="row"> -->
+<!-- 														<div class="mb-3 col-md-4"  style="display:inline-block;"> -->
+<!-- 															<label class="form-label" for="mk_status">게시 여부</label> -->
+<!-- 															<select class="form-select" name="mk_status" id="mk_status"> -->
+<%-- 															  <option value="1" <c:if test="${prodList.mk_status == 1}">selected</c:if>>O</option> --%>
+<%-- 															  <option value="0" <c:if test="${prodList.mk_status == 0}">selected</c:if>>X</option>													  													    --%>
+<!-- 															</select>														 -->
+<!-- 														</div> -->
+<!-- 													</div> -->
 													<div class="row">
 														<div class="mb-3 col-md-4"  style="display:inline-block;">
 															<label class="form-label" for="mk_product_type">상품 분류</label>
@@ -120,7 +120,7 @@
 														<input type="submit" class="btn btn-primary" value="등록"/>
 													</c:when>	
 												</c:choose>
-											</c:forEach>
+											
 											</form>
 										</div>
 									</div>

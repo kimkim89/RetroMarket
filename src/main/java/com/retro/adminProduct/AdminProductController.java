@@ -78,12 +78,12 @@ public class AdminProductController {
 			List<AdminProductVO> prodCategoryList = admProdService.selectProdCategory();			
 			
 			//개별 상품정보 select
-			List<AdminProductVO> productList = admProdService.adminSelectOneProd(product_idx);
+			List<AdminProductVO> prodList = admProdService.adminSelectOneProd(product_idx);
 			
 			mav.addObject("wu", wu);			
 			mav.addObject("prodSortList", prodSortList);
 			mav.addObject("prodCategoryList", prodCategoryList);
-			mav.addObject("productList", productList);
+			mav.addObject("prodList", prodList);
 			mav.setViewName("admin/admin_product_register");
 			return mav;
 		}
