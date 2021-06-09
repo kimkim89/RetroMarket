@@ -45,7 +45,7 @@ public class AdminProductController {
 			
 			ModelAndView mav = new ModelAndView();
 			
-			/*//상품등록인지 수정인지 구분해주는 구분자 => wu
+			//상품등록인지 수정인지 구분해주는 구분자 => wu
 			//i=> 상품등록, u=> 상품수정
 			String wu = "i";
 								
@@ -53,7 +53,7 @@ public class AdminProductController {
 			List<AdminProductVO> prodSortList = admProdService.selectProdSort();				
 					
 			mav.addObject("wu", wu);	
-			mav.addObject("prodSortList", prodSortList);*/
+			mav.addObject("prodSortList", prodSortList);
 			mav.setViewName("admin/admin_product_register");
 			return mav;
 		}
