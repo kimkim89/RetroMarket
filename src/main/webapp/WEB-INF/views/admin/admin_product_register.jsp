@@ -76,7 +76,7 @@
 															<select class="form-select" name="mk_product_category" id="mk_product_category">
 															  <option value="" >상품 종류</option>															  
 															  <c:forEach var="categoryList" items="${prodCategoryList}" varStatus="status">														  
-															  	<option value="${categoryList.pc_category_id}" <c:if test="${prodList.mk_product_category == status.count">selected</c:if>>${categoryList.pc_category_name}</option>														  
+															  	<option value="${categoryList.pc_category_id}" <c:if test="">selected</c:if>>${categoryList.pc_category_name}</option>														  
 															</c:forEach>													   
 															</select>														
 														</div>
