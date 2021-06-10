@@ -16,8 +16,8 @@
 	<!-- 회원등록 -->
 	<insert id="adminMemInsert" parameterType="memberVO">
 		<![CDATA[
-		insert into member (id, name, nickname, phone, pwd, email, address1, address2, address3, status, level, role_check, authstatus)
-		values (#{id}, #{name}, #{nickname}, #{phone}, #{pwd}, #{email}, #{address1}, #{address2}, #{address3}, 1, #{level}, #{role_check}, 1);
+		insert into member (id, name, nickname, phone, pwd, email, address1, address2, address3, status, level, authstatus)
+		values (#{id}, #{name}, #{nickname}, #{phone}, #{pwd}, #{email}, #{address1}, #{address2}, #{address3}, 1, #{level}, 1);
 		]]>
 	</insert>
 	

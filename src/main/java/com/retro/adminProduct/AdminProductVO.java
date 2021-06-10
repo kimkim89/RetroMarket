@@ -35,6 +35,9 @@ public class AdminProductVO {
 	private String ps_sort_name;
 	private int ps_sort_order;
 	
+	private int pc_category_id;
+	private String pc_category_name;
+	private int pc_category_order;
 	
 	
 }
