@@ -27,6 +27,14 @@ public class ProductController {
 		
 		mav.setViewName("temporary");
 		return mav;
+	}
+	
+	//임시
+	@RequestMapping(value = "temporary2")
+	public ModelAndView temporary2(Locale locale, Model model) {
+		
+		mav.setViewName("temporary2");
+		return mav;
 	}	
 	
 	//상품 상세보기
