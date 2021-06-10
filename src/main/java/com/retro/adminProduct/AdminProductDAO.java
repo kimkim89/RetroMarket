@@ -34,8 +34,8 @@ public class AdminProductDAO {
 	}
 	
 	//개별 상품정보 select
-	public List<AdminProductVO> adminSelectOneProd(int mk_idx) {
-		return sqlSession.selectList("mapper.AdminProd.adminSelectOneProd", mk_idx);
+	public AdminProductVO adminSelectOneProd(int mk_idx) {
+		return sqlSession.selectOne("mapper.AdminProd.adminSelectOneProd", mk_idx);
 	}
 	
 	//상품 삭제(delete)

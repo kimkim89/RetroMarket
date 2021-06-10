@@ -48,24 +48,24 @@
 											<form name="product_form" action="${contextPath}/adminProd/adminProdInsert" enctype="multipart/form-data" method="post">
 												
 												
-<!-- 													<div class="row"> -->
-<!-- 														<div class="mb-3 col-md-4"  style="display:inline-block;"> -->
-<!-- 															<label class="form-label" for="mk_status">게시 여부</label> -->
-<!-- 															<select class="form-select" name="mk_status" id="mk_status"> -->
-<%-- 															  <option value="1" <c:if test="${prodList.mk_status == 1}">selected</c:if>>O</option> --%>
-<%-- 															  <option value="0" <c:if test="${prodList.mk_status == 0}">selected</c:if>>X</option>													  													    --%>
-<!-- 															</select>														 -->
-<!-- 														</div> -->
-<!-- 													</div> -->
+													<div class="row">
+														<div class="mb-3 col-md-4"  style="display:inline-block;">
+															<label class="form-label" for="mk_status">게시 여부</label>
+															<select class="form-select" name="mk_status" id="mk_status">
+															  <option value="1" >O</option>
+															  <option value="0" >X</option>													  													   
+															</select>														
+														</div>
+													</div>
 													<div class="row">
 														<div class="mb-3 col-md-4"  style="display:inline-block;">
 															<label class="form-label" for="mk_product_type">상품 분류</label>
 															<select class="form-select" name="mk_product_type" id="mk_product_type">
 																<option value="" >상품 분류</option>
-															<c:set var="num" value="1"/>
+															
 															<c:forEach var="sortList" items="${prodSortList}" varStatus="status">														  
-															  	<option value="${sortList.ps_sort_id}" <c:if test="${prodList.mk_product_type == num}">selected</c:if>>${sortList.ps_sort_name}</option>														  
-															<c:set var="num" value="${num+1}"/>
+															  	<option value="${sortList.ps_sort_id}" >${sortList.ps_sort_name}</option>														  
+															
 															</c:forEach>													   
 															</select>														
 														</div>
@@ -76,7 +76,7 @@
 															<select class="form-select" name="mk_product_category" id="mk_product_category">
 															  <option value="" >상품 종류</option>															  
 															  <c:forEach var="categoryList" items="${prodCategoryList}" varStatus="status">														  
-															  	<option value="${categoryList.pc_category_id}" <c:if test="">selected</c:if>>${categoryList.pc_category_name}</option>														  
+															  	<option value="${categoryList.pc_category_id}" >${categoryList.pc_category_name}</option>														  
 															</c:forEach>													   
 															</select>														
 														</div>
