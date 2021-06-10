@@ -100,7 +100,7 @@ public class AdminProductService {
 	}
 	
 	//개별 상품정보 select
-	public List<AdminProductVO> adminSelectOneProd(int mk_idx) {
+	public AdminProductVO adminSelectOneProd(int mk_idx) {
 		return admProdDAO.adminSelectOneProd(mk_idx);
 	}
 	
