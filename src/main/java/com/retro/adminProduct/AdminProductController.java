@@ -50,10 +50,13 @@ public class AdminProductController {
 			String wu = "i";
 								
 			//상품분류(신상품/인기상품/할인상품)
-			List<AdminProductVO> prodSortList = admProdService.selectProdSort();				
+			List<AdminProductVO> prodSortList = admProdService.selectProdSort();	
+			//상품 종류(스낵/젤리/캔디/기타)
+			List<AdminProductVO> prodCategoryList = admProdService.selectProdCategory();
 					
 			mav.addObject("wu", wu);	
 			mav.addObject("prodSortList", prodSortList);
+			mav.addObject("prodCategoryList", prodCategoryList);
 			mav.setViewName("admin/admin_product_register");
 			return mav;
 		}
