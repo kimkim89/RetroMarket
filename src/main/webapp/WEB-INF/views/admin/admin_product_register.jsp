@@ -46,70 +46,81 @@
 										</div>
 										<div class="card-body">
 											<form name="product_form" action="${contextPath}/adminProd/adminProdInsert" enctype="multipart/form-data" method="post">
-												<div class="row">
-													<div class="mb-3 col-md-4"  style="display:inline-block;">
-														<label class="form-label" for="mk_status">게시 여부</label>
-														<select class="form-select" name="mk_status" id="mk_status">
-														  <option value="1" >O</option>
-														  <option value="0">X</option>														  													   
-														</select>														
+												
+												
+<!-- 													<div class="row"> -->
+<!-- 														<div class="mb-3 col-md-4"  style="display:inline-block;"> -->
+<!-- 															<label class="form-label" for="mk_status">게시 여부</label> -->
+<!-- 															<select class="form-select" name="mk_status" id="mk_status"> -->
+<%-- 															  <option value="1" <c:if test="${prodList.mk_status == 1}">selected</c:if>>O</option> --%>
+<%-- 															  <option value="0" <c:if test="${prodList.mk_status == 0}">selected</c:if>>X</option>													  													    --%>
+<!-- 															</select>														 -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+													<div class="row">
+														<div class="mb-3 col-md-4"  style="display:inline-block;">
+															<label class="form-label" for="mk_product_type">상품 분류</label>
+															<select class="form-select" name="mk_product_type" id="mk_product_type">
+																<option value="" >상품 분류</option>
+															<c:set var="num" value="1"/>
+															<c:forEach var="sortList" items="${prodSortList}" varStatus="status">														  
+															  	<option value="${sortList.ps_sort_id}" <c:if test="${prodList.mk_product_type == num}">selected</c:if>>${sortList.ps_sort_name}</option>														  
+															<c:set var="num" value="${num+1}"/>
+															</c:forEach>													   
+															</select>														
+														</div>
 													</div>
-												</div>
-												<div class="row">
-													<div class="mb-3 col-md-4"  style="display:inline-block;">
-														<label class="form-label" for="mk_product_type">상품 분류</label>
-														<select class="form-select" name="mk_product_type" id="mk_product_type">
-															<option value="" >상품 분류</option>
-														<c:forEach var="sortList" items="${prodSortList}" varStatus="status">														  
-														  	<option value="${sortList.ps_sort_id}">${sortList.ps_sort_name}</option>														  
-														</c:forEach>													   
-														</select>														
+													<div class="row">
+														<div class="mb-3 col-md-4"  style="display:inline-block;">
+															<label class="form-label" for="mk_product_category">상품 종류</label>
+															<select class="form-select" name="mk_product_category" id="mk_product_category">
+															  <option value="" >상품 종류</option>															  
+															  <c:forEach var="categoryList" items="${prodCategoryList}" varStatus="status">														  
+															  	<option value="${categoryList.pc_category_id}" <c:if test="">selected</c:if>>${categoryList.pc_category_name}</option>														  
+															</c:forEach>													   
+															</select>														
+														</div>
 													</div>
-												</div>
-												<div class="row">
-													<div class="mb-3 col-md-4"  style="display:inline-block;">
-														<label class="form-label" for="mk_product_category">상품 종류</label>
-														<select class="form-select" name="mk_product_category" id="mk_product_category">
-														  <option value="" >상품 종류</option>
-														  <option value="1">스낵</option>
-														  <option value="2">젤리</option>
-														  <option value="3">캔디</option>
-														  <option value="4">기타</option>
-														</select>														
+													<div class="mb-3">
+														<label class="form-label" for="mk_product_name">상품명</label>
+														<input type="text" class="form-control" name="mk_product_name" id="mk_product_name" value="${prodList.mk_product_name}">
 													</div>
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="mk_product_name">상품명</label>
-													<input type="text" class="form-control" name="mk_product_name" id="mk_product_name" value="">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="mk_product_id">상품코드</label>
-													<input type="text" class="form-control" name="mk_product_id" id="mk_product_id" value="">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="mk_product_price">상품 가격(원)</label>
-													<input type="number" class="form-control" name="mk_product_price" id="mk_product_price" value="">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for="mk_inventory">재고량</label>
-													<input type="number" class="form-control" name="mk_inventory" id="mk_inventory" value="">
-												</div>
-												<div class="mb-3">
-													<label class="form-label" for=mk_original_thumb>상품 썸네일(상품목록용)</label>
-													<input type="file" class="form-control" name="original_thumb" id="original_thumb" value="">
-												</div>		
-												<div class="mb-3">
-													<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>
-													<input type="file" class="form-control" name="original_upfile" id="original_upfile" value="">
-												</div>							
-												<div class="mb-3">
-													<label class="form-label" for="mk_content">상품 설명</label>
-													<textarea class="form-control" name="mk_content" id="mk_content"></textarea>
-													<script>
-														CKEDITOR.replace('mk_content');
-													</script>
-												</div>	
-												<input type="submit" class="btn btn-primary" value="등록"/>
+													<div class="mb-3">
+														<label class="form-label" for="mk_product_id">상품코드</label>
+														<input type="text" class="form-control" name="mk_product_id" id="mk_product_id" value="${prodList.mk_product_id}">
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="mk_product_price">상품 가격(원)</label>
+														<input type="number" class="form-control" name="mk_product_price" id="mk_product_price" value="${prodList.mk_product_price}">
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="mk_inventory">재고량</label>
+														<input type="number" class="form-control" name="mk_inventory" id="mk_inventory" value="${prodList.mk_inventory}">
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for=mk_original_thumb>상품 썸네일(상품목록용)</label>
+														<input type="file" class="form-control" name="original_thumb" id="original_thumb" value="${prodList.mk_stored_thumb}">
+													</div>		
+													<div class="mb-3">
+														<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>
+														<input type="file" class="form-control" name="original_upfile" id="original_upfile" value="${prodList.mk_stored_upfile}">
+													</div>							
+													<div class="mb-3">
+														<label class="form-label" for="mk_content">상품 설명</label>
+														<textarea class="form-control" name="mk_content" id="mk_content">${prodList.mk_content}</textarea>
+														<script>
+															CKEDITOR.replace('mk_content');
+														</script>
+													</div>
+													<c:choose>
+													<c:when test="${wu=='u'}">
+														<input type="submit" class="btn btn-primary" value="수정"/>
+													</c:when>	
+													<c:when test="${wu=='i'}">	
+														<input type="submit" class="btn btn-primary" value="등록"/>
+													</c:when>	
+												</c:choose>
+											
 											</form>
 										</div>
 									</div>
