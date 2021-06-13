@@ -14,12 +14,26 @@
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-
-	<title>상품 관리</title>
-	<script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
 	<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
+	<title>상품 관리</title>
+	
+	<script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript">
+		var myEditor;
+		ClassicEditor.create(document.querySelector('#mk_content'), {
+							 ckfinder: { uploadUrl: '/adminProd/editorFileUpload'},
+							 alignment: { 
+							 options: ['left', 'center', 'right']
+							}
+					})
+					 .then(editor=>{console.log('Editor was initialized', editor);
+					 myEditor = editor;
+					 })
+					 .catch(error=>{console.error(error);
+					});
+	</script>
+	
 	<style>
 		.form-control{ width:50%;height:auto; }
 	</style>
@@ -109,7 +123,7 @@
 														<label class="form-label" for="mk_content">상품 설명</label>
 														<textarea class="form-control" name="mk_content" id="mk_content">${prodList.mk_content}</textarea>
 														<script>
-															CKEDITOR.replace('mk_content',{filebrowserImageUploadUrl:'${contextPath}/adminProd/editorImgUpload'});
+															CKEDITOR.replace('mk_content');
 														</script>
 													</div>
 													<c:choose>

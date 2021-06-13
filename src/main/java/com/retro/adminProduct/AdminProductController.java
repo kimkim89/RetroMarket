@@ -16,10 +16,12 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -112,6 +114,7 @@ public class AdminProductController {
 											) {
 			ModelAndView mav = new ModelAndView();
 			
+			
 			//static Logger logger = Logger.getlogger
 						
 			//서버 물리적 경로
@@ -162,11 +165,51 @@ public class AdminProductController {
 			return mav;
 		}*/
 		 
+		//--------------------------------------------------------------------------------
+		
+		/*Editor 테스트 중*/
+		
+		@RequestMapping(value = "/adminProd/editorFileUpload", method = {RequestMethod.POST, RequestMethod.GET})
+		public String editorFileUpload( Model model, 
+										@RequestParam(value="upload", required=false) MultipartFile fileLoad, 
+										HttpServletRequest request) {
+			System.out.println("테스트중 확인 중");
+			
+			
+			//랜덤 문자 생성
+			UUID uid = UUID.randomUUID();
+			
+			//에디터 파일 이름 가져오기
+			String fileName = fileLoad.getOriginalFilename();
+			
+			//에디터 이미지(upload) 저장 경로 생성
+			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/editor/");
+			
+			//디렉터리 경로 설정
+			String newFileName = uploadPath + uid + "_" + fileName;
+			
+			//업로드 수행
+			File file = new File(uploadPath + "/" + newFileName);
+			
+			try {
+				//실제파일이 업로드되는 부분
+				FileUtils.writeByteArrayToFile(file, fileLoad.getBytes());
+				return "{ \"uploaded\" : true, \"url\" : " + uploadPath + "/" + newFileName + "\" }";
+			} catch (IOException e) {
+				return "{ \"uploaded\" : false, \"error\": { \"message\": \"업로드 중 에러가 발생했습니다. 다시 시도해 주세요.\" } }";
+			}
+			
+		}
+		
+		
+		
+		
+		//---------------------------------------------------------------------------------
 		
 		//에디터이미지업로드
-		@RequestMapping(value = "editorImgUpload", method = RequestMethod.POST)
+		/*@RequestMapping(value = "editorImgUpload", method = RequestMethod.POST)
 		public void editorImgUpload(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile,
-									@RequestParam MultipartFile mtf) throws Exception {
+									@RequestParam MultipartFile upload) throws Exception {
 			//랜덤 문자 생성
 			UUID uid = UUID.randomUUID();
 			
@@ -180,8 +223,8 @@ public class AdminProductController {
 			try {
 			
 				//에디터 업로드 파일 이름  가져오기
-				String editorFileName = mtf.getOriginalFilename();
-				byte[] bytes = mtf.getBytes();
+				String editorFileName = upload.getOriginalFilename();
+				byte[] bytes = upload.getBytes();
 				
 				//에디터 이미지 저장 경로 생성
 				String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/editor/");
@@ -203,7 +246,7 @@ public class AdminProductController {
 				out.write(bytes);
 				out.flush(); //outputStream에 저장된 데이터 전송 후 초기화
 				
-				String callback = request.getParameter("ckEditorNum");
+				String callback = request.getParameter("CKEditorFuncNum");
 				printWriter = response.getWriter();
 				String editorFileUrl = "/adminProd/editorImgSubmit?uid=" + uid + "&editorFileName=" + editorFileName;
 				
@@ -233,7 +276,7 @@ public class AdminProductController {
 		 * @throws IOException
 		 * */
 		
-		@RequestMapping(value="/adminProd/editorImgSubmit")
+		/*@RequestMapping(value="/adminProd/editorImgSubmit")
 		public void editorImgSubmit(@RequestParam(value="uid") String uid,
 									@RequestParam(value="editorFileName") String editorFileName,
 									HttpServletRequest request,
@@ -282,7 +325,7 @@ public class AdminProductController {
 			}
 			
 			
-		}
+		}*/
 
 
 		
