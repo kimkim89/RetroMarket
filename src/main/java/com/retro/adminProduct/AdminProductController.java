@@ -1,13 +1,23 @@
 package com.retro.adminProduct;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +30,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-
 @Controller
 @RequestMapping("/adminProd/*")
 public class AdminProductController {
 	
 	@Autowired
 	private AdminProductService admProdService;
+	
+	static Logger logger = Logger.getLogger(AdminProductController.class);
 	
 		//상품관리-목록 페이지
 		@RequestMapping(value = "adminProduct")
@@ -150,10 +161,128 @@ public class AdminProductController {
 			mav.setViewName("redirect:/adminProd/adminProduct");
 			return mav;
 		}*/
+		 
+		
+		//에디터이미지업로드
+		@RequestMapping(value = "editorImgUpload", method = RequestMethod.POST)
+		public void editorImgUpload(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile,
+									@RequestParam MultipartFile mtf) throws Exception {
+			//랜덤 문자 생성
+			UUID uid = UUID.randomUUID();
+			
+			OutputStream out = null;
+			PrintWriter printWriter = null;
+			
+			//인코딩
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html;charset=UTF-8");
+			
+			try {
+			
+				//에디터 업로드 파일 이름  가져오기
+				String editorFileName = mtf.getOriginalFilename();
+				byte[] bytes = mtf.getBytes();
+				
+				//에디터 이미지 저장 경로 생성
+				String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/editor/");
+				
+				//에디터 이미지 서버 네임
+				String ckUploadPath = uploadPath + uid + "_" + editorFileName;
+				File editorImgDir = new File(uploadPath);
+				
+				//에디터 이미지 저장 디렉토리 확인
+				if(!editorImgDir.exists()) {
+					try {
+						editorImgDir.mkdirs(); //디렉토리 생성
+					}catch (Exception e) {
+						e.getStackTrace();
+					}
+				}
+				
+				out = new FileOutputStream(new File(ckUploadPath));
+				out.write(bytes);
+				out.flush(); //outputStream에 저장된 데이터 전송 후 초기화
+				
+				String callback = request.getParameter("ckEditorNum");
+				printWriter = response.getWriter();
+				String editorFileUrl = "/adminProd/editorImgSubmit?uid=" + uid + "&editorFileName=" + editorFileName;
+				
+				//업로드 메세지 출력
+				printWriter.println("{\"editorFileName\" : \""+editorFileName+"\", \"uploaded\" : 1, \"url\":\""+editorFileUrl+"\"}");
+				printWriter.flush();
+			}catch (Exception e) {
+				e.getStackTrace();
+			}finally {
+				try {
+					if(out != null) { out.close();}
+					if(printWriter != null) {printWriter.close();}
+				}catch(IOException e) {e.printStackTrace();}
+			}
+			
+			return;
+			
+		}
 		
 		
+		/* CK에디터 서버로 전송된 이미지 뿌리기
+		 * @param uid
+		 * @param editorFileName
+		 * @param request
+		 * @return
+		 * @throws ServletException
+		 * @throws IOException
+		 * */
 		
-	 
+		@RequestMapping(value="/adminProd/editorImgSubmit")
+		public void editorImgSubmit(@RequestParam(value="uid") String uid,
+									@RequestParam(value="editorFileName") String editorFileName,
+									HttpServletRequest request,
+									HttpServletResponse response) throws ServletException, IOException {			
+					
+			//에디터 이미지 저장 경로 생성
+			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/editor/");
+			//에디터 이미지 경로 + 파일명
+			String sUploadPath = uploadPath + uid + "_" + editorFileName;
+			
+			File editorFile = new File(sUploadPath);
+			
+			//이미지 파일 못 찾을 경우 예외처리로 empty 이미지 파일 설정
+			if(editorFile.isFile()) {
+				byte[] buf = new byte[1024];
+				int readByte = 0;
+				int length = 0;
+				byte[] imgBuf = null;
+				
+				FileInputStream fileInputStream = null;
+				ByteArrayOutputStream outputStream = null;
+				ServletOutputStream out = null;
+				
+				try {
+					fileInputStream = new FileInputStream(editorFile);
+					outputStream = new ByteArrayOutputStream();
+					out = response.getOutputStream();
+					
+					while((readByte = fileInputStream.read(buf)) != -1) {
+						outputStream.write(buf, 0, readByte);
+					}
+					
+					imgBuf = outputStream.toByteArray();
+					length = imgBuf.length;
+					out.write(imgBuf, 0, length);
+					out.flush();//outputStream에 저장된 데이터 전송 후 초기화
+										
+				} catch (Exception e) {
+					logger.info(e);
+				}finally {
+					outputStream.close();
+					fileInputStream.close();
+					out.close();
+					
+				}
+			}
+			
+			
+		}
 
 
 		

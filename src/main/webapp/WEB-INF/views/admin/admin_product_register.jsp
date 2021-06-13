@@ -64,7 +64,7 @@
 																<option value="" >상품 분류</option>
 															
 															<c:forEach var="sortList" items="${prodSortList}" varStatus="status">														  
-															  	<option value="${sortList.ps_sort_id}" >${sortList.ps_sort_name}</option>														  
+															  	<option value="${sortList.ps_sort_id}" <c:if test="${prodList.mk_product_type==sortList.ps_sort_id}">selected</c:if>>${sortList.ps_sort_name}</option>														  
 															
 															</c:forEach>													   
 															</select>														
@@ -76,7 +76,7 @@
 															<select class="form-select" name="mk_product_category" id="mk_product_category">
 															  <option value="" >상품 종류</option>															  
 															  <c:forEach var="categoryList" items="${prodCategoryList}" varStatus="status">														  
-															  	<option value="${categoryList.pc_category_id}" >${categoryList.pc_category_name}</option>														  
+															  	<option value="${categoryList.pc_category_id}" <c:if test="${prodList.mk_product_category==categoryList.pc_category_id}">selected</c:if>>${categoryList.pc_category_name}</option>														  
 															</c:forEach>													   
 															</select>														
 														</div>
@@ -109,7 +109,7 @@
 														<label class="form-label" for="mk_content">상품 설명</label>
 														<textarea class="form-control" name="mk_content" id="mk_content">${prodList.mk_content}</textarea>
 														<script>
-															CKEDITOR.replace('mk_content');
+															CKEDITOR.replace('mk_content',{filebrowserImageUploadUrl:'${contextPath}/adminProd/editorImgUpload'});
 														</script>
 													</div>
 													<c:choose>
