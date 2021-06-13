@@ -109,7 +109,7 @@
 														<label class="form-label" for="mk_content">상품 설명</label>
 														<textarea class="form-control" name="mk_content" id="mk_content">${prodList.mk_content}</textarea>
 														<script>
-															CKEDITOR.replace('mk_content',{filebrowserImageUploadUrl:'${contextPath}/adminProd/editorImgUpload'});
+															CKEDITOR.replace('mk_content',{filebrowserUploadUrl:'${contextPath}/adminProd/editorImgUpload'});
 														</script>
 													</div>
 													<c:choose>

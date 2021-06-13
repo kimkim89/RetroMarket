@@ -112,6 +112,7 @@ public class AdminProductController {
 											) {
 			ModelAndView mav = new ModelAndView();
 			
+			
 			//static Logger logger = Logger.getlogger
 						
 			//서버 물리적 경로
@@ -166,7 +167,7 @@ public class AdminProductController {
 		//에디터이미지업로드
 		@RequestMapping(value = "editorImgUpload", method = RequestMethod.POST)
 		public void editorImgUpload(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile,
-									@RequestParam MultipartFile mtf) throws Exception {
+									@RequestParam MultipartFile upload) throws Exception {
 			//랜덤 문자 생성
 			UUID uid = UUID.randomUUID();
 			
@@ -180,8 +181,8 @@ public class AdminProductController {
 			try {
 			
 				//에디터 업로드 파일 이름  가져오기
-				String editorFileName = mtf.getOriginalFilename();
-				byte[] bytes = mtf.getBytes();
+				String editorFileName = upload.getOriginalFilename();
+				byte[] bytes = upload.getBytes();
 				
 				//에디터 이미지 저장 경로 생성
 				String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/editor/");
@@ -203,7 +204,7 @@ public class AdminProductController {
 				out.write(bytes);
 				out.flush(); //outputStream에 저장된 데이터 전송 후 초기화
 				
-				String callback = request.getParameter("ckEditorNum");
+				String callback = request.getParameter("CKEditorFuncNum");
 				printWriter = response.getWriter();
 				String editorFileUrl = "/adminProd/editorImgSubmit?uid=" + uid + "&editorFileName=" + editorFileName;
 				
