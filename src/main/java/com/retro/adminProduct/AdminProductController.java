@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +31,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.gson.JsonObject;
 
 
 @Controller
@@ -170,10 +173,15 @@ public class AdminProductController {
 		/*Editor 테스트 중*/
 		
 		@RequestMapping(value = "/adminProd/editorFileUpload", method = {RequestMethod.POST, RequestMethod.GET})
-		public String editorFileUpload( Model model, 
-										@RequestParam(value="upload", required=false) MultipartFile fileLoad, 
-										HttpServletRequest request) {
-			System.out.println("테스트중 확인 중");
+		public String editorFileUpload( HttpServletRequest request,
+										HttpServletResponse response,
+										MultipartHttpServletRequest multiFile) throws Exception {
+			JsonObject json = new JsonObject();
+			PrintWriter printWriter = null;
+			MultipartFile file = multiFile.getFile("upload");
+			if(file != null) {
+				//if(file.getSize() > 0 && StringUtils.isNotBlank)
+			}
 			
 			
 			//랜덤 문자 생성

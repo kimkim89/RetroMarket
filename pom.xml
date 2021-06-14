@@ -15,7 +15,12 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-
+		<!-- JSON 사용을 위한 라이브러리 -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.7</version>
+		</dependency>		
 		<!-- 파일 업로드 처리 관련 라이브러리 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>

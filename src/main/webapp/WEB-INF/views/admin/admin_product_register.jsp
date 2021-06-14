@@ -21,17 +21,7 @@
 	<script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript">
 		var myEditor;
-		ClassicEditor.create(document.querySelector('#mk_content'), {
-							 ckfinder: { uploadUrl: '/adminProd/editorFileUpload'},
-							 alignment: { 
-							 options: ['left', 'center', 'right']
-							}
-					})
-					 .then(editor=>{console.log('Editor was initialized', editor);
-					 myEditor = editor;
-					 })
-					 .catch(error=>{console.error(error);
-					});
+		
 	</script>
 	
 	<style>
@@ -122,8 +112,9 @@
 													<div class="mb-3">
 														<label class="form-label" for="mk_content">상품 설명</label>
 														<textarea class="form-control" name="mk_content" id="mk_content">${prodList.mk_content}</textarea>
-														<script>
-															CKEDITOR.replace('mk_content');
+														<script>														
+															CKEDITOR.replace('mk_content', {filebrowserUploadUrl: '${contextPath}/adminProd/editorFileUpload'});
+																													
 														</script>
 													</div>
 													<c:choose>
