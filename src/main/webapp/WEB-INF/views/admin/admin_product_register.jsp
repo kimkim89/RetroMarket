@@ -20,7 +20,13 @@
 	
 	<script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript">
-		var myEditor;
+		function adminProdInsert() {
+			location.href="${contextPath}/adminProd/adminProdInsert";
+		}
+		
+		function adminProdUpdate() {
+			location.href="${contextPath}/adminProd/adminProdUpdate";
+		}
 		
 	</script>
 	
@@ -49,7 +55,7 @@
 											<h5 class="card-title mb-0"><font style="color:red;">*상품 정보를 등록해주세요.</font></h5>
 										</div>
 										<div class="card-body">
-											<form name="product_form" action="${contextPath}/adminProd/adminProdInsert" enctype="multipart/form-data" method="post">
+											<form name="product_form" action="" enctype="multipart/form-data" method="post">
 												
 												
 													<div class="row">
@@ -119,10 +125,10 @@
 													</div>
 													<c:choose>
 													<c:when test="${wu=='u'}">
-														<input type="submit" class="btn btn-primary" value="수정"/>
+														<button type="button" class="btn btn-primary" onclick="adminProdUpdate();">수정</button>
 													</c:when>	
 													<c:when test="${wu=='i'}">	
-														<input type="submit" class="btn btn-primary" value="등록"/>
+														<button type="button" class="btn btn-primary" onclick="adminProdInsert();">등록</button>
 													</c:when>	
 												</c:choose>
 											
