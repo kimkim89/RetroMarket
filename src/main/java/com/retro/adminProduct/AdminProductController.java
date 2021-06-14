@@ -16,12 +16,14 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.gson.JsonObject;
 
 
 @Controller
@@ -170,36 +174,69 @@ public class AdminProductController {
 		/*Editor 테스트 중*/
 		
 		@RequestMapping(value = "/adminProd/editorFileUpload", method = {RequestMethod.POST, RequestMethod.GET})
-		public String editorFileUpload( Model model, 
-										@RequestParam(value="upload", required=false) MultipartFile fileLoad, 
-										HttpServletRequest request) {
-			System.out.println("테스트중 확인 중");
-			
-			
-			//랜덤 문자 생성
+		public String editorFileUpload( HttpServletRequest request,
+										HttpServletResponse response,
+										MultipartHttpServletRequest multiFile) throws Exception {
+			JsonObject json = new JsonObject();
+			PrintWriter printWriter = null;
+			MultipartFile file = multiFile.getFile("upload");
 			UUID uid = UUID.randomUUID();
+			FileOutputStream out = null;
 			
-			//에디터 파일 이름 가져오기
-			String fileName = fileLoad.getOriginalFilename();
 			
-			//에디터 이미지(upload) 저장 경로 생성
-			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/editor/");
-			
-			//디렉터리 경로 설정
-			String newFileName = uploadPath + uid + "_" + fileName;
-			
-			//업로드 수행
-			File file = new File(uploadPath + "/" + newFileName);
-			
-			try {
-				//실제파일이 업로드되는 부분
-				FileUtils.writeByteArrayToFile(file, fileLoad.getBytes());
-				return "{ \"uploaded\" : true, \"url\" : " + uploadPath + "/" + newFileName + "\" }";
-			} catch (IOException e) {
-				return "{ \"uploaded\" : false, \"error\": { \"message\": \"업로드 중 에러가 발생했습니다. 다시 시도해 주세요.\" } }";
+			if(file != null) {
+				try {
+					String fileName = file.getName();
+					byte[] bytes = file.getBytes();
+					
+					//에디터 이미지(upload) 저장 경로 생성
+					String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/editor/");
+					
+					File uploadFile = new File(uploadPath);
+					if(!uploadFile.exists()) {
+						uploadFile.mkdirs();
+					}
+
+					fileName = UUID.randomUUID().toString();
+					uploadPath = uploadPath + "/" + fileName;
+					out = new FileOutputStream(new File(uploadPath));
+					
+					out.write(bytes);
+					
+					printWriter = response.getWriter();
+					response.setContentType("text/html");
+					String fileUrl = request.getContextPath() + "/resources/images/editor/" + fileName;
+					
+					//JSON 데이터 등록
+					//return값 -> {"uploaded" : 1, "fileName" : "test.jpg", "url" : "/img/test.jpg"}
+					json.addProperty("uploaded", 1);
+					json.addProperty("fileName", fileName);
+					json.addProperty("url", fileUrl);
+					
+					printWriter.println(json);
+					
+				}catch (IOException e) {
+					e.printStackTrace();
+				}finally {
+					if(out != null) {
+						out.close();
+					}
+					if(printWriter != null) {
+						printWriter.close();
+					}
+				}
+					
+				}
+				return null;
 			}
 			
-		}
+			
+				
+			
+			
+			
+			
+			
 		
 		
 		
