@@ -2,6 +2,7 @@ package com.retro.adminProduct;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -92,9 +93,16 @@ public class AdminProductService {
 		return admProdDAO.selectProdCategory();
 	}
 	
-	//전체 상품목록 Select
-	public List<AdminProductVO> adminProductSelect() {
-		return admProdDAO.adminProductSelect();
+	//전체 상품목록 Select - 페이징처리 포함
+	public List<AdminProductVO> adminProductSelect(String searchField, String keyword, int pageFirst, int pageSize) {
+		HashMap map = new HashMap();
+		
+		map.put("searchField", searchField);
+		map.put("keyword", keyword);
+		map.put("pageFirst", pageFirst);
+		map.put("pageSize", pageSize);
+		
+		return admProdDAO.adminProductSelect(map);
 	}
 	
 	//개별 상품정보 select
@@ -105,6 +113,16 @@ public class AdminProductService {
 	//상품 삭제(delete)
 	public void adminProdDelete(int mk_idx) {
 		admProdDAO.adminProdDelete(mk_idx);
+	}
+
+	//전체 상품 수
+	public int countProd(String searchField, String keyword) {
+		HashMap map = new HashMap();
+		
+		map.put("searchField", searchField);
+		map.put("keyword", keyword);
+		
+		return admProdDAO.countProd(map);
 	}
 	
 	
