@@ -19,6 +19,7 @@
 	<title>상품 관리</title>
 	
 	<script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
+	
 	<script type="text/javascript">
 		function adminProdInsert() {
 			location.href="${contextPath}/adminProd/adminProdInsert";
@@ -62,8 +63,8 @@
 														<div class="mb-3 col-md-4"  style="display:inline-block;">
 															<label class="form-label" for="mk_status">게시 여부</label>
 															<select class="form-select" name="mk_status" id="mk_status">
-															  <option value="1" >O</option>
-															  <option value="0" >X</option>													  													   
+															  <option value="1" <c:if test="${prodList.mk_status==1}">selected</c:if>>O</option>
+															  <option value="0" <c:if test="${prodList.mk_status==0}">selected</c:if>>X</option>													  													   
 															</select>														
 														</div>
 													</div>
@@ -120,7 +121,7 @@
 														<textarea class="form-control" name="mk_content" id="mk_content">${prodList.mk_content}</textarea>
 														<script>														
 															CKEDITOR.replace('mk_content', {filebrowserUploadUrl: '${contextPath}/adminProd/editorFileUpload'});
-																													
+															console.log('${contextPath}/adminProd/editorFileUpload');														
 														</script>
 													</div>
 													<c:choose>
