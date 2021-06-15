@@ -35,6 +35,11 @@
 		location.href="${contextPath}/adminProd/adminProdDelete/" + product_num;
 	}
 	
+	function adminProductList() {
+		document.getElementById('prodSearch').submit(); 
+		return false;
+	}
+	
 </script>
 <link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
 <style>
@@ -65,17 +70,14 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
-								<form name="memList" class="d-none d-sm-inline-block"
-									action="${contextPath}/admin/adminMember" method="get">
+								<form name="prodSearch" id="prodSearch" class="d-none d-sm-inline-block" action="${contextPath}/adminProd/adminProduct" method="get">
 									<div class="input-group input-group-navbar">
-										<select name="searchField" class="form-select"
-											aria-label="Default select example">
-
-											<option value="id">상품명</option>
-											<option value="name">상품번호</option>
-										</select>&nbsp;&nbsp; <input type="text" name="keyword"
-											class="form-control" placeholder="" aria-label="Search">
-										<button type="button" class="btn" onclick="adminMemberList();">
+										<select name="searchField" class="form-select" aria-label="Default select example">
+											<option value="mk_product_name">상품명</option>
+											<option value="mk_product_id">상품번호</option>
+										</select>&nbsp;&nbsp; 
+										<input type="text" name="keyword" class="form-control" placeholder="" aria-label="Search">
+										<button type="button" class="btn" onclick="adminProductList();">
 											<i class="align-middle" data-feather="search"></i>
 										</button>
 										&nbsp;&nbsp;
@@ -99,7 +101,14 @@
 										</thead>
 										<tbody>
 										
-										<c:set var="num" value="1"/>
+									<c:choose>
+										<c:when test="${map.nowPage!=1}">
+											<c:set var="num" value="${map.nowPage+(3*(map.nowPage-1))}" />
+										</c:when>
+										<c:when test="${map.nowPage == 1}">
+											<c:set var="num" value="1"/>
+										</c:when>
+									</c:choose>
 										<c:forEach var="prodList" items="${productList}" varStatus="status">								
 												
 											<tr>
@@ -150,17 +159,17 @@
 					<ul class="pagination pagination-md">
 						<c:if test="${map.blockFirst != 1}">
 							<li class="page-item"><a class="page-link"
-								href="${contextPath}/admin/adminMember?nowPage=${map.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i
+								href="${contextPath}/adminProd/adminProduct?nowPage=${map.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i
 									class="fas fa-angle-left"></i></a></li>
 						</c:if>
 						<c:forEach begin="${map.blockFirst}" end="${map.blockLast}" var="i">
 							<li class="page-item">
-								<a href="${contextPath}/admin/adminMember?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
+								<a href="${contextPath}/adminProd/adminProduct?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
 							</li>
 						</c:forEach>
 						<c:if test="${map.totalPage != map.blockLast}">
 							<li class="page-item">
-								<a class="page-link" href="${contextPath}/admin/adminMember?nowPage=${map.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
+								<a class="page-link" href="${contextPath}/adminProd/adminProduct?nowPage=${map.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
 									<i	class="fas fa-angle-right"></i>
 								</a>
 							</li>

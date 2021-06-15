@@ -1,29 +1,19 @@
 package com.retro.adminProduct;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.codec.binary.StringUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,9 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.google.gson.JsonObject;
+import com.retro.common.PagingService;
 
 
 @Controller
@@ -42,15 +31,36 @@ public class AdminProductController {
 	
 	@Autowired
 	private AdminProductService admProdService;
+	private PagingService pagingService;
 	
 	static Logger logger = Logger.getLogger(AdminProductController.class);
 	
 		//상품관리-목록 페이지
 		@RequestMapping(value = "adminProduct")
-		public ModelAndView adminProduct() {
+		public ModelAndView adminProduct(@RequestParam(defaultValue = "1") int nowPage, 
+										 @RequestParam(defaultValue = "") String searchField, 
+										 @RequestParam(defaultValue = "") String keyword) {
 			ModelAndView mav = new ModelAndView();
-		
-			mav.addObject("productList", admProdService.adminProductSelect());
+			
+			/*페이징처리*/
+			PagingService pagingService = new PagingService();
+			HashMap<String, Object> map = new HashMap<String, Object>();		
+			int pageSizeToPaging = 4;
+			int blockSizeToBlockSize = 3;
+			
+			int prodCount = admProdService.countProd(searchField, keyword);
+			
+			map = pagingService.pagingList(nowPage, prodCount, pageSizeToPaging, blockSizeToBlockSize);
+			int pageFirst = Integer.parseInt(map.get("pageFirst").toString());
+			int pageSize = Integer.parseInt(map.get("pageSize").toString());
+			
+			List productList = admProdService.adminProductSelect(searchField, keyword, pageFirst, pageSize);
+						
+			mav.addObject("productList", productList);
+			mav.addObject("prodCount", prodCount);
+			mav.addObject("map", map);
+			mav.addObject("searchField", searchField);
+			mav.addObject("keyword", keyword);
 			mav.setViewName("admin/admin_product");
 			return mav;
 		}
