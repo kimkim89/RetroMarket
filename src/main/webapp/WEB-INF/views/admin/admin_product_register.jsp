@@ -121,7 +121,7 @@
 														<textarea class="form-control" name="mk_content" id="mk_content">${prodList.mk_content}</textarea>
 														<script>														
 															CKEDITOR.replace('mk_content', {filebrowserUploadUrl: '${contextPath}/adminProd/editorFileUpload'});
-															console.log('${contextPath}/adminProd/editorFileUpload');														
+															//console.log('${contextPath}/adminProd/editorFileUpload');														
 														</script>
 													</div>
 													<c:choose>
