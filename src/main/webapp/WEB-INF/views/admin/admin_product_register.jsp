@@ -22,11 +22,17 @@
 	
 	<script type="text/javascript">
 		function adminProdInsert() {
-			location.href="${contextPath}/adminProd/adminProdInsert";
+			var form = document.product_form;
+			form.action="${contextPath}/adminProd/adminProdInsert"
+			form.submit();
+			//location.href="${contextPath}/adminProd/adminProdInsert";
 		}
 		
 		function adminProdUpdate() {
-			location.href="${contextPath}/adminProd/adminProdUpdate";
+			var form = document.product_form;
+			form.action="${contextPath}/adminProd/adminProdUpdate"
+			form.submit();
+			//location.href="${contextPath}/adminProd/adminProdUpdate";
 		}
 		
 	</script>
@@ -56,7 +62,7 @@
 											<h5 class="card-title mb-0"><font style="color:red;">*상품 정보를 등록해주세요.</font></h5>
 										</div>
 										<div class="card-body">
-											<form name="product_form" action="" enctype="multipart/form-data" method="post">
+											<form name="product_form" id="product_form" enctype="multipart/form-data" method="post">
 												
 												
 													<div class="row">

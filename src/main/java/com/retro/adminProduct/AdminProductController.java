@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -121,12 +120,12 @@ public class AdminProductController {
 		
 		
 		//상품 정보 insert
-		@RequestMapping(value = "adminProdInsert", method = {RequestMethod.POST, RequestMethod.GET}, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+		@RequestMapping(value = "adminProdInsert", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/text; charset=utf8")
 		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, 
 											@RequestParam("original_thumb") MultipartFile file1, 
 											@RequestParam("original_upfile") MultipartFile file2,
-											MultipartHttpServletRequest request
-											
+											//HttpServletRequest request,
+											MultipartHttpServletRequest request									
 											) {
 			ModelAndView mav = new ModelAndView();
 			
