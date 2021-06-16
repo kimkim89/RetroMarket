@@ -1,5 +1,6 @@
 package com.retro.adminProduct;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,20 +28,25 @@ public class AdminProductDAO {
 		return sqlSession.selectList("mapper.AdminProd.selectProdCategory");
 	}
 
-	//전체 상품목록 select
-	public List<AdminProductVO> adminProductSelect() {
+	//전체 상품목록 select - 페이징처리 포함
+	public List<AdminProductVO> adminProductSelect(HashMap<String, Object> map) {
 		//System.out.println(sqlSession.selectList("mapper.AdminProd.adminProductSelect"));
-		return sqlSession.selectList("mapper.AdminProd.adminProductSelect");
+		return sqlSession.selectList("mapper.AdminProd.adminProductSelect", map);
 	}
 	
 	//개별 상품정보 select
-	public List<AdminProductVO> adminSelectOneProd(int mk_idx) {
-		return sqlSession.selectList("mapper.AdminProd.adminSelectOneProd", mk_idx);
+	public AdminProductVO adminSelectOneProd(int mk_idx) {
+		return sqlSession.selectOne("mapper.AdminProd.adminSelectOneProd", mk_idx);
 	}
 	
 	//상품 삭제(delete)
 	public void adminProdDelete(int mk_idx) {
 		sqlSession.delete("mapper.AdminProd.adminProdDelete", mk_idx);
+	}
+
+	//전체 상품 수
+	public int countProd(HashMap<String, Object> map) {
+		return sqlSession.selectOne("mapper.AdminProd.countProd", map);
 	}
 	
 }

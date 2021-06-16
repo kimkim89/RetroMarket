@@ -14,12 +14,29 @@
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-
-	<title>상품 관리</title>
-	<script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
 	<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
+	<title>상품 관리</title>
+	
+	<script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
+	
+	<script type="text/javascript">
+		function adminProdInsert() {
+			var form = document.product_form;
+			form.action="${contextPath}/adminProd/adminProdInsert"
+			form.submit();
+			//location.href="${contextPath}/adminProd/adminProdInsert";
+		}
+		
+		function adminProdUpdate() {
+			var form = document.product_form;
+			form.action="${contextPath}/adminProd/adminProdUpdate"
+			form.submit();
+			//location.href="${contextPath}/adminProd/adminProdUpdate";
+		}
+		
+	</script>
+	
 	<style>
 		.form-control{ width:50%;height:auto; }
 	</style>
@@ -45,27 +62,27 @@
 											<h5 class="card-title mb-0"><font style="color:red;">*상품 정보를 등록해주세요.</font></h5>
 										</div>
 										<div class="card-body">
-											<form name="product_form" action="${contextPath}/adminProd/adminProdInsert" enctype="multipart/form-data" method="post">
+											<form name="product_form" id="product_form" enctype="multipart/form-data" method="post">
 												
 												
-<!-- 													<div class="row"> -->
-<!-- 														<div class="mb-3 col-md-4"  style="display:inline-block;"> -->
-<!-- 															<label class="form-label" for="mk_status">게시 여부</label> -->
-<!-- 															<select class="form-select" name="mk_status" id="mk_status"> -->
-<%-- 															  <option value="1" <c:if test="${prodList.mk_status == 1}">selected</c:if>>O</option> --%>
-<%-- 															  <option value="0" <c:if test="${prodList.mk_status == 0}">selected</c:if>>X</option>													  													    --%>
-<!-- 															</select>														 -->
-<!-- 														</div> -->
-<!-- 													</div> -->
+													<div class="row">
+														<div class="mb-3 col-md-4"  style="display:inline-block;">
+															<label class="form-label" for="mk_status">게시 여부</label>
+															<select class="form-select" name="mk_status" id="mk_status">
+															  <option value="1" <c:if test="${prodList.mk_status==1}">selected</c:if>>O</option>
+															  <option value="0" <c:if test="${prodList.mk_status==0}">selected</c:if>>X</option>													  													   
+															</select>														
+														</div>
+													</div>
 													<div class="row">
 														<div class="mb-3 col-md-4"  style="display:inline-block;">
 															<label class="form-label" for="mk_product_type">상품 분류</label>
 															<select class="form-select" name="mk_product_type" id="mk_product_type">
 																<option value="" >상품 분류</option>
-															<c:set var="num" value="1"/>
+															
 															<c:forEach var="sortList" items="${prodSortList}" varStatus="status">														  
-															  	<option value="${sortList.ps_sort_id}" <c:if test="${prodList.mk_product_type == num}">selected</c:if>>${sortList.ps_sort_name}</option>														  
-															<c:set var="num" value="${num+1}"/>
+															  	<option value="${sortList.ps_sort_id}" <c:if test="${prodList.mk_product_type==sortList.ps_sort_id}">selected</c:if>>${sortList.ps_sort_name}</option>														  
+															
 															</c:forEach>													   
 															</select>														
 														</div>
@@ -76,7 +93,7 @@
 															<select class="form-select" name="mk_product_category" id="mk_product_category">
 															  <option value="" >상품 종류</option>															  
 															  <c:forEach var="categoryList" items="${prodCategoryList}" varStatus="status">														  
-															  	<option value="${categoryList.pc_category_id}" <c:if test="">selected</c:if>>${categoryList.pc_category_name}</option>														  
+															  	<option value="${categoryList.pc_category_id}" <c:if test="${prodList.mk_product_category==categoryList.pc_category_id}">selected</c:if>>${categoryList.pc_category_name}</option>														  
 															</c:forEach>													   
 															</select>														
 														</div>
@@ -108,16 +125,17 @@
 													<div class="mb-3">
 														<label class="form-label" for="mk_content">상품 설명</label>
 														<textarea class="form-control" name="mk_content" id="mk_content">${prodList.mk_content}</textarea>
-														<script>
-															CKEDITOR.replace('mk_content');
+														<script>														
+															CKEDITOR.replace('mk_content', {filebrowserUploadUrl: '${contextPath}/adminProd/editorFileUpload'});
+															//console.log('${contextPath}/adminProd/editorFileUpload');														
 														</script>
 													</div>
 													<c:choose>
 													<c:when test="${wu=='u'}">
-														<input type="submit" class="btn btn-primary" value="수정"/>
+														<button type="button" class="btn btn-primary" onclick="adminProdUpdate();">수정</button>
 													</c:when>	
 													<c:when test="${wu=='i'}">	
-														<input type="submit" class="btn btn-primary" value="등록"/>
+														<button type="button" class="btn btn-primary" onclick="adminProdInsert();">등록</button>
 													</c:when>	
 												</c:choose>
 											
