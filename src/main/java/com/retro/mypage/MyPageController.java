@@ -1,23 +1,120 @@
 package com.retro.mypage;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.JsonParser;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.JsonElement;
 import com.retro.member.UserSha256;
 
 @Controller
 @RequestMapping("mypage")
 public class MyPageController {
-
+	
 	@Autowired
 	private MyPageService myPageService;
+	
+
+//		//카카오 테스트
+	@RequestMapping(value= "/kakaologin", produces = "apllication/json", method = RequestMethod.GET )
+			public String snsTest(@RequestParam("code")String code, RedirectAttributes ra, HttpSession session,
+								  HttpServletResponse response
+					) {
+		
+				String test = "";
+				System.out.println("왔업");
+				System.out.println(code);
+				
+				testPost(code);
+				
+				return "kakao";
+			}
+	
+	//카카오 Post 테스트 
+	
+	public String testPost(String code){
+		
+		//post 요청 ㄱㄱ해야함
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("grant_type", "=authorization_code");
+		map.put("client_id", "=79f79d24d2f1f339724c007a9913ecba"); //카카오 앱에 있는 REST KEY
+		map.put("redirect_uri", "=localhost:8090/moonmarket/mypage/kakaologin"); //카카오 앱에 등록한 redirect URL
+		map.put("code", "="+code);
+		
+		String targetUrl = "https://kauth.kakao.com/oauth/token";
+		try {
+		
+		URL url = new URL(targetUrl);
+		
+		HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
+		
+		
+		con.setRequestMethod("POST");
+		con.setDoOutput(true);
+		// POST 파라미터 전달을 위한 설정
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
+		StringBuilder sb = new StringBuilder();
+		sb.append("grant_type=authorization_code");
+		sb.append("&client_id=79f79d24d2f1f339724c007a9913ecba");
+		sb.append("&redirect_uri=http://localhost:8090/moonmarket/mypage/kakaologin&response_type=code");
+		sb.append("&code= "+ code);
+		bw.write(sb.toString());
+		bw.flush();
+		
+		int responseCode = con.getResponseCode();
+        System.out.println("responseCode : " + responseCode);
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String line = "";
+        String result = "";
+        
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        System.out.println("response body : " + result);
+        
+        JSONParser parser = new JSONParser();
+        JsonElement element = (JsonElement) parser.parse(result);
+        
+        String access_Token = element.getAsJsonObject().get("access_token").getAsString();
+        String refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
+		 
+        System.out.println("access_token : " + access_Token);
+        System.out.println("refresh_token : " + refresh_Token);
+        br.close();
+        bw.close();	
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
+	
+	
 	
 		// 마이페이지 이동
 		@RequestMapping(value = "myPageR", method = RequestMethod.GET)

@@ -145,6 +145,7 @@ background-position
 												class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
 												type="button">쿠폰등록</button>
 										</div>
+										<a href="https://kauth.kakao.com/oauth/authorize?client_id=79f79d24d2f1f339724c007a9913ecba&redirect_uri=http://localhost:8090/moonmarket/mypage/kakaologin&response_type=code">테스트</a>
 									</div>
 								</div>
 							</form>
