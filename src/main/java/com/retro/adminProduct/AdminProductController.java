@@ -124,7 +124,8 @@ public class AdminProductController {
 		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, 
 											@RequestParam("original_thumb") MultipartFile file1, 
 											@RequestParam("original_upfile") MultipartFile file2,
-											HttpServletRequest request										
+											//HttpServletRequest request,
+											MultipartHttpServletRequest request									
 											) {
 			ModelAndView mav = new ModelAndView();
 			
