@@ -15,46 +15,46 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-<<<<<<< HEAD
-	<!-- 임시 나중에 지울것 - by Moon -->
+<!-- <<<<<<< HEAD -->
+ 	<!-- 임시 나중에 지울것 - by Moon --> 
 	
-    <!--  Gson: Java to Json conversion -->
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.6.2</version>
-      <scope>compile</scope>
-    </dependency>
-	<!-- 잭슨 -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.5</version>
-        </dependency>
+<!--      Gson: Java to Json conversion -->
+<!--     <dependency> -->
+<!--       <groupId>com.google.code.gson</groupId> -->
+<!--       <artifactId>gson</artifactId> -->
+<!--       <version>2.6.2</version> -->
+<!--       <scope>compile</scope> -->
+<!--     </dependency> -->
+ 	<!-- 잭슨 --> 
+<!--         <dependency> -->
+<!--             <groupId>com.fasterxml.jackson.core</groupId> -->
+<!--             <artifactId>jackson-databind</artifactId> -->
+<!--             <version>2.9.5</version> -->
+<!--         </dependency> -->
  
-        <!-- httpcore(카카오) -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.4.6</version>
-        </dependency>
+<!--         httpcore(카카오) -->
+<!--         <dependency> -->
+<!--             <groupId>org.apache.httpcomponents</groupId> -->
+<!--             <artifactId>httpcore</artifactId> -->
+<!--             <version>4.4.6</version> -->
+<!--         </dependency> -->
  
-        <!-- httpclient(카카오) -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.2</version>
-        </dependency>
-        <!-- 임시 나중에 지울것 - by Moon -->
+<!--         httpclient(카카오) -->
+<!--         <dependency> -->
+<!--             <groupId>org.apache.httpcomponents</groupId> -->
+<!--             <artifactId>httpclient</artifactId> -->
+<!--             <version>4.5.2</version> -->
+<!--         </dependency> -->
+<!--         임시 나중에 지울것 - by Moon -->
 
-=======
+<!-- ======= -->
 		<!-- JSON 사용을 위한 라이브러리 -->
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		    <version>2.8.7</version>
 		</dependency>		
->>>>>>> a2ed4e3ac9ceee0bd6aa631fb47a7a6fd87df881
+
 		<!-- 파일 업로드 처리 관련 라이브러리 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
