@@ -1,8 +1,10 @@
 package com.retro.adminProduct;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -246,7 +248,24 @@ public class AdminProductController {
 		//상품 이미지 관련 다운로드 처리
 		@RequestMapping(value = "/adminProd/downloadImg", method = RequestMethod.GET)
 		public void imgFileDownload(@RequestParam("imgFileName") String imgFileName,
-									HttpServletResponse response) {
+									HttpServletRequest request,
+									HttpServletResponse response) throws Exception {
+			
+			//서버 물리적 경로
+			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
+			
+			String realFile = uploadPath + imgFileName;
+			String fileName = "";
+			
+			BufferedOutputStream out = null;
+			InputStream in = null;
+			
+			try {
+				response.setContentType("image/*");
+				response.setHeader("Content-Disposition", "inline;filename="+fileName);
+			}
+			}
+			
 			
 		}
 			
