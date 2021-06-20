@@ -2,6 +2,7 @@ package com.retro.adminProduct;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -124,11 +125,11 @@ public class AdminProductController {
 		
 		//상품 정보 insert
 		@RequestMapping(value = "adminProdInsert", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/text; charset=utf8")
-		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, 
-											@RequestParam("original_thumb") MultipartFile file1, 
-											@RequestParam("original_upfile") MultipartFile file2,
-											//HttpServletRequest request,
-											MultipartHttpServletRequest request									
+		public ModelAndView adminProdInsert( AdminProductVO adminProdVO, 
+											 @RequestParam("original_thumb") MultipartFile file1, 
+											 @RequestParam("original_upfile") MultipartFile file2,
+											 //HttpServletRequest request,
+											 MultipartHttpServletRequest request									
 											) {
 			ModelAndView mav = new ModelAndView();
 			
@@ -161,11 +162,11 @@ public class AdminProductController {
 		
 		
 		//상품정보 update
-		/*@RequestMapping(value = "adminProdUpdate", method = RequestMethod.POST, produces = "application/text; charset=utf-8")
-		public ModelAndView adminProdUpdate(AdminProductVO adminProdVO, 
-											@RequestParam("original_thumb") MultipartFile file1, 
-											@RequestParam("original_upfile") MultipartFile file2,
-											HttpServletRequest request										
+		@RequestMapping(value = "adminProdUpdate", method = RequestMethod.POST, produces = "application/text; charset=utf-8")
+		public ModelAndView adminProdUpdate( AdminProductVO adminProdVO, 
+											 @RequestParam("original_thumb") MultipartFile file1, 
+											 @RequestParam("original_upfile") MultipartFile file2,
+											 MultipartHttpServletRequest request									
 											) {
 			ModelAndView mav = new ModelAndView();
 			
@@ -177,11 +178,11 @@ public class AdminProductController {
 				makeFolder.mkdirs();
 			}
 			
-//			admProdService.adminProductUpdate(adminProdVO, file1, file2, uploadPath, request);
+			admProdService.adminProdUpdate(adminProdVO, file1, file2, uploadPath, request);;
 			
 			mav.setViewName("redirect:/adminProd/adminProduct");
 			return mav;
-		}*/
+		}
 		 
 		//--------------------------------------------------------------------------------
 		
@@ -248,6 +249,7 @@ public class AdminProductController {
 		//상품 이미지 관련 다운로드 처리
 		@RequestMapping(value = "/adminProd/downloadImg", method = RequestMethod.GET)
 		public void imgFileDownload(@RequestParam("imgFileName") String imgFileName,
+									@RequestParam("imgRealName") String imgRealName,
 									HttpServletRequest request,
 									HttpServletResponse response) throws Exception {
 			
@@ -255,7 +257,7 @@ public class AdminProductController {
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			
 			String realFile = uploadPath + imgFileName;
-			String fileName = "";
+			String fileName = imgRealName;
 			
 			BufferedOutputStream out = null;
 			InputStream in = null;
@@ -263,10 +265,23 @@ public class AdminProductController {
 			try {
 				response.setContentType("image/*");
 				response.setHeader("Content-Disposition", "inline;filename="+fileName);
+				File file = new File(realFile);
+				if(file.exists()) {
+					in = new FileInputStream(file);
+					out = new BufferedOutputStream(response.getOutputStream());
+					int len;
+					byte[] buf = new byte[1024];
+					while((len = in.read(buf)) > 0) {
+						out.write(buf, 0, len);
+					}
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if(out != null) {out.flush();}
+				if(out != null) {out.close();}
+				if(out != null) {in.close();}
 			}
-			}
-			
-			
 		}
 			
 	
