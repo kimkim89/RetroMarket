@@ -2,6 +2,7 @@ package com.retro.adminProduct;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -248,6 +249,7 @@ public class AdminProductController {
 		//상품 이미지 관련 다운로드 처리
 		@RequestMapping(value = "/adminProd/downloadImg", method = RequestMethod.GET)
 		public void imgFileDownload(@RequestParam("imgFileName") String imgFileName,
+									@RequestParam("imgRealName") String imgRealName,
 									HttpServletRequest request,
 									HttpServletResponse response) throws Exception {
 			
@@ -255,7 +257,7 @@ public class AdminProductController {
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			
 			String realFile = uploadPath + imgFileName;
-			String fileName = "";
+			String fileName = imgRealName;
 			
 			BufferedOutputStream out = null;
 			InputStream in = null;
@@ -263,10 +265,23 @@ public class AdminProductController {
 			try {
 				response.setContentType("image/*");
 				response.setHeader("Content-Disposition", "inline;filename="+fileName);
+				File file = new File(realFile);
+				if(file.exists()) {
+					in = new FileInputStream(file);
+					out = new BufferedOutputStream(response.getOutputStream());
+					int len;
+					byte[] buf = new byte[1024];
+					while((len = in.read(buf)) > 0) {
+						out.write(buf, 0, len);
+					}
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if(out != null) {out.flush();}
+				if(out != null) {out.close();}
+				if(out != null) {in.close();}
 			}
-			}
-			
-			
 		}
 			
 	
