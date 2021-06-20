@@ -149,9 +149,8 @@ public class AdminProductService {
 			    	writer_ip = request.getRemoteAddr();	        
 			    }		
 			    
-				adminProdVO.setMk_writer_ip(writer_ip);		
+				adminProdVO.setMk_writer_ip(writer_ip);					
 				
-		
 		admProdDAO.adminProdUpdate(adminProdVO);
 	}
 	
