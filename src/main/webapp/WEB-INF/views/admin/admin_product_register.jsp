@@ -63,8 +63,7 @@
 										</div>
 										<div class="card-body">
 											<form name="product_form" id="product_form" enctype="multipart/form-data" method="post">
-												
-												
+												<input type="hidden" name="mk_idx" id="mk_idx" value="${prodList.mk_idx}"/>												
 													<div class="row">
 														<div class="mb-3 col-md-4"  style="display:inline-block;">
 															<label class="form-label" for="mk_status">게시 여부</label>
