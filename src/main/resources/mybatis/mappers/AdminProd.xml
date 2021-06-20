@@ -31,16 +31,29 @@
 		select * from product_info as pr_info join product_sort as pr_sort on pr_info.mk_product_type = pr_sort.ps_sort_id where pr_info.mk_idx = #{mk_idx} order by pr_info.mk_idx desc;
 	</select>
 
-
-
 	<!-- 상품수정(update) -->
-<!-- 	<update id="adminProdUpdate"> -->
-<!-- 		update product_info  -->
-<!-- 		set mk_product_name, mk_product_price, mk_product_discount_price, mk_product_category, mk_product_type, mk_original_thumb,  -->
-<!-- 			mk_stored_thumb, mk_thumb_size, mk_status, mk_content, mk_original_upfile, mk_stored_upfile, mk_upfile_size, mk_inventory,  -->
-<!-- 			mk_hit, mk_like_count, mk_writer_ip -->
-<!-- 		where mk_product_id = ${mk_product_id}; -->
-<!-- 	</update> -->
+	<update id="adminProdUpdate" parameterType="adminProdVO">
+		update product_info 
+		set mk_product_name = #{mk_product_name}, 
+			mk_product_price = #{mk_product_price}, 
+			mk_product_category = #{mk_product_category}, 
+			mk_product_type = #{mk_product_type},
+		<if test="mk_original_thumb != ''"> 
+			mk_original_thumb = #{mk_original_thumb}, 
+			mk_stored_thumb = #{mk_stored_thumb}, 
+			mk_thumb_size = #{mk_thumb_size},
+		</if> 
+			mk_status = #{mk_status}, 
+			mk_content = #{mk_content}, 
+		<if test="mk_original_upfile != ''">
+			mk_original_upfile = #{mk_original_upfile}, 
+			mk_stored_upfile = #{mk_stored_upfile}, 
+			mk_upfile_size = #{mk_upfile_size}, 
+		</if>
+			mk_inventory = #{mk_inventory},  
+			mk_writer_ip = #{mk_writer_ip}
+		where mk_idx = ${mk_idx};
+	</update>
 
 	<!-- 상품 분류(신상품/인기상품/할인상품) -->
 	<select id="selectProdSort" resultType="adminProdVO">

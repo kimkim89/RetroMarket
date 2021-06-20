@@ -125,11 +125,11 @@ public class AdminProductController {
 		
 		//상품 정보 insert
 		@RequestMapping(value = "adminProdInsert", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/text; charset=utf8")
-		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, 
-											@RequestParam("original_thumb") MultipartFile file1, 
-											@RequestParam("original_upfile") MultipartFile file2,
-											//HttpServletRequest request,
-											MultipartHttpServletRequest request									
+		public ModelAndView adminProdInsert( AdminProductVO adminProdVO, 
+											 @RequestParam("original_thumb") MultipartFile file1, 
+											 @RequestParam("original_upfile") MultipartFile file2,
+											 //HttpServletRequest request,
+											 MultipartHttpServletRequest request									
 											) {
 			ModelAndView mav = new ModelAndView();
 			
@@ -162,11 +162,11 @@ public class AdminProductController {
 		
 		
 		//상품정보 update
-		/*@RequestMapping(value = "adminProdUpdate", method = RequestMethod.POST, produces = "application/text; charset=utf-8")
-		public ModelAndView adminProdUpdate(AdminProductVO adminProdVO, 
-											@RequestParam("original_thumb") MultipartFile file1, 
-											@RequestParam("original_upfile") MultipartFile file2,
-											HttpServletRequest request										
+		@RequestMapping(value = "adminProdUpdate", method = RequestMethod.POST, produces = "application/text; charset=utf-8")
+		public ModelAndView adminProdUpdate( AdminProductVO adminProdVO, 
+											 @RequestParam("original_thumb") MultipartFile file1, 
+											 @RequestParam("original_upfile") MultipartFile file2,
+											 MultipartHttpServletRequest request									
 											) {
 			ModelAndView mav = new ModelAndView();
 			
@@ -178,11 +178,11 @@ public class AdminProductController {
 				makeFolder.mkdirs();
 			}
 			
-//			admProdService.adminProductUpdate(adminProdVO, file1, file2, uploadPath, request);
+			admProdService.adminProdUpdate(adminProdVO, file1, file2, uploadPath, request);;
 			
 			mav.setViewName("redirect:/adminProd/adminProduct");
 			return mav;
-		}*/
+		}
 		 
 		//--------------------------------------------------------------------------------
 		
