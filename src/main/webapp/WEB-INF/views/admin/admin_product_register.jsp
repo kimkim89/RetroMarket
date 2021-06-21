@@ -115,13 +115,13 @@
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for=mk_original_thumb>상품 썸네일(상품목록용)</label>
-														<input type="file" class="form-control" name="original_thumb" id="original_thumb" value="">
+														<input type="file" class="form-control" name="original_thumb" id="original_thumb">
 														<span>저장된 상품 썸네일: </span>
 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_thumb}&imgRealName=${prodList.mk_original_thumb}">${prodList.mk_original_thumb}</a>
 													</div>		
 													<div class="mb-3">
 														<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>
-														<input type="file" class="form-control" name="original_upfile" id="original_upfile" value="${prodList.mk_stored_upfile}">
+														<input type="file" class="form-control" name="original_upfile" id="original_upfile">
 														<span>저장된 상품 상세 이미지: </span>
 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
 													</div>							

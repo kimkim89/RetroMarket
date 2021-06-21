@@ -90,33 +90,35 @@ public class AdminProductService {
 								 MultipartFile file2, 
 								 String uploadPath,
 								 HttpServletRequest request) {		
-			
+							
 				//썸네일 원본 파일명
 				String thumbOrigName = file1.getOriginalFilename();
 				//썸네일 서버 파일명
 				String thumbStoredName = System.currentTimeMillis() + "_" + thumbOrigName;
 				//썸네일 원본 파일 사이즈
 				long thumbFileSize = file1.getSize();
-		
-				
-		if(file1.getOriginalFilename() != "" || file2.getOriginalFilename() != "") {//상품 썸네일 및 상품 이미지 파일이 있을 경우		
+			
 				//상품 이미지 원본 파일명
 				String upfileOrigName = file2.getOriginalFilename();
 				//상품 이미지 서버 파일명
 				String upfileStoredName = System.currentTimeMillis() + "_" + upfileOrigName;
 				//상품 이미지 원본 파일 사이즈
 				long upfileFileSize = file2.getSize();
+
+		if(thumbOrigName != "") {//상품 썸네일 파일이 있을 경우
 				
 				//썸네일 파일 정보 저장
 				adminProdVO.setMk_original_thumb(thumbOrigName);
 				adminProdVO.setMk_stored_thumb(thumbStoredName);
 				adminProdVO.setMk_thumb_size(thumbFileSize);
-				
+		}//상품 썸네일 파일유무 if문 끝
+		
+		if(upfileOrigName != "") {//상품 이미지 파일이 있을 경우		
 				//상품 이미지 파일 정보 저장
 				adminProdVO.setMk_original_upfile(upfileOrigName);
 				adminProdVO.setMk_stored_upfile(upfileStoredName);
 				adminProdVO.setMk_upfile_size(upfileFileSize);
-				
+		}//상품 이미지 파일유무 if문 끝		
 				File upload_file1 = new File(uploadPath+thumbStoredName);
 				File upload_file2 = new File(uploadPath+upfileStoredName);
 							
@@ -128,7 +130,7 @@ public class AdminProductService {
 		        } catch (IOException e) {            
 		            e.printStackTrace();
 		        }		
-		}//파일유무 if문 끝
+		
 		
 				//상품 정보 작성자 IP주소 가져오기
 				String writer_ip = request.getHeader("X-Forwarded-For");	    
