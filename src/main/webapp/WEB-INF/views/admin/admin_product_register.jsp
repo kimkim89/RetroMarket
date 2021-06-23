@@ -35,6 +35,20 @@
 			//location.href="${contextPath}/adminProd/adminProdUpdate";
 		}
 		
+		/*20210624 상품종류 select 박스 선택 시 상품 코드 자동으로 만들어지도록 작업 진행 중*/
+		function addProdCode(optionValue, totalCategories) {
+			//console.log(optionValue);
+			var productCode = document.getElementById("mk_product_id").value;
+			var prodAlphabetCode = 65;
+			
+			for(i=1; i<=totalCategories; i++) {
+				
+			}
+			
+			
+			console.log(totalProdCategory);
+		}
+		
 		
 	</script>
 	
@@ -90,9 +104,10 @@
 													<div class="row">
 														<div class="mb-3 col-md-4"  style="display:inline-block;">
 															<label class="form-label" for="mk_product_category">상품 종류</label>
-															<select class="form-select" name="mk_product_category" id="mk_product_category" onchange="addProdCode(this.value);">
-															  <option value="" >상품 종류</option>															  
-															  <c:forEach var="categoryList" items="${prodCategoryList}" varStatus="status">														  
+															<select class="form-select" name="mk_product_category" id="mk_product_category" onchange="addProdCode(this.value, ${totalProdCategories});">
+															  <option value="" >상품 종류</option>
+															  <c:set var="num" value="1"/>															  
+															 <c:forEach var="categoryList" items="${prodCategoryList}" varStatus="status">														  
 															  	<option value="${categoryList.pc_category_id}" <c:if test="${prodList.mk_product_category==categoryList.pc_category_id}">selected</c:if>>${categoryList.pc_category_name}</option>														  
 															</c:forEach>													   
 															</select>														
