@@ -79,18 +79,7 @@ public class AdminProductService {
 	    
 		adminProdVO.setMk_writer_ip(writer_ip);		
 		
-		/*	상품코드=> 상품분류(알파벳2개)+상품카테고리(숫자3개)+상품종류(숫자3개)
-			EX: AA100001, AA200008
-		*/
-		/*String prType = "";
-		for(int i=1; i<=26; i++) {
-			char pType1 = 'A';
-			for(int j=1; j<=26; j++) {
-				char pType2 = 'A';
 				
-			}
-		}*/
-		
 		admProdDAO.adminProdInsert(adminProdVO);
 	}
 	
