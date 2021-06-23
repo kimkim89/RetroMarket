@@ -32,6 +32,12 @@ public class AdminProductDAO {
 	public List<AdminProductVO> selectProdCategory() {		
 		return sqlSession.selectList("mapper.AdminProd.selectProdCategory");
 	}
+	
+	//상품 종류(스낵/젤리ㅣ/캔디/기타) 개수
+	public int selectTotalProdCategories() {
+		return sqlSession.selectOne("mapper.AdminProd.selectTotalProdCategories");
+	}
+	
 
 	//전체 상품목록 select - 페이징처리 포함
 	public List<AdminProductVO> adminProductSelect(HashMap<String, Object> map) {

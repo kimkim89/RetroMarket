@@ -168,6 +168,11 @@ public class AdminProductService {
 		return admProdDAO.selectProdCategory();
 	}
 	
+	//상품 종류(스낵/젤리ㅣ/캔디/기타) 개수
+	public int selectTotalProdCategories() {
+		return admProdDAO.selectTotalProdCategories();
+	}
+	
 	//전체 상품목록 Select - 페이징처리 포함
 	public List<AdminProductVO> adminProductSelect(String searchField, String keyword, int pageFirst, int pageSize) {
 		HashMap map = new HashMap();
