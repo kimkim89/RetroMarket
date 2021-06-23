@@ -84,7 +84,7 @@ public class AdminProductController {
 			List<AdminProductVO> prodSortList = admProdService.selectProdSort();	
 			//상품 종류(스낵/젤리/캔디/기타)
 			List<AdminProductVO> prodCategoryList = admProdService.selectProdCategory();
-					
+			
 			mav.addObject("wu", wu);	
 			mav.addObject("prodSortList", prodSortList);
 			mav.addObject("prodCategoryList", prodCategoryList);
@@ -284,6 +284,8 @@ public class AdminProductController {
 			}
 		}
 			
+		
+		
 	
 			
 		

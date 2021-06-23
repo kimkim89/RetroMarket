@@ -79,7 +79,7 @@ public class AdminProductService {
 	    
 		adminProdVO.setMk_writer_ip(writer_ip);		
 		
-		
+				
 		admProdDAO.adminProdInsert(adminProdVO);
 	}
 	

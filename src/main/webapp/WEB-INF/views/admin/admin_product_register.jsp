@@ -35,6 +35,7 @@
 			//location.href="${contextPath}/adminProd/adminProdUpdate";
 		}
 		
+		
 	</script>
 	
 	<style>
@@ -89,7 +90,7 @@
 													<div class="row">
 														<div class="mb-3 col-md-4"  style="display:inline-block;">
 															<label class="form-label" for="mk_product_category">상품 종류</label>
-															<select class="form-select" name="mk_product_category" id="mk_product_category">
+															<select class="form-select" name="mk_product_category" id="mk_product_category" onchange="addProdCode(this.value);">
 															  <option value="" >상품 종류</option>															  
 															  <c:forEach var="categoryList" items="${prodCategoryList}" varStatus="status">														  
 															  	<option value="${categoryList.pc_category_id}" <c:if test="${prodList.mk_product_category==categoryList.pc_category_id}">selected</c:if>>${categoryList.pc_category_name}</option>														  
