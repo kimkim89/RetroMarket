@@ -39,11 +39,25 @@
 		function addProdCode(optionValue, totalCategories) {
 			//console.log(optionValue);
 			var productCode = document.getElementById("mk_product_id").value;
-			var prodAlphabetCode = 65;
+			var prodAlphabetCode = 64;
+			var alphabetArray = [];
 			
-			for(i=1; i<=totalCategories; i++) {
+			
+			for(i=1; i<=26; i++) {
+				productCategoryCode = prodAlphabetCode+i;
+							
+				alphabetArray[i] = productCategoryCode;				
 				
+				if(i==productCode) {
+					
+				}
+				//console.log(String.fromCharCode(alphabetArray[i]));
 			}
+			
+			
+			
+			
+			
 			
 			
 			console.log(totalProdCategory);
