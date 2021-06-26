@@ -43,6 +43,29 @@
 			var alphabetArray = [];
 			
 			
+			$.ajax({
+				type: "POST",
+				url: ${contextPath}/adminProd/ajaxProductCode,
+				async: false,
+				data: {cateOptValue : optionValue},
+				dataType: "json",
+				success: function(jdata) {
+					if(jdata.length == 0) {
+						alert("error 발생");
+					}else {
+						$(jdata).each(function(i){
+							productCode == jdata[i].productCode;
+						});
+					}
+				}, error: function(xhr) {
+					console.log(xhr.responseText);
+					alert("처리할 수 없음");
+					return;
+				}
+			})		
+			
+			
+			
 			for(i=1; i<=26; i++) {
 				productCategoryCode = prodAlphabetCode+i;
 							

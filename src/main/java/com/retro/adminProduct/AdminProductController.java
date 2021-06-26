@@ -289,7 +289,14 @@ public class AdminProductController {
 		}
 			
 		
-		
+		//상품코드 생성 (ajax)		
+		@RequestMapping(value = "/adminProd/ajaxProductCode", method = {RequestMethod.POST, RequestMethod.GET})
+		public String editorFileUpload( HttpServletRequest request,
+										HttpServletResponse response
+										) throws Exception {
+			JsonObject json = new JsonObject();
+			return null;
+		}
 	
 			
 		
