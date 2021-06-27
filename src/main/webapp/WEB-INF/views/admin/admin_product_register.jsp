@@ -16,6 +16,7 @@
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 	<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
+	<%@ include file="./include/admin_top.jsp" %>
 	<title>상품 관리</title>
 	
 	<script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
@@ -46,7 +47,7 @@
 			$.ajax({
 				type: "POST",
 				contentType: 'application/json; charset=UTF-8',
-				url: ${contextPath}/adminProd/ajaxProductCode,
+				url: "${contextPath}/adminProd/ajaxProductCode",
 				async: false,
 				data: JSON.stringify({ categoryOptionValue : optionValue }),
 				dataType: "text",
@@ -63,7 +64,7 @@
 					alert("처리할 수 없음");
 					return;
 				}
-			})		
+			});		
 			
 			
 			

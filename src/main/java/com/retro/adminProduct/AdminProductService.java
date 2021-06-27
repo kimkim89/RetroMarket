@@ -205,6 +205,10 @@ public class AdminProductService {
 		return admProdDAO.countProd(map);
 	}
 	
+	//상품코드 ajax
+	public String ajaxProductCode(int prodCategoryValue) {
+		return admProdDAO.ajaxProductCode(prodCategoryValue);
+	}
 	
 	
 }

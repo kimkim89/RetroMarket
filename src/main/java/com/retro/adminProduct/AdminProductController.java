@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.protobuf.TextFormat.ParseException;
 import com.retro.common.PagingService;
 
@@ -296,11 +298,22 @@ public class AdminProductController {
 		
 		//상품코드 생성 (ajax)		
 		@RequestMapping(value = "/adminProd/ajaxProductCode", method = {RequestMethod.POST, RequestMethod.GET})
-		public @ResponseBody String ajaxProductCode( Model model, 
-													 HttpSession session, 
-													 @RequestBody String paramData
-												   ) throws ParseException {
-			//JsonObject json = new JsonObject();
+		public @ResponseBody String ajaxProductCode( @RequestBody String paramData ) throws ParseException {
+			JsonObject json = new JsonObject();
+			
+			
+			
+			//admProdService.ajaxProductCode(prodCategoryValue);
+			
+			JSONParser jparser = new JSONParser();
+			/*
+			 * 	int prodCategoryValue 
+			 * JSON으로 받아온 값 추출하는 방법 파악 예정
+			
+			
+			System.out.println("테스트22: " + prodCategoryValue);
+			*/
+			System.out.println("테스트: " + paramData);
 			
 			return null;
 		}

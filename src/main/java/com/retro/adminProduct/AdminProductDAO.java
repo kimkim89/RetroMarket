@@ -60,4 +60,8 @@ public class AdminProductDAO {
 		return sqlSession.selectOne("mapper.AdminProd.countProd", map);
 	}
 	
+	//상품코드 ajax
+	public String ajaxProductCode(int prodCategoryValue) {
+		return sqlSession.selectOne("mapper.AdminProd.ajaxProductCode", prodCategoryValue);
+	}
 }
