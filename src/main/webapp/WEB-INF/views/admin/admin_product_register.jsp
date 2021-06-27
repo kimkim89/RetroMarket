@@ -45,10 +45,11 @@
 			
 			$.ajax({
 				type: "POST",
+				contentType: 'application/json; charset=UTF-8',
 				url: ${contextPath}/adminProd/ajaxProductCode,
 				async: false,
-				data: {cateOptValue : optionValue},
-				dataType: "json",
+				data: JSON.stringify({ categoryOptionValue : optionValue }),
+				dataType: "text",
 				success: function(jdata) {
 					if(jdata.length == 0) {
 						alert("error 발생");

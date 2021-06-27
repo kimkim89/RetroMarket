@@ -13,19 +13,24 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.JsonObject;
+import com.google.protobuf.TextFormat.ParseException;
 import com.retro.common.PagingService;
 
 
@@ -291,10 +296,12 @@ public class AdminProductController {
 		
 		//상품코드 생성 (ajax)		
 		@RequestMapping(value = "/adminProd/ajaxProductCode", method = {RequestMethod.POST, RequestMethod.GET})
-		public String editorFileUpload( HttpServletRequest request,
-										HttpServletResponse response
-										) throws Exception {
-			JsonObject json = new JsonObject();
+		public @ResponseBody String ajaxProductCode( Model model, 
+													 HttpSession session, 
+													 @RequestBody String paramData
+												   ) throws ParseException {
+			//JsonObject json = new JsonObject();
+			
 			return null;
 		}
 	
