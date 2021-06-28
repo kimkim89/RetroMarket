@@ -7,6 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <%@ include file="../include/Top.jsp"%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css?family=Raleway:200');
 
@@ -95,6 +96,31 @@ background-position
 }
 </style>
 
+<script type="text/javascript">
+
+
+	function test3() {
+		alert("헬로");
+	}
+	
+	function test4() {
+		alert("뭐야?");
+	}
+	
+	function testAdd() {
+		$("#testDiv").append("<button type='button' onclick='test4()' style='color: black;'>생성 버튼</button>")
+	}
+	
+	function selAdd() {
+		
+// 			$("#selTest").append('<option value="1">안녕</option>');
+			$("#ZZZ123").append("<option value=1>zzz</option>");
+	}
+
+
+
+</script>
+
 </head>
 <body>
 	<header>
@@ -145,7 +171,6 @@ background-position
 												class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
 												type="button">쿠폰등록</button>
 										</div>
-										<a href="https://kauth.kakao.com/oauth/authorize?client_id=79f79d24d2f1f339724c007a9913ecba&redirect_uri=http://localhost:8090/moonmarket/mypage/kakaologin&response_type=code">테스트</a>
 									</div>
 								</div>
 							</form>
@@ -167,10 +192,22 @@ background-position
 								<div class="col-md-4">
 									<div class="single-gallery-image"
 										style="background: url(${contextPath}/resources/assets/img/newtro/coupon3.png);"></div>
-
 								</div>
 							</div>
 						</div>
+						
+<!-- 						test -->
+
+							<div id="testDiv">
+								<button type="button" onclick="test3()" style="color: black;">테스트 버튼</button>
+								<button type="button" onclick="testAdd()" style="color: black;">테스트 버튼 추가</button>
+								<button type="button" onclick="selAdd()" style="color: black;">셀렉트 박스 추가</button>
+								<a href="${contextPath}/mypage/y2">ddd</a>
+							</div>
+							
+								<select class="mytest" id="ZZZ123">
+								</select>
+						
 					</div>
 				</div>
 			</div>
