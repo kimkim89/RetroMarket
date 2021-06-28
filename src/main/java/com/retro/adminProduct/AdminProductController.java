@@ -317,6 +317,29 @@ public class AdminProductController {
 			
 			return null;
 		}
+		
+		
+		
+		
+		
+		
+		//20210628 테스트중
+		@RequestMapping(value="/adminProd/test33") 
+		public ModelAndView dynamicTagTest() {
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("testFolder/test33");
+			return mav;
+		}
+		
+		//20210628 테스트중
+		@RequestMapping(value="/adminProd/testtest") 
+		public ModelAndView dynamicTagTest2() {
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("testFolder/testtest");
+			return mav;
+		}
 	
 			
 		
