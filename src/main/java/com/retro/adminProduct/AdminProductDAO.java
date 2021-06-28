@@ -17,6 +17,11 @@ public class AdminProductDAO {
 	public void adminProdInsert(AdminProductVO adminProdVO) {
 		sqlSession.insert("mapper.AdminProd.adminProdInsert", adminProdVO);
 	}
+	
+	//상품 수정 update
+	public void adminProdUpdate(AdminProductVO adminProdVO) {
+		sqlSession.update("mapper.AdminProd.adminProdUpdate", adminProdVO);
+	}
 		
 	//상품 분류(신상품-1, 인기상품-2, 할인상품-3)
 	public List<AdminProductVO> selectProdSort() {		
@@ -27,6 +32,12 @@ public class AdminProductDAO {
 	public List<AdminProductVO> selectProdCategory() {		
 		return sqlSession.selectList("mapper.AdminProd.selectProdCategory");
 	}
+	
+	//상품 종류(스낵/젤리ㅣ/캔디/기타) 개수
+	public int selectTotalProdCategories() {
+		return sqlSession.selectOne("mapper.AdminProd.selectTotalProdCategories");
+	}
+	
 
 	//전체 상품목록 select - 페이징처리 포함
 	public List<AdminProductVO> adminProductSelect(HashMap<String, Object> map) {
@@ -49,4 +60,8 @@ public class AdminProductDAO {
 		return sqlSession.selectOne("mapper.AdminProd.countProd", map);
 	}
 	
+	//상품코드 ajax
+	public String ajaxProductCode(int prodCategoryValue) {
+		return sqlSession.selectOne("mapper.AdminProd.ajaxProductCode", prodCategoryValue);
+	}
 }

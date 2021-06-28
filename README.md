@@ -1,4 +1,4 @@
-# RetroSnackMarket
+Oò# RetroSnackMarket
 
 옛날 과자 상점(쇼핑몰 프로젝트)
 
@@ -25,3 +25,7 @@ XSS 공격 방어를 위한 Front , Back-Server 유효성 검증
 비밀번호 찾기 인증번호 검증시 악의적인 인증을 막기 위한 인증번호 HashCode 변환
 
 @Pathvarable을 통한 리팩토링
+
+자바 Http 통신 (Restful로 한 발자국)에 대해 생각할 수 있는 기회가 됨 ! 
+Json 파싱, Http통신 (Rest Api)에 대한 공부 더 필요
+오픈 API활용 

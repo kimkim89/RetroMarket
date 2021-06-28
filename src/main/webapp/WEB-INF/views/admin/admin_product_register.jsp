@@ -16,6 +16,7 @@
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 	<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
+	<%@ include file="./include/admin_top.jsp" %>
 	<title>상품 관리</title>
 	
 	<script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
@@ -34,6 +35,59 @@
 			form.submit();
 			//location.href="${contextPath}/adminProd/adminProdUpdate";
 		}
+		
+		/*20210624 상품종류 select 박스 선택 시 상품 코드 자동으로 만들어지도록 작업 진행 중*/
+		function addProdCode(optionValue, totalCategories) {
+			//console.log(optionValue);
+			var productCode = document.getElementById("mk_product_id").value;
+			var prodAlphabetCode = 64;
+			var alphabetArray = [];
+			
+			
+			$.ajax({
+				type: "POST",
+				contentType: 'application/json; charset=UTF-8',
+				url: "${contextPath}/adminProd/ajaxProductCode",
+				async: false,
+				data: JSON.stringify({ categoryOptionValue : optionValue }),
+				dataType: "text",
+				success: function(jdata) {
+					if(jdata.length == 0) {
+						alert("error 발생");
+					}else {
+						$(jdata).each(function(i){
+							productCode == jdata[i].productCode;
+						});
+					}
+				}, error: function(xhr) {
+					console.log(xhr.responseText);
+					alert("처리할 수 없음");
+					return;
+				}
+			});		
+			
+			
+			
+			for(i=1; i<=26; i++) {
+				productCategoryCode = prodAlphabetCode+i;
+							
+				alphabetArray[i] = productCategoryCode;				
+				
+				if(i==productCode) {
+					
+				}
+				//console.log(String.fromCharCode(alphabetArray[i]));
+			}
+			
+			
+			
+			
+			
+			
+			
+			console.log(totalProdCategory);
+		}
+		
 		
 	</script>
 	
@@ -63,8 +117,7 @@
 										</div>
 										<div class="card-body">
 											<form name="product_form" id="product_form" enctype="multipart/form-data" method="post">
-												
-												
+												<input type="hidden" name="mk_idx" id="mk_idx" value="${prodList.mk_idx}"/>												
 													<div class="row">
 														<div class="mb-3 col-md-4"  style="display:inline-block;">
 															<label class="form-label" for="mk_status">게시 여부</label>
@@ -90,9 +143,10 @@
 													<div class="row">
 														<div class="mb-3 col-md-4"  style="display:inline-block;">
 															<label class="form-label" for="mk_product_category">상품 종류</label>
-															<select class="form-select" name="mk_product_category" id="mk_product_category">
-															  <option value="" >상품 종류</option>															  
-															  <c:forEach var="categoryList" items="${prodCategoryList}" varStatus="status">														  
+															<select class="form-select" name="mk_product_category" id="mk_product_category" onchange="addProdCode(this.value, ${totalProdCategories});">
+															  <option value="" >상품 종류</option>
+															  <c:set var="num" value="1"/>															  
+															 <c:forEach var="categoryList" items="${prodCategoryList}" varStatus="status">														  
 															  	<option value="${categoryList.pc_category_id}" <c:if test="${prodList.mk_product_category==categoryList.pc_category_id}">selected</c:if>>${categoryList.pc_category_name}</option>														  
 															</c:forEach>													   
 															</select>														
@@ -116,11 +170,15 @@
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for=mk_original_thumb>상품 썸네일(상품목록용)</label>
-														<input type="file" class="form-control" name="original_thumb" id="original_thumb" value="${prodList.mk_stored_thumb}">
+														<input type="file" class="form-control" name="original_thumb" id="original_thumb">
+														<span>저장된 상품 썸네일: </span>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_thumb}&imgRealName=${prodList.mk_original_thumb}">${prodList.mk_original_thumb}</a>
 													</div>		
 													<div class="mb-3">
 														<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>
-														<input type="file" class="form-control" name="original_upfile" id="original_upfile" value="${prodList.mk_stored_upfile}">
+														<input type="file" class="form-control" name="original_upfile" id="original_upfile">
+														<span>저장된 상품 상세 이미지: </span>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
 													</div>							
 													<div class="mb-3">
 														<label class="form-label" for="mk_content">상품 설명</label>

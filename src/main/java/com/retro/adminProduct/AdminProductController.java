@@ -1,8 +1,11 @@
 package com.retro.adminProduct;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -10,18 +13,26 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.protobuf.TextFormat.ParseException;
 import com.retro.common.PagingService;
 
 
@@ -80,8 +91,12 @@ public class AdminProductController {
 			List<AdminProductVO> prodSortList = admProdService.selectProdSort();	
 			//상품 종류(스낵/젤리/캔디/기타)
 			List<AdminProductVO> prodCategoryList = admProdService.selectProdCategory();
-					
-			mav.addObject("wu", wu);	
+			//상품 종류 개수
+			int totalProdCategories =admProdService.selectTotalProdCategories();
+			
+			
+			mav.addObject("wu", wu);
+			mav.addObject("totalProdCategories", totalProdCategories);
 			mav.addObject("prodSortList", prodSortList);
 			mav.addObject("prodCategoryList", prodCategoryList);
 			mav.setViewName("admin/admin_product_register");
@@ -121,11 +136,11 @@ public class AdminProductController {
 		
 		//상품 정보 insert
 		@RequestMapping(value = "adminProdInsert", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/text; charset=utf8")
-		public ModelAndView adminProdInsert(AdminProductVO adminProdVO, 
-											@RequestParam("original_thumb") MultipartFile file1, 
-											@RequestParam("original_upfile") MultipartFile file2,
-											//HttpServletRequest request,
-											MultipartHttpServletRequest request									
+		public ModelAndView adminProdInsert( AdminProductVO adminProdVO, 
+											 @RequestParam("original_thumb") MultipartFile file1, 
+											 @RequestParam("original_upfile") MultipartFile file2,
+											 //HttpServletRequest request,
+											 MultipartHttpServletRequest request									
 											) {
 			ModelAndView mav = new ModelAndView();
 			
@@ -158,11 +173,11 @@ public class AdminProductController {
 		
 		
 		//상품정보 update
-		/*@RequestMapping(value = "adminProdUpdate", method = RequestMethod.POST, produces = "application/text; charset=utf-8")
-		public ModelAndView adminProdUpdate(AdminProductVO adminProdVO, 
-											@RequestParam("original_thumb") MultipartFile file1, 
-											@RequestParam("original_upfile") MultipartFile file2,
-											HttpServletRequest request										
+		@RequestMapping(value = "adminProdUpdate", method = RequestMethod.POST, produces = "application/text; charset=utf-8")
+		public ModelAndView adminProdUpdate( AdminProductVO adminProdVO, 
+											 @RequestParam("original_thumb") MultipartFile file1, 
+											 @RequestParam("original_upfile") MultipartFile file2,
+											 MultipartHttpServletRequest request									
 											) {
 			ModelAndView mav = new ModelAndView();
 			
@@ -174,16 +189,16 @@ public class AdminProductController {
 				makeFolder.mkdirs();
 			}
 			
-//			admProdService.adminProductUpdate(adminProdVO, file1, file2, uploadPath, request);
+			admProdService.adminProdUpdate(adminProdVO, file1, file2, uploadPath, request);
 			
 			mav.setViewName("redirect:/adminProd/adminProduct");
 			return mav;
-		}*/
+		}
 		 
 		//--------------------------------------------------------------------------------
 		
-		/*Editor 테스트 중*/
 		
+		//에디터 이미지 업로드 처리
 		@RequestMapping(value = "/adminProd/editorFileUpload", method = {RequestMethod.POST, RequestMethod.GET})
 		public String editorFileUpload( HttpServletRequest request,
 										HttpServletResponse response,
@@ -242,139 +257,72 @@ public class AdminProductController {
 			}
 			
 			
-				
+		//상품 이미지 관련 다운로드 처리
+		@RequestMapping(value = "/adminProd/downloadImg", method = RequestMethod.GET)
+		public void imgFileDownload(@RequestParam("imgFileName") String imgFileName,
+									@RequestParam("imgRealName") String imgRealName,
+									HttpServletRequest request,
+									HttpServletResponse response) throws Exception {
 			
+			//서버 물리적 경로
+			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			
+			String realFile = uploadPath + imgFileName;
+			String fileName = imgRealName;
 			
-			
-			
-		
-		
-		
-		
-		//---------------------------------------------------------------------------------
-		
-		//에디터이미지업로드
-		/*@RequestMapping(value = "editorImgUpload", method = RequestMethod.POST)
-		public void editorImgUpload(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile,
-									@RequestParam MultipartFile upload) throws Exception {
-			//랜덤 문자 생성
-			UUID uid = UUID.randomUUID();
-			
-			OutputStream out = null;
-			PrintWriter printWriter = null;
-			
-			//인코딩
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html;charset=UTF-8");
+			BufferedOutputStream out = null;
+			InputStream in = null;
 			
 			try {
-			
-				//에디터 업로드 파일 이름  가져오기
-				String editorFileName = upload.getOriginalFilename();
-				byte[] bytes = upload.getBytes();
-				
-				//에디터 이미지 저장 경로 생성
-				String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/editor/");
-				
-				//에디터 이미지 서버 네임
-				String ckUploadPath = uploadPath + uid + "_" + editorFileName;
-				File editorImgDir = new File(uploadPath);
-				
-				//에디터 이미지 저장 디렉토리 확인
-				if(!editorImgDir.exists()) {
-					try {
-						editorImgDir.mkdirs(); //디렉토리 생성
-					}catch (Exception e) {
-						e.getStackTrace();
+				response.setContentType("image/*");
+				response.setHeader("Content-Disposition", "inline;filename="+fileName);
+				File file = new File(realFile);
+				if(file.exists()) {
+					in = new FileInputStream(file);
+					out = new BufferedOutputStream(response.getOutputStream());
+					int len;
+					byte[] buf = new byte[1024];
+					while((len = in.read(buf)) > 0) {
+						out.write(buf, 0, len);
 					}
 				}
-				
-				out = new FileOutputStream(new File(ckUploadPath));
-				out.write(bytes);
-				out.flush(); //outputStream에 저장된 데이터 전송 후 초기화
-				
-				String callback = request.getParameter("CKEditorFuncNum");
-				printWriter = response.getWriter();
-				String editorFileUrl = "/adminProd/editorImgSubmit?uid=" + uid + "&editorFileName=" + editorFileName;
-				
-				//업로드 메세지 출력
-				printWriter.println("{\"editorFileName\" : \""+editorFileName+"\", \"uploaded\" : 1, \"url\":\""+editorFileUrl+"\"}");
-				printWriter.flush();
-			}catch (Exception e) {
-				e.getStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
 			}finally {
-				try {
-					if(out != null) { out.close();}
-					if(printWriter != null) {printWriter.close();}
-				}catch(IOException e) {e.printStackTrace();}
+				if(out != null) {out.flush();}
+				if(out != null) {out.close();}
+				if(out != null) {in.close();}
 			}
-			
-			return;
-			
 		}
+			
+		
+		//상품코드 생성 (ajax)		
+		@RequestMapping(value = "/adminProd/ajaxProductCode", method = {RequestMethod.POST, RequestMethod.GET})
+		public @ResponseBody String ajaxProductCode( @RequestBody String paramData ) throws ParseException {
+			JsonObject json = new JsonObject();
+			
+			
+			
+			//admProdService.ajaxProductCode(prodCategoryValue);
+			
+			JSONParser jparser = new JSONParser();
+			/*
+			 * 	int prodCategoryValue 
+			 * JSON으로 받아온 값 추출하는 방법 파악 예정
+			
+			
+			System.out.println("테스트22: " + prodCategoryValue);
+			*/
+			System.out.println("테스트: " + paramData);
+			
+			return null;
+		}
+	
+			
 		
 		
-		/* CK에디터 서버로 전송된 이미지 뿌리기
-		 * @param uid
-		 * @param editorFileName
-		 * @param request
-		 * @return
-		 * @throws ServletException
-		 * @throws IOException
-		 * */
 		
-		/*@RequestMapping(value="/adminProd/editorImgSubmit")
-		public void editorImgSubmit(@RequestParam(value="uid") String uid,
-									@RequestParam(value="editorFileName") String editorFileName,
-									HttpServletRequest request,
-									HttpServletResponse response) throws ServletException, IOException {			
-					
-			//에디터 이미지 저장 경로 생성
-			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/editor/");
-			//에디터 이미지 경로 + 파일명
-			String sUploadPath = uploadPath + uid + "_" + editorFileName;
-			
-			File editorFile = new File(sUploadPath);
-			
-			//이미지 파일 못 찾을 경우 예외처리로 empty 이미지 파일 설정
-			if(editorFile.isFile()) {
-				byte[] buf = new byte[1024];
-				int readByte = 0;
-				int length = 0;
-				byte[] imgBuf = null;
-				
-				FileInputStream fileInputStream = null;
-				ByteArrayOutputStream outputStream = null;
-				ServletOutputStream out = null;
-				
-				try {
-					fileInputStream = new FileInputStream(editorFile);
-					outputStream = new ByteArrayOutputStream();
-					out = response.getOutputStream();
-					
-					while((readByte = fileInputStream.read(buf)) != -1) {
-						outputStream.write(buf, 0, readByte);
-					}
-					
-					imgBuf = outputStream.toByteArray();
-					length = imgBuf.length;
-					out.write(imgBuf, 0, length);
-					out.flush();//outputStream에 저장된 데이터 전송 후 초기화
-										
-				} catch (Exception e) {
-					logger.info(e);
-				}finally {
-					outputStream.close();
-					fileInputStream.close();
-					out.close();
-					
-				}
-			}
-			
-			
-		}*/
-
+	
 
 		
 		
