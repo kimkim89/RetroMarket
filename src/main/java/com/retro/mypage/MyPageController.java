@@ -2,10 +2,8 @@ package com.retro.mypage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.jackson.JsonParser;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +32,15 @@ public class MyPageController {
 	
 	@Autowired
 	private MyPageService myPageService;
+	
+	//카카오 테스트
+	@RequestMapping(value= "/y2", method = RequestMethod.GET )
+			public ModelAndView yy() {
+		
+			ModelAndView mav = new ModelAndView();
+				mav.setViewName("mypage/test33");
+				return mav;
+			}
 	
 
 //		//카카오 테스트
