@@ -32,4 +32,5 @@ XSS 공격 방어를 위한 Front , Back-Server 유효성 검증
 
 자바 Http 통신 (Restful로 한 발자국)에 대해 생각할 수 있는 기회가 됨 ! 
 Json 파싱, Http통신 (Rest Api)에 대한 공부 더 필요
+() => JSON OBJ를 response값으로 return받을 때 DTO객체를 만들면 훨씬 쉽게 데이터 파싱가능
 오픈 API활용 
