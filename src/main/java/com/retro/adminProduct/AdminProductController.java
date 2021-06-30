@@ -313,7 +313,7 @@ public class AdminProductController {
 			
 			System.out.println("테스트22: " + prodCategoryValue);
 			*/
-			System.out.println("테스트: " + paramData);
+			System.out.println("테스트: " + paramData.valueOf(categoryOptionValue));
 			
 			return null;
 		}

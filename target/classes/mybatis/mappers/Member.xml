@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.Member">
+
+	<!-- Test -->
+	<select id="Test" parameterType="HashMap" resultType="memberVO">
+		select * from memeber
+	</select>
+	
+	<!-- 회원 가입 -->
+	<insert id="userJoin" parameterType="memberVO"> 
+		insert into member (id, name, nickname, phone, pwd, email, address1, address2, address3)
+		values (#{id}, #{name}, #{nickname}, #{phone}, #{pwd}, #{email}, #{address1}, #{address2}, #{address3});
+	</insert>
+	
+	<!-- ID중복 확인 -->
+	<select id="idcheck" resultType="_int">
+		select count(id) from member where id = #{id};
+	</select>
+
+	<!-- 닉네임 중복 확인 -->
+	<select id="nicknameCheck" resultType="_int">
+		select count(nickname) from member where nickname = #{nickname};
+	</select>
+	
+	<!-- 이메일 중복 확인 -->
+	<select id="emailCheck" resultType="_int">
+		select count(email) from member where email = #{email};
+	</select>
+	
+	<!-- authkey 업데이트 -->
+	<update id="updateAuthKey" parameterType="hashmap">
+		update member set authkey = #{authkey} where email = #{email};
+	</update>
+	
+	<!-- AuthKey 가져오기 -->
+	<select id="getAuthKey" parameterType="String" resultType="String">
+		select authkey from member where email = #{email};
+	</select>
+	
+	<!-- 인증 상태 업데이트 -->
+	<update id="updateAuthKeyStatus" parameterType="hashmap">
+		update member set authstatus = 1 where email = #{email};
+	</update>
+	
+	<!-- 비밀번호 일치 여부 확인 -->
+	<select id="pwdCheck" resultType="String">
+		select pwd from member where id = #{id};
+	</select>
+	
+	<!-- 이메일 인증 여부 확인 -->
+	<select id="emailStatusCheck" resultType="_int">
+		select authstatus from member where id = #{id};
+	</select>
+	
+	<!-- ID 찾기 -->
+	<select id="idFindExecute" resultType="String">
+		select id from member where email = #{email};
+	</select>
+	
+	<!-- ID, Email 일치 여부 -->
+	<select id="idemailCheck" parameterType="HashMap" resultType="_int">
+		select count(1) from member where id = #{id} and email = #{email};
+	</select>
+	
+	<!-- 비밀번호 찾기(변경) -->
+	<update id="pwChange" parameterType="HashMap">
+		update member set pwd = #{hashPwd} where email = #{email};
+	</update>
+	
+	
+	
+	
+</mapper>
