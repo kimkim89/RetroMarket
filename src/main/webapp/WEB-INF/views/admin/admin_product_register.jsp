@@ -46,7 +46,7 @@
 			
 			$.ajax({
 				type: "POST",
-				contentType: 'application/json; charset=UTF-8',
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8;',
 				url: "${contextPath}/adminProd/ajaxProductCode",
 				async: false,
 				data: JSON.stringify({ categoryOptionValue : optionValue }),
