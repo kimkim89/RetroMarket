@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -297,25 +298,15 @@ public class AdminProductController {
 			
 		
 		//상품코드 생성 (ajax)		
-		@RequestMapping(value = "/adminProd/ajaxProductCode", method = {RequestMethod.POST, RequestMethod.GET})
-		public @ResponseBody String ajaxProductCode( @RequestParam String categoryOptionValue ) throws ParseException {
-			JsonObject json = new JsonObject();
+		@RequestMapping(value = "/adminProd/ajaxProductCode")
+		@ResponseBody
+		public String ajaxProductCode( @RequestParam Map<String, Object> param ) {
 			
+			String prCategory = (String) param.get("prodCategory");		
 			
+			System.out.println("test: " + prCategory);
 			
-			//admProdService.ajaxProductCode(prodCategoryValue);
-			
-			JSONParser jparser = new JSONParser();
-			/*
-			 * 	int prodCategoryValue 
-			 * JSON으로 받아온 값 추출하는 방법 파악 예정
-			
-			
-			System.out.println("테스트22: " + prodCategoryValue);
-			*/
-			System.out.println("테스트: " + categoryOptionValue);
-			
-			return null;
+			return "test";
 		}
 		
 		
