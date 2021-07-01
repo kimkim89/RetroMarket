@@ -298,7 +298,7 @@ public class AdminProductController {
 		
 		//상품코드 생성 (ajax)		
 		@RequestMapping(value = "/adminProd/ajaxProductCode", method = {RequestMethod.POST, RequestMethod.GET})
-		public @ResponseBody String ajaxProductCode( @RequestBody String paramData ) throws ParseException {
+		public @ResponseBody String ajaxProductCode( @RequestParam String categoryOptionValue ) throws ParseException {
 			JsonObject json = new JsonObject();
 			
 			
@@ -313,7 +313,7 @@ public class AdminProductController {
 			
 			System.out.println("테스트22: " + prodCategoryValue);
 			*/
-			System.out.println("테스트: " + paramData.valueOf(categoryOptionValue));
+			System.out.println("테스트: " + categoryOptionValue);
 			
 			return null;
 		}
