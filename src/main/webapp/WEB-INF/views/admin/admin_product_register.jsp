@@ -46,24 +46,18 @@
 			
 			$.ajax({
 				type: "POST",
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8;',
 				url: "${contextPath}/adminProd/ajaxProductCode",
-				async: false,
-				data: JSON.stringify({ categoryOptionValue : optionValue }),
-				dataType: "text",
-				success: function(jdata) {
-					if(jdata.length == 0) {
-						alert("error 발생");
-					}else {
-						$(jdata).each(function(i){
-							productCode == jdata[i].productCode;
-						});
-					}
-				}, error: function(xhr) {
-					console.log(xhr.responseText);
-					alert("처리할 수 없음");
-					return;
+				data: {"prodCategory" : optionValue},
+				contentType: "application/json; charset=UTF-8",
+				success: function(data) {
+					alert(data);
+					console.log(data);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					
+					alert("ERROR: " + textStatus + " : " + errorThrown);
 				}
+								
 			});		
 			
 			
@@ -85,7 +79,7 @@
 			
 			
 			
-			console.log(totalProdCategory);
+			
 		}
 		
 		
