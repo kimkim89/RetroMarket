@@ -1,6 +1,7 @@
 package com.retro.adminProduct;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -32,8 +33,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -304,20 +303,22 @@ public class AdminProductController {
 		//상품코드 생성 (ajax)		
 		@RequestMapping(value = "/adminProd/ajaxProductCode")
 		@ResponseBody
-		public void ajaxProductCode(HttpServletResponse response, @RequestParam int prodCategory) {
-			Gson gson = new Gson();
-			Map<String, Object> data = new HashMap<String, Object>();
+		public String ajaxProductCode(HttpServletRequest request) {
+			StringBuffer json = new StringBuffer();
+			String line = null;
 			
-			data.put("productCategory", prodCategory);
-			System.out.println("확인: " + prodCategory);
+			try {
+				BufferedReader reader = request.getReader();
+				while((line = reader.readLine()) != null) {
+					json.append(line);
+				}
+			} catch (Exception e) {
+				System.out.println("Error reading JSON string" + e.toString());
+			}
+			return json.toString();
 			
-			//admProdService.ajaxProductCode(prCategory);
+			
 		}
-		
-		
-		
-		
-		
 		
 		
 		
