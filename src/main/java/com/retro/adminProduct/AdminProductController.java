@@ -31,6 +31,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.protobuf.TextFormat.ParseException;
@@ -300,14 +304,20 @@ public class AdminProductController {
 		//상품코드 생성 (ajax)		
 		@RequestMapping(value = "/adminProd/ajaxProductCode")
 		@ResponseBody
-		public String ajaxProductCode( @RequestParam Map<String, Object> param ) {
+		public void ajaxProductCode(HttpServletResponse response, @RequestParam int prodCategory) {
+			Gson gson = new Gson();
+			Map<String, Object> data = new HashMap<String, Object>();
 			
-			String prCategory = (String) param.get("prodCategory");		
+			data.put("productCategory", prodCategory);
+			System.out.println("확인: " + prodCategory);
 			
-			System.out.println("test: " + prCategory);
-			
-			return "test";
+			//admProdService.ajaxProductCode(prCategory);
 		}
+		
+		
+		
+		
+		
 		
 		
 		
