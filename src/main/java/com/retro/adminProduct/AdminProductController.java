@@ -1,12 +1,14 @@
 package com.retro.adminProduct;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +34,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -304,20 +304,36 @@ public class AdminProductController {
 		//상품코드 생성 (ajax)		
 		@RequestMapping(value = "/adminProd/ajaxProductCode")
 		@ResponseBody
-		public void ajaxProductCode(HttpServletResponse response, @RequestParam int prodCategory) {
-			Gson gson = new Gson();
-			Map<String, Object> data = new HashMap<String, Object>();
+		public String ajaxProductCode(HttpServletRequest request) {
+			StringBuffer json = new StringBuffer();
+			String line = null;
+			int prodCateVal;
+			String productCodeVal = "";
 			
-			data.put("productCategory", prodCategory);
-			System.out.println("확인: " + prodCategory);
+			try {
+				BufferedReader reader = request.getReader();
+				while((line = reader.readLine()) != null) {
+					json.append(line);
+					String productCategory = json.toString();
+					
+					//Arrays.toString(productCategory);
+					
+					String[] prCategory = productCategory.split("=");
+					String prodCategory = prCategory[1];
+					prodCateVal = Integer.parseInt(prodCategory);
+					
+					productCodeVal = admProdService.ajaxProductCode(prodCateVal);
+					
+					System.out.println("제이슨에이젝스: " +productCodeVal);
+					
+				}
+			} catch (Exception e) {
+				System.out.println("Error reading JSON string" + e.toString());
+			}
+			return productCodeVal;
 			
-			//admProdService.ajaxProductCode(prCategory);
+			
 		}
-		
-		
-		
-		
-		
 		
 		
 		
