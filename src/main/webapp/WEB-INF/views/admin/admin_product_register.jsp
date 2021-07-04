@@ -39,10 +39,7 @@
 		/*20210624 상품종류 select 박스 선택 시 상품 코드 자동으로 만들어지도록 작업 진행 중*/
 		function addProdCode(optionValue, totalCategories) {
 			//console.log(optionValue);
-			var productCode = document.getElementById("mk_product_id").value;
-			var prodAlphabetCode = 64;
-			var alphabetArray = [];
-			
+			var productCode = document.getElementById("mk_product_id");			
 			
 			$.ajax({
 				type: "POST",
@@ -51,8 +48,8 @@
 				data: {"prodCategory" : optionValue},
 				contentType: "application/json; charset=UTF-8",
 				success: function(data) {
-					alert(data);
-					console.log(data);
+					
+					$("#mk_product_id").val(data);
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
 					
@@ -61,26 +58,7 @@
 								
 			});		
 			
-			
-			
-			for(i=1; i<=26; i++) {
-				productCategoryCode = prodAlphabetCode+i;
-							
-				alphabetArray[i] = productCategoryCode;				
-				
-				if(i==productCode) {
-					
-				}
-				//console.log(String.fromCharCode(alphabetArray[i]));
-			}
-			
-			
-			
-			
-			
-			
-			
-			
+								
 		}
 		
 		
