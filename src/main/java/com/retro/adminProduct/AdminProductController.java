@@ -311,6 +311,10 @@ public class AdminProductController {
 				BufferedReader reader = request.getReader();
 				while((line = reader.readLine()) != null) {
 					json.append(line);
+					String[] productCategory = json.toString().split("=");
+					
+					System.out.println("제이슨에이젝스: " + productCategory);
+					
 				}
 			} catch (Exception e) {
 				System.out.println("Error reading JSON string" + e.toString());
