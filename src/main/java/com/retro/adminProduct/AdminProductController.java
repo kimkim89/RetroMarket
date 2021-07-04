@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -306,20 +307,30 @@ public class AdminProductController {
 		public String ajaxProductCode(HttpServletRequest request) {
 			StringBuffer json = new StringBuffer();
 			String line = null;
+			int prodCateVal;
+			String productCodeVal = "";
 			
 			try {
 				BufferedReader reader = request.getReader();
 				while((line = reader.readLine()) != null) {
 					json.append(line);
-					String[] productCategory = json.toString().split("=");
+					String productCategory = json.toString();
 					
-					System.out.println("제이슨에이젝스: " + productCategory);
+					//Arrays.toString(productCategory);
+					
+					String[] prCategory = productCategory.split("=");
+					String prodCategory = prCategory[1];
+					prodCateVal = Integer.parseInt(prodCategory);
+					
+					productCodeVal = admProdService.ajaxProductCode(prodCateVal);
+					
+					System.out.println("제이슨에이젝스: " +productCodeVal);
 					
 				}
 			} catch (Exception e) {
 				System.out.println("Error reading JSON string" + e.toString());
 			}
-			return json.toString();
+			return productCodeVal;
 			
 			
 		}

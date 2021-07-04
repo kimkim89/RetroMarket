@@ -207,6 +207,12 @@ public class AdminProductService {
 	
 	//상품코드 ajax
 	public String ajaxProductCode(int prodCategoryValue) {
+		
+		String productCode = admProdDAO.ajaxProductCode(prodCategoryValue);
+		
+		//상품코드 중 숫자만 추출
+		int prCodeNum = Integer.parseInt(productCode.replaceAll("[^0-9]", ""));
+		System.out.println("상품코드숫자: " + prCodeNum);
 		return admProdDAO.ajaxProductCode(prodCategoryValue);
 	}
 	
