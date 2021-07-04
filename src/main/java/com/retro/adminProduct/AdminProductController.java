@@ -330,8 +330,7 @@ public class AdminProductController {
 			} catch (Exception e) {
 				System.out.println("Error reading JSON string" + e.toString());
 			}
-			return productCodeVal;
-			
+			return productCodeVal;			
 			
 		}
 		

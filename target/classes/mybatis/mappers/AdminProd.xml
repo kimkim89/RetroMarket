@@ -87,7 +87,7 @@
  
  	<!-- 상품코드 ajax -->
  	<select id="ajaxProductCode" resultType="String" parameterType="int">
- 		select mk_product_id from product_info where mk_product_category = #{prodCategoryValue} order by mk_idx desc;
+ 		select mk_product_id from product_info where mk_product_category = #{prodCategoryValue} order by mk_idx desc limit 0, 1;
  	</select>
  
  

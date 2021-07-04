@@ -209,11 +209,21 @@ public class AdminProductService {
 	public String ajaxProductCode(int prodCategoryValue) {
 		
 		String productCode = admProdDAO.ajaxProductCode(prodCategoryValue);
+				
+		//상품코드 중 문자만 추출
+		String prCodeChar = productCode.replaceAll("[0-9]", "");
 		
 		//상품코드 중 숫자만 추출
 		int prCodeNum = Integer.parseInt(productCode.replaceAll("[^0-9]", ""));
-		System.out.println("상품코드숫자: " + prCodeNum);
-		return admProdDAO.ajaxProductCode(prodCategoryValue);
+		
+		//새로운 상품 => 상품코드 중 숫자에 1 더하기
+		prCodeNum = prCodeNum +1;
+		String productCodeNum = String.format("%05d", prCodeNum);
+		
+		//새로운 상품 번호 저장
+		String newProductCode = prCodeChar + productCodeNum;
+				
+		return newProductCode;
 	}
 	
 	
