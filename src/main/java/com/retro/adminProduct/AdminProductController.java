@@ -324,8 +324,6 @@ public class AdminProductController {
 					
 					productCodeVal = admProdService.ajaxProductCode(prodCateVal);
 					
-					System.out.println("제이슨에이젝스: " +productCodeVal);
-					
 				}
 			} catch (Exception e) {
 				System.out.println("Error reading JSON string" + e.toString());

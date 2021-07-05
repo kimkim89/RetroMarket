@@ -61,7 +61,7 @@ public class AdminProductDAO {
 	}
 	
 	//상품코드 ajax
-	public String ajaxProductCode(int prodCategoryValue) {
+	public String ajaxProductCode(int prodCategoryValue) {		
 		return sqlSession.selectOne("mapper.AdminProd.ajaxProductCode", prodCategoryValue);
 	}
 }
