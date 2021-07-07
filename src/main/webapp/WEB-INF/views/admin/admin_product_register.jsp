@@ -41,6 +41,12 @@
 			//console.log(optionValue);
 			var productCode = document.getElementById("mk_product_id");			
 			
+			/*20210707 상품수정 페이지에서 이미 선택 되어있는 상품종류는 재선택 불가능하도록 작업 */
+			var wuStatus = document.getElementById("wu").value;
+			var prCate = document.getElementById("prCategory").value;
+			var prCode = document.getElementById("prCode").value;
+			
+					
 			$.ajax({
 				type: "POST",
 				url: "${contextPath}/adminProd/ajaxProductCode",
@@ -49,17 +55,24 @@
 				contentType: "application/json; charset=UTF-8",
 				success: function(data) {
 					
-					$("#mk_product_id").val(data);
+					if(wuStatus == 'u' && prCate == optionValue) {
+						$("#mk_product_id").val(data); = prCode;
+					}
+					alert(prcate != optionValue);
+					if(prcate != optionValue) {
+						$("#mk_product_id").val(data);
+					}
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
 					
 					alert("ERROR: " + textStatus + " : " + errorThrown);
 				}
 								
-			});		
-			
-								
+			});										
 		}
+		
+		
+		
 		
 		
 	</script>
@@ -90,7 +103,11 @@
 										</div>
 										<div class="card-body">
 											<form name="product_form" id="product_form" enctype="multipart/form-data" method="post">
-												<input type="hidden" name="mk_idx" id="mk_idx" value="${prodList.mk_idx}"/>												
+												<input type="hidden" name="mk_idx" id="mk_idx" value="${prodList.mk_idx}"/>
+												<input type="hidden" name="wu" id="wu" value="${wu}" />
+												<input type="hidden" name="prCategory" id="prCategory" value="${prodList.mk_product_category}" />		
+												<input type="hidden" name="prCode" id="prCode" value="${prodList.mk_product_id}" />
+																						
 													<div class="row">
 														<div class="mb-3 col-md-4"  style="display:inline-block;">
 															<label class="form-label" for="mk_status">게시 여부</label>
@@ -131,7 +148,7 @@
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for="mk_product_id">상품코드</label>
-														<input type="text" class="form-control" name="mk_product_id" id="mk_product_id" value="${prodList.mk_product_id}">
+														<input type="text" class="form-control" name="mk_product_id" id="mk_product_id" value="${prodList.mk_product_id}" readonly>
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for="mk_product_price">상품 가격(원)</label>
