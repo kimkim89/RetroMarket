@@ -64,4 +64,11 @@ public class AdminProductDAO {
 	public String ajaxProductCode(int prodCategoryValue) {		
 		return sqlSession.selectOne("mapper.AdminProd.ajaxProductCode", prodCategoryValue);
 	}
+	
+	//상품 상세 이미지 insert
+	public void insertProdImage(AdminProductVO adminProdVO) {
+		sqlSession.insert("mapper.AdminProd.insertProdImage", adminProdVO);
+	}
+	
+	
 }
