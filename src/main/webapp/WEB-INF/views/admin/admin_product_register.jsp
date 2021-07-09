@@ -54,14 +54,14 @@
 				data: {"prodCategory" : optionValue},
 				contentType: "application/json; charset=UTF-8",
 				success: function(data) {
-					
+					alert(data);
 					if(wuStatus == 'u' && prCate == optionValue) {
-						$("#mk_product_id").val(data); = prCode;
+						$("#mk_product_id").val(prCode);
 					}
 					alert(prcate != optionValue);
-					if(prcate != optionValue) {
+					//if(prcate != optionValue) {
 						$("#mk_product_id").val(data);
-					}
+					//}
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
 					

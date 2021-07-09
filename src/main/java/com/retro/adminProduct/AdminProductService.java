@@ -243,4 +243,10 @@ public class AdminProductService {
 	}
 	
 	
+	//상품 상세 이미지 insert
+	public void insertProdImage(AdminProductVO adminProdVO) {
+		admProdDAO.insertProdImage(adminProdVO);
+	}
+	
+	
 }
