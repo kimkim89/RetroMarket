@@ -46,6 +46,10 @@
 			var prCate = document.getElementById("prCategory").value;
 			var prCode = document.getElementById("prCode").value;
 			
+			console.log("wuStatus: " + wuStatus);
+			console.log("optionValue: " + optionValue);
+			console.log("prCate: " + prCate);
+			console.log("prCode: " + prCode);
 					
 			$.ajax({
 				type: "POST",
@@ -54,14 +58,14 @@
 				data: {"prodCategory" : optionValue},
 				contentType: "application/json; charset=UTF-8",
 				success: function(data) {
-					alert(data);
+					//alert(data);
 					if(wuStatus == 'u' && prCate == optionValue) {
 						$("#mk_product_id").val(prCode);
 					}
-					alert(prcate != optionValue);
-					//if(prcate != optionValue) {
+					
+					if(prCate != optionValue) {
 						$("#mk_product_id").val(data);
-					//}
+					}
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
 					
@@ -169,7 +173,38 @@
 														<input type="file" class="form-control" name="original_upfile" id="original_upfile">
 														<span>저장된 상품 상세 이미지: </span>
 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
-													</div>							
+													</div>	
+													<!--  파일 추가 버튼 클릭 시 파일 업로드 버튼 최대 4개 더 표출되도록 작업 예정 -->
+													<div class="mb-3">
+														<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>
+														<input type="file" class="form-control" name="original_upfile" id="original_upfile">
+														<span>저장된 상품 상세 이미지: </span>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
+													</div>	
+													<div class="mb-3">
+														<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>
+														<input type="file" class="form-control" name="original_upfile" id="original_upfile">
+														<span>저장된 상품 상세 이미지: </span>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
+													</div>	
+													<div class="mb-3">
+														<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>
+														<input type="file" class="form-control" name="original_upfile" id="original_upfile">
+														<span>저장된 상품 상세 이미지: </span>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
+													</div>	
+													<div class="mb-3">
+														<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>
+														<input type="file" class="form-control" name="original_upfile" id="original_upfile">
+														<span>저장된 상품 상세 이미지: </span>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
+													</div>	
+													
+													
+													
+													
+													
+																			
 													<div class="mb-3">
 														<label class="form-label" for="mk_content">상품 설명</label>
 														<textarea class="form-control" name="mk_content" id="mk_content">${prodList.mk_content}</textarea>
