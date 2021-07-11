@@ -84,7 +84,6 @@
 			var fileNum = 2;
 			
 			
-				
 				newFileTag = '<div class="mb-3">';
 				newfileTag += '<label class="form-label" for="mk_original_upfile' + fileNum + '">상품 이미지(상품상세보기)</label>';
 				newFileTag += '<input type="file" class="form-control" name="original_upfile" id="original_upfile">';
@@ -93,7 +92,7 @@
 				newFileTag += '</div>';
 				
 		
-				parentDivTag.innerHTML = newFileTag;
+				//parentDivTag.innerHTML = newFileTag;
 				
 				fileNum++;
 				
