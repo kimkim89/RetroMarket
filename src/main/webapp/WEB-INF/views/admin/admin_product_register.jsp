@@ -75,16 +75,16 @@
 			});										
 		}
 		
-		
+		var fileNum = 2;
 		
 		//상푸상세이미지 추가 기능
 		function createPrDetailImg() {
 			var parentDivTag = document.getElementById("pr_detail_img");
-			var newFileTag;
-			var fileNum = 2;
 			
 			
-				newFileTag = '<div class="mb-3">';
+			
+			
+			var	newFileTag = '<div class="mb-3">';
 				newfileTag += '<label class="form-label" for="mk_original_upfile' + fileNum + '">상품 이미지(상품상세보기)</label>';
 				newFileTag += '<input type="file" class="form-control" name="original_upfile" id="original_upfile">';
 				newFileTag += '<span>저장된 상품 상세 이미지: </span>';
@@ -96,7 +96,7 @@
 				
 				fileNum++;
 				
-				console.log(fileNum);
+				console.log(newFileTag);
 		}
 		
 		
