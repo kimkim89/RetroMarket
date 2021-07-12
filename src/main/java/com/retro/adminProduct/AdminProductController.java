@@ -143,7 +143,11 @@ public class AdminProductController {
 		@RequestMapping(value = "adminProdInsert", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/text; charset=utf8")
 		public ModelAndView adminProdInsert( AdminProductVO adminProdVO, 
 											 @RequestParam("original_thumb") MultipartFile file1, 
-											 @RequestParam("original_upfile") MultipartFile file2,
+											 @RequestParam("original_upfile1") MultipartFile file2,
+											 @RequestParam("original_upfile2") MultipartFile file3,
+											 @RequestParam("original_upfile3") MultipartFile file4,
+											 @RequestParam("original_upfile4") MultipartFile file5,
+											 @RequestParam("original_upfile5") MultipartFile file6,
 											 //HttpServletRequest request,
 											 MultipartHttpServletRequest request									
 											) {
@@ -160,7 +164,7 @@ public class AdminProductController {
 				makeFolder.mkdirs();
 			}
 			
-			admProdService.adminProdInsert(adminProdVO, file1, file2, uploadPath, request);
+			admProdService.adminProdInsert(adminProdVO, file1, file2, file3, file4, file5, file6, uploadPath, request);
 			
 			//List<AdminProductVO> productInfoList = admProdService.adminProductInfo();
 			//mav.addObject("productInfoList", productInfoList);

@@ -75,24 +75,28 @@
 			});										
 		}
 		
-		var fileNum = 2;
 		
-		//상푸상세이미지 추가 기능
-		function createPrDetailImg() {
+		
+		//상품상세이미지 추가 기능
+		function createPrDetailImg(fileNum) {
 			var parentDivTag = document.getElementById("pr_detail_img");
 			
+			var totalFileNum = 0;
 			
-			
+			if(fileNum==2){
+				
+			}
 			
 			var	newFileTag = '<div class="mb-3">';
-				newfileTag += '<label class="form-label" for="mk_original_upfile' + fileNum + '">상품 이미지(상품상세보기)</label>';
-				newFileTag += '<input type="file" class="form-control" name="original_upfile" id="original_upfile">';
+				//newfileTag += '<label class="form-label" for="mk_original_upfile">상품 이미지(상품상세보기)</label>';
+				newFileTag += '<input type="file" class="form-control" name="original_upfile' + fileNum + '" id="original_upfile' + fileNum + '">';
 				newFileTag += '<span>저장된 상품 상세 이미지: </span>';
 				newFileTag += '<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>';
 				newFileTag += '</div>';
 				
 		
-				//parentDivTag.innerHTML = newFileTag;
+				parentDivTag.innerHTML = newFileTag;
+				
 				
 				fileNum++;
 				
@@ -192,20 +196,43 @@
 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_thumb}&imgRealName=${prodList.mk_original_thumb}">${prodList.mk_original_thumb}</a>
 													</div>		
 													<div class="mb-3">
-														<label class="form-label" for="mk_original_upfile1">상품 이미지(상품상세보기)</label>
-														<a href="javascript:void(0);" onclick="createPrDetailImg();" class="btn btn-primary">추가</a>
+														<label class="form-label" for="mk_original_upfile1">상품 이미지1(상품상세보기)</label>
+														<a href="javascript:void(0);" onclick="createPrDetailImg(2);" class="btn btn-primary">추가</a>
 														<input type="file" class="form-control" name="original_upfile1" id="original_upfile1">
 														<span>저장된 상품 상세 이미지: </span>
 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
-													</div>	
-													<!--  파일 추가 버튼 클릭 시 파일 업로드 버튼 최대 4개 더 표출되도록 작업 예정 -->
+													</div>
 													
-												<div id="pr_detail_img">
+													<!-- 2021.07.13 상세이미지 파일 insert 테스트용 -->
+													<div class="mb-3">
+														<label class="form-label" for="mk_original_upfile2">상품 이미지2(상품상세보기)</label>														
+														<input type="file" class="form-control" name="original_upfile2" id="original_upfile2">
+														<span>저장된 상품 상세 이미지: </span>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="mk_original_upfile3">상품 이미지3(상품상세보기)</label>														
+														<input type="file" class="form-control" name="original_upfile3" id="original_upfile3">
+														<span>저장된 상품 상세 이미지: </span>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="mk_original_upfile4">상품 이미지4(상품상세보기)</label>														
+														<input type="file" class="form-control" name="original_upfile4" id="original_upfile4">
+														<span>저장된 상품 상세 이미지: </span>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="mk_original_upfile5">상품 이미지5(상품상세보기)</label>														
+														<input type="file" class="form-control" name="original_upfile5" id="original_upfile5">
+														<span>저장된 상품 상세 이미지: </span>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
+													</div>
 													
-												
-												
-												</div>	
+													<!-- 2021.07.13(화) 동적으로 파일 업로드 태그 생성 예정 
+													<div class="mb-3"  id="pr_detail_img">													
 													
+													</div>-->
 													
 													
 													
