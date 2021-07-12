@@ -18,7 +18,14 @@ public class AdminProductService {
 	AdminProductDAO admProdDAO;
 	
 	//상품 정보 insert
-	public void adminProdInsert(AdminProductVO adminProdVO, MultipartFile file1, MultipartFile file2, String uploadPath,
+	public void adminProdInsert(AdminProductVO adminProdVO, 
+								MultipartFile file1, 
+								MultipartFile file2, 
+								MultipartFile file3, 
+								MultipartFile file4, 
+								MultipartFile file5, 
+								MultipartFile file6,
+								String uploadPath,
 								HttpServletRequest request) {
 		
 		
