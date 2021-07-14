@@ -132,10 +132,24 @@ public class AdminProductService {
 		
 		/*20210714 기존 상품상세이미지 파일 작업한 것 <-- 곧 제거할 예정
 		File upload_file2 = new File(uploadPath+upfileStoredName); */
+		
+		/*20210714 상품상세이미지 db insert 작업 수정 시작----------------------------------------------*/
+		File upload_file2 = new File(uploadPath+upfileStoredName1);		
+		File upload_file3 = new File(uploadPath+upfileStoredName2);
+		File upload_file4 = new File(uploadPath+upfileStoredName3);
+		File upload_file5 = new File(uploadPath+upfileStoredName4);
+		File upload_file6 = new File(uploadPath+upfileStoredName5);
+	
+		/*20210714 상품상세이미지 db insert 작업 수정 끝----------------------------------------------*/
+		
 					
 		try {
             file1.transferTo(upload_file1);
             file2.transferTo(upload_file2);
+            file3.transferTo(upload_file3);
+            file4.transferTo(upload_file4);
+            file5.transferTo(upload_file5);
+            file6.transferTo(upload_file6);
         } catch (IllegalStateException e) {            
             e.printStackTrace();
         } catch (IOException e) {            
@@ -163,10 +177,13 @@ public class AdminProductService {
 	    
 		adminProdVO.setMk_writer_ip(writer_ip);		
 		
-				
+		//상품 정보 테이블에 insert		
 		admProdDAO.adminProdInsert(adminProdVO);
+		//상품 상세 이미지 테이블에 insert
+		admProdDAO.insertProdImage(adminProdVO);
 	}
 	
+		
 	
 	//상품 수정 update
 	public void adminProdUpdate( AdminProductVO adminProdVO, 
@@ -327,10 +344,7 @@ public class AdminProductService {
 	}
 	
 	
-	//상품 상세 이미지 insert
-	public void insertProdImage(AdminProductVO adminProdVO) {
-		admProdDAO.insertProdImage(adminProdVO);
-	}
+
 	
 	
 }

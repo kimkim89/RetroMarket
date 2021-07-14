@@ -336,14 +336,7 @@ public class AdminProductController {
 			
 		}
 		
-		//상품 상세 이미지 insert
-		public void insertProdImage(AdminProductVO adminProdVO) {
-			admProdService.insertProdImage(adminProdVO);			
-		}
-		
-		
-		
-		
+				
 		//20210628 테스트중
 		@RequestMapping(value="/adminProd/test33") 
 		public ModelAndView dynamicTagTest() {

@@ -18,6 +18,11 @@ public class AdminProductDAO {
 		sqlSession.insert("mapper.AdminProd.adminProdInsert", adminProdVO);
 	}
 	
+	//상품 상세 이미지 insert
+	public void insertProdImage(AdminProductVO adminProdVO) {
+		sqlSession.insert("mapper.AdminProd.insertProdImage", adminProdVO);
+	}
+	
 	//상품 수정 update
 	public void adminProdUpdate(AdminProductVO adminProdVO) {
 		sqlSession.update("mapper.AdminProd.adminProdUpdate", adminProdVO);
@@ -65,10 +70,7 @@ public class AdminProductDAO {
 		return sqlSession.selectOne("mapper.AdminProd.ajaxProductCode", prodCategoryValue);
 	}
 	
-	//상품 상세 이미지 insert
-	public void insertProdImage(AdminProductVO adminProdVO) {
-		sqlSession.insert("mapper.AdminProd.insertProdImage", adminProdVO);
-	}
+	
 	
 	
 }
