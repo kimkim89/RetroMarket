@@ -36,25 +36,102 @@ public class AdminProductService {
 		//썸네일 원본 파일 사이즈
 		long thumbFileSize = file1.getSize();
 		
-		//상품 이미지 원본 파일명
+		/* 20210714 기존 상품상세이미지 파일 작업한 것 <-- 곧 제거할 예정
+		 * //상품 이미지 원본 파일명
 		String upfileOrigName = file2.getOriginalFilename();
 		//상품 이미지 서버 파일명
 		String upfileStoredName = System.currentTimeMillis() + "_" + upfileOrigName;
 		//상품 이미지 원본 파일 사이즈
-		long upfileFileSize = file2.getSize();
+		long upfileFileSize = file2.getSize(); */
+		
+		
+		/*20210714 상품상세이미지 db insert 작업 수정 시작----------------------------------------------*/
+		
+		//상품 이미지 원본 파일명1
+		String upfileOrigName1 = file2.getOriginalFilename();
+		//상품 이미지 서버 파일명1
+		String upfileStoredName1 = System.currentTimeMillis() + "_" + upfileOrigName1;
+		//상품 이미지 원본 파일 사이즈1
+		long upfileFileSize1 = file2.getSize();
+		
+		//상품 이미지 원본 파일명2
+		String upfileOrigName2 = file3.getOriginalFilename();
+		//상품 이미지 서버 파일명2
+		String upfileStoredName2 = System.currentTimeMillis() + "_" + upfileOrigName2;
+		//상품 이미지 원본 파일 사이즈2
+		long upfileFileSize2 = file3.getSize();
+		
+		//상품 이미지 원본 파일명3
+		String upfileOrigName3 = file4.getOriginalFilename();
+		//상품 이미지 서버 파일명3
+		String upfileStoredName3 = System.currentTimeMillis() + "_" + upfileOrigName3;
+		//상품 이미지 원본 파일 사이즈3
+		long upfileFileSize3 = file4.getSize();		
+		
+		//상품 이미지 원본 파일명4
+		String upfileOrigName4 = file5.getOriginalFilename();
+		//상품 이미지 서버 파일명4
+		String upfileStoredName4 = System.currentTimeMillis() + "_" + upfileOrigName4;
+		//상품 이미지 원본 파일 사이즈4
+		long upfileFileSize4 = file5.getSize();	
+		
+		//상품 이미지 원본 파일명5
+		String upfileOrigName5 = file6.getOriginalFilename();
+		//상품 이미지 서버 파일명3
+		String upfileStoredName5 = System.currentTimeMillis() + "_" + upfileOrigName5;
+		//상품 이미지 원본 파일 사이즈3
+		long upfileFileSize5 = file6.getSize();				
+		
+		
+		/*20210714 상품상세이미지 db insert 작업 수정 끝----------------------------------------------*/
 		
 		//썸네일 파일 정보 저장
 		adminProdVO.setMk_original_thumb(thumbOrigName);
 		adminProdVO.setMk_stored_thumb(thumbStoredName);
 		adminProdVO.setMk_thumb_size(thumbFileSize);
 		
+		
+		/*20210714 기존 상품상세이미지 파일 작업한 것 <-- 곧 제거할 예정
 		//상품 이미지 파일 정보 저장
 		adminProdVO.setMk_original_upfile(upfileOrigName);
 		adminProdVO.setMk_stored_upfile(upfileStoredName);
-		adminProdVO.setMk_upfile_size(upfileFileSize);
+		adminProdVO.setMk_upfile_size(upfileFileSize);*/
+		
+		
+		/*20210714 상품상세이미지 db insert 작업 수정 시작----------------------------------------------*/
+		//상품 이미지 파일1 정보 저장
+		adminProdVO.setMk_original_upfile1(upfileOrigName1);
+		adminProdVO.setMk_stored_upfile1(upfileStoredName1);
+		adminProdVO.setMk_upfile_size1(upfileFileSize1);
+		
+		//상품 이미지 파일2 정보 저장
+		adminProdVO.setMk_original_upfile2(upfileOrigName2);
+		adminProdVO.setMk_stored_upfile2(upfileStoredName2);
+		adminProdVO.setMk_upfile_size2(upfileFileSize2);
+		
+		//상품 이미지 파일3 정보 저장
+		adminProdVO.setMk_original_upfile3(upfileOrigName3);
+		adminProdVO.setMk_stored_upfile3(upfileStoredName3);
+		adminProdVO.setMk_upfile_size3(upfileFileSize3);
+		
+		//상품 이미지 파일4 정보 저장
+		adminProdVO.setMk_original_upfile4(upfileOrigName4);
+		adminProdVO.setMk_stored_upfile4(upfileStoredName4);
+		adminProdVO.setMk_upfile_size4(upfileFileSize4);
+		
+		//상품 이미지 파일5 정보 저장
+		adminProdVO.setMk_original_upfile5(upfileOrigName5);
+		adminProdVO.setMk_stored_upfile5(upfileStoredName5);
+		adminProdVO.setMk_upfile_size5(upfileFileSize5);		
+		
+		/*20210714 상품상세이미지 db insert 작업 수정 끝----------------------------------------------*/
+		
+		
 		
 		File upload_file1 = new File(uploadPath+thumbStoredName);
-		File upload_file2 = new File(uploadPath+upfileStoredName);
+		
+		/*20210714 기존 상품상세이미지 파일 작업한 것 <-- 곧 제거할 예정
+		File upload_file2 = new File(uploadPath+upfileStoredName); */
 					
 		try {
             file1.transferTo(upload_file1);
