@@ -93,9 +93,40 @@ public class AdminProductService {
 		
 		/*20210714 기존 상품상세이미지 파일 작업한 것 <-- 곧 제거할 예정
 		//상품 이미지 파일 정보 저장
-		 * adminProdVO.setMk_original_upfile(upfileOrigName);
+		adminProdVO.setMk_original_upfile(upfileOrigName);
 		adminProdVO.setMk_stored_upfile(upfileStoredName);
 		adminProdVO.setMk_upfile_size(upfileFileSize);*/
+		
+		
+		/*20210714 상품상세이미지 db insert 작업 수정 시작----------------------------------------------*/
+		//상품 이미지 파일1 정보 저장
+		adminProdVO.setMk_original_upfile1(upfileOrigName1);
+		adminProdVO.setMk_stored_upfile1(upfileStoredName1);
+		adminProdVO.setMk_upfile_size1(upfileFileSize1);
+		
+		//상품 이미지 파일2 정보 저장
+		adminProdVO.setMk_original_upfile2(upfileOrigName2);
+		adminProdVO.setMk_stored_upfile2(upfileStoredName2);
+		adminProdVO.setMk_upfile_size2(upfileFileSize2);
+		
+		//상품 이미지 파일3 정보 저장
+		adminProdVO.setMk_original_upfile3(upfileOrigName3);
+		adminProdVO.setMk_stored_upfile3(upfileStoredName3);
+		adminProdVO.setMk_upfile_size3(upfileFileSize3);
+		
+		//상품 이미지 파일4 정보 저장
+		adminProdVO.setMk_original_upfile4(upfileOrigName4);
+		adminProdVO.setMk_stored_upfile4(upfileStoredName4);
+		adminProdVO.setMk_upfile_size4(upfileFileSize4);
+		
+		//상품 이미지 파일5 정보 저장
+		adminProdVO.setMk_original_upfile5(upfileOrigName5);
+		adminProdVO.setMk_stored_upfile5(upfileStoredName5);
+		adminProdVO.setMk_upfile_size5(upfileFileSize5);		
+		
+		/*20210714 상품상세이미지 db insert 작업 수정 끝----------------------------------------------*/
+		
+		
 		
 		File upload_file1 = new File(uploadPath+thumbStoredName);
 		
