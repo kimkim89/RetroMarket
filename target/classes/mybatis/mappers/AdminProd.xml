@@ -62,9 +62,10 @@
 				mk_upfile_size4 	= #{mk_upfile_size4}, 				
 				mk_original_upfile5 = #{mk_original_upfile5}, 
 				mk_stored_upfile5 	= #{mk_stored_upfile5}, 
-				mk_upfile_size5 	= #{mk_upfile_size5}				
+				mk_upfile_size5 	= #{mk_upfile_size5},
+				udate				= #{udate}				
 				);   
-			where pf_product_id = #{mk_product_id},
+			where pf_idx = #{pf_idx};
 	</update>
 	
 	

@@ -179,6 +179,8 @@ public class AdminProductService {
 		
 		//상품 정보 테이블에 insert		
 		admProdDAO.adminProdInsert(adminProdVO);
+		
+		System.out.println("20210715_테스트입니다.");
 		//상품 상세 이미지 테이블에 insert
 		admProdDAO.insertProdImage(adminProdVO);
 	}
