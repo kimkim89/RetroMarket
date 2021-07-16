@@ -22,10 +22,10 @@
 	
 	
  	<!-- 상품 상세보기 이미지 5개 insert -->
- 	<insert id="insertProdImage" parameterType="adminProdVO">
+ 	<insert id="insertProdImage" parameterType="adminProdImage">
  		insert into product_file
  		values (#{pf_idx},
- 				#{mk_product_id},
+ 				#{pf_product_id},
  				#{mk_original_upfile1}, 
 				#{mk_stored_upfile1}, 
 				#{mk_upfile_size1}, 				

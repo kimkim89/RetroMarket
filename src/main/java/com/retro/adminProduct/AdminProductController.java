@@ -153,9 +153,9 @@ public class AdminProductController {
 											) {
 			ModelAndView mav = new ModelAndView();
 			
+			System.out.println("20210715_테스트입니다.");
 			
-			//static Logger logger = Logger.getlogger
-						
+			
 			//서버 물리적 경로
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			
@@ -166,11 +166,11 @@ public class AdminProductController {
 			
 			admProdService.adminProdInsert(adminProdVO, file1, file2, file3, file4, file5, file6, uploadPath, request);
 			
-			//List<AdminProductVO> productInfoList = admProdService.adminProductInfo();
-			//mav.addObject("productInfoList", productInfoList);
+
 			mav.setViewName("redirect:/adminProd/adminProduct");
 			return mav;
 		}
+		
 		
 		//상품 삭제(delete)
 		@RequestMapping(value="adminProdDelete/{product_num}", method = RequestMethod.GET)
