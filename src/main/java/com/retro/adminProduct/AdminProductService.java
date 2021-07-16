@@ -49,7 +49,7 @@ public class AdminProductService {
 		/*20210714 상품상세이미지 db insert 작업 수정 시작----------------------------------------------*/
 		
 		//상품 이미지 원본 파일명1
-		String upfileOrigName1 = file2.getOriginalFilename();
+		String upfileOrigName1 = file2.getOriginalFilename();		
 		//상품 이미지 서버 파일명1
 		String upfileStoredName1 = System.currentTimeMillis() + "_" + upfileOrigName1;
 		//상품 이미지 원본 파일 사이즈1
