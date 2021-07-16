@@ -39,26 +39,6 @@ public class AdminProductVO {
 	private String pc_category_name;
 	private int pc_category_order;
 	
-	//상품 상세보기 이미지  5개
-	private String mk_original_upfile1; 
-	private String mk_stored_upfile1;
-	private long mk_upfile_size1;
-	
-	private String mk_original_upfile2; 
-	private String mk_stored_upfile2;
-	private long mk_upfile_size2;
-	
-	private String mk_original_upfile3; 
-	private String mk_stored_upfile3;
-	private long mk_upfile_size3;
-	
-	private String mk_original_upfile4; 
-	private String mk_stored_upfile4;
-	private long mk_upfile_size4;
-	
-	private String mk_original_upfile5; 
-	private String mk_stored_upfile5;
-	private long mk_upfile_size5;
 	
 	
 }

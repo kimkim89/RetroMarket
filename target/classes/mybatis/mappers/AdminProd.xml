@@ -22,10 +22,10 @@
 	
 	
  	<!-- 상품 상세보기 이미지 5개 insert -->
- 	<insert id="insertProdImage" parameterType="adminProdVO">
+ 	<insert id="insertProdImage" parameterType="adminProdImage">
  		insert into product_file
  		values (#{pf_idx},
- 				#{mk_product_id},
+ 				#{pf_product_id},
  				#{mk_original_upfile1}, 
 				#{mk_stored_upfile1}, 
 				#{mk_upfile_size1}, 				
@@ -62,9 +62,10 @@
 				mk_upfile_size4 	= #{mk_upfile_size4}, 				
 				mk_original_upfile5 = #{mk_original_upfile5}, 
 				mk_stored_upfile5 	= #{mk_stored_upfile5}, 
-				mk_upfile_size5 	= #{mk_upfile_size5}				
+				mk_upfile_size5 	= #{mk_upfile_size5},
+				udate				= #{udate}				
 				);   
-			where pf_product_id = #{mk_product_id},
+			where pf_idx = #{pf_idx};
 	</update>
 	
 	

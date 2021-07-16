@@ -134,7 +134,9 @@
 										</div>
 										<div class="card-body">
 											<form name="product_form" id="product_form" enctype="multipart/form-data" method="post">
+											<c:if test="${wu=='u'}">
 												<input type="hidden" name="mk_idx" id="mk_idx" value="${prodList.mk_idx}"/>
+											</c:if>	
 												<input type="hidden" name="wu" id="wu" value="${wu}" />
 												<input type="hidden" name="prCategory" id="prCategory" value="${prodList.mk_product_category}" />		
 												<input type="hidden" name="prCode" id="prCode" value="${prodList.mk_product_id}" />
