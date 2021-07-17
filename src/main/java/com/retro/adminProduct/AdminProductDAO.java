@@ -61,8 +61,8 @@ public class AdminProductDAO {
 	}
 	
 	//상품상세이미지 select
-	public AdminProductImageVO selectProdImage(String mk_product_id) {		
-		return sqlSession.selectOne("mapper.AdminProd.adminSelectOneProd", mk_product_id);
+	public AdminProductImageVO selectProdImage(String product_id) {			
+		return sqlSession.selectOne("mapper.AdminProd.selectProdImage", product_id);
 	}
 	
 	//상품 삭제(delete)

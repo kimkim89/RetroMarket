@@ -91,7 +91,7 @@
 	
 	<!-- 상품수정페이지: 상품 상세이미지 정보 출력(select) -->
 	<select id="selectProdImage" parameterType="String" resultType="adminProdImageVO">
-		select * from product_file where pf_product_id = #{mk_product_id};
+		select * from product_file where pf_product_id = #{product_id};
 	</select>
 
 

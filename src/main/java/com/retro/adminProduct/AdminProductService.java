@@ -299,8 +299,8 @@ public class AdminProductService {
 	}
 	
 	//개별 상품상세이미지 select
-	public AdminProductImageVO selectProdImage(String mk_product_id) {			
-		return admProdDAO.selectProdImage(mk_product_id);
+	public AdminProductImageVO selectProdImage(String product_id) {			
+		return admProdDAO.selectProdImage(product_id);
 	}	
 	
 	//상품 삭제(delete)

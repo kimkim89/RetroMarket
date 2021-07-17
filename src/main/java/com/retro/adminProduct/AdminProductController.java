@@ -119,8 +119,10 @@ public class AdminProductController {
 			//개별 상품정보 select
 			AdminProductVO prodList = admProdService.adminSelectOneProd(product_idx);
 			
+			String product_id = prodList.getMk_product_id().toString();
+			
 			//개별 상품상세이미지 select
-			AdminProductImageVO prodImgList = admProdService.selectProdImage(prodList.getMk_product_id().toString());
+			AdminProductImageVO prodImgList = admProdService.selectProdImage(product_id);
 			 
 			
 			
