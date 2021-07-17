@@ -119,10 +119,16 @@ public class AdminProductController {
 			//개별 상품정보 select
 			AdminProductVO prodList = admProdService.adminSelectOneProd(product_idx);
 			
+			//개별 상품상세이미지 select
+			AdminProductImageVO prodImgList = admProdService.selectProdImage(prodList.getMk_product_id().toString());
+			 
+			
+			
 			mav.addObject("wu", wu);			
 			mav.addObject("prodSortList", prodSortList);
 			mav.addObject("prodCategoryList", prodCategoryList);
 			mav.addObject("prodList", prodList);
+			mav.addObject("prodImgList", prodImgList);
 			mav.setViewName("admin/admin_product_register");
 			return mav;
 		}

@@ -82,10 +82,18 @@
 	    order by a.mk_idx desc limit #{pageFirst}, #{pageSize};
 	</select>
 	
-	<!-- 상품수정페이지: 개별 상품정보 출력(select) -->
+	
+	<!-- 상품수정페이지: 개별 상품 정보 출력(select) -->
 	<select id="adminSelectOneProd" parameterType="int" resultType="adminProdVO">
 		select * from product_info as pr_info join product_sort as pr_sort on pr_info.mk_product_type = pr_sort.ps_sort_id where pr_info.mk_idx = #{mk_idx} order by pr_info.mk_idx desc;
 	</select>
+	
+	
+	<!-- 상품수정페이지: 상품 상세이미지 정보 출력(select) -->
+	<select id="selectProdImage" parameterType="String" resultType="adminProdImageVO">
+		select * from product_file where pf_product_id = #{mk_product_id};
+	</select>
+
 
 	<!-- 상품수정(update) -->
 	<update id="adminProdUpdate" parameterType="adminProdVO">

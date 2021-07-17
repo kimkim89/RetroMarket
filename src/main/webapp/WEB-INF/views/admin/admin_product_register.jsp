@@ -203,7 +203,7 @@
 <!-- 														<a href="javascript:void(0);" onclick="createPrDetailImg(2);" class="btn btn-primary">추가</a> -->
 														<input type="file" class="form-control" name="original_upfile${i}" id="original_upfile${i}">
 														<span>저장된 상품 상세 이미지${i}: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile1}&imgRealName=${prodImgList.mk_original_upfile1}">${prodImgList.mk_original_upfile1}</a>
 													</div>
 													</c:forEach>
 													<!-- 2021.07.13 상세이미지 파일 insert 테스트용 -->

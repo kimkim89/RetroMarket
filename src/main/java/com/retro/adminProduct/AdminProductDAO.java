@@ -60,6 +60,11 @@ public class AdminProductDAO {
 		return sqlSession.selectOne("mapper.AdminProd.adminSelectOneProd", mk_idx);
 	}
 	
+	//상품상세이미지 select
+	public AdminProductImageVO selectProdImage(String mk_product_id) {		
+		return sqlSession.selectOne("mapper.AdminProd.adminSelectOneProd", mk_product_id);
+	}
+	
 	//상품 삭제(delete)
 	public void adminProdDelete(int mk_idx) {
 		sqlSession.delete("mapper.AdminProd.adminProdDelete", mk_idx);

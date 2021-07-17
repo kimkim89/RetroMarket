@@ -298,6 +298,11 @@ public class AdminProductService {
 		return admProdDAO.adminSelectOneProd(mk_idx);
 	}
 	
+	//개별 상품상세이미지 select
+	public AdminProductImageVO selectProdImage(String mk_product_id) {			
+		return admProdDAO.selectProdImage(mk_product_id);
+	}	
+	
 	//상품 삭제(delete)
 	public void adminProdDelete(int mk_idx) {
 		admProdDAO.adminProdDelete(mk_idx);
@@ -349,6 +354,9 @@ public class AdminProductService {
 					
 		return newProductCode;
 	}
+
+
+
 	
 	
 
