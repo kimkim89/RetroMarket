@@ -7,6 +7,6 @@
 		<typeAlias type="com.retro.member.MemberVO" alias="memberVO"/>
 		<typeAlias type="com.retro.admin.PointVO" alias="pointVO"/>
 		<typeAlias type="com.retro.adminProduct.AdminProductVO" alias="adminProdVO"/>
-		<typeAlias type="com.retro.adminProduct.AdminProductImage" alias="adminProdImage"/>
+		<typeAlias type="com.retro.adminProduct.AdminProductImageVO" alias="adminProdImageVO"/>
 	</typeAliases>
 </configuration>

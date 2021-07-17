@@ -19,8 +19,8 @@ public class AdminProductDAO {
 	}
 	
 	//상품 상세 이미지 insert
-	public void insertProdImage(AdminProductImage adminProdImage) {
-		sqlSession.insert("mapper.AdminProd.insertProdImage", adminProdImage);
+	public void insertProdImage(AdminProductImageVO adminProdImageVO) {
+		sqlSession.insert("mapper.AdminProd.insertProdImage", adminProdImageVO);
 	}
 	
 	//상품 수정 update

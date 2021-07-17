@@ -22,7 +22,7 @@
 	
 	
  	<!-- 상품 상세보기 이미지 5개 insert -->
- 	<insert id="insertProdImage" parameterType="adminProdImage">
+ 	<insert id="insertProdImage" parameterType="adminProdImageVO">
  		insert into product_file
  		values (#{pf_idx},
  				#{pf_product_id},

@@ -8,24 +8,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,10 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.protobuf.TextFormat.ParseException;
 import com.retro.common.PagingService;
 
 
@@ -142,6 +131,7 @@ public class AdminProductController {
 		//상품 정보 insert
 		@RequestMapping(value = "adminProdInsert", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/text; charset=utf8")
 		public ModelAndView adminProdInsert( AdminProductVO adminProdVO, 
+											 AdminProductImageVO adminProdImageVO,
 											 @RequestParam("original_thumb") MultipartFile file1, 
 											 @RequestParam("original_upfile1") MultipartFile file2,
 											 @RequestParam("original_upfile2") MultipartFile file3,
@@ -164,7 +154,7 @@ public class AdminProductController {
 				makeFolder.mkdirs();
 			}
 			
-			admProdService.adminProdInsert(adminProdVO, file1, file2, file3, file4, file5, file6, uploadPath, request);
+			admProdService.adminProdInsert(adminProdVO, adminProdImageVO, file1, file2, file3, file4, file5, file6, uploadPath, request);
 			
 
 			mav.setViewName("redirect:/adminProd/adminProduct");
