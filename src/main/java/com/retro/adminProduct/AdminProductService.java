@@ -16,10 +16,11 @@ public class AdminProductService {
 
 	@Autowired
 	AdminProductDAO admProdDAO;
-	AdminProductImage adminProdImage;
+	AdminProductImageVO adminProdImageVOVO;
 	
 	//상품 정보 insert
 	public void adminProdInsert(AdminProductVO adminProdVO, 
+								AdminProductImageVO adminProdImageVO,
 								MultipartFile file1, 
 								MultipartFile file2, 
 								MultipartFile file3, 
@@ -100,30 +101,30 @@ public class AdminProductService {
 		
 		
 		/*20210714 상품상세이미지 db insert 작업 수정 시작----------------------------------------------*/
-		//상품 이미지 파일1 정보 저장
-		adminProdImage.setMk_original_upfile1(upfileOrigName1);
-		adminProdImage.setMk_stored_upfile1(upfileStoredName1);
-		adminProdImage.setMk_upfile_size1(upfileFileSize1);
+		//상품 이미지 파일1 정보 저장		
+		adminProdImageVO.setMk_original_upfile1(upfileOrigName1);		
+		adminProdImageVO.setMk_stored_upfile1(upfileStoredName1);
+		adminProdImageVO.setMk_upfile_size1(upfileFileSize1);
 		
 		//상품 이미지 파일2 정보 저장
-		adminProdImage.setMk_original_upfile2(upfileOrigName2);
-		adminProdImage.setMk_stored_upfile2(upfileStoredName2);
-		adminProdImage.setMk_upfile_size2(upfileFileSize2);
+		adminProdImageVO.setMk_original_upfile2(upfileOrigName2);
+		adminProdImageVO.setMk_stored_upfile2(upfileStoredName2);
+		adminProdImageVO.setMk_upfile_size2(upfileFileSize2);
 		
 		//상품 이미지 파일3 정보 저장
-		adminProdImage.setMk_original_upfile3(upfileOrigName3);
-		adminProdImage.setMk_stored_upfile3(upfileStoredName3);
-		adminProdImage.setMk_upfile_size3(upfileFileSize3);
+		adminProdImageVO.setMk_original_upfile3(upfileOrigName3);
+		adminProdImageVO.setMk_stored_upfile3(upfileStoredName3);
+		adminProdImageVO.setMk_upfile_size3(upfileFileSize3);
 		
 		//상품 이미지 파일4 정보 저장
-		adminProdImage.setMk_original_upfile4(upfileOrigName4);
-		adminProdImage.setMk_stored_upfile4(upfileStoredName4);
-		adminProdImage.setMk_upfile_size4(upfileFileSize4);
+		adminProdImageVO.setMk_original_upfile4(upfileOrigName4);
+		adminProdImageVO.setMk_stored_upfile4(upfileStoredName4);
+		adminProdImageVO.setMk_upfile_size4(upfileFileSize4);
 		
 		//상품 이미지 파일5 정보 저장
-		adminProdImage.setMk_original_upfile5(upfileOrigName5);
-		adminProdImage.setMk_stored_upfile5(upfileStoredName5);
-		adminProdImage.setMk_upfile_size5(upfileFileSize5);		
+		adminProdImageVO.setMk_original_upfile5(upfileOrigName5);
+		adminProdImageVO.setMk_stored_upfile5(upfileStoredName5);
+		adminProdImageVO.setMk_upfile_size5(upfileFileSize5);		
 		
 		/*20210714 상품상세이미지 db insert 작업 수정 끝----------------------------------------------*/
 		
@@ -183,10 +184,10 @@ public class AdminProductService {
 		
 		
 		//상품상세이미지 테이블 데이터 저장
-		adminProdImage.setPf_product_id(adminProdVO.getMk_product_id());
+		adminProdImageVO.setPf_product_id(adminProdVO.getMk_product_id());
 		
 		//상품 상세 이미지 테이블에 insert
-		admProdDAO.insertProdImage(adminProdImage);
+		admProdDAO.insertProdImage(adminProdImageVO);
 	}
 	
 		
@@ -297,6 +298,11 @@ public class AdminProductService {
 		return admProdDAO.adminSelectOneProd(mk_idx);
 	}
 	
+	//개별 상품상세이미지 select
+	public AdminProductImageVO selectProdImage(String product_id) {			
+		return admProdDAO.selectProdImage(product_id);
+	}	
+	
 	//상품 삭제(delete)
 	public void adminProdDelete(int mk_idx) {
 		admProdDAO.adminProdDelete(mk_idx);
@@ -348,6 +354,9 @@ public class AdminProductService {
 					
 		return newProductCode;
 	}
+
+
+
 	
 	
 

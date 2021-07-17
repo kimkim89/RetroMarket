@@ -194,42 +194,45 @@
 													<div class="mb-3">
 														<label class="form-label" for=mk_original_thumb>상품 썸네일(상품목록용)</label>
 														<input type="file" class="form-control" name="original_thumb" id="original_thumb">
-														<span>저장된 상품 썸네일: </span>
+														<span class="image_download">저장된 상품 썸네일: </span>
 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_thumb}&imgRealName=${prodList.mk_original_thumb}">${prodList.mk_original_thumb}</a>
-													</div>		
-													<div class="mb-3">
-														<label class="form-label" for="mk_original_upfile1">상품 이미지1(상품상세보기)</label>
-														<a href="javascript:void(0);" onclick="createPrDetailImg(2);" class="btn btn-primary">추가</a>
-														<input type="file" class="form-control" name="original_upfile1" id="original_upfile1">
-														<span>저장된 상품 상세 이미지: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
 													</div>
-													
+													<c:forEach var="i" begin="1" end="5" step="1">
+													<c:set var="original_upfile" value="prodImgList.mk_original_upfile${i}"></c:set>	
+													<c:set var="stored_upfile" value="prodImgList.mk_stored_upfile${i}"></c:set>		
+													<div class="mb-3">
+														<label class="form-label" for="mk_original_upfile${i}">상품 이미지${i}(상품상세보기)</label>
+<!-- 														<a href="javascript:void(0);" onclick="createPrDetailImg(2);" class="btn btn-primary">추가</a> -->
+														<input type="file" class="form-control" name="original_upfile${i}" id="original_upfile${i}">
+														<span>저장된 상품 상세 이미지${i}: </span>
+														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${stored_upfile}&imgRealName=${original_upfile}">${original_upfile}</a>
+													</div>
+													</c:forEach>
 													<!-- 2021.07.13 상세이미지 파일 insert 테스트용 -->
-													<div class="mb-3">
-														<label class="form-label" for="mk_original_upfile2">상품 이미지2(상품상세보기)</label>														
-														<input type="file" class="form-control" name="original_upfile2" id="original_upfile2">
-														<span>저장된 상품 상세 이미지: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
-													</div>
-													<div class="mb-3">
-														<label class="form-label" for="mk_original_upfile3">상품 이미지3(상품상세보기)</label>														
-														<input type="file" class="form-control" name="original_upfile3" id="original_upfile3">
-														<span>저장된 상품 상세 이미지: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
-													</div>
-													<div class="mb-3">
-														<label class="form-label" for="mk_original_upfile4">상품 이미지4(상품상세보기)</label>														
-														<input type="file" class="form-control" name="original_upfile4" id="original_upfile4">
-														<span>저장된 상품 상세 이미지: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
-													</div>
-													<div class="mb-3">
-														<label class="form-label" for="mk_original_upfile5">상품 이미지5(상품상세보기)</label>														
-														<input type="file" class="form-control" name="original_upfile5" id="original_upfile5">
-														<span>저장된 상품 상세 이미지: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a>
-													</div>
+<!-- 													<div class="mb-3"> -->
+<!-- 														<label class="form-label" for="mk_original_upfile2">상품 이미지2(상품상세보기)</label>														 -->
+<!-- 														<input type="file" class="form-control" name="original_upfile2" id="original_upfile2"> -->
+<!-- 														<span>저장된 상품 상세 이미지: </span> -->
+<%-- 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a> --%>
+<!-- 													</div> -->
+<!-- 													<div class="mb-3"> -->
+<!-- 														<label class="form-label" for="mk_original_upfile3">상품 이미지3(상품상세보기)</label>														 -->
+<!-- 														<input type="file" class="form-control" name="original_upfile3" id="original_upfile3"> -->
+<!-- 														<span>저장된 상품 상세 이미지: </span> -->
+<%-- 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a> --%>
+<!-- 													</div> -->
+<!-- 													<div class="mb-3"> -->
+<!-- 														<label class="form-label" for="mk_original_upfile4">상품 이미지4(상품상세보기)</label>														 -->
+<!-- 														<input type="file" class="form-control" name="original_upfile4" id="original_upfile4"> -->
+<!-- 														<span>저장된 상품 상세 이미지: </span> -->
+<%-- 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a> --%>
+<!-- 													</div> -->
+<!-- 													<div class="mb-3"> -->
+<!-- 														<label class="form-label" for="mk_original_upfile5">상품 이미지5(상품상세보기)</label>														 -->
+<!-- 														<input type="file" class="form-control" name="original_upfile5" id="original_upfile5"> -->
+<!-- 														<span>저장된 상품 상세 이미지: </span> -->
+<%-- 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_upfile}&imgRealName=${prodList.mk_original_upfile}">${prodList.mk_original_upfile}</a> --%>
+<!-- 													</div> -->
 													
 													<!-- 2021.07.13(화) 동적으로 파일 업로드 태그 생성 예정 
 													<div class="mb-3"  id="pr_detail_img">													

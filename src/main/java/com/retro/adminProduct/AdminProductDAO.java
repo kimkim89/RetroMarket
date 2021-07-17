@@ -19,8 +19,8 @@ public class AdminProductDAO {
 	}
 	
 	//상품 상세 이미지 insert
-	public void insertProdImage(AdminProductImage adminProdImage) {
-		sqlSession.insert("mapper.AdminProd.insertProdImage", adminProdImage);
+	public void insertProdImage(AdminProductImageVO adminProdImageVO) {
+		sqlSession.insert("mapper.AdminProd.insertProdImage", adminProdImageVO);
 	}
 	
 	//상품 수정 update
@@ -58,6 +58,11 @@ public class AdminProductDAO {
 	//개별 상품정보 select
 	public AdminProductVO adminSelectOneProd(int mk_idx) {
 		return sqlSession.selectOne("mapper.AdminProd.adminSelectOneProd", mk_idx);
+	}
+	
+	//상품상세이미지 select
+	public AdminProductImageVO selectProdImage(String product_id) {			
+		return sqlSession.selectOne("mapper.AdminProd.selectProdImage", product_id);
 	}
 	
 	//상품 삭제(delete)

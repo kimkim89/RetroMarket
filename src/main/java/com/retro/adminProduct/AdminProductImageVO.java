@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Component
-public class AdminProductImage {
+public class AdminProductImageVO {
 		//상품 상세보기 이미지  테이블 VO
 		private int pf_idx;
 		private String pf_product_id;
