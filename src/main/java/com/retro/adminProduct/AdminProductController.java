@@ -128,6 +128,10 @@ public class AdminProductController {
 			
 			
 			
+			
+			//System.out.println(prodImgList);
+			
+			
 			mav.addObject("wu", wu);			
 			mav.addObject("prodSortList", prodSortList);
 			mav.addObject("prodCategoryList", prodCategoryList);
