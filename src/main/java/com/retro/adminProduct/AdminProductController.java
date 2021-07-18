@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -123,14 +124,15 @@ public class AdminProductController {
 			
 			//개별 상품상세이미지 select
 			AdminProductImageVO prodImgList = admProdService.selectProdImage(product_id);
-			 
+			
+			
 			
 			
 			mav.addObject("wu", wu);			
 			mav.addObject("prodSortList", prodSortList);
 			mav.addObject("prodCategoryList", prodCategoryList);
-			mav.addObject("prodList", prodList);
-			mav.addObject("prodImgList", prodImgList);
+			mav.addObject("prodList", prodList);			
+			mav.addObject("prodImgList", prodImgList);		
 			mav.setViewName("admin/admin_product_register");
 			return mav;
 		}
