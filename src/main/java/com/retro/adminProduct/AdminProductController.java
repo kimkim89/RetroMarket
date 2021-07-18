@@ -123,21 +123,10 @@ public class AdminProductController {
 			String product_id = prodList.getMk_product_id().toString();
 			
 			//개별 상품상세이미지 select
-			AdminProductImageVO prodImgData = admProdService.selectProdImage(product_id);
+			List prodImgList = (List) admProdService.selectProdImage(product_id);
 			
-			List<String> prodImgList = new ArrayList();
-			prodImgList.add(0, prodImgData.getMk_original_upfile1());
-			prodImgList.add(1, prodImgData.getMk_original_upfile1());
-			prodImgList.add(2, prodImgData.getMk_original_upfile2());
-			prodImgList.add(3, prodImgData.getMk_original_upfile3());
-			prodImgList.add(4, prodImgData.getMk_original_upfile4());
-			prodImgList.add(5, prodImgData.getMk_original_upfile5());
-			prodImgList.add(6, prodImgData.getMk_original_upfile1());
-			prodImgList.add(7, prodImgData.getMk_original_upfile1());
-			prodImgList.add(8, prodImgData.getMk_original_upfile2());
-			prodImgList.add(9, prodImgData.getMk_original_upfile3());
-			prodImgList.add(10, prodImgData.getMk_original_upfile4());
-			prodImgList.add(11, prodImgData.getMk_original_upfile5());
+			
+			
 			
 			mav.addObject("wu", wu);			
 			mav.addObject("prodSortList", prodSortList);
