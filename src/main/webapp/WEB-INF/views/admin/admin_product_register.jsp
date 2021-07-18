@@ -198,10 +198,10 @@
 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_thumb}&imgRealName=${prodList.mk_original_thumb}">${prodList.mk_original_thumb}</a>
 													</div>
 													<c:forEach var="i" begin="1" end="5" step="1">
-													<c:set var="original_upfile" value="prodImgList.mk_original_upfile${i}"></c:set>	
-													<c:set var="stored_upfile" value="prodImgList.mk_stored_upfile${i}"></c:set>		
+													<c:set var="original_upfile" value="prodImgList.mk_original_upfile${i}" />	
+													<c:set var="stored_upfile" value="prodImgList.mk_stored_upfile${i}" />		
 													<div class="mb-3">
-														<label class="form-label" for="mk_original_upfile${i}">상품 이미지${i}(상품상세보기)</label>
+														<label class="form-label" for="mk_original_upfile${i}">상품 상세 이미지${i}</label>
 <!-- 														<a href="javascript:void(0);" onclick="createPrDetailImg(2);" class="btn btn-primary">추가</a> -->
 														<input type="file" class="form-control" name="original_upfile${i}" id="original_upfile${i}">
 														<span>저장된 상품 상세 이미지${i}: </span>
