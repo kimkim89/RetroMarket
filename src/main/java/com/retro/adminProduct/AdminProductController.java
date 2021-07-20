@@ -125,9 +125,7 @@ public class AdminProductController {
 			//개별 상품상세이미지 select
 			AdminProductImageVO prodImgList = admProdService.selectProdImage(product_id);
 			
-			
-			
-			
+						
 			
 			//System.out.println(prodImgList);
 			

@@ -29,7 +29,7 @@ public class AdminProductDAO {
 	}
 	
 	//상품 상세 이미지 update
-	public void updateProdImage(AdminProductVO adminProdVO) {
+	public void updateProdImage(AdminProductVO adminProdVO, String product_id) {
 		sqlSession.update("mapper.AdminProd.updateProdImage", adminProdVO);
 	}
 		

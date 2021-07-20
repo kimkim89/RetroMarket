@@ -16,7 +16,7 @@ public class AdminProductService {
 
 	@Autowired
 	AdminProductDAO admProdDAO;
-	AdminProductImageVO adminProdImageVOVO;
+	AdminProductImageVO adminProdImageVO;
 	
 	//상품 정보 insert
 	public void adminProdInsert(AdminProductVO adminProdVO, 
@@ -262,6 +262,8 @@ public class AdminProductService {
 				adminProdVO.setMk_writer_ip(writer_ip);					
 				
 		admProdDAO.adminProdUpdate(adminProdVO);
+		
+		admProdDAO.updateProdImage(adminProdVO, adminProdVO.getMk_product_id());
 	}
 	
 	
