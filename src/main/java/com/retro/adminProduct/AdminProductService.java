@@ -263,7 +263,9 @@ public class AdminProductService {
 				
 		admProdDAO.adminProdUpdate(adminProdVO);
 		
-		admProdDAO.updateProdImage(adminProdVO, adminProdVO.getMk_product_id());
+		adminProdImageVO.setPf_product_id(adminProdVO.getMk_product_id());
+		
+		admProdDAO.updateProdImage(adminProdImageVO);
 	}
 	
 	

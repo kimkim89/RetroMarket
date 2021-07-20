@@ -29,8 +29,8 @@ public class AdminProductDAO {
 	}
 	
 	//상품 상세 이미지 update
-	public void updateProdImage(AdminProductVO adminProdVO, String product_id) {
-		sqlSession.update("mapper.AdminProd.updateProdImage", adminProdVO);
+	public void updateProdImage(AdminProductImageVO adminProdImageVO) {
+		sqlSession.update("mapper.AdminProd.updateProdImage", adminProdImageVO);
 	}
 		
 	//상품 분류(신상품-1, 인기상품-2, 할인상품-3)
