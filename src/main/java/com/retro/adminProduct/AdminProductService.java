@@ -196,6 +196,10 @@ public class AdminProductService {
 	public void adminProdUpdate( AdminProductVO adminProdVO, 
 								 MultipartFile file1, 
 								 MultipartFile file2, 
+								 MultipartFile file3, 
+								 MultipartFile file4, 
+								 MultipartFile file5, 
+								 MultipartFile file6, 
 								 String uploadPath,
 								 HttpServletRequest request) {		
 							
@@ -263,7 +267,9 @@ public class AdminProductService {
 				
 		admProdDAO.adminProdUpdate(adminProdVO);
 		
-		admProdDAO.updateProdImage(adminProdVO, adminProdVO.getMk_product_id());
+		adminProdImageVO.setPf_product_id(adminProdVO.getMk_product_id());
+		
+		admProdDAO.updateProdImage(adminProdImageVO);
 	}
 	
 	
