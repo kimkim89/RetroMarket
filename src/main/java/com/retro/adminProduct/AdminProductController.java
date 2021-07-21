@@ -187,7 +187,11 @@ public class AdminProductController {
 		@RequestMapping(value = "adminProdUpdate", method = RequestMethod.POST, produces = "application/text; charset=utf-8")
 		public ModelAndView adminProdUpdate( AdminProductVO adminProdVO, 
 											 @RequestParam("original_thumb") MultipartFile file1, 
-											 @RequestParam("original_upfile") MultipartFile file2,
+											 @RequestParam("original_upfile1") MultipartFile file2,
+											 @RequestParam("original_upfile2") MultipartFile file3,
+											 @RequestParam("original_upfile3") MultipartFile file4,
+											 @RequestParam("original_upfile4") MultipartFile file5,
+											 @RequestParam("original_upfile5") MultipartFile file6,
 											 MultipartHttpServletRequest request									
 											) {
 			ModelAndView mav = new ModelAndView();
@@ -200,7 +204,7 @@ public class AdminProductController {
 				makeFolder.mkdirs();
 			}
 			
-			admProdService.adminProdUpdate(adminProdVO, file1, file2, uploadPath, request);
+			admProdService.adminProdUpdate(adminProdVO, file1, file2, file3, file4, file5, file6, uploadPath, request);
 			
 			mav.setViewName("redirect:/adminProd/adminProduct");
 			return mav;

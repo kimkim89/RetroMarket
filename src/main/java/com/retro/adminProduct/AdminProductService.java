@@ -196,6 +196,10 @@ public class AdminProductService {
 	public void adminProdUpdate( AdminProductVO adminProdVO, 
 								 MultipartFile file1, 
 								 MultipartFile file2, 
+								 MultipartFile file3, 
+								 MultipartFile file4, 
+								 MultipartFile file5, 
+								 MultipartFile file6, 
 								 String uploadPath,
 								 HttpServletRequest request) {		
 							
