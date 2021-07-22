@@ -300,18 +300,7 @@ public class AdminProductService {
 		}//상품 이미지 파일2 유무 if문 끝	
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+				
 				File upload_file1 = new File(uploadPath+thumbStoredName);
 				File upload_file2 = new File(uploadPath+upfileStoredName1);
 				File upload_file3 = new File(uploadPath+upfileStoredName2);
@@ -320,8 +309,12 @@ public class AdminProductService {
 				File upload_file6 = new File(uploadPath+upfileStoredName5);
 							
 				try {
-		            file1.transferTo(upload_file1);
+					file1.transferTo(upload_file1);
 		            file2.transferTo(upload_file2);
+		            file3.transferTo(upload_file3);
+		            file4.transferTo(upload_file4);
+		            file5.transferTo(upload_file5);
+		            file6.transferTo(upload_file6);
 		        } catch (IllegalStateException e) {            
 		            e.printStackTrace();
 		        } catch (IOException e) {            
