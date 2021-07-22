@@ -211,12 +211,50 @@ public class AdminProductService {
 				long thumbFileSize = file1.getSize();
 			
 				//상품 이미지 원본 파일명
-				String upfileOrigName = file2.getOriginalFilename();
+				/*String upfileOrigName = file2.getOriginalFilename();
 				//상품 이미지 서버 파일명
 				String upfileStoredName = System.currentTimeMillis() + "_" + upfileOrigName;
 				//상품 이미지 원본 파일 사이즈
-				long upfileFileSize = file2.getSize();
+				long upfileFileSize = file2.getSize();*/
 
+
+				//상품 이미지 원본 파일명1
+				String upfileOrigName1 = file2.getOriginalFilename();		
+				//상품 이미지 서버 파일명1
+				String upfileStoredName1 = System.currentTimeMillis() + "_" + upfileOrigName1;
+				//상품 이미지 원본 파일 사이즈1
+				long upfileFileSize1 = file2.getSize();
+				
+				//상품 이미지 원본 파일명2
+				String upfileOrigName2 = file3.getOriginalFilename();
+				//상품 이미지 서버 파일명2
+				String upfileStoredName2 = System.currentTimeMillis() + "_" + upfileOrigName2;
+				//상품 이미지 원본 파일 사이즈2
+				long upfileFileSize2 = file3.getSize();
+				
+				//상품 이미지 원본 파일명3
+				String upfileOrigName3 = file4.getOriginalFilename();
+				//상품 이미지 서버 파일명3
+				String upfileStoredName3 = System.currentTimeMillis() + "_" + upfileOrigName3;
+				//상품 이미지 원본 파일 사이즈3
+				long upfileFileSize3 = file4.getSize();		
+				
+				//상품 이미지 원본 파일명4
+				String upfileOrigName4 = file5.getOriginalFilename();
+				//상품 이미지 서버 파일명4
+				String upfileStoredName4 = System.currentTimeMillis() + "_" + upfileOrigName4;
+				//상품 이미지 원본 파일 사이즈4
+				long upfileFileSize4 = file5.getSize();	
+				
+				//상품 이미지 원본 파일명5
+				String upfileOrigName5 = file6.getOriginalFilename();
+				//상품 이미지 서버 파일명3
+				String upfileStoredName5 = System.currentTimeMillis() + "_" + upfileOrigName5;
+				//상품 이미지 원본 파일 사이즈3
+				long upfileFileSize5 = file6.getSize();		
+				
+		
+				
 		if(thumbOrigName != "") {//상품 썸네일 파일이 있을 경우
 				
 				//썸네일 파일 정보 저장
@@ -225,18 +263,58 @@ public class AdminProductService {
 				adminProdVO.setMk_thumb_size(thumbFileSize);
 		}//상품 썸네일 파일유무 if문 끝
 		
-		if(upfileOrigName != "") {//상품 이미지 파일이 있을 경우		
+		if(upfileOrigName1 != "") {//상품 이미지 파일1 있을 경우		
 				//상품 이미지 파일 정보 저장
-				adminProdVO.setMk_original_upfile(upfileOrigName);
-				adminProdVO.setMk_stored_upfile(upfileStoredName);
-				adminProdVO.setMk_upfile_size(upfileFileSize);
+				adminProdVO.setMk_original_upfile(upfileOrigName1);
+				adminProdVO.setMk_stored_upfile(upfileStoredName1);
+				adminProdVO.setMk_upfile_size(upfileFileSize1);
 		}//상품 이미지 파일유무 if문 끝		
+		
+		
+		if(upfileOrigName2 != "") {//상품 이미지 파일2 있을 경우		
+			//상품 이미지 파일 정보 저장
+			adminProdVO.setMk_original_upfile(upfileOrigName2);
+			adminProdVO.setMk_stored_upfile(upfileStoredName2);
+			adminProdVO.setMk_upfile_size(upfileFileSize2);
+		}//상품 이미지 파일2 유무 if문 끝	
+		
+		if(upfileOrigName3 != "") {//상품 이미지 파일2 있을 경우		
+			//상품 이미지 파일 정보 저장
+			adminProdVO.setMk_original_upfile(upfileOrigName3);
+			adminProdVO.setMk_stored_upfile(upfileStoredName3);
+			adminProdVO.setMk_upfile_size(upfileFileSize3);
+		}//상품 이미지 파일2 유무 if문 끝	
+		
+		if(upfileOrigName4 != "") {//상품 이미지 파일2 있을 경우		
+			//상품 이미지 파일 정보 저장
+			adminProdVO.setMk_original_upfile(upfileOrigName4);
+			adminProdVO.setMk_stored_upfile(upfileStoredName4);
+			adminProdVO.setMk_upfile_size(upfileFileSize4);
+		}//상품 이미지 파일2 유무 if문 끝	
+		
+		if(upfileOrigName5 != "") {//상품 이미지 파일2 있을 경우		
+			//상품 이미지 파일 정보 저장
+			adminProdVO.setMk_original_upfile(upfileOrigName5);
+			adminProdVO.setMk_stored_upfile(upfileStoredName5);
+			adminProdVO.setMk_upfile_size(upfileFileSize5);
+		}//상품 이미지 파일2 유무 if문 끝	
+		
+		
+				
 				File upload_file1 = new File(uploadPath+thumbStoredName);
-				File upload_file2 = new File(uploadPath+upfileStoredName);
+				File upload_file2 = new File(uploadPath+upfileStoredName1);
+				File upload_file3 = new File(uploadPath+upfileStoredName2);
+				File upload_file4 = new File(uploadPath+upfileStoredName3);
+				File upload_file5 = new File(uploadPath+upfileStoredName4);
+				File upload_file6 = new File(uploadPath+upfileStoredName5);
 							
 				try {
-		            file1.transferTo(upload_file1);
+					file1.transferTo(upload_file1);
 		            file2.transferTo(upload_file2);
+		            file3.transferTo(upload_file3);
+		            file4.transferTo(upload_file4);
+		            file5.transferTo(upload_file5);
+		            file6.transferTo(upload_file6);
 		        } catch (IllegalStateException e) {            
 		            e.printStackTrace();
 		        } catch (IOException e) {            
