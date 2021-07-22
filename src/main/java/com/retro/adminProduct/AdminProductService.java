@@ -194,6 +194,7 @@ public class AdminProductService {
 	
 	//상품 수정 update
 	public void adminProdUpdate( AdminProductVO adminProdVO, 
+								 AdminProductImageVO adminProdImageVO,	
 								 MultipartFile file1, 
 								 MultipartFile file2, 
 								 MultipartFile file3, 
@@ -210,14 +211,7 @@ public class AdminProductService {
 				//썸네일 원본 파일 사이즈
 				long thumbFileSize = file1.getSize();
 			
-				//상품 이미지 원본 파일명
-				/*String upfileOrigName = file2.getOriginalFilename();
-				//상품 이미지 서버 파일명
-				String upfileStoredName = System.currentTimeMillis() + "_" + upfileOrigName;
-				//상품 이미지 원본 파일 사이즈
-				long upfileFileSize = file2.getSize();*/
-
-
+				
 				//상품 이미지 원본 파일명1
 				String upfileOrigName1 = file2.getOriginalFilename();		
 				//상품 이미지 서버 파일명1
@@ -248,59 +242,55 @@ public class AdminProductService {
 				
 				//상품 이미지 원본 파일명5
 				String upfileOrigName5 = file6.getOriginalFilename();
-				//상품 이미지 서버 파일명3
+				//상품 이미지 서버 파일명5
 				String upfileStoredName5 = System.currentTimeMillis() + "_" + upfileOrigName5;
-				//상품 이미지 원본 파일 사이즈3
+				//상품 이미지 원본 파일 사이즈5
 				long upfileFileSize5 = file6.getSize();		
 				
 		
 				
-		if(thumbOrigName != "") {//상품 썸네일 파일이 있을 경우
-				
-				//썸네일 파일 정보 저장
-				adminProdVO.setMk_original_thumb(thumbOrigName);
-				adminProdVO.setMk_stored_thumb(thumbStoredName);
-				adminProdVO.setMk_thumb_size(thumbFileSize);
-		}//상품 썸네일 파일유무 if문 끝
+		if(thumbOrigName != "") {//상품 썸네일 파일이 있을 경우				
+			//썸네일 파일 정보 저장
+			adminProdVO.setMk_original_thumb(thumbOrigName);
+			adminProdVO.setMk_stored_thumb(thumbStoredName);
+			adminProdVO.setMk_thumb_size(thumbFileSize);
+		}//상품 썸네일 파일 유무 if문 끝
 		
 		if(upfileOrigName1 != "") {//상품 이미지 파일1 있을 경우		
-				//상품 이미지 파일 정보 저장
-				adminProdVO.setMk_original_upfile(upfileOrigName1);
-				adminProdVO.setMk_stored_upfile(upfileStoredName1);
-				adminProdVO.setMk_upfile_size(upfileFileSize1);
-		}//상품 이미지 파일유무 if문 끝		
-		
-		
+			//상품 이미지 파일1 정보 저장		
+			adminProdImageVO.setMk_original_upfile1(upfileOrigName1);		
+			adminProdImageVO.setMk_stored_upfile1(upfileStoredName1);
+			adminProdImageVO.setMk_upfile_size1(upfileFileSize1);
+		}//상품 이미지 파일1 유무 if문 끝		
+				
 		if(upfileOrigName2 != "") {//상품 이미지 파일2 있을 경우		
-			//상품 이미지 파일 정보 저장
-			adminProdVO.setMk_original_upfile(upfileOrigName2);
-			adminProdVO.setMk_stored_upfile(upfileStoredName2);
-			adminProdVO.setMk_upfile_size(upfileFileSize2);
+			//상품 이미지 파일2 정보 저장
+			adminProdImageVO.setMk_original_upfile2(upfileOrigName2);
+			adminProdImageVO.setMk_stored_upfile2(upfileStoredName2);
+			adminProdImageVO.setMk_upfile_size2(upfileFileSize2);
 		}//상품 이미지 파일2 유무 if문 끝	
 		
 		if(upfileOrigName3 != "") {//상품 이미지 파일2 있을 경우		
-			//상품 이미지 파일 정보 저장
-			adminProdVO.setMk_original_upfile(upfileOrigName3);
-			adminProdVO.setMk_stored_upfile(upfileStoredName3);
-			adminProdVO.setMk_upfile_size(upfileFileSize3);
-		}//상품 이미지 파일2 유무 if문 끝	
+			//상품 이미지 파일3 정보 저장
+			adminProdImageVO.setMk_original_upfile3(upfileOrigName3);
+			adminProdImageVO.setMk_stored_upfile3(upfileStoredName3);
+			adminProdImageVO.setMk_upfile_size3(upfileFileSize3);
+		}//상품 이미지 파일3 유무 if문 끝	
 		
 		if(upfileOrigName4 != "") {//상품 이미지 파일2 있을 경우		
-			//상품 이미지 파일 정보 저장
-			adminProdVO.setMk_original_upfile(upfileOrigName4);
-			adminProdVO.setMk_stored_upfile(upfileStoredName4);
-			adminProdVO.setMk_upfile_size(upfileFileSize4);
-		}//상품 이미지 파일2 유무 if문 끝	
+			//상품 이미지 파일5 정보 저장
+			adminProdImageVO.setMk_original_upfile5(upfileOrigName5);
+			adminProdImageVO.setMk_stored_upfile5(upfileStoredName5);
+			adminProdImageVO.setMk_upfile_size5(upfileFileSize5);
+		}//상품 이미지 파일4 유무 if문 끝	
 		
 		if(upfileOrigName5 != "") {//상품 이미지 파일2 있을 경우		
 			//상품 이미지 파일 정보 저장
 			adminProdVO.setMk_original_upfile(upfileOrigName5);
 			adminProdVO.setMk_stored_upfile(upfileStoredName5);
 			adminProdVO.setMk_upfile_size(upfileFileSize5);
-		}//상품 이미지 파일2 유무 if문 끝	
-		
-		
-				
+		}//상품 이미지 파일5 유무 if문 끝	
+						
 				File upload_file1 = new File(uploadPath+thumbStoredName);
 				File upload_file2 = new File(uploadPath+upfileStoredName1);
 				File upload_file3 = new File(uploadPath+upfileStoredName2);
@@ -346,6 +336,8 @@ public class AdminProductService {
 		admProdDAO.adminProdUpdate(adminProdVO);
 		
 		adminProdImageVO.setPf_product_id(adminProdVO.getMk_product_id());
+		
+		System.out.println("상품번호 " + adminProdImageVO.getPf_product_id());
 		
 		admProdDAO.updateProdImage(adminProdImageVO);
 	}

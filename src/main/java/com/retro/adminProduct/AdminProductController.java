@@ -186,6 +186,7 @@ public class AdminProductController {
 		//상품정보 update
 		@RequestMapping(value = "adminProdUpdate", method = RequestMethod.POST, produces = "application/text; charset=utf-8")
 		public ModelAndView adminProdUpdate( AdminProductVO adminProdVO, 
+											 AdminProductImageVO adminProdImageVO,
 											 @RequestParam("original_thumb") MultipartFile file1, 
 											 @RequestParam("original_upfile1") MultipartFile file2,
 											 @RequestParam("original_upfile2") MultipartFile file3,
@@ -204,7 +205,7 @@ public class AdminProductController {
 				makeFolder.mkdirs();
 			}
 			
-			admProdService.adminProdUpdate(adminProdVO, file1, file2, file3, file4, file5, file6, uploadPath, request);
+			admProdService.adminProdUpdate(adminProdVO, adminProdImageVO, file1, file2, file3, file4, file5, file6, uploadPath, request);
 			
 			mav.setViewName("redirect:/adminProd/adminProduct");
 			return mav;
