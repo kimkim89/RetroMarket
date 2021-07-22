@@ -12,12 +12,6 @@
 		values(#{mk_idx}, #{mk_product_id}, #{mk_product_name}, #{mk_product_price}, #{mk_product_discount_price},
  			   #{mk_product_category}, #{mk_product_type}, #{mk_original_thumb}, #{mk_stored_thumb}, #{mk_thumb_size}, #{mk_status}, #{mk_content},
 			   #{mk_inventory}, now(), now(), 10, 20, #{mk_writer_ip});
-			   
-<!-- 		insert into product_info -->
-<!-- 		values(#{mk_idx}, #{mk_product_id}, #{mk_product_name}, #{mk_product_price}, #{mk_product_discount_price}, -->
-<!--  			   #{mk_product_category}, #{mk_product_type}, #{mk_original_thumb}, #{mk_stored_thumb}, #{mk_thumb_size}, #{mk_status}, #{mk_content}, -->
-<!-- 			   #{mk_original_upfile}, #{mk_stored_upfile}, #{mk_upfile_size}, #{mk_inventory}, now(),  -->
-<!-- 			   now(), 10, 20, #{mk_writer_ip});	    -->
 	</insert>
 	
 	
@@ -46,40 +40,6 @@
 				);
  	</insert>
  	
- 	<update id="updateProdImage" parameterType="adminProdImageVO">
- 	update product_file
- 	 		set 
- 	 		<if test="mk_original_upfile1 != null">
- 	 			mk_original_upfile1 = #{mk_original_upfile1}, 
-				mk_stored_upfile1 	= #{mk_stored_upfile1}, 
-				mk_upfile_size1 	= #{mk_upfile_size1}, 
-			</if> 
-			<if test="mk_original_upfile2 != null">				
-				mk_original_upfile2 = #{mk_original_upfile2}, 
-				mk_stored_upfile2 	= #{mk_stored_upfile2}, 
-				mk_upfile_size2 	= #{mk_upfile_size2},
-			</if> 	 
-			<if test="mk_original_upfile3 != null">				
-				mk_original_upfile3 = #{mk_original_upfile3}, 
-				mk_stored_upfile3 	= #{mk_stored_upfile3}, 
-				mk_upfile_size3 	= #{mk_upfile_size3},
-			</if> 	 	
-			<if test="mk_original_upfile4 != null">			
-				mk_original_upfile4 = #{mk_original_upfile4}, 
-				mk_stored_upfile4 	= #{mk_stored_upfile4}, 
-				mk_upfile_size4 	= #{mk_upfile_size4}, 	
-			</if> 
-			<if test="mk_original_upfile5 != null">			
-				mk_original_upfile5 = #{mk_original_upfile5}, 
-				mk_stored_upfile5 	= #{mk_stored_upfile5}, 
-				mk_upfile_size5 	= #{mk_upfile_size5},
-			</if> 	
-				udate				= #{udate}				
-				);   
-			where pf_idx = #{pf_idx};
-	</update>
-	
-	
 	
 	
 	<!-- 전체 상품목록(select) -->
@@ -119,16 +79,48 @@
 			mk_thumb_size = #{mk_thumb_size},
 		</if> 
 			mk_status = #{mk_status}, 
-			mk_content = #{mk_content}, 
-		<if test="mk_original_upfile != null">
-			mk_original_upfile = #{mk_original_upfile}, 
-			mk_stored_upfile = #{mk_stored_upfile}, 
-			mk_upfile_size = #{mk_upfile_size}, 
-		</if>
+			mk_content = #{mk_content}, 		
 			mk_inventory = #{mk_inventory},  
 			mk_writer_ip = #{mk_writer_ip}
 		where mk_idx = ${mk_idx};
 	</update>
+	
+	
+	<!-- 상품 상세보기 이미지 5개 update -->
+ 	<update id="updateProdImage" parameterType="adminProdImageVO">
+ 	update product_file
+ 	 		set 
+ 	 		<if test="mk_original_upfile1 != null">
+ 	 			mk_original_upfile1 = #{mk_original_upfile1}, 
+				mk_stored_upfile1 	= #{mk_stored_upfile1}, 
+				mk_upfile_size1 	= #{mk_upfile_size1}, 
+			</if> 
+			<if test="mk_original_upfile2 != null">				
+				mk_original_upfile2 = #{mk_original_upfile2}, 
+				mk_stored_upfile2 	= #{mk_stored_upfile2}, 
+				mk_upfile_size2 	= #{mk_upfile_size2},
+			</if> 	 
+			<if test="mk_original_upfile3 != null">				
+				mk_original_upfile3 = #{mk_original_upfile3}, 
+				mk_stored_upfile3 	= #{mk_stored_upfile3}, 
+				mk_upfile_size3 	= #{mk_upfile_size3},
+			</if> 	 	
+			<if test="mk_original_upfile4 != null">			
+				mk_original_upfile4 = #{mk_original_upfile4}, 
+				mk_stored_upfile4 	= #{mk_stored_upfile4}, 
+				mk_upfile_size4 	= #{mk_upfile_size4}, 	
+			</if> 
+			<if test="mk_original_upfile5 != null">			
+				mk_original_upfile5 = #{mk_original_upfile5}, 
+				mk_stored_upfile5 	= #{mk_stored_upfile5}, 
+				mk_upfile_size5 	= #{mk_upfile_size5},
+			</if> 	
+				udate				= #{udate}	
+			where pf_idx = #{pf_idx};
+	</update>
+	
+	
+	
 
 	<!-- 상품 분류(신상품/인기상품/할인상품) -->
 	<select id="selectProdSort" resultType="adminProdVO">
