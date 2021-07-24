@@ -2,11 +2,15 @@ package com.retro.moonmarket;
 
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.retro.adminProduct.AdminProductService;
+import com.retro.common.PagingService;
 
 /**
  * Handles requests for the application home page.
@@ -15,12 +19,20 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/index/*")
 public class HomeController {
 	
+	@Autowired
+	private AdminProductService admProdService;
+	private PagingService pagingService;
+
+	
 	ModelAndView mav = new ModelAndView();
 	
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
 //		String notice = "";
 //		mav.addObject("notice", notice);
+		
+		
+		
 		mav.setViewName("index");
 		return mav;
 	}

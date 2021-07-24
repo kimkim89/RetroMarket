@@ -65,7 +65,7 @@
                     <div class="col-xl-7 col-lg-8 col-md-7">
                         <div class="footer-copy-right">
                             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  RetroMarketProject &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This Site is made <i class="fa fa-heart" aria-hidden="true"></i> by <b><mark>Developer Moon</mark></b>
+  RetroMarketProject &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This Site is made <i class="fa fa-heart" aria-hidden="true"></i> by <b><mark>Developer Moon & Developer Jaen Kim</mark></b>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>                  
                         </div>
                     </div>
