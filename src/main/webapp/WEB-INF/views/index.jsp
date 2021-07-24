@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 d-none d-sm-block">
+                            <div class="col-xl-3 col-lg-3 col-md-4 c이ol-sm-4 d-none d-sm-block">
                                 <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
                                     <img src="${contextPath}/resources/assets/img/newtro/mainewtro.jpg" style="width: 630px; height: 720px;" alt="" class=" heartbeat">
                                 </div>

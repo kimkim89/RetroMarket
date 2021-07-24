@@ -6,13 +6,21 @@
    
 <mapper namespace="mapper.HomeMain">
 	
-	<!-- 메인 화면에 상품 정보 출력 -->
-	<select id="selectMainProdImage" resultType="memberVO">
-		<![CDATA[
-		select * from product_info;
-		]]>
+	<!-- 메인 화면에 상품 정보 출력 (신상품)-->
+	<select id="selectImageByDate" resultType="">		
+		select * from product_info order by mk_register_date;		
 	</select>
 	
+	<!-- 메인 화면에 상품 정보 출력 (할인상품)-->
+	<select id="selectImageByDiscount" resultType="">		
+		select * from product_info order by mk_register_date;		
+	</select>
+
+	<!-- 메인 화면에 상품 정보 출력 (인기상품)-->
+	<select id="selectImageByPopularity" resultType="">		
+		select * from product_info order by mk_register_date;		
+	</select>
+
 	
 	
 	
