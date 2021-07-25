@@ -7,18 +7,21 @@
 <mapper namespace="mapper.HomeMain">
 	
 	<!-- 메인 화면에 상품 정보 출력 (신상품)-->
-	<select id="selectImageByDate" resultType="">		
-		select * from product_info order by mk_register_date;		
+	<select id="selectImageByDate" resultType="java.util.HashMap">		
+		select * from product_info as a left join product_file as b on a.index = b.pf_product_id order by a.mk_register_date desc;		
 	</select>
 	
 	<!-- 메인 화면에 상품 정보 출력 (할인상품)-->
-	<select id="selectImageByDiscount" resultType="">		
-		select * from product_info order by mk_register_date;		
+	<select id="selectImageByDiscount" resultType="java.util.HashMap">		
+		select * from product_info as a left join product_file as b 
+				on a.index = b.pf_product_id 
+				where a.mk_product_discount_price is not null
+				order by a.mk_register_date desc;		
 	</select>
 
 	<!-- 메인 화면에 상품 정보 출력 (인기상품)-->
-	<select id="selectImageByPopularity" resultType="">		
-		select * from product_info order by mk_register_date;		
+	<select id="selectImageByPopularity" resultType="java.util.HashMap">		
+		select * from product_info as a left join product_file as b on a.index = b.pf_product_id order by a.mk_sold_number desc;		
 	</select>
 
 	

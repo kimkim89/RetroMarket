@@ -9,9 +9,9 @@
 	<!-- 상품 등록(insert) -->
  	<insert id="adminProdInsert" parameterType="adminProdVO">
  		insert into product_info
-		values(#{mk_idx}, #{mk_product_id}, #{mk_product_name}, #{mk_product_price}, #{mk_product_discount_price},
+		values(#{mk_idx}, #{mk_product_id}, #{mk_product_name}, #{mk_product_price}, #{mk_product_discount_rate},
  			   #{mk_product_category}, #{mk_product_type}, #{mk_original_thumb}, #{mk_stored_thumb}, #{mk_thumb_size}, #{mk_status}, #{mk_content},
-			   #{mk_inventory}, now(), now(), 10, 20, #{mk_writer_ip});
+			   #{mk_inventory}, now(), now(), 10, 20, #{mk_writer_ip}, 11);
 	</insert>
 	
 	
