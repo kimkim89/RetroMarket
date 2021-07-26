@@ -30,7 +30,10 @@ public class HomeMainController {
 		List ListByRegDate = homeMainService.selectImageByRegDate();
 		List ListByDiscount = homeMainService.selectImageByDiscountRate();
 		List ListBySoldNum = homeMainService.selectImageBySoldNum();
-				
+		
+		mav.addObject("ListByRegDate", ListByRegDate);
+		mav.addObject("ListByDiscount", ListByDiscount);
+		mav.addObject("ListBySoldNum", ListBySoldNum);
 		mav.setViewName("index");
 		return mav;
 	}
