@@ -20,6 +20,7 @@ public class HomeMainService {
 	
 	//최신상품 정렬 by 신상품
 	public List<HashMap<String, Object>> selectImageByRegDate() {
+		System.out.println(homeMainDAO.selectImageByRegDate());
 		return homeMainDAO.selectImageByRegDate();
 	}
 	
