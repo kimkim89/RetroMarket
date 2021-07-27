@@ -247,8 +247,7 @@ public class AdminProductService {
 				//상품 이미지 원본 파일 사이즈5
 				long upfileFileSize5 = file6.getSize();		
 				
-		
-				
+								
 		if(thumbOrigName != "") {//상품 썸네일 파일이 있을 경우				
 			//썸네일 파일 정보 저장
 			adminProdVO.setMk_original_thumb(thumbOrigName);
@@ -279,18 +278,25 @@ public class AdminProductService {
 		
 		if(upfileOrigName4 != "") {//상품 이미지 파일2 있을 경우		
 			//상품 이미지 파일5 정보 저장
-			adminProdImageVO.setMk_original_upfile5(upfileOrigName5);
-			adminProdImageVO.setMk_stored_upfile5(upfileStoredName5);
-			adminProdImageVO.setMk_upfile_size5(upfileFileSize5);
+			adminProdImageVO.setMk_original_upfile4(upfileOrigName4);
+			adminProdImageVO.setMk_stored_upfile4(upfileStoredName4);
+			adminProdImageVO.setMk_upfile_size4(upfileFileSize4);
 		}//상품 이미지 파일4 유무 if문 끝	
 		
 		if(upfileOrigName5 != "") {//상품 이미지 파일2 있을 경우		
 			//상품 이미지 파일 정보 저장
-			adminProdVO.setMk_original_upfile(upfileOrigName5);
-			adminProdVO.setMk_stored_upfile(upfileStoredName5);
-			adminProdVO.setMk_upfile_size(upfileFileSize5);
+			adminProdImageVO.setMk_original_upfile5(upfileOrigName5);
+			adminProdImageVO.setMk_stored_upfile5(upfileStoredName5);
+			adminProdImageVO.setMk_upfile_size5(upfileFileSize5);
 		}//상품 이미지 파일5 유무 if문 끝	
 						
+
+		System.out.println("파일2: " + upfileOrigName1);
+		System.out.println("파일3: " + upfileOrigName2);
+		System.out.println("파일4: " + upfileOrigName3);
+		System.out.println("파일5: " + upfileOrigName4);
+		System.out.println("파일6: " + upfileOrigName5);
+		
 				File upload_file1 = new File(uploadPath+thumbStoredName);
 				File upload_file2 = new File(uploadPath+upfileStoredName1);
 				File upload_file3 = new File(uploadPath+upfileStoredName2);

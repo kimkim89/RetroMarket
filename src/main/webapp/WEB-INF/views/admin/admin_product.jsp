@@ -117,7 +117,7 @@
 												<td style="vertical-align: middle;">
 													<div class="flex-container">
 														<div class="flex-item">
-															<img src="${contextPath}/resources/images/temporary/${prodList.mk_stored_thumb}" style="width: 150px;">
+															<img src="${contextPath}/resources/images/temporary/${prodList.mk_stored_thumb}" style="width: 150px; height: 140px;">
 														</div>
 														<div class="flex-item">
 															<input type="text" class="form-control" value="${prodList.mk_product_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
