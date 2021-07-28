@@ -115,7 +115,7 @@
 				mk_stored_upfile5 	= #{mk_stored_upfile5}, 
 				mk_upfile_size5 	= #{mk_upfile_size5},
 			</if> 	
-				udate				= #{udate}	
+				udate				= now()	
 			where pf_idx = #{pf_idx};
 	</update>
 	

@@ -13,7 +13,7 @@ public class AdminProductVO {
 	private String mk_product_id;
 	private String mk_product_name;
 	private int mk_product_price;
-	private int mk_product_discount_price;
+	private int mk_product_discount_rate;
 	private int mk_product_category;
 	private int mk_product_type;
 	private String mk_original_thumb;
