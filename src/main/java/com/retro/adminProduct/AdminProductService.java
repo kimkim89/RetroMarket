@@ -291,11 +291,11 @@ public class AdminProductService {
 		}//상품 이미지 파일5 유무 if문 끝	
 						
 
-		System.out.println("파일2: " + upfileOrigName1);
-		System.out.println("파일3: " + upfileOrigName2);
-		System.out.println("파일4: " + upfileOrigName3);
-		System.out.println("파일5: " + upfileOrigName4);
-		System.out.println("파일6: " + upfileOrigName5);
+//		System.out.println("파일2: " + upfileOrigName1);
+//		System.out.println("파일3: " + upfileOrigName2);
+//		System.out.println("파일4: " + upfileOrigName3);
+//		System.out.println("파일5: " + upfileOrigName4);
+//		System.out.println("파일6: " + upfileOrigName5);
 		
 				File upload_file1 = new File(uploadPath+thumbStoredName);
 				File upload_file2 = new File(uploadPath+upfileStoredName1);
