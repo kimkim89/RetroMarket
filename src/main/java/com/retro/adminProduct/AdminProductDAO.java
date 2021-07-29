@@ -30,6 +30,7 @@ public class AdminProductDAO {
 	
 	//상품 상세 이미지 update
 	public void updateProdImage(AdminProductImageVO adminProdImageVO) {
+		System.out.println(sqlSession.update("mapper.AdminProd.updateProdImage"));
 		sqlSession.update("mapper.AdminProd.updateProdImage", adminProdImageVO);
 	}
 		
