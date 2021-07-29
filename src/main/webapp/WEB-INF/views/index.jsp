@@ -76,6 +76,7 @@
                     </div>
                 </div>
                 <div class="row">
+                	<c:forEach var="listByRegDate" items="${ListByRegDate}" varStatus="status">	
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-new-pro mb-30 text-center">
                             <div class="product-img">
@@ -85,33 +86,34 @@
                                 </div>
                             </div>
                             <div class="product-caption">
-                                <h3><a href="product_details.html">아몬드 빼빼로</a></h3>
-                                <span>1000원</span>
+                                <h3><a href="product_details.html">${listByRegDate.mk_product_name}</a></h3>
+                                <span>${listByRegDate.mk_product_price}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-new-pro mb-30 text-center">
-                            <div class="product-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s3.GIF" alt="">
-                            </div>
-                            <div class="product-caption">
-                                <h3><a href="product_details.html">누드 빼빼로</a></h3>
-                                <span>1000원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-new-pro mb-30 text-center">
-                            <div class="product-img">
-                                <img style="height: 613.82;" src="${contextPath}/resources/assets/img/gallery/s2.GIF" alt="">
-                            </div>
-                            <div class="product-caption">
-                                <h3><a href="product_details.html">일반 빼빼로</a></h3>
-                                <span>1000원</span>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
+<!--                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6"> -->
+<!--                         <div class="single-new-pro mb-30 text-center"> -->
+<!--                             <div class="product-img"> -->
+<%--                                 <img src="${contextPath}/resources/assets/img/gallery/s3.GIF" alt=""> --%>
+<!--                             </div> -->
+<!--                             <div class="product-caption"> -->
+<!--                                 <h3><a href="product_details.html">누드 빼빼로</a></h3> -->
+<!--                                 <span>1000원</span> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6"> -->
+<!--                         <div class="single-new-pro mb-30 text-center"> -->
+<!--                             <div class="product-img"> -->
+<%--                                 <img style="height: 613.82;" src="${contextPath}/resources/assets/img/gallery/s2.GIF" alt=""> --%>
+<!--                             </div> -->
+<!--                             <div class="product-caption"> -->
+<!--                                 <h3><a href="product_details.html">일반 빼빼로</a></h3> -->
+<!--                                 <span>1000원</span> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
                 </div>
             </div>
         </section>
