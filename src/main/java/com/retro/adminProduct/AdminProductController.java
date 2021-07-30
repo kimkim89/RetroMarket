@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonObject;
 import com.retro.common.PagingService;
@@ -176,10 +177,19 @@ public class AdminProductController {
 		
 		//상품 삭제(delete)
 		@RequestMapping(value="adminProdDelete/{product_num}", method = RequestMethod.GET)
-		public void adminProdDelete(@PathVariable("product_num") String product_num) {
+		public ModelAndView adminProdDelete(@PathVariable("product_num") String product_num, RedirectAttributes attributes) {
+			ModelAndView mav = new ModelAndView();
+			
 			//상품 인덱스 번호
 			int product_idx = Integer.parseInt(product_num);			
 			admProdService.adminProdDelete(product_idx);
+			
+			String msg = "";
+			msg = "회원 삭제 되었습니다.";
+			
+			attributes.addFlashAttribute("msg", msg);
+			mav.setViewName("redirect:/adminProd/adminProduct");
+			return mav;
 		}
 		
 		
