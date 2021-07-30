@@ -116,7 +116,7 @@
 				mk_upfile_size5 	= #{mk_upfile_size5},
 			</if> 	
 				udate				= now()	
-			where pf_idx = #{pf_idx};
+			where pf_product_id = #{pf_product_id};
 	</update>
 	
 	
