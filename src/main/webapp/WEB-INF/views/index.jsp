@@ -76,11 +76,11 @@
                     </div>
                 </div>
                 <div class="row">
-<%--                 	<c:forEach var="listByRegDate" items="${ListByRegDate}" varStatus="status">	 --%>
+                	<c:forEach var="listByRegDate" items="${ListByRegDate}" varStatus="status">	
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-new-pro mb-30 text-center">
                             <div class="product-img">
-                                <img class="snack-img" src="${contextPath}/resources/assets/img/gallery/s1.GIF" alt="">
+                                <img class="snack-img" src="${contextPath}/resources/images/temporary/${listByRegDate.mk_stored_thumb}" alt="">
                                  <div class="img-cap">
                                     <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
                                 </div>
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                     </div>
-<%--                     </c:forEach> --%>
+                    </c:forEach>
 <!--                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6"> -->
 <!--                         <div class="single-new-pro mb-30 text-center"> -->
 <!--                             <div class="product-img"> -->
