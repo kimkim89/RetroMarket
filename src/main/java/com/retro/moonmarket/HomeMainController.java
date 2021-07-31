@@ -1,5 +1,6 @@
 package com.retro.moonmarket;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -27,13 +28,13 @@ public class HomeMainController {
 		ModelAndView mav = new ModelAndView();
 		
 		
-		List ListByRegDate = homeMainService.selectImageByRegDate();
-		List ListByDiscount = homeMainService.selectImageByDiscountRate();
-		List ListBySoldNum = homeMainService.selectImageBySoldNum();
+		List<HashMap<String, Object>> ListByRegDate = homeMainService.selectImageByRegDate();
+//		List ListByDiscount = homeMainService.selectImageByDiscountRate();
+//		List ListBySoldNum = homeMainService.selectImageBySoldNum();
 		
 		mav.addObject("ListByRegDate", ListByRegDate);
-		mav.addObject("ListByDiscount", ListByDiscount);
-		mav.addObject("ListBySoldNum", ListBySoldNum);
+//		mav.addObject("ListByDiscount", ListByDiscount);
+//		mav.addObject("ListBySoldNum", ListBySoldNum);
 		mav.setViewName("index");
 		return mav;
 	}

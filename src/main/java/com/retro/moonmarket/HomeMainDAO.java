@@ -16,12 +16,13 @@ public class HomeMainDAO {
 	
 	//메인 화면에 상품 정보 출력 (신상품)
 	public List<HashMap<String, Object>> selectImageByRegDate() {
+		System.out.println("테스트1234");
 		return sqlSession.selectList("mapper.HomeMain.selectImageByRegDate");
 		
 	}
 	
 	//메인 화면에 상품 정보 출력 (할인상품)
-	public List<HashMap<String, Object>> selectImageByDiscountRate() {
+	/*public List<HashMap<String, Object>> selectImageByDiscountRate() {
 		return sqlSession.selectList("mapper.HomeMain.selectImageByDiscountRate");
 		
 	}
@@ -30,7 +31,7 @@ public class HomeMainDAO {
 	public List<HashMap<String, Object>> selectImageBySoldNum() {
 		return sqlSession.selectList("mapper.HomeMain.selectImageBySoldNum");
 		
-	}
+	}*/
 	
 	
 	

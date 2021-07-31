@@ -7,7 +7,7 @@
 
 	<!-- Test -->
 	<select id="Test" parameterType="HashMap" resultType="memberVO">
-		select * from memeber
+		select * from memeber;
 	</select>
 	
 	<!-- 회원 가입 -->

@@ -76,7 +76,7 @@
                     </div>
                 </div>
                 <div class="row">
-                	<c:forEach var="listByRegDate" items="${ListByRegDate}" varStatus="status">	
+<%--                 	<c:forEach var="listByRegDate" items="${ListByRegDate}" varStatus="status">	 --%>
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-new-pro mb-30 text-center">
                             <div class="product-img">
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                     </div>
-                    </c:forEach>
+<%--                     </c:forEach> --%>
 <!--                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6"> -->
 <!--                         <div class="single-new-pro mb-30 text-center"> -->
 <!--                             <div class="product-img"> -->

@@ -8,5 +8,6 @@
 		<typeAlias type="com.retro.admin.PointVO" alias="pointVO"/>
 		<typeAlias type="com.retro.adminProduct.AdminProductVO" alias="adminProdVO"/>
 		<typeAlias type="com.retro.adminProduct.AdminProductImageVO" alias="adminProdImageVO"/>
+		<typeAlias type="com.retro.moonmarket.HomeMainVO" alias="homeMainVO"/>
 	</typeAliases>
 </configuration>
