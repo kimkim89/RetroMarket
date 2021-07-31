@@ -210,10 +210,6 @@ public class AdminProductController {
 			//서버 물리적 경로
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			
-			System.out.println("경로확인: " + uploadPath);
-			System.out.println("경로확인1: " + request.getSession());
-			System.out.println("경로확인2: " + request.getSession().getServletContext().getRealPath("/"));
-			
 			File makeFolder = new File(uploadPath);
 			if(!makeFolder.exists()) {
 				makeFolder.mkdirs();
