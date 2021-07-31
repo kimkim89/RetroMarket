@@ -80,7 +80,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-new-pro mb-30 text-center">
                             <div class="product-img">
-                                <img class="snack-img" src="${contextPath}/resources/assets/img/gallery/s1.GIF" alt="">
+                                <img class="snack-img" src="${contextPath}/resources/images/temporary/${listByRegDate.mk_stored_thumb}" alt="">
                                  <div class="img-cap">
                                     <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
                                 </div>
@@ -309,58 +309,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s1.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>2500원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s2.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>2500원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s3.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>1300원</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
                 <!-- Button -->
                 <div class="row justify-content-center">
                     <div class="room-btn pt-70">

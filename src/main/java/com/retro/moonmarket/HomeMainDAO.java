@@ -12,19 +12,20 @@ import org.springframework.stereotype.Repository;
 public class HomeMainDAO {
 	
 	@Autowired
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	//메인 화면에 상품 정보 출력 (신상품)
 	public List<HashMap<String, Object>> selectImageByRegDate() {
+		System.out.println("test중이다");
 		return sqlSession.selectList("mapper.HomeMain.selectImageByRegDate");
 		
 	}
 	
 	//메인 화면에 상품 정보 출력 (할인상품)
-	public List<HashMap<String, Object>> selectImageByDiscountRate() {
+	/*public List<HashMap<String, Object>> selectImageByDiscountRate() {
 		return sqlSession.selectList("mapper.HomeMain.selectImageByDiscountRate");
 		
-	}
+	}*/
 		
 	//메인 화면에 상품 정보 출력 (인기순)
 	public List<HashMap<String, Object>> selectImageBySoldNum() {
