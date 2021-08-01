@@ -13,7 +13,7 @@
 		on a.mk_product_id = b.pf_product_id 
 		where a.mk_product_type = 1 
 		order by a.mk_register_date desc 
-		limit 6;	
+		limit 3;	
 	</select>
 	
 	<!-- 메인 화면에 상품 정보 출력 (할인상품)-->
@@ -32,7 +32,7 @@
 		on a.mk_product_id = b.pf_product_id 
 		where a.mk_product_type = 2 
 		order by a.mk_register_date desc 
-		limit 6;			
+		limit 3;			
 <!-- 		order by a.mk_sold_number desc limit 6;		 -->
 	</select>
 
