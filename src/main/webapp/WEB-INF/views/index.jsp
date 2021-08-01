@@ -64,78 +64,62 @@
             </div>
         </div>
         <!-- slider Area End-->
-        <!-- ? New Product Start -->
-        <section class="new-product-area section-padding30">
+ 
+        
+        <!--? New Updated Items Start -->
+        <div class="popular-items section-padding30" style="padding-top:60px;">
             <div class="container">
                 <!-- Section tittle -->
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="section-tittle mb-70">
-                            <h2>신상 과자</h2>
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8 col-md-10">
+                        <div class="section-tittle mb-70 text-center">
+                            <h2>신상품</h2>
+                            <p>새로운 상품을 확인해보세요!</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                	<c:forEach var="listByRegDate" items="${ListByRegDate}" varStatus="status">	
+                <c:forEach var="listByRegDate" items="${ListByRegDate}" varStatus="status">	
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-new-pro mb-30 text-center">
-                            <div class="product-img">
+                        <div class="single-popular-items mb-50 text-center">
+                            <div class="popular-img">
                                 <img class="snack-img" src="${contextPath}/resources/images/temporary/${listByRegDate.mk_stored_thumb}" alt="">
-                                 <div class="img-cap">
+                                <div class="img-cap">
                                     <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
                                 </div>
+                                <div class="favorit-items">
+                                    <span class="flaticon-heart"></span>
+                                </div>
                             </div>
-                            <div class="product-caption">
+                            <div class="popular-caption">
                                 <h3><a href="product_details.html">${listByRegDate.mk_product_name}</a></h3>
                                 <span>${listByRegDate.mk_product_price}</span>
                             </div>
                         </div>
                     </div>
-                    </c:forEach>
-<!--                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6"> -->
-<!--                         <div class="single-new-pro mb-30 text-center"> -->
-<!--                             <div class="product-img"> -->
-<%--                                 <img src="${contextPath}/resources/assets/img/gallery/s3.GIF" alt=""> --%>
-<!--                             </div> -->
-<!--                             <div class="product-caption"> -->
-<!--                                 <h3><a href="product_details.html">누드 빼빼로</a></h3> -->
-<!--                                 <span>1000원</span> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6"> -->
-<!--                         <div class="single-new-pro mb-30 text-center"> -->
-<!--                             <div class="product-img"> -->
-<%--                                 <img style="height: 613.82;" src="${contextPath}/resources/assets/img/gallery/s2.GIF" alt=""> --%>
-<!--                             </div> -->
-<!--                             <div class="product-caption"> -->
-<!--                                 <h3><a href="product_details.html">일반 빼빼로</a></h3> -->
-<!--                                 <span>1000원</span> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
+                 </c:forEach>
                 </div>
-            </div>
-        </section>
-        <!--  New Product End -->
-        
+                <!--? New Updated Items End -->
+                
+                
         <!--? Popular Items Start -->
-        <div class="popular-items section-padding30" style="padding-top:60px;">
+        <div class="popular-items section-padding30" style="padding-top:30px;">
             <div class="container">
                 <!-- Section tittle -->
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8 col-md-10">
                         <div class="section-tittle mb-70 text-center">
-                            <h2>할인 품목</h2>
+                            <h2>인기 상품</h2>
                             <p>걍 안팔려서 싸게 팝니다.</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                <c:forEach var="listBySoldNum" items="${ListBySoldNum}" varStatus="status">	
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s1.GIF" alt="">
+                                <img class="snack-img" src="${contextPath}/resources/images/temporary/${listBySoldNum.mk_stored_thumb}" alt="">
                                 <div class="img-cap">
                                     <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
                                 </div>
@@ -144,182 +128,54 @@
                                 </div>
                             </div>
                             <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>500원</span>
+                                <h3><a href="product_details.html">${listBySoldNum.mk_product_name}</a></h3>
+                                <span>${listBySoldNum.mk_product_price}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s2.GIF" alt="">
-                                <div class="img-cap">
-                                    <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>1500원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s3.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>1500원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s1.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>2500원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s2.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>2500원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s3.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>1300원</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Button -->
-                <div class="row justify-content-center">
-                    <div class="room-btn pt-70">
-                        <a href="${contextPath}/product/productList" class="btn view-btn1">더 보고싶어 ?</a>
-                    </div>
+                 </c:forEach>
                 </div>
             </div>
         </div>
         <!-- Popular Items End -->
-        
-        <!--? Popular Items Start -->
-        <div class="popular-items section-padding30" style="padding-top:60px;">
+       
+        <!--? On Sale Items Start -->
+        <div class="popular-items section-padding30" style="padding-top:30px;">
             <div class="container">
                 <!-- Section tittle -->
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8 col-md-10">
                         <div class="section-tittle mb-70 text-center">
-                            <h2>인기 품목</h2>
-                            <p>다양한 추억의 먹거리들 중 잼민이들이 가장 좋아하는 인기 상품들입니다.</p>
+                            <h2>할인 상품</h2>
+                            <p>걍 안팔려서 싸게 팝니다.</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                <c:forEach var="listByDiscount" items="${ListByDiscount}" varStatus="status">	
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s1.GIF" alt="">
+                                <img class="snack-img" src="${contextPath}/resources/images/temporary/${listByDiscount.mk_stored_thumb}" alt="">
                                 <div class="img-cap">
-                                    <span>상품 보기</span>
+                                    <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
                                 </div>
                                 <div class="favorit-items">
                                     <span class="flaticon-heart"></span>
                                 </div>
                             </div>
                             <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>500원</span>
+                                <h3><a href="product_details.html">${listByDiscount.mk_product_name}</a></h3>
+                                <span>${listByDiscount.mk_product_price}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s2.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>1500원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s3.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>1500원</span>
-                            </div>
-                        </div>
-                    </div>
-
-
-                <!-- Button -->
-                <div class="row justify-content-center">
-                    <div class="room-btn pt-70">
-                        <a href="${contextPath}/product/productList" class="btn view-btn1">더 보고싶어 ?</a>
-                    </div>
+                 </c:forEach>
                 </div>
             </div>
         </div>
-        <!-- Popular Items End -->
+        <!-- On Sale Items End -->        
+
         
         <!--? Shop Method Start-->
         <div class="shop-method-area">
