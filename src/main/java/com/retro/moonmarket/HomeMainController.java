@@ -29,11 +29,11 @@ public class HomeMainController {
 		
 		
 		List<HashMap<String, Object>> ListByRegDate = homeMainService.selectImageByRegDate();
-//		List ListByDiscount = homeMainService.selectImageByDiscountRate();
+		List<HashMap<String, Object>> ListByDiscount = homeMainService.selectImageByDiscountRate();
 		List<HashMap<String, Object>> ListBySoldNum = homeMainService.selectImageBySoldNum();
 		
 		mav.addObject("ListByRegDate", ListByRegDate);
-//		mav.addObject("ListByDiscount", ListByDiscount);
+		mav.addObject("ListByDiscount", ListByDiscount);
 		mav.addObject("ListBySoldNum", ListBySoldNum);
 		mav.setViewName("index");
 		return mav;
