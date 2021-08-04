@@ -4,7 +4,7 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
-<mapper namespace="mapper.HomeMain">
+<mapper namespace="mapper.Product">
 	
 	<!-- 메인 화면에 상품 정보 출력 (신상품)-->
 	<select id="selectImageByRegDate" resultType="java.util.HashMap">		
