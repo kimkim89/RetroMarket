@@ -73,14 +73,16 @@
                     </div>
                 </div>
                 <!-- Nav Card 상품리스트 시작 -->
+                
                 <div class="tab-content" id="nav-tabContent">
                     <!-- card one -->
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="row">
+                    <c:forEach var="listBySoldNum" items="${ListBySoldNum}" varStatus="status">	
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s1.GIF" alt="">
+                                <img src="${contextPath}/resources/images/temporary/${listBySoldNum.mk_stored_thumb}" alt="">
                                 <div class="img-cap">
                                     <a href="${contextPath}/product/productDetail"><span>상품 보기</span></a>
                                 </div>
@@ -94,91 +96,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s2.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>1500원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s3.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>1500원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s1.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>2500원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s2.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>2500원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-popular-items mb-50 text-center">
-                            <div class="popular-img">
-                                <img src="${contextPath}/resources/assets/img/gallery/s3.GIF" alt="">
-                                <div class="img-cap">
-                                    <span>상품 보기</span>
-                                </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
-                            </div>
-                            <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>1300원</span>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
                     </div>
                     <!-- Card two -->
