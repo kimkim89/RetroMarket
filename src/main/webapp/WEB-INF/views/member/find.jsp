@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>돼지 김민지</title>
+    <title>아이디/비밀번호 찾기</title>
     <%@ include file="../include/Top.jsp" %>
 </head>
 <body>
