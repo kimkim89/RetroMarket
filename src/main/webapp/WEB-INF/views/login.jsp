@@ -22,7 +22,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="login_part_text text-center">
                             <div class="login_part_text_iner">
-                                <h2>회원이 아니야 ?</h2>
+                                <h2>회원이 아닌가요?</h2>
                                 <p>There are advances being made in science and technology
                                     everyday, and a good example of this is the</p>
                                 <a href="${contextPath}/member/joinPage" class="btn_3">가입하러 가기</a>
