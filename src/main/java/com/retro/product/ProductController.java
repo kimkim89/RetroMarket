@@ -25,9 +25,9 @@ public class ProductController {
 	
 	
 	
-	//상품 게시판 이동 및 상품리스트 조회
-	@RequestMapping(value = "productList")
-	public ModelAndView productList(Locale locale, Model model) {
+	//모든 상품 페이지로 이동 및 상품 리스트 조회
+	@RequestMapping(value = "allProducts")
+	public ModelAndView allProducts(Locale locale, Model model) {
 					
 		ModelAndView mav = new ModelAndView();
 		
@@ -44,6 +44,91 @@ public class ProductController {
 		mav.setViewName("product");
 		return mav;
 	}
+	
+	//스낵 상품 페이지로 이동 및 상품 리스트 조회
+	@RequestMapping(value = "snack")
+	public ModelAndView snack(Locale locale, Model model) {
+					
+		ModelAndView mav = new ModelAndView();
+		
+		
+		List<HashMap<String, Object>> ListByRegDate = homeMainService.selectImageByRegDate();
+		List<HashMap<String, Object>> ListByDiscount = homeMainService.selectImageByDiscountRate();
+		List<HashMap<String, Object>> ListBySoldNum = homeMainService.selectImageBySoldNum();
+		
+		mav.addObject("ListByRegDate", ListByRegDate);
+		mav.addObject("ListByDiscount", ListByDiscount);
+		mav.addObject("ListBySoldNum", ListBySoldNum);
+		
+		
+		mav.setViewName("product");
+		return mav;
+	}
+	
+	// 젤리/사탕 상품 페이지로 이동 및 상품 리스트 조회
+	@RequestMapping(value = "jellyandcandy")
+	public ModelAndView jellyandcandy(Locale locale, Model model) {
+					
+		ModelAndView mav = new ModelAndView();
+		
+		
+		List<HashMap<String, Object>> ListByRegDate = homeMainService.selectImageByRegDate();
+		List<HashMap<String, Object>> ListByDiscount = homeMainService.selectImageByDiscountRate();
+		List<HashMap<String, Object>> ListBySoldNum = homeMainService.selectImageBySoldNum();
+		
+		mav.addObject("ListByRegDate", ListByRegDate);
+		mav.addObject("ListByDiscount", ListByDiscount);
+		mav.addObject("ListBySoldNum", ListBySoldNum);
+		
+		
+		mav.setViewName("product");
+		return mav;
+	}	
+	
+	// 기타 상품 페이지로 이동 및 상품 리스트 조회
+	@RequestMapping(value = "etc")
+	public ModelAndView etc(Locale locale, Model model) {
+					
+		ModelAndView mav = new ModelAndView();
+		
+		
+		List<HashMap<String, Object>> ListByRegDate = homeMainService.selectImageByRegDate();
+		List<HashMap<String, Object>> ListByDiscount = homeMainService.selectImageByDiscountRate();
+		List<HashMap<String, Object>> ListBySoldNum = homeMainService.selectImageBySoldNum();
+		
+		mav.addObject("ListByRegDate", ListByRegDate);
+		mav.addObject("ListByDiscount", ListByDiscount);
+		mav.addObject("ListBySoldNum", ListBySoldNum);
+		
+		
+		mav.setViewName("product");
+		return mav;
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//임시
 	@RequestMapping(value = "temporary")
