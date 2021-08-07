@@ -16,10 +16,10 @@
                             <nav>                                                
                                 <ul id="navigation">  
                                     <li><a href="${contextPath}/index/main">메인</a></li>
-                                    <li class="hot"><a href="${contextPath}/product/productList">모든 상품</a></li>
-                                    <li><a href="${contextPath}/product/productList">과자</a></li>
-                                    <li><a href="${contextPath}/product/productList">젤리/캔디</a></li>
-                                    <li><a href="${contextPath}/product/productList">기타</a></li>
+                                    <li class="hot"><a href="${contextPath}/product/allProducts">모든 상품</a></li>
+                                    <li><a href="${contextPath}/product/snack">과자</a></li>
+                                    <li><a href="${contextPath}/product/jellyandcandy">젤리/캔디</a></li>
+                                    <li><a href="${contextPath}/product/etc">기타</a></li>
                                     <li><a href="#">이벤트</a></li>
                                     <li><a href="#">고객 센터</a></li>
                                     <li><a href="${contextPath}/product/temporary">Contact Developer</a></li>
