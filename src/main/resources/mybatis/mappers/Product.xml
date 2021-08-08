@@ -6,8 +6,15 @@
    
 <mapper namespace="mapper.Product">
 	
-	<!-- 메인 화면에 상품 정보 출력 (신상품)-->
-	<select id="selectImageByRegDate" resultType="java.util.HashMap">		
+	<!--  -->
+	<select id="selectAllProducts" resultType="java.util.HashMap">		
+		select * 
+		from product_info as a left join product_file as b 
+		on a.mk_product_id = b.pf_product_id 		
+		order by a.mk_register_date desc;	
+	</select>
+	
+	<select id="selectSnack" resultType="java.util.HashMap">		
 		select * 
 		from product_info as a left join product_file as b 
 		on a.mk_product_id = b.pf_product_id 
@@ -15,6 +22,23 @@
 		order by a.mk_register_date desc;	
 	</select>
 	
+	<select id="selectJellyCandy" resultType="java.util.HashMap">		
+		select * 
+		from product_info as a left join product_file as b 
+		on a.mk_product_id = b.pf_product_id 
+		where a.mk_product_type = 1 
+		order by a.mk_register_date desc;	
+	</select>
+	
+	<select id="selectEtc" resultType="java.util.HashMap">		
+		select * 
+		from product_info as a left join product_file as b 
+		on a.mk_product_id = b.pf_product_id 
+		where a.mk_product_type = 1 
+		order by a.mk_register_date desc;	
+	</select>
+
+
 
 	
 </mapper>

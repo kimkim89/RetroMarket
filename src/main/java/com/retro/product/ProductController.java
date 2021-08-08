@@ -18,8 +18,7 @@ import com.retro.moonmarket.HomeMainVO;
 public class ProductController {
 	
 	@Autowired
-	HomeMainService homeMainService;
-	HomeMainVO homeMainVO;
+	ProductService productService;
 	
 	private ModelAndView mav = new ModelAndView();
 	
@@ -32,15 +31,10 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView();
 		
 		
-		List<HashMap<String, Object>> ListByRegDate = homeMainService.selectImageByRegDate();
-		List<HashMap<String, Object>> ListByDiscount = homeMainService.selectImageByDiscountRate();
-		List<HashMap<String, Object>> ListBySoldNum = homeMainService.selectImageBySoldNum();
+		List<HashMap<String, Object>> productList = productService.selectAllProducts();
 		
-		mav.addObject("ListByRegDate", ListByRegDate);
-		mav.addObject("ListByDiscount", ListByDiscount);
-		mav.addObject("ListBySoldNum", ListBySoldNum);
-		
-		
+		mav.addObject("productList", productList);
+				
 		mav.setViewName("product");
 		return mav;
 	}
