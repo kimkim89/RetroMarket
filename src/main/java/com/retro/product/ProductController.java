@@ -27,7 +27,7 @@ public class ProductController {
 	
 	//모든 상품 페이지로 이동 및 상품 리스트 조회
 	@RequestMapping(value = "allProducts")
-	public ModelAndView allProducts(Locale locale, Model model) {
+	public ModelAndView selectAllProducts(Locale locale, Model model) {
 					
 		ModelAndView mav = new ModelAndView();
 		
@@ -47,7 +47,7 @@ public class ProductController {
 	
 	//스낵 상품 페이지로 이동 및 상품 리스트 조회
 	@RequestMapping(value = "snack")
-	public ModelAndView snack(Locale locale, Model model) {
+	public ModelAndView selectSnack(Locale locale, Model model) {
 					
 		ModelAndView mav = new ModelAndView();
 		
@@ -67,7 +67,7 @@ public class ProductController {
 	
 	// 젤리/사탕 상품 페이지로 이동 및 상품 리스트 조회
 	@RequestMapping(value = "jellyandcandy")
-	public ModelAndView jellyandcandy(Locale locale, Model model) {
+	public ModelAndView selectJellyCandy(Locale locale, Model model) {
 					
 		ModelAndView mav = new ModelAndView();
 		
@@ -87,7 +87,7 @@ public class ProductController {
 	
 	// 기타 상품 페이지로 이동 및 상품 리스트 조회
 	@RequestMapping(value = "etc")
-	public ModelAndView etc(Locale locale, Model model) {
+	public ModelAndView selectEtc(Locale locale, Model model) {
 					
 		ModelAndView mav = new ModelAndView();
 		
