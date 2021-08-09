@@ -18,7 +18,7 @@
 		select * 
 		from product_info as a left join product_file as b 
 		on a.mk_product_id = b.pf_product_id 
-		where a.mk_product_type = 1 
+		where a.mk_product_category = 1 
 		order by a.mk_register_date desc;	
 	</select>
 	
@@ -26,7 +26,8 @@
 		select * 
 		from product_info as a left join product_file as b 
 		on a.mk_product_id = b.pf_product_id 
-		where a.mk_product_type = 1 
+		where a.mk_product_category = 2 
+		or a.mk_product_category = 3
 		order by a.mk_register_date desc;	
 	</select>
 	
@@ -34,7 +35,7 @@
 		select * 
 		from product_info as a left join product_file as b 
 		on a.mk_product_id = b.pf_product_id 
-		where a.mk_product_type = 1 
+		where a.mk_product_category = 4 
 		order by a.mk_register_date desc;	
 	</select>
 
