@@ -28,13 +28,11 @@ public class ProductController {
 	@RequestMapping(value = "allProducts")
 	public ModelAndView selectAllProducts(Locale locale, Model model) {
 					
-		ModelAndView mav = new ModelAndView();
-		
+		ModelAndView mav = new ModelAndView();		
 		
 		List<HashMap<String, Object>> productList = productService.selectAllProducts();
 		
-		mav.addObject("productList", productList);
-				
+		mav.addObject("productList", productList);				
 		mav.setViewName("product");
 		return mav;
 	}
@@ -45,16 +43,9 @@ public class ProductController {
 					
 		ModelAndView mav = new ModelAndView();
 		
+		List<HashMap<String, Object>> productList = productService.selectSnack();
 		
-		List<HashMap<String, Object>> ListByRegDate = homeMainService.selectImageByRegDate();
-		List<HashMap<String, Object>> ListByDiscount = homeMainService.selectImageByDiscountRate();
-		List<HashMap<String, Object>> ListBySoldNum = homeMainService.selectImageBySoldNum();
-		
-		mav.addObject("ListByRegDate", ListByRegDate);
-		mav.addObject("ListByDiscount", ListByDiscount);
-		mav.addObject("ListBySoldNum", ListBySoldNum);
-		
-		
+		mav.addObject("productList", productList);
 		mav.setViewName("product");
 		return mav;
 	}
@@ -65,16 +56,9 @@ public class ProductController {
 					
 		ModelAndView mav = new ModelAndView();
 		
+		List<HashMap<String, Object>> productList = productService.selectJellyCandy();
 		
-		List<HashMap<String, Object>> ListByRegDate = homeMainService.selectImageByRegDate();
-		List<HashMap<String, Object>> ListByDiscount = homeMainService.selectImageByDiscountRate();
-		List<HashMap<String, Object>> ListBySoldNum = homeMainService.selectImageBySoldNum();
-		
-		mav.addObject("ListByRegDate", ListByRegDate);
-		mav.addObject("ListByDiscount", ListByDiscount);
-		mav.addObject("ListBySoldNum", ListBySoldNum);
-		
-		
+		mav.addObject("productList", productList);
 		mav.setViewName("product");
 		return mav;
 	}	
@@ -85,16 +69,9 @@ public class ProductController {
 					
 		ModelAndView mav = new ModelAndView();
 		
+		List<HashMap<String, Object>> productList = productService.selectEtc();
 		
-		List<HashMap<String, Object>> ListByRegDate = homeMainService.selectImageByRegDate();
-		List<HashMap<String, Object>> ListByDiscount = homeMainService.selectImageByDiscountRate();
-		List<HashMap<String, Object>> ListBySoldNum = homeMainService.selectImageBySoldNum();
-		
-		mav.addObject("ListByRegDate", ListByRegDate);
-		mav.addObject("ListByDiscount", ListByDiscount);
-		mav.addObject("ListBySoldNum", ListBySoldNum);
-		
-		
+		mav.addObject("productList", productList);
 		mav.setViewName("product");
 		return mav;
 	}	
