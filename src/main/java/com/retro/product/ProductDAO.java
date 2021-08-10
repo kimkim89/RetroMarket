@@ -34,8 +34,20 @@ public class ProductDAO {
 		return sqlSession.selectList("mapper.Product.selectEtc");
 	}
 	
+	// 모든 상품 - 인기상품 조회
+	public List<HashMap<String, Object>> selectallPopularProd() {
+		return sqlSession.selectList("mapper.Product.selectallPopularProd");
+	}
 	
+	// 모든 상품 - 신상품
+	public List<HashMap<String, Object>> selectallNewProd() {
+		return sqlSession.selectList("mapper.Product.selectallNewProd");
+	}
 	
+	// 모든 상품 - 할인상품
+	public List<HashMap<String, Object>> selectEtc() {
+		return sqlSession.selectList("mapper.Product.selectEtc");
+	}
 	
 	
 	
