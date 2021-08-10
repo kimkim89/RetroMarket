@@ -35,18 +35,18 @@ public class ProductService {
 		}
 		
 		// 모든 상품 - 인기상품
-		public List<HashMap<String, Object>> selectallPopularProd() {
-			return productDAO.selectallPopularProd();
+		public List<HashMap<String, Object>> selectAllPopularProd() {
+			return productDAO.selectAllPopularProd();
 		}
 		
 		// 모든 상품 - 신상품
-		public List<HashMap<String, Object>> selectallNewProd() {
-			return productDAO.selectallNewProd();
+		public List<HashMap<String, Object>> selectAllNewProd() {
+			return productDAO.selectAllNewProd();
 		}
 		
 		// 모든 상품 - 할인상품
-		public List<HashMap<String, Object>> selectallDiscountProducts() {
-			return productDAO.selectallDiscountProducts();
+		public List<HashMap<String, Object>> selectAllDiscountProd() {
+			return productDAO.selectAllDiscountProd();
 		}
 		
 	
