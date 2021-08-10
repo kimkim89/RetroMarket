@@ -33,5 +33,21 @@ public class ProductService {
 		public List<HashMap<String, Object>> selectEtc() {
 			return productDAO.selectEtc();
 		}
+		
+		// 모든 상품 - 인기상품
+		public List<HashMap<String, Object>> selectallPopularProd() {
+			return productDAO.selectallPopularProd();
+		}
+		
+		// 모든 상품 - 신상품
+		public List<HashMap<String, Object>> selectallNewProd() {
+			return productDAO.selectallNewProd();
+		}
+		
+		// 모든 상품 - 할인상품
+		public List<HashMap<String, Object>> selectallDiscountProducts() {
+			return productDAO.selectallDiscountProducts();
+		}
+		
 	
 }

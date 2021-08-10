@@ -79,11 +79,11 @@ public class ProductController {
 	
 	//모든 상품 페이지 - 인기상품 버튼 클릭 시
 	@RequestMapping(value = "allPopularProducts")
-	public ModelAndView selectallPopularProducts(Locale locale, Model model) {
+	public ModelAndView selectallPopularProd(Locale locale, Model model) {
 					
 		ModelAndView mav = new ModelAndView();		
 		
-		List<HashMap<String, Object>> productList = productService.selectAllProducts();
+		List<HashMap<String, Object>> productList = productService.selectallPopularProd();
 		
 		mav.addObject("productList", productList);				
 		mav.setViewName("product");
@@ -93,11 +93,11 @@ public class ProductController {
 	
 	//모든 상품 페이지 - 신상품 버튼 클릭 시
 	@RequestMapping(value = "allNewProducts")
-	public ModelAndView selectallNewProducts(Locale locale, Model model) {
+	public ModelAndView selectallNewProd(Locale locale, Model model) {
 					
 		ModelAndView mav = new ModelAndView();		
 		
-		List<HashMap<String, Object>> productList = productService.selectAllProducts();
+		List<HashMap<String, Object>> productList = productService.selectallNewProd();
 		
 		mav.addObject("productList", productList);				
 		mav.setViewName("product");
@@ -110,7 +110,7 @@ public class ProductController {
 					
 		ModelAndView mav = new ModelAndView();		
 		
-		List<HashMap<String, Object>> productList = productService.selectAllProducts();
+		List<HashMap<String, Object>> productList = productService.selectallDiscountProducts();
 		
 		mav.addObject("productList", productList);				
 		mav.setViewName("product");
