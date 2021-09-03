@@ -32,13 +32,14 @@
         </div>
         <!-- Hero Area End-->
         <!--================Single Product Area =================-->
+        <c:forEach var="productList" items="${productList}" varStatus="status">
         <div class="product_image_area">
             <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                 <div class="product_img_slide owl-carousel">
                     <div class="single_product_img">
-                        <img src="${contextPath}/resources/assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
+                        <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="#" class="img-fluid">
                     </div>
                     <div class="single_product_img">
                         <img src="${contextPath}/resources/assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
@@ -73,6 +74,7 @@
             </div>
             </div>
         </div>
+        </c:forEach>
         
     </main>
     <footer>

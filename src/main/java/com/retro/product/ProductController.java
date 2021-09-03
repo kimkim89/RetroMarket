@@ -37,6 +37,7 @@ public class ProductController {
 		return mav;
 	}
 	
+	
 	//스낵 상품 페이지로 이동 및 상품 리스트 조회
 	@RequestMapping(value = "snack")
 	public ModelAndView selectSnack(Locale locale, Model model) {
@@ -49,6 +50,7 @@ public class ProductController {
 		mav.setViewName("product");
 		return mav;
 	}
+	
 	
 	// 젤리/사탕 상품 페이지로 이동 및 상품 리스트 조회
 	@RequestMapping(value = "jellyandcandy")
@@ -63,6 +65,7 @@ public class ProductController {
 		return mav;
 	}	
 	
+	
 	// 기타 상품 페이지로 이동 및 상품 리스트 조회
 	@RequestMapping(value = "etc")
 	public ModelAndView selectEtc(Locale locale, Model model) {
@@ -75,6 +78,21 @@ public class ProductController {
 		mav.setViewName("product");
 		return mav;
 	}	
+	
+	
+	//상품 상세보기
+	@RequestMapping(value = "productDetail")
+	public ModelAndView productDetail() {
+		
+ModelAndView mav = new ModelAndView();
+		
+		List<HashMap<String, Object>> productList = productService.selectEtc();
+		
+		mav.addObject("productList", productList);		
+		mav.setViewName("product_detail");
+		return mav;
+	}
+	
 	
 	
 	//모든 상품 페이지 - 인기상품 버튼 클릭 시
@@ -117,17 +135,7 @@ public class ProductController {
 		return mav;
 	}
 	
-	//상품 상세보기 페이지
-	@RequstMapping(value = "productDetail") 
-	publi ModelAndView productInfo() {
-		
-	}
-	
-	
 
-	
-	
-	
 	
 	
 	
@@ -164,11 +172,6 @@ public class ProductController {
 		return mav;
 	}	
 	
-	//상품 상세보기
-	@RequestMapping(value = "productDetail")
-	public ModelAndView productDetail() {
-		mav.setViewName("product-detatils");
-		return mav;
-	}
+	
 	
 }
