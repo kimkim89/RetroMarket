@@ -117,6 +117,12 @@ public class ProductController {
 		return mav;
 	}
 	
+	//상품 상세보기 페이지
+	@RequstMapping(value = "productDetail") 
+	publi ModelAndView productInfo() {
+		
+	}
+	
 	
 
 	
