@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Watch shop | eCommers</title>
+    <title>상품 목록</title>
     <%@ include file="./include/Top.jsp" %>
 </head>
 
@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="hero-cap text-center">
-                                <h2>매점 리스트</h2>
+                                <h2>상품 목록</h2>
                             </div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
         </div>
         <!-- Hero Area End-->
         <!-- Latest Products Start -->
-        <section class="popular-items latest-padding">
+        <section class="popular-items latest-padding">        
             <div class="container">
                 <div class="row product-btn justify-content-between mb-40">
                     <div class="properties__button">
@@ -79,6 +79,9 @@
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="row">
                     <c:forEach var="productList" items="${productList}" varStatus="status">	
+                    <form name="productForm" method="post" action="${contextPath}/product/productDetail">
+        				<input type="hidden" name="product_code" value="${productList.mk_product_id}">
+        			</form>
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
@@ -91,8 +94,8 @@
                                 </div>
                             </div>
                             <div class="popular-caption">
-                                <h3><a href="product_details.html">초코막대과자</a></h3>
-                                <span>500원</span>
+                                <h3><a href="product_details.html">${productList.mk_product_name}</a></h3>
+                                <span>${productList.mk_product_price}원</span>
                             </div>
                         </div>
                     </div>

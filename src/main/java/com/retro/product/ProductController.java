@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.retro.adminProduct.AdminProductImageVO;
+import com.retro.adminProduct.AdminProductService;
 import com.retro.moonmarket.HomeMainService;
 import com.retro.moonmarket.HomeMainVO;
 
@@ -19,6 +23,7 @@ public class ProductController {
 	
 	@Autowired
 	ProductService productService;
+	AdminProductService admProdService;
 	
 	private ModelAndView mav = new ModelAndView();
 	
@@ -81,12 +86,17 @@ public class ProductController {
 	
 	
 	//상품 상세보기
-	@RequestMapping(value = "productDetail")
-	public ModelAndView productDetail() {
+	@RequestMapping(value = "productDetail", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView productDetail(@RequestParam("product_id") String product_id,
+									  @RequestParam("product_code") String product_code) {
 		
-ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 		
-		List<HashMap<String, Object>> productList = productService.selectEtc();
+		List<HashMap<String, Object>> productList = productService.selectEachProd(product_id);
+		
+		
+		//개별 상품상세이미지 select
+		AdminProductImageVO prodImgList = admProdService.selectProdImage(product_code);
 		
 		mav.addObject("productList", productList);		
 		mav.setViewName("product_detail");
