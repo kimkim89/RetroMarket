@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Watch shop | eCommers</title>
+    <title>상품 상세 페이지</title>
     <%@ include file="./include/Top.jsp" %>
 </head>
     
@@ -32,27 +32,22 @@
         </div>
         <!-- Hero Area End-->
         <!--================Single Product Area =================-->
+        <c:forEach var="productList" items="${productList}" varStatus="status">
         <div class="product_image_area">
             <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                 <div class="product_img_slide owl-carousel">
                     <div class="single_product_img">
-                        <img src="${contextPath}/resources/assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
-                    </div>
-                    <div class="single_product_img">
-                        <img src="${contextPath}/resources/assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
-                    </div>
-                    <div class="single_product_img">
-                        <img src="${contextPath}/resources/assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
+                        <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="#" class="img-fluid">
                     </div>
                 </div>
                 </div>
                 <div class="col-lg-8">
                 <div class="single_product_text text-center">
-                    <h3>상품 제목</h3>
+                    <h3>${productList.mk_product_name}</h3>
                     <p>
-                    	CKEditor 구현하기 (상품 설명 - 관리자페이지)
+                    	${productList.mk_content}
                     </p>
                     <div class="card_area">
                         <div class="product_count_area">
@@ -62,7 +57,7 @@
                                 <input class="product_count_item input-number" type="text" value="1" min="1" max="999">
                                 <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
                             </div>
-                            <p>$5</p>
+                            <p>${productList.mk_product_price}원</p>
                         </div>
                     <div class="add_to_cart">
                         <a href="#" class="btn_3">과자바구니 담기</a>
@@ -73,6 +68,7 @@
             </div>
             </div>
         </div>
+        </c:forEach>
         
     </main>
     <footer>
