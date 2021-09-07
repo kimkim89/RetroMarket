@@ -41,7 +41,7 @@ public class ProductService {
 		}
 
 		// 상품 상세 페이지 - 상품 이미지 출력
-		public AdminProductImageVO selectProdImg(String product_code) {
+		public List<String> selectProdImg(String product_code) {
 			return productDAO.selectProdImg(product_code);
 		}
 		

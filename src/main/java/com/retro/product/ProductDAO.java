@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.retro.adminProduct.AdminProductImageVO;
+
 
 @Repository
 public class ProductDAO {
@@ -40,7 +42,7 @@ public class ProductDAO {
 	}
 	
 	// 상품 상세 페이지 - 상품 이미지 출력
-	public void selectProdImg(String product_code) {
+	public List<String> selectProdImg(String product_code) {
 		return sqlSession.selectList("mapper.Product.selectProdImg", product_code);
 	}
 	
