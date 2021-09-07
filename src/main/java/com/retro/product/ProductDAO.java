@@ -39,6 +39,10 @@ public class ProductDAO {
 		return sqlSession.selectList("mapper.Product.selectEachProd", product_id);
 	}
 	
+	// 상품 상세 페이지 - 상품 이미지 출력
+	public void selectProdImg(String product_code) {
+		return sqlSession.selectList("mapper.Product.selectProdImg", product_code);
+	}
 	
 	// 모든 상품 - 인기상품 조회
 	public List<HashMap<String, Object>> selectAllPopularProd() {
@@ -54,6 +58,8 @@ public class ProductDAO {
 	public List<HashMap<String, Object>> selectAllDiscountProd() {
 		return sqlSession.selectList("mapper.Product.selectAllDiscountProd");
 	}
+
+
 	
 	
 	

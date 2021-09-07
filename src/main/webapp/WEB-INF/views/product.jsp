@@ -78,16 +78,13 @@
                     <!-- card one -->
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="row">
-                    <c:forEach var="productList" items="${productList}" varStatus="status">	
-                    <form name="productForm" method="post" action="${contextPath}/product/productDetail">
-        				<input type="hidden" name="product_code" value="${productList.mk_product_id}">
-        			</form>
+                    <c:forEach var="productList" items="${productList}" varStatus="status">
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
                                 <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="">
                                 <div class="img-cap">
-                                    <a href="${contextPath}/product/productDetail?product_id=${productList.mk_idx}"><span>상품 보기</span></a>
+                                    <a href="${contextPath}/product/productDetail?product_id=${productList.mk_idx}&product_code=${productList.mk_product_id}"><span>상품 보기</span></a>
                                 </div>
                                 <div class="favorit-items">
                                     <span class="flaticon-heart"></span>

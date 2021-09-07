@@ -23,7 +23,7 @@ public class ProductController {
 	
 	@Autowired
 	ProductService productService;
-	AdminProductService admProdService;
+
 	
 	private ModelAndView mav = new ModelAndView();
 	
@@ -94,11 +94,11 @@ public class ProductController {
 		
 		List<HashMap<String, Object>> productList = productService.selectEachProd(product_id);
 		
-		
 		//개별 상품상세이미지 select
-		AdminProductImageVO prodImgList = admProdService.selectProdImage(product_code);
+		AdminProductImageVO prodImgList = productService.selectProdImg(product_code);
 		
-		mav.addObject("productList", productList);		
+		mav.addObject("productList", productList);	
+		mav.addObject("prodImgList", prodImgList);
 		mav.setViewName("product_detail");
 		return mav;
 	}
