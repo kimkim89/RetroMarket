@@ -49,10 +49,11 @@
 	</select>
 	
 	<!-- 상품 상세 페이지 상품 이미지 출력 -->
-	<select id="selectProdImg" parameterType="String" resultType="java.util.List">
-		select *
+	<select id="selectEachProdImg" parameterType="String" resultType="String">
+		select mk_stored_upfile1, mk_stored_upfile2, mk_stored_upfile3, mk_stored_upfile4, mk_stored_upfile5
 			from product_file
-			where 
+			where pf_product_id = #{product_code}
+			order by pf_idx;
 	</select>
 	
 		

@@ -1,6 +1,7 @@
 package com.retro.product;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -16,6 +17,7 @@ import com.retro.adminProduct.AdminProductImageVO;
 import com.retro.adminProduct.AdminProductService;
 import com.retro.moonmarket.HomeMainService;
 import com.retro.moonmarket.HomeMainVO;
+import com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry;
 
 @Controller
 @RequestMapping("/product/*")
@@ -87,15 +89,30 @@ public class ProductController {
 	
 	//상품 상세보기
 	@RequestMapping(value = "productDetail", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView productDetail(@RequestParam("product_id") String product_id,
-									  @RequestParam("product_code") String product_code) {
+	public ModelAndView productDetail(@RequestParam("product_id") String product_id) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		List<HashMap<String, Object>> productList = productService.selectEachProd(product_id);
+		HashMap<String, Object> prodImgMap;
+		String product_code = "";
 		
+		//List<HashMap<String, Object>>타입인 productList 내부 키 및 값 출력
+		for(int i=0; i<productList.size(); i++) {
+			//System.out.println("list순서 " + i + "번째 ");
+			for(java.util.Map.Entry<String, Object> elem : productList.get(i).entrySet()) {				
+				//System.out.println(String.format("키: %s, 값: %s", elem.getKey(), elem.getValue()));
+				//System.out.println("점검중: " + elem.getKey().equals("mk_product_id"));
+				if(elem.getKey().equals("mk_product_id")) {
+					product_code = elem.getValue().toString();					
+				}
+			}
+		}
+					
 		//개별 상품상세이미지 select
-		AdminProductImageVO prodImgList = productService.selectProdImg(product_code);
+		List<String> prodImgList = productService.selectEachProdImg(product_code);
+		
+		System.out.println("List배열 크기: " + prodImgList);
 		
 		mav.addObject("productList", productList);	
 		mav.addObject("prodImgList", prodImgList);

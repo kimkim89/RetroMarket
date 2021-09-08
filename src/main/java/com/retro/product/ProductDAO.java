@@ -42,8 +42,8 @@ public class ProductDAO {
 	}
 	
 	// 상품 상세 페이지 - 상품 이미지 출력
-	public List<String> selectProdImg(String product_code) {
-		return sqlSession.selectList("mapper.Product.selectProdImg", product_code);
+	public List<String> selectEachProdImg(String product_code) {
+		return sqlSession.selectList("mapper.Product.selectEachProdImg", product_code);
 	}
 	
 	// 모든 상품 - 인기상품 조회
