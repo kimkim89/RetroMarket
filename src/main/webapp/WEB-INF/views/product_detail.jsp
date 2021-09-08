@@ -32,7 +32,7 @@
         </div>
         <!-- Hero Area End-->
         <!--================Single Product Area =================-->
-        <c:forEach var="productList" items="${productList}" varStatus="status">
+        <c:forEach var="productList" items="${productList}">
         <div class="product_image_area">
             <div class="container">
             <div class="row justify-content-center">
@@ -40,7 +40,7 @@
                 <div class="product_img_slide owl-carousel">
                 <c:forEach var="prodImgList" items="${prodImgList}" varStatus="status">
                     <div class="single_product_img">
-                        <img src="${contextPath}/resources/images/temporary/${prodImgList.mk_original_upfile1}" alt="#" class="img-fluid">
+                        <img src="${contextPath}/resources/images/temporary/${prodImgList}" alt="#" class="img-fluid">
                     </div>
                 </c:forEach>
                 </div>

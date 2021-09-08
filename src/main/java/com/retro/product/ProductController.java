@@ -110,7 +110,9 @@ public class ProductController {
 		}
 					
 		//개별 상품상세이미지 select
-		List<AdminProductImageVO> prodImgList = productService.selectEachProdImg(product_code);
+		List<String> prodImgList = productService.selectEachProdImg(product_code);
+		
+		System.out.println("List배열 크기: " + prodImgList);
 		
 		mav.addObject("productList", productList);	
 		mav.addObject("prodImgList", prodImgList);
