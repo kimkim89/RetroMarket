@@ -48,6 +48,13 @@
 			order by a.mk_register_date desc;
 	</select>
 	
+	<!-- 상품 상세 페이지 상품 이미지 출력 -->
+	<select id="selectProdImg" parameterType="String" resultType="java.util.List">
+		select *
+			from product_file
+			where 
+	</select>
+	
 		
 	<!--  20210811 수정 작업 진행 시작 -->
 	

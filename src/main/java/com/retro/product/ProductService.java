@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.retro.adminProduct.AdminProductImageVO;
 import com.retro.moonmarket.HomeMainDAO;
 
 @Service
@@ -38,6 +39,11 @@ public class ProductService {
 		public List<HashMap<String, Object>> selectEachProd(String product_id) {
 			return productDAO.selectEachProd(product_id);
 		}
+
+		// 상품 상세 페이지 - 상품 이미지 출력
+		public List<String> selectProdImg(String product_code) {
+			return productDAO.selectProdImg(product_code);
+		}
 		
 		// 모든 상품 - 인기상품
 		public List<HashMap<String, Object>> selectAllPopularProd() {
@@ -53,6 +59,8 @@ public class ProductService {
 		public List<HashMap<String, Object>> selectAllDiscountProd() {
 			return productDAO.selectAllDiscountProd();
 		}
+
+
 		
 	
 }
