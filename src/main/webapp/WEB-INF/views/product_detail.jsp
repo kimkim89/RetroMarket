@@ -38,9 +38,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                 <div class="product_img_slide owl-carousel">
+                <c:forEach var="prodImgList" items="${prodImgList}" varStatus="status">
                     <div class="single_product_img">
-                        <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="#" class="img-fluid">
+                        <img src="${contextPath}/resources/images/temporary/${prodImgList.mk_original_upfile1}" alt="#" class="img-fluid">
                     </div>
+                </c:forEach>
                 </div>
                 </div>
                 <div class="col-lg-8">
