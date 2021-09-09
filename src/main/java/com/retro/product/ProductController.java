@@ -1,5 +1,6 @@
 package com.retro.product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -93,8 +94,7 @@ public class ProductController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		List<HashMap<String, Object>> productList = productService.selectEachProd(product_id);
-		HashMap<String, Object> prodImgMap;
+		List<HashMap<String, Object>> productList = productService.selectEachProd(product_id);		
 		String product_code = "";
 		
 		//List<HashMap<String, Object>>타입인 productList 내부 키 및 값 출력
@@ -110,9 +110,28 @@ public class ProductController {
 		}
 					
 		//개별 상품상세이미지 select
-		List<String> prodImgList = productService.selectEachProdImg(product_code);
+		List<HashMap<String, Object>> productImageList = productService.selectEachProdImg(product_code);
 		
-		System.out.println("List배열 크기: " + prodImgList);
+		List<String> prodImgList = new ArrayList<String>();
+		
+		for(int a=0; a<productImageList.size(); a++) {			
+			for(java.util.Map.Entry<String, Object> elem : productList.get(a).entrySet()) {						
+				if(elem.getKey().equals("mk_stored_upfile1")) {
+					prodImgList.add(elem.getValue().toString());									
+				}else if(elem.getKey().equals("mk_stored_upfile2")) {
+					prodImgList.add(elem.getValue().toString());									
+				}else if(elem.getKey().equals("mk_stored_upfile3")) {
+					prodImgList.add(elem.getValue().toString());									
+				}else if(elem.getKey().equals("mk_stored_upfile4")) {
+					prodImgList.add(elem.getValue().toString());									
+				}else if(elem.getKey().equals("mk_stored_upfile5")) {
+					prodImgList.add(elem.getValue().toString());									
+				}
+			}
+		}
+		
+		System.out.println("테스트중배열: " + prodImgList);
+		
 		
 		mav.addObject("productList", productList);	
 		mav.addObject("prodImgList", prodImgList);

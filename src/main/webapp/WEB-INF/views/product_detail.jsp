@@ -48,23 +48,23 @@
                 <div class="col-lg-8">
                 <div class="single_product_text text-center">
                     <h3>${productList.mk_product_name}</h3>
-                    <p>
-                    	${productList.mk_content}
-                    </p>
                     <div class="card_area">
                         <div class="product_count_area">
-                            <p>Quantity</p>
+                            <p>수량</p>
                             <div class="product_count d-inline-block">
-                                <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
+                                <span class="product_count_item inumber-decrement" id="minus_btn"> <i class="ti-minus"></i></span>
                                 <input class="product_count_item input-number" type="text" value="1" min="1" max="999">
-                                <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
+                                <span class="product_count_item number-increment" id="plus_btn"> <i class="ti-plus"></i></span>
                             </div>
                             <p>${productList.mk_product_price}원</p>
                         </div>
-                    <div class="add_to_cart">
-                        <a href="#" class="btn_3">과자바구니 담기</a>
+	                    <div class="add_to_cart">
+	                        <a href="#" class="btn_3">과자바구니 담기</a>
+	                    </div>
                     </div>
-                    </div>
+                    <p>
+                    	${productList.mk_content}
+                    </p>                    
                 </div>
                 </div>
             </div>
