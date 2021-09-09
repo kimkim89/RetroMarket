@@ -5,7 +5,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="mapper.Product">
-	
+
 	<!--  -->
 	<select id="selectAllProducts" resultType="java.util.HashMap">		
 		select * 
@@ -49,7 +49,7 @@
 	</select>
 	
 	<!-- 상품 상세 페이지 상품 이미지 출력 -->
-	<select id="selectEachProdImg" parameterType="String" resultType="String">
+	<select id="selectEachProdImg" parameterType="String" resultType="java.util.HashMap">
 		select mk_stored_upfile1, mk_stored_upfile2, mk_stored_upfile3, mk_stored_upfile4, mk_stored_upfile5
 			from product_file
 			where pf_product_id = #{product_code}

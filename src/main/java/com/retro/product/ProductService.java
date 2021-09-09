@@ -41,7 +41,7 @@ public class ProductService {
 		}
 
 		// 상품 상세 페이지 - 상품 이미지 출력
-		public List<String> selectEachProdImg(String product_code) {
+		public List<HashMap<String, Object>> selectEachProdImg(String product_code) {
 			return productDAO.selectEachProdImg(product_code);
 		}
 		

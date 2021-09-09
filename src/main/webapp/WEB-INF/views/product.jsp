@@ -84,7 +84,7 @@
                             <div class="popular-img">
                                 <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="">
                                 <div class="img-cap">
-                                    <a href="${contextPath}/product/productDetail?product_id=${productList.mk_idx}&product_code=${productList.mk_product_id}"><span>상품 보기</span></a>
+                                    <a href="${contextPath}/product/productDetail?product_id=${productList.mk_idx}"><span>상품 보기</span></a>
                                 </div>
                                 <div class="favorit-items">
                                     <span class="flaticon-heart"></span>
