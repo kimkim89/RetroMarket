@@ -52,9 +52,9 @@
                         <div class="product_count_area">
                             <p>수량</p>
                             <div class="product_count d-inline-block">
-                                <span class="product_count_item inumber-decrement" id="minus_btn"> <i class="ti-minus"></i></span>
+                                <span class="product_count_item inumber-decrement" id="quantity_plus_btn"> <i class="ti-minus"></i></span>
                                 <input class="product_count_item input-number" type="text" value="1" min="1" max="999">
-                                <span class="product_count_item number-increment" id="plus_btn"> <i class="ti-plus"></i></span>
+                                <span class="product_count_item number-increment" id="quantity_minus_btn"> <i class="ti-plus"></i></span>
                             </div>
                             <p>${productList.mk_product_price}원</p>
                         </div>
@@ -73,6 +73,22 @@
         </c:forEach>
         
     </main>
+    
+    
+        
+<script>
+	let subPrice = document.getElementById("quantity_plus_btn");
+	let addPrice = document.getElementById("quantity_minus_btn");
+	
+	subPrice.addEventListener("click", function(){
+		
+	});	
+	addPrice.addEventListener("click", function(){
+		
+	});
+</script> 
+    
+ 
     <footer>
         
     </footer>

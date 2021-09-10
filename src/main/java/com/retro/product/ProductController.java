@@ -95,7 +95,8 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView();
 		
 		List<HashMap<String, Object>> productList = productService.selectEachProd(product_id);		
-		String product_code = "";
+		List<String> prodImgList = new ArrayList<String>();		
+				
 		
 		//List<HashMap<String, Object>>타입인 productList 내부 키 및 값 출력
 		for(int i=0; i<productList.size(); i++) {
@@ -103,19 +104,6 @@ public class ProductController {
 			for(java.util.Map.Entry<String, Object> elem : productList.get(i).entrySet()) {				
 				//System.out.println(String.format("키: %s, 값: %s", elem.getKey(), elem.getValue()));
 				//System.out.println("점검중: " + elem.getKey().equals("mk_product_id"));
-				if(elem.getKey().equals("mk_product_id")) {
-					product_code = elem.getValue().toString();					
-				}
-			}
-		}
-					
-		//개별 상품상세이미지 select
-		List<HashMap<String, Object>> productImageList = productService.selectEachProdImg(product_code);
-		
-		List<String> prodImgList = new ArrayList<String>();
-		
-		for(int a=0; a<productImageList.size(); a++) {			
-			for(java.util.Map.Entry<String, Object> elem : productList.get(a).entrySet()) {						
 				if(elem.getKey().equals("mk_stored_upfile1")) {
 					prodImgList.add(elem.getValue().toString());									
 				}else if(elem.getKey().equals("mk_stored_upfile2")) {
@@ -129,6 +117,8 @@ public class ProductController {
 				}
 			}
 		}
+					
+		
 		
 		System.out.println("테스트중배열: " + prodImgList);
 		
