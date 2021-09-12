@@ -5,13 +5,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.retro.adminProduct.AdminProductImageVO;
@@ -117,17 +122,36 @@ public class ProductController {
 				}
 			}
 		}
-					
-		
-		
-		System.out.println("테스트중배열: " + prodImgList);
-		
+	
+//		System.out.println("테스트중배열: " + prodImgList);
 		
 		mav.addObject("productList", productList);	
 		mav.addObject("prodImgList", prodImgList);
 		mav.setViewName("product_detail");
 		return mav;
 	}
+	
+	
+	// 상품 수량 변경 시 가격 변경
+	@RequestMapping(value = "ajaxProductPrice")
+	@ResponseBody
+	public int ajaxProductPrice(@RequestBody String sendData) {
+		String[] sendDataSplit = sendData.split("&");
+		String[] prPrice = sendDataSplit[0].split("=");
+		String productPrice = prPrice[1];
+		String[] prTotalCnt = sendDataSplit[1].split("=");
+		String productTotalCnt = prTotalCnt[1];
+		int prodPrice = Integer.parseInt(productPrice);
+		int prodTotalCnt = Integer.parseInt(productTotalCnt);
+		int totalPrPrice = prodPrice * prodTotalCnt;
+							
+		return totalPrPrice;		
+	}
+	
+	
+	
+	
+	
 	
 	
 	
