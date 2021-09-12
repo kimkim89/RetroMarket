@@ -46,10 +46,10 @@
 			var prCate = document.getElementById("prCategory").value;
 			var prCode = document.getElementById("prCode").value;
 			
-			console.log("wuStatus: " + wuStatus);
+			/*console.log("wuStatus: " + wuStatus);
 			console.log("optionValue: " + optionValue);
 			console.log("prCate: " + prCate);
-			console.log("prCode: " + prCode);
+			console.log("prCode: " + prCode);*/
 					
 			$.ajax({
 				type: "POST",
