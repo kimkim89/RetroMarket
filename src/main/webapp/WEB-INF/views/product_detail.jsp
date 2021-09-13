@@ -101,10 +101,15 @@
 	
 	
 	function changePrice() {
-		let productPrice = 0;
-		let currentPrice = document.getElementById('product_price').innerText;
-			currentPrice = currentPrice.split("원");
-		var sendData = {"currentPrice": currentPrice[0], "totalCnt": totalCnt};
+		let defaultPrice = document.getElementById('prod_price').innerText;
+			currentPrice = defaultPrice.split("원");
+			productPrice = parseInt(currentPrice[0]) * totalCnt;
+			document.getElementById('prod_price').innerText = productPrice + "원";
+			
+			console.log("test데이터값: " + parseInt(currentPrice[0]) * totalCnt);
+			console.log("currentPrice[0]: " + currentPrice[0]);
+			console.log("totalCnt: " + totalCnt);
+		/*var sendData = {"currentPrice": currentPrice[0], "totalCnt": totalCnt};
 			
 		$.ajax({
 			type: "POST",
@@ -119,7 +124,7 @@
 			error: function(jqXHR, textStatus, errorThrown) {				
 				alert("ERROR: " + textStatus + " : " + errorThrown);
 			}
-		});	
+		});	*/
 	}
 
 </script> 
