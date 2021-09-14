@@ -95,11 +95,11 @@ public class ProductController {
 	
 	//상품 상세보기
 	@RequestMapping(value = "productDetail", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView productDetail(@RequestParam("product_id") String product_id) {
+	public ModelAndView productDetail(@RequestParam("product_id") String productId) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		List<HashMap<String, Object>> productList = productService.selectEachProd(product_id);		
+		List<HashMap<String, Object>> productList = productService.selectEachProd(productId);		
 		List<String> prodImgList = new ArrayList<String>();		
 				
 		
@@ -132,26 +132,20 @@ public class ProductController {
 	}
 	
 	
-	// 상품 수량 변경 시 가격 변경
-	@RequestMapping(value = "ajaxProductPrice")
-	@ResponseBody
-	public int ajaxProductPrice(@RequestBody String sendData) {
-		String[] sendDataSplit = sendData.split("&");
-		String[] prPrice = sendDataSplit[0].split("=");
-		String productPrice = prPrice[1];
-		String[] prTotalCnt = sendDataSplit[1].split("=");
-		String productTotalCnt = prTotalCnt[1];
-		int prodPrice = Integer.parseInt(productPrice);
-		int prodTotalCnt = Integer.parseInt(productTotalCnt);
-		int totalPrPrice = prodPrice * prodTotalCnt;
-							
-		return totalPrPrice;		
+	//장바구니 페이지
+	@RequestMapping(value = "cart")
+	public ModelAndView checkout(@RequestParam("productId") String productId) {
+					
+		ModelAndView mav = new ModelAndView();		
+		
+		List<HashMap<String, Object>> productList = productService.selectEachProd(productId);	
+		
+		System.out.println("테스트 상품아이디: " + productId);
+		
+		mav.addObject("productList", productList);
+		mav.setViewName("cart");
+		return mav;
 	}
-	
-	
-	
-	
-	
 	
 	
 	
@@ -194,6 +188,9 @@ public class ProductController {
 		mav.setViewName("product");
 		return mav;
 	}
+	
+	
+
 	
 
 	
