@@ -35,62 +35,23 @@ public class ProductController {
 	
 	private ModelAndView mav = new ModelAndView();
 	
-	
-	
+	//***********************************
 	//모든 상품 페이지로 이동 및 상품 리스트 조회
-	@RequestMapping(value = "allProducts")
-	public ModelAndView selectAllProducts(Locale locale, Model model) {
+	@RequestMapping(value = "prList")
+	public ModelAndView selectProduct(@RequestParam("prCode") String prCode) {
 					
 		ModelAndView mav = new ModelAndView();		
 		
-		List<HashMap<String, Object>> productList = productService.selectAllProducts();
+		List<HashMap<String, Object>> productList = productService.selectProduct(prCode);
+		
+		//List<HashMap<String, Object>> productList = productService.selectAllProducts();
 		
 		mav.addObject("productList", productList);				
 		mav.setViewName("product");
 		return mav;
-	}
-	
-	
-	//스낵 상품 페이지로 이동 및 상품 리스트 조회
-	@RequestMapping(value = "snack")
-	public ModelAndView selectSnack(Locale locale, Model model) {
-					
-		ModelAndView mav = new ModelAndView();
-		
-		List<HashMap<String, Object>> productList = productService.selectSnack();
-		
-		mav.addObject("productList", productList);
-		mav.setViewName("product");
-		return mav;
-	}
-	
-	
-	// 젤리/사탕 상품 페이지로 이동 및 상품 리스트 조회
-	@RequestMapping(value = "jellyandcandy")
-	public ModelAndView selectJellyCandy(Locale locale, Model model) {
-					
-		ModelAndView mav = new ModelAndView();
-		
-		List<HashMap<String, Object>> productList = productService.selectJellyCandy();
-		
-		mav.addObject("productList", productList);
-		mav.setViewName("product");
-		return mav;
 	}	
+	//***********************************
 	
-	
-	// 기타 상품 페이지로 이동 및 상품 리스트 조회
-	@RequestMapping(value = "etc")
-	public ModelAndView selectEtc(Locale locale, Model model) {
-					
-		ModelAndView mav = new ModelAndView();
-		
-		List<HashMap<String, Object>> productList = productService.selectEtc();
-		
-		mav.addObject("productList", productList);
-		mav.setViewName("product");
-		return mav;
-	}	
 	
 	
 	//상품 상세보기

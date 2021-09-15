@@ -15,25 +15,22 @@ public class ProductService {
 	@Autowired
 	ProductDAO productDAO;
 		
-		// 모든 상품 조회
-		public List<HashMap<String, Object>> selectAllProducts() {
-			return productDAO.selectAllProducts();
+		public List<HashMap<String, Object>> selectProduct(String prCode) {
+			
+			if(prCode.equals("snack")) { // 스낵 상품 조회
+				return productDAO.selectSnack();
+			}else if(prCode.equals("jellycandy")) { // 젤리 or 캔디 상품 조회
+				return productDAO.selectJellyCandy();
+			}else if(prCode.equals("etc")) { // 기타 상품 조회
+				return productDAO.selectEtc();
+			}else if(prCode.equals("all")){ // 모든 상품 조회
+				return productDAO.selectAllProducts();
+			}else {
+				return productDAO.selectAllProducts();
+			}
 		}
-		
-		// 스낵 상품 조회
-		public List<HashMap<String, Object>> selectSnack() {
-			return productDAO.selectSnack();
-		}
-		
-		// 젤리 or 캔디 상품 조회
-		public List<HashMap<String, Object>> selectJellyCandy() {
-			return productDAO.selectJellyCandy();
-		}
-		
-		// 기타 상품 조회
-		public List<HashMap<String, Object>> selectEtc() {
-			return productDAO.selectEtc();
-		}
+	
+	
 		
 		// 상품 상세 페이지 데이터 조회
 		public List<HashMap<String, Object>> selectEachProd(String product_id) {
@@ -54,6 +51,8 @@ public class ProductService {
 		public List<HashMap<String, Object>> selectAllDiscountProd() {
 			return productDAO.selectAllDiscountProd();
 		}
+
+
 
 
 		
