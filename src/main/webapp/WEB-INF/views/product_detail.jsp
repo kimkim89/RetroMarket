@@ -7,7 +7,6 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>상품 상세 페이지</title>
     <%@ include file="./include/Top.jsp" %>
-
 </head>
     
 <body>
@@ -53,14 +52,18 @@
                         <div class="product_count_area">
                             <p>수량</p>
                             <div class="product_count d-inline-block">
-                                <span class="product_count_item inumber-decrement" id="quantity_minus_btn"> <i class="ti-minus"></i></span>
+                                <span class="product_count_item inumber-decrement" id="quantity_minus_btn" onclick="changePrice('minus');"> <i class="ti-minus"></i></span>
                                 <input class="product_count_item input-number" type="text" value="1" min="1" max="999">
-                                <span class="product_count_item number-increment" id="quantity_plus_btn"> <i class="ti-plus"></i></span>
+                                <span class="product_count_item number-increment" id="quantity_plus_btn" onclick="changePrice('plus');"> <i class="ti-plus"></i></span>
                             </div>
                             <p id="prod_price">${productList.mk_product_price}원</p>
                         </div>
 	                    <div class="add_to_cart">
-	                        <a href="#" class="btn_3">과자바구니 담기</a>
+	                    	<form name="productForm" method="post" action="${contextPath}/product/cart">
+	                    		<input type="hidden" name="productId" value="${productList.mk_idx}" />
+	                    		<input type="submit" class="btn_3" value="장바구니 담기" />
+<!-- 	                    		<a href="#" class="btn_3">장바구니 담기</a> -->
+	                    	</form>	                        
 	                    </div>
                     </div>
                     <p>
@@ -78,50 +81,30 @@
     
         
 <script>
-	let subPrice = document.getElementById("quantity_minus_btn");
-	let addPrice = document.getElementById("quantity_plus_btn");
+	let defaultPrice = document.getElementById('prod_price').innerText;
 	var totalCnt = 1;
-	
-	subPrice.addEventListener("click", function(){
-		if(totalCnt == 1) {			
-			alert("구매 최소 수량은 1개 입니다.");		
-		}else {
-			totalCnt--;
-		}
-	});	
-	addPrice.addEventListener("click", function(){
-		if(totalCnt == 999) {
-			alert(totalCnt);
-			alert("구매 최대 수량은 999개 입니다.");		
-		}else {
-			totalCnt++;
-			changePrice();
-		}
-	});
-	
-	
-	function changePrice() {
-		let productPrice = 0;
-		let currentPrice = document.getElementById('product_price').innerText;
-			currentPrice = currentPrice.split("원");
-		var sendData = {"currentPrice": currentPrice[0], "totalCnt": totalCnt};
+		
+	function changePrice(msg) {
+			currentPrice = defaultPrice.split("원");
+			productPrice = parseInt(currentPrice[0]) * totalCnt;
+			document.getElementById('prod_price').innerText = productPrice + "원";
 			
-		$.ajax({
-			type: "POST",
-			url: "${contextPath}/product/ajaxProductPrice",
-			//async: false,
-			data: sendData,
-			contentType: "application/json; charset=UTF-8",
-			success: function(data) {
-				alert(data);
-				document.getElementById("prod_price").value = data;
-			},
-			error: function(jqXHR, textStatus, errorThrown) {				
-				alert("ERROR: " + textStatus + " : " + errorThrown);
+			if(msg == "minus") {
+				if(totalCnt == 1) {			
+					alert("구매 최소 수량은 1개 입니다.");		
+				}else {
+					totalCnt--;
+				}
+			}else if(msg == "plus") {
+				if(totalCnt == 999) {
+					alert(totalCnt);
+					alert("구매 최대 수량은 999개 입니다.");		
+				}else {
+					totalCnt++;
+					changePrice();
+				}
 			}
-		});	
 	}
-
 </script> 
     
  

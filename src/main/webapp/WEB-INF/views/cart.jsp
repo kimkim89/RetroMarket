@@ -45,19 +45,20 @@
                   </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="productList" items="${productList}" varStatus="status">
                   <tr>
                     <td>
                       <div class="media">
                         <div class="d-flex">
-                          <img src="${contextPath}/resources/assets/img/gallery/card1.png" alt="" />
+                          <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="" />
                         </div>
                         <div class="media-body">
-                          <p>Minimalistic shop for multipurpose use</p>
+                          <p>${productList.mk_product_name}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <h5>$360.00</h5>
+                      <h5>${productList.mk_product_price}원</h5>
                     </td>
                     <td>
                       <div class="product_count">
@@ -70,31 +71,7 @@
                       <h5>$720.00</h5>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <div class="media">
-                        <div class="d-flex">
-                          <img src="${contextPath}/resources/assets/img/gallery/card2.png" alt="" />
-                        </div>
-                        <div class="media-body">
-                          <p>Minimalistic shop for multipurpose use</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <h5>$360.00</h5>
-                    </td>
-                    <td>
-                      <div class="product_count">
-                          <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                          <input class="input-number" type="text" value="1" min="0" max="10">
-                          <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                      </div>
-                    </td>
-                    <td>
-                      <h5>$720.00</h5>
-                    </td>
-                  </tr>
+                  </c:forEach>
                   <tr class="bottom_button">
                     <td>
                       <a class="btn_1" href="#">Update Cart</a>
@@ -173,7 +150,35 @@
           </div>
       </section>
       <!--================End Cart Area =================-->
-  </main>>
+  </main>
+  
+  <script>
+	let defaultPrice = document.getElementById('prod_price').innerText;
+	var totalCnt = 1;
+		
+	function changePrice(msg) {
+			currentPrice = defaultPrice.split("원");
+			productPrice = parseInt(currentPrice[0]) * totalCnt;
+			document.getElementById('prod_price').innerText = productPrice + "원";
+			
+			if(msg == "minus") {
+				if(totalCnt == 1) {			
+					alert("구매 최소 수량은 1개 입니다.");		
+				}else {
+					totalCnt--;
+				}
+			}else if(msg == "plus") {
+				if(totalCnt == 999) {
+					alert(totalCnt);
+					alert("구매 최대 수량은 999개 입니다.");		
+				}else {
+					totalCnt++;
+					changePrice();
+				}
+			}
+	}
+</script> 
+
   <footer>
       
   </footer>
