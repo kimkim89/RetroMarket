@@ -17,6 +17,7 @@ public class ProductService {
 		
 		public List<HashMap<String, Object>> selectProduct(String prCode) {
 			
+			
 			if(prCode.equals("snack")) { // 스낵 상품 조회
 				return productDAO.selectSnack();
 			}else if(prCode.equals("jellycandy")) { // 젤리 or 캔디 상품 조회
