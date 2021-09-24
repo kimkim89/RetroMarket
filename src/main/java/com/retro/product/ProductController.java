@@ -95,15 +95,24 @@ public class ProductController {
 	
 	//장바구니 페이지
 	@RequestMapping(value = "cart")
-	public ModelAndView checkout(@RequestParam("productId") String productId) {
+	public ModelAndView checkout(@RequestParam("productId") String productId,
+								 @RequestParam("productNum") Integer productNum,
+								 @RequestParam("productPrice") Integer productPrice) {
 					
 		ModelAndView mav = new ModelAndView();		
 		
 		List<HashMap<String, Object>> productList = productService.selectEachProd(productId);	
+		int totalPrice = productPrice * productNum;
+		HashMap<String, Integer> cartMap = new HashMap<String, Integer>();
+		cartMap.put("productNum", productNum);
+		cartMap.put("totalPrice", totalPrice);
 		
-		System.out.println("테스트 상품아이디: " + productId);
+		System.out.println("productNum타입 확인" + productNum.getClass().getName());
 		
-		mav.addObject("productList", productList);
+		
+		
+		mav.addObject("productList", productList);		
+		mav.addObject("cartMap", cartMap);
 		mav.setViewName("cart");
 		return mav;
 	}
