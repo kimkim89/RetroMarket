@@ -37,8 +37,8 @@ public class ProductDAO {
 	}
 	
 	// 상품 상세 페이지 데이터 조회
-	public List<HashMap<String, Object>> selectEachProd(String product_id) {
-		return sqlSession.selectList("mapper.Product.selectEachProd", product_id);
+	public List<HashMap<String, Object>> selectEachProd(String productId) {
+		return sqlSession.selectList("mapper.Product.selectEachProd", productId);
 	}
 	
 	// 모든 상품 - 인기상품 조회

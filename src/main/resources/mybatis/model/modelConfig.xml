@@ -9,5 +9,6 @@
 		<typeAlias type="com.retro.adminProduct.AdminProductVO" alias="adminProdVO"/>
 		<typeAlias type="com.retro.adminProduct.AdminProductImageVO" alias="adminProdImageVO"/>
 		<typeAlias type="com.retro.moonmarket.HomeMainVO" alias="homeMainVO"/>
+		<typeAlias type="com.retro.cart.CartVO" alias="cartVO" />
 	</typeAliases>
 </configuration>
