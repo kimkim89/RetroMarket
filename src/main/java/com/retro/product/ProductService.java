@@ -34,8 +34,9 @@ public class ProductService {
 	
 		
 		// 상품 상세 페이지 데이터 조회
-		public List<HashMap<String, Object>> selectEachProd(String product_id) {
-			return productDAO.selectEachProd(product_id);
+		public List<HashMap<String, Object>> selectEachProd(String productId) {		
+			System.out.println("productId는??? : " + productId);
+			return productDAO.selectEachProd(productId);
 		}
 				
 		// 모든 상품 - 인기상품
