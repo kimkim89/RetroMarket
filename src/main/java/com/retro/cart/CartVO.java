@@ -21,4 +21,5 @@ public class CartVO {
 	private	int cart_status;
 	private	Timestamp cart_date;
 	private	String member_ip;
+	private int total_num;
 }

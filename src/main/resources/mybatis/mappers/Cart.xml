@@ -6,7 +6,7 @@
 
 <mapper namespace="mapper.Cart">
 
-	<insert id="insertCartInfo" >
+	<insert id="insertCartInfo" parameterType="cartVO">
 		insert into cart
 			values(	#{cart_idx}, 
 					#{order_num}, 
@@ -19,7 +19,8 @@
 					#{pr_applied_discount}, 
 					#{cart_status}, 
 					#{cart_date}, 
-					#{member_ip} 
+					#{member_ip},
+					#{total_num}
 					);		
 	</insert>
 
