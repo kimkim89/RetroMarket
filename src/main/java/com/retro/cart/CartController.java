@@ -11,13 +11,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.retro.product.ProductService;
 
+
+
 @Controller
+//@RequiredArgsConstructor
 @RequestMapping("/cart/*")
 public class CartController {
 
 	@Autowired
-	CartService cartService;
-	ProductService productService;
+	private CartService cartService;
+	@Autowired
+	private ProductService productService;
+	
+	
+	//private final CartService cartService;
+	//private final ProductService productService;
 	
 	
 	//장바구니 페이지
