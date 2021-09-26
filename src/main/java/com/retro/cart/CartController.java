@@ -44,9 +44,10 @@ public class CartController {
 		cartMap.put("productNum", productNum);
 		cartMap.put("totalPrice", totalPrice);
 		
-		System.out.println("productNum타입 확인" + productNum.getClass().getName());
+		//System.out.println("productNum타입 확인" + productNum.getClass().getName());
+		//System.out.println("productList배열 확인: " + productList);
 		
-		//cartService.insertCartInfo();
+		cartService.insertCartInfo(productList, productNum);
 		
 		mav.addObject("productList", productList);		
 		mav.addObject("cartMap", cartMap);

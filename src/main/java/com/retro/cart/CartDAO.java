@@ -10,8 +10,8 @@ public class CartDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	public void insertCartInfo() {
-		//sqlSession.insert("mapper.Cart.insertCartInfo");
+	public void insertCartInfo(CartVO cartVO) {
+		sqlSession.insert("mapper.Cart.insertCartInfo", cartVO);
 	}
 
 }
