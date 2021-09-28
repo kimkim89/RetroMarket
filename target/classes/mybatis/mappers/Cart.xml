@@ -7,21 +7,35 @@
 <mapper namespace="mapper.Cart">
 
 	<insert id="insertCartInfo" parameterType="cartVO">
-		insert into cart
-			values(	#{cart_idx}, 
-					#{order_num}, 
-					#{member_id}, 
-					#{pr_idx}, 
-					#{pr_code}, 
-					#{pr_name}, 
-					#{pr_price}, 
-					#{pr_discount_price}, 
-					#{pr_applied_discount}, 
-					#{cart_status}, 
-					#{cart_date}, 
-					#{member_ip},
-					#{total_num}
-					);		
+		insert into cart( cart_idx, 
+						  order_num, 
+						  member_id, 
+						  pr_idx, 
+						  pr_code, 
+						  pr_name, 
+						  pr_price, 
+						  pr_discount_price, 
+						  pr_point,						 
+						  cart_status, 
+						  member_ip, 
+						  total_num )		
+				values(	#{cart_idx}, 
+						#{order_num}, 
+						#{member_id}, 
+						#{pr_idx}, 
+						#{pr_code}, 
+						#{pr_name}, 
+						#{pr_price}, 
+						#{pr_discount_price}, 	
+						#{pr_point}, 					
+						#{cart_status}, 						
+						#{member_ip},
+						#{total_num}
+						);		
 	</insert>
+	
+	<select id="selectCartList" parameterType="String" resultType="cartVO">
+		select * from cart where member_id = #{member_id};
+	</select>
 
 </mapper>

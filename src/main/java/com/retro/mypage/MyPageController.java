@@ -62,7 +62,7 @@ public class MyPageController {
 	
 	public String testPost(String code){
 		
-		//post 요청 ㄱㄱ해야함
+		//post 요청
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("grant_type", "=authorization_code");
 		map.put("client_id", "=79f79d24d2f1f339724c007a9913ecba"); //카카오 앱에 있는 REST KEY
