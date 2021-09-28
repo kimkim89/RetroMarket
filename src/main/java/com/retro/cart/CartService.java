@@ -1,6 +1,5 @@
 package com.retro.cart;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -22,7 +21,7 @@ public class CartService {
 		
 		for(int i = 0; i < productList.size(); i++) {
 			for(Entry<String, Object> ent : productList.get(i).entrySet()) {
-				 System.out.println( String.format("키 : %s, 값 : %s", ent.getKey(), ent.getValue()) );
+				 //System.out.println( String.format("키 : %s, 값 : %s", ent.getKey(), ent.getValue()) );
 				 if(ent.getKey().equals("mk_idx")) {
 					 String cartIdx = ent.getValue().toString();
 					 cartVO.setPr_idx(Integer.parseInt(cartIdx));
