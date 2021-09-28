@@ -7,6 +7,14 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>장바구니</title>
   <%@ include file="./include/Top.jsp" %>
+  
+  <script type="text/javascript">
+	//알림 메시지
+	if("${msg}" != "") {
+	 	alert("${msg}");
+	 	location.href='${contextPath}/member/login';
+	 }
+  </script>
 </head>
 
 <body>
