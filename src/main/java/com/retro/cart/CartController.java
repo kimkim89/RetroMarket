@@ -36,49 +36,62 @@ public class CartController {
 	
 	//장바구니 페이지
 	@RequestMapping(value = "prCart")
-	public ModelAndView cartList(@RequestParam("productId") String productId,
-								 @RequestParam("productNum") Integer productNum,
-								 @RequestParam("productPrice") Integer productPrice,
+	public ModelAndView cartList(//@RequestParam("productId") String productId,
+								 //@RequestParam("productNum") Integer productNum,								 
 								 HttpServletRequest request) {
 					
 		ModelAndView mav = new ModelAndView();		
 		
-		String userId = (String) request.getSession().getAttribute("user_id");
+		//System.out.println("request확인중: " + request);
+		
+		String fromPrPg = request.getParameter("fromPrPg");
+		String userId = (String) request.getSession().getAttribute("user_id");		
+	
+		int count = 0;
 		String msg = "";
+		String locationUrl = "";
 		
 		//비회원일 경우 장바구니 기능 사용할 수 없음
 		if(userId == null) {
 			msg = "로그인 후 이용하실 수 있습니다.";
+			locationUrl = "member/login";
 		}else { //회원일 경우 장바구니 기능 사용 가능
-		
-			//선택한 상품 정보 조회
-			List<HashMap<String, Object>> productList = productService.selectEachProd(productId);	
-
-			//회원 아이디 기준으로 장바구니에 데이터 저장
-			cartService.insertCartInfo(productList, productNum, userId, request);
+			
+			if(fromPrPg == "Y") {
+				Integer productNum = Integer.parseInt(request.getParameter("productNum"));
+				String productId = request.getParameter("productId");	
+				
+				//선택한 상품 정보 조회
+				List<HashMap<String, Object>> productList = productService.selectEachProd(productId);					
+			
+				//회원 아이디 기준으로 장바구니에 데이터 저장
+				msg = "테스트 중입니다." + count;
+				//cartService.insertCartInfo(productList, productNum, userId, request);
+				count++;
+			}
 			
 			//회원 아이디 기준으로 장바구니 목록 조회
 			List<CartVO> cartList = cartService.selectCartList(userId);
-			
-			int totalPrice = productPrice * productNum;
-			HashMap<String, Integer> cartMap = new HashMap<String, Integer>();
-			cartMap.put("productNum", productNum);
-			cartMap.put("totalPrice", totalPrice);
+			System.out.println(cartList);
+			//int totalPrice = cartList. * productNum;
+			//HashMap<String, Integer> cartMap = new HashMap<String, Integer>();
+			//cartMap.put("productNum", productNum);
+			//cartMap.put("totalPrice", totalPrice);
 			
 			//System.out.println("productNum타입 확인" + productNum.getClass().getName());
-					
+			
+			
 			mav.addObject("cartList", cartList);		
-			mav.addObject("cartMap", cartMap);
+			//mav.addObject("cartMap", cartMap);
+			
 		}
+		
 		mav.addObject("msg", msg);
+		mav.addObject("locationUrl", locationUrl);
 		mav.setViewName("cart");
 		return mav;
 		
 	}
-	
-	
-	
-	
 	
 	
 	

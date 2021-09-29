@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="hero-cap text-center">
-                                <h2>Watch Shop</h2>
+                                <h2>상품 상세보기</h2>
                             </div>
                         </div>
                     </div>
@@ -61,10 +61,9 @@
 	                    <div class="add_to_cart">
 	                    	<form name="productForm" method="post" action="${contextPath}/cart/prCart">
 	                    		<input type="hidden" name="productId" value="${productList.mk_idx}" />
-	                    		<input type="hidden" name="productNum" id="productNum" value="1" />
-	                    		<input type="hidden" name="productPrice" id="productPrice" value="${productList.mk_product_price}" />
+	                    		<input type="hidden" name="productNum" id="productNum" value="1" />	
+	                    		<input type="hidden" name="fromPrPg" id="fromPrPg" value="Y" />        
 	                    		<input type="submit" class="btn_3" value="장바구니 담기" />
-<!-- 	                    		<a href="#" class="btn_3">장바구니 담기</a> -->
 	                    	</form>	                        
 	                    </div>
                     </div>

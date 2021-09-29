@@ -12,7 +12,7 @@
 	//알림 메시지
 	if("${msg}" != "") {
 	 	alert("${msg}");
-	 	location.href='${contextPath}/member/login';
+	 	location.href='${contextPath}/' + '${locationUrl}';
 	 }
   </script>
 </head>
@@ -53,25 +53,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="productList" items="${productList}" varStatus="status">
+                <c:forEach var="cartList" items="${cartList}" varStatus="status">
                   <tr>
                     <td>
                       <div class="media">
                         <div class="d-flex">
-                          <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="" />
+                          <img src="${contextPath}/resources/images/temporary/${cartList.mk_stored_thumb}" alt="" />
                         </div>
                         <div class="media-body">
-                          <p>${productList.mk_product_name}</p>
+                          <p>${cartList.mk_product_name}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <h5>${productList.mk_product_price}원</h5>
+                      <h5>${cartList.mk_product_price}원</h5>
                     </td>
                     <td>
                       <div class="product_count">
                         <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                        <input class="input-number" type="text" value="${cartMap.productNum}" min="0" max="10">
+                        <input class="input-number" type="text" value="${cartList.total_num}" min="0" max="10">
                         <span class="input-number-increment"> <i class="ti-plus"></i></span>
                       </div>
                     </td>
