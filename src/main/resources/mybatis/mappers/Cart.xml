@@ -6,6 +6,10 @@
 
 <mapper namespace="mapper.Cart">
 
+<resultMap type="CartVO" id="CartVO">
+	<collection property="ProductVO" resultMap="ProductVO"></collection>
+</resultMap>
+
 	<insert id="insertCartInfo" parameterType="cartVO">
 		insert into cart( cart_idx, 
 						  order_num, 
@@ -34,8 +38,8 @@
 						);		
 	</insert>
 	
-	<select id="selectCartList" parameterType="String" resultType="cartVO">
-		select * from cart where member_id = #{member_id};
+	<select id="selectCartList" parameterType="String" resultType="map">
+		select * from cart c inner join product_info p on c.pr_idx = p.mk_idx where c.member_id = #{member_id} order by c.cart_idx desc;
 	</select>
 
 </mapper>
