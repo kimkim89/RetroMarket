@@ -61,7 +61,8 @@
 	                    <div class="add_to_cart">
 	                    	<form name="productForm" method="post" action="${contextPath}/cart/prCart">
 	                    		<input type="hidden" name="productId" value="${productList.mk_idx}" />
-	                    		<input type="hidden" name="productNum" id="productNum" value="1" />	         
+	                    		<input type="hidden" name="productNum" id="productNum" value="1" />	
+	                    		<input type="hidden" name="fromPrPg" id="fromPrPg" value="Y" />        
 	                    		<input type="submit" class="btn_3" value="장바구니 담기" />
 	                    	</form>	                        
 	                    </div>

@@ -12,7 +12,7 @@
 	//알림 메시지
 	if("${msg}" != "") {
 	 	alert("${msg}");
-	 	location.href="${locationUrl}";
+	 	location.href='${contextPath}/' + '${locationUrl}';
 	 }
   </script>
 </head>
