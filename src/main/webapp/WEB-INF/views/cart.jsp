@@ -21,17 +21,22 @@
 		let productNumArray = document.getElementsByName("product_num"); 
 		let productTotalPrice = document.getElementsByName("product_total");
 		let eachProdPrice = 0;
+		let finalTotalPrice = 0;
 		//console.log(eachNumPrice.length);
 		
 		for(var i=0; i<productPriceArray.length; i++) {
-			let productPriceSplit = productPriceArray[i].innerText.split('원');
-			let productPrice = parseInt(productPriceSplit[0]);
+			
+			let productPrice = parseInt(productPriceArray[i].innerText);
 			let productNum = productNumArray[i].value;
 			eachProdPrice = productPrice * productNum;
-			productTotalPrice[i].innerText = eachProdPrice + "원";
+			productTotalPrice[i].innerText = eachProdPrice.toLocaleString();
+			finalTotalPrice += eachProdPrice;
 			
-			console.log(productTotalPrice);					
 		}
+
+		document.getElementById("total_price").innerText = finalTotalPrice.toLocaleString();
+		
+		
 	});
 	
   </script>
@@ -86,7 +91,7 @@
                       </div>
                     </td>
                     <td>
-                      <h5 name="product_price">${cartList.mk_product_price}원</h5>
+                      <h5 name="product_price">${cartList.mk_product_price}</h5>
                     </td>
                     <td>
                       <div class="product_count">
@@ -96,7 +101,7 @@
                       </div>
                     </td>
                     <td>
-                      <h5 name="product_total">0000원</h5>
+                      <h5 name="product_total"></h5>
                     </td>
                   </tr>
                   </c:forEach>
@@ -116,10 +121,10 @@
                     <td></td>
                     <td></td>
                     <td>
-                      <h5>Subtotal</h5>
+                      <h5>총 상품금액</h5>
                     </td>
                     <td>
-                      <h5 id="total_price">$2160.00</h5>
+                      <h5 id="total_price"></h5>
                     </td>
                   </tr>
                   <tr class="shipping_area">
@@ -180,13 +185,7 @@
       <!--================End Cart Area =================-->
   </main>
   
-  <script>
-	
-	
-	
-	
-  </script> 
-
+  
   <footer>
       
   </footer>
