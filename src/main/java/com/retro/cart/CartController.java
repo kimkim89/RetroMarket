@@ -1,5 +1,6 @@
 package com.retro.cart;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -71,8 +72,24 @@ public class CartController {
 			}
 			
 			//회원 아이디 기준으로 장바구니 목록 조회
-			List<CartVO> cartList = cartService.selectCartList(userId);
-			System.out.println(cartList);
+			List<HashMap<String, Object>> cartList = cartService.selectCartList(userId);
+			List<Integer> totalPriceList = new ArrayList<Integer>();
+			int totalPrice = 0;
+			
+			for(int i=0; i<cartList.size(); i++) {
+				//System.out.println("횟수 확인 " + i + "번째 반복");
+				//System.out.println("price확인: " + cartList.get(i).get("pr_price"));
+				//System.out.println("상품 개수 확인: " + cartList.get(i).get("total_num"));
+				totalPrice = Integer.parseInt(cartList.get(i).get("pr_price").toString()) * Integer.parseInt(cartList.get(i).get("total_num").toString());
+				//totalPrice = Integer.parseInt(cartList.get(i).get("eachNumPrice").toString()); 
+				totalPriceList.add(i, totalPrice);
+												
+			}
+			
+			System.out.println("totalPrice 확인: " + totalPriceList);
+			
+			
+			//System.out.println(cartList);
 			//int totalPrice = cartList. * productNum;
 			//HashMap<String, Integer> cartMap = new HashMap<String, Integer>();
 			//cartMap.put("productNum", productNum);
@@ -82,7 +99,7 @@ public class CartController {
 			
 			
 			mav.addObject("cartList", cartList);		
-			//mav.addObject("cartMap", cartMap);
+			//mav.addObject("totalPriceList", totalPriceList);
 			
 		}
 		

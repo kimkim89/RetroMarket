@@ -1,5 +1,6 @@
 package com.retro.cart;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,7 +17,7 @@ public class CartDAO {
 		sqlSession.insert("mapper.Cart.insertCartInfo", cartVO);
 	}
 	
-	public List<CartVO> selectCartList(String userId) {
+	public List<HashMap<String, Object>> selectCartList(String userId) {
 		return sqlSession.selectList("mapper.Cart.selectCartList", userId);
 	}
 
