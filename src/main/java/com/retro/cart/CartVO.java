@@ -22,4 +22,7 @@ public class CartVO {
 	private	Timestamp cart_date;
 	private	String member_ip;
 	private int total_num;
+	
+	
+	//private int eachNumPrice = pr_price * total_num;
 }

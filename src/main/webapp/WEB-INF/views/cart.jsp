@@ -14,6 +14,26 @@
 	 	alert("${msg}");
 	 	location.href='${contextPath}/' + '${locationUrl}';
 	 }
+	
+	$(document).ready(function() {
+		//상품별 총 금액 작업
+		let productPriceArray = document.getElementsByName("product_price");
+		let productNumArray = document.getElementsByName("product_num"); 
+		let productTotalPrice = document.getElementsByName("product_total");
+		let eachProdPrice = 0;
+		//console.log(eachNumPrice.length);
+		
+		for(var i=0; i<productPriceArray.length; i++) {
+			let productPriceSplit = productPriceArray[i].innerText.split('원');
+			let productPrice = parseInt(productPriceSplit[0]);
+			let productNum = productNumArray[i].value;
+			eachProdPrice = productPrice * productNum;
+			productTotalPrice[i].innerText = eachProdPrice + "원";
+			
+			console.log(productTotalPrice);					
+		}
+	});
+	
   </script>
 </head>
 
@@ -66,17 +86,17 @@
                       </div>
                     </td>
                     <td>
-                      <h5>${cartList.mk_product_price}원</h5>
+                      <h5 name="product_price">${cartList.mk_product_price}원</h5>
                     </td>
                     <td>
                       <div class="product_count">
                         <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                        <input class="input-number" type="text" value="${cartList.total_num}" min="0" max="10">
+                        <input class="input-number" name="product_num" type="text" value="${cartList.total_num}" min="0" max="10">
                         <span class="input-number-increment"> <i class="ti-plus"></i></span>
                       </div>
                     </td>
                     <td>
-                      <h5>${cartMap.totalPrice}원</h5>
+                      <h5 name="product_total">0000원</h5>
                     </td>
                   </tr>
                   </c:forEach>
@@ -99,7 +119,7 @@
                       <h5>Subtotal</h5>
                     </td>
                     <td>
-                      <h5>$2160.00</h5>
+                      <h5 id="total_price">$2160.00</h5>
                     </td>
                   </tr>
                   <tr class="shipping_area">
@@ -161,31 +181,11 @@
   </main>
   
   <script>
-	let defaultPrice = document.getElementById('prod_price').innerText;
-	var totalCnt = 1;
-		
-	function changePrice(msg) {
-			currentPrice = defaultPrice.split("원");
-			productPrice = parseInt(currentPrice[0]) * totalCnt;
-			document.getElementById('prod_price').innerText = productPrice + "원";
-			
-			if(msg == "minus") {
-				if(totalCnt == 1) {			
-					alert("구매 최소 수량은 1개 입니다.");		
-				}else {
-					totalCnt--;
-				}
-			}else if(msg == "plus") {
-				if(totalCnt == 999) {
-					alert(totalCnt);
-					alert("구매 최대 수량은 999개 입니다.");		
-				}else {
-					totalCnt++;
-					changePrice();
-				}
-			}
-	}
-</script> 
+	
+	
+	
+	
+  </script> 
 
   <footer>
       

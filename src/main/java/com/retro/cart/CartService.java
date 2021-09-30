@@ -66,7 +66,7 @@ public class CartService {
 	}
 	
 	
-	public List<CartVO> selectCartList(String userId) {
+	public List<HashMap<String, Object>> selectCartList(String userId) {
 		return cartDAO.selectCartList(userId);
 	}
 
