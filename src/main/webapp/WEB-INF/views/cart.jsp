@@ -15,29 +15,65 @@
 	 	location.href='${contextPath}/' + '${locationUrl}';
 	 }
 	
+	
+	//상품별 총 금액 작업
+	let productPriceArray = document.getElementsByName("product_price");
+	let productNumArray = document.getElementsByName("product_num"); 
+	let productTotalPrice = document.getElementsByName("product_total");
+	let eachProdPrice = 100;
+	let finalTotalPrice = 0;
+
+	
 	$(document).ready(function() {
-		//상품별 총 금액 작업
-		let productPriceArray = document.getElementsByName("product_price");
-		let productNumArray = document.getElementsByName("product_num"); 
-		let productTotalPrice = document.getElementsByName("product_total");
-		let eachProdPrice = 0;
-		let finalTotalPrice = 0;
-		//console.log(eachNumPrice.length);
-		
+				
 		for(var i=0; i<productPriceArray.length; i++) {
 			
 			let productPrice = parseInt(productPriceArray[i].innerText);
 			let productNum = productNumArray[i].value;
 			eachProdPrice = productPrice * productNum;
-			productTotalPrice[i].innerText = eachProdPrice.toLocaleString();
-			finalTotalPrice += eachProdPrice;
+			productTotalPrice[i].innerText = eachProdPrice;
 			
+			finalTotalPrice += eachProdPrice;
+			//document.write(typeof prodPrice);
 		}
-
-		document.getElementById("total_price").innerText = finalTotalPrice.toLocaleString();
-		
-		
+		document.getElementById("total_price").innerText = finalTotalPrice;	
 	});
+	
+	
+	//상품수량변경
+	function changePrice(msg) {
+		
+		console.log(productPriceArray);
+		
+		for(var j=0; j<productPriceArray.length; j++) {
+			if(msg == "minus") {
+				if(totalCnt == 1) {			
+					alert("구매 최소 수량은 1개 입니다.");		
+				}else {
+					totalCnt--;
+				}
+			}else if(msg == "plus") {
+				if(totalCnt == 999) {
+					alert(totalCnt);
+					alert("구매 최대 수량은 999개 입니다.");		
+				}else {
+					totalCnt++;
+					changePrice();
+				}
+			}
+		}
+		
+		
+		
+			/*currentPrice = defaultPrice.split("원");
+			productPrice = parseInt(currentPrice[0]) * totalCnt;
+			document.getElementById('prod_price').innerText = productPrice + "원";
+			
+			
+			
+			document.getElementById('productNum').value = totalCnt;*/
+	}
+	
 	
   </script>
 </head>
@@ -95,9 +131,9 @@
                     </td>
                     <td>
                       <div class="product_count">
-                        <span class="input-number-decrement"> <i class="ti-minus"></i></span>
+                        <span class="input-number-decrement" name="minus_btn${status.count}" onclick="changePrice('minus')"> <i class="ti-minus"></i></span>
                         <input class="input-number" name="product_num" type="text" value="${cartList.total_num}" min="0" max="10">
-                        <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                        <span class="input-number-increment" onclick="changePrice('plus')"> <i class="ti-plus"></i></span>
                       </div>
                     </td>
                     <td>
