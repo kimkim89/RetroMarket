@@ -53,7 +53,7 @@
                             <p>수량</p>
                             <div class="product_count d-inline-block">
                                 <span class="product_count_item inumber-decrement" id="quantity_minus_btn" onclick="changePrice('minus');"> <i class="ti-minus"></i></span>
-                                <input class="product_count_item input-number" type="text" value="1" min="1" max="999">
+                                <input class="product_count_item input-number" id="product_quantity" type="text" value="1" min="1" max="999">
                                 <span class="product_count_item number-increment" id="quantity_plus_btn" onclick="changePrice('plus');"> <i class="ti-plus"></i></span>
                             </div>
                             <p id="prod_price">${productList.mk_product_price}원</p>
@@ -94,15 +94,16 @@
 				if(totalCnt == 1) {			
 					alert("구매 최소 수량은 1개 입니다.");		
 				}else {
-					totalCnt--;
+					--totalCnt;
+					document.getElementById('product_quantity').value = totalCnt;
 				}
 			}else if(msg == "plus") {
 				if(totalCnt == 999) {
 					alert(totalCnt);
 					alert("구매 최대 수량은 999개 입니다.");		
 				}else {
-					totalCnt++;
-					changePrice();
+					++totalCnt;
+					document.getElementById('product_quantity').value = totalCnt;
 				}
 			}
 			
