@@ -450,6 +450,7 @@
           $("#seconds").html("<span>Seconds</span>" + seconds);
 
         }
+      
       // click counter js
       (function() {
         window.inputNumber = function(el) {

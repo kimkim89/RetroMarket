@@ -17,62 +17,84 @@
 	
 	
 	//상품별 총 금액 작업
-	let productPriceArray = document.getElementsByName("product_price");
-	let productNumArray = document.getElementsByName("product_num"); 
+	let productPriceArray = document.getElementsByName("product_price");	 
 	let productTotalPrice = document.getElementsByName("product_total");
 	let eachProdPrice = 100;
 	let finalTotalPrice = 0;
 
-	
+
 	$(document).ready(function() {
-				
+		console.log(productPriceArray.length);
+		calculateEachProduct();				
+	});
+	
+	
+	//상품별 금액 계산
+	function calculateEachProduct() {
+		
 		for(var i=0; i<productPriceArray.length; i++) {
+					
+			let productNumName = "product_num" + i;
+			let productNum = document.getElementById(productNumName).value;
 			
 			let productPrice = parseInt(productPriceArray[i].innerText);
-			let productNum = productNumArray[i].value;
+		
 			eachProdPrice = productPrice * productNum;
 			productTotalPrice[i].innerText = eachProdPrice;
 			
 			finalTotalPrice += eachProdPrice;
 			//document.write(typeof prodPrice);
 		}
-		document.getElementById("total_price").innerText = finalTotalPrice;	
-	});
+			document.getElementById("total_price").innerText = finalTotalPrice;	
+	}
 	
 	
 	//상품수량변경
-	function changePrice(msg) {
+	function changePrice(msg, totalCnt) {
+			
+		console.log("totalCnt= " + totalCnt);
 		
-		console.log(productPriceArray);
+		let minusBtn, plusBtn;
+		let minusBtnName = "minus_btn";
+		let plusBtnName = "plus_btn";
+		
+		let minusFullName = "";
+		let plusFullName = "";
+		
 		
 		for(var j=0; j<productPriceArray.length; j++) {
-			if(msg == "minus") {
-				if(totalCnt == 1) {			
+			
+			var productNumName = "product_num" + j;
+			var productNumValue = document.getElementById(productNumName).value;
+			
+				minusFullName = minusBtnName + j;
+				plusFullName = plusBtnName + j;
+				//productTotalNum = productNumName;
+				
+				minusBtn = document.getElementsByName(minusFullName);
+				plusBtn = document.getElementsByName(plusFullName);	
+				
+			if(msg == minusFullName) {
+				if(totalCnt <= 1) {
 					alert("구매 최소 수량은 1개 입니다.");		
 				}else {
-					totalCnt--;
+					totalCnt--;					
 				}
-			}else if(msg == "plus") {
+			}else if(msg == plusFullName) {
 				if(totalCnt == 999) {
 					alert(totalCnt);
 					alert("구매 최대 수량은 999개 입니다.");		
 				}else {
-					totalCnt++;
-					changePrice();
+					totalCnt++;					
 				}
 			}
+			
+				productNumValue = totalCnt;
 		}
-		
-		
-		
-			/*currentPrice = defaultPrice.split("원");
-			productPrice = parseInt(currentPrice[0]) * totalCnt;
-			document.getElementById('prod_price').innerText = productPrice + "원";
-			
-			
-			
-			document.getElementById('productNum').value = totalCnt;*/
+		alert('productNumValue = ' + productNumValue);
 	}
+		
+
 	
 	
   </script>
@@ -131,9 +153,9 @@
                     </td>
                     <td>
                       <div class="product_count">
-                        <span class="input-number-decrement" name="minus_btn${status.count}" onclick="changePrice('minus')"> <i class="ti-minus"></i></span>
-                        <input class="input-number" name="product_num" type="text" value="${cartList.total_num}" min="0" max="10">
-                        <span class="input-number-increment" onclick="changePrice('plus')"> <i class="ti-plus"></i></span>
+                        <span class="input-number-decrement" name="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', '${cartList.total_num}')"> <i class="ti-minus"></i></span>
+                        <input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10">
+                        <span class="input-number-increment" name="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', '${cartList.total_num}')"> <i class="ti-plus"></i></span>
                       </div>
                     </td>
                     <td>
