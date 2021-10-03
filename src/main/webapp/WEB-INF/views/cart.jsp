@@ -50,9 +50,55 @@
 	
 	
 	//상품수량변경
-	function changePrice(msg, totalCnt) {
+	
+	for(var a=0; a<productPriceArray.length; a++) {
+		
+		var prodNumTagId = "product_num" + a;
+		
+		$('"' + productNumTagId + '"').on("propertychange change keyup paste input", function() {
 			
-		console.log("totalCnt= " + totalCnt);
+			minusFullName = minusBtnName + a;
+			plusFullName = plusBtnName + a;
+			//productTotalNum = productNumName;
+			
+			minusBtn = document.getElementsByName(minusFullName);
+			plusBtn = document.getElementsByName(plusFullName);	
+			
+		if(msg == minusFullName) {
+			if(totalCnt <= 1) {
+				alert("구매 최소 수량은 1개 입니다.");		
+			}else {
+				totalCnt--;					
+				alert("totalCnt= " + totalCnt);
+				alert('productNumValue값 확인--: ' + productNumValue);
+			}
+		}else if(msg == plusFullName) {
+			if(totalCnt == 999) {
+				alert(totalCnt);
+				alert("구매 최대 수량은 999개 입니다.");		
+			}else {
+				totalCnt++;					
+				$('"#product_num' + j + '"').val() = totalCnt;
+				alert("test중입니다: " + $("'#product_num" + j + "'").val());
+			}
+			//alert('productNumValue값 확인++: ' + totalCnt);
+			//$("'#product_num" + j + "'").val() = totalCnt;
+			//alert("test중입니다: " + $("'#product_num" + j + "'").val());
+		}
+		
+	}
+			
+			
+			
+		})
+		
+	}
+	
+	
+	
+	
+	
+	function changePrice(msg, totalCnt) {		
 		
 		let minusBtn, plusBtn;
 		let minusBtnName = "minus_btn";
@@ -67,6 +113,7 @@
 			var productNumName = "product_num" + j;
 			var productNumValue = document.getElementById(productNumName).value;
 			
+			
 				minusFullName = minusBtnName + j;
 				plusFullName = plusBtnName + j;
 				//productTotalNum = productNumName;
@@ -79,6 +126,8 @@
 					alert("구매 최소 수량은 1개 입니다.");		
 				}else {
 					totalCnt--;					
+					alert("totalCnt= " + totalCnt);
+					alert('productNumValue값 확인--: ' + productNumValue);
 				}
 			}else if(msg == plusFullName) {
 				if(totalCnt == 999) {
@@ -86,12 +135,16 @@
 					alert("구매 최대 수량은 999개 입니다.");		
 				}else {
 					totalCnt++;					
+					$('"#product_num' + j + '"').val() = totalCnt;
+					alert("test중입니다: " + $("'#product_num" + j + "'").val());
 				}
+				//alert('productNumValue값 확인++: ' + totalCnt);
+				//$("'#product_num" + j + "'").val() = totalCnt;
+				//alert("test중입니다: " + $("'#product_num" + j + "'").val());
 			}
 			
-				productNumValue = totalCnt;
 		}
-		alert('productNumValue = ' + productNumValue);
+		
 	}
 		
 
