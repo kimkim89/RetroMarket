@@ -229,9 +229,9 @@
 			}else {
 				totalCnt++;	
 				productNumValue = totalCnt;
-				alert("productNumValue확인++: " + productNumValue);
-				alert("20211004: " + document.getElementById('"' + inputId + '"').value);
-				//document.getElementById('"' + inputId + '"').setAttribute('onClick', '"changePrice(' + type + ',' + tagNumber + ',' + totalCnt + ',' + inputId + '"') ;
+				//alert("productNumValue확인++: " + productNumValue);
+				console.log("20211004: " + document.getElementById(inputId));
+				document.getElementById('"' + inputId + '"').onClick = 'changePrice("' + type + ',' + tagNumber + ',' + totalCnt + ',' + inputId + '")' ;
 			}				
 		}else if(type.indexOf('minus') != -1) {				
 			if(totalCnt < 1) {
