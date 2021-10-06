@@ -88,10 +88,9 @@
 
 		
 	function changePrice(msg) {
-		
-									
+											
 			if(msg == "minus") {
-				if(totalCnt < 1) {			
+				if(totalCnt <= 1) {			
 					alert("구매 최소 수량은 1개 입니다.");
 					return false;
 				}else {
@@ -99,21 +98,21 @@
 					document.getElementById('product_quantity').value = totalCnt;					
 				}
 			}else if(msg == "plus") {
-				if(totalCnt > 999) {
+				if(totalCnt >= 5) {
 					alert(totalCnt);
-					alert("구매 최대 수량은 999개 입니다.");	
+					alert("구매 최대 수량은 50개 입니다.");	
 					return false;
 				}else {
 					totalCnt++;
-// 					alert("test:: "+ totalCnt);
 					document.getElementById('product_quantity').value = totalCnt;
-// 					alert("id value: " + document.getElementById('product_quantity').value);
 				}
 			}
 			
-			var productPrice = Number(parseInt(currentPrice[0])) * Number(totalCnt);
-			document.getElementById('prod_price').innerText = productPrice + "원";
-			document.getElementById('productNum').value = totalCnt;
+			if(totalCnt >= 1 && totalCnt <= 5) {
+				var productPrice = Number(parseInt(currentPrice[0])) * Number(totalCnt);
+				document.getElementById('prod_price').innerText = productPrice + "원";
+				document.getElementById('productNum').value = totalCnt;
+			}
 	}
 </script> 
     
