@@ -106,13 +106,17 @@
                       <h5 name="product_price">${cartList.mk_product_price}</h5>
                     </td>
                     <td>
-                      <div class="product_count">
+                      <div class="product_count" id="product_count">
 <%--                       	<span class="input-number-decrement" name="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', this);"> <i class="ti-minus"></i></span> --%>
 <%--                         <input type="text" class="" name="product_num${status.index}" id="product_num${status.index}" value="${cartList.total_num}" min="0" max="10" readonly> --%>
 <%--                         <span class="input-number-increment" name="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', this);"> <i class="ti-plus"></i></span> --%>
-                        <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')"> <i class="ti-minus"></i></span>
+                        <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')">
+                        	<i class="ti-minus"></i>
+                        </span>
                         <input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10">
-                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')"> <i class="ti-plus"></i></span>
+                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')">
+                        	<i class="ti-plus"></i>
+                        </span>
                       </div>
                     </td>
                     <td>
@@ -203,7 +207,7 @@
   
   <script type="text/javascript">
 	//상품수량변경 ---> test중
-	/*function changePrice(type, tagNumber, totalNumber, inputId) {
+	function changePrice(type, tagNumber, totalNumber, inputId) {
 		
 		let totalCnt = Number(totalNumber);
 		
@@ -211,31 +215,27 @@
  		console.log("test++: " + type.indexOf('plus'));
  		console.log("test--: " + type.indexOf('minus'));		
 		
-// 		let productNumName = "product_num" + tagNumber;
-// 		let productNumValue = document.getElementById(productNumName).value;
-// 		let inputIdStr = "#" + inputId;
+		let productNumName = "product_num" + tagNumber;
+		let productNumValue = document.getElementById(productNumName).value;
+		let inputIdStr = "#" + inputId;
 		
 		//onclick 속성값
-// 		let onclickFunc = "changePrice(" + type + ", " + tagNumber + ", " + totalNumber + ", " + inputId + ")";
+		let onclickFunc = "changePrice(" + type + ", " + tagNumber + ", " + totalNumber + ", " + inputId + ")";
 		
-// 		var code1 = '<span class="input-number-decrement" name="'+ type + '" id="' + type + '" onclick="' + onclickFunc + '">';
-		
-// 		console.log(code1);
+		var quantityCode = '<span class="input-number-decrement" name="'+ type + '" id="' + type + '" onclick="' + onclickFunc + '">';
+			quantityCode += '<i class="ti-minus"></i></span>';
+			quantityCode += '<input class="" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10">';
+			quantityCode += '<span class="input-number-increment" name="'+ type + '" id="' + type + '" onclick="' + onclickFunc + '">';
+			quantityCode += '<i class="ti-plus"></i></span>';
+
+					
+			console.log(quantityCode);
 
 		
-// 			code1 += '<i class="ti-minus"></i></span>';
-// 		 	code1 += '<input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10">';
-// 		 	code1 += '<span class="input-number-increment" name="plus_btn' + tagNumber + '" id="plus_btn' + tagNumber + '" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')">';
-// 		 	code1 += '<i class="ti-plus"></i></span>';
+		document.getElementById("product_count").innerHTML = quantityCode;
+		
 
-		
-		
-		
-		//$('.product_count').innerHTML.replace();
-		
-		//alert("true/false: " + type.indexOf('plus') );
-		
-		/*
+
 		if(type.indexOf('plus') != -1) {
 			
 			if(totalCnt >= 999) {
@@ -259,7 +259,7 @@
 		}//onclick함수에서 plus/minus값 넘어오는지 확인하는 if문 끝
 		
 	}//changePrice()함수 끝
-	*/
+
 	
 	
 	
@@ -267,7 +267,7 @@
 	
 	
 	//상품수량변경
-	function changePrice(msg, totalNumber, c, d) {		
+	function changePrice2(msg, totalNumber, c, d) {		
 				
 		let minusBtn, plusBtn;
 		let minusBtnName = "minus_btn";

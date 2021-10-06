@@ -76,17 +76,17 @@ public class CartController {
 			List<Integer> totalPriceList = new ArrayList<Integer>();
 			int totalPrice = 0;
 			
-			for(int i=0; i<cartList.size(); i++) {
+			/*for(int i=0; i<cartList.size(); i++) {
 				//System.out.println("횟수 확인 " + i + "번째 반복");
 				//System.out.println("price확인: " + cartList.get(i).get("pr_price"));
 				//System.out.println("상품 개수 확인: " + cartList.get(i).get("total_num"));
-				totalPrice = Integer.parseInt(cartList.get(i).get("pr_price").toString()) * Integer.parseInt(cartList.get(i).get("total_num").toString());
+				//totalPrice = Integer.parseInt(cartList.get(i).get("pr_price").toString()) * Integer.parseInt(cartList.get(i).get("total_num").toString());
 				//totalPrice = Integer.parseInt(cartList.get(i).get("eachNumPrice").toString()); 
-				totalPriceList.add(i, totalPrice);
+				//totalPriceList.add(i, totalPrice);
 												
-			}
+			}*/
 			
-			System.out.println("totalPrice 확인: " + totalPriceList);
+			//System.out.println("totalPrice 확인: " + totalPriceList);
 			
 			
 			//System.out.println(cartList);

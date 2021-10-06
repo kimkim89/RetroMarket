@@ -452,6 +452,8 @@
         }
       
       // click counter js
+      //2021.10.06 : 장바구니 수량 기능 중복 적용으로 인해 오류 발생해서 주석 처리 
+/*  
       (function() {
         window.inputNumber = function(el) {
 
@@ -489,13 +491,16 @@
             }
           }
         }
-      })();
+      })(); 
 
       inputNumber($('.input-number'));
         setInterval(function () {
           makeTimer();
         }, 1000);
       
+*/        
+        
+        
 
       $('.select_option_dropdown').hide();
       $(".select_option_list").click(function () {
