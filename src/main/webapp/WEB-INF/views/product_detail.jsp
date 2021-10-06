@@ -98,7 +98,7 @@
 					document.getElementById('product_quantity').value = totalCnt;					
 				}
 			}else if(msg == "plus") {
-				if(totalCnt >= 5) {
+				if(totalCnt >= 50) {
 					alert(totalCnt);
 					alert("구매 최대 수량은 50개 입니다.");	
 					return false;
@@ -108,7 +108,7 @@
 				}
 			}
 			
-			if(totalCnt >= 1 && totalCnt <= 5) {
+			if(totalCnt >= 1 && totalCnt <= 50) {
 				var productPrice = Number(parseInt(currentPrice[0])) * Number(totalCnt);
 				document.getElementById('prod_price').innerText = productPrice + "원";
 				document.getElementById('productNum').value = totalCnt;
