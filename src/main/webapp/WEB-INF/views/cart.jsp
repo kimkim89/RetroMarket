@@ -23,8 +23,7 @@
 	let finalTotalPrice = 0;
 
 
-	$(document).ready(function() {
-		console.log(productPriceArray.length);
+	$(document).ready(function() {		
 		calculateEachProduct();				
 	});
 	
@@ -49,52 +48,7 @@
 	}
 	
 	
-	//상품수량변경
-	function changePrice(msg, totalCnt) {
-			
-		console.log("totalCnt= " + totalCnt);
-		
-		let minusBtn, plusBtn;
-		let minusBtnName = "minus_btn";
-		let plusBtnName = "plus_btn";
-		
-		let minusFullName = "";
-		let plusFullName = "";
-		
-		
-		for(var j=0; j<productPriceArray.length; j++) {
-			
-			var productNumName = "product_num" + j;
-			var productNumValue = document.getElementById(productNumName).value;
-			
-				minusFullName = minusBtnName + j;
-				plusFullName = plusBtnName + j;
-				//productTotalNum = productNumName;
-				
-				minusBtn = document.getElementsByName(minusFullName);
-				plusBtn = document.getElementsByName(plusFullName);	
-				
-			if(msg == minusFullName) {
-				if(totalCnt <= 1) {
-					alert("구매 최소 수량은 1개 입니다.");		
-				}else {
-					totalCnt--;					
-				}
-			}else if(msg == plusFullName) {
-				if(totalCnt == 999) {
-					alert(totalCnt);
-					alert("구매 최대 수량은 999개 입니다.");		
-				}else {
-					totalCnt++;					
-				}
-			}
-			
-				productNumValue = totalCnt;
-		}
-		alert('productNumValue = ' + productNumValue);
-	}
-		
-
+	
 	
 	
   </script>
@@ -153,9 +107,12 @@
                     </td>
                     <td>
                       <div class="product_count">
-                        <span class="input-number-decrement" name="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', '${cartList.total_num}')"> <i class="ti-minus"></i></span>
+<%--                       	<span class="input-number-decrement" name="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', this);"> <i class="ti-minus"></i></span> --%>
+<%--                         <input type="text" class="" name="product_num${status.index}" id="product_num${status.index}" value="${cartList.total_num}" min="0" max="10" readonly> --%>
+<%--                         <span class="input-number-increment" name="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', this);"> <i class="ti-plus"></i></span> --%>
+                        <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')"> <i class="ti-minus"></i></span>
                         <input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10">
-                        <span class="input-number-increment" name="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', '${cartList.total_num}')"> <i class="ti-plus"></i></span>
+                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')"> <i class="ti-plus"></i></span>
                       </div>
                     </td>
                     <td>
@@ -243,6 +200,143 @@
       <!--================End Cart Area =================-->
   </main>
   
+  
+  <script type="text/javascript">
+	//상품수량변경 ---> test중
+	/*function changePrice(type, tagNumber, totalNumber, inputId) {
+		
+		let totalCnt = Number(totalNumber);
+		
+		console.log("type: " + type);
+ 		console.log("test++: " + type.indexOf('plus'));
+ 		console.log("test--: " + type.indexOf('minus'));		
+		
+// 		let productNumName = "product_num" + tagNumber;
+// 		let productNumValue = document.getElementById(productNumName).value;
+// 		let inputIdStr = "#" + inputId;
+		
+		//onclick 속성값
+// 		let onclickFunc = "changePrice(" + type + ", " + tagNumber + ", " + totalNumber + ", " + inputId + ")";
+		
+// 		var code1 = '<span class="input-number-decrement" name="'+ type + '" id="' + type + '" onclick="' + onclickFunc + '">';
+		
+// 		console.log(code1);
+
+		
+// 			code1 += '<i class="ti-minus"></i></span>';
+// 		 	code1 += '<input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10">';
+// 		 	code1 += '<span class="input-number-increment" name="plus_btn' + tagNumber + '" id="plus_btn' + tagNumber + '" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')">';
+// 		 	code1 += '<i class="ti-plus"></i></span>';
+
+		
+		
+		
+		//$('.product_count').innerHTML.replace();
+		
+		//alert("true/false: " + type.indexOf('plus') );
+		
+		/*
+		if(type.indexOf('plus') != -1) {
+			
+			if(totalCnt >= 999) {
+				//alert(totalCnt);
+				alert("구매 최대 수량은 999개 입니다.");						
+			}else {
+				totalCnt++;	
+				productNumValue = totalCnt;
+				//alert("productNumValue확인++: " + productNumValue);
+				console.log("20211004: " + document.getElementById(inputId));
+				
+			}				
+		}else if(type.indexOf('minus') != -1) {				
+			if(totalCnt < 1) {
+				alert("구매 최소 수량은 1개 입니다.");		
+			}else {
+				totalCnt--;
+				productNumValue = totalCnt;
+				alert("productNumValue확인--: " + productNumValue);				
+			}
+		}//onclick함수에서 plus/minus값 넘어오는지 확인하는 if문 끝
+		
+	}//changePrice()함수 끝
+	*/
+	
+	
+	
+	
+	
+	
+	//상품수량변경
+	function changePrice(msg, totalNumber, c, d) {		
+				
+		let minusBtn, plusBtn;
+		let minusBtnName = "minus_btn";
+		let plusBtnName = "plus_btn";
+		
+		let minusFullName = "";
+		let plusFullName = "";
+		let totalCnt = Number(totalNumber);
+		
+		let addMinusOnclick = "";
+		//document.write(typeof totalNumber);
+		
+		alert(totalCnt);
+		
+		for(var j=0; j<productPriceArray.length; j++) {
+			
+			var productNumName = "product_num" + j;
+			var productNumValue = document.getElementById(productNumName).value;
+			
+			
+				minusFullName = minusBtnName + j;
+				plusFullName = plusBtnName + j;
+				//productTotalNum = productNumName;
+				
+				minusBtn = document.getElementById(minusFullName);
+				plusBtn = document.getElementById(plusFullName);	
+				
+				
+			if(msg == minusFullName) {				
+				if(totalCnt <= 1) {
+					alert("구매 최소 수량은 1개 입니다.");		
+				}else {
+					totalCnt--;					
+					//addOnclick = "'minus_btn${status.index}'," + totalCnt;					
+					//minusBtn.onclick = "'changePrice(" + addOnclick + ")'";
+				}
+			}else if(msg == plusFullName) {
+				if(totalCnt == 999) {
+					//alert(totalCnt);
+					alert("구매 최대 수량은 999개 입니다.");						
+				}else {
+					totalCnt++;
+					//addOnclick = "'plus_btn${status.index}'," + totalCnt;
+					//plusBtn.onclick = "'changePrice(" + addOnclick + ")'";
+				}				
+			}
+			document.getElementById(productNumName).value = totalCnt;
+			//console.log("totalCnt = " + totalCnt);
+			//alert('productNumValue값 확인++: ' + productNumValue);
+			//alert("횟수: " + j);
+			
+			
+			
+			alert(addMinusOnclick);
+	
+			
+			//minusBtn.setAttribute("onclick", "'changePrice(" + addMinusOnclick + ")'");
+			//plusBtn.setAttribute("onclick", "'changePrice(" + addMinusOnclick + ")'");
+			//plusBtn.setAttribute('onclick', 'changePrice('plus_btn${status.index}', totalCnt)');
+			return false;
+			
+		}
+		
+		
+	}
+		
+
+  
+  </script>
   
   <footer>
       
