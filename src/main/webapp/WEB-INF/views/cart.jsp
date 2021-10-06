@@ -112,7 +112,7 @@
 <%--                         <span class="input-number-increment" name="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', this);"> <i class="ti-plus"></i></span> --%>
                         <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')"> <i class="ti-minus"></i></span>
                         <input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10">
-                        <span class="input-number-increment" name="plus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')"> <i class="ti-plus"></i></span>
+                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')"> <i class="ti-plus"></i></span>
                       </div>
                     </td>
                     <td>
@@ -203,7 +203,7 @@
   
   <script type="text/javascript">
 	//상품수량변경 ---> test중
-	function changePrice(type, tagNumber, totalNumber, inputId) {
+	/*function changePrice(type, tagNumber, totalNumber, inputId) {
 		
 		let totalCnt = Number(totalNumber);
 		
@@ -211,16 +211,31 @@
  		console.log("test++: " + type.indexOf('plus'));
  		console.log("test--: " + type.indexOf('minus'));		
 		
-		let productNumName = "product_num" + tagNumber;
-		let productNumValue = document.getElementById(productNumName).value;
+// 		let productNumName = "product_num" + tagNumber;
+// 		let productNumValue = document.getElementById(productNumName).value;
+// 		let inputIdStr = "#" + inputId;
+		
+		//onclick 속성값
+// 		let onclickFunc = "changePrice(" + type + ", " + tagNumber + ", " + totalNumber + ", " + inputId + ")";
+		
+// 		var code1 = '<span class="input-number-decrement" name="'+ type + '" id="' + type + '" onclick="' + onclickFunc + '">';
+		
+// 		console.log(code1);
+
+		
+// 			code1 += '<i class="ti-minus"></i></span>';
+// 		 	code1 += '<input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10">';
+// 		 	code1 += '<span class="input-number-increment" name="plus_btn' + tagNumber + '" id="plus_btn' + tagNumber + '" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}')">';
+// 		 	code1 += '<i class="ti-plus"></i></span>';
+
 		
 		
-			
-	
+		
+		//$('.product_count').innerHTML.replace();
 		
 		//alert("true/false: " + type.indexOf('plus') );
 		
-		
+		/*
 		if(type.indexOf('plus') != -1) {
 			
 			if(totalCnt >= 999) {
@@ -231,7 +246,7 @@
 				productNumValue = totalCnt;
 				//alert("productNumValue확인++: " + productNumValue);
 				console.log("20211004: " + document.getElementById(inputId));
-				document.getElementById('"' + inputId + '"').onClick = 'changePrice("' + type + ',' + tagNumber + ',' + totalCnt + ',' + inputId + '")' ;
+				
 			}				
 		}else if(type.indexOf('minus') != -1) {				
 			if(totalCnt < 1) {
@@ -239,13 +254,12 @@
 			}else {
 				totalCnt--;
 				productNumValue = totalCnt;
-				alert("productNumValue확인--: " + productNumValue);
-				document.getElementById('"' + inputId + '"').setAttribute('onClick', '"changePrice(' + type + ',' + tagNumber + ',' + totalCnt + ',' + inputId + '"') ;
+				alert("productNumValue확인--: " + productNumValue);				
 			}
 		}//onclick함수에서 plus/minus값 넘어오는지 확인하는 if문 끝
 		
 	}//changePrice()함수 끝
-	
+	*/
 	
 	
 	
