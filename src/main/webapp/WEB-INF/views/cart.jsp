@@ -267,7 +267,7 @@
 	
 	
 	//상품수량변경
-	/*function changePrice2(msg, totalNumber) {		
+	function changePrice(msg, totalNumber, c, d) {		
 				
 		let minusBtn, plusBtn;
 		let minusBtnName = "minus_btn";
@@ -332,7 +332,7 @@
 		}
 		
 		
-	}*/
+	}
 		
 
   
