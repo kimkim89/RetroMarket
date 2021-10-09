@@ -213,14 +213,13 @@
 		
 		let productNumName = "product_num" + tagNumber;
 		let productNumValue = document.getElementById(productNumName).value;
-		let inputIdStr = "#" + inputId;
 		let buttonName = "";
 		var quantityCode = "";
 		//onclick 속성값
-		let onclickFunc = "changePrice(" + nameType + ", " + tagNumber + ", " + totalNumber + ", " + inputId + ")";
+		var onclickFunc = "changePrice(" + nameType + ", " + tagNumber + ", " + totalNumber + ", " + inputId + ")";
 		
-			console.log();	
-console.log(nameType);
+//console.log();	
+//console.log(nameType);
 
 		if(nameType.indexOf('plus') != -1) {
 			
@@ -242,7 +241,7 @@ console.log(nameType);
 			
 				document.getElementById("product_count").innerHTML = quantityCode;
 
-				alert("productNumValue확인++: " + productNumValue);				
+				//alert("productNumValue확인++: " + productNumValue);				
 				
 				
 			}				
@@ -264,9 +263,9 @@ console.log(nameType);
 									
 				document.getElementById("product_count").innerHTML = quantityCode;
 	
-				console.log(quantityCode);
+				//console.log(quantityCode);
 				
-				alert("productNumValue확인--: " + productNumValue);				
+				//alert("productNumValue확인--: " + productNumValue);				
 				
 			}
 		}//onclick함수에서 plus/minus값 넘어오는지 확인하는 if문 끝
