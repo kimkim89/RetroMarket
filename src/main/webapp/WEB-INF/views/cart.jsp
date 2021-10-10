@@ -214,13 +214,18 @@
 		let productNumName = "product_num" + tagNumber;
 		let productNumValue = document.getElementById(productNumName).value;
 		let buttonName = "";
+		
+		var nameType = nameType.toString();
 		var quantityCode = "";
 		//onclick 속성값
 		var onclickFunc = "changePrice(" + nameType + ", " + tagNumber + ", " + totalNumber + ", " + inputId + ")";
 		
+		
+		
 //console.log();	
 //console.log(nameType);
 
+console.log("test중: " + nameType);
 		if(nameType.indexOf('plus') != -1) {
 			
 			if(totalCnt >= 999) {
