@@ -103,24 +103,24 @@
                       </div>
                     </td>
                     <td>
-                      <h5 name="product_price">${cartList.mk_product_price}</h5>
+                      <h5 name="product_price" id="product_price${status.index}">${cartList.mk_product_price}</h5>
                     </td>
                     <td>
                       <div class="product_count" id="product_count${status.index}">
 <%--                       	<span class="input-number-decrement" name="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', this);"> <i class="ti-minus"></i></span> --%>
 <%--                         <input type="text" class="" name="product_num${status.index}" id="product_num${status.index}" value="${cartList.total_num}" min="0" max="10" readonly> --%>
 <%--                         <span class="input-number-increment" name="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', this);"> <i class="ti-plus"></i></span> --%>
-                        <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'minus')">
+                        <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'minus', 'product_price${status.index}')">
                         	<i class="ti-minus"></i>
                         </span>
                         <input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10">
-                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'plus')">
+                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'plus', 'product_price${status.index}')">
                         	<i class="ti-plus"></i>
                         </span>
                       </div>
                     </td>
                     <td>
-                      <h5 name="product_total"></h5>
+                      <h5 name="product_total" id="product_total${status.index}"></h5>
                     </td>
                   </tr>
                  </c:forEach>
@@ -207,20 +207,20 @@
   
   <script type="text/javascript">
 	//상품수량변경 ---> test중
-	function changePrice(nameType, tagNumber, totalNumber, inputId, pmSign) {
-
-		let totalCnt = Number(totalNumber);
-	
-		let buttonName = "";
-		var productNumValue = document.getElementById(inputId).value;
-		var keyType = pmSign;
-		var quantityCode = "";
+	function changePrice(nameType, tagNumber, totalNumber, inputId, keyType, prPrice) {
 		
-		//onclick 속성값
-		var onclickFunc = "";
+		let totalCnt = Number(totalNumber);
+		let buttonName = "";
+		let quantityCode = "";
+		let productNumValue = document.getElementById(inputId).value;
+		let prodPrice = document.getElementById(prPrice).innerText; 		
+		var epTotalPrice = 0;
+		var prTotalPrice = document.getElementById("total_price").innerText;
+			prTotalPrice = Number(prTotalPrice);
+			
 
-
-console.log("inputId 1차:: " + inputId);
+		//alert(eachTotalPrice);
+		
 
 		if(keyType == "plus") {
 			if(totalCnt >= 999) {
@@ -231,10 +231,16 @@ console.log("inputId 1차:: " + inputId);
 				totalCnt++;					
 				productNumValue = totalCnt;
 				
+				//개별 상품 * 수량 총액
+				epTotalPrice = prodPrice * totalCnt;
+				
+				//장바구니 모든 상품 총액
+				prTotalPrice += epTotalPrice;
+				
 				//onclick plus
-				onclickPlusFunc = "changePrice(" + "'" + nameType + "'" + ", " + tagNumber + ", " + totalCnt + ", " + "'" + inputId + "'" + ", " + "'"  +  keyType + "'" + ")";
+				onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "'" + ")";
 				//onclick minus
-				onclickMinusFunc = "changePrice(" + "'" + nameType + "'" + ", " + tagNumber + ", " + totalCnt + ", " + "'" + inputId + "'" + ", " + "'minus'" + ")";
+				onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'minus', '" + prPrice + "'" + ")";
 								
 				buttonName = "minus" + tagNumber;
 				
@@ -245,10 +251,12 @@ console.log("inputId 1차:: " + inputId);
 				quantityCode += '<span class="input-number-increment" name="'+ nameType + '" id="' + nameType + '" onclick="' + onclickPlusFunc + '">';
 				quantityCode += '<i class="ti-plus"></i></span>';
 			
+				document.getElementById("product_total" + tagNumber).innerText = epTotalPrice;
+				document.getElementById("total_price").innerText = prTotalPrice;
 				document.getElementById("product_count" + tagNumber).innerHTML = quantityCode;
-	
 				
-			}				
+			}		
+			
 		}else if(keyType == "minus") {				
 			if(totalCnt <= 1) {
 				alert("구매 최소 수량은 1개 입니다.");		
@@ -256,11 +264,17 @@ console.log("inputId 1차:: " + inputId);
 				totalCnt--;
 				productNumValue = totalCnt;
 				
+				//개별 상품 * 수량 총액
+				epTotalPrice = prodPrice * totalCnt;
+				
+				//장바구니 모든 상품 총액
+				prTotalPrice += epTotalPrice;
+				
 				//onclick minus
-				onclickMinusFunc = "changePrice(" + "'" + nameType + "'" + ", " + tagNumber + ", " + totalCnt + ", " + "'" + inputId + "'" + ", " + "'"  +  keyType + "'" + ")";
+				onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "'" + ")";
 				//onclick plus
-				onclickPlusFunc = "changePrice(" + "'" + nameType + "'" + ", " + tagNumber + ", " + totalCnt + ", " + "'" + inputId + "'" + ", " + "'plus'" + ")";
-												
+				onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'plus', '" + prPrice + "'" + ")";
+						
 				buttonName = "plus" + tagNumber;
 				
 				//onclick 속성값
@@ -272,18 +286,13 @@ console.log("inputId 1차:: " + inputId);
 				quantityCode += '<input class="" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10">';
 				quantityCode += '<span class="input-number-increment" name="'+ buttonName + '" id="' + buttonName + '" onclick="' + onclickPlusFunc + '">';
 				quantityCode += '<i class="ti-plus"></i></span>';
-									
+				
+				document.getElementById("product_total" + tagNumber).innerText = epTotalPrice;
+				document.getElementById("total_price").innerText = prTotalPrice;
 				document.getElementById("product_count" + tagNumber).innerHTML = quantityCode;
-	
-				//console.log(quantityCode);
-				
-				//alert("productNumValue확인--: " + productNumValue);				
-				
+		
 			}
 		}//onclick함수에서 plus/minus값 넘어오는지 확인하는 if문 끝
-		
-
-		console.log("---------------------------------------------");
 		
 	}//changePrice()함수 끝
 
