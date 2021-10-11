@@ -215,7 +215,7 @@
 		let productNumValue = document.getElementById(productNumName).value;
 		let buttonName = "";
 		
-		var nameType = nameType.toString();
+		//var nameType = nameType.toString();
 		var quantityCode = "";
 		//onclick 속성값
 		var onclickFunc = "changePrice(" + nameType + ", " + tagNumber + ", " + totalNumber + ", " + inputId + ")";
