@@ -106,7 +106,7 @@
                       <h5 name="product_price">${cartList.mk_product_price}</h5>
                     </td>
                     <td>
-                      <div class="product_count" id="product_count">
+                      <div class="product_count" id="product_count${status.index}">
 <%--                       	<span class="input-number-decrement" name="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', this);"> <i class="ti-minus"></i></span> --%>
 <%--                         <input type="text" class="" name="product_num${status.index}" id="product_num${status.index}" value="${cartList.total_num}" min="0" max="10" readonly> --%>
 <%--                         <span class="input-number-increment" name="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', this);"> <i class="ti-plus"></i></span> --%>
@@ -207,59 +207,59 @@
   
   <script type="text/javascript">
 	//상품수량변경 ---> test중
-	function changePrice(nameType, tagNumber, totalNumber, inputId, keyType) {
-		
+	function changePrice(nameType, tagNumber, totalNumber, inputId, pmSign) {
+
 		let totalCnt = Number(totalNumber);
-		
-		let productNumName = "product_num" + tagNumber;
-		let productNumValue = document.getElementById(productNumName).value;
-		let buttonName = "";				
+	
+		let buttonName = "";
+		var productNumValue = document.getElementById(inputId).value;
+		var keyType = pmSign;
 		var quantityCode = "";
 		
 		//onclick 속성값
 		var onclickFunc = "";
 
-		
-console.log("productNumName:: " + productNumName);
-console.log("productNumValue 1차:: " + productNumValue);
 
-		if(keyType != "plus") {
+console.log("inputId 1차:: " + inputId);
+
+		if(keyType == "plus") {
 			if(totalCnt >= 999) {
 				//alert(totalCnt);
-				alert("구매 최대 수량은 999개 입니다.");						
-			}else {
-				console.log("1234");				
-				totalCnt++;		
+				alert("구매 최대 수량은 999개 입니다.");	
 				
+			}else {
+				totalCnt++;					
 				productNumValue = totalCnt;
 				
-				//onclick 속성값
-				onclickFunc = "changePrice(" + nameType + ", " + tagNumber + ", " + totalCnt + ", " + inputId + ", " + keyType + ")";
-
-console.log("productNumValue 2차:: " + productNumValue);
-				
+				//onclick plus
+				onclickPlusFunc = "changePrice(" + "'" + nameType + "'" + ", " + tagNumber + ", " + totalCnt + ", " + "'" + inputId + "'" + ", " + "'"  +  keyType + "'" + ")";
+				//onclick minus
+				onclickMinusFunc = "changePrice(" + "'" + nameType + "'" + ", " + tagNumber + ", " + totalCnt + ", " + "'" + inputId + "'" + ", " + "'minus'" + ")";
+								
 				buttonName = "minus" + tagNumber;
 				
 				//onclick 클릭 시 해당 코드로 변경되도록 작업				
-				quantityCode = '<span class="input-number-decrement" name="'+ buttonName + '" id="' + buttonName + '" onclick="' + onclickFunc + '">';
+				quantityCode = '<span class="input-number-decrement" name="'+ buttonName + '" id="' + buttonName + '" onclick="' + onclickMinusFunc + '">';
 				quantityCode += '<i class="ti-minus"></i></span>';
 				quantityCode += '<input class="" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10">';
-				quantityCode += '<span class="input-number-increment" name="'+ nameType + '" id="' + nameType + '" onclick="' + onclickFunc + '">';
+				quantityCode += '<span class="input-number-increment" name="'+ nameType + '" id="' + nameType + '" onclick="' + onclickPlusFunc + '">';
 				quantityCode += '<i class="ti-plus"></i></span>';
 			
-				document.getElementById("product_count").innerHTML = quantityCode;
-
-				//alert("productNumValue확인++: " + productNumValue);				
-
-console.log("productNumValue 3차:: " + productNumValue);				
+				document.getElementById("product_count" + tagNumber).innerHTML = quantityCode;
+	
 				
 			}				
-		}else if(keyType != "minus") {				
-			if(totalCnt < 1) {
+		}else if(keyType == "minus") {				
+			if(totalCnt <= 1) {
 				alert("구매 최소 수량은 1개 입니다.");		
 			}else {
 				totalCnt--;
 				productNumValue = totalCnt;
+				
+				//onclick minus
+				onclickMinusFunc = "changePrice(" + "'" + nameType + "'" + ", " + tagNumber + ", " + totalCnt + ", " + "'" + inputId + "'" + ", " + "'"  +  keyType + "'" + ")";
+				//onclick plus
+				onclickPlusFunc = "changePrice(" + "'" + nameType + "'" + ", " + tagNumber + ", " + totalCnt + ", " + "'" + inputId + "'" + ", " + "'plus'" + ")";
 												
 				buttonName = "plus" + tagNumber;
 				
@@ -267,13 +267,13 @@ console.log("productNumValue 3차:: " + productNumValue);
 				onclickFunc = "changePrice(" + nameType + ", " + tagNumber + ", " + totalCnt + ", " + inputId + ", " + keyType + ")";
 				
 				//onclick 클릭 시 해당 코드로 변경되도록 작업				
-				quantityCode = '<span class="input-number-decrement" name="'+ nameType + '" id="' + nameType + '" onclick="' + onclickFunc + '">';
+				quantityCode = '<span class="input-number-decrement" name="'+ nameType + '" id="' + nameType + '" onclick="' + onclickMinusFunc + '">';
 				quantityCode += '<i class="ti-minus"></i></span>';
 				quantityCode += '<input class="" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10">';
-				quantityCode += '<span class="input-number-increment" name="'+ buttonName + '" id="' + buttonName + '" onclick="' + onclickFunc + '">';
+				quantityCode += '<span class="input-number-increment" name="'+ buttonName + '" id="' + buttonName + '" onclick="' + onclickPlusFunc + '">';
 				quantityCode += '<i class="ti-plus"></i></span>';
 									
-				document.getElementById("product_count").innerHTML = quantityCode;
+				document.getElementById("product_count" + tagNumber).innerHTML = quantityCode;
 	
 				//console.log(quantityCode);
 				
@@ -282,7 +282,8 @@ console.log("productNumValue 3차:: " + productNumValue);
 			}
 		}//onclick함수에서 plus/minus값 넘어오는지 확인하는 if문 끝
 		
-		console.log("productNumValue 4차:: " + productNumValue);		
+
+		console.log("---------------------------------------------");
 		
 	}//changePrice()함수 끝
 
