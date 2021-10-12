@@ -279,17 +279,23 @@
 	function deleteProd() {
 		var checkedArray = [];
 		$("input:checkbox[name='del_check']:checked").each(function() {
-			checkedArray.push($(this).val()); // 체크된 것 value만 배열에 push
-			console.log(checkedArray);
+			checkedArray.push($(this).val()); // 체크된 것 value만 배열에 push			
 		})
+		
+		console.log(checkedArray);
 		
 		$.ajax({
 			type : "POST",
-			url : "${contextPath}/",
-			data :
-			
-			
-		})
+			url : "${contextPath}/cart/delEachCartProd",
+			async: false,
+			data : {"checkedArray" : checkedArray},			
+			success: function(data) {
+				console.log(data);
+			},
+			error: function(xhr, status, error) {
+				alert(error);
+			}
+		});//ajax끝
 		
 	}//deleteEachProd()함수 끝
 	
