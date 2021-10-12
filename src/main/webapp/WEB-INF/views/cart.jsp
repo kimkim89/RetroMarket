@@ -46,12 +46,14 @@
 		}
 			document.getElementById("total_price").innerText = finalTotalPrice;	
 	}
-	
-	
-	
-	
-	
+		
   </script>
+  
+  <style>
+  	.delete_box {
+  		vertical-align: top !important;
+  	}
+  </style>
 </head>
 
 <body>
@@ -86,14 +88,15 @@
                     <th scope="col">상품</th>
                     <th scope="col">가격</th>
                     <th scope="col">수량</th>
-                    <th scope="col">총 가격</th>
+                    <th scope="col">총액</th>
                   </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="cartList" items="${cartList}" varStatus="status">
-                  <tr>
+                  <tr>          	
                     <td>
-                      <div class="media">
+                      <div class="media">  
+                      <input type="checkbox" class="delete_box" name="del_check" id="del_check${status.index}" value="${cartList.cart_idx}" />                    	
                         <div class="d-flex">
                           <img src="${contextPath}/resources/images/temporary/${cartList.mk_stored_thumb}" alt="" />
                         </div>
@@ -107,9 +110,6 @@
                     </td>
                     <td>
                       <div class="product_count" id="product_count${status.index}">
-<%--                       	<span class="input-number-decrement" name="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', this);"> <i class="ti-minus"></i></span> --%>
-<%--                         <input type="text" class="" name="product_num${status.index}" id="product_num${status.index}" value="${cartList.total_num}" min="0" max="10" readonly> --%>
-<%--                         <span class="input-number-increment" name="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', this);"> <i class="ti-plus"></i></span> --%>
                         <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'minus', 'product_price${status.index}')">
                         	<i class="ti-minus"></i>
                         </span>
@@ -124,18 +124,6 @@
                     </td>
                   </tr>
                  </c:forEach>
-                  <tr class="bottom_button">
-                    <td>
-                      <a class="btn_1" href="#">Update Cart</a>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <div class="cupon_text float-right">
-                        <a class="btn_1" href="#">Close Coupon</a>
-                      </div>
-                    </td>
-                  </tr>
                   <tr>
                     <td></td>
                     <td></td>
@@ -146,56 +134,25 @@
                       <h5 id="total_price"></h5>
                     </td>
                   </tr>
-                  <tr class="shipping_area">
-                    <td></td>
-                    <td></td>
+                  <tr class="bottom_button">
                     <td>
-                      <h5>Shipping</h5>
+                      <a class="btn_1" href="javascript:chooseAllProd();">전체선택</a>	
+                    </td>
+                    <td></td>
+                    <td>                    	
                     </td>
                     <td>
-                      <div class="shipping_box">
-                        <ul class="list">
-                          <li>
-                            Flat Rate: $5.00
-                            <input type="radio" aria-label="Radio button for following text input">
-                          </li>
-                          <li>
-                            Free Shipping
-                            <input type="radio" aria-label="Radio button for following text input">
-                          </li>
-                          <li>
-                            Flat Rate: $10.00
-                            <input type="radio" aria-label="Radio button for following text input">
-                          </li>
-                          <li class="active">
-                            Local Delivery: $2.00
-                            <input type="radio" aria-label="Radio button for following text input">
-                          </li>
-                        </ul>
-                        <h6>
-                          Calculate Shipping
-                          <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </h6>
-                        <select class="shipping_select">
-                          <option value="1">Bangladesh</option>
-                          <option value="2">India</option>
-                          <option value="4">Pakistan</option>
-                        </select>
-                        <select class="shipping_select section_bg">
-                          <option value="1">Select a State</option>
-                          <option value="2">Select a State</option>
-                          <option value="4">Select a State</option>
-                        </select>
-                        <input class="post_code" type="text" placeholder="Postcode/Zipcode" />
-                        <a class="btn_1" href="#">Update Details</a>
+                      <div class="cupon_text float-right">
+                        <a class="btn_1" href="javascript:deleteProd();">선택삭제</a>
                       </div>
                     </td>
                   </tr>
+
                 </tbody>
               </table>
-              <div class="checkout_btn_inner float-right">
-                <a class="btn_1" href="#">과자 계속 담기</a>
-                <a class="btn_1 checkout_btn_1" href="${contextPath}/buy/buyPage">구매 하기</a>
+              <div class="checkout_btn_inner float-right">	
+    	        <a class="btn_1" href="javascript:deleteAllProd();">선택상품주문</a>
+                <a class="btn_1 checkout_btn_1" href="${contextPath}/buy/buyPage">전체상품주문</a>
               </div>
             </div>
           </div>
@@ -296,7 +253,49 @@
 		
 	}//changePrice()함수 끝
 
-	  
+	
+	/*전체선택 시작*/
+	let clickCnt = 1;
+		
+	function chooseAllProd() {
+			
+		let delChkBoxArray = document.getElementsByName("del_check");
+		
+		clickCnt++;
+			
+			if(clickCnt%2 == 0) {
+				for(var j=0; j<delChkBoxArray.length; j++) {
+					document.getElementsByName("del_check")[j].checked = true;
+				}
+			}else {
+				for(var j=0; j<delChkBoxArray.length; j++) {
+					document.getElementsByName("del_check")[j].checked = false;
+				}
+			}			
+	}//chooseAllProd()함수 끝
+	
+	
+	/*선택삭제 기능 시작*/
+	function deleteProd() {
+		var checkedArray = [];
+		$("input:checkbox[name='del_check']:checked").each(function() {
+			checkedArray.push($(this).val()); // 체크된 것 value만 배열에 push
+			console.log(checkedArray);
+		})
+		
+		$.ajax({
+			type : "POST",
+			url : "${contextPath}/",
+			data :
+			
+			
+		})
+		
+	}//deleteEachProd()함수 끝
+	
+	
+	
+	
   </script>
   
   <footer>
