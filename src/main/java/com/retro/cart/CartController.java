@@ -3,12 +3,15 @@ package com.retro.cart;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -109,6 +112,31 @@ public class CartController {
 		return mav;
 		
 	}
+	
+	
+	
+	@RequestMapping(value="/cart/delEachCartProd") 
+	@ResponseBody
+	public Integer deleteEachCartProd(@RequestParam(value="checkedArray[]") List<String> chkBoxArr) {
+		Integer result = 0;
+		String checkDelNum = "";
+		
+		
+		for(String str : chkBoxArr) {
+			checkDelNum = str;
+			System.out.println("확인중1234::: ");
+			System.out.println(checkDelNum);
+		}
+		
+		
+		
+		
+		
+		
+		return result;
+	}
+	
+	
 	
 	
 	
