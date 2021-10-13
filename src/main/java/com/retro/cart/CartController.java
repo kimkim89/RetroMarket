@@ -54,6 +54,10 @@ public class CartController {
 		int count = 0;
 		String msg = "";
 		String locationUrl = "";
+	
+		
+
+		
 		
 		//비회원일 경우 장바구니 기능 사용할 수 없음
 		if(userId == null) {
@@ -61,7 +65,7 @@ public class CartController {
 			locationUrl = "member/login";
 		}else { //회원일 경우 장바구니 기능 사용 가능
 			
-			if(fromPrPg == "Y") {
+			if(fromPrPg != null) { 
 				Integer productNum = Integer.parseInt(request.getParameter("productNum"));
 				String productId = request.getParameter("productId");	
 				
@@ -69,8 +73,8 @@ public class CartController {
 				List<HashMap<String, Object>> productList = productService.selectEachProd(productId);					
 			
 				//회원 아이디 기준으로 장바구니에 데이터 저장
-				msg = "테스트 중입니다." + count;
-				//cartService.insertCartInfo(productList, productNum, userId, request);
+				cartService.insertCartInfo(productList, productNum, userId, request);
+				
 				count++;
 			}
 			
@@ -108,7 +112,7 @@ public class CartController {
 		
 		mav.addObject("msg", msg);
 		mav.addObject("locationUrl", locationUrl);
-		mav.setViewName("cart");
+		mav.setViewName("order/cart");
 		return mav;
 		
 	}
@@ -133,11 +137,6 @@ public class CartController {
 		if(delResult != 0) {
 			delMsg = "삭제되었습니다.";
 		}
-		
-		
-		
-		
-		
 		return delMsg;
 	}
 	

@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>장바구니</title>
-  <%@ include file="./include/Top.jsp" %>
+  <%@ include file="../include/Top.jsp" %>
   
   <script type="text/javascript">
 	//알림 메시지
@@ -59,7 +59,7 @@
 <body>
   <header>
     <!-- Header Start -->
-        <jsp:include page="./include/TopNavi.jsp" />
+        <jsp:include page="../include/TopNavi.jsp" />
     <!-- Header End -->
   </header>
   <main>
@@ -310,7 +310,7 @@
   <footer>
       
   </footer>
-   <jsp:include page="./include/Footer.jsp" />
+   <jsp:include page="../include/Footer.jsp" />
 
 </body>
 </html>
