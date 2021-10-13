@@ -47,7 +47,7 @@ public class ProductController {
 		//List<HashMap<String, Object>> productList = productService.selectAllProducts();
 		
 		mav.addObject("productList", productList);				
-		mav.setViewName("product");
+		mav.setViewName("product/product");
 		return mav;
 	}	
 	//***********************************
@@ -88,7 +88,7 @@ public class ProductController {
 		
 		mav.addObject("productList", productList);	
 		mav.addObject("prodImgList", prodImgList);
-		mav.setViewName("product_detail");
+		mav.setViewName("product/product_detail");
 		return mav;
 	}
 	
@@ -128,7 +128,7 @@ public class ProductController {
 		List<HashMap<String, Object>> productList = productService.selectAllPopularProd();
 		
 		mav.addObject("productList", productList);				
-		mav.setViewName("product");
+		mav.setViewName("product/product");
 		return mav;
 	}
 	
@@ -142,7 +142,7 @@ public class ProductController {
 		List<HashMap<String, Object>> productList = productService.selectAllNewProd();
 		
 		mav.addObject("productList", productList);				
-		mav.setViewName("product");
+		mav.setViewName("product/product");
 		return mav;
 	}
 	
@@ -155,7 +155,7 @@ public class ProductController {
 		List<HashMap<String, Object>> productList = productService.selectAllDiscountProd();
 		
 		mav.addObject("productList", productList);				
-		mav.setViewName("product");
+		mav.setViewName("product/product");
 		return mav;
 	}
 	

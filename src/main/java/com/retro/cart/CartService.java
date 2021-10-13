@@ -18,8 +18,7 @@ public class CartService {
 	private CartVO cartVO;
 	
 	public void insertCartInfo(List<HashMap<String, Object>> productList, Integer productNum, String userId, HttpServletRequest request) {
-				
-		
+					
 		//장바구니 데이터 저장하는 아이디의 IP주소 가져오기
 		String memberIP = request.getHeader("X-Forwarded-For");	    
 
@@ -68,6 +67,13 @@ public class CartService {
 	
 	public List<HashMap<String, Object>> selectCartList(String userId) {
 		return cartDAO.selectCartList(userId);
+	}
+
+	
+	//장바구니 제품 delete
+	public int deleteCartList(Integer checkDelNum) {
+		return cartDAO.deleteCartList(checkDelNum);
+		
 	}
 
 }

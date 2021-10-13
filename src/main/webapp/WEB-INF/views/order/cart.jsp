@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>장바구니</title>
-  <%@ include file="./include/Top.jsp" %>
+  <%@ include file="../include/Top.jsp" %>
   
   <script type="text/javascript">
 	//알림 메시지
@@ -59,7 +59,7 @@
 <body>
   <header>
     <!-- Header Start -->
-        <jsp:include page="./include/TopNavi.jsp" />
+        <jsp:include page="../include/TopNavi.jsp" />
     <!-- Header End -->
   </header>
   <main>
@@ -278,6 +278,9 @@
 	/*선택삭제 기능 시작*/
 	function deleteProd() {
 		var checkedArray = [];
+		
+		alert("선택한 상품을 삭제하시겠습니까?");
+		
 		$("input:checkbox[name='del_check']:checked").each(function() {
 			checkedArray.push($(this).val()); // 체크된 것 value만 배열에 push			
 		})
@@ -287,10 +290,10 @@
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/cart/delEachCartProd",
-			async: false,
 			data : {"checkedArray" : checkedArray},			
 			success: function(data) {
-				console.log(data);
+				alert(data);
+				location.href = location.href;
 			},
 			error: function(xhr, status, error) {
 				alert(error);
@@ -307,7 +310,7 @@
   <footer>
       
   </footer>
-   <jsp:include page="./include/Footer.jsp" />
+   <jsp:include page="../include/Footer.jsp" />
 
 </body>
 </html>
