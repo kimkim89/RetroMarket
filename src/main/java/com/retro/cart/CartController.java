@@ -115,25 +115,30 @@ public class CartController {
 	
 	
 	
-	@RequestMapping(value="/cart/delEachCartProd") 
+	@RequestMapping(value="/cart/delEachCartProd", produces = "application/text; charset=utf8") 
 	@ResponseBody
-	public Integer deleteEachCartProd(@RequestParam(value="checkedArray[]") List<String> chkBoxArr) {
-		Integer result = 0;
-		String checkDelNum = "";
+	public String deleteEachCartProd(@RequestParam(value="checkedArray[]") List<Integer> chkBoxArr) {
 		
+		Integer checkDelNum = 0;
+		int delResult = 0;
+		String delMsg = "";
 		
-		for(String str : chkBoxArr) {
-			checkDelNum = str;
-			System.out.println("확인중1234::: ");
-			System.out.println(checkDelNum);
+		for(Integer delNumber : chkBoxArr) {
+			checkDelNum = delNumber;
+			
+			//장바구니 제품 delete
+			delResult = cartService.deleteCartList(checkDelNum);
+		}
+		
+		if(delResult != 0) {
+			delMsg = "삭제되었습니다.";
 		}
 		
 		
 		
 		
 		
-		
-		return result;
+		return delMsg;
 	}
 	
 	

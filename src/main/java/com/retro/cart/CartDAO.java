@@ -21,4 +21,9 @@ public class CartDAO {
 		return sqlSession.selectList("mapper.Cart.selectCartList", userId);
 	}
 
+	//장바구니 제품 delete
+	public int deleteCartList(Integer checkDelNum) {
+		return sqlSession.delete("mapper.Cart.deleteCartList", checkDelNum);		
+	}
+
 }

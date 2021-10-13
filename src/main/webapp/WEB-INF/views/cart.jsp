@@ -278,6 +278,9 @@
 	/*선택삭제 기능 시작*/
 	function deleteProd() {
 		var checkedArray = [];
+		
+		alert("선택한 상품을 삭제하시겠습니까?");
+		
 		$("input:checkbox[name='del_check']:checked").each(function() {
 			checkedArray.push($(this).val()); // 체크된 것 value만 배열에 push			
 		})
@@ -287,10 +290,10 @@
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/cart/delEachCartProd",
-			async: false,
 			data : {"checkedArray" : checkedArray},			
 			success: function(data) {
-				console.log(data);
+				alert(data);
+				location.href = location.href;
 			},
 			error: function(xhr, status, error) {
 				alert(error);

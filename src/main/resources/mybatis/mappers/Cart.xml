@@ -9,7 +9,8 @@
 <resultMap type="CartVO" id="CartVO">
 	<collection property="ProductVO" resultMap="ProductVO"></collection>
 </resultMap>
-
+	
+	<!-- 장바구니 테이블에 데이터 insert -->
 	<insert id="insertCartInfo" parameterType="cartVO">
 		insert into cart( cart_idx, 
 						  order_num, 
@@ -38,8 +39,26 @@
 						);		
 	</insert>
 	
+	
+	<!-- 장바구니 및 제품 정보 join해서 select -->
 	<select id="selectCartList" parameterType="String" resultType="map">
 		select * from cart c inner join product_info p on c.pr_idx = p.mk_idx where c.member_id = #{member_id} order by c.cart_idx desc;
 	</select>
+
+	
+	<!-- 장바구니 데이터 delete -->
+	<delete id="deleteCartList" parameterType="Integer">
+		delete from cart where cart_idx = #{checkDelNum};
+	</delete>
+
+
+
+
+
+
+
+
+
+
 
 </mapper>

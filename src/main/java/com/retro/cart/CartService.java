@@ -70,4 +70,11 @@ public class CartService {
 		return cartDAO.selectCartList(userId);
 	}
 
+	
+	//장바구니 제품 delete
+	public int deleteCartList(Integer checkDelNum) {
+		return cartDAO.deleteCartList(checkDelNum);
+		
+	}
+
 }
