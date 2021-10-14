@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import lombok.Getter;
 
 @Controller
-@RequestMapping("/order/*")
+@RequestMapping("/buy/*")
 public class BuyController {
 	
 	private ModelAndView mav = new ModelAndView();
