@@ -152,7 +152,7 @@
               </table>
               <div class="checkout_btn_inner float-right">	
     	        <a class="btn_1" href="javascript:deleteAllProd();">선택상품주문</a>
-                <a class="btn_1 checkout_btn_1" href="${contextPath}/buy/buyPage">전체상품주문</a>
+                <a class="btn_1 checkout_btn_1" href="${contextPath}/order/orderForm">전체상품주문</a>
               </div>
             </div>
           </div>

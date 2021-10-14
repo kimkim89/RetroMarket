@@ -5,15 +5,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Watch shop | eCommers</title>
-    <%@ include file="./include/Top.jsp" %>
+    <title>주문결제</title>
+    <%@ include file="../include/Top.jsp" %>
 </head>
 
 <body>
 
   <header>
     <!-- Header Start -->
-        <jsp:include page="./include/TopNavi.jsp" />
+        <jsp:include page="../include/TopNavi.jsp" />
     <!-- Header End -->
   </header>
     <main>
@@ -51,12 +51,12 @@
                   <form class="row contact_form" action="#" method="post" novalidate="novalidate">
                     <div class="col-md-6 form-group p_star">
                       <input type="text" class="form-control" id="first" name="name" />
-                      <span class="placeholder" data-placeholder="First name"></span>
+                      <span class="placeholder" data-placeholder="이름"></span>
                     </div>
-                    <div class="col-md-6 form-group p_star">
-                      <input type="text" class="form-control" id="last" name="name" />
-                      <span class="placeholder" data-placeholder="Last name"></span>
-                    </div>
+<!--                     <div class="col-md-6 form-group p_star"> -->
+<!--                       <input type="text" class="form-control" id="last" name="name" /> -->
+<!--                       <span class="placeholder" data-placeholder="Last name"></span> -->
+<!--                     </div> -->
                     <div class="col-md-12 form-group">
                       <input type="text" class="form-control" id="company" name="company" placeholder="Company name" />
                     </div>
@@ -199,7 +199,7 @@
     <footer>
         
     </footer>
-    <jsp:include page="./include/Footer.jsp" />
+    <jsp:include page="../include/Footer.jsp" />
     
   
 </body>
