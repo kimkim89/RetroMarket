@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>주문결제</title>
+    <title>아맞다매점 - 주문결제</title>
     <%@ include file="../include/Top.jsp" %>
 </head>
 
@@ -47,65 +47,57 @@
             <div class="billing_details">
               <div class="row">
                 <div class="col-lg-8">
-                  <h3>Billing Details</h3>
+                  <h3>배송정보</h3>
                   <form class="row contact_form" action="#" method="post" novalidate="novalidate">
                     <div class="col-md-6 form-group p_star">
                       <input type="text" class="form-control" id="first" name="name" />
-                      <span class="placeholder" data-placeholder="이름"></span>
+                      <span class="placeholder" data-placeholder="받는사람 이름"></span>
                     </div>
-<!--                     <div class="col-md-6 form-group p_star"> -->
-<!--                       <input type="text" class="form-control" id="last" name="name" /> -->
-<!--                       <span class="placeholder" data-placeholder="Last name"></span> -->
-<!--                     </div> -->
-                    <div class="col-md-12 form-group">
-                      <input type="text" class="form-control" id="company" name="company" placeholder="Company name" />
+                    <div class="col-md-7 form-group p_star">
+                      <input type="text" class="form-control" id="last" name="name" />
+                      <span class="placeholder" data-placeholder="연락처"></span>
                     </div>
-                    <div class="col-md-6 form-group p_star">
-                      <input type="text" class="form-control" id="number" name="number" />
-                      <span class="placeholder" data-placeholder="Phone number"></span>
+                    <div class="col-md-7 form-group p_star">
+                      <input type="text" class="form-control" id="last" name="name" />
+                      <span class="placeholder" data-placeholder="우편번호"></span>
                     </div>
-                    <div class="col-md-6 form-group p_star">
-                      <input type="text" class="form-control" id="email" name="compemailany" />
-                      <span class="placeholder" data-placeholder="Email Address"></span>
-                    </div>
-                    <div class="col-md-12 form-group p_star">
-                      <select class="country_select">
-                        <option value="1">Country</option>
-                        <option value="2">Country</option>
-                        <option value="4">Country</option>
-                      </select>
-                    </div>
+					<div class="col-md-2 form-group p_star">
+						<button type="button" id="addr_btn" style="color: black; padding: 4px;">주소찾기</button>
+					</div>                                        
                     <div class="col-md-12 form-group p_star">
                       <input type="text" class="form-control" id="add1" name="add1" />
-                      <span class="placeholder" data-placeholder="Address line 01"></span>
+                      <span class="placeholder" data-placeholder="주소"></span>
                     </div>
                     <div class="col-md-12 form-group p_star">
                       <input type="text" class="form-control" id="add2" name="add2" />
-                      <span class="placeholder" data-placeholder="Address line 02"></span>
-                    </div>
-                    <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="city" name="city" />
-                      <span class="placeholder" data-placeholder="Town/City"></span>
+                      <span class="placeholder" data-placeholder="상세주소"></span>
                     </div>
                     <div class="col-md-12 form-group p_star">
                       <select class="country_select">
-                        <option value="1">District</option>
-                        <option value="2">District</option>
-                        <option value="4">District</option>
+                      	<option value="0" selected disabled>배송 요청사항을 선택해 주세요.</option>
+                        <option value="1">배송 전 연락바랍니다.</option>
+                        <option value="2">부재시 경비실에 맡겨주세요.</option>
+                        <option value="3">부재시 문 앞에 놓아주세요.</option>
+                        <option value="4">부재시 전화 주시거나 문자 남겨 주세요.</option>
+                        <option value="5">요청사항 직접 입력</option>
                       </select>
+                    </div>                    
+                    <div class="col-md-12 form-group p_star">
+                    	<textarea class="form-control" maxlength="50"></textarea>
                     </div>
-                    <div class="col-md-12 form-group">
-                      <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" />
-                    </div>
+                    <div class="col-md-12 form-group"></div>
+
+ 
+<!--                     <div class="col-md-12 form-group"> -->
+<!--                       <div class="creat_account"> -->
+<!--                         <input type="checkbox" id="f-option2" name="selector" /> -->
+<!--                         <label for="f-option2">Create an account?</label> -->
+<!--                       </div> -->
+<!--                     </div> -->
+
                     <div class="col-md-12 form-group">
                       <div class="creat_account">
-                        <input type="checkbox" id="f-option2" name="selector" />
-                        <label for="f-option2">Create an account?</label>
-                      </div>
-                    </div>
-                    <div class="col-md-12 form-group">
-                      <div class="creat_account">
-                        <h3>Shipping Details</h3>
+                        <h3>결제수단</h3>
                         <input type="checkbox" id="f-option3" name="selector" />
                         <label for="f-option3">Ship to a different address?</label>
                       </div>
