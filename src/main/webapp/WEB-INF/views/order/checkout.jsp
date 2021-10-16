@@ -74,7 +74,7 @@
                     </div>
                     <div class="col-md-12 form-group p_star">
                       <select class="country_select">
-                      	<option value="0" selected disabled>배송 요청사항을 선택해 주세요.</option>
+                      	<option value="" selected disabled>배송 요청사항을 선택해 주세요.</option>
                         <option value="1">배송 전 연락바랍니다.</option>
                         <option value="2">부재시 경비실에 맡겨주세요.</option>
                         <option value="3">부재시 문 앞에 놓아주세요.</option>
@@ -82,8 +82,9 @@
                         <option value="5">요청사항 직접 입력</option>
                       </select>
                     </div>                    
-                    <div class="col-md-12 form-group p_star">
-                    	<textarea class="form-control" maxlength="50"></textarea>
+                    <div class="col-md-12 form-group">
+                    	<textarea class="form-control" name="message" id="message" rows="1"
+                        placeholder="Order Notes"></textarea>
                     </div>
                     <div class="col-md-12 form-group"></div>
 
@@ -98,21 +99,35 @@
                     <div class="col-md-12 form-group">
                       <div class="creat_account">
                         <h3>결제수단</h3>
-                        <input type="checkbox" id="f-option3" name="selector" />
-                        <label for="f-option3">Ship to a different address?</label>
-                      </div>
-                      <textarea class="form-control" name="message" id="message" rows="1"
-                        placeholder="Order Notes"></textarea>
+                        <input type="radio" id="f-option3" name="selector" checked />
+                        <label for="f-option3">무통장 입금</label>
+                      </div>                      
                     </div>
+                    <div class="col-md-12 form-group p_star">
+                      <select class="country_select">
+                      	<option value="" selected disabled>은행명</option>
+                      	<c:forEach var="bankNameList" items="${bankNameList}" varStatus="status">
+                      		 <option value="${bankNameList.bank_code}">${bankNameList.bank_name}</option>
+                      	</c:forEach>                     
+                      </select>                      
+                    </div>
+                    <div class="col-md-12 form-group p_star">
+                      <input type="text" class="form-control" id="bank_account" name="bank_account" />
+                      <span class="placeholder" data-placeholder="계좌번호"></span>
+                    </div> 
+                    <div class="col-md-12 form-group p_star">
+                      <input type="text" class="form-control" id="bank_acct_owner" name="bank_acct_owner" />
+                      <span class="placeholder" data-placeholder="예금주명"></span>
+                    </div>    
                   </form>
                 </div>
                 <div class="col-lg-4">
                   <div class="order_box">
-                    <h2>Your Order</h2>
+                    <h2>주문 상품</h2>
                     <ul class="list">
                       <li>
-                        <a href="#">Product
-                          <span>Total</span>
+                        <a href="#">상품
+                          <span>누적금액</span>
                         </a>
                       </li>
                       <li>
@@ -136,50 +151,50 @@
                     </ul>
                     <ul class="list list_2">
                       <li>
-                        <a href="#">Subtotal
+                        <a href="#">상품금액
                           <span>$2160.00</span>
                         </a>
                       </li>
                       <li>
-                        <a href="#">Shipping
-                          <span>Flat rate: $50.00</span>
+                        <a href="#">배송료
+                          <span>$50.00</span>
                         </a>
                       </li>
                       <li>
-                        <a href="#">Total
+                        <a href="#">결제금액
                           <span>$2210.00</span>
                         </a>
                       </li>
                     </ul>
-                    <div class="payment_item">
-                      <div class="radion_btn">
-                        <input type="radio" id="f-option5" name="selector" />
-                        <label for="f-option5">Check payments</label>
-                        <div class="check"></div>
-                      </div>
-                      <p>
-                        Please send a check to Store Name, Store Street, Store Town,
-                        Store State / County, Store Postcode.
-                      </p>
-                    </div>
-                    <div class="payment_item active">
-                      <div class="radion_btn">
-                        <input type="radio" id="f-option6" name="selector" />
-                        <label for="f-option6">Paypal </label>
-                        <img src="img/product/single-product/card.jpg" alt="" />
-                        <div class="check"></div>
-                      </div>
-                      <p>
-                        Please send a check to Store Name, Store Street, Store Town,
-                        Store State / County, Store Postcode.
-                      </p>
-                    </div>
-                    <div class="creat_account">
-                      <input type="checkbox" id="f-option4" name="selector" />
-                      <label for="f-option4">I’ve read and accept the </label>
-                      <a href="#">terms & conditions*</a>
-                    </div>
-                    <a class="btn_3" href="#">Proceed to Paypal</a>
+<!--                     <div class="payment_item"> -->
+<!--                       <div class="radion_btn"> -->
+<!--                         <input type="radio" id="f-option5" name="selector" /> -->
+<!--                         <label for="f-option5">Check payments</label> -->
+<!--                         <div class="check"></div> -->
+<!--                       </div> -->
+<!--                       <p> -->
+<!--                         Please send a check to Store Name, Store Street, Store Town, -->
+<!--                         Store State / County, Store Postcode. -->
+<!--                       </p> -->
+<!--                     </div> -->
+<!--                     <div class="payment_item active"> -->
+<!--                       <div class="radion_btn"> -->
+<!--                         <input type="radio" id="f-option6" name="selector" /> -->
+<!--                         <label for="f-option6">Paypal </label> -->
+<!--                         <img src="img/product/single-product/card.jpg" alt="" /> -->
+<!--                         <div class="check"></div> -->
+<!--                       </div> -->
+<!--                       <p> -->
+<!--                         Please send a check to Store Name, Store Street, Store Town, -->
+<!--                         Store State / County, Store Postcode. -->
+<!--                       </p> -->
+<!--                     </div> -->
+<!--                     <div class="creat_account"> -->
+<!--                       <input type="checkbox" id="f-option4" name="selector" /> -->
+<!--                       <label for="f-option4">I’ve read and accept the </label> -->
+<!--                       <a href="#">terms & conditions*</a> -->
+<!--                     </div> -->
+                    <a class="btn_3" href="#">결제하기</a>
                   </div>
                 </div>
               </div>

@@ -10,5 +10,7 @@
 		<typeAlias type="com.retro.adminProduct.AdminProductImageVO" alias="adminProdImageVO"/>
 		<typeAlias type="com.retro.moonmarket.HomeMainVO" alias="homeMainVO"/>
 		<typeAlias type="com.retro.cart.CartVO" alias="cartVO" />
+		<typeAlias type="com.retro.customerOrder.BankNameDTO" alias="bankNameDTO" />
+		<typeAlias type="com.retro.customerOrder.CustomerOrderVO" alias="csOrderVO" />
 	</typeAliases>
 </configuration>

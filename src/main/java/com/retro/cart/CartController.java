@@ -119,7 +119,7 @@ public class CartController {
 	
 	
 	
-	@RequestMapping(value="/cart/delEachCartProd", produces = "application/text; charset=utf8") 
+	@RequestMapping(value="delEachCartProd", produces = "application/text; charset=utf8") 
 	@ResponseBody
 	public String deleteEachCartProd(@RequestParam(value="checkedArray[]") List<Integer> chkBoxArr) {
 		
@@ -139,6 +139,29 @@ public class CartController {
 		}
 		return delMsg;
 	}
+	
+	
+	//장바구니 수량 변경
+	@RequestMapping(value="updateCartList", produces = "application/text; charset=utf8") 
+	@ResponseBody
+	public String updateCartList(Integer totalCount, Integer cartId) {
+		
+		int updateResult = 0;
+		HashMap<String, Integer> updateCartMap = new HashMap<String, Integer>(); 
+		String updateMsg = "";
+				
+		updateCartMap.put("totalCount", totalCount);
+		updateCartMap.put("cartId", cartId);
+			
+		updateResult = cartService.updateCartList(updateCartMap);
+		
+		if(updateResult != 0) {
+			updateMsg = "선택하신 상품의 수량을 변경했습니다.";
+		}
+		
+		return updateMsg;		
+	}
+	
 	
 	
 	

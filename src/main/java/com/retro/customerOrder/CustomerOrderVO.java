@@ -30,4 +30,5 @@ public class CustomerOrderVO {
 	private int pay_method;
 	private int pay_status;
 	
+	
 }

@@ -79,6 +79,7 @@
       </div>
       <!--================Cart Area =================-->
       <section class="cart_area section_padding">
+      <form name="check_form" id="check_form">
         <div class="container" style="max-width: 110%;">
           <div class="cart_inner">
             <div class="table-responsive">
@@ -95,7 +96,8 @@
                 <c:forEach var="cartList" items="${cartList}" varStatus="status">
                   <tr>          	
                     <td>
-                      <div class="media">  
+                      <div class="media">
+                      <input type="hidden" name="cart_index" id="cart_index" value="${cartList.cart_idx}" />  
                       <input type="checkbox" class="delete_box" name="del_check" id="del_check${status.index}" value="${cartList.cart_idx}" />                    	
                         <div class="d-flex">
                           <img src="${contextPath}/resources/images/temporary/${cartList.mk_stored_thumb}" alt="" />
@@ -110,11 +112,11 @@
                     </td>
                     <td>
                       <div class="product_count" id="product_count${status.index}">
-                        <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'minus', 'product_price${status.index}')">
+                        <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'minus', 'product_price${status.index}', '${cartList.cart_idx}')">
                         	<i class="ti-minus"></i>
                         </span>
                         <input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10">
-                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'plus', 'product_price${status.index}')">
+                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'plus', 'product_price${status.index}', '${cartList.cart_idx}')">
                         	<i class="ti-plus"></i>
                         </span>
                       </div>
@@ -149,14 +151,15 @@
                   </tr>
 
                 </tbody>
-              </table>
-              <div class="checkout_btn_inner float-right">	
+              </table>              
+              <div class="checkout_btn_inner float-right">
     	        <a class="btn_1" href="javascript:deleteAllProd();">선택상품주문</a>
-                <a class="btn_1 checkout_btn_1" href="${contextPath}/order/orderForm">전체상품주문</a>
-              </div>
+                <a class="btn_1 checkout_btn_1" href="javascript:orderAllProducts();">전체상품주문</a>
+              </div>            
             </div>
           </div>
           </div>
+      </form>
       </section>
       <!--================End Cart Area =================-->
   </main>
@@ -164,7 +167,7 @@
   
   <script type="text/javascript">
 	//상품수량변경 ---> test중
-	function changePrice(nameType, tagNumber, totalNumber, inputId, keyType, prPrice) {
+	function changePrice(nameType, tagNumber, totalNumber, inputId, keyType, prPrice, cartIndex) {
 		
 		let totalCnt = Number(totalNumber);
 		let buttonName = "";
@@ -195,9 +198,9 @@
 				prTotalPrice += epTotalPrice;
 				
 				//onclick plus
-				onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "'" + ")";
+				onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "', '" + cartIndex  + "')";
 				//onclick minus
-				onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'minus', '" + prPrice + "'" + ")";
+				onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'minus', '" + prPrice + "', '" + cartIndex  + "')";
 								
 				buttonName = "minus" + tagNumber;
 				
@@ -211,6 +214,9 @@
 				document.getElementById("product_total" + tagNumber).innerText = epTotalPrice;
 				document.getElementById("total_price").innerText = prTotalPrice;
 				document.getElementById("product_count" + tagNumber).innerHTML = quantityCode;
+				
+				//상품 수량 변경 시 장바구니 테이블 데이터 수정
+				changeCartData(totalCnt, cartIndex);
 				
 			}		
 			
@@ -228,9 +234,9 @@
 				prTotalPrice += epTotalPrice;
 				
 				//onclick minus
-				onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "'" + ")";
+				onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "', '" + cartIndex  + "')";
 				//onclick plus
-				onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'plus', '" + prPrice + "'" + ")";
+				onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'plus', '" + prPrice + "', '" + cartIndex  + "')";
 						
 				buttonName = "plus" + tagNumber;
 				
@@ -247,6 +253,10 @@
 				document.getElementById("product_total" + tagNumber).innerText = epTotalPrice;
 				document.getElementById("total_price").innerText = prTotalPrice;
 				document.getElementById("product_count" + tagNumber).innerHTML = quantityCode;
+				
+								
+				//상품 수량 변경 시 장바구니 테이블 데이터 수정
+				changeCartData(totalCnt, cartIndex);
 		
 			}
 		}//onclick함수에서 plus/minus값 넘어오는지 확인하는 if문 끝
@@ -302,6 +312,42 @@
 		
 	}//deleteEachProd()함수 끝
 	
+	
+	/*수량 변경 시 장바구니 테이블 내 데이터 수정*/
+	function changeCartData(totalCount, cartId) {
+						
+		$.ajax({
+			type : "POST",
+			url : "${contextPath}/cart/updateCartList",
+			data : { "totalCount" : totalCount, "cartId" : cartId },			
+			success: function(data) {
+				alert(data);
+				location.href = location.href;
+			},
+			error: function(xhr, status, error) {
+				alert(error);
+			}
+		});//ajax끝
+	}
+	
+	//20211016 작업 진행 중
+	/*전체상품주문 페이지로 이동*/
+	function orderAllProducts() {
+		
+		var cartIndexArr = document.getElementsByName("cart_index");
+		var cartIndexValue = [];
+		
+		alert(cartIndexArr.length);
+		
+		for(var k=0; k<cartIndexArr.length; k++) {
+			cartIndexValue.push(cartIndexArr[k].value);
+			//console.log("cartIndexArr[" + k + "] = " + cartIndexArr[k].value);
+			document.form.action = "${contextPath}/order/orderForm"
+		}
+		
+		
+		
+	}
 	
 	
 	

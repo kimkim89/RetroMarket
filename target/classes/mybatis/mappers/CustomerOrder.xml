@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.CustomerOrder">
+
+
+
+	
+	
+	
+<!-- 상품 주문 페이지의 결제수단 - 은행명 출력에 사용 -->
+	<select id="selectBankName" resultType="BankNameDTO">
+		select * from bank_name_info;
+	</select>
+	
+	
+
+
+
+
+
+<!-- 은행 정보 입력용으로만 사용한 후 주석 처리 했음  -->
+<!-- 	<insert id="insertBankInfo" parameterType="hashMap"> -->
+<!-- 		insert into bank_name_info(bank_code, bank_name) values(#{bankCode}, #{bankName}); -->
+<!-- 	</insert> -->
+
+</mapper>
