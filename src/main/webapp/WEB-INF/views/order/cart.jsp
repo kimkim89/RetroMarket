@@ -79,6 +79,7 @@
       </div>
       <!--================Cart Area =================-->
       <section class="cart_area section_padding">
+      <form name="check_form" id="check_form">
         <div class="container" style="max-width: 110%;">
           <div class="cart_inner">
             <div class="table-responsive">
@@ -150,14 +151,15 @@
                   </tr>
 
                 </tbody>
-              </table>
+              </table>              
               <div class="checkout_btn_inner float-right">
     	        <a class="btn_1" href="javascript:deleteAllProd();">선택상품주문</a>
                 <a class="btn_1 checkout_btn_1" href="javascript:orderAllProducts();">전체상품주문</a>
-              </div>
+              </div>            
             </div>
           </div>
           </div>
+      </form>
       </section>
       <!--================End Cart Area =================-->
   </main>
@@ -313,8 +315,7 @@
 	
 	/*수량 변경 시 장바구니 테이블 내 데이터 수정*/
 	function changeCartData(totalCount, cartId) {
-		console.log("cartId:: " + cartId);
-				
+						
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/cart/updateCartList",
@@ -329,10 +330,23 @@
 		});//ajax끝
 	}
 	
-	
+	//20211016 작업 진행 중
 	/*전체상품주문 페이지로 이동*/
 	function orderAllProducts() {
-		//${contextPath}/order/orderForm
+		
+		var cartIndexArr = document.getElementsByName("cart_index");
+		var cartIndexValue = [];
+		
+		alert(cartIndexArr.length);
+		
+		for(var k=0; k<cartIndexArr.length; k++) {
+			cartIndexValue.push(cartIndexArr[k].value);
+			//console.log("cartIndexArr[" + k + "] = " + cartIndexArr[k].value);
+			document.form.action = "${contextPath}/order/orderForm"
+		}
+		
+		
+		
 	}
 	
 	
