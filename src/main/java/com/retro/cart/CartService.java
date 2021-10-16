@@ -76,4 +76,9 @@ public class CartService {
 		
 	}
 
+	//장바구니 수량 변경
+	public int updateCartList(HashMap<String, Integer> updateCartMap) {
+		return cartDAO.updateCartList(updateCartMap);
+	}
+
 }

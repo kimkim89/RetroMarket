@@ -52,7 +52,10 @@
 	</delete>
 
 
-
+	<!-- 장바구니 수량 변경 -->
+	<update id="updateCartList" parameterType="map">
+		update cart set total_num = #{totalCount} where cart_idx = #{cartId}; 
+	</update>
 
 
 

@@ -27,4 +27,9 @@ public class CartDAO {
 		return sqlSession.delete("mapper.Cart.deleteCartList", checkDelNum);		
 	}
 
+	//장바구니 수량 변경
+	public int updateCartList(HashMap<String, Integer> updateCartMap) {
+		return sqlSession.update("mapper.Cart.updateCartList", updateCartMap);
+	}
+
 }

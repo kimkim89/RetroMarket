@@ -27,9 +27,7 @@ public class CustomerOrderController {
 			//상품 주문 페이지의 결제수단 - 은행명 출력에 사용			
 			List<BankNameDTO> bankNameList = csOrderService.selectBankName();
 				
-			System.out.println("++++++++확인 start ++++++++++++++++++++++++++++++++++++++++++");
-				System.out.println("BankNameDTO타입 배열 :: " + bankNameList);
-			System.out.println("++++++++확인 end ++++++++++++++++++++++++++++++++++++++++++");
+			
 			
 			mav.addObject("bankNameList", bankNameList);
 			mav.setViewName("order/checkout");
