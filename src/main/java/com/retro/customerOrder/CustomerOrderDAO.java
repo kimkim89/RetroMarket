@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.retro.cart.CartVO;
+
 @Repository
 public class CustomerOrderDAO {
 	
@@ -18,6 +20,18 @@ public class CustomerOrderDAO {
 		return sqlSession.selectList("mapper.CustomerOrder.selectBankName");
 	}	
 	
+	
+	public List<CartVO> selectAllOrderList(String userId) {
+		return sqlSession.selectList("mapper.CustomerOrder.selectAllOrderList", userId);
+	}
+	
+	
+	//주문할 상품 조회
+//	public List<CartVO> selectOrderList(Integer cartIndex) {
+//		return sqlSession.selectList("mapper.CustomerOrder.selectOrderList", cartIndex);
+//	}
+
+
 	
 	
 	
