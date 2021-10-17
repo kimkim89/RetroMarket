@@ -126,28 +126,18 @@
                     <h2>주문 상품</h2>
                     <ul class="list">
                       <li>
-                        <a href="#">상품
-                          <span>누적금액</span>
+                        <a href="#">상품명
+                          <span>수량</span>
                         </a>
                       </li>
+                      <c:forEach var="orderList" items="${orderList}" varStatus="status">
                       <li>
-                        <a href="#">Fresh Blackberry
-                          <span class="middle">x 02</span>
-                          <span class="last">$720.00</span>
+                        <a href="#">${orderList.pr_name}
+                          <span class="middle"></span>
+                          <span class="last">${orderList.total_num}개</span>
                         </a>
                       </li>
-                      <li>
-                        <a href="#">Fresh Tomatoes
-                          <span class="middle">x 02</span>
-                          <span class="last">$720.00</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">Fresh Brocoli
-                          <span class="middle">x 02</span>
-                          <span class="last">$720.00</span>
-                        </a>
-                      </li>
+                      </c:forEach>                      
                     </ul>
                     <ul class="list list_2">
                       <li>

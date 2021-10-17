@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.retro.cart.CartVO;
+
 @Service
 public class CustomerOrderService {
 
@@ -17,8 +19,18 @@ public class CustomerOrderService {
 		return csOrderDAO.selectBankName();
 	}
 
+	public List<CartVO> selectAllOrderList(String userId) {
+		return csOrderDAO.selectAllOrderList(userId);
+				
+	}
 	
 	
+	
+	
+	//주문할 상품 조회
+//	public List<CartVO> selectOrderList(Integer cartIndex) {
+//		return csOrderDAO.selectOrderList(cartIndex);
+//	}
 	
 	
 	

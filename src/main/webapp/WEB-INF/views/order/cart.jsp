@@ -79,7 +79,7 @@
       </div>
       <!--================Cart Area =================-->
       <section class="cart_area section_padding">
-      <form name="check_form" id="check_form">
+      <form name="cart_form" id="cart_form" method="post">
         <div class="container" style="max-width: 110%;">
           <div class="cart_inner">
             <div class="table-responsive">
@@ -336,17 +336,14 @@
 		
 		var cartIndexArr = document.getElementsByName("cart_index");
 		var cartIndexValue = [];
-		
-		alert(cartIndexArr.length);
-		
+				
 		for(var k=0; k<cartIndexArr.length; k++) {
 			cartIndexValue.push(cartIndexArr[k].value);
-			//console.log("cartIndexArr[" + k + "] = " + cartIndexArr[k].value);
-			document.form.action = "${contextPath}/order/orderForm"
-		}
+			//console.log("cartIndexArr[" + k + "] = " + cartIndexArr[k].value);			
+		}		
 		
-		
-		
+		document.cart_form.action = "${contextPath}/order/orderForm";
+		document.cart_form.submit();		
 	}
 	
 	

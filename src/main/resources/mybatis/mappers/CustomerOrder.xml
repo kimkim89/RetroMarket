@@ -7,17 +7,20 @@
 <mapper namespace="mapper.CustomerOrder">
 
 
-
-	
-	
-	
-<!-- 상품 주문 페이지의 결제수단 - 은행명 출력에 사용 -->
+	<!-- 상품 주문 페이지의 결제수단 - 은행명 출력에 사용 -->
 	<select id="selectBankName" resultType="BankNameDTO">
 		select * from bank_name_info;
 	</select>
 	
+	<select id="selectAllOrderList" parameterType="String" resultType="cartVO">
+		select * from cart where member_id = #{userId};
+	</select>
 	
-
+		
+	<!-- 주문할 상품 조회 -->
+	<select id="selectOrderList" parameterType="int" resultType="cartVO">
+		select * from cart where cart_idx = #{cartIndex} order by cart_idx desc;
+	</select>
 
 
 
