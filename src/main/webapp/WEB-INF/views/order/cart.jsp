@@ -342,7 +342,7 @@
 			//console.log("cartIndexArr[" + k + "] = " + cartIndexArr[k].value);			
 		}		
 		
-		document.cart_form.action = "${contextPath}/order/orderForm";
+		document.cart_form.action = "${contextPath}/order/orderAllProd";
 		document.cart_form.submit();		
 	}
 	
