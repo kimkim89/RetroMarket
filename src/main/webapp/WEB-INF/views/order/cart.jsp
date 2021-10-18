@@ -98,6 +98,7 @@
                     <td>
                       <div class="media">
                       <input type="hidden" name="cart_index" id="cart_index" value="${cartList.cart_idx}" />  
+                      <input type="hidden" name="selected_index" id="selected_index" value="" />
                       <input type="checkbox" class="delete_box" name="del_check" id="del_check${status.index}" value="${cartList.cart_idx}" />                    	
                         <div class="d-flex">
                           <img src="${contextPath}/resources/images/temporary/${cartList.mk_stored_thumb}" alt="" />
@@ -153,7 +154,7 @@
                 </tbody>
               </table>              
               <div class="checkout_btn_inner float-right">
-    	        <a class="btn_1" href="javascript:deleteAllProd();">선택상품주문</a>
+    	        <a class="btn_1" href="javascript:orderSelectedProds();">선택상품주문</a>
                 <a class="btn_1 checkout_btn_1" href="javascript:orderAllProducts();">전체상품주문</a>
               </div>            
             </div>
@@ -166,7 +167,7 @@
   
   
   <script type="text/javascript">
-	//상품수량변경 ---> test중
+	//상품수량변경
 	function changePrice(nameType, tagNumber, totalNumber, inputId, keyType, prPrice, cartIndex) {
 		
 		let totalCnt = Number(totalNumber);
@@ -330,22 +331,42 @@
 		});//ajax끝
 	}
 	
-	//20211016 작업 진행 중
+	
 	/*전체상품주문 페이지로 이동*/
-	function orderAllProducts() {
+	function orderAllProducts() {		
 		
-		var cartIndexArr = document.getElementsByName("cart_index");
-		var cartIndexValue = [];
-				
-		for(var k=0; k<cartIndexArr.length; k++) {
-			cartIndexValue.push(cartIndexArr[k].value);
-			//console.log("cartIndexArr[" + k + "] = " + cartIndexArr[k].value);			
-		}		
-		
-		document.cart_form.action = "${contextPath}/order/orderForm";
+		document.cart_form.action = "${contextPath}/order/orderAllProd";
 		document.cart_form.submit();		
 	}
 	
+	
+	/*선택상품주문 페이지로 이동*/
+	function orderSelectedProds() {
+		
+		var cartIndexValue = [];		
+		
+		$("input:checkbox[name='del_check']:checked").each(function() {
+			cartIndexValue.push($(this).val()); // 체크된 것 value만 배열에 push				
+		});
+		
+		document.getElementById("selected_index").value = cartIndexValue;
+		
+		document.cart_form.action = "${contextPath}/order/orderSomeProd";
+		document.cart_form.submit();
+		
+		
+		
+		
+		
+		
+		
+// 		for(var k=0; k<cartIndexArr.length; k++) {
+// 			//cartIndexValue.push(cartIndexArr[k].value);
+// 			console.log("cartIndexArr[" + k + "] = " + cartIndexArr[k].checked.value);			
+// 		}	
+		
+
+	}
 	
 	
   </script>

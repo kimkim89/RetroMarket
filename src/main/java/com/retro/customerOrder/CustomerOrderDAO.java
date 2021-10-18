@@ -20,16 +20,15 @@ public class CustomerOrderDAO {
 		return sqlSession.selectList("mapper.CustomerOrder.selectBankName");
 	}	
 	
-	
+	//장바구니 내 전체 상품 목록 조회
 	public List<CartVO> selectAllOrderList(String userId) {
 		return sqlSession.selectList("mapper.CustomerOrder.selectAllOrderList", userId);
 	}
-	
-	
-	//주문할 상품 조회
-//	public List<CartVO> selectOrderList(Integer cartIndex) {
-//		return sqlSession.selectList("mapper.CustomerOrder.selectOrderList", cartIndex);
-//	}
+		
+	//장바구니 테이블로부터 선택한 상품 목록 조회
+	public List<CartVO> selectSomeOrderList(Integer cartIndex) {
+		return sqlSession.selectList("mapper.CustomerOrder.selectSomeOrderList", cartIndex);
+	}
 
 
 	
