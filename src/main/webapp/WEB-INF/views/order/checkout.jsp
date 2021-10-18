@@ -35,45 +35,45 @@
         <section class="checkout_area section_padding">
           <div class="container">
             
-            <div class="cupon_area">
-              <div class="check_title">
-                <h2>
-                  	쿠폰이 있나요 ?
-                </h2>
-              </div>
-              <input type="text" placeholder="쿠폰을 입력해주세요" />
-              <a class="tp_btn" href="#">쿠폰 적용</a>
-            </div>
+<!--             <div class="cupon_area"> -->
+<!--               <div class="check_title"> -->
+<!--                 <h2> -->
+<!--                   	쿠폰이 있나요 ? -->
+<!--                 </h2> -->
+<!--               </div> -->
+<!--               <input type="text" placeholder="쿠폰을 입력해주세요" /> -->
+<!--               <a class="tp_btn" href="#">쿠폰 적용</a> -->
+<!--             </div> -->
             <div class="billing_details">
               <div class="row">
                 <div class="col-lg-8">
                   <h3>배송정보</h3>
                   <form class="row contact_form" action="#" method="post" novalidate="novalidate">
                     <div class="col-md-6 form-group p_star">
-                      <input type="text" class="form-control" id="first" name="name" />
+                      <input type="text" class="form-control" id=receiver_name name="receiver_name" />
                       <span class="placeholder" data-placeholder="받는사람 이름"></span>
                     </div>
                     <div class="col-md-7 form-group p_star">
-                      <input type="text" class="form-control" id="last" name="name" />
+                      <input type="text" class="form-control" id="receiver_phone" name="receiver_phone" />
                       <span class="placeholder" data-placeholder="연락처"></span>
                     </div>
                     <div class="col-md-7 form-group p_star">
-                      <input type="text" class="form-control" id="last" name="name" />
+                      <input type="text" class="form-control" id="receiver_addr1" name="receiver_addr1" />
                       <span class="placeholder" data-placeholder="우편번호"></span>
                     </div>
 					<div class="col-md-2 form-group p_star">
 						<button type="button" id="addr_btn" style="color: black; padding: 4px;">주소찾기</button>
 					</div>                                        
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="add1" name="add1" />
+                      <input type="text" class="form-control" id="receiver_addr2" name="receiver_addr2" />
                       <span class="placeholder" data-placeholder="주소"></span>
                     </div>
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="add2" name="add2" />
+                      <input type="text" class="form-control" id="receiver_addr3" name="receiver_addr3" />
                       <span class="placeholder" data-placeholder="상세주소"></span>
                     </div>
                     <div class="col-md-12 form-group p_star">
-                      <select class="country_select">
+                      <select class="country_select" name="delivery_choice" id="delivery_choice">
                       	<option value="" selected disabled>배송 요청사항을 선택해 주세요.</option>
                         <option value="1">배송 전 연락바랍니다.</option>
                         <option value="2">부재시 경비실에 맡겨주세요.</option>
@@ -83,7 +83,7 @@
                       </select>
                     </div>                    
                     <div class="col-md-12 form-group">
-                    	<textarea class="form-control" name="message" id="message" rows="1"
+                    	<textarea class="form-control" name="delivery_msg" id="delivery_msg" rows="1"
                         placeholder="Order Notes"></textarea>
                     </div>
                     <div class="col-md-12 form-group"></div>
@@ -99,12 +99,12 @@
                     <div class="col-md-12 form-group">
                       <div class="creat_account">
                         <h3>결제수단</h3>
-                        <input type="radio" id="f-option3" name="selector" checked />
-                        <label for="f-option3">무통장 입금</label>
+                        <input type="radio" id="pay_method" name="pay_method" value="1" checked />
+                        <label for="pay_method">무통장 입금</label>
                       </div>                      
                     </div>
                     <div class="col-md-12 form-group p_star">
-                      <select class="country_select">
+                      <select class="country_select" name="od_bank_name" id="od_bank_name">
                       	<option value="" selected disabled>은행명</option>
                       	<c:forEach var="bankNameList" items="${bankNameList}" varStatus="status">
                       		 <option value="${bankNameList.bank_code}">${bankNameList.bank_name}</option>
@@ -112,7 +112,7 @@
                       </select>                      
                     </div>
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="bank_account" name="bank_account" />
+                      <input type="text" class="form-control" id="bank_acct_num" name="bank_acct_num" />
                       <span class="placeholder" data-placeholder="계좌번호"></span>
                     </div> 
                     <div class="col-md-12 form-group p_star">
@@ -155,6 +155,13 @@
                           <span><fmt:formatNumber value="${totalOrderPrice}" pattern="#,###"/>원</span>
                         </a>
                       </li>
+                      
+                      <li>
+                        <a href="#">쿠폰
+                        <span>쿠폰추가</span>
+                        </a>                        
+                      </li>
+                     
                     </ul>
 <!--                     <div class="payment_item"> -->
 <!--                       <div class="radion_btn"> -->

@@ -12,13 +12,14 @@
 		select * from bank_name_info;
 	</select>
 	
+	<!-- 장바구니 내 전체 상품 목록 조회 -->
 	<select id="selectAllOrderList" parameterType="String" resultType="cartVO">
 		select * from cart where member_id = #{userId};
 	</select>
 	
 		
-	<!-- 주문할 상품 조회 -->
-	<select id="selectOrderList" parameterType="int" resultType="cartVO">
+	<!-- 장바구니 테이블로부터 선택한 상품 목록 조회 -->
+	<select id="selectSomeOrderList" parameterType="int" resultType="cartVO">
 		select * from cart where cart_idx = #{cartIndex} order by cart_idx desc;
 	</select>
 

@@ -19,18 +19,16 @@ public class CustomerOrderService {
 		return csOrderDAO.selectBankName();
 	}
 
+	//장바구니 내 전체 상품 목록 조회
 	public List<CartVO> selectAllOrderList(String userId) {
-		return csOrderDAO.selectAllOrderList(userId);
-				
+		return csOrderDAO.selectAllOrderList(userId);				
 	}
 	
 	
-	
-	
-	//주문할 상품 조회
-//	public List<CartVO> selectOrderList(Integer cartIndex) {
-//		return csOrderDAO.selectOrderList(cartIndex);
-//	}
+	//장바구니 테이블로부터 선택한 상품 목록 조회
+	public List<CartVO> selectSomeOrderList(Integer cartIndex) {
+		return csOrderDAO.selectSomeOrderList(cartIndex);
+	}
 	
 	
 	

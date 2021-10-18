@@ -23,12 +23,15 @@ public class CustomerOrderVO {
 	private String receiver_addr3;
 	private int delivery_check;
 	private int delivery_fee;
-	private int delivery_msg;
+	private int delivery_choice;
+	private String delivery_msg;
 	private int coupon_price;
 	private int added_point;
 	private int used_point;
-	private int pay_method;
-	private int pay_status;
-	
+	private int payment_method;
+	private int payment_status;
+	private String od_bank_name;
+	private String bank_acct_num;
+	private String bank_acct_owner;
 	
 }
