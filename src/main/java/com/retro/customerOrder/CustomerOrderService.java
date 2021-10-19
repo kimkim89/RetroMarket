@@ -46,8 +46,18 @@ public class CustomerOrderService {
 		//현재 로그인한 아이디
 		String userId = (String) request.getSession().getAttribute("user_id");	
 		
+		//배송료
+		int totalDeliFee = Integer.parseInt(request.getParameter("delivery_fee"));
+		
 		//현재 로그인된 계정의 
 		MemberVO memberList = mypageService.getInfo(userId);
+		
+		
+		if(totalDeliFee == 0) {
+			csOrderVO.setDelivery_check(0);
+		}else {
+			csOrderVO.setDelivery_check(1);
+		}		
 		
 		csOrderVO.setMember_id(userId);
 		csOrderVO.setOrder_name(memberList.getName());
@@ -56,13 +66,16 @@ public class CustomerOrderService {
 		csOrderVO.setOrder_addr2(memberList.getAddress2());
 		csOrderVO.setOrder_addr3(memberList.getAddress3());
 		csOrderVO.setOrder_phone(memberList.getPhone());
+		csOrderVO.setDelivery_fee(totalDeliFee);
 		
 		
 		
 		
 		
 		
-		csOrderVO.setMember_id(userId);
+		
+		
+		
 		
 		
 		

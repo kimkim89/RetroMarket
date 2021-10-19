@@ -75,7 +75,7 @@
 									#{added_point},
 									#{used_point},
 									#{payment_method},
-									#{payment_status},
+									0,
 									#{od_bank_name},
 									#{bank_acct_num},
 									#{bank_acct_owner}
