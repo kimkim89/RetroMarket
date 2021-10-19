@@ -24,6 +24,63 @@
 	</select>
 
 
+	<!-- 결제버튼 클릭 시 주문 관련 정보 저장 -->
+	<insert id="insertOrderInfo" parameterType="csOrderVO">
+		insert into product_order ( order_idx,
+									order_code,
+									member_id,
+									order_name,
+									order_email,
+									order_addr1
+									order_addr2,
+									order_addr3,
+									order_phone,
+									receiver_name,
+									receiver_phone,
+									receiver_addr1,
+									receiver_addr2,
+									receiver_addr3,
+									delivery_check,
+									delivery_fee,
+									delivery_choice,
+									delivery_msg,
+									coupon_price,
+									added_point,
+									used_point,
+									payment_method,
+									payment_status,
+									od_bank_name,
+									bank_acct_num,
+									bank_acct_owner
+								   )
+			 			   values ( #{order_idx},
+									#{order_code},
+									#{member_id},
+									#{order_name},
+									#{order_email},
+									#{order_addr1},
+									#{order_addr2},
+									#{order_addr3},
+									#{order_phone},
+									#{receiver_name},
+									#{receiver_phone},
+									#{receiver_addr1},
+									#{receiver_addr2},
+									#{receiver_addr3},
+									#{delivery_check},
+									#{delivery_fee},
+									#{delivery_choice},
+									#{delivery_msg},
+									#{coupon_price},
+									#{added_point},
+									#{used_point},
+									#{payment_method},
+									#{payment_status},
+									#{od_bank_name},
+									#{bank_acct_num},
+									#{bank_acct_owner}
+			 				);
+	</insert>
 
 
 <!-- 은행 정보 입력용으로만 사용한 후 주석 처리 했음  -->

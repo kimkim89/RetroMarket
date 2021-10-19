@@ -1,18 +1,27 @@
 package com.retro.customerOrder;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.retro.cart.CartVO;
+import com.retro.member.MemberVO;
+import com.retro.mypage.MyPageService;
 
 @Service
 public class CustomerOrderService {
 
 	@Autowired
-	CustomerOrderDAO csOrderDAO;
+	private CustomerOrderDAO csOrderDAO;
+	@Autowired
+	private MyPageService mypageService;
+	@Autowired
+	private CustomerOrderVO csOrderVO;
+	
 	
 	//상품 주문 페이지의 결제수단 - 은행명 출력에 사용
 	public List<BankNameDTO> selectBankName() {
@@ -30,6 +39,40 @@ public class CustomerOrderService {
 		return csOrderDAO.selectSomeOrderList(cartIndex);
 	}
 	
+	
+	//결제버튼 클릭 시 주문 관련 정보 저장
+	public List<CartVO> insertOrderInfo(CustomerOrderVO csOrderVO, HttpServletRequest request) {
+		
+		//현재 로그인한 아이디
+		String userId = (String) request.getSession().getAttribute("user_id");	
+		
+		//현재 로그인된 계정의 
+		MemberVO memberList = mypageService.getInfo(userId);
+		
+		csOrderVO.setMember_id(userId);
+		csOrderVO.setOrder_name(memberList.getName());
+		csOrderVO.setOrder_email(memberList.getEmail());
+		csOrderVO.setOrder_addr1(memberList.getAddress1());
+		csOrderVO.setOrder_addr2(memberList.getAddress2());
+		csOrderVO.setOrder_addr3(memberList.getAddress3());
+		csOrderVO.setOrder_phone(memberList.getPhone());
+		
+		
+		
+		
+		
+		
+		csOrderVO.setMember_id(userId);
+		
+		
+		
+		
+		
+		
+		
+		
+		return csOrderDAO.insertOrderInfo(csOrderVO);
+	}
 	
 	
 	

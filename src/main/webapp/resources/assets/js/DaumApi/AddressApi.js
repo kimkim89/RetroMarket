@@ -30,9 +30,16 @@ function execPostCode() {
 //                console.log(data.zonecode);
 //                console.log(fullRoadAddr);
                 
+                /*20211019 주문결제 페이지의 주소 입력칸 name인 receiver_addr1, receiver_addr2로 되어 있어서 해당 페이지에서만 if문 조건에 해당되고 그 외에는 else문 적용되도록 수정*/
+                var checkPageName = document.getElementById('map_check').value;                
                 
-                $("#address1").val(data.zonecode);
-                $("#address2").val(fullRoadAddr);
+                if(checkPageName == "checkout") {
+                	$("#receiver_addr1").val(data.zonecode);
+                    $("#receiver_addr2").val(fullRoadAddr);
+                }else {
+	                $("#address1").val(data.zonecode);
+	                $("#address2").val(fullRoadAddr);
+                }
                 
 //                document.getElementById('address1').value = data.zonecode; //5자리 새우편번호 사용
 //                document.getElementById('address2').value = fullRoadAddr;

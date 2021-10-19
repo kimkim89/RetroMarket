@@ -5,8 +5,8 @@
    
 <mapper namespace="mapper.MyPage">
 
-	<select id="MyInfo" resultType="memberVO">
-		select * from member;
+	<select id="MyInfo" resultType="memberVO" parameterType="String">
+		select * from member where id = #{id};
 	</select>
 	
 	<update id="ModifyAction" parameterType="hashMap">

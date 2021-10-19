@@ -16,7 +16,7 @@ public class MyPageDAO {
 	
 	// 20210424 마이페이지 정보 들고오기
 	public MemberVO getInfo(String id) {
-			return sqlsession.selectOne("mapper.MyPage.MyInfo", id);
+		return sqlsession.selectOne("mapper.MyPage.MyInfo", id);
 	}
 
 	// 20210605 마이페이지 정보 수정

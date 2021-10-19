@@ -7,6 +7,17 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>아맞다매점 - 주문결제</title>
     <%@ include file="../include/Top.jsp" %>
+    
+    <!-- 다음 우편 API -->
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script src="${contextPath}/resources/assets/js/DaumApi/AddressApi.js"></script>
+	<script>
+		//우편번호 , 주소 검색 API
+		function addressFind() {
+			execPostCode();
+		};
+	</script>
+    
 </head>
 
 <body>
@@ -48,7 +59,8 @@
               <div class="row">
                 <div class="col-lg-8">
                   <h3>배송정보</h3>
-                  <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                  <form class="row contact_form" action="${contextPath}/order/placeOrder" method="post" novalidate="novalidate">
+                  <input type="hidden" name="map_check" id="map_check" value="checkout" />
                     <div class="col-md-6 form-group p_star">
                       <input type="text" class="form-control" id=receiver_name name="receiver_name" />
                       <span class="placeholder" data-placeholder="받는사람 이름"></span>
@@ -62,7 +74,7 @@
                       <span class="placeholder" data-placeholder="우편번호"></span>
                     </div>
 					<div class="col-md-2 form-group p_star">
-						<button type="button" id="addr_btn" style="color: black; padding: 4px;">주소찾기</button>
+						<button type="button" id="addr_btn" style="color: black; padding: 4px;" onclick="addressFind();">주소 검색</button>
 					</div>                                        
                     <div class="col-md-12 form-group p_star">
                       <input type="text" class="form-control" id="receiver_addr2" name="receiver_addr2" />
@@ -73,7 +85,7 @@
                       <span class="placeholder" data-placeholder="상세주소"></span>
                     </div>
                     <div class="col-md-12 form-group p_star">
-                      <select class="country_select" name="delivery_choice" id="delivery_choice">
+                      <select class="country_select" name="delivery_choice" id="delivery_choice" onchange="chooseMsg(this.value);">
                       	<option value="" selected disabled>배송 요청사항을 선택해 주세요.</option>
                         <option value="1">배송 전 연락바랍니다.</option>
                         <option value="2">부재시 경비실에 맡겨주세요.</option>
@@ -82,9 +94,8 @@
                         <option value="5">요청사항 직접 입력</option>
                       </select>
                     </div>                    
-                    <div class="col-md-12 form-group">
-                    	<textarea class="form-control" name="delivery_msg" id="delivery_msg" rows="1"
-                        placeholder="Order Notes"></textarea>
+                    <div class="col-md-12 form-group" id="hidden_d_msg" style="display:none;">
+                    	<textarea class="form-control" name="delivery_msg" id="delivery_msg" rows="1" placeholder="Order Notes"></textarea>
                     </div>
                     <div class="col-md-12 form-group"></div>
 
@@ -191,7 +202,7 @@
 <!--                       <label for="f-option4">I’ve read and accept the </label> -->
 <!--                       <a href="#">terms & conditions*</a> -->
 <!--                     </div> -->
-                    <a class="btn_3" href="#">결제하기</a>
+                    <a class="btn_3" href="${contextPath}/order/placeOrder">결제하기</a>
                   </div>
                 </div>
               </div>
@@ -200,6 +211,27 @@
         </section>
         <!--================End Checkout Area =================-->
     </main>
+    
+    <script type="text/javascript">
+	
+    //배송 요청 사항 메시지칸 추가
+    function chooseMsg(deliOptValue) {
+    	var selectMsg = document.getElementById("delivery_choice");	    	
+    	
+    	if(selectMsg.options[selectMsg.selectedIndex].value == 5) {
+    		document.getElementById("hidden_d_msg").style.display = 'block';
+    	}else {
+    		document.getElementById("hidden_d_msg").style.display = 'none';
+    	}
+    	   
+    }
+    
+    
+    
+    
+    </script>
+    
+    
     <footer>
         
     </footer>
