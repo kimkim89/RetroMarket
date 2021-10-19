@@ -7,6 +7,17 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>아맞다매점 - 주문결제</title>
     <%@ include file="../include/Top.jsp" %>
+    
+    <!-- 다음 우편 API -->
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script src="${contextPath}/resources/assets/js/DaumApi/AddressApi.js"></script>
+	<script>
+		//우편번호 , 주소 검색 API
+		function addressFind() {
+			execPostCode();
+		};
+	</script>
+    
 </head>
 
 <body>
@@ -48,32 +59,37 @@
               <div class="row">
                 <div class="col-lg-8">
                   <h3>배송정보</h3>
-                  <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                  
+                  <form class="row contact_form" action="${contextPath}/order/placeOrder" method="post" novalidate="novalidate">
+                  	<input type="hidden" name="map_check" id="map_check" value="checkout" />
+                  	<input type="hidden" name="delivery_fee" id="delivery_fee" value="${deliveryFee}" />
+                  	<input type="hidden" name="order_price" id="order_price" value="${totalOrderPrice}"/>
+                  	
                     <div class="col-md-6 form-group p_star">
-                      <input type="text" class="form-control" id=receiver_name name="receiver_name" />
-                      <span class="placeholder" data-placeholder="받는사람 이름"></span>
+                      <input type="text" class="form-control" id=receiver_name name="receiver_name" placeholder="받는사람 이름 *"/>
+<!--                       <span class="placeholder" data-placeholder="받는사람 이름"></span> -->
                     </div>
                     <div class="col-md-7 form-group p_star">
-                      <input type="text" class="form-control" id="receiver_phone" name="receiver_phone" />
-                      <span class="placeholder" data-placeholder="연락처"></span>
+                      <input type="text" class="form-control" id="receiver_phone" name="receiver_phone" placeholder="연락처 *"/>
+<!--                       <span class="placeholder" data-placeholder="연락처"></span> -->
                     </div>
                     <div class="col-md-7 form-group p_star">
-                      <input type="text" class="form-control" id="receiver_addr1" name="receiver_addr1" />
-                      <span class="placeholder" data-placeholder="우편번호"></span>
+                      <input type="text" class="form-control" id="receiver_addr1" name="receiver_addr1" placeholder="우편번호 *"/>
+<!--                       <span class="placeholder" data-placeholder="우편번호"></span> -->
                     </div>
 					<div class="col-md-2 form-group p_star">
-						<button type="button" id="addr_btn" style="color: black; padding: 4px;">주소찾기</button>
+						<button type="button" id="addr_btn" style="color: black; padding: 4px;" onclick="addressFind();">주소 검색</button>
 					</div>                                        
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="receiver_addr2" name="receiver_addr2" />
-                      <span class="placeholder" data-placeholder="주소"></span>
+                      <input type="text" class="form-control" id="receiver_addr2" name="receiver_addr2" placeholder="주소 *"/>
+<!--                       <span class="placeholder" data-placeholder="주소"></span> -->
                     </div>
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="receiver_addr3" name="receiver_addr3" />
-                      <span class="placeholder" data-placeholder="상세주소"></span>
+                      <input type="text" class="form-control" id="receiver_addr3" name="receiver_addr3" placeholder="상세주소 *"/>
+<!--                       <span class="placeholder" data-placeholder="상세주소"></span> -->
                     </div>
                     <div class="col-md-12 form-group p_star">
-                      <select class="country_select" name="delivery_choice" id="delivery_choice">
+                      <select class="country_select" name="delivery_choice" id="delivery_choice" onchange="chooseMsg(this.value);">
                       	<option value="" selected disabled>배송 요청사항을 선택해 주세요.</option>
                         <option value="1">배송 전 연락바랍니다.</option>
                         <option value="2">부재시 경비실에 맡겨주세요.</option>
@@ -82,9 +98,8 @@
                         <option value="5">요청사항 직접 입력</option>
                       </select>
                     </div>                    
-                    <div class="col-md-12 form-group">
-                    	<textarea class="form-control" name="delivery_msg" id="delivery_msg" rows="1"
-                        placeholder="Order Notes"></textarea>
+                    <div class="col-md-12 form-group" id="hidden_d_msg" style="display:none;">
+                    	<textarea class="form-control" name="delivery_msg" id="delivery_msg" rows="1" placeholder="Order Notes"></textarea>
                     </div>
                     <div class="col-md-12 form-group"></div>
 
@@ -99,25 +114,25 @@
                     <div class="col-md-12 form-group">
                       <div class="creat_account">
                         <h3>결제수단</h3>
-                        <input type="radio" id="pay_method" name="pay_method" value="1" checked />
+                        <input type="radio" id="payment_method" name="payment_method" value="1" checked />
                         <label for="pay_method">무통장 입금</label>
                       </div>                      
                     </div>
                     <div class="col-md-12 form-group p_star">
                       <select class="country_select" name="od_bank_name" id="od_bank_name">
-                      	<option value="" selected disabled>은행명</option>
+                      	<option value="" selected disabled>무통장입금계좌의 은행명을 선택해 주세요.</option>
                       	<c:forEach var="bankNameList" items="${bankNameList}" varStatus="status">
                       		 <option value="${bankNameList.bank_code}">${bankNameList.bank_name}</option>
                       	</c:forEach>                     
                       </select>                      
                     </div>
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="bank_acct_num" name="bank_acct_num" />
-                      <span class="placeholder" data-placeholder="계좌번호"></span>
+                      <input type="text" class="form-control" id="bank_acct_num" name="bank_acct_num" placeholder="계좌번호 *"/>
+<!--                       <span class="placeholder" data-placeholder="계좌번호"></span> -->
                     </div> 
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="bank_acct_owner" name="bank_acct_owner" />
-                      <span class="placeholder" data-placeholder="예금주명"></span>
+                      <input type="text" class="form-control" id="bank_acct_owner" name="bank_acct_owner" placeholder="예금주명 *"/>
+<!--                       <span class="placeholder" data-placeholder="예금주명"></span> -->
                     </div>    
                   </form>
                 </div>
@@ -191,7 +206,7 @@
 <!--                       <label for="f-option4">I’ve read and accept the </label> -->
 <!--                       <a href="#">terms & conditions*</a> -->
 <!--                     </div> -->
-                    <a class="btn_3" href="#">결제하기</a>
+                    <a class="btn_3" href="${contextPath}/order/placeOrder">결제하기</a>
                   </div>
                 </div>
               </div>
@@ -200,6 +215,27 @@
         </section>
         <!--================End Checkout Area =================-->
     </main>
+    
+    <script type="text/javascript">
+	
+    //배송 요청 사항 메시지칸 추가
+    function chooseMsg(deliOptValue) {
+    	var selectMsg = document.getElementById("delivery_choice");	    	
+    	
+    	if(selectMsg.options[selectMsg.selectedIndex].value == 5) {
+    		document.getElementById("hidden_d_msg").style.display = 'block';
+    	}else {
+    		document.getElementById("hidden_d_msg").style.display = 'none';
+    	}
+    	   
+    }
+    
+    
+    
+    
+    </script>
+    
+    
     <footer>
         
     </footer>

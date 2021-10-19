@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.retro.cart.CartVO;
 
@@ -125,8 +126,22 @@ public class CustomerOrderController {
 			
 		}
 
-
-
+		
+		@RequestMapping(value="placeOrder")
+		public ModelAndView insertOrderInfo(CustomerOrderVO csOrderVO, RedirectAttributes attributes, HttpServletRequest request) {
+			
+			ModelAndView mav = new ModelAndView();
+			
+			//결제버튼 클릭 시 주문 관련 정보 저장
+			csOrderService.insertOrderInfo(csOrderVO, request);
+			
+			String msg = "주문이 완료되었습니다.";
+			
+			attributes.addFlashAttribute("msg", msg); 
+			mav.setViewName("redirect:/main/index");
+			return mav;
+		}
+		
 		
 		
 		

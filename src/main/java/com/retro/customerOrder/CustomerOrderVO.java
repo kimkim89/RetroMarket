@@ -33,5 +33,6 @@ public class CustomerOrderVO {
 	private String od_bank_name;
 	private String bank_acct_num;
 	private String bank_acct_owner;
+	private int total_order_price;
 	
 }

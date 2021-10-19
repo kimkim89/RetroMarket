@@ -3,6 +3,8 @@ package com.retro.customerOrder;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,7 +32,16 @@ public class CustomerOrderDAO {
 		return sqlSession.selectList("mapper.CustomerOrder.selectSomeOrderList", cartIndex);
 	}
 
-
+	//결제버튼 클릭 시 주문 관련 정보 저장
+	public List<CartVO> insertOrderInfo(CustomerOrderVO csOrderVO) {
+		return sqlSession.selectList("mapper.CustomerOrder.insertOrderInfo", csOrderVO);
+	}	
+	
+	//전체 주문 조회
+	public CustomerOrderVO selectLastOrder() {
+		return sqlSession.selectOne("mapper.CustomerOrder.selectLastOrder");
+	}
+	
 	
 	
 	
