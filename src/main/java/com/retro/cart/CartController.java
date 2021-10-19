@@ -55,10 +55,6 @@ public class CartController {
 		String msg = "";
 		String locationUrl = "";
 	
-		
-
-		
-		
 		//비회원일 경우 장바구니 기능 사용할 수 없음
 		if(userId == null) {
 			msg = "로그인 후 이용하실 수 있습니다.";
@@ -118,7 +114,7 @@ public class CartController {
 	}
 	
 	
-	
+	//선택삭제 기능 구현
 	@RequestMapping(value="delEachCartProd", produces = "application/text; charset=utf8") 
 	@ResponseBody
 	public String deleteEachCartProd(@RequestParam(value="checkedArray[]") List<Integer> chkBoxArr) {

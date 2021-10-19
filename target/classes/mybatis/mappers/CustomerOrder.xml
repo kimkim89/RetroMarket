@@ -81,6 +81,14 @@
 									#{bank_acct_owner}
 			 				);
 	</insert>
+	
+	<!-- 전체 주문 조회 -->
+	<select id="selectLastOrder" resultType="csOrderVO">
+		select * from product_order order by order_idx desc limit 1;
+	</select>
+
+
+
 
 
 <!-- 은행 정보 입력용으로만 사용한 후 주석 처리 했음  -->

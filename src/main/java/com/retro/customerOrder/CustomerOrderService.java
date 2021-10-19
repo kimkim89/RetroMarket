@@ -1,6 +1,8 @@
 package com.retro.customerOrder;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +43,7 @@ public class CustomerOrderService {
 	
 	
 	//결제버튼 클릭 시 주문 관련 정보 저장
-	public List<CartVO> insertOrderInfo(CustomerOrderVO csOrderVO, HttpServletRequest request) {
+	public void insertOrderInfo(CustomerOrderVO csOrderVO, HttpServletRequest request) {
 		
 		//현재 로그인한 아이디
 		String userId = (String) request.getSession().getAttribute("user_id");	
@@ -49,8 +51,33 @@ public class CustomerOrderService {
 		//배송료
 		int totalDeliFee = Integer.parseInt(request.getParameter("delivery_fee"));
 		
+		//주문금액
+		int totalOrderPrice = Integer.parseInt(request.getParameter("order_price"));
+		
 		//현재 로그인된 계정의 
 		MemberVO memberList = mypageService.getInfo(userId);
+		
+		//주문번호 생성하기
+		Date today = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		String orderDate = df.format(today);
+		
+//20211020 오전:: 수정 작업 시작 예정 ---------------------------------------------------
+		CustomerOrderVO lastOrderList = csOrderDAO.selectLastOrder();
+		int uniqueOrderNum = 0;
+		int orderIdx = Integer.parseInt(lastOrderList.getOrder_idx());
+		
+		if(orderIdx != 1) {
+			orderIdx += 1;
+		}
+		
+		
+		String orderCode = orderDate + "-" + String.format("%04d", orderIdx);
+		
+		
+		System.out.println("orderCode확인중입니다:: " + orderCode);
+		
+//20211020 오전:: 수정 작업 종료 예정 ---------------------------------------------------
 		
 		
 		if(totalDeliFee == 0) {
@@ -67,24 +94,10 @@ public class CustomerOrderService {
 		csOrderVO.setOrder_addr3(memberList.getAddress3());
 		csOrderVO.setOrder_phone(memberList.getPhone());
 		csOrderVO.setDelivery_fee(totalDeliFee);
+		csOrderVO.setTotal_order_price(totalOrderPrice);
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		return csOrderDAO.insertOrderInfo(csOrderVO);
+		//return csOrderDAO.insertOrderInfo(csOrderVO);
 	}
 	
 	
