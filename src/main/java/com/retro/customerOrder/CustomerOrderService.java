@@ -64,15 +64,18 @@ public class CustomerOrderService {
 		
 //20211020 오전:: 수정 작업 시작 예정 ---------------------------------------------------
 		CustomerOrderVO lastOrderList = csOrderDAO.selectLastOrder();
-		int uniqueOrderNum = 0;
-		int orderIdx = Integer.parseInt(lastOrderList.getOrder_idx());
+		int orderIdx = 0;
 		
-		if(orderIdx != 1) {
-			orderIdx += 1;
+		
+		
+		if(orderIdx != 0) {
+			orderIdx = Integer.parseInt(lastOrderList.getOrder_idx()) + 1;
+		}else {
+			orderIdx = 1;
 		}
 		
 		
-		String orderCode = orderDate + "-" + String.format("%04d", orderIdx);
+		String orderCode = orderDate + String.format("%04d", orderIdx);
 		
 		
 		System.out.println("orderCode확인중입니다:: " + orderCode);
@@ -95,9 +98,11 @@ public class CustomerOrderService {
 		csOrderVO.setOrder_phone(memberList.getPhone());
 		csOrderVO.setDelivery_fee(totalDeliFee);
 		csOrderVO.setTotal_order_price(totalOrderPrice);
+		csOrderVO.setOrder_code(orderCode);
+		csOrderVO.setTotal_order_price(totalOrderPrice);
 		
 		
-		//return csOrderDAO.insertOrderInfo(csOrderVO);
+		csOrderDAO.insertOrderInfo(csOrderVO);
 	}
 	
 	

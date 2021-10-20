@@ -31,7 +31,7 @@
 									member_id,
 									order_name,
 									order_email,
-									order_addr1
+									order_addr1,
 									order_addr2,
 									order_addr3,
 									order_phone,
@@ -49,7 +49,7 @@
 									used_point,
 									payment_method,
 									payment_status,
-									od_bank_name,
+									od_bank_code,
 									bank_acct_num,
 									bank_acct_owner
 								   )
@@ -76,7 +76,7 @@
 									#{used_point},
 									#{payment_method},
 									0,
-									#{od_bank_name},
+									#{od_bank_code},
 									#{bank_acct_num},
 									#{bank_acct_owner}
 			 				);

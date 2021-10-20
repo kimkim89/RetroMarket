@@ -30,7 +30,7 @@ public class CustomerOrderVO {
 	private int used_point;
 	private int payment_method;
 	private int payment_status;
-	private String od_bank_name;
+	private int od_bank_code;
 	private String bank_acct_num;
 	private String bank_acct_owner;
 	private int total_order_price;
