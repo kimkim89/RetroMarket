@@ -81,7 +81,7 @@
 									#{bank_acct_num},
 									#{bank_acct_owner},
 									#{total_order_price}
-			 				);
+			 					);
 	</insert>
 	
 	<!-- 전체 주문 조회 -->
