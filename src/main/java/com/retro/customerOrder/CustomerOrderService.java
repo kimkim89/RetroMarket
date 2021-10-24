@@ -1,6 +1,8 @@
 package com.retro.customerOrder;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,12 +65,19 @@ public class CustomerOrderService {
 		String orderDate = df.format(today);
 		
 //20211020 오전:: 수정 작업 시작 예정 ---------------------------------------------------
-		CustomerOrderVO lastOrderList = csOrderDAO.selectLastOrder();
+		
 		int orderIdx = 0;
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String currentDate = now.format(dateTimeFormat);
+		System.out.println(currentDate);
+		
+		CustomerOrderVO lastOrderList = csOrderDAO.selectLastOrder(currentDate);
+		
+		System.out.println("참거짓 테스트::: " + lastOrderList.getOrder_idx() != null);
 		
 		
-		
-		if(orderIdx != 0) {
+		if(lastOrderList.getOrder_idx() != null) {
 			orderIdx = Integer.parseInt(lastOrderList.getOrder_idx()) + 1;
 		}else {
 			orderIdx = 1;

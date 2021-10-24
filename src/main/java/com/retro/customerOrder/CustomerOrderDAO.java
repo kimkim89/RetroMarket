@@ -38,8 +38,8 @@ public class CustomerOrderDAO {
 	}	
 	
 	//전체 주문 조회
-	public CustomerOrderVO selectLastOrder() {
-		return sqlSession.selectOne("mapper.CustomerOrder.selectLastOrder");
+	public CustomerOrderVO selectLastOrder(String currentDate) {
+		return sqlSession.selectOne("mapper.CustomerOrder.selectLastOrder", currentDate);
 	}
 	
 	
