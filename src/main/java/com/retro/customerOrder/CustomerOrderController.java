@@ -47,9 +47,7 @@ public class CustomerOrderController {
 					cartIndex = Integer.parseInt(selectedIndexArr[i]);
 					orderList.addAll(csOrderService.selectSomeOrderList(cartIndex));
 					totalProdPrice += orderList.get(i).getPr_price() * orderList.get(i).getTotal_num();
-				}
-				System.out.println("orderList 확인중++++++++++++++++++:: " + orderList);
-				System.out.println("totalProdPrice 확인중++++++++++++++++++:: " + totalProdPrice);
+				}				
 			}
 			
 			
@@ -66,7 +64,7 @@ public class CustomerOrderController {
 			//상품 주문 페이지의 결제수단 - 은행명 출력에 사용			
 			List<BankNameDTO> bankNameList = csOrderService.selectBankName();
 			
-			
+			mav.addObject("selectedIndexStr", selectedIndexStr);
 			mav.addObject("deliveryFee", deliveryFee);
 			mav.addObject("totalProdPrice", totalProdPrice);
 			mav.addObject("totalOrderPrice", totalOrderPrice);

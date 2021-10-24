@@ -86,10 +86,13 @@
 	
 	<!-- 전체 주문 조회 -->
 	<select id="selectLastOrder" resultType="csOrderVO" parameterType="String">
-		select * from product_order where order_date like #{currentDate} || '%' order by order_idx desc limit 1;
+		select * from product_order where order_code like concat(#{currentDate}, '%') order by order_idx desc limit 1;
 	</select>
 
-
+	<!-- cart 테이블 내 order_num(=주문번호)컬럼에 주문번호 저장 -->
+	<insert id="updateOrderNum" parameterType="csOrderVO">
+		update table cart set order_num = #{order_code}, cart_status = 1 where cart_idx = #{};
+	</insert>
 
 
 

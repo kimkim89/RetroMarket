@@ -64,6 +64,7 @@
                   	<input type="hidden" name="map_check" id="map_check" value="checkout" />
                   	<input type="hidden" name="delivery_fee" id="delivery_fee" value="${deliveryFee}" />
                   	<input type="hidden" name="order_price" id="order_price" value="${totalOrderPrice}"/>
+                  	<input type="hidden" name="selected_index" id="selected_index" value="${selectedIndexStr}" />
                   	
                     <div class="col-md-6 form-group p_star">
                       <input type="text" class="form-control" id=receiver_name name="receiver_name" placeholder="받는사람 이름 *"/>
