@@ -1,9 +1,13 @@
 package com.retro.customerOrder;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -47,7 +51,7 @@ public class CustomerOrderService {
 		
 		//현재 로그인한 아이디
 		String userId = (String) request.getSession().getAttribute("user_id");	
-		
+				
 		//배송료
 		int totalDeliFee = Integer.parseInt(request.getParameter("delivery_fee"));
 		
@@ -61,24 +65,25 @@ public class CustomerOrderService {
 		Date today = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 		String orderDate = df.format(today);
+	
+		int orderIdx = 0;
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String currentDate = now.format(dateTimeFormat);
+		String[] orderCodeIdxArr;
 		
-//20211020 오전:: 수정 작업 시작 예정 ---------------------------------------------------
-		CustomerOrderVO lastOrderList = csOrderDAO.selectLastOrder();
-		int uniqueOrderNum = 0;
-		int orderIdx = Integer.parseInt(lastOrderList.getOrder_idx());
+		CustomerOrderVO lastOrderList = csOrderDAO.selectLastOrder(currentDate);		
 		
-		if(orderIdx != 1) {
-			orderIdx += 1;
+		if(lastOrderList == null) {
+			orderIdx = 1;		
+		}else {			
+			orderCodeIdxArr = lastOrderList.getOrder_code().split(currentDate);
+			
+			orderIdx = Integer.parseInt(orderCodeIdxArr[1]) + 1;	
 		}
 		
-		
-		String orderCode = orderDate + "-" + String.format("%04d", orderIdx);
-		
-		
-		System.out.println("orderCode확인중입니다:: " + orderCode);
-		
-//20211020 오전:: 수정 작업 종료 예정 ---------------------------------------------------
-		
+		String orderCode = orderDate + String.format("%04d", orderIdx);
+
 		
 		if(totalDeliFee == 0) {
 			csOrderVO.setDelivery_check(0);
@@ -95,9 +100,34 @@ public class CustomerOrderService {
 		csOrderVO.setOrder_phone(memberList.getPhone());
 		csOrderVO.setDelivery_fee(totalDeliFee);
 		csOrderVO.setTotal_order_price(totalOrderPrice);
+		csOrderVO.setOrder_code(orderCode);
+		csOrderVO.setTotal_order_price(totalOrderPrice);
+
+		
+//20211025 오전:: 수정 작업 시작 예정 ---------------------------------------------------		
+
+		//주문할 상품 인덱스 번호
+		String selectedIndexStr = request.getParameter("selected_index");
+		String[] selectedIndexArr = selectedIndexStr.split(",");
+		int cartIndex = 0;
+
+		Map<String, Object> selectedIdxMap = new HashMap<String, Object>();
+		selectedIdxMap.put("order_code", csOrderVO.getOrder_code());
+		
+		if(selectedIndexStr != "") {
+			for(int i=0; i<selectedIndexArr.length; i++) {
+				cartIndex = Integer.parseInt(selectedIndexArr[i]);
+				
+			}
+			System.out.println("orderList 확인중++++++++++++++++++:: " + orderList);			
+		}
 		
 		
-		//return csOrderDAO.insertOrderInfo(csOrderVO);
+//20211025 오전:: 수정 작업 종료 예정 ---------------------------------------------------		
+		
+		
+		
+		csOrderDAO.insertOrderInfo(csOrderVO);
 	}
 	
 	

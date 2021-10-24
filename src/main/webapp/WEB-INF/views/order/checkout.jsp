@@ -60,10 +60,11 @@
                 <div class="col-lg-8">
                   <h3>배송정보</h3>
                   
-                  <form class="row contact_form" action="${contextPath}/order/placeOrder" method="post" novalidate="novalidate">
+                  <form class="row contact_form" name="order_form" action="${contextPath}/order/placeOrder" method="post" novalidate="novalidate">
                   	<input type="hidden" name="map_check" id="map_check" value="checkout" />
                   	<input type="hidden" name="delivery_fee" id="delivery_fee" value="${deliveryFee}" />
                   	<input type="hidden" name="order_price" id="order_price" value="${totalOrderPrice}"/>
+                  	<input type="hidden" name="selected_index" id="selected_index" value="${selectedIndexStr}" />
                   	
                     <div class="col-md-6 form-group p_star">
                       <input type="text" class="form-control" id=receiver_name name="receiver_name" placeholder="받는사람 이름 *"/>
@@ -119,7 +120,7 @@
                       </div>                      
                     </div>
                     <div class="col-md-12 form-group p_star">
-                      <select class="country_select" name="od_bank_name" id="od_bank_name">
+                      <select class="country_select" name="od_bank_code" id="od_bank_code">
                       	<option value="" selected disabled>무통장입금계좌의 은행명을 선택해 주세요.</option>
                       	<c:forEach var="bankNameList" items="${bankNameList}" varStatus="status">
                       		 <option value="${bankNameList.bank_code}">${bankNameList.bank_name}</option>
@@ -206,7 +207,7 @@
 <!--                       <label for="f-option4">I’ve read and accept the </label> -->
 <!--                       <a href="#">terms & conditions*</a> -->
 <!--                     </div> -->
-                    <a class="btn_3" href="${contextPath}/order/placeOrder">결제하기</a>
+                    <a class="btn_3" href="javascript:orderProduct();">결제하기</a>
                   </div>
                 </div>
               </div>
@@ -228,6 +229,27 @@
     		document.getElementById("hidden_d_msg").style.display = 'none';
     	}
     	   
+    }
+    
+    //결제하기 기능
+    function orderProduct() {
+    	
+    	/*console.log($("#receiver_name").val() == "");
+    	if($("#receiver_name").val() == "") {
+    		$("#receiver_name").focus();
+    	}else if($("#receiver_phone").val() == "") {
+    		$("#receiver_phone").focus();
+    	}else if($("#receiver_addr1").val() == "") {
+    		$("#receiver_addr1").focus();
+    	}else if($("#receiver_addr2").val() == "") {
+    		$("#receiver_addr2").focus();
+    	}else if($("#receiver_addr3").val() == "") {
+    		$("#receiver_addr3").focus();
+    	}*/
+    	
+    	
+    	
+    	document.order_form.submit();
     }
     
     

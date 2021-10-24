@@ -33,13 +33,13 @@ public class CustomerOrderDAO {
 	}
 
 	//결제버튼 클릭 시 주문 관련 정보 저장
-	public List<CartVO> insertOrderInfo(CustomerOrderVO csOrderVO) {
-		return sqlSession.selectList("mapper.CustomerOrder.insertOrderInfo", csOrderVO);
+	public void insertOrderInfo(CustomerOrderVO csOrderVO) {
+		sqlSession.selectList("mapper.CustomerOrder.insertOrderInfo", csOrderVO);
 	}	
 	
 	//전체 주문 조회
-	public CustomerOrderVO selectLastOrder() {
-		return sqlSession.selectOne("mapper.CustomerOrder.selectLastOrder");
+	public CustomerOrderVO selectLastOrder(String currentDate) {
+		return sqlSession.selectOne("mapper.CustomerOrder.selectLastOrder", currentDate);
 	}
 	
 	

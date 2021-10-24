@@ -1,5 +1,7 @@
 package com.retro.customerOrder;
 
+import java.sql.Timestamp;
+
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -30,9 +32,11 @@ public class CustomerOrderVO {
 	private int used_point;
 	private int payment_method;
 	private int payment_status;
-	private String od_bank_name;
+	private int od_bank_code;
 	private String bank_acct_num;
 	private String bank_acct_owner;
 	private int total_order_price;
+	private Timestamp order_date;
+	private Timestamp update_date;
 	
 }
