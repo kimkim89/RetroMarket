@@ -42,6 +42,15 @@ public class CustomerOrderDAO {
 		return sqlSession.selectOne("mapper.CustomerOrder.selectLastOrder", currentDate);
 	}
 	
+	//장바구니 cart_status 변경
+	public void updateCartStat(int cartIndex) {
+		sqlSession.update("mapper.CustomerOrder.updateCartStat", cartIndex);
+	}
+
+	public void updateOrderNum(Map<String, Object> selectedIdxMap) {
+		sqlSession.update("mapper.CustomerOrder.updateOrderNum", selectedIdxMap);
+	}
+	
 	
 	
 	

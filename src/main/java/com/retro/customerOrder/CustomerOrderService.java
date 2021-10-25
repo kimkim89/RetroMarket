@@ -103,8 +103,6 @@ public class CustomerOrderService {
 		csOrderVO.setOrder_code(orderCode);
 		csOrderVO.setTotal_order_price(totalOrderPrice);
 
-		
-//20211025 오전:: 수정 작업 시작 예정 ---------------------------------------------------		
 
 		//주문할 상품 인덱스 번호
 		String selectedIndexStr = request.getParameter("selected_index");
@@ -112,21 +110,20 @@ public class CustomerOrderService {
 		int cartIndex = 0;
 
 		Map<String, Object> selectedIdxMap = new HashMap<String, Object>();
-		selectedIdxMap.put("order_code", csOrderVO.getOrder_code());
+		selectedIdxMap.put("orderCode", csOrderVO.getOrder_code());
 		
 		if(selectedIndexStr != "") {
-			for(int i=0; i<selectedIndexArr.length; i++) {
+			for(int i=0; i<selectedIndexArr.length; i++) {				
 				cartIndex = Integer.parseInt(selectedIndexArr[i]);
+				csOrderDAO.updateCartStat(cartIndex);
 				
+				selectedIdxMap.put("cartIndex", cartIndex);
+				csOrderDAO.updateOrderNum(selectedIdxMap);
+				
+				//System.out.println("selectedIdxMap 확인중--------------------:: " + selectedIdxMap);					
 			}
-			System.out.println("orderList 확인중++++++++++++++++++:: " + orderList);			
-		}
-		
-		
-//20211025 오전:: 수정 작업 종료 예정 ---------------------------------------------------		
-		
-		
-		
+			//System.out.println("selectedIdxMap 전체 확인중++++++++++++++++++:: " + selectedIdxMap);			
+		}		
 		csOrderDAO.insertOrderInfo(csOrderVO);
 	}
 	

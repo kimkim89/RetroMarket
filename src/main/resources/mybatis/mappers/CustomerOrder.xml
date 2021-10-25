@@ -89,10 +89,15 @@
 		select * from product_order where order_code like concat(#{currentDate}, '%') order by order_idx desc limit 1;
 	</select>
 
+	<!-- cart 테이블의 cart_status 컬럼 값 변경 -->
+	<update id="updateCartStat" parameterType="int">
+		update cart set cart_status = 1 where cart_idx = #{cartIndex};
+	</update>
+
 	<!-- cart 테이블 내 order_num(=주문번호)컬럼에 주문번호 저장 -->
-	<insert id="updateOrderNum" parameterType="csOrderVO">
-		update table cart set order_num = #{order_code}, cart_status = 1 where cart_idx = #{};
-	</insert>
+	<update id="updateOrderNum" parameterType="map">
+		update cart set order_num = #{orderCode} where cart_idx = #{cartIndex} and cart_status = 1;
+	</update>
 
 
 
