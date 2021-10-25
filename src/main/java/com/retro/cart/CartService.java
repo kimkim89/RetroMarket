@@ -2,6 +2,7 @@ package com.retro.cart;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ public class CartService {
 	@Autowired
 	private CartVO cartVO;
 	
-	public void insertCartInfo(List<HashMap<String, Object>> productList, Integer productNum, String userId, HttpServletRequest request) {
+	public int insertCartInfo(List<HashMap<String, Object>> productList, Integer productNum, String userId, HttpServletRequest request) {
 					
 		//장바구니 데이터 저장하는 아이디의 IP주소 가져오기
 		String memberIP = request.getHeader("X-Forwarded-For");	    
@@ -61,7 +62,13 @@ public class CartService {
 		cartVO.setTotal_num(productNum);
 	    cartVO.setMember_ip(memberIP);
 		
-		cartDAO.insertCartInfo(cartVO);
+	        
+	    int existProdCheck = cartDAO.existProd(cartVO);
+	    if(existProdCheck == 0) {
+	    	cartDAO.insertCartInfo(cartVO);
+	    }
+	    
+	    return existProdCheck;
 	}
 	
 	
@@ -80,5 +87,10 @@ public class CartService {
 	public int updateCartList(HashMap<String, Integer> updateCartMap) {
 		return cartDAO.updateCartList(updateCartMap);
 	}
+	
+	//장바구니에 동일한 상품이 있는지 확인
+	public int existProd(CartVO cartVO) {
+		return cartDAO.existProd(cartVO);
+	} 
 
 }
