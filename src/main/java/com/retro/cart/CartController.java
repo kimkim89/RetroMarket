@@ -1,22 +1,15 @@
 package com.retro.cart;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.retro.member.MemberVO;
 import com.retro.product.ProductService;
 
 
@@ -30,13 +23,7 @@ public class CartController {
 	private CartService cartService;
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private MemberVO memberVO;
-	
-	
-	//private final CartService cartService;
-	//private final ProductService productService;
-	
+
 	
 	//장바구니 페이지
 	@RequestMapping(value = "prCart")
@@ -69,17 +56,24 @@ public class CartController {
 				List<HashMap<String, Object>> productList = productService.selectEachProd(productId);					
 			
 				//회원 아이디 기준으로 장바구니에 데이터 저장
-				cartService.insertCartInfo(productList, productNum, userId, request);
+				int checkProdExist = cartService.insertCartInfo(productList, productNum, userId, request);
+				
+				System.out.println("checkProdExist:: ================== " + checkProdExist );
+				if(checkProdExist != 0) {
+					msg = "해당 상품이 이미 장바구니에 담겨있습니다. 장바구니에서 수량을 변경해주세요.";
+					locationUrl = "cart/prCart";
+				}				
 				
 				count++;
 			}
 			
 			//회원 아이디 기준으로 장바구니 목록 조회
 			List<HashMap<String, Object>> cartList = cartService.selectCartList(userId);
-			List<Integer> totalPriceList = new ArrayList<Integer>();
+			
+			/*List<Integer> totalPriceList = new ArrayList<Integer>();
 			int totalPrice = 0;
 			
-			/*for(int i=0; i<cartList.size(); i++) {
+			for(int i=0; i<cartList.size(); i++) {
 				//System.out.println("횟수 확인 " + i + "번째 반복");
 				//System.out.println("price확인: " + cartList.get(i).get("pr_price"));
 				//System.out.println("상품 개수 확인: " + cartList.get(i).get("total_num"));
@@ -98,19 +92,14 @@ public class CartController {
 			//cartMap.put("productNum", productNum);
 			//cartMap.put("totalPrice", totalPrice);
 			
-			//System.out.println("productNum타입 확인" + productNum.getClass().getName());
-			
-			
-			mav.addObject("cartList", cartList);		
-			//mav.addObject("totalPriceList", totalPriceList);
-			
+			//System.out.println("productNum타입 확인" + productNum.getClass().getName());			
+			mav.addObject("cartList", cartList);					
 		}
 		
 		mav.addObject("msg", msg);
 		mav.addObject("locationUrl", locationUrl);
 		mav.setViewName("order/cart");
-		return mav;
-		
+		return mav;		
 	}
 	
 	
