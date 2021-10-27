@@ -51,8 +51,7 @@
 										&nbsp;&nbsp;
 									</div>
 								</form>
-								<button type="button" class="btn btn-info btn_delete" style="float: right;" onclick="">선택 삭제</button>
-								<button type="button" class="btn btn-info btn_blue" style="float: right; margin: auto 10px;" onclick="adminProdRegister();">상품 등록</button>
+								<button type="button" class="btn btn-info btn_delete" style="float: right;" onclick="">Later</button>								
 							</div>
 <br>
 								<div class="table-responsive">
@@ -92,7 +91,7 @@
 												<td><fmt:formatNumber value="${odList.used_point}" pattern="#,###"/>원</td>
 												<td>${odList.order_date}</td>
 												<td>
-													<a href="${contextPath}/admin/adminMemberInfo?wu=u&id=${List.id}">
+													<a href="${contextPath}/adminOrder/OrderForm?wu=u&id=${odList.order_idx}">
 														<i class="align-middle" data-feather="edit-2"></i>
 													</a>
 												</td>

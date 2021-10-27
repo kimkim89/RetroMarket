@@ -51,4 +51,17 @@ public class AdminOrderController {
 		return mav;
 	}
 	
+	
+	// 주문 내역 수정 페이지
+	@RequestMapping(value = "orderForm")
+	public ModelAndView selectEachOrderInfo() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("admin/admin_order_form");
+		return mav;
+	}
+	
+
+	
 }
