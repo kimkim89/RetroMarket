@@ -38,5 +38,6 @@ public class CustomerOrderVO {
 	private int total_order_price;
 	private Timestamp order_date;
 	private Timestamp update_date;
+	private int paid_price;
 	
 }

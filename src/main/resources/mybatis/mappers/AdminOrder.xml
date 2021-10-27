@@ -4,15 +4,33 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.adminOrder">
+<mapper namespace="mapper.AdminOrder">
 
-	<select id="selectAdminOrderList" resultType="csOrderVO">
-		select * 
-		from product_order;
+	<select id="selectAdminOrderList" resultType="csOrderVO" parameterType="map">
+			select * 
+			from product_order
+		<if test="searchField != '' ">
+			where ${searchField} like concat('%', #{keyword}, '%')
+		</if>
+			order by order_idx desc
+			limit #{pageFirst}, #{pageSize};
 	</select>
 
+	<select id="countOrderList" resultType="int">
+			select count(*) 
+			from product_order
+		<if test="searchField != '' "	>
+			where ${searchField} like concat('%', #{keyword}, '%');
+		</if>
+	</select>
 
-
-
+	<!-- 목록 개수 출력  -->
+<!--  	<select id=""countOrderList"" resultType="int" parameterType="java.util.HashMap"> -->
+<!-- 		select count(*) from product_info		 -->
+<!-- 		<if test="searchField != '' "	> -->
+<!-- 		where ${searchField} like concat('%', #{keyword}, '%') -->
+<!-- 		</if> -->
+<!-- 		order by mk_idx desc; -->
+<!-- 	</select> -->
 
 </mapper>

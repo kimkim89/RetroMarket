@@ -17,9 +17,16 @@
 
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
-	<title>Settings | AdminKit Demo</title>
-
+	<title>주문 내역</title>
 	<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
+
+	<script type="text/javascript">
+		function searchOrderList() {
+			document.getElementById('prodSearch').submit(); 
+			return false;
+		}
+	</script>
+
 </head>
 
 <body>
@@ -30,9 +37,24 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Always responsive</h5>
-									<h6 class="card-subtitle text-muted">Across every breakpoint, use <code>.table-responsive</code> for horizontally scrolling tables.</h6>
-								</div>
+								<form name="prodSearch" id="prodSearch" class="d-none d-sm-inline-block" action="${contextPath}/adminOrder/orderList" method="get">
+									<div class="input-group input-group-navbar">
+										<select name="searchField" class="form-select" aria-label="Default select example">
+											<option value="order_name">주문자명</option>
+											<option value="order_code">주문번호</option>
+											<option value="member_id">아이디</option>
+										</select>&nbsp;&nbsp; 
+										<input type="text" name="keyword" class="form-control" placeholder="" aria-label="Search">
+										<button type="button" class="btn" onclick="searchOrderList();">
+											<i class="align-middle" data-feather="search"></i>
+										</button>
+										&nbsp;&nbsp;
+									</div>
+								</form>
+								<button type="button" class="btn btn-info btn_delete" style="float: right;" onclick="">선택 삭제</button>
+								<button type="button" class="btn btn-info btn_blue" style="float: right; margin: auto 10px;" onclick="adminProdRegister();">상품 등록</button>
+							</div>
+<br>
 								<div class="table-responsive">
 									<table class="table mb-0">
 										<thead>
@@ -40,33 +62,69 @@
 												<th scope="col">#</th>
 												<th scope="col">주문번호</th>
 												<th scope="col">주문자</th>
-												<th scope="col">아이디</th>
-												<th scope="col">쿠폰</th>
+<!-- 												<th scope="col">아이디</th> -->												
 												<th scope="col">주문금액</th>
 												<th scope="col">입금액</th>
+<!-- 												<th scope="col">적립금 추가</th> -->
+												<th scope="col">적립금 사용</th>
 												<th scope="col">주문일시</th>
-												<th scope="col">미수금</th>
 												<th scope="col">수정</th>
 											</tr>
 										</thead>
 										<tbody>
+										<c:choose>
+										<c:when test="${pagingMap.nowPage!=1}">
+											<c:set var="num" value="${pagingMap.nowPage+(3*(pagingMap.nowPage-1))}" />
+										</c:when>
+										<c:when test="${pagingMap.nowPage == 1}">
+											<c:set var="num" value="1"/>
+										</c:when>
+										</c:choose>
+										<c:forEach var="odList" items="${csOrderList}" varStatus="status">
 											<tr>
-												<th scope="row">1</th>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-												<td>Cell</td>
-											</tr>											
+												<th scope="row">${num}</th>
+												<td>${odList.order_code}</td>
+												<td>${odList.order_name}</td>
+<%-- 												<td>${odList.member_id}</td> --%>												
+												<td><fmt:formatNumber value="${odList.total_order_price}" pattern="#,###"/>원</td>
+												<td><fmt:formatNumber value="${odList.paid_price}" pattern="#,###"/>원</td>												
+<%-- 												<td><fmt:formatNumber value="${odList.added_point}" pattern="#,###"/>원</td> --%>
+												<td><fmt:formatNumber value="${odList.used_point}" pattern="#,###"/>원</td>
+												<td>${odList.order_date}</td>
+												<td>
+													<a href="${contextPath}/admin/adminMemberInfo?wu=u&id=${List.id}">
+														<i class="align-middle" data-feather="edit-2"></i>
+													</a>
+												</td>
+											</tr>
+										<c:set var="num" value="${num+1}"/>	
+										</c:forEach>												
 										</tbody>
 									</table>
 								</div>
 							</div>
 						</div>
+						<nav aria-label="Page navigation example">
+							<ul class="pagination pagination-md">
+								<c:if test="${pagingMap.blockFirst != 1}">
+									<li class="page-item"><a class="page-link"
+										href="${contextPath}/adminOrder/orderList?nowPage=${pagingMap.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i
+											class="fas fa-angle-left"></i></a></li>
+								</c:if>
+								<c:forEach begin="${pagingMap.blockFirst}" end="${pagingMap.blockLast}" var="i">
+									<li class="page-item">
+										<a href="${contextPath}/adminOrder/orderList?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
+									</li>
+								</c:forEach>
+								<c:if test="${pagingMap.totalPage != pagingMap.blockLast}">
+									<li class="page-item">
+										<a class="page-link" href="${contextPath}/adminOrder/orderList?nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
+											<i	class="fas fa-angle-right"></i>
+										</a>
+									</li>
+								</c:if>
+							</ul>
+						</nav>						
 			</main>
 
 			<footer class="footer">
