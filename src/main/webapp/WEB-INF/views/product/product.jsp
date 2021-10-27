@@ -50,27 +50,27 @@
                     <div class="grid-list-view">
                     </div>
                     <!-- Select items -->
-                    <div class="select-this">
-                    	<form action="#" style="float: right;">
-                            <div class="select-itms">
-                                <select name="select" id="select1">
-                                    <option value="">인기순</option>
-                                    <option value="">좋아요순</option>
-                                    <option value="">구매순</option>
-                                </select>
-                            </div>
-                        </form>
-                        <form action="#" style="float: right;" >
-                            <div class="select-itms ">
-                                <select name="select" id="select1">
-                                    <option value="">스낵류</option>
-                                    <option value="">젤리류</option>
-                                    <option value="">캔디류</option>
-                                    <option value="">기타</option>
-                                </select>
-                            </div>
-                        </form>
-                    </div>
+<!--                     <div class="select-this"> -->
+<!--                     	<form action="#" style="float: right;"> -->
+<!--                             <div class="select-itms"> -->
+<!--                                 <select name="select" id="select1"> -->
+<!--                                     <option value="">인기순</option> -->
+<!--                                     <option value="">좋아요순</option> -->
+<!--                                     <option value="">구매순</option> -->
+<!--                                 </select> -->
+<!--                             </div> -->
+<!--                         </form> -->
+<!--                         <form action="#" style="float: right;" > -->
+<!--                             <div class="select-itms "> -->
+<!--                                 <select name="select" id="select1"> -->
+<!--                                     <option value="">스낵류</option> -->
+<!--                                     <option value="">젤리류</option> -->
+<!--                                     <option value="">캔디류</option> -->
+<!--                                     <option value="">기타</option> -->
+<!--                                 </select> -->
+<!--                             </div> -->
+<!--                         </form> -->
+<!--                     </div> -->
                 </div>
                 <!-- Nav Card 상품리스트 시작 -->
                 

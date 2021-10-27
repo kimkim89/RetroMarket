@@ -2,11 +2,13 @@ package com.retro.product;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.retro.adminProduct.AdminProductImageVO;
+import com.retro.adminProduct.AdminProductVO;
 import com.retro.moonmarket.HomeMainDAO;
 
 @Service
@@ -14,28 +16,30 @@ public class ProductService {
 	
 	@Autowired
 	ProductDAO productDAO;
+	@Autowired
+	AdminProductVO adminProdVO;
+	
 		
-		public List<HashMap<String, Object>> selectProduct(String prCode) {
-			
+		// 상품 조회
+		public List<HashMap<String, Object>> selectProdList(String prCode) {			
+			Map<String, Integer> prCodeNumMap = new HashMap<String, Integer>();
+			int prCodeNum = 0;
 			
 			if(prCode.equals("snack")) { // 스낵 상품 조회
-				return productDAO.selectSnack();
+				prCodeNum = 1;			
 			}else if(prCode.equals("jellycandy")) { // 젤리 or 캔디 상품 조회
-				return productDAO.selectJellyCandy();
+				prCodeNum = 2;
 			}else if(prCode.equals("etc")) { // 기타 상품 조회
-				return productDAO.selectEtc();
+				prCodeNum = 3;
 			}else if(prCode.equals("all")){ // 모든 상품 조회
-				return productDAO.selectAllProducts();
-			}else {
-				return productDAO.selectAllProducts();
-			}
+				prCodeNum = 0;
+			}			
+			prCodeNumMap.put("prCodeNum", prCodeNum);
+			return productDAO.selectProdList(prCodeNumMap);
 		}
 	
-	
-		
 		// 상품 상세 페이지 데이터 조회
-		public List<HashMap<String, Object>> selectEachProd(String productId) {		
-			System.out.println("productId는??? : " + productId);
+		public List<HashMap<String, Object>> selectEachProd(String productId) {
 			return productDAO.selectEachProd(productId);
 		}
 				
