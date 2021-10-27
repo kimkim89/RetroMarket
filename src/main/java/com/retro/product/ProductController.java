@@ -35,24 +35,19 @@ public class ProductController {
 	
 	private ModelAndView mav = new ModelAndView();
 	
-	//***********************************
 	//모든 상품 페이지로 이동 및 상품 리스트 조회
 	@RequestMapping(value = "prList")
 	public ModelAndView selectProduct(@RequestParam("prCode") String prCode) {
 					
 		ModelAndView mav = new ModelAndView();		
 		
-		List<HashMap<String, Object>> productList = productService.selectProduct(prCode);
-		
-		//List<HashMap<String, Object>> productList = productService.selectAllProducts();
+		List<HashMap<String, Object>> productList = productService.selectProdList(prCode);
 		
 		mav.addObject("productList", productList);				
 		mav.setViewName("product/product");
 		return mav;
 	}	
-	//***********************************
-	
-	
+
 	
 	//상품 상세보기
 	@RequestMapping(value = "productDetail", method = {RequestMethod.POST, RequestMethod.GET})
@@ -119,46 +114,46 @@ public class ProductController {
 	
 	
 	
-	//모든 상품 페이지 - 인기상품 버튼 클릭 시
-	@RequestMapping(value = "allPopularProducts")
-	public ModelAndView selectAllPopularProd(Locale locale, Model model) {
-					
-		ModelAndView mav = new ModelAndView();		
-		
-		List<HashMap<String, Object>> productList = productService.selectAllPopularProd();
-		
-		mav.addObject("productList", productList);				
-		mav.setViewName("product/product");
-		return mav;
-	}
-	
-	
-	//모든 상품 페이지 - 신상품 버튼 클릭 시
-	@RequestMapping(value = "allNewProducts")
-	public ModelAndView selectAllNewProd(Locale locale, Model model) {
-					
-		ModelAndView mav = new ModelAndView();		
-		
-		List<HashMap<String, Object>> productList = productService.selectAllNewProd();
-		
-		mav.addObject("productList", productList);				
-		mav.setViewName("product/product");
-		return mav;
-	}
-	
-	//모든 상품 페이지 - 할인상품 버튼 클릭 시
-	@RequestMapping(value = "allDiscountProducts")
-	public ModelAndView selectAllDiscountProd(Locale locale, Model model) {
-					
-		ModelAndView mav = new ModelAndView();		
-		
-		List<HashMap<String, Object>> productList = productService.selectAllDiscountProd();
-		
-		mav.addObject("productList", productList);				
-		mav.setViewName("product/product");
-		return mav;
-	}
-	
+//	//모든 상품 페이지 - 인기상품 버튼 클릭 시
+//	@RequestMapping(value = "allPopularProducts")
+//	public ModelAndView selectAllPopularProd(Locale locale, Model model) {
+//					
+//		ModelAndView mav = new ModelAndView();		
+//		
+//		List<HashMap<String, Object>> productList = productService.selectAllPopularProd();
+//		
+//		mav.addObject("productList", productList);				
+//		mav.setViewName("product/product");
+//		return mav;
+//	}
+//	
+//	
+//	//모든 상품 페이지 - 신상품 버튼 클릭 시
+//	@RequestMapping(value = "allNewProducts")
+//	public ModelAndView selectAllNewProd(Locale locale, Model model) {
+//					
+//		ModelAndView mav = new ModelAndView();		
+//		
+//		List<HashMap<String, Object>> productList = productService.selectAllNewProd();
+//		
+//		mav.addObject("productList", productList);				
+//		mav.setViewName("product/product");
+//		return mav;
+//	}
+//	
+//	//모든 상품 페이지 - 할인상품 버튼 클릭 시
+//	@RequestMapping(value = "allDiscountProducts")
+//	public ModelAndView selectAllDiscountProd(Locale locale, Model model) {
+//					
+//		ModelAndView mav = new ModelAndView();		
+//		
+//		List<HashMap<String, Object>> productList = productService.selectAllDiscountProd();
+//		
+//		mav.addObject("productList", productList);				
+//		mav.setViewName("product/product");
+//		return mav;
+//	}
+//	
 	
 
 	

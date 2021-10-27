@@ -145,7 +145,8 @@
 		</div>
 	</div>
 
-	<script src="js/app.js"></script>
+
+	<script src="${contextPath}/resources/admin/js/app.js"></script>
 
 </body>
 

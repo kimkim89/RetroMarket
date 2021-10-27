@@ -17,32 +17,32 @@
 
 					<li class="sidebar-item active">
 						<a class="sidebar-link" href="index.html">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            </a>
+			              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+			            </a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="${contextPath}/admin/adminMember">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">회원관리</span>
-            </a>
+			              <i class="align-middle" data-feather="user"></i> <span class="align-middle">회원관리</span>
+			            </a>
 					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="${contextPath}/admin/adminSales">
-              <i class="align-middle" data-feather="settings"></i> <span class="align-middle">매출관리</span>
-            </a>
-					</li>
-
+					
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="${contextPath}/admin/adminVisitorLog">
-              <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">방문자로그</span>
-            </a>
+			              <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">방문자로그</span>
+			            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="${contextPath}/adminOrder/orderList">
+			              <i class="align-middle" data-feather="settings"></i> <span class="align-middle">주문관리</span>
+			            </a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="${contextPath}/admin/adminPoint">
-              <i class="align-middle" data-feather="book"></i> <span class="align-middle">포인트 관리</span>
-            </a>
+			              <i class="align-middle" data-feather="book"></i> <span class="align-middle">포인트 관리</span>
+			            </a>
 					</li>
 
 					<li class="sidebar-header">
@@ -51,8 +51,8 @@
 					<li class="sidebar-item">
 
 						<a href="javascript::" data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
-              <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">상품 관리</span>
-            </a>
+			              <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">상품 관리</span>
+			            </a>
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
 							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/adminProd/adminProduct">상품 관리</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/adminProd/adminInventory">재고 관리</a></li>
