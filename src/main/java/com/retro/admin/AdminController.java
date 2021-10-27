@@ -180,13 +180,13 @@ public class AdminController {
 		return mav;
 	}	
 	
-	//매출 관리 페이지 이동
-	@RequestMapping(value = "adminSales")
-	public ModelAndView adminSales() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/admin_sales");
-		return mav;
-	}
+	//주문 관리 페이지 이동
+//	@RequestMapping(value = "adminOrder")
+//	public ModelAndView adminSales() {
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("admin/admin_order");
+//		return mav;
+//	}
 	
 	//방문자로그 페이지 이동
 	@RequestMapping(value = "adminVisitorLog")
@@ -205,15 +205,7 @@ public class AdminController {
 		mav.setViewName("admin/admin_inventory");
 		return mav;
 	}	
-	
-	//주문관리 페이지 이동
-	@RequestMapping(value = "adminOrder")
-	public ModelAndView adminOrder() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/admin_order");
-		return mav;
-	}
-	
+		
 	//이벤트관리 페이지 이동
 	@RequestMapping(value = "adminEvent")
 	public ModelAndView adminEvent() {
