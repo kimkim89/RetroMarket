@@ -91,7 +91,7 @@
 												<td><fmt:formatNumber value="${odList.used_point}" pattern="#,###"/>원</td>
 												<td>${odList.order_date}</td>
 												<td>
-													<a href="${contextPath}/adminOrder/OrderForm?wu=u&id=${odList.order_idx}">
+													<a href="${contextPath}/adminOrder/orderForm?wu=u&id=${odList.order_idx}">
 														<i class="align-middle" data-feather="edit-2"></i>
 													</a>
 												</td>
