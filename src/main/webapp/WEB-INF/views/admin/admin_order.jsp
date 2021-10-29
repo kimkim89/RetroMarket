@@ -37,7 +37,7 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-								<form name="prodSearch" id="prodSearch" class="d-none d-sm-inline-block" action="${contextPath}/adminOrder/orderList" method="get">
+								<form name="prodSearch" id="prodSearch" class="d-none d-sm-inline-block" action="${contextPath}/adminOrder/orderList" method="post">									
 									<div class="input-group input-group-navbar">
 										<select name="searchField" class="form-select" aria-label="Default select example">
 											<option value="order_name">주문자명</option>
@@ -67,7 +67,7 @@
 <!-- 												<th scope="col">적립금 추가</th> -->
 												<th scope="col">적립금 사용</th>
 												<th scope="col">주문일시</th>
-												<th scope="col">수정</th>
+												<th scope="col">확인/수정</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -91,12 +91,13 @@
 												<td><fmt:formatNumber value="${odList.used_point}" pattern="#,###"/>원</td>
 												<td>${odList.order_date}</td>
 												<td>
-													<a href="${contextPath}/adminOrder/OrderForm?wu=u&id=${odList.order_idx}">
+													<a href="${contextPath}/adminOrder/orderForm?wu=u&id=${odList.order_idx}">
 														<i class="align-middle" data-feather="edit-2"></i>
 													</a>
 												</td>
 											</tr>
 										<c:set var="num" value="${num+1}"/>	
+										<input type="hidden" name="order_number" id="order_number" value="${odList.order_code}" />
 										</c:forEach>												
 										</tbody>
 									</table>

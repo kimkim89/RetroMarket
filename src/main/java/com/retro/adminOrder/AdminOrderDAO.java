@@ -1,6 +1,5 @@
 package com.retro.adminOrder;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,4 +22,8 @@ public class AdminOrderDAO {
 	public int countOrderList(Map<String, Object> map) {
 		return sqlSession.selectOne("mapper.AdminOrder.countOrderList", map);
 	}
+
+//	public List<CustomerOrderVO> selectEachOrderList(int order_idx) {
+//		return sqlSession.selectOne("mapper.AdminOrder.selectEachOrderList", order_idx);
+//	}
 }

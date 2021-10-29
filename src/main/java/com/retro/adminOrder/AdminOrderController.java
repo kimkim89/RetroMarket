@@ -1,5 +1,6 @@
 package com.retro.adminOrder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,10 +55,17 @@ public class AdminOrderController {
 	
 	// 주문 내역 수정 페이지
 	@RequestMapping(value = "orderForm")
-	public ModelAndView selectEachOrderInfo() {
+	public ModelAndView selectEachOrderInfo(@RequestParam("wu") String wu,
+											@RequestParam("id") int order_idx
+											) {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		//List<CustomerOrderVO> eachOrderList = new ArrayList<CustomerOrderVO>();
+				
+		//eachOrderList = admOrderService.selectEachOrderList(order_idx);
+				
+		//mav.addObject("eachOrderList", eachOrderList);
 		mav.setViewName("admin/admin_order_form");
 		return mav;
 	}

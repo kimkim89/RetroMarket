@@ -15,6 +15,9 @@ public class AdminOrderService {
 	@Autowired
 	AdminOrderDAO admOrderDAO;
 	
+	@Autowired
+	CustomerOrderVO csOrderVO;
+	
 	public List<CustomerOrderVO> selectAdminOrderList(String searchField, String keyword, int pageFirst, int pageSize) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -34,4 +37,8 @@ public class AdminOrderService {
 		
 		return admOrderDAO.countOrderList(map);
 	}
+
+//	public List<CustomerOrderVO> selectEachOrderList(int order_idx) {
+//		return admOrderDAO.selectEachOrderList(order_idx);		
+//	}
 }
