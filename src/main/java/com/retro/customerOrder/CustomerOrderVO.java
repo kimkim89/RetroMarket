@@ -39,5 +39,11 @@ public class CustomerOrderVO {
 	private Timestamp order_date;
 	private Timestamp update_date;
 	private int paid_price;
+	private Timestamp paid_date;
+	private int refund_price;
+	private String delivery_company;
+	private String tracking_number;
+	private Timestamp delivery_start_date;
+	
 	
 }

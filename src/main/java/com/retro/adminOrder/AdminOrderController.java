@@ -63,13 +63,15 @@ public class AdminOrderController {
 		
 		ModelAndView mav = new ModelAndView();
 						
-		CustomerOrderVO eachOrderList = admOrderService.selectEachOrderList(orderIdx);
+		Map<String, Object> eachOrderList = admOrderService.selectEachOrderList(orderIdx);
 		
-		String orderCode = eachOrderList.getOrder_code();
-		Map<String, Object> orderedProdMap = admOrderService.selectOrderedProd(orderCode);
+		String orderCode = (String) eachOrderList.get("order_code");
+		
+		
+		List<Map<String, Object>> odProdList = admOrderService.selectOrderedProd(orderCode);
 		
 		mav.addObject("eachOrderList", eachOrderList);
-		mav.addObject("orderedProdMap", orderedProdMap);
+		mav.addObject("odProdList", odProdList);
 		mav.setViewName("admin/admin_order_form");
 		return mav;
 	}

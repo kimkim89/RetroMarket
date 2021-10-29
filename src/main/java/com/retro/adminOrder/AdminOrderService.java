@@ -38,11 +38,11 @@ public class AdminOrderService {
 		return admOrderDAO.countOrderList(map);
 	}
 
-	public CustomerOrderVO selectEachOrderList(int orderIdx) {
+	public Map<String, Object> selectEachOrderList(int orderIdx) {
 		return admOrderDAO.selectEachOrderList(orderIdx);		
 	}
 
-	public Map<String, Object> selectOrderedProd(String orderCode) {
+	public List<Map<String, Object>> selectOrderedProd(String orderCode) {
 		return admOrderDAO.selectOrderedProd(orderCode);
 	}
 }

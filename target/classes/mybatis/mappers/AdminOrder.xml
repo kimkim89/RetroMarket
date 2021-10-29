@@ -25,10 +25,13 @@
 	</select>
 
 	<!-- 주문별 정보 조회 -->
-	<select id="selectEachOrderList" parameterType="int" resultType="csOrderVO">
+	<select id="selectEachOrderList" parameterType="int" resultType="map">
 		select * 
-		from product_order
-		where order_idx = #{orderIdx};
+		from product_order as a left join bank_name_info as b
+		on a.od_bank_code = b.bank_code 
+		inner join order_status_info as c
+		on a.order_status = c.order_status_code
+		where a.order_idx = #{orderIdx};
 	</select>
 	
 	<!-- 주문한 상품 조회 -->
@@ -36,7 +39,7 @@
 		select * 
 		from product_order as a left join cart as b 
 		on a.order_code = b.order_num 
-		where order_code = #{orderCode}
+		where a.order_code = #{orderCode}
 		order by a.order_idx desc;
 	</select>
 
