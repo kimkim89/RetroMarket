@@ -48,7 +48,7 @@
 									added_point,
 									used_point,
 									payment_method,
-									payment_status,
+									order_status,
 									od_bank_code,
 									bank_acct_num,
 									bank_acct_owner,

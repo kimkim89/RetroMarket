@@ -23,7 +23,11 @@ public class AdminOrderDAO {
 		return sqlSession.selectOne("mapper.AdminOrder.countOrderList", map);
 	}
 
-//	public List<CustomerOrderVO> selectEachOrderList(int order_idx) {
-//		return sqlSession.selectOne("mapper.AdminOrder.selectEachOrderList", order_idx);
-//	}
+	public CustomerOrderVO selectEachOrderList(int orderIdx) {
+		return sqlSession.selectOne("mapper.AdminOrder.selectEachOrderList", orderIdx);
+	}
+
+	public Map<String, Object> selectOrderedProd(String orderCode) {
+		return sqlSession.selectMap("mapper.AdminOrder.selectOrderedProd", orderCode);
+	}
 }

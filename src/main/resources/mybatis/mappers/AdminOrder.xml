@@ -25,10 +25,19 @@
 	</select>
 
 	<!-- 주문별 정보 조회 -->
-<!-- 	<select id="selectEachOrderList" parameterType="int" resultType="csOrderVO"> -->
-<!-- 		select *  -->
-<!-- 		from product_order -->
-<!-- 		where order_idx = #{order_idx}; -->
-<!-- 	</select> -->
+	<select id="selectEachOrderList" parameterType="int" resultType="csOrderVO">
+		select * 
+		from product_order
+		where order_idx = #{orderIdx};
+	</select>
+	
+	<!-- 주문한 상품 조회 -->
+	<select id="selectOrderedProd" parameterType="String" resultType="map" >
+		select * 
+		from product_order as a left join cart as b 
+		on a.order_code = b.order_num 
+		where order_code = #{orderCode}
+		order by a.order_idx desc;
+	</select>
 
 </mapper>

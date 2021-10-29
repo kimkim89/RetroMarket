@@ -20,6 +20,8 @@ public class AdminOrderController {
 
 	@Autowired
 	AdminOrderService admOrderService;
+	@Autowired
+	CustomerOrderVO csOrderVO;
 	
 	//주문 관리 목록 페이지 이동
 	@RequestMapping(value = "orderList")
@@ -56,16 +58,18 @@ public class AdminOrderController {
 	// 주문 내역 수정 페이지
 	@RequestMapping(value = "orderForm")
 	public ModelAndView selectEachOrderInfo(@RequestParam("wu") String wu,
-											@RequestParam("id") int order_idx
+											@RequestParam("id") int orderIdx
 											) {
 		
 		ModelAndView mav = new ModelAndView();
+						
+		CustomerOrderVO eachOrderList = admOrderService.selectEachOrderList(orderIdx);
 		
-		//List<CustomerOrderVO> eachOrderList = new ArrayList<CustomerOrderVO>();
-				
-		//eachOrderList = admOrderService.selectEachOrderList(order_idx);
-				
-		//mav.addObject("eachOrderList", eachOrderList);
+		String orderCode = eachOrderList.getOrder_code();
+		Map<String, Object> orderedProdMap = admOrderService.selectOrderedProd(orderCode);
+		
+		mav.addObject("eachOrderList", eachOrderList);
+		mav.addObject("orderedProdMap", orderedProdMap);
 		mav.setViewName("admin/admin_order_form");
 		return mav;
 	}

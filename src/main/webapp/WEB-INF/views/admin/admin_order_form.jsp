@@ -53,7 +53,7 @@
 <!-- 2021.10.29 주문 정보 작업 진행 중 시작 -->	
 											<h4 class="each_title">주문/결제 정보</h4>
 											<div class="table-responsive">
-												<table class="table mb-0">
+												<table class="table mb-0" style="border: solid 2px #8C8C8C;">
 													<thead>
 														<tr>
 															<th scope="col">주문번호</th>
@@ -65,23 +65,20 @@
 															<th scope="col">주문상태</th>
 														</tr>
 													</thead>
-													<tbody>										
-													<c:forEach var="eachOdList" items="${eachOrderList}" varStatus="status">
+													<tbody>		
 														<tr>
-															<td>${eachOdList.order_code}</td>
-															<td>${eachOdList.payment_method}</td>
-															<td><fmt:formatNumber value="${eachOdList.total_order_price}" pattern="#,###"/>원</td>
-															<td><fmt:formatNumber value="${eachOdList.delivery_fee}" pattern="#,###"/>원/td>
-															<td><fmt:formatNumber value="${eachOdList.used_point}" pattern="#,###"/>원</td>
-															<td><fmt:formatNumber value="${eachOdList.coupon_price}" pattern="#,###"/>원</td>
-															<td>접수, 입금, 배송시작, 배송완료, 주문취소</td>
-														</tr>													
-													</c:forEach>												
+															<td>${eachOrderList.order_code}</td>
+															<td>${eachOrderList.payment_method}</td>
+															<td><fmt:formatNumber value="${eachOrderList.total_order_price}" pattern="#,###"/>원</td>
+															<td><fmt:formatNumber value="${eachOrderList.delivery_fee}" pattern="#,###"/>원</td>
+															<td><fmt:formatNumber value="${eachOrderList.used_point}" pattern="#,###"/>원</td>
+															<td><fmt:formatNumber value="${eachOrderList.coupon_price}" pattern="#,###"/>원</td>
+															<td>${eachOrderList.payment_method}</td>
+														</tr>									
 													</tbody>
 												</table>
 											</div>				
-<br><br><br><br><br><br><br><br><br>
-												
+<br><br>		
 <!-- 2021.10.29 주문 정보  작업 진행 중 끝 -->												
 											
 											
@@ -267,17 +264,17 @@
 											</tr>
 										</thead>
 										<tbody>										
-<%-- 										<c:forEach var="odList" items="${csOrderList}" varStatus="status"> --%>
+										<c:forEach var="odProdList" items="${orderedProdMap}" varStatus="status">
 											<tr>
 												<th scope="row"><input type="checkbox" name="" id="" /></th>
-												<td>${odList.order_code}test</td>
-												<td><fmt:formatNumber value="${odList.paid_price}" pattern="#,###"/>원</td>
-												<td>${odList.order_code}test</td>
-												<td><fmt:formatNumber value="${odList.paid_price}" pattern="#,###"/>원</td>
-												<td><fmt:formatNumber value="${odList.paid_price}" pattern="#,###"/>원</td>
+												<td>${odProdList.pr_name}</td>
+												<td>${odProdList.total_num}</td>
+												<td><fmt:formatNumber value="${odProdList.pr_price}" pattern="#,###"/>원</td>
+												<td><fmt:formatNumber value="${odProdList.pr_point}" pattern="#,###"/>원</td>
+												<td><fmt:formatNumber value="${odProdList.order_status}" pattern="#,###"/>원</td>
 											</tr>
 										
-<%-- 										</c:forEach>												 --%>
+										</c:forEach>												
 										</tbody>
 									</table>
 								</div>
