@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @Component
 public class CustomerOrderVO {
-	private String order_idx;
+	private int order_idx;
 	private String order_code;
 	private String member_id;
 	private String order_name;

@@ -24,13 +24,11 @@
 		</if>
 	</select>
 
-	<!-- 목록 개수 출력  -->
-<!--  	<select id=""countOrderList"" resultType="int" parameterType="java.util.HashMap"> -->
-<!-- 		select count(*) from product_info		 -->
-<!-- 		<if test="searchField != '' "	> -->
-<!-- 		where ${searchField} like concat('%', #{keyword}, '%') -->
-<!-- 		</if> -->
-<!-- 		order by mk_idx desc; -->
+	<!-- 주문별 정보 조회 -->
+<!-- 	<select id="selectEachOrderList" parameterType="int" resultType="csOrderVO"> -->
+<!-- 		select *  -->
+<!-- 		from product_order -->
+<!-- 		where order_idx = #{order_idx}; -->
 <!-- 	</select> -->
 
 </mapper>
