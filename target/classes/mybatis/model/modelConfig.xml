@@ -12,5 +12,6 @@
 		<typeAlias type="com.retro.cart.CartVO" alias="cartVO" />
 		<typeAlias type="com.retro.customerOrder.BankNameDTO" alias="bankNameDTO" />
 		<typeAlias type="com.retro.customerOrder.CustomerOrderVO" alias="csOrderVO" />
+		<typeAlias type="com.retro.adminOrder.OrderStatusVO" alias="orderStatusVO" />
 	</typeAliases>
 </configuration>

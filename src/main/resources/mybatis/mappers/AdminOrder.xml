@@ -25,10 +25,55 @@
 	</select>
 
 	<!-- 주문별 정보 조회 -->
-<!-- 	<select id="selectEachOrderList" parameterType="int" resultType="csOrderVO"> -->
-<!-- 		select *  -->
-<!-- 		from product_order -->
-<!-- 		where order_idx = #{order_idx}; -->
-<!-- 	</select> -->
+	<select id="selectEachOrderList" parameterType="int" resultType="map">
+		select * 
+		from product_order as a left join bank_name_info as b
+		on a.od_bank_code = b.bank_code 
+		inner join order_status_info as c
+		on a.order_status = c.order_status_code
+		where a.order_idx = #{orderIdx};
+	</select>
+	
+	<!-- 주문한 상품 조회 -->
+	<select id="selectOrderedProd" parameterType="String" resultType="map" >
+		select * 
+		from product_order as a left join cart as b 
+		on a.order_code = b.order_num 
+		where a.order_code = #{orderCode}
+		order by a.order_idx desc;
+	</select>
+
+	<!-- 주문 상태 종류 조회 -->
+	<select id="selectOrderStatInfo" resultType="orderStatusVO">
+		select * from order_status_info;
+	</select>
+
+	<!-- 주문 내역 update -->
+	<update id="updateOrderInfo" parameterType="csOrderVO">
+		update product_order
+		set order_name = #{order_name},
+			order_phone = #{order_phone},
+			order_addr1 = #{order_addr1},
+			order_addr2 = #{order_addr2},
+			order_addr3 = #{order_addr3},
+			receiver_name = #{receiver_name},
+			receiver_phone = #{receiver_phone},
+			receiver_addr1 = #{receiver_addr1},
+			receiver_addr2 = #{receiver_addr2},
+			receiver_addr3 = #{receiver_addr3},
+			delivery_msg = #{delivery_msg},
+			bank_acct_owner = #{bank_acct_owner},
+			od_bank_code = #{od_bank_code},
+			bank_acct_num = #{bank_acct_num},
+			paid_price = #{paid_price},
+			paid_date = #{paid_date},
+			added_point = #{added_point},
+			refund_price = #{refund_price},
+			delivery_company = #{delivery_company},
+			tracking_number = #{tracking_number},
+			delivery_start_date = #{delivery_start_date},
+			order_status = #{order_status}			 
+		where order_idx = #{order_idx};
+	</update>
 
 </mapper>

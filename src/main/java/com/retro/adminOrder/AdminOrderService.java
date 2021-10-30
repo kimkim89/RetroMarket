@@ -38,7 +38,21 @@ public class AdminOrderService {
 		return admOrderDAO.countOrderList(map);
 	}
 
-//	public List<CustomerOrderVO> selectEachOrderList(int order_idx) {
-//		return admOrderDAO.selectEachOrderList(order_idx);		
-//	}
+	public Map<String, Object> selectEachOrderList(int orderIdx) {
+		return admOrderDAO.selectEachOrderList(orderIdx);		
+	}
+
+	public List<Map<String, Object>> selectOrderedProd(String orderCode) {
+		return admOrderDAO.selectOrderedProd(orderCode);
+	}
+	
+	public List<OrderStatusVO> selectOrderStatInfo() {
+		return admOrderDAO.selectOrderStatInfo();
+	}
+	
+	public int updateOrderInfo(CustomerOrderVO csOrderVO) {
+		return admOrderDAO.updateOrderInfo(csOrderVO);
+	}
+	
+	
 }
