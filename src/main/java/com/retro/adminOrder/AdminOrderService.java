@@ -45,4 +45,14 @@ public class AdminOrderService {
 	public List<Map<String, Object>> selectOrderedProd(String orderCode) {
 		return admOrderDAO.selectOrderedProd(orderCode);
 	}
+	
+	public List<OrderStatusVO> selectOrderStatInfo() {
+		return admOrderDAO.selectOrderStatInfo();
+	}
+	
+	public int updateOrderInfo(CustomerOrderVO csOrderVO) {
+		return admOrderDAO.updateOrderInfo(csOrderVO);
+	}
+	
+	
 }

@@ -30,4 +30,15 @@ public class AdminOrderDAO {
 	public List<Map<String, Object>> selectOrderedProd(String orderCode) {		
 		return sqlSession.selectList("mapper.AdminOrder.selectOrderedProd", orderCode);
 	}
+	
+	public List<OrderStatusVO> selectOrderStatInfo() {
+		return sqlSession.selectList("mapper.AdminOrder.selectOrderStatInfo");
+	}
+	
+	public int updateOrderInfo(CustomerOrderVO csOrderVO) {
+		return sqlSession.update("mapper.AdminOrder.updateOrderInfo", csOrderVO);
+	}
+	
+	
+	
 }

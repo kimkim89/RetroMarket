@@ -2,6 +2,7 @@ package com.retro.customerOrder;
 
 import java.sql.Timestamp;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -39,10 +40,12 @@ public class CustomerOrderVO {
 	private Timestamp order_date;
 	private Timestamp update_date;
 	private int paid_price;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp paid_date;
 	private int refund_price;
 	private String delivery_company;
 	private String tracking_number;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp delivery_start_date;
 	
 	
