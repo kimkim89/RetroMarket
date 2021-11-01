@@ -34,12 +34,7 @@ public class CustomerOrderService {
 		return csOrderDAO.selectBankName();
 	}
 
-	//장바구니 내 전체 상품 목록 조회
-	public List<CartVO> selectAllOrderList(String userId) {
-		return csOrderDAO.selectAllOrderList(userId);				
-	}
-	
-	
+		
 	//장바구니 테이블로부터 선택한 상품 목록 조회
 	public List<CartVO> selectSomeOrderList(Integer cartIndex) {
 		return csOrderDAO.selectSomeOrderList(cartIndex);

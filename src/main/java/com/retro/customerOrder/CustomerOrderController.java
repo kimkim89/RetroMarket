@@ -70,56 +70,7 @@ public class CustomerOrderController {
 			return mav;			
 		}
 	
-	
-	
-		//전체구매 페이지 이동
-		@RequestMapping(value = "orderAllProd")
-		public ModelAndView selectAllOrderList(HttpServletRequest request) {
 			
-			ModelAndView mav = new ModelAndView();
-			
-			//상품총액 변수
-			Integer totalProdPrice = 0;
-			//배송료 변수
-			Integer deliveryFee = 0;
-			//결제총액 변수
-			Integer totalOrderPrice = 0;
-			
-			String userId = (String) request.getSession().getAttribute("user_id");
-			List<CartVO> orderList = new ArrayList<CartVO>();
-			
-			orderList = csOrderService.selectAllOrderList(userId);
-			
-			//상품총액
-			for(int i=0; i<orderList.size(); i++) {					
-				totalProdPrice += orderList.get(i).getPr_price() * orderList.get(i).getTotal_num();			
-			}
-			
-			//배송료
-			if(totalProdPrice < 50000) {
-				deliveryFee = 3000;
-			}else {
-				deliveryFee = 0;
-			}
-			
-			//결제총액
-			totalOrderPrice = totalProdPrice + deliveryFee;
-			
-			//상품 주문 페이지의 결제수단 - 은행명 출력에 사용			
-			List<BankNameDTO> bankNameList = csOrderService.selectBankName();
-			
-			
-			mav.addObject("deliveryFee", deliveryFee);
-			mav.addObject("totalProdPrice", totalProdPrice);
-			mav.addObject("totalOrderPrice", totalOrderPrice);
-			mav.addObject("orderList", orderList);
-			mav.addObject("bankNameList", bankNameList);
-			mav.setViewName("order/checkout");
-			return mav;
-			
-		}
-
-		
 		@RequestMapping(value="placeOrder")
 		public ModelAndView insertOrderInfo(CustomerOrderVO csOrderVO, RedirectAttributes attributes, HttpServletRequest request) {
 			
@@ -128,9 +79,9 @@ public class CustomerOrderController {
 			//결제버튼 클릭 시 주문 관련 정보 저장
 			csOrderService.insertOrderInfo(csOrderVO, request);
 			
-			String msg = "주문이 완료되었습니다.";
+			String notice = "주문이 완료되었습니다.";
 			
-			attributes.addFlashAttribute("msg", msg); 
+			attributes.addFlashAttribute("notice", notice); 
 			mav.setViewName("redirect:/main/index");
 			return mav;
 		}
