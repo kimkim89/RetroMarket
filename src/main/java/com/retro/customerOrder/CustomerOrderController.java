@@ -1,7 +1,10 @@
 package com.retro.customerOrder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,27 +81,7 @@ public class CustomerOrderController {
 			
 			//결제버튼 클릭 시 주문 관련 정보 저장
 			csOrderService.insertOrderInfo(csOrderVO, request);
-			
-			String selectedIndexStr = request.getParameter("selected_index");
-			String[] selectedIndexArr = selectedIndexStr.split(",");
-			int cartIndex = 0;
-			
-			List<CartVO> cartList = new ArrayList<CartVO>();
-			
-			if(selectedIndexStr != "") {
-				for(int i=0; i<selectedIndexArr.length; i++) {
-					cartIndex = Integer.parseInt(selectedIndexArr[i]);
-					//cartList.addAll(arg0)
-				}
-			}
-			
-			
-			
-			
-			csOrderService.selectSomeOrderList(cartIndex);
-			
-			csOrderService.updateProductInventory(inventoryNum, productNumber);
-			
+						
 			String notice = "주문이 완료되었습니다.";
 			
 			attributes.addFlashAttribute("notice", notice); 

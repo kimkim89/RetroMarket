@@ -41,6 +41,8 @@ public class CartController {
 		int count = 0;
 		String msg = "";
 		String locationUrl = "";
+		String quantityMsg = "";
+		String quantityFontColor = "";
 	
 		//비회원일 경우 장바구니 기능 사용할 수 없음
 		if(userId == null) {
@@ -54,18 +56,36 @@ public class CartController {
 				
 				//선택한 상품 정보 조회
 				List<HashMap<String, Object>> productList = productService.selectEachProd(productId);					
+				int prQuantity = (Integer) productList.get(0).get("mk_inventory");
+				int ableToSellQuantity = 0;
+				
+				
+				//2021.11.02 : 재고량 있을 때만 장바구니에 상품 담을 수 있도록 수정 작업 진행 중-------------------------------------
+				if(prQuantity == 0) {
+					quantityMsg = "(품절)";
+					quantityFontColor = "red";
+					
+				}else if(prQuantity - productNum < 1) {
+					ableToSellQuantity = productNum - prQuantity;
+					quantityMsg = "현재 구매 가능한 수량: " + ableToSellQuantity + "개";
+					quantityFontColor = "red";
+					
+				}else if(prQuantity - productNum >= 1) {						
+					//회원 아이디 기준으로 장바구니에 데이터 저장
+					int checkProdExist = cartService.insertCartInfo(productList, productNum, userId, request);
+					
+					if(checkProdExist != 0) {
+						msg = "해당 상품이 이미 장바구니에 담겨있습니다. 장바구니에서 수량을 변경해주세요.";
+						locationUrl = "cart/prCart";
+					}						
+					count++;
+				}//prQuantity if문 끝
+				System.out.println("testtest중");
+				System.out.println(prQuantity);
+			}//fromPrPg if문 끝
 			
-				//회원 아이디 기준으로 장바구니에 데이터 저장
-				int checkProdExist = cartService.insertCartInfo(productList, productNum, userId, request);
-				
-				System.out.println("checkProdExist:: ================== " + checkProdExist );
-				if(checkProdExist != 0) {
-					msg = "해당 상품이 이미 장바구니에 담겨있습니다. 장바구니에서 수량을 변경해주세요.";
-					locationUrl = "cart/prCart";
-				}				
-				
-				count++;
-			}
+			
+			
 			
 			//회원 아이디 기준으로 장바구니 목록 조회
 			List<HashMap<String, Object>> cartList = cartService.selectCartList(userId);
@@ -96,6 +116,8 @@ public class CartController {
 			mav.addObject("cartList", cartList);					
 		}
 		
+		mav.addObject("quantityFontColor", quantityFontColor);
+		mav.addObject("quantityMsg", quantityMsg);
 		mav.addObject("msg", msg);
 		mav.addObject("locationUrl", locationUrl);
 		mav.setViewName("order/cart");

@@ -7,6 +7,16 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>상품 상세 페이지</title>
     <%@ include file="../include/Top.jsp" %>
+    
+    <style type="text/css">
+	.outStock {
+		color: red;
+	    background-color: lightgray;
+	    border: 3px solid #2577fd;
+	    font-weight: bold;   
+	}	 	
+    </style>
+    
 </head>
     
 <body>
@@ -63,7 +73,7 @@
 	                    		<input type="hidden" name="productId" value="${productList.mk_idx}" />
 	                    		<input type="hidden" name="productNum" id="productNum" value="1" />	
 	                    		<input type="hidden" name="fromPrPg" id="fromPrPg" value="Y" />        
-	                    		<input type="submit" class="btn_3" value="장바구니 담기" />
+	                    		<input type="submit" class="btn_3 ${prBtnClassName}" ${prBtnBlock} value="${prBtnName}" />								
 	                    	</form>	                        
 	                    </div>
                     </div>

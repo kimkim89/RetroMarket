@@ -107,6 +107,8 @@ public class CustomerOrderService {
 		Map<String, Object> selectedIdxMap = new HashMap<String, Object>();
 		selectedIdxMap.put("orderCode", csOrderVO.getOrder_code());
 		
+		List<CartVO> cartList = new ArrayList<CartVO>();
+		
 		if(selectedIndexStr != "") {
 			for(int i=0; i<selectedIndexArr.length; i++) {				
 				cartIndex = Integer.parseInt(selectedIndexArr[i]);
@@ -114,6 +116,10 @@ public class CustomerOrderService {
 				
 				selectedIdxMap.put("cartIndex", cartIndex);
 				csOrderDAO.updateOrderNum(selectedIdxMap);
+				
+				//주문된 상품의 수량을 상품 재고량에서 빼기
+				cartList = csOrderDAO.selectSomeOrderList(cartIndex);
+				updateProductInventory(cartList.get(0).getTotal_num(), cartList.get(0).getPr_idx());	
 				
 				//System.out.println("selectedIdxMap 확인중--------------------:: " + selectedIdxMap);					
 			}
@@ -127,12 +133,9 @@ public class CustomerOrderService {
 	public void updateProductInventory(int inventoryNum, int productNumber) {
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
-		
+						
 		map.put("inventoryNum", inventoryNum);
 		map.put("productNumber", productNumber);
-		
-	
-		
 		
 		csOrderDAO.updateProductInventory((HashMap<String, Integer>) map);
 	}

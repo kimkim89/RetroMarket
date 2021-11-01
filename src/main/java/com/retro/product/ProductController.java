@@ -55,7 +55,21 @@ public class ProductController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		List<HashMap<String, Object>> productList = productService.selectEachProd(productId);		
+		List<HashMap<String, Object>> productList = productService.selectEachProd(productId);	
+		
+		int prTotalQuantity = (Integer) productList.get(0).get("mk_inventory");
+		String prBtnName = "";
+		String prBtnBlock = "";
+		String prBtnClassName = "";
+		
+		if(prTotalQuantity == 0) {
+			prBtnName = "품절";
+			prBtnBlock = "disabled";
+			prBtnClassName = "outStock";
+		}else {
+			prBtnName = "장바구니 담기";
+		}
+		
 		List<String> prodImgList = new ArrayList<String>();		
 				
 		
@@ -81,6 +95,9 @@ public class ProductController {
 	
 //		System.out.println("테스트중배열: " + prodImgList);
 		
+		mav.addObject("prBtnClassName", prBtnClassName);
+		mav.addObject("prBtnBlock", prBtnBlock);
+		mav.addObject("prBtnName", prBtnName);
 		mav.addObject("productList", productList);	
 		mav.addObject("prodImgList", prodImgList);
 		mav.setViewName("product/product_detail");
