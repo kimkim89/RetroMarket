@@ -154,8 +154,8 @@
                 </tbody>
               </table>              
               <div class="checkout_btn_inner float-right">
-    	        <a class="btn_1" href="javascript:orderSelectedProds();">선택상품주문</a>
-                <a class="btn_1 checkout_btn_1" href="javascript:orderAllProducts();">전체상품주문</a>
+    	        <a class="btn_1" href="javascript:orderProds('selected');">선택상품주문</a>
+                <a class="btn_1 checkout_btn_1" href="javascript:orderProds('all');">전체상품주문</a>
               </div>            
             </div>
           </div>
@@ -332,40 +332,32 @@
 	}
 	
 	
-	/*전체상품주문 페이지로 이동*/
-	function orderAllProducts() {		
-		
-		document.cart_form.action = "${contextPath}/order/orderAllProd";
-		document.cart_form.submit();		
-	}
 	
 	
-	/*선택상품주문 페이지로 이동*/
-	function orderSelectedProds() {
+	/* 상품주문 페이지로 이동*/
+	function orderProds(orderType) {
 		
 		var cartIndexValue = [];		
-		
+				
 		$("input:checkbox[name='del_check']:checked").each(function() {
 			cartIndexValue.push($(this).val()); // 체크된 것 value만 배열에 push				
 		});
+				
+		if(orderType == "selected" && cartIndexValue.length == 0) {
+			alert("상품을 선택해주세요.");
+		}
 		
+		if(orderType == "all") {
+			$("input:checkbox[name='del_check']:not(:checked)").each(function() {
+				cartIndexValue.push($(this).val()); // 체크 안된 것들만 배열에 push				
+			});
+		}
+		
+		console.log(cartIndexValue);
 		document.getElementById("selected_index").value = cartIndexValue;
 		
 		document.cart_form.action = "${contextPath}/order/orderSomeProd";
 		document.cart_form.submit();
-		
-		
-		
-		
-		
-		
-		
-// 		for(var k=0; k<cartIndexArr.length; k++) {
-// 			//cartIndexValue.push(cartIndexArr[k].value);
-// 			console.log("cartIndexArr[" + k + "] = " + cartIndexArr[k].checked.value);			
-// 		}	
-		
-
 	}
 	
 	

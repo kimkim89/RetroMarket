@@ -307,7 +307,7 @@
 										</tbody>
 									</table>
 								</div>
-<br><br><br><br><br><br><br><br><br>															
+<br><br><br>															
 <!-- 2021.10.29 주문한 상품 목록 작업 진행 중 끝 -->												
 		
 													<button type="button" class="btn btn-primary" onclick="updateOrderList();">수정</button>												

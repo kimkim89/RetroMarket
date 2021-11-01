@@ -34,12 +34,7 @@ public class CustomerOrderService {
 		return csOrderDAO.selectBankName();
 	}
 
-	//장바구니 내 전체 상품 목록 조회
-	public List<CartVO> selectAllOrderList(String userId) {
-		return csOrderDAO.selectAllOrderList(userId);				
-	}
-	
-	
+		
 	//장바구니 테이블로부터 선택한 상품 목록 조회
 	public List<CartVO> selectSomeOrderList(Integer cartIndex) {
 		return csOrderDAO.selectSomeOrderList(cartIndex);
@@ -128,7 +123,19 @@ public class CustomerOrderService {
 	}
 	
 	
+	//상품 재고량에서 주문된 수량만큼 빼기
+	public void updateProductInventory(int inventoryNum, int productNumber) {
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("inventoryNum", inventoryNum);
+		map.put("productNumber", productNumber);
+		
 	
+		
+		
+		csOrderDAO.updateProductInventory((HashMap<String, Integer>) map);
+	}
 	
 	
 	
