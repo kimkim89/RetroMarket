@@ -96,7 +96,7 @@
 
 	<!-- 상품 재고량에서 주문된 수량만큼 빼기 -->
 	<update id="updateProductInventory" parameterType="map">
-		update product_info set mk_inventory = mk_inventory - #{} where mk_idx = #{productNumber};
+		update product_info set mk_inventory = mk_inventory - #{inventoryNum} where mk_idx = #{productNumber};
 	</update>
 
 

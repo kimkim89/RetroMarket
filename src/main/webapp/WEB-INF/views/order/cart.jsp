@@ -104,7 +104,7 @@
                           <img src="${contextPath}/resources/images/temporary/${cartList.mk_stored_thumb}" alt="" />
                         </div>
                         <div class="media-body">
-                          <p>${cartList.mk_product_name}</p>
+                          <p>${cartList.mk_product_name}${quantityMsg}</p>
                         </div>
                       </div>
                     </td>
