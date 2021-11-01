@@ -123,7 +123,19 @@ public class CustomerOrderService {
 	}
 	
 	
+	//상품 재고량에서 주문된 수량만큼 빼기
+	public void updateProductInventory(int inventoryNum, int productNumber) {
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("inventoryNum", inventoryNum);
+		map.put("productNumber", productNumber);
+		
 	
+		
+		
+		csOrderDAO.updateProductInventory((HashMap<String, Integer>) map);
+	}
 	
 	
 	

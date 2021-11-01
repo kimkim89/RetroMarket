@@ -94,6 +94,10 @@
 		update cart set order_num = #{orderCode} where cart_idx = #{cartIndex} and cart_status = 1;
 	</update>
 
+	<!-- 상품 재고량에서 주문된 수량만큼 빼기 -->
+	<update id="updateProductInventory" parameterType="map">
+		update product_info set mk_inventory = mk_inventory - #{} where mk_idx = #{productNumber};
+	</update>
 
 
 <!-- 은행 정보 입력용으로만 사용한 후 주석 처리 했음  -->

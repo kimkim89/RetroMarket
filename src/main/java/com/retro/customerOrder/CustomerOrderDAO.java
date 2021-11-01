@@ -1,5 +1,6 @@
 package com.retro.customerOrder;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,10 +43,15 @@ public class CustomerOrderDAO {
 		sqlSession.update("mapper.CustomerOrder.updateCartStat", cartIndex);
 	}
 
+	//cart 테이블 내 order_num(=주문번호)컬럼에 주문번호 저장
 	public void updateOrderNum(Map<String, Object> selectedIdxMap) {
 		sqlSession.update("mapper.CustomerOrder.updateOrderNum", selectedIdxMap);
 	}
 	
+	//상품 재고량에서 주문된 수량만큼 빼기
+	public void updateProductInventory(HashMap<String, Integer> map) {
+		sqlSession.update("map", map);
+	}
 	
 	
 	

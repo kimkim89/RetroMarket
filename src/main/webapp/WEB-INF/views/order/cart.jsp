@@ -338,11 +338,14 @@
 	function orderProds(orderType) {
 		
 		var cartIndexValue = [];		
-		
-		
+				
 		$("input:checkbox[name='del_check']:checked").each(function() {
 			cartIndexValue.push($(this).val()); // 체크된 것 value만 배열에 push				
 		});
+				
+		if(orderType == "selected" && cartIndexValue.length == 0) {
+			alert("상품을 선택해주세요.");
+		}
 		
 		if(orderType == "all") {
 			$("input:checkbox[name='del_check']:not(:checked)").each(function() {
