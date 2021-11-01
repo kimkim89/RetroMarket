@@ -335,8 +335,16 @@
 	/*전체상품주문 페이지로 이동*/
 	function orderAllProducts() {		
 		
+		var allCartIndex = [];
+		
+		$("input:checkbox[name='del_check']:not(:checked)").each(function() {
+			allCartIndex.push($(this).val()); // 체크 안된 것들만 배열에 push				
+		});
+		
+		console.log(allCartIndex);
+		
 		document.cart_form.action = "${contextPath}/order/orderAllProd";
-		document.cart_form.submit();		
+		//document.cart_form.submit();		
 	}
 	
 	
