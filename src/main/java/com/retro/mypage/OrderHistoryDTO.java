@@ -10,4 +10,9 @@ public class OrderHistoryDTO {
 	private int order_status;
 	private String order_status_name;
 	private String member_id;	
+	private String mk_stored_thumb;
+	private String pr_name;
+	private int total_num;
+	private int pr_price;
+	
 }

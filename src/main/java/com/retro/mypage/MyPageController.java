@@ -178,19 +178,8 @@ public class MyPageController {
 		}
 		
 				
-		// 결제 정보 페이지 이동
-		@RequestMapping(value = "buyInfo", method = RequestMethod.GET)
-		public ModelAndView buyInfo(HttpServletRequest request) {
-			ModelAndView mav = new ModelAndView();
-			
-			
-			mav.setViewName("/mypage/buy_info");
-			return mav;
-		}		
-		
-		
-		
-		// 주문내역 조회 페이지 이동
+				
+		// 2021.11.02 - 주문내역 조회 페이지 작업 완료
 		@RequestMapping(value = "orderInfo", method = RequestMethod.GET)
 		public ModelAndView orderInfo(@RequestParam(defaultValue = "1") int nowPage,
 									  HttpServletRequest request) {
@@ -214,13 +203,10 @@ public class MyPageController {
 			
 			List<OrderHistoryDTO> myPageOrderList = myPageService.selectMyOrderHistory(pageFirst, pageSize, userId);
 			
-			System.out.println("myPageOrderList 크기:: =============== " + myPageOrderList.size());
-			
 			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String,Object>>();
 			
 			for(int i=0; i<myPageOrderList.size(); i++) {
-				myPgOdProdList = myPageService.selectMyOrderProdList(myPageOrderList.get(i).getOrder_code());
-				System.out.println("myPgOdProdList:: =============== " + myPgOdProdList);
+				myPgOdProdList = myPageService.selectMyOrderProdList(myPageOrderList.get(i).getOrder_code());	
 			}
 			
 			mav.addObject("pagingMap", pagingMap);
@@ -229,6 +215,20 @@ public class MyPageController {
 			mav.setViewName("/mypage/order_history_list");
 			return mav;
 		}
+		
+		
+		// 2021.11.03 - 결제 정보 페이지 작업 진행 중
+		@RequestMapping(value = "orderInfoDetail", method = RequestMethod.POST)
+		public ModelAndView buyInfo(HttpServletRequest request) {
+			ModelAndView mav = new ModelAndView();
+			
+			
+			mav.setViewName("/mypage/order_history");
+			return mav;
+		}			
+		
+		
+		
 		
 		
 		
@@ -242,7 +242,15 @@ public class MyPageController {
 		}
 		
 		
-		
+		// 결제 정보 페이지 이동
+//		@RequestMapping(value = "buyInfo", method = RequestMethod.GET)
+//		public ModelAndView buyInfo(HttpServletRequest request) {
+//			ModelAndView mav = new ModelAndView();
+//			
+//			
+//			mav.setViewName("/mypage/buy_info");
+//			return mav;
+//		}		
 		
 		
 		

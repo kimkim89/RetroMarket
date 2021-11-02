@@ -116,7 +116,7 @@
 					totalCnt++;					
 				}
 			}
-			
+			alert(totalCnt);
 			if(totalCnt >= 1 && totalCnt <= 50) {
 				
 				let checkInvVal = document.getElementById("invCnt").value;
