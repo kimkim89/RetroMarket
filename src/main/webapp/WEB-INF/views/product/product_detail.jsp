@@ -72,8 +72,9 @@
 	                    	<form name="productForm" method="post" action="${contextPath}/cart/prCart">
 	                    		<input type="hidden" name="productId" value="${productList.mk_idx}" />
 	                    		<input type="hidden" name="productNum" id="productNum" value="1" />	
-	                    		<input type="hidden" name="fromPrPg" id="fromPrPg" value="Y" />        
-	                    		<input type="submit" class="btn_3 ${prBtnClassName}" ${prBtnBlock} value="${prBtnName}" />								
+	                    		<input type="hidden" name="fromPrPg" id="fromPrPg" value="Y" />
+	                    		<input type="hidden" name="invCnt" id="invCnt" value="${productList.mk_inventory}" /> 	                    	  
+	                    		<input type="submit" class="btn_3 ${prBtnClassName}" ${prBtnBlock} value="${prBtnName}" />	
 	                    	</form>	                        
 	                    </div>
                     </div>
@@ -104,8 +105,7 @@
 					alert("구매 최소 수량은 1개 입니다.");
 					return false;
 				}else {
-					totalCnt--;
-					document.getElementById('product_quantity').value = totalCnt;					
+					totalCnt--;									
 				}
 			}else if(msg == "plus") {
 				if(totalCnt >= 50) {
@@ -113,17 +113,27 @@
 					alert("구매 최대 수량은 50개 입니다.");	
 					return false;
 				}else {
-					totalCnt++;
-					document.getElementById('product_quantity').value = totalCnt;
+					totalCnt++;					
 				}
 			}
-			
+			alert(totalCnt);
 			if(totalCnt >= 1 && totalCnt <= 50) {
-				var productPrice = Number(parseInt(currentPrice[0])) * Number(totalCnt);
-				document.getElementById('prod_price').innerText = productPrice + "원";
-				document.getElementById('productNum').value = totalCnt;
+				
+				let checkInvVal = document.getElementById("invCnt").value;
+				
+				if(checkInvVal < totalCnt ) {// 선택한 수량이 재고량 보다 많을 경우 알림
+					alert("현재 남은 수량은 " + checkInvVal + "개 입니다.");					
+				}else {
+					var productPrice = Number(parseInt(currentPrice[0])) * Number(totalCnt);
+					document.getElementById('product_quantity').value = totalCnt;
+					document.getElementById('prod_price').innerText = productPrice + "원";
+					document.getElementById('productNum').value = totalCnt;
+				}
+				
+				
 			}
 	}
+	
 </script> 
     
  
