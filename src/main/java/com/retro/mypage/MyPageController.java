@@ -5,8 +5,11 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonElement;
+import com.retro.common.PagingService;
 import com.retro.member.UserSha256;
 
 @Controller
@@ -184,14 +188,49 @@ public class MyPageController {
 			return mav;
 		}		
 		
+		
+		
 		// 주문내역 조회 페이지 이동
 		@RequestMapping(value = "orderInfo", method = RequestMethod.GET)
-		public ModelAndView orderInfo() {
+		public ModelAndView orderInfo(@RequestParam(defaultValue = "1") int nowPage,
+									  HttpServletRequest request) {
 			ModelAndView mav = new ModelAndView();
 			
-			mav.setViewName("/mypage/order_info");
+			String userId = (String) request.getSession().getAttribute("user_id");
+			
+			/*페이징처리*/
+			PagingService pagingService = new PagingService();
+			Map<String, Object> pagingMap = new HashMap<String, Object>();
+			
+			int pageSizeToPaging = 5;
+			int blockSizeToBlockSize = 3;
+			
+			int OrderCount = myPageService.countMyPageOrderList(userId);
+			
+			pagingMap = pagingService.pagingList(nowPage, OrderCount, pageSizeToPaging, blockSizeToBlockSize);
+				int pageFirst = Integer.parseInt(pagingMap.get("pageFirst").toString());
+				int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
+			
+			
+			List<OrderHistoryDTO> myPageOrderList = myPageService.selectMyOrderHistory(pageFirst, pageSize, userId);
+			
+			System.out.println("myPageOrderList 크기:: =============== " + myPageOrderList.size());
+			
+			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String,Object>>();
+			
+			for(int i=0; i<myPageOrderList.size(); i++) {
+				myPgOdProdList = myPageService.selectMyOrderProdList(myPageOrderList.get(i).getOrder_code());
+				System.out.println("myPgOdProdList:: =============== " + myPgOdProdList);
+			}
+			
+			mav.addObject("pagingMap", pagingMap);
+			mav.addObject("myPgOdProdList", myPgOdProdList);
+			mav.addObject("myPageOrderList", myPageOrderList);
+			mav.setViewName("/mypage/order_history_list");
 			return mav;
 		}
+		
+		
 		
 		// 쿠폰 페이지
 		@RequestMapping(value = "couponAdd", method = RequestMethod.GET)
@@ -201,6 +240,33 @@ public class MyPageController {
 			mav.setViewName("/mypage/couponAdd");
 			return mav;
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		// 최근 본 상품
 //		@RequestMapping(value = "couponAdd", method = RequestMethod.GET)

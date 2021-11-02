@@ -345,6 +345,7 @@
 				
 		if(orderType == "selected" && cartIndexValue.length == 0) {
 			alert("상품을 선택해주세요.");
+			return false;
 		}
 		
 		if(orderType == "all") {

@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.MemberService;
 import com.retro.member.MemberVO;
 
@@ -116,6 +117,13 @@ public class MailSendService {
 		return authKey;
 	}	
 	
+	
+	//주문 완료 이메일 전송
+//	@Async
+//	public String sendOrderList(CustomerOrderVO csOrderVO) {
+//		
+//		return "test";
+//	}
 	
 	
 	

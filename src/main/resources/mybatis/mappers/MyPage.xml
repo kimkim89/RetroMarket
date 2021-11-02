@@ -20,4 +20,35 @@
 		</if>
 	</update>
 	
+	<!-- My Page 주문 내역 조회 -->
+	<select id="selectMyOrderHistory"  resultType="orderHistoryDTO" parameterType="map">
+		select t1.order_code, t1.order_status, t2.order_status_name
+		from product_order as t1
+		left join order_status_info as t2
+		on t1.order_status = t2.order_status_code
+		where t1.member_id = #{userId}
+		order by t1.order_code desc
+		limit #{pageFirst}, #{pageSize};
+	</select>
+	
+	
+	<select id="selectMyOrderProdList" parameterType="String" resultType="map">
+		select *
+		from cart as t1
+		left join product_info as t2
+		on t1.pr_idx = t2.mk_idx
+		left join product_file as t3
+		on t2.mk_product_id = t3.pf_product_id
+		where t1.order_num = #{orderNumber}
+		order by t1.cart_idx;
+	</select>
+	
+	<!-- 주문 목록 총 개수 구하기 -->
+	<select id="countMyPageOrderList" resultType="int" parameterType="String">
+		select count(*)
+		from product_order as t1
+		left join order_status_info as t2
+		on t1.order_status = t2.order_status_code
+		where t1.member_id = #{userId}
+	</select>
 </mapper>
