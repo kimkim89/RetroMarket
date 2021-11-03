@@ -36,6 +36,9 @@ public class CustomerOrderController {
 			Integer totalOrderPrice = 0;
 			
 			String selectedIndexStr = request.getParameter("selected_index");
+			
+			System.out.println("test---------------------------- :: " + selectedIndexStr);
+			
 			String[] selectedIndexArr = selectedIndexStr.split(",");
 			int cartIndex = 0;
 			

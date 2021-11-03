@@ -96,7 +96,7 @@
 	let defaultPrice = document.getElementById('prod_price').innerText;
 	let	currentPrice = defaultPrice.split("원");
 	var totalCnt = document.getElementById('product_quantity').value;
-
+	let checkInvVal = document.getElementById("invCnt").value;
 		
 	function changePrice(msg) {
 											
@@ -113,24 +113,22 @@
 					alert("구매 최대 수량은 50개 입니다.");	
 					return false;
 				}else {
-					totalCnt++;					
+					totalCnt++;
+															
+					if(checkInvVal < totalCnt ) {// 선택한 수량이 재고량 보다 많을 경우 알림
+						alert("현재 남은 수량은 " + checkInvVal + "개 입니다.");
+						totalCnt--;
+					}
 				}
 			}
-			alert(totalCnt);
+			//alert(totalCnt);
+			
 			if(totalCnt >= 1 && totalCnt <= 50) {
-				
-				let checkInvVal = document.getElementById("invCnt").value;
-				
-				if(checkInvVal < totalCnt ) {// 선택한 수량이 재고량 보다 많을 경우 알림
-					alert("현재 남은 수량은 " + checkInvVal + "개 입니다.");					
-				}else {
-					var productPrice = Number(parseInt(currentPrice[0])) * Number(totalCnt);
-					document.getElementById('product_quantity').value = totalCnt;
-					document.getElementById('prod_price').innerText = productPrice + "원";
-					document.getElementById('productNum').value = totalCnt;
-				}
-				
-				
+			
+				var productPrice = Number(parseInt(currentPrice[0])) * Number(totalCnt);
+				document.getElementById('product_quantity').value = totalCnt;
+				document.getElementById('prod_price').innerText = productPrice + "원";
+				document.getElementById('productNum').value = totalCnt;
 			}
 	}
 	
