@@ -24,12 +24,19 @@
 
 
 	$(document).ready(function() {		
-		calculateEachProduct();				
+		calculateEachProduct();			
 	});
 	
 	
 	//상품별 금액 계산
 	function calculateEachProduct() {
+		
+		var chkInvStatArr = document.getElementsByName("checkInvStatus") 
+		var prTrId = "";
+		var delChkId = "";
+		var plusBtnId = "";
+		var minusBtnId = "";
+		var chkInvIndexArr = [];
 		
 		for(var i=0; i<productPriceArray.length; i++) {
 					
@@ -41,17 +48,43 @@
 			eachProdPrice = productPrice * productNum;
 			productTotalPrice[i].innerText = eachProdPrice;
 			
-			finalTotalPrice += eachProdPrice;
-			//document.write(typeof prodPrice);
+			
+			//상품 품절일 경우 
+			if(chkInvStatArr[i].value.indexOf("none") != -1 ) {
+				chkInvIndexArr = chkInvStatArr[i].value.split("none");
+				prTrId = "pr_tr" + chkInvIndexArr[1];
+				delChkId = "del_check" + chkInvIndexArr[1];
+				plusBtnId = "plus_btn" + chkInvIndexArr[1];
+				minusBtnId = "minus_btn" + chkInvIndexArr[1];
+				
+				document.getElementById(prTrId).style.opacity = "0.3";				
+				document.getElementById(delChkId).disabled = true;
+				document.getElementById(plusBtnId).removeAttribute("onclick");
+				document.getElementById(minusBtnId).removeAttribute("onclick");
+				
+			}else {
+				finalTotalPrice += eachProdPrice;
+				//document.write(typeof prodPrice);
+				
+			}
+			
+			
+			
 		}
 			document.getElementById("total_price").innerText = finalTotalPrice;	
 	}
-		
+	
+			
   </script>
   
   <style>
   	.delete_box {
   		vertical-align: top !important;
+  	}
+  	
+  	.prCheckColor {
+  		color: red;
+  		font-weight: bold;
   	}
   </style>
 </head>
@@ -93,18 +126,38 @@
                   </tr>
                 </thead>
                 <tbody>
+                
                 <c:forEach var="cartList" items="${cartList}" varStatus="status">
-                  <tr>          	
+                <input type="hidden" name="inventoryCnt" value="${cartList.mk_inventory }" /> 
+                
+                <c:choose>
+                	<c:when test="${cartList.mk_inventory < 1}">
+                		<c:set var="quantityMsg" value=" [품절]" /> 
+                		<c:set var="prCheckColor" value="prCheckColor" /> 
+                		<c:set var="checkInvStatus" value="none" />              		
+                	</c:when>
+                	<c:when test="${cartList.mk_inventory < cartList.total_num}">
+                		<c:set var="quantityMsg" value=" 현재 구매 가능한 수량은  ${cartList.mk_inventory}개 입니다." /> 
+                		<c:set var="prCheckColor" value="prCheckColor" />
+                		<c:set var="checkInvStatus" value="few" />               		
+                	</c:when>
+                </c:choose>
+                <input type="hidden" name="checkInvStatus" id="checkInvStatus" value="${checkInvStatus}${status.index}" />
+                  <tr id="pr_tr${status.index}" name="pr_tr">          	
                     <td>
                       <div class="media">
                       <input type="hidden" name="cart_index" id="cart_index" value="${cartList.cart_idx}" />  
                       <input type="hidden" name="selected_index" id="selected_index" value="" />
                       <input type="checkbox" class="delete_box" name="del_check" id="del_check${status.index}" value="${cartList.cart_idx}" />                    	
                         <div class="d-flex">
-                          <img src="${contextPath}/resources/images/temporary/${cartList.mk_stored_thumb}" alt="" />
+                          <a href="${contextPath}/product/productDetail?product_id=${cartList.pr_idx}" >
+                          	<img src="${contextPath}/resources/images/temporary/${cartList.mk_stored_thumb}" alt="" />
+                          </a>
                         </div>
                         <div class="media-body">
-                          <p>${cartList.mk_product_name}${quantityMsg}</p>
+                          <a href="${contextPath}/product/productDetail?product_id=${cartList.pr_idx}" >
+                          	<p>${cartList.mk_product_name}<span class="${prCheckColor}" id="pr_font_color">${quantityMsg}</span></p>
+                          </a>
                         </div>
                       </div>
                     </td>
@@ -116,7 +169,7 @@
                         <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'minus', 'product_price${status.index}', '${cartList.cart_idx}')">
                         	<i class="ti-minus"></i>
                         </span>
-                        <input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10">
+                        <input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10" readonly>
                         <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'plus', 'product_price${status.index}', '${cartList.cart_idx}')">
                         	<i class="ti-plus"></i>
                         </span>
@@ -208,7 +261,7 @@
 				//onclick 클릭 시 해당 코드로 변경되도록 작업				
 				quantityCode = '<span class="input-number-decrement" name="'+ buttonName + '" id="' + buttonName + '" onclick="' + onclickMinusFunc + '">';
 				quantityCode += '<i class="ti-minus"></i></span>';
-				quantityCode += '<input class="" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10">';
+				quantityCode += '<input class="" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10" readonly>';
 				quantityCode += '<span class="input-number-increment" name="'+ nameType + '" id="' + nameType + '" onclick="' + onclickPlusFunc + '">';
 				quantityCode += '<i class="ti-plus"></i></span>';
 			
@@ -247,7 +300,7 @@
 				//onclick 클릭 시 해당 코드로 변경되도록 작업				
 				quantityCode = '<span class="input-number-decrement" name="'+ nameType + '" id="' + nameType + '" onclick="' + onclickMinusFunc + '">';
 				quantityCode += '<i class="ti-minus"></i></span>';
-				quantityCode += '<input class="" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10">';
+				quantityCode += '<input class="" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10" readonly>';
 				quantityCode += '<span class="input-number-increment" name="'+ buttonName + '" id="' + buttonName + '" onclick="' + onclickPlusFunc + '">';
 				quantityCode += '<i class="ti-plus"></i></span>';
 				
@@ -264,27 +317,6 @@
 		
 	}//changePrice()함수 끝
 
-	
-	/*전체선택 시작*/
-	let clickCnt = 1;
-		
-	function chooseAllProd() {
-			
-		let delChkBoxArray = document.getElementsByName("del_check");
-		
-		clickCnt++;
-			
-			if(clickCnt%2 == 0) {
-				for(var j=0; j<delChkBoxArray.length; j++) {
-					document.getElementsByName("del_check")[j].checked = true;
-				}
-			}else {
-				for(var j=0; j<delChkBoxArray.length; j++) {
-					document.getElementsByName("del_check")[j].checked = false;
-				}
-			}			
-	}//chooseAllProd()함수 끝
-	
 	
 	/*선택삭제 기능 시작*/
 	function deleteProd() {
@@ -331,7 +363,27 @@
 		});//ajax끝
 	}
 	
+
+	/*전체선택 시작*/
+	let clickCnt = 1;
+	let delChkBoxArray = document.getElementsByName("del_check");	
 	
+	function chooseAllProd() {
+	
+		clickCnt++;
+			
+			if(clickCnt%2 == 0) {
+				for(var j=0; j<delChkBoxArray.length; j++) {
+					if(delChkBoxArray[j].disabled == false) {
+						delChkBoxArray[j].checked = true;
+					}
+				}
+			}else {
+				for(var j=0; j<delChkBoxArray.length; j++) {
+					delChkBoxArray[j].checked = false;
+				}
+			}			
+	}//chooseAllProd()함수 끝
 	
 	
 	/* 상품주문 페이지로 이동*/
@@ -349,17 +401,22 @@
 		}
 		
 		if(orderType == "all") {
-			$("input:checkbox[name='del_check']:not(:checked)").each(function() {
-				cartIndexValue.push($(this).val()); // 체크 안된 것들만 배열에 push				
-			});
+ 			$("input:checkbox[name='del_check']:not(:disabled)").each(function() {
+ 				cartIndexValue.push($(this).val()); // 체크 안된 것들만 배열에 push				
+ 			});
 		}
 		
-		console.log(cartIndexValue);
 		document.getElementById("selected_index").value = cartIndexValue;
 		
 		document.cart_form.action = "${contextPath}/order/orderSomeProd";
 		document.cart_form.submit();
 	}
+	
+	
+	
+	
+	
+	
 	
 	
   </script>
