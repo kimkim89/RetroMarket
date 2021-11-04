@@ -39,5 +39,10 @@ public class MyPageDAO {
 	public int countMyPageOrderList(String userId) {
 		return sqlSession.selectOne("mapper.MyPage.countMyPageOrderList", userId);
 	}
+	
+	//마이페이지: 주문번호별 상세 내역 조회
+	public OrderHistoryDTO selectOneOrderHistory(Map<String, Object> map) {
+		return sqlSession.selectOne("mapper.MyPage.selectOneOrderHistory", map);
+	}
 
 }

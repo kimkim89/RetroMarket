@@ -120,6 +120,7 @@
 										</c:forEach>		
 									</tbody>									
 								</table>
+								<hr>
 								<br>								
 								</c:forEach>
 								<!-- 페이징 시작 -->				

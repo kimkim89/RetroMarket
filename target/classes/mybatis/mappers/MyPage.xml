@@ -9,6 +9,7 @@
 		select * from member where id = #{id};
 	</select>
 	
+	
 	<update id="ModifyAction" parameterType="hashMap">
 		<if test="type == 1">
 			update member set phone = #{mypageVO.phone} , address1 = #{mypageVO.address1} , 
@@ -20,7 +21,8 @@
 		</if>
 	</update>
 	
-	<!-- My Page 주문 내역 조회 -->
+	
+	<!-- 마이페이지: 주문 내역 조회 -->
 	<select id="selectMyOrderHistory"  resultType="orderHistoryDTO" parameterType="map">
 		select distinct(t1.order_code), t1.order_status, t3.order_status_name
 		from product_order as t1
@@ -35,6 +37,7 @@
 	</select>
 	
 	
+	<!-- 마이페이지: 주문 정보 중 상품 정보 조회 -->
 	<select id="selectMyOrderProdList" parameterType="String" resultType="map">
 		select *
 		from cart as t1
@@ -46,8 +49,29 @@
 		order by t1.cart_idx desc;		
 	</select>
 	
-	<!-- 주문 목록 총 개수 구하기 -->
+	
+	<!-- 마이페이지: 주문 목록 총 개수 구하기 -->
 	<select id="countMyPageOrderList" resultType="int" parameterType="String">
 		select count(distinct(order_num)) from cart where member_id = #{userId} and order_num is not null;	     
 	</select>
+	
+	
+	<!-- 마이페이지: 주문번호별 상세 내역 조회 -->
+	<select id="selectOneOrderHistory" resultType="orderHistoryDTO" parameterType="map">
+		select distinct(t1.order_code), t1.order_status, t3.order_status_name
+		from product_order as t1
+		inner join order_status_info as t3
+		on t1.order_status = t3.order_status_code
+		inner join cart as t2
+		on t1.order_code = t2.order_num
+		where t1.member_id = #{userId}
+		and t1.order_code = #{orderCode}
+		order by t1.order_code desc
+		limit 1;		
+	</select>
+	
+	
+	
+	
+	
 </mapper>

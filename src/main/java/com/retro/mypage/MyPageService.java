@@ -53,7 +53,15 @@ public class MyPageService {
 		return mypageDAO.countMyPageOrderList(userId);
 	}
 	
-	
+	//마이페이지: 주문번호별 상세 내역 조회
+	public OrderHistoryDTO selectOneOrderHistory(String userId, String orderCode) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+			map.put("userId", userId);
+			map.put("orderCode", orderCode);		
+		
+		return mypageDAO.selectOneOrderHistory(map);
+	}
 	
 	
 	
