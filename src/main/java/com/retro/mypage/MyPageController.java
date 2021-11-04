@@ -217,12 +217,22 @@ public class MyPageController {
 		}
 		
 		
-		// 2021.11.03 - 결제 정보 페이지 작업 진행 중
+		// 2021.11.04 - 주문번호별 상세 내역 페이지
 		@RequestMapping(value = "orderInfoDetail", method = RequestMethod.POST)
-		public ModelAndView buyInfo(HttpServletRequest request) {
+		public ModelAndView buyInfo(HttpServletRequest request, OrderHistoryDTO orderHistoryDTO) {
 			ModelAndView mav = new ModelAndView();
 			
+			String userId = request.getSession().getAttribute("user_id").toString();
+			String orderCode = request.getParameter("od_code");
 			
+			OrderHistoryDTO myPageOrderList = myPageService.selectOneOrderHistory(userId, orderCode);
+			
+			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String,Object>>();
+						
+				myPgOdProdList = myPageService.selectMyOrderProdList(orderCode);	
+						
+			mav.addObject("myPgOdProdList", myPgOdProdList);
+			mav.addObject("myPageOrderList", myPageOrderList);
 			mav.setViewName("/mypage/order_history");
 			return mav;
 		}			

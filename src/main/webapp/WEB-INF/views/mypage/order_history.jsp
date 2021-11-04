@@ -26,7 +26,22 @@
   height: 70px;
 }
 
+#pr_name {
+	font-weight: bold;
+}
+
+.od_detail_click {
+	color: blue;
+}
+
 </style>
+
+<script type="text/javascript">
+	function moveToOrderDetail() {
+		document.getElementById("order_history_form").submit();
+	}
+
+</script>
 </head>
 <body>
 	<header>
@@ -42,7 +57,7 @@
 					<div class="row">
 						<div class="col-xl-12">
 							<div class="hero-cap text-center">
-								<h2>주문 내역</h2>
+								<h2>주문 목록</h2>
 							</div>
 						</div>
 					</div>
@@ -55,100 +70,61 @@
 			<div class="gallery-area">
 				<div class="row">
 					<jsp:include page="./include/myPageSide.jsp" />
-						<div class="col-lg-8 mb-5 mb-lg-0" style="margin: 3%; margin-top: 1%;">
-								<!-- 20210426 주문 정보-->
+						<div class="col-lg-8 mb-5 mb-lg-0" style="margin-left: 3%;">
+							<form name="order_history_form" id="order_history_form" action="${contextPath}/mypage/orderInfoDetail" method="post" >
+								
+								<input type="hidden" id="od_code" name="od_code" value="${orderList.order_code}"/>
 								<table class="table">
 									<thead style="background: background: #fbf9ff;">
 										<tr align="center">
-											<th style="width:25%;">주문 정보</th>
-											<th style="width:45%">결제/취소/환불 내역</th>
-											<th class="d-none d-md-table-cell" style="width:20%">결제/환불 금액</th>
-											<th>상태</th>
+											<th style="width:45%; text-align: left;">
+												<a href="javascript:moveToOrderDetail();" class="od_detail_click">
+													[주문번호] ${orderList.order_code}
+												</a>
+											</th>
+											<th class="d-none d-md-table-cell" style="width:20%">결제 금액</th>
+											<th>주문 상태</th>
 										</tr>
-									</thead>
-									<tbody>
+									</thead>									
+									<c:forEach var="myPgOdProdList" items="${myPgOdProdList}">																		
+									<tbody>										
 										<tr>
-											<td align="center">
-												<div>
-													<p><b>요청일</b></p>
-													<strong>2021.11.05</strong> 
-													<hr class="line">
-													<p><b>주문번호</b></p>
-													<strong>2308829074</strong> <br>
-													<a href="#" class="genric-btn info small">바로가기</a>
-												</div>
-											</td>
 											<td style="vertical-align: middle;">
 												<div class="flex-container">
-													<div class= "flex-item"><img src="${contextPath}/resources/assets/img/Android.GIF" style="border: solid; 1px; width: 110px; height: 110px;"/></div>
-													&nbsp;&nbsp;<div class= "flex-item" style="margin-top: 5%; width: 340px;">
-													<input type="text" name="product_info" value="asdnkasdnklsdankladsnlkasd" readonly="readonly" class="single-input-secondary info-attribute">
+													<div class= "flex-item">
+														<a href="${contextPath}/product/productDetail?product_id=${myPgOdProdList.pr_idx}">
+															<img src="${contextPath}/resources/images/temporary/${myPgOdProdList.mk_stored_thumb}" style="border: solid lightgray; 1px; width: 110px; height: 110px;"/>
+														</a>
 													</div>
-												</div>
-												<div style="margin-top: 2%; max-width: 455px;">
-													<input type="text" name="first_name" value="asdnkasdnklsdankladsnlkasd" readonly="readonly" class="single-input-secondary info-attribute">
-												</div>
-												
+													&nbsp;&nbsp;
+													<div class= "flex-item" style="margin: 5%; width: 380px">
+														<a href="${contextPath}/product/productDetail?product_id=${myPgOdProdList.pr_idx}">
+															<input type="text" name="pr_name" id="pr_name" class="single-input-secondary info-attribute" value="${myPgOdProdList.pr_name}(${myPgOdProdList.total_num}개)" >
+														</a>
+													</div>
+												</div>												
 											</td>
 											<td align="center" class="d-none d-md-table-cell" style="vertical-align: middle;">
 												<div>
-													<p><b style="color: #dc1c87;;">8730원</b></p>
+													<p><b style="color: #dc1c87;;"><fmt:formatNumber value="${myPgOdProdList.pr_price}" pattern="#,###"/>원</b></p>
 												</div>
 											</td>
 											<td align="center" class="table-action" style="vertical-align: middle;">
 												<div>
-													<span><b>결제 완료</b></span><br>
-													<span>완료일</span><br>
-													<span>2100.12.30</span>
+													<span><b>${orderList.order_status_name}</b></span><br>
 												</div>
 											</td>
 										</tr>
-									
-										<tr >
-											<td align="center">
-												<div>
-													<p><b>요청일</b></p>
-													<strong>2021.11.05</strong> 
-													<hr class="line">
-													<p><b>주문번호</b></p>
-													<strong>2308829074</strong> <br>
-													<a href="#" class="genric-btn info small">바로가기</a>
-												</div>
-											</td>
-											<td style="vertical-align: middle;">
-												<div class="flex-container">
-													<div class= "flex-item"><img src="${contextPath}/resources/assets/img/Android.GIF" style="border: solid; 1px; width: 110px; height: 110px;"/></div>
-													&nbsp;&nbsp;<div class= "flex-item" style="margin-top: 5%; width: 340px;">
-													<input type="text" name="product_info" value="asdnkasdnklsdanklaffffffffffffffffffffffffffffffffffdsnlkasd" readonly="readonly" class="single-input-secondary info-attribute">
-													</div>
-												</div>
-												<div style="margin-top: 2%; max-width: 455px;">
-													<input type="text" name="first_name" value="asdnkasdnklsdankladsnlkasd" readonly="readonly" class="single-input-secondary info-attribute">
-												</div>
-												
-											</td>
-											<td align="center" class="d-none d-md-table-cell" style="vertical-align: middle;">
-												<div>
-													<p><b style="color: #dc1c87;;">8730원</b></p>
-												</div>
-											</td>
-											<td align="center" class="table-action" style="vertical-align: middle;">
-												<div>
-													<span><b>취소 완료</b></span><br>
-													<span>완료일</span><br>
-													<span>2099.12.30</span>
-												</div>
-											</td>
-										</tr>
-										
-									</tbody>
+										</c:forEach>		
+									</tbody>									
 								</table>
-								<!-- 20210426 주문 정보-->
-							</div>
+								<hr>							
+							</form>									
 						</div>
 					</div>
+				</div>
 		</section>
-		<!--================Blog Area =================-->
+		<!--================Blog Area =================-->	
 	</main>
 	<footer> </footer>
 	<jsp:include page="../include/Footer.jsp" />
