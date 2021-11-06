@@ -82,7 +82,7 @@
 													[주문번호] ${orderList.order_code}
 												</a>
 											</th>
-											<th class="d-none d-md-table-cell" style="width:20%">결제 금액</th>
+											<th class="d-none d-md-table-cell" style="width:20%">상품 금액</th>
 											<th>주문 상태</th>
 										</tr>
 									</thead>									

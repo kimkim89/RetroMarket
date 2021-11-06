@@ -204,14 +204,13 @@ public class MyPageController {
 			List<OrderHistoryDTO> myPageOrderList = myPageService.selectMyOrderHistory(pageFirst, pageSize, userId);
 			
 			
-			
 			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String,Object>>();
 			
 			for(int i=0; i<myPageOrderList.size(); i++) {
 				myPgOdProdList = myPageService.selectMyOrderProdList(myPageOrderList.get(i).getOrder_code());	
-				
-				System.out.println("myPgOdProdList:: " + myPgOdProdList);
+				System.out.println("테스트중" + i + ") :: " + myPgOdProdList);
 			}
+			
 			
 			mav.addObject("pagingMap", pagingMap);
 			mav.addObject("myPgOdProdList", myPgOdProdList);
