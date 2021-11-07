@@ -206,12 +206,32 @@ public class MyPageController {
 			
 			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String,Object>>();
 			
+			Map<String, Object> prodMap = new HashMap<String, Object>();
+			
+			List<OrderHistoryDTO> odHisList = new ArrayList<OrderHistoryDTO>();
+			
+			OrderHistoryDTO orderHistoryDTO = new OrderHistoryDTO();
+			
+			
+			
 			for(int i=0; i<myPageOrderList.size(); i++) {
 				myPgOdProdList = myPageService.selectMyOrderProdList(myPageOrderList.get(i).getOrder_code());	
-				System.out.println("테스트중" + i + ") :: " + myPgOdProdList);
+				
+				for(int a=0; a<myPgOdProdList.size(); a++) {  
+				System.out.println("테스트중" + i + ") :: " + myPgOdProdList.get(a).get("pr_name"));
+				
+				orderHistoryDTO.setPr_idx(Integer.parseInt(myPgOdProdList.get(a).get("pr_idx").toString()));
+				orderHistoryDTO.setPr_name(myPgOdProdList.get(a).get("pr_name").toString());
+				orderHistoryDTO.setPr_price(Integer.parseInt(myPgOdProdList.get(a).get("pr_price").toString()));
+				orderHistoryDTO.setTotal_num(Integer.parseInt(myPgOdProdList.get(a).get("total_num").toString()));
+				orderHistoryDTO.setMk_stored_thumb(myPgOdProdList.get(a).get("mk_stored_thumb").toString());
+				
+				odHisList.add(i, orderHistoryDTO.getPr_idx());
+
+				}
 			}
 			
-			
+			mav.addObject("odHisList", odHisList);
 			mav.addObject("pagingMap", pagingMap);
 			mav.addObject("myPgOdProdList", myPgOdProdList);
 			mav.addObject("myPageOrderList", myPageOrderList);

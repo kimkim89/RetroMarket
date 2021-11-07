@@ -1,8 +1,11 @@
 package com.retro.mypage;
 
+import java.util.List;
+
 import lombok.Getter;
+import lombok.Setter;
 
-
+@Setter
 @Getter
 public class OrderHistoryDTO {
 	
@@ -14,5 +17,8 @@ public class OrderHistoryDTO {
 	private String pr_name;
 	private int total_num;
 	private int pr_price;
+	private int pr_idx;
+	
+	private List<String> orderHistoryList;
 	
 }

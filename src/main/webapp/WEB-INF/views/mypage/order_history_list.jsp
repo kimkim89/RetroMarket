@@ -86,7 +86,7 @@
 											<th>주문 상태</th>
 										</tr>
 									</thead>									
-									<c:forEach var="myPgOdProdList" items="${myPgOdProdList}">																		
+									<c:forEach var="myPgOdProdList" items="${odHisList}">																		
 									<tbody>										
 										<tr>
 											<td style="vertical-align: middle;">
