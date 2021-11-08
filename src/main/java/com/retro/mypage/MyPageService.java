@@ -75,11 +75,6 @@ public class MyPageService {
 	}
 	
 	
-	//주문별 상품 개수
-	public int countMyProdList(String orderNumber) {
-		return mypageDAO.countMyProdList(orderNumber);
-	}
-	
 	
 	
 }

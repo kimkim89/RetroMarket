@@ -52,10 +52,6 @@ public class MyPageDAO {
 		return sqlSession.selectList("mapper.MyPage.selectMyCartIdxList", orderNumber);
 	}
 	
-	//주문별 상품 개수
-	public int countMyProdList(String orderNumber) {
-		return sqlSession.selectOne("mapper.MyPage.countMyProdList", orderNumber);
-	}
 	
 
 }

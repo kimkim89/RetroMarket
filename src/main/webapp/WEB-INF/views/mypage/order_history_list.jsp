@@ -72,7 +72,9 @@
 					<jsp:include page="./include/myPageSide.jsp" />
 						<div class="col-lg-8 mb-5 mb-lg-0" style="margin-left: 3%;">
 							<form name="order_history_form" id="order_history_form" action="${contextPath}/mypage/orderInfoDetail" method="post" >
-								<c:forEach var="orderList" items="${myPageOrderList}">
+							
+							<c:forEach var="orderList" items="${myPageOrderList}" varStatus="orderStatus">
+								
 								<input type="hidden" id="od_code" name="od_code" value="${orderList.order_code}"/>
 								<table class="table">
 									<thead style="background: background: #fbf9ff;">
@@ -85,45 +87,50 @@
 											<th class="d-none d-md-table-cell" style="width:20%">상품 금액</th>
 											<th>주문 상태</th>
 										</tr>
-									</thead>									
-									<c:forEach var="myPgOdProdList" items="${myPgOdProdList}" varStatus="status">
-																										
-									<tbody>										
-										<tr>
-											<td style="vertical-align: middle;">
-												<div class="flex-container">
-													<div class= "flex-item">
-														<a href="${contextPath}/product/productDetail?product_id=${myPgOdProdList.pr_idx}">
-															<img src="${contextPath}/resources/images/temporary/${myPgOdProdList.mk_stored_thumb}" style="border: solid lightgray; 1px; width: 110px; height: 110px;"/>
-														</a>
+									</thead>
+									<c:forEach var="fOrderProdList" items="${finalOrderProdList}" varStatus="status">																	
+										<c:forEach var="myPgOdProdList" items="${fOrderProdList}" varStatus="status2">		
+										<c:if test="${myPgOdProdList.order_num eq  orderList.order_code}">
+																																
+										<tbody>																			
+											<tr>
+												<td style="vertical-align: middle;">
+													<div class="flex-container">
+														<div class= "flex-item">
+															<a href="${contextPath}/product/productDetail?product_id=${myPgOdProdList.pr_idx}">
+																<img src="${contextPath}/resources/images/temporary/${myPgOdProdList.mk_stored_thumb}" style="border: solid lightgray; 1px; width: 110px; height: 110px;"/>
+															</a>
+														</div>
+														&nbsp;&nbsp;
+														<div class= "flex-item" style="margin: 5%; width: 380px">
+															<a href="${contextPath}/product/productDetail?product_id=${myPgOdProdList.pr_idx}">
+																<input type="text" name="pr_name" id="pr_name" class="single-input-secondary info-attribute" value="${myPgOdProdList.pr_name}(${myPgOdProdList.total_num}개)" >
+															</a>
+														</div>
+													</div>												
+												</td>
+												<td align="center" class="d-none d-md-table-cell" style="vertical-align: middle;">
+													<div>
+														<p><b style="color: #dc1c87;;"><fmt:formatNumber value="${myPgOdProdList.pr_price}" pattern="#,###"/>원</b></p>
 													</div>
-													&nbsp;&nbsp;
-													<div class= "flex-item" style="margin: 5%; width: 380px">
-														<a href="${contextPath}/product/productDetail?product_id=${myPgOdProdList.pr_idx}">
-															<input type="text" name="pr_name" id="pr_name" class="single-input-secondary info-attribute" value="${myPgOdProdList.pr_name}(${myPgOdProdList.total_num}개)" >
-														</a>
+												</td>
+												<td align="center" class="table-action" style="vertical-align: middle;">
+													<div>
+														<span><b>${orderList.order_status_name}</b></span><br>
+	<!-- 													<span>완료일</span><br> -->
+	<!-- 													<span>2100.12.30</span> -->
 													</div>
-												</div>												
-											</td>
-											<td align="center" class="d-none d-md-table-cell" style="vertical-align: middle;">
-												<div>
-													<p><b style="color: #dc1c87;;"><fmt:formatNumber value="${myPgOdProdList.pr_price}" pattern="#,###"/>원</b></p>
-												</div>
-											</td>
-											<td align="center" class="table-action" style="vertical-align: middle;">
-												<div>
-													<span><b>${orderList.order_status_name}</b></span><br>
-<!-- 													<span>완료일</span><br> -->
-<!-- 													<span>2100.12.30</span> -->
-												</div>
-											</td>
-										</tr>
-										</c:forEach>		
+												</td>
+											</tr>
+										</c:if>
+										</c:forEach>
+									</c:forEach>		
+									
 									</tbody>									
 								</table>
 								<hr>
 								<br>								
-								</c:forEach>
+							</c:forEach>
 								<!-- 페이징 시작 -->				
 								<nav aria-label="Page navigation example">
 									<ul class="pagination pagination-md">

@@ -204,9 +204,6 @@ public class MyPageController {
 			List<Map<String, Object>> myPageOrderList = myPageService.selectMyOrderHistory(pageFirst, pageSize, userId);
 			
 			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String, Object>>();
-//			List<List<OrderHistoryDTO>> myPgOdProdList = new ArrayList<List<OrderHistoryDTO>>();
-			
-			List<Map<String, Object>> orderProdList = new ArrayList<Map<String, Object>>();
 			
 			List<List<Map<String, Object>>> finalOrderProdList = new ArrayList<List<Map<String, Object>>>();
 					
@@ -217,21 +214,20 @@ public class MyPageController {
 
 				finalOrderProdList.add(myPgOdProdList);
 					
-					//System.out.println("finalOrderProdList2 :: " + finalOrderProdList);
-				
 			}
+			
+			//System.out.println("finalOrderProdList 배열 확인 :: " + finalOrderProdList);
 	
 			
 			mav.addObject("finalOrderProdList", finalOrderProdList);
 			mav.addObject("pagingMap", pagingMap);
-			mav.addObject("myPgOdProdList", myPgOdProdList);
 			mav.addObject("myPageOrderList", myPageOrderList);
 			mav.setViewName("/mypage/order_history_list");
 			return mav;
 		}
 		
 		
-		// 2021.11.04 - 주문번호별 상세 내역 페이지
+		//주문번호별 상세 내역 페이지
 		@RequestMapping(value = "orderInfoDetail", method = RequestMethod.POST)
 		public ModelAndView buyInfo(HttpServletRequest request, OrderHistoryDTO orderHistoryDTO) {
 			ModelAndView mav = new ModelAndView();
