@@ -201,76 +201,30 @@ public class MyPageController {
 				int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
 			
 			
-			List<OrderHistoryDTO> myPageOrderList = myPageService.selectMyOrderHistory(pageFirst, pageSize, userId);
+			List<Map<String, Object>> myPageOrderList = myPageService.selectMyOrderHistory(pageFirst, pageSize, userId);
 			
-			List<OrderHistoryDTO> myPgOdProdList = new ArrayList<OrderHistoryDTO>();
+			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String, Object>>();
 //			List<List<OrderHistoryDTO>> myPgOdProdList = new ArrayList<List<OrderHistoryDTO>>();
 			
-			List<List> orderProdList = new ArrayList<List>();
+			List<Map<String, Object>> orderProdList = new ArrayList<Map<String, Object>>();
 			
-			int cntOrderProd = 0;
-			List<String> orderNumberList = new ArrayList<String>();
-			List<Integer> prIdxList = new ArrayList<Integer>();
-			List<String> prNameList = new ArrayList<String>();
-			List<Integer> totalNumList = new ArrayList<Integer>();
-			List<String> storedThumbList = new ArrayList<String>();
-			
-			
-			for(int i=0; i<myPageOrderList.size(); i++) {
-				myPgOdProdList = myPageService.selectMyOrderProdList(myPageOrderList.get(i).getOrder_code());	
-				//주문별 상품 개수
-				cntOrderProd = myPageService.countMyProdList(myPageOrderList.get(i).getOrder_code());
-				
-				System.out.println("주문별 상품 개수(숫자): " + cntOrderProd);
-				System.out.println("주문별 상품 목록 배열: " + myPgOdProdList.get(0).getOrder_num());
-				
-				
-//				if(myPageOrderList.get(i).getOrder_code().equals(myPgOdProdList.get(0).getOrder_num())) {
-				
-//				System.out.println("각각의 myPgOdProdList크기:: " + myPgOdProdList.get(j).get(4).getProd_count());	
-	
-//					System.out.println("쳌쳌:: " + myPgOdProdList.get(j));
-//					orderNumberList.add(myPgOdProdList.get(j).getOrder_num());
-//					System.out.println("orderNumberList확인중 (" + a + ") :: " + orderNumberList.get(a));						
-//					prIdxList.add(myPgOdProdList.get(a).getPr_idx());
-//					prNameList.add(myPgOdProdList.get(a).getPr_name());
-//					totalNumList.add(myPgOdProdList.get(a).getTotal_num());
-//					storedThumbList.add(myPgOdProdList.get(a).getMk_stored_thumb());
-//					
-//					System.out.println("a값은?? " + a);
-
-	
-					//System.out.println("myPgOdProdList테스트:: " + myPgOdProdList);
-//				}
-				
-				//System.out.println(orderProdList);
-				//System.out.println("test:: " + myPageOrderList.get(i).getOrder_code().getClass().getName());				
-				
-				//System.out.println("횟수0-[" + a + "]:: " + myPgOdProdList);
-				//System.out.println("몇번-[" + a + "]:: " + orderProdList);
+			List<List<Map<String, Object>>> finalOrderProdList = new ArrayList<List<Map<String, Object>>>();
 					
-//				}
-				
-				
-				
-//				for(int j=0; j<cntOrderProd; j++) {  
+			for(int i=0; i<myPageOrderList.size(); i++) {				
 
-//				}
-//				orderProdList.add(orderNumberList);
-//				orderProdList.add(prIdxList);
-//				orderProdList.add(prNameList);
-//				orderProdList.add(totalNumList);
-//				orderProdList.add(storedThumbList);
-//				System.out.println("orderNumberList:: " + orderNumberList);
+				//상품 정보 가져오기
+				myPgOdProdList = myPageService.selectMyOrderProdList(0, myPageOrderList.get(i).get("order_code").toString());
+
+				finalOrderProdList.add(myPgOdProdList);
+					
+					//System.out.println("finalOrderProdList2 :: " + finalOrderProdList);
+				
 			}
-			//System.out.println("orderProdList-----------------:: " + orderProdList);
-			//System.out.println("myPgOdProdList----------------:: " + myPgOdProdList);
+	
 			
-			
-			
-			mav.addObject("myPgOdProdList", myPgOdProdList);
+			mav.addObject("finalOrderProdList", finalOrderProdList);
 			mav.addObject("pagingMap", pagingMap);
-//			mav.addObject("myPgOdProdList", myPgOdProdList);
+			mav.addObject("myPgOdProdList", myPgOdProdList);
 			mav.addObject("myPageOrderList", myPageOrderList);
 			mav.setViewName("/mypage/order_history_list");
 			return mav;

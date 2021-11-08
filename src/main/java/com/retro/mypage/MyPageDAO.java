@@ -1,5 +1,6 @@
 package com.retro.mypage;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,13 +27,13 @@ public class MyPageDAO {
 	}
 	
 	// My Page 주문 내역 조회1 - 주문TB, 주문상태TB
-	public List<OrderHistoryDTO> selectMyOrderHistory(Map<String, Object> map) {
+	public List<Map<String, Object>> selectMyOrderHistory(Map<String, Object> map) {
 		return sqlSession.selectList("mapper.MyPage.selectMyOrderHistory", map);
 	}
 	
 	// My Page 주문 내역2
-	public List<OrderHistoryDTO> selectMyOrderProdList(String orderNumber) {
-		return sqlSession.selectList("mapper.MyPage.selectMyOrderProdList", orderNumber);
+	public List<Map<String, Object>> selectMyOrderProdList(Map<String, Object> map) {
+		return sqlSession.selectList("mapper.MyPage.selectMyOrderProdList", map);
 	}
 	
 	//주문 목록 총 개수 구하기
@@ -43,6 +44,12 @@ public class MyPageDAO {
 	//마이페이지: 주문번호별 상세 내역 조회
 	public OrderHistoryDTO selectOneOrderHistory(Map<String, Object> map) {
 		return sqlSession.selectOne("mapper.MyPage.selectOneOrderHistory", map);
+	}
+	
+	
+	//특정 주문번호의 장바구니 index번호 조회
+	public List<OrderHistoryDTO> selectMyCartIdxList(String orderNumber) {
+		return sqlSession.selectList("mapper.MyPage.selectMyCartIdxList", orderNumber);
 	}
 	
 	//주문별 상품 개수

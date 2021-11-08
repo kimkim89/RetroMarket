@@ -32,7 +32,7 @@ public class MyPageService {
 	}
 	
 	// My Page 주문 내역 조회1 - 주문TB, 주문상태TB
-	public List<OrderHistoryDTO> selectMyOrderHistory(int pageFirst, int pageSize, String userId) {
+	public List<Map<String, Object>> selectMyOrderHistory(int pageFirst, int pageSize, String userId) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();		
 			map.put("pageFirst", pageFirst);
@@ -44,8 +44,13 @@ public class MyPageService {
 	
 	
 	// My Page 주문 내역2
-	public List<OrderHistoryDTO> selectMyOrderProdList(String orderNumber) {
-		return mypageDAO.selectMyOrderProdList(orderNumber);
+	public List<Map<String, Object>> selectMyOrderProdList(int cartIdx, String orderNumber) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+			map.put("cartIdx", cartIdx);
+			map.put("orderNumber", orderNumber);
+		
+		return mypageDAO.selectMyOrderProdList(map);
 	}
 	
 	//주문 목록 총 개수 구하기
@@ -62,6 +67,13 @@ public class MyPageService {
 		
 		return mypageDAO.selectOneOrderHistory(map);
 	}
+	
+	
+	//특정 주문번호의 장바구니 index번호 조회
+	public List<OrderHistoryDTO> selectMyCartIdxList(String orderNumber) {
+		return mypageDAO.selectMyCartIdxList(orderNumber);
+	}
+	
 	
 	//주문별 상품 개수
 	public int countMyProdList(String orderNumber) {
