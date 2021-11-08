@@ -37,7 +37,8 @@
 </style>
 
 <script type="text/javascript">
-	function moveToOrderDetail() {
+	function moveToOrderDetail(orderId) {
+		document.getElementById("order_history_form").action = "${contextPath}/mypage/orderInfoDetail?order_id=" + orderId;
 		document.getElementById("order_history_form").submit();
 	}
 
@@ -71,7 +72,7 @@
 				<div class="row">
 					<jsp:include page="./include/myPageSide.jsp" />
 						<div class="col-lg-8 mb-5 mb-lg-0" style="margin-left: 3%;">
-							<form name="order_history_form" id="order_history_form" action="${contextPath}/mypage/orderInfoDetail" method="post" >
+							<form name="order_history_form" id="order_history_form" action="" method="post" >
 							
 							<c:forEach var="orderList" items="${myPageOrderList}" varStatus="orderStatus">
 								
@@ -80,7 +81,7 @@
 									<thead style="background: background: #fbf9ff;">
 										<tr align="center">
 											<th style="width:45%; text-align: left;">
-												<a href="javascript:moveToOrderDetail();" class="od_detail_click">
+												<a href="javascript:moveToOrderDetail('${orderList.order_code}');" class="od_detail_click">
 													[주문번호] ${orderList.order_code}
 												</a>
 											</th>

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.MemberVO;
 
 @Service
@@ -44,10 +45,9 @@ public class MyPageService {
 	
 	
 	// My Page 주문 내역2
-	public List<Map<String, Object>> selectMyOrderProdList(int cartIdx, String orderNumber) {
+	public List<Map<String, Object>> selectMyOrderProdList(String orderNumber) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-			map.put("cartIdx", cartIdx);
 			map.put("orderNumber", orderNumber);
 		
 		return mypageDAO.selectMyOrderProdList(map);
@@ -64,14 +64,14 @@ public class MyPageService {
 		Map<String, Object> map = new HashMap<String, Object>();
 			map.put("userId", userId);
 			map.put("orderCode", orderCode);		
-		
+						
 		return mypageDAO.selectOneOrderHistory(map);
 	}
 	
 	
-	//특정 주문번호의 장바구니 index번호 조회
-	public List<OrderHistoryDTO> selectMyCartIdxList(String orderNumber) {
-		return mypageDAO.selectMyCartIdxList(orderNumber);
+	//특정 주문번호에 관한 주문 상세 정보 조회
+	public CustomerOrderVO selectOrderDetailInfo(String orderNumber) {
+		return mypageDAO.selectOrderDetailInfo(orderNumber);
 	}
 	
 	

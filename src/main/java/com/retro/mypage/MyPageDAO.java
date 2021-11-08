@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.MemberVO;
 
 @Repository
@@ -47,11 +48,10 @@ public class MyPageDAO {
 	}
 	
 	
-	//특정 주문번호의 장바구니 index번호 조회
-	public List<OrderHistoryDTO> selectMyCartIdxList(String orderNumber) {
-		return sqlSession.selectList("mapper.MyPage.selectMyCartIdxList", orderNumber);
+	//특정 주문번호에 관한 주문 상세 정보 조회
+	public CustomerOrderVO selectOrderDetailInfo(String orderNumber) {
+		return sqlSession.selectOne("mapper.MyPage.selectOrderDetailInfo", orderNumber);
 	}
-	
 	
 
 }
