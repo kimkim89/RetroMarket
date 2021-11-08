@@ -44,7 +44,7 @@ public class MyPageService {
 	
 	
 	// My Page 주문 내역2
-	public List<Map<String, Object>> selectMyOrderProdList(String orderNumber) {
+	public List<OrderHistoryDTO> selectMyOrderProdList(String orderNumber) {
 		return mypageDAO.selectMyOrderProdList(orderNumber);
 	}
 	
@@ -61,6 +61,11 @@ public class MyPageService {
 			map.put("orderCode", orderCode);		
 		
 		return mypageDAO.selectOneOrderHistory(map);
+	}
+	
+	//주문별 상품 개수
+	public int countMyProdList(String orderNumber) {
+		return mypageDAO.countMyProdList(orderNumber);
 	}
 	
 	

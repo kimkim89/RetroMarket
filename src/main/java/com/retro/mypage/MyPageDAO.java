@@ -31,7 +31,7 @@ public class MyPageDAO {
 	}
 	
 	// My Page 주문 내역2
-	public List<Map<String, Object>> selectMyOrderProdList(String orderNumber) {
+	public List<OrderHistoryDTO> selectMyOrderProdList(String orderNumber) {
 		return sqlSession.selectList("mapper.MyPage.selectMyOrderProdList", orderNumber);
 	}
 	
@@ -44,5 +44,11 @@ public class MyPageDAO {
 	public OrderHistoryDTO selectOneOrderHistory(Map<String, Object> map) {
 		return sqlSession.selectOne("mapper.MyPage.selectOneOrderHistory", map);
 	}
+	
+	//주문별 상품 개수
+	public int countMyProdList(String orderNumber) {
+		return sqlSession.selectOne("mapper.MyPage.countMyProdList", orderNumber);
+	}
+	
 
 }

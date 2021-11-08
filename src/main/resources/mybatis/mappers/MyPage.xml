@@ -38,13 +38,11 @@
 	
 	
 	<!-- 마이페이지: 주문 정보 중 상품 정보 조회 -->
-	<select id="selectMyOrderProdList" parameterType="String" resultType="map">
-		select *
+	<select id="selectMyOrderProdList" parameterType="String" resultType="orderHistoryDTO">
+		select count(t1.order_num) as prod_count, t1.order_num, t1.pr_idx, t1.pr_name, t1.total_num, t2.mk_stored_thumb
 		from cart as t1
 		inner join product_info as t2
-		on t1.pr_code = t2.mk_product_id
-		inner join product_file as t3
-		on t2.mk_product_id = t3.pf_product_id
+		on t1.pr_code = t2.mk_product_id		
 		where t1.order_num = #{orderNumber}
 		order by t1.cart_idx desc;		
 	</select>
@@ -70,8 +68,10 @@
 		limit 1;		
 	</select>
 	
-	
-	
+	<!-- 주문별 상품 개수 -->
+	<select id="countMyProdList" resultType="int" parameterType="String">
+		select count(order_num) from cart where order_num = #{order_num};
+	</select>
 	
 	
 </mapper>

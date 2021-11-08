@@ -203,37 +203,74 @@ public class MyPageController {
 			
 			List<OrderHistoryDTO> myPageOrderList = myPageService.selectMyOrderHistory(pageFirst, pageSize, userId);
 			
+			List<OrderHistoryDTO> myPgOdProdList = new ArrayList<OrderHistoryDTO>();
+//			List<List<OrderHistoryDTO>> myPgOdProdList = new ArrayList<List<OrderHistoryDTO>>();
 			
-			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String,Object>>();
+			List<List> orderProdList = new ArrayList<List>();
 			
-			Map<String, Object> prodMap = new HashMap<String, Object>();
-			
-			List<OrderHistoryDTO> odHisList = new ArrayList<OrderHistoryDTO>();
-			
-			OrderHistoryDTO orderHistoryDTO = new OrderHistoryDTO();
-			
+			int cntOrderProd = 0;
+			List<String> orderNumberList = new ArrayList<String>();
+			List<Integer> prIdxList = new ArrayList<Integer>();
+			List<String> prNameList = new ArrayList<String>();
+			List<Integer> totalNumList = new ArrayList<Integer>();
+			List<String> storedThumbList = new ArrayList<String>();
 			
 			
 			for(int i=0; i<myPageOrderList.size(); i++) {
 				myPgOdProdList = myPageService.selectMyOrderProdList(myPageOrderList.get(i).getOrder_code());	
+				//주문별 상품 개수
+				cntOrderProd = myPageService.countMyProdList(myPageOrderList.get(i).getOrder_code());
 				
-				for(int a=0; a<myPgOdProdList.size(); a++) {  
-				System.out.println("테스트중" + i + ") :: " + myPgOdProdList.get(a).get("pr_name"));
+				System.out.println("주문별 상품 개수(숫자): " + cntOrderProd);
+				System.out.println("주문별 상품 목록 배열: " + myPgOdProdList.get(0).getOrder_num());
 				
-				orderHistoryDTO.setPr_idx(Integer.parseInt(myPgOdProdList.get(a).get("pr_idx").toString()));
-				orderHistoryDTO.setPr_name(myPgOdProdList.get(a).get("pr_name").toString());
-				orderHistoryDTO.setPr_price(Integer.parseInt(myPgOdProdList.get(a).get("pr_price").toString()));
-				orderHistoryDTO.setTotal_num(Integer.parseInt(myPgOdProdList.get(a).get("total_num").toString()));
-				orderHistoryDTO.setMk_stored_thumb(myPgOdProdList.get(a).get("mk_stored_thumb").toString());
 				
-				odHisList.add(i, orderHistoryDTO.getPr_idx());
+//				if(myPageOrderList.get(i).getOrder_code().equals(myPgOdProdList.get(0).getOrder_num())) {
+				
+//				System.out.println("각각의 myPgOdProdList크기:: " + myPgOdProdList.get(j).get(4).getProd_count());	
+	
+//					System.out.println("쳌쳌:: " + myPgOdProdList.get(j));
+//					orderNumberList.add(myPgOdProdList.get(j).getOrder_num());
+//					System.out.println("orderNumberList확인중 (" + a + ") :: " + orderNumberList.get(a));						
+//					prIdxList.add(myPgOdProdList.get(a).getPr_idx());
+//					prNameList.add(myPgOdProdList.get(a).getPr_name());
+//					totalNumList.add(myPgOdProdList.get(a).getTotal_num());
+//					storedThumbList.add(myPgOdProdList.get(a).getMk_stored_thumb());
+//					
+//					System.out.println("a값은?? " + a);
 
-				}
+	
+					//System.out.println("myPgOdProdList테스트:: " + myPgOdProdList);
+//				}
+				
+				//System.out.println(orderProdList);
+				//System.out.println("test:: " + myPageOrderList.get(i).getOrder_code().getClass().getName());				
+				
+				//System.out.println("횟수0-[" + a + "]:: " + myPgOdProdList);
+				//System.out.println("몇번-[" + a + "]:: " + orderProdList);
+					
+//				}
+				
+				
+				
+//				for(int j=0; j<cntOrderProd; j++) {  
+
+//				}
+//				orderProdList.add(orderNumberList);
+//				orderProdList.add(prIdxList);
+//				orderProdList.add(prNameList);
+//				orderProdList.add(totalNumList);
+//				orderProdList.add(storedThumbList);
+//				System.out.println("orderNumberList:: " + orderNumberList);
 			}
+			//System.out.println("orderProdList-----------------:: " + orderProdList);
+			//System.out.println("myPgOdProdList----------------:: " + myPgOdProdList);
 			
-			mav.addObject("odHisList", odHisList);
-			mav.addObject("pagingMap", pagingMap);
+			
+			
 			mav.addObject("myPgOdProdList", myPgOdProdList);
+			mav.addObject("pagingMap", pagingMap);
+//			mav.addObject("myPgOdProdList", myPgOdProdList);
 			mav.addObject("myPageOrderList", myPageOrderList);
 			mav.setViewName("/mypage/order_history_list");
 			return mav;
@@ -257,7 +294,7 @@ public class MyPageController {
 			
 			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String,Object>>();
 						
-				myPgOdProdList = myPageService.selectMyOrderProdList(orderCode);	
+				//myPgOdProdList = myPageService.selectMyOrderProdList(orderCode);	
 						
 			mav.addObject("myPgOdProdList", myPgOdProdList);
 			mav.addObject("myPageOrderList", myPageOrderList);
