@@ -22,31 +22,29 @@
 	</update>
 	
 	
-	<!-- 마이페이지: 주문 내역 조회 -->
-	<select id="selectMyOrderHistory"  resultType="orderHistoryDTO" parameterType="map">
-		select distinct(t1.order_code), t1.order_status, t3.order_status_name
-		from product_order as t1
-		inner join order_status_info as t3
-		on t1.order_status = t3.order_status_code
-		inner join cart as t2
-		on t1.order_code = t2.order_num
-		where t1.member_id = #{userId}
-		and t2.order_num is not null
-		order by t1.order_code desc
-		limit #{pageFirst}, #{pageSize};		
+	<!-- 마이페이지: 주문 내역(주문번호) 조회 -->
+	<select id="selectMyOrderHistory"  resultType="map" parameterType="map">
+		select distinct(t1.order_code), t1.order_status, t2.order_status_name
+			from product_order as t1
+			inner join order_status_info as t2
+			on t1.order_status = t2.order_status_code
+			inner join cart as t3
+			on t1.order_code = t3.order_num
+			where t1.member_id = #{userId}	
+			and t3.order_num is not null		
+			order by t1.order_code desc
+			limit #{pageFirst}, #{pageSize};	
 	</select>
 	
 	
 	<!-- 마이페이지: 주문 정보 중 상품 정보 조회 -->
-	<select id="selectMyOrderProdList" parameterType="String" resultType="map">
-		select *
-		from cart as t1
-		inner join product_info as t2
-		on t1.pr_code = t2.mk_product_id
-		inner join product_file as t3
-		on t2.mk_product_id = t3.pf_product_id
-		where t1.order_num = #{orderNumber}
-		order by t1.cart_idx desc;		
+	<select id="selectMyOrderProdList" parameterType="map" resultType="map">
+		select t1.cart_idx, t1.order_num, t1.pr_idx, t1.pr_name, t1.total_num, t1.pr_price, t2.mk_stored_thumb
+			from cart as t1
+			inner join product_info as t2
+			on t1.pr_code = t2.mk_product_id		
+			where t1.order_num = #{orderNumber}
+			order by t1.cart_idx desc;		
 	</select>
 	
 	
@@ -58,19 +56,25 @@
 	
 	<!-- 마이페이지: 주문번호별 상세 내역 조회 -->
 	<select id="selectOneOrderHistory" resultType="orderHistoryDTO" parameterType="map">
-		select distinct(t1.order_code), t1.order_status, t3.order_status_name
-		from product_order as t1
-		inner join order_status_info as t3
-		on t1.order_status = t3.order_status_code
-		inner join cart as t2
-		on t1.order_code = t2.order_num
-		where t1.member_id = #{userId}
-		and t1.order_code = #{orderCode}
-		order by t1.order_code desc
-		limit 1;		
+		select t1.order_code, t1.order_status, t2.order_status_name
+			from product_order as t1
+			inner join order_status_info as t2
+			on t1.order_status = t2.order_status_code
+			inner join cart as t3
+			on t1.order_code = t3.order_num
+			where t1.member_id = #{userId}	
+			and t3.order_num = #{orderCode}	
+			order by t1.order_code desc
+			limit 1;
+	</select>
+	
+	<!-- 특정 주문번호에 관한 주문 상세 정보 조회  -->
+	<select id="selectOrderDetailInfo" resultType="csOrderVO" parameterType="String">
+		select * from product_order where order_code = #{orderNumber};
 	</select>
 	
 	
+
 	
 	
 	

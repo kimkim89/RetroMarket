@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonElement;
 import com.retro.common.PagingService;
+import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.UserSha256;
 
 @Controller
@@ -179,7 +180,7 @@ public class MyPageController {
 		
 				
 				
-		// 2021.11.02 - 주문내역 조회 페이지 작업 완료
+		//주문내역 조회 페이지 
 		@RequestMapping(value = "orderInfo", method = RequestMethod.GET)
 		public ModelAndView orderInfo(@RequestParam(defaultValue = "1") int nowPage,
 									  HttpServletRequest request) {
@@ -201,36 +202,53 @@ public class MyPageController {
 				int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
 			
 			
-			List<OrderHistoryDTO> myPageOrderList = myPageService.selectMyOrderHistory(pageFirst, pageSize, userId);
+			List<Map<String, Object>> myPageOrderList = myPageService.selectMyOrderHistory(pageFirst, pageSize, userId);
 			
-			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String,Object>>();
+			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String, Object>>();
 			
-			for(int i=0; i<myPageOrderList.size(); i++) {
-				myPgOdProdList = myPageService.selectMyOrderProdList(myPageOrderList.get(i).getOrder_code());	
+			List<List<Map<String, Object>>> finalOrderProdList = new ArrayList<List<Map<String, Object>>>();
+					
+			for(int i=0; i<myPageOrderList.size(); i++) {				
+
+				//상품 정보 가져오기
+				myPgOdProdList = myPageService.selectMyOrderProdList(myPageOrderList.get(i).get("order_code").toString());
+
+				finalOrderProdList.add(myPgOdProdList);
+					
 			}
 			
+			//System.out.println("finalOrderProdList 배열 확인 :: " + finalOrderProdList);
+	
+			
+			mav.addObject("finalOrderProdList", finalOrderProdList);
 			mav.addObject("pagingMap", pagingMap);
-			mav.addObject("myPgOdProdList", myPgOdProdList);
 			mav.addObject("myPageOrderList", myPageOrderList);
 			mav.setViewName("/mypage/order_history_list");
 			return mav;
 		}
 		
 		
-		// 2021.11.04 - 주문번호별 상세 내역 페이지
+		//주문번호별 상세 내역 페이지
 		@RequestMapping(value = "orderInfoDetail", method = RequestMethod.POST)
 		public ModelAndView buyInfo(HttpServletRequest request, OrderHistoryDTO orderHistoryDTO) {
 			ModelAndView mav = new ModelAndView();
 			
+			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String,Object>>();
+			
+			
 			String userId = request.getSession().getAttribute("user_id").toString();
-			String orderCode = request.getParameter("od_code");
+			String orderCode = request.getParameter("order_id");
 			
 			OrderHistoryDTO myPageOrderList = myPageService.selectOneOrderHistory(userId, orderCode);
 			
-			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String,Object>>();
-						
-				myPgOdProdList = myPageService.selectMyOrderProdList(orderCode);	
-						
+			myPgOdProdList = myPageService.selectMyOrderProdList(orderCode);
+			
+			CustomerOrderVO csOrderInfo = myPageService.selectOrderDetailInfo(orderCode);
+			
+			//System.out.println("myPgOdProdList배열 확인: " + myPgOdProdList);
+			
+			
+			mav.addObject("csOrderInfo", csOrderInfo);			
 			mav.addObject("myPgOdProdList", myPgOdProdList);
 			mav.addObject("myPageOrderList", myPageOrderList);
 			mav.setViewName("/mypage/order_history");
