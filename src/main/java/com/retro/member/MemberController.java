@@ -39,8 +39,23 @@ public class MemberController {
 	
 	//로그인 페이지 이동
 	@RequestMapping(value = "login")
-	public ModelAndView login(Locale locale, Model model) {
+	public ModelAndView login(Locale locale, Model model, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+
+		String userId = (String) request.getSession().getAttribute("user_id");
+		
+		String msg = "";
+		String locationUrl = "";
+		
+		System.out.println("로그인 했는지?? : " + userId);
+		
+		if(userId != null) {
+			msg = "이미 로그인 되어 있습니다. 메인페이지로 이동합니다.";
+			locationUrl = "main/index";
+		}		
+		
+		mav.addObject("notice", msg);
+		mav.addObject("locationUrl", locationUrl);
 		mav.setViewName("member/login");
 		return mav;
 	}
@@ -173,9 +188,22 @@ public class MemberController {
 	
 	//마이페이지 이동
 	@RequestMapping(value = "mypage")
-	public ModelAndView mypage() {
-		// 세션에 유저아이디값으로 DB에서 정보 긁어와서 뿌려주기 ㅇㅇㅇㅇㅇㅇㅇㅇ
+	public ModelAndView mypage(HttpServletRequest request) {
+		// 세션에 유저아이디값으로 DB에서 정보 긁어와서 뿌려주기
 		ModelAndView mav = new ModelAndView();
+		
+		String userId = (String) request.getSession().getAttribute("user_id");
+		
+		String msg = "";
+		String locationUrl = "";
+		
+		if(userId == null) {
+			msg = "로그인 후 이용하실 수 있습니다.";
+			locationUrl = "member/login";
+		}
+		
+		mav.addObject("msg", msg);
+		mav.addObject("locationUrl", locationUrl);
 		mav.setViewName("member/myPage");
 		return mav;
 	}

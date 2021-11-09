@@ -16,6 +16,14 @@
 </style>
 
 
+<script type="text/javascript">
+	//알림 메시지
+	if("${msg}" != "") {
+	 	alert("${msg}");
+	 	location.href='${contextPath}/' + '${locationUrl}';
+	}
+</script>
+
 </head>
 <body>
 	<header>

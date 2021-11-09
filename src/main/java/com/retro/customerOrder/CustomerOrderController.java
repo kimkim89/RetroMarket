@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.retro.cart.CartVO;
+import com.retro.member.MemberVO;
 
 
 @Controller
@@ -63,9 +64,30 @@ public class CustomerOrderController {
 			//결제총액
 			totalOrderPrice = totalProdPrice + deliveryFee;
 			
+						
+			//현재 로그인한 아이디
+			String memberId = (String) request.getSession().getAttribute("user_id");
+			//적립 포인트 계산
+			double purchasePoint = 0;
+			
+			//회원 등급별 적립 금액 계산
+			MemberVO myMemberInfo = csOrderService.selectMyMemberId(memberId);
+			
+			
+			if(myMemberInfo.getLevel() == 1) {
+				purchasePoint = totalOrderPrice * 0.01;
+			}else if(myMemberInfo.getLevel() == 2) {
+				purchasePoint = totalOrderPrice * 0.03;
+			}else if(myMemberInfo.getLevel() == 3) {
+				purchasePoint = totalOrderPrice * 0.05;
+			}else {
+				purchasePoint = 0;
+			}
+			
 			//상품 주문 페이지의 결제수단 - 은행명 출력에 사용			
 			List<BankNameDTO> bankNameList = csOrderService.selectBankName();
 			
+			mav.addObject("purchasePoint", purchasePoint);
 			mav.addObject("selectedIndexStr", selectedIndexStr);
 			mav.addObject("deliveryFee", deliveryFee);
 			mav.addObject("totalProdPrice", totalProdPrice);
