@@ -65,6 +65,7 @@
                   	<input type="hidden" name="delivery_fee" id="delivery_fee" value="${deliveryFee}" />
                   	<input type="hidden" name="order_price" id="order_price" value="${totalOrderPrice}"/>
                   	<input type="hidden" name="selected_index" id="selected_index" value="${selectedIndexStr}" />
+                  	<input type="hidden" name="added_point" id="added_point" value="${purchasePoint}" />
                   	
                     <div class="col-md-6 form-group p_star">
                       <input type="text" class="form-control" id=receiver_name name="receiver_name" placeholder="받는사람 이름 *"/>
@@ -171,42 +172,18 @@
                           <span><fmt:formatNumber value="${totalOrderPrice}" pattern="#,###"/>원</span>
                         </a>
                       </li>
+                      <li>
+                        <a href="#">적립금액
+                          <span><fmt:formatNumber value="${purchasePoint}" pattern="#,###"/>원</span>
+                        </a>
+                      </li>
                       
                       <li>
                         <a href="#">쿠폰
                         <span>쿠폰추가</span>
                         </a>                        
-                      </li>
-                     
+                      </li>                     
                     </ul>
-<!--                     <div class="payment_item"> -->
-<!--                       <div class="radion_btn"> -->
-<!--                         <input type="radio" id="f-option5" name="selector" /> -->
-<!--                         <label for="f-option5">Check payments</label> -->
-<!--                         <div class="check"></div> -->
-<!--                       </div> -->
-<!--                       <p> -->
-<!--                         Please send a check to Store Name, Store Street, Store Town, -->
-<!--                         Store State / County, Store Postcode. -->
-<!--                       </p> -->
-<!--                     </div> -->
-<!--                     <div class="payment_item active"> -->
-<!--                       <div class="radion_btn"> -->
-<!--                         <input type="radio" id="f-option6" name="selector" /> -->
-<!--                         <label for="f-option6">Paypal </label> -->
-<!--                         <img src="img/product/single-product/card.jpg" alt="" /> -->
-<!--                         <div class="check"></div> -->
-<!--                       </div> -->
-<!--                       <p> -->
-<!--                         Please send a check to Store Name, Store Street, Store Town, -->
-<!--                         Store State / County, Store Postcode. -->
-<!--                       </p> -->
-<!--                     </div> -->
-<!--                     <div class="creat_account"> -->
-<!--                       <input type="checkbox" id="f-option4" name="selector" /> -->
-<!--                       <label for="f-option4">I’ve read and accept the </label> -->
-<!--                       <a href="#">terms & conditions*</a> -->
-<!--                     </div> -->
                     <a class="btn_3" href="javascript:orderProduct();">결제하기</a>
                   </div>
                 </div>
@@ -226,10 +203,16 @@
     	if(selectMsg.options[selectMsg.selectedIndex].value == 5) {
     		document.getElementById("hidden_d_msg").style.display = 'block';
     	}else {
-    		document.getElementById("hidden_d_msg").style.display = 'none';
-    	}
-    	   
+    		document.getElementById("hidden_d_msg").style.display = 'none'; 
+    		
+    		var target = document.getElementById("delivery_choice");
+    		
+    		var deliveryMsg = target.options[target.selectedIndex].text;
+    		
+    		document.getElementById("delivery_msg").value = deliveryMsg;    			   			
+    	}    	   
     }
+    
     
     //결제하기 기능
     function orderProduct() {

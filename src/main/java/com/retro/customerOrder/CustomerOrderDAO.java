@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.retro.cart.CartVO;
+import com.retro.member.MemberVO;
 
 @Repository
 public class CustomerOrderDAO {
@@ -51,6 +52,11 @@ public class CustomerOrderDAO {
 	//상품 재고량에서 주문된 수량만큼 빼기
 	public void updateProductInventory(HashMap<String, Integer> map) {
 		sqlSession.update("mapper.CustomerOrder.updateProductInventory", map);
+	}
+	
+	//회원 등급 조회
+	public MemberVO selectMyMemberId(String memberId) {
+		return sqlSession.selectOne("mapper.CustomerOrder.selectMyMemberId", memberId);
 	}
 	
 	

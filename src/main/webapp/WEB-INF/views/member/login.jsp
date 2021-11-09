@@ -13,6 +13,11 @@
 	//알림 메시지
 	if("${notice}" != "") {
 	 	alert("${notice}");
+	 	
+	 	//로그인 한 상태에서 로그인 페이지 표출되지 않고 메인 페이지로 이동
+	 	if("${locationUrl}" != "") {
+	 		location.href='${contextPath}/' + '${locationUrl}'; 		
+	 	}
 	 }
  
  	$(document).ready(function() {

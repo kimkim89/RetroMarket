@@ -5,8 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="../include/Top.jsp"%>
-<script type="text/javascript">
 
+<script type="text/javascript">
+	
+	//알림 메시지
+	if("${msg}" != "") {
+	 	alert("${msg}");
+	 	location.href='${contextPath}/' + '${locationUrl}';
+	 }
+
+	
 	$(document).ready(function() {
 		
 		$("#logout_btn").click(function() {

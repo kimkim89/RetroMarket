@@ -133,6 +133,15 @@ public class MyPageController {
 			ModelAndView mav = new ModelAndView();
 			
 			String id = (String)session.getAttribute("user_id");
+						
+			String msg = "";
+			String locationUrl = "";
+			
+			if(id == null) {
+				msg = "로그인 후 이용하실 수 있습니다.";
+				locationUrl = "member/login";
+			}
+			
 			mav.addObject("myInfo", myPageService.getInfo(id));
 			mav.setViewName("/mypage/myPageR");
 			return mav;

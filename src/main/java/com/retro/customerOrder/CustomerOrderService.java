@@ -141,7 +141,10 @@ public class CustomerOrderService {
 	}
 	
 	
-	
+	//회원 등급 조회
+	public MemberVO selectMyMemberId(String memberId) {
+		return csOrderDAO.selectMyMemberId(memberId);
+	}
 	
 	
 	

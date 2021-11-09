@@ -99,6 +99,14 @@
 		update product_info set mk_inventory = mk_inventory - #{inventoryNum} where mk_idx = #{productNumber};
 	</update>
 
+	<!-- 회원 등급 조회 -->
+	<select id="selectMyMemberId" parameterType="String" resultType="memberVO">
+		select * from member where id = #{memberId}; 
+	</select>
+	
+	<!-- 상품 구매시 포인트 테이블에 해당 데이터 저장 -->
+	
+	
 
 <!-- 은행 정보 입력용으로만 사용한 후 주석 처리 했음  -->
 <!-- 	<insert id="insertBankInfo" parameterType="hashMap"> -->
