@@ -338,14 +338,19 @@ public class AdminProductService {
 			    }		
 			    
 				adminProdVO.setMk_writer_ip(writer_ip);					
-				
+		
+		//상품 정보 수정				
 		admProdDAO.adminProdUpdate(adminProdVO);
 		
 		adminProdImageVO.setPf_product_id(adminProdVO.getMk_product_id());
 		
-		System.out.println("상품번호 " + adminProdImageVO.getPf_product_id());
+		//System.out.println("상품번호 " + adminProdImageVO.getPf_product_id());
 		
+		//상품 이미지 정보 수정
 		admProdDAO.updateProdImage(adminProdImageVO);
+		
+		//장바구니 테이블 내 주문이 들어가지 않은 row의 상품 가격(pr_price) 변경
+		updateCartPrPrice(adminProdVO);
 	}
 	
 	
@@ -440,8 +445,10 @@ public class AdminProductService {
 	}
 
 
-
-	
+	//상품 금액 변경 시 주문번호(order_num)가 null, 장바구니상태(cart_status)가 0인 row의 pr_price 데이터 일괄 변경 
+	public void updateCartPrPrice(AdminProductVO adminProdVO) {
+		admProdDAO.updateCartPrPrice(adminProdVO);
+	}
 	
 
 	

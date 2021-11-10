@@ -238,7 +238,7 @@ public class MyPageController {
 		
 		
 		//주문번호별 상세 내역 페이지
-		@RequestMapping(value = "orderInfoDetail", method = RequestMethod.POST)
+		@RequestMapping(value = "orderInfoDetail", method = {RequestMethod.POST, RequestMethod.GET})
 		public ModelAndView buyInfo(HttpServletRequest request, OrderHistoryDTO orderHistoryDTO) {
 			ModelAndView mav = new ModelAndView();
 			

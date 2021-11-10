@@ -1,16 +1,14 @@
 package com.retro.customerOrder;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.retro.cart.CartVO;
 import com.retro.member.MemberVO;
 
@@ -107,10 +105,12 @@ public class CustomerOrderController {
 			//결제버튼 클릭 시 주문 관련 정보 저장
 			csOrderService.insertOrderInfo(csOrderVO, request);
 						
+			
 			String notice = "주문이 완료되었습니다.";
 			
+			mav.addObject("order_id", csOrderVO.getOrder_code());
 			attributes.addFlashAttribute("notice", notice); 
-			mav.setViewName("redirect:/main/index");
+			mav.setViewName("redirect:/mypage/orderInfoDetail");
 			return mav;
 		}
 		
