@@ -80,7 +80,12 @@ public class AdminProductDAO {
 		return sqlSession.selectOne("mapper.AdminProd.ajaxProductCode", prodCategoryValue);
 	}
 	
+	//상품 금액 변경 시 주문번호(order_num)가 null, 장바구니상태(cart_status)가 0인 row의 pr_price 데이터 일괄 변경 
+	public void updateCartPrPrice(AdminProductVO adminProdVO) {
+		sqlSession.update("mapper.AdminProd.updateCartPrPrice", adminProdVO);
+	}
 	
 	
+ 	
 	
 }

@@ -114,7 +114,7 @@
 														</c:when>
 													</c:choose>
 												</td>
-												<td>POINT</td>											
+												<td>${List.point}</td>											
 												<td><a href="${contextPath}/admin/adminMemberInfo?wu=u&id=${List.id}"><i class="align-middle" data-feather="edit-2"></i></a></td>
 												<td><a href="${contextPath}/admin/adminMemDel?id=${List.id}"><i class="align-middle" data-feather="trash"></i></a></td>
 											</tr>

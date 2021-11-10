@@ -65,7 +65,7 @@
                   	<input type="hidden" name="delivery_fee" id="delivery_fee" value="${deliveryFee}" />
                   	<input type="hidden" name="order_price" id="order_price" value="${totalOrderPrice}"/>
                   	<input type="hidden" name="selected_index" id="selected_index" value="${selectedIndexStr}" />
-                  	<input type="hidden" name="added_point" id="added_point" value="${purchasePoint}" />
+                  	<input type="hidden" name="p_point" id="p_point" value="<fmt:parseNumber value="${purchasePoint}" integerOnly="true" />"/>
                   	
                     <div class="col-md-6 form-group p_star">
                       <input type="text" class="form-control" id=receiver_name name="receiver_name" placeholder="받는사람 이름 *"/>
@@ -176,8 +176,7 @@
                         <a href="#">적립금액
                           <span><fmt:formatNumber value="${purchasePoint}" pattern="#,###"/>원</span>
                         </a>
-                      </li>
-                      
+                      </li>                      
                       <li>
                         <a href="#">쿠폰
                         <span>쿠폰추가</span>

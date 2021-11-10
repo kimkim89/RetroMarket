@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.retro.admin.PointVO;
+import com.retro.adminProduct.AdminProductVO;
 import com.retro.cart.CartVO;
 import com.retro.member.MemberVO;
 import com.retro.mypage.MyPageService;
@@ -25,8 +27,7 @@ public class CustomerOrderService {
 	private CustomerOrderDAO csOrderDAO;
 	@Autowired
 	private MyPageService mypageService;
-	@Autowired
-	private CustomerOrderVO csOrderVO;
+	
 	
 	
 	//상품 주문 페이지의 결제수단 - 은행명 출력에 사용
@@ -44,6 +45,7 @@ public class CustomerOrderService {
 	//결제버튼 클릭 시 주문 관련 정보 저장
 	public void insertOrderInfo(CustomerOrderVO csOrderVO, HttpServletRequest request) {
 		
+		
 		//현재 로그인한 아이디
 		String userId = (String) request.getSession().getAttribute("user_id");	
 				
@@ -53,7 +55,11 @@ public class CustomerOrderService {
 		//주문금액
 		int totalOrderPrice = Integer.parseInt(request.getParameter("order_price"));
 		
-		//현재 로그인된 계정의 
+		//포인트
+		int purchasePoint = Integer.parseInt(request.getParameter("p_point"));
+			purchasePoint = Math.round(purchasePoint);
+			
+		//현재 로그인된 아이디 
 		MemberVO memberList = mypageService.getInfo(userId);
 		
 		//주문번호 생성하기
@@ -97,7 +103,7 @@ public class CustomerOrderService {
 		csOrderVO.setTotal_order_price(totalOrderPrice);
 		csOrderVO.setOrder_code(orderCode);
 		csOrderVO.setTotal_order_price(totalOrderPrice);
-
+		csOrderVO.setAdded_point(purchasePoint);
 
 		//주문할 상품 인덱스 번호
 		String selectedIndexStr = request.getParameter("selected_index");
@@ -125,7 +131,11 @@ public class CustomerOrderService {
 			}
 			//System.out.println("selectedIdxMap 전체 확인중++++++++++++++++++:: " + selectedIdxMap);			
 		}		
+		//주문정보 저장
 		csOrderDAO.insertOrderInfo(csOrderVO);
+		
+		//주문 금액 포인트 저장
+		insertPointInfo(userId, purchasePoint);
 	}
 	
 	
@@ -145,6 +155,26 @@ public class CustomerOrderService {
 	public MemberVO selectMyMemberId(String memberId) {
 		return csOrderDAO.selectMyMemberId(memberId);
 	}
+	
+	
+	//상품 구매시 포인트 테이블에 해당 데이터 저장
+	public void insertPointInfo(String userId, int purchasePoint) {
+		
+		PointVO pointVO = new PointVO();
+		
+		pointVO.setId(userId);
+		pointVO.setMp_point(purchasePoint);
+		pointVO.setMp_point_type(1);
+		pointVO.setMp_content("상품구매");
+		csOrderDAO.insertPointInfo(pointVO);
+	}
+
+	
+	
+	
+	
+	
+	
 	
 	
 	

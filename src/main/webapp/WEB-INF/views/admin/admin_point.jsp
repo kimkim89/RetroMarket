@@ -82,9 +82,10 @@
 												<td>${List.id}</td>
 												<td>
 													<c:choose>
-														<c:when test="${List.mp_point_type==1}">회원가입</c:when>
+														<c:when test="${List.mp_point_type==1}">상품구매</c:when>
 														<c:when test="${List.mp_point_type==2}">상품평</c:when>
 														<c:when test="${List.mp_point_type==3}">이벤트</c:when>
+														<c:when test="${List.mp_point_type==4}">기타</c:when>
 													</c:choose>
 												</td>
 												<td>${List.mp_content}</td>

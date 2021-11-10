@@ -157,8 +157,10 @@
  		select mk_product_id from product_info where mk_product_category = #{prodCategoryValue} order by mk_idx desc limit 0, 1;
  	</select>
  
-
- 	
+ 	<!-- 상품 금액 변경 시 주문번호(order_num)가 null, 장바구니상태(cart_status)가 0인 row의 pr_price 데이터 일괄 변경 -->
+ 	<update id="updateCartPrPrice" parameterType="adminProdVO">
+ 		update cart set pr_price = #{mk_product_price} where pr_code = #{mk_product_id} and order_num is null and cart_status = 0;  
+ 	</update>
  	
  	
  	

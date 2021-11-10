@@ -105,6 +105,22 @@
 	</select>
 	
 	<!-- 상품 구매시 포인트 테이블에 해당 데이터 저장 -->
+	<insert id="insertPointInfo" parameterType="pointVO">
+		insert into member_point (  mp_idx,
+									id,
+									mp_point,
+									mp_point_type,
+									mp_content
+								 )
+						  values ( #{mp_idx},
+								   #{id},
+								   #{mp_point},
+								   #{mp_point_type},
+								   #{mp_content}					 
+							     );		
+	</insert>
+	
+	
 	
 	
 

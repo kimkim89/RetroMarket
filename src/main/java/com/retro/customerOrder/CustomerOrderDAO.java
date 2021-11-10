@@ -3,15 +3,15 @@ package com.retro.customerOrder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import com.retro.admin.PointVO;
+import com.retro.adminProduct.AdminProductVO;
 import com.retro.cart.CartVO;
 import com.retro.member.MemberVO;
+
+
 
 @Repository
 public class CustomerOrderDAO {
@@ -58,6 +58,16 @@ public class CustomerOrderDAO {
 	public MemberVO selectMyMemberId(String memberId) {
 		return sqlSession.selectOne("mapper.CustomerOrder.selectMyMemberId", memberId);
 	}
+	
+	//상품 구매시 포인트 테이블에 해당 데이터 저장
+	public void insertPointInfo(PointVO pointVO) {
+		sqlSession.insert("mapper.CustomerOrder.insertPointInfo", pointVO);
+	}
+	
+	
+	
+	
+	
 	
 	
 	

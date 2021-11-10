@@ -19,6 +19,7 @@ public class MemberVO {
 	private String phone;
 	private String authkey;
 	private int level;
-	private int role_check;
+	private int point;
+	//private int role_check;
 	
 }
