@@ -100,20 +100,28 @@ public class AdminOrderController {
 	@RequestMapping(value = "updateOrderForm")
 	public ModelAndView updateOrderInfo( @RequestParam("paid_date_ex") String paidDateEx,
 										 @RequestParam("delivery_start_date_ex") String deliveryDateEx,
-										 CustomerOrderVO csOrderVO ) {
+										 CustomerOrderVO csOrderVO,
+										 HttpServletRequest request) {
 		
 		
 		ModelAndView mav = new ModelAndView();
 		
 		String msg = "";
+		Timestamp paidDate = null;
+		Timestamp deliveryDate = null;
 		
-		Timestamp paidDate = Timestamp.valueOf(paidDateEx);
-		Timestamp deliveryDate = Timestamp.valueOf(deliveryDateEx);
+		if(paidDateEx != "") {
+			paidDate = Timestamp.valueOf(paidDateEx);
+		}
+		
+		if(deliveryDateEx != "") {
+			deliveryDate = Timestamp.valueOf(deliveryDateEx);
+		}
 		
 		csOrderVO.setPaid_date(paidDate);
 		csOrderVO.setDelivery_start_date(deliveryDate);
 		
-		int resultCnt = admOrderService.updateOrderInfo(csOrderVO);
+		int resultCnt = admOrderService.updateOrderInfo(csOrderVO, request);
 		
 		if(resultCnt >= 1) {
 			msg = "주문 내역이 수정되었습니다.";

@@ -88,7 +88,7 @@
 														<c:when test="${List.mp_point_type==4}">기타</c:when>
 													</c:choose>
 												</td>
-												<td>${List.mp_content}</td>
+												<td>${List.mp_detail}</td>
 												<td>${List.mp_point}</td>
 												<td>${List.mp_datetime}</td>																							
 											</tr>

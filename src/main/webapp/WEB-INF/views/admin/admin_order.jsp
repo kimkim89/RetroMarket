@@ -67,7 +67,7 @@
 <!-- 												<th scope="col">적립금 추가</th> -->
 												<th scope="col">적립금 사용</th>
 												<th scope="col">주문일시</th>
-												<th scope="col">확인/수정</th>
+												<th scope="col">수정</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -89,7 +89,7 @@
 												<td><fmt:formatNumber value="${odList.paid_price}" pattern="#,###"/>원</td>												
 <%-- 												<td><fmt:formatNumber value="${odList.added_point}" pattern="#,###"/>원</td> --%>
 												<td><fmt:formatNumber value="${odList.used_point}" pattern="#,###"/>원</td>
-												<td>${odList.order_date}</td>
+												<td><fmt:formatDate value="${odList.order_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td>
 													<a href="${contextPath}/adminOrder/orderForm?wu=u&id=${odList.order_idx}">
 														<i class="align-middle" data-feather="edit-2"></i>

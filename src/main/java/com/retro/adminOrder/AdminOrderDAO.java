@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.retro.admin.PointVO;
 import com.retro.customerOrder.CustomerOrderVO;
 
 @Repository
@@ -37,6 +38,21 @@ public class AdminOrderDAO {
 	
 	public int updateOrderInfo(CustomerOrderVO csOrderVO) {
 		return sqlSession.update("mapper.AdminOrder.updateOrderInfo", csOrderVO);
+	}
+	
+	//상품 구매시 포인트 테이블에 해당 데이터 저장
+	public void insertPointInfo(PointVO pointVO) {
+		sqlSession.insert("mapper.AdminOrder.insertPointInfo", pointVO);
+	}
+	
+	//배송완료 상태로 변경할 경우, member테이블에 누적 적립금 저장되도록 update 
+	public void updateTotalMemberPoint(Map<String, Object> map) {
+		sqlSession.update("mapper.AdminOrder.updateTotalMemberPoint", map);
+	}
+	
+	//ID와 주문번호로 포인트 내역 조회 
+	public PointVO selectOnePointList(Map<String, Object> map) {
+		return sqlSession.selectOne("mapper.AdminOrder.selectOnePointList", map);
 	}
 	
 	

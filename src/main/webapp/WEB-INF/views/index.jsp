@@ -16,9 +16,7 @@
     	
 	});
      
-     if("${notice}" != "") {
-    	 alert("${notice}");
-     }
+
     </script>
 	
 	
@@ -79,7 +77,7 @@
                     </div>
                 </div>
                 <div class="row">
-                <c:forEach var="listByRegDate" items="${ListByRegDate}" varStatus="status">	
+                <c:forEach var="listByRegDate" items="${listByRegDate}" varStatus="status">	
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
@@ -115,7 +113,7 @@
                     </div>
                 </div>
                 <div class="row">
-                <c:forEach var="listBySoldNum" items="${ListBySoldNum}" varStatus="status">	
+                <c:forEach var="listBySoldNum" items="${listBySoldNum}" varStatus="status">	
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
