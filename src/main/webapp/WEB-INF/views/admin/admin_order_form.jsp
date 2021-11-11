@@ -69,6 +69,7 @@
 										<div class="card-body">	
 											<form name="order_form" id="order_form" method="POST">
 											<input type="hidden" name="order_idx" id="order_idx" value="${eachOrderList.order_idx}" />
+											<input type="hidden" name="order_number" id="order_number" value="${eachOrderList.order_code}" />
 <!-- 2021.10.29 주문 정보 작업 진행 중 시작 -->	
 											<h4 class="each_title">주문/결제 정보</h4>											
 											<div class="table-responsive">
@@ -230,12 +231,12 @@
 														<label class="form-label" for="paid_date_ex">입금 확인일시</label>
 														<input type="checkbox" id="add_p_date" name="add_p_date" onclick="addCurrentDate('dateTypeP');"/> 
 														<span class="memo_span">*현재시간설정 시 체크박스 클릭</span>														
-														<input type="text" class="form-control" name="paid_date_ex" id="paid_date_ex" value="${eachOrderList.paid_date}">
+														<input type="text" class="form-control" name="paid_date_ex" id="paid_date_ex" value="<fmt:formatDate value="${eachOrderList.paid_date}" pattern="yyyy-MM-dd HH:mm:ss" />">
 													</div>																								
 												</div>
 												<div class="row">
 													<div class="mb-3 col-md-6" style="display:inline-block;">
-														<label class="form-label" for="added_point">환불 포인트</label>
+														<label class="form-label" for="added_point">적립 포인트</label>
 														<input type="text" class="form-control" name="added_point" id="added_point" value="${eachOrderList.added_point}">
 													</div>													
 													<div class="mb-3 col-md-6" style="display:inline-block;">
@@ -265,7 +266,7 @@
 														<label class="form-label" for="delivery_start_date_ex">배송일시</label>
 														<input type="checkbox" id="add_d_date" name="add_d_date" onclick="addCurrentDate('dateTypeD');"/> 
 														<span class="memo_span">*현재시간설정 시 체크박스 클릭</span>														
-														<input type="text" class="form-control" name="delivery_start_date_ex" id="delivery_start_date_ex" value="${eachOrderList.delivery_start_date}">
+														<input type="text" class="form-control" name="delivery_start_date_ex" id="delivery_start_date_ex" value="<fmt:formatDate value="${eachOrderList.delivery_start_date}" pattern="yyyy-MM-dd HH:mm:ss" />">
 													</div>													
 													<div class="mb-3 col-md-6" style="display:inline-block;">
 														<label class="form-label" for="point">메일 발송</label>

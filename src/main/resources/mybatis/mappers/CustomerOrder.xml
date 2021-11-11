@@ -104,22 +104,10 @@
 		select * from member where id = #{memberId}; 
 	</select>
 	
-	<!-- 상품 구매시 포인트 테이블에 해당 데이터 저장 -->
-	<insert id="insertPointInfo" parameterType="pointVO">
-		insert into member_point (  mp_idx,
-									id,
-									mp_point,
-									mp_point_type,
-									mp_content
-								 )
-						  values ( #{mp_idx},
-								   #{id},
-								   #{mp_point},
-								   #{mp_point_type},
-								   #{mp_content}					 
-							     );		
-	</insert>
-	
+	<!-- 장바구니 내 상품별 적립 포인트 금액 저장 -->
+	<update id="updateCartPrPoint" parameterType="map">
+		update cart set pr_point = #{prPoint} where cart_idx = #{cartIndex};
+	</update>
 	
 	
 	

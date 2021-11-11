@@ -109,11 +109,13 @@ public class CustomerOrderService {
 		String selectedIndexStr = request.getParameter("selected_index");
 		String[] selectedIndexArr = selectedIndexStr.split(",");
 		int cartIndex = 0;
+		int prPoint = 0;
 
 		Map<String, Object> selectedIdxMap = new HashMap<String, Object>();
 		selectedIdxMap.put("orderCode", csOrderVO.getOrder_code());
 		
 		List<CartVO> cartList = new ArrayList<CartVO>();
+		
 		
 		if(selectedIndexStr != "") {
 			for(int i=0; i<selectedIndexArr.length; i++) {				
@@ -123,8 +125,24 @@ public class CustomerOrderService {
 				selectedIdxMap.put("cartIndex", cartIndex);
 				csOrderDAO.updateOrderNum(selectedIdxMap);
 				
-				//주문된 상품의 수량을 상품 재고량에서 빼기
+				//장바구니 index로 데이터 조회
 				cartList = csOrderDAO.selectSomeOrderList(cartIndex);
+				
+				//장바구니테이블 상품별 적립금액(pr_point) 저장
+				if(memberList.getLevel() == 1) {
+					prPoint = (int) (cartList.get(0).getPr_price() * 0.01);
+				}else if(memberList.getLevel() == 2) {
+					prPoint =  (int) (cartList.get(0).getPr_price() * 0.03);
+				}else if(memberList.getLevel() == 3) {
+					prPoint =  (int) (cartList.get(0).getPr_price() * 0.05);
+				}else {
+					prPoint = 0;
+				}
+				
+				//장바구니 내 상품별 적립 포인트 금액 저장
+				updateCartPrPoint(cartIndex, prPoint);
+				
+				//주문된 상품의 수량을 상품 재고량에서 빼기, 상품별 적립금액 저장
 				updateProductInventory(cartList.get(0).getTotal_num(), cartList.get(0).getPr_idx());	
 				
 				//System.out.println("selectedIdxMap 확인중--------------------:: " + selectedIdxMap);					
@@ -133,9 +151,7 @@ public class CustomerOrderService {
 		}		
 		//주문정보 저장
 		csOrderDAO.insertOrderInfo(csOrderVO);
-		
-		//주문 금액 포인트 저장
-		insertPointInfo(userId, purchasePoint);
+	
 	}
 	
 	
@@ -145,7 +161,7 @@ public class CustomerOrderService {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 						
 		map.put("inventoryNum", inventoryNum);
-		map.put("productNumber", productNumber);
+		map.put("productNumber", productNumber);		
 		
 		csOrderDAO.updateProductInventory((HashMap<String, Integer>) map);
 	}
@@ -157,16 +173,15 @@ public class CustomerOrderService {
 	}
 	
 	
-	//상품 구매시 포인트 테이블에 해당 데이터 저장
-	public void insertPointInfo(String userId, int purchasePoint) {
+	//장바구니 내 상품별 적립 포인트 금액 저장
+	public void updateCartPrPoint(int cartIndex, int prPoint) {
 		
-		PointVO pointVO = new PointVO();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		pointVO.setId(userId);
-		pointVO.setMp_point(purchasePoint);
-		pointVO.setMp_point_type(1);
-		pointVO.setMp_content("상품구매");
-		csOrderDAO.insertPointInfo(pointVO);
+		map.put("cartIndex", cartIndex);
+		map.put("prPoint", prPoint);
+		
+		csOrderDAO.updateCartPrPoint(map);
 	}
 
 	

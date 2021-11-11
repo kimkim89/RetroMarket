@@ -76,4 +76,47 @@
 		where order_idx = #{order_idx};
 	</update>
 
+	
+	<!-- 배송완료시 포인트 테이블에 해당 포인트 관련 데이터 저장 -->
+	<insert id="insertPointInfo" parameterType="pointVO">
+		insert into member_point (  mp_idx,
+									id,
+									mp_point,
+									mp_point_type,
+									mp_content,
+									mp_detail,
+									mp_option,
+									mp_previous_point,
+									check_point
+								 )
+						  values ( #{mp_idx},
+								   #{id},
+								   #{mp_point},
+								   #{mp_point_type},
+								   #{mp_content},
+								   #{mp_detail},
+								   #{mp_option},
+								   #{mp_previous_point},
+								   #{check_point}			 
+							     );		
+	</insert>
+	
+	
+	<!-- 배송완료 상태로 변경할 경우, member테이블에 누적 적립금 저장되도록 update -->
+	<update id="updateTotalMemberPoint" parameterType="map">
+		update member 
+		set point = #{memberPoint}
+		where id = #{userId};
+	</update>
+	
+	
+	<!-- ID와 주문번호로 포인트 내역 조회 -->
+	<select id="selectOnePointList" parameterType="String" resultType="pointVO">
+		select * 
+			from member_point 
+			where id = #{userId} 
+			and mp_option = #{orderNumber}
+			and check_point = #{checkPoint};
+	</select>
+	
 </mapper>

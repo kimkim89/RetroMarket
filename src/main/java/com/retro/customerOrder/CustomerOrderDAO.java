@@ -59,10 +59,12 @@ public class CustomerOrderDAO {
 		return sqlSession.selectOne("mapper.CustomerOrder.selectMyMemberId", memberId);
 	}
 	
-	//상품 구매시 포인트 테이블에 해당 데이터 저장
-	public void insertPointInfo(PointVO pointVO) {
-		sqlSession.insert("mapper.CustomerOrder.insertPointInfo", pointVO);
+	//장바구니 내 상품별 적립 포인트 금액 저장
+	public void updateCartPrPoint(Map<String, Object> map) {
+		sqlSession.update("mapper.CustomerOrder.updateCartPrPoint", map);
 	}
+	
+	
 	
 	
 	

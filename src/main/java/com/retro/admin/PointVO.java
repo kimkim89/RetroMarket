@@ -15,5 +15,9 @@ public class PointVO {
 	private int mp_point;
 	private int mp_point_type;
 	private String mp_content;
+	private String mp_detail;
+	private String mp_option;
+	private int mp_previous_point;
 	private Timestamp mp_datetime;
+	private int check_point;
 }
