@@ -58,6 +58,10 @@ public class CustomerOrderService {
 		//포인트
 		int purchasePoint = Integer.parseInt(request.getParameter("p_point"));
 			purchasePoint = Math.round(purchasePoint);
+		
+		//사용한 포인트
+		int usedPoint = Integer.parseInt(request.getParameter("u_point"));
+			
 			
 		//현재 로그인된 아이디 
 		MemberVO memberList = mypageService.getInfo(userId);
@@ -104,13 +108,17 @@ public class CustomerOrderService {
 		csOrderVO.setOrder_code(orderCode);
 		csOrderVO.setTotal_order_price(totalOrderPrice);
 		csOrderVO.setAdded_point(purchasePoint);
-
+		csOrderVO.setUsed_point(usedPoint);
+		
+		
 		//주문할 상품 인덱스 번호
 		String selectedIndexStr = request.getParameter("selected_index");
 		String[] selectedIndexArr = selectedIndexStr.split(",");
 		int cartIndex = 0;
 		int prPoint = 0;
-
+		//회원 등급별 포인트 적립률
+		double pointRate = 0;
+		
 		Map<String, Object> selectedIdxMap = new HashMap<String, Object>();
 		selectedIdxMap.put("orderCode", csOrderVO.getOrder_code());
 		
@@ -130,14 +138,16 @@ public class CustomerOrderService {
 				
 				//장바구니테이블 상품별 적립금액(pr_point) 저장
 				if(memberList.getLevel() == 1) {
-					prPoint = (int) (cartList.get(0).getPr_price() * 0.01);
+					pointRate = 0.01;
 				}else if(memberList.getLevel() == 2) {
-					prPoint =  (int) (cartList.get(0).getPr_price() * 0.03);
+					pointRate = 0.03;
 				}else if(memberList.getLevel() == 3) {
-					prPoint =  (int) (cartList.get(0).getPr_price() * 0.05);
+					pointRate = 0.05;					
 				}else {
-					prPoint = 0;
-				}
+					pointRate = 0;
+				}				
+				
+				prPoint = (int) (cartList.get(0).getPr_price() * pointRate); 
 				
 				//장바구니 내 상품별 적립 포인트 금액 저장
 				updateCartPrPoint(cartIndex, prPoint);
@@ -151,7 +161,9 @@ public class CustomerOrderService {
 		}		
 		//주문정보 저장
 		csOrderDAO.insertOrderInfo(csOrderVO);
-	
+		//주문완료 시 회원의 포인트 데이터 변경
+		int totalPoint = memberList.getPoint() - usedPoint + purchasePoint;		
+		updateMemberPoint(totalPoint, userId);
 	}
 	
 	
@@ -177,16 +189,24 @@ public class CustomerOrderService {
 	public void updateCartPrPoint(int cartIndex, int prPoint) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("cartIndex", cartIndex);
-		map.put("prPoint", prPoint);
+			map.put("cartIndex", cartIndex);
+			map.put("prPoint", prPoint);
 		
 		csOrderDAO.updateCartPrPoint(map);
 	}
 
 	
-	
-	
+	//회원(member)테이블에 point컬럼 값 업데이트 
+	public void updateMemberPoint(int totalPoint, String memberId) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+			map.put("totalPoint", totalPoint);
+			map.put("memberId", memberId);
+		
+		csOrderDAO.updateMemberPoint(map);
+	}
+		
+		
 	
 	
 	

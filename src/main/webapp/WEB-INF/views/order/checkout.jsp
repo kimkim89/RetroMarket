@@ -93,6 +93,7 @@
                   	<input type="hidden" name="order_price" id="order_price" value="${totalOrderPrice}"/>
                   	<input type="hidden" name="selected_index" id="selected_index" value="${selectedIndexStr}" />
                   	<input type="hidden" name="p_point" id="p_point" value="<fmt:parseNumber value="${purchasePoint}" integerOnly="true" />"/>
+                  	<input type="hidden" name="u_point" id="u_point" value="" />
                   	
                     <div class="col-md-6 form-group p_star">
                       <input type="text" class="form-control" id=receiver_name name="receiver_name" placeholder="받는사람 이름 *"/>
@@ -286,14 +287,12 @@
     
     
     //현재 보유중인 포인트 금액만큼 입력되도록 기능 추가
-	
-    
 	function applyPoint() {
 		
     	let usedPointId = document.getElementById("used_point");
 		let memberPointId = document.getElementById("myPoint");
 		//결제금액
-		var totalOrderPrice = document.getElementById("total_order_price").innerText.split(',').join('');
+		var totalOrderPrice = Number(document.getElementById("total_order_price").innerText.split(',').join(''));
 		//사용된 포인트
     	var usedPoint = Number(usedPointId.value);
     	let memberPoint = Number(memberPointId.innerText.split(',').join('')); 
@@ -306,31 +305,11 @@
     	}else {
     		
     		if(applyPointButton == "사용") {
-    		 
-       			
-       			totalOrderPrice = Number(totalOrderPrice);
         		
        			//포인트 적용 후 결제금액
        			totalOrderPrice = totalOrderPrice - usedPoint;
-        		  
-        		document.getElementById("total_order_price").innerText = totalOrderPrice;
         		    	        		
-        		//회원 등급별 적립 예정 포인트 계산
-        		$.ajax({
-    				type: "POST",
-    				url: "${contextPath}/order/ajaxCheckMemberLevel",
-    				async: false,
-    				data: {"userPointStr" : usedPoint, "totalOrderPriceStr" : totalOrderPrice},
-    				success: function(data) {
-    					
-    					//적립예정포인트 금액 변경
-    					document.getElementById("add_point").innerText = data;
-    					
-    				},
-    				error: function(jqXHR, textStatus, errorThrown) {    					
-    					alert("ERROR: " + textStatus + " : " + errorThrown);
-    				}    								
-    			});		        		
+        		ajaxAddPoint(totalOrderPrice, usedPoint);
     			        		
         		document.getElementById("used_point").readOnly = true;
 				document.getElementById("applyPointBtn").innerText = "취소";
@@ -339,22 +318,38 @@
     			
     			totalOrderPrice = totalOrderPrice + usedPoint;
     			
-    			document.getElementById("total_order_price").innerText = totalOrderPrice;
+    			ajaxAddPoint(totalOrderPrice, usedPoint);
     			
-    			
+    			document.getElementById("u_point").value = 0;
+    			document.getElementById("used_point").readOnly = false;
+				document.getElementById("applyPointBtn").innerText = "사용";    			
     		}
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		//alert("사용 가능!");
     		
     	}
 		
-		
+    	
+    //회원 등급별 적립 예정 포인트 계산
+	function ajaxAddPoint(totalOrderPrice, usedPoint) {
+    	$.ajax({
+			type: "POST",
+			url: "${contextPath}/order/ajaxCheckMemberLevel",
+			async: false,
+			data: {"totalOrderPriceStr" : totalOrderPrice},
+			success: function(data) {
+				
+				//결제금액 변경
+				document.getElementById("total_order_price").innerText = totalOrderPrice;
+				//적립예정포인트 금액 변경
+				document.getElementById("add_point").innerText = data;
+				document.getElementById("p_point").value = data;
+				document.getElementById("order_price").value = totalOrderPrice;
+				document.getElementById("u_point").value = usedPoint
+			},
+			error: function(jqXHR, textStatus, errorThrown) {    					
+				alert("ERROR: " + textStatus + " : " + errorThrown);
+			}    								
+		});		        		
+    };
     	
     	
     	

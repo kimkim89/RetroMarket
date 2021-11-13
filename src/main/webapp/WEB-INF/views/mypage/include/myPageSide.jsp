@@ -9,24 +9,31 @@
 		<aside class="single_sidebar_widget post_category_widget">
 			<a href="${contextPath}/mypage/myPageR"><h4 class="widget_title">회원 정보</h4></a>
 			<ul class="list cat-list">
-				<li><a href="${contextPath}/mypage/memberInfoModify" class="d-flex">
-						<p>회원 정보 수정</p>
-				</a></li>
-				<li><a href="${contextPath}/mypage/orderInfo" class="d-flex">
-						<p>주문 내역 조회</p>
-				</a></li>
-				<li><a href="${contextPath}/mypage/buyInfo" class="d-flex">
-						<P>결제 내역 조회</P>
-				</a></li>
-				<li><a href="${contextPath}/mypage/couponAdd" class="d-flex">
-						<p>할인 쿠폰</p>
-				</a></li>
-				<li><a href="#" class="d-flex">
+				<li>
+					<a href="${contextPath}/mypage/memberInfoModify" class="d-flex">
+							<p>회원정보수정</p>
+					</a>
+				</li>
+				<li>
+					<a href="${contextPath}/mypage/orderInfo" class="d-flex">
+						<p>주문내역조회</p>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="d-flex">
+						<p>위시리스트</p>
+					</a>
+				</li>
+				<li>
+					<a href="${contextPath}/mypage/couponAdd" class="d-flex">
+						<p>할인쿠폰</p>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="d-flex">
 						<p>최근 본 상품</p>
-				</a></li>
-				<li><a href="${contextPath}/mypage/wishList" class="d-flex">
-						<p>장바구니 조회</p>
-				</a></li>
+					</a>
+				</li>				
 			</ul>
 		</aside>
 
