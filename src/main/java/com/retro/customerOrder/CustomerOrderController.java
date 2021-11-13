@@ -2,10 +2,15 @@ package com.retro.customerOrder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -65,6 +70,7 @@ public class CustomerOrderController {
 						
 			//현재 로그인한 아이디
 			String memberId = (String) request.getSession().getAttribute("user_id");
+			
 			//적립 포인트 계산
 			double purchasePoint = 0;
 			
@@ -85,6 +91,7 @@ public class CustomerOrderController {
 			//상품 주문 페이지의 결제수단 - 은행명 출력에 사용			
 			List<BankNameDTO> bankNameList = csOrderService.selectBankName();
 			
+			mav.addObject("memberPoint", myMemberInfo.getPoint());
 			mav.addObject("purchasePoint", purchasePoint);
 			mav.addObject("selectedIndexStr", selectedIndexStr);
 			mav.addObject("deliveryFee", deliveryFee);
@@ -115,7 +122,45 @@ public class CustomerOrderController {
 		}
 		
 		
-		
+		@ResponseBody
+		@RequestMapping(value="ajaxCheckMemberLevel", method=RequestMethod.POST)
+		public int ajaxChkMemLev(String userPointStr, String totalOrderPriceStr, HttpServletRequest request) {
+			
+			System.out.println("들어옴! ");
+			
+			System.out.println("totalOrderPriceStr:: " + totalOrderPriceStr);
+			
+			int userPoint = Integer.parseInt(userPointStr);
+			int totalOrderPrice = Integer.parseInt(totalOrderPriceStr);
+			
+			//현재 로그인한 아이디
+			String memberId = (String) request.getSession().getAttribute("user_id");
+			
+			//회원 등급별 포인트 적립률
+			double pointRate = 0;
+			
+			//포인트 적용된 후 최종 결제금액
+			int finalOrderPoint = 0;
+				
+			//회원 등급별 적립 금액 계산
+			MemberVO myMemberInfo = csOrderService.selectMyMemberId(memberId);
+						
+			if(myMemberInfo.getLevel() == 1) {
+				pointRate = 0.01;
+			}else if(myMemberInfo.getLevel() == 2) {
+				pointRate = 0.03;
+			}else if(myMemberInfo.getLevel() == 3) {
+				pointRate = 0.05;
+			}else {
+				pointRate = 0;
+			}
+			
+			finalOrderPoint = (int) (totalOrderPrice * pointRate); 
+			
+			
+			
+			return finalOrderPoint;
+		}
 		
 		
 			

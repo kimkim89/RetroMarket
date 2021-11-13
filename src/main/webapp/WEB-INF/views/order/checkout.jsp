@@ -3,20 +3,47 @@
 <!doctype html>
 <html lang="zxx">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>아맞다매점 - 주문결제</title>
-    <%@ include file="../include/Top.jsp" %>
-    
-    <!-- 다음 우편 API -->
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>아맞다매점 - 주문결제</title>
+<%@ include file="../include/Top.jsp" %>
+
+	<!-- 다음 우편 API -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script src="${contextPath}/resources/assets/js/DaumApi/AddressApi.js"></script>
 	<script>
-		//우편번호 , 주소 검색 API
-		function addressFind() {
-			execPostCode();
-		};
+	//우편번호 , 주소 검색 API
+	function addressFind() {
+		execPostCode();
+	};
 	</script>
+    
+ 	<style type="text/css">
+ 		.nice-select {
+ 			width: 100%;
+ 		}
+ 		
+ 		.list {
+ 			width: 100%; 			
+ 		} 		
+ 		
+ 		.list>li>a { 			
+ 			pointer-events: none;
+ 		} 	
+ 		
+ 		#applyPointBtn {
+ 			color: black;
+ 			padding: 4px 7px;
+    		margin-left: 20px;
+ 		}
+ 		
+ 		#addPointDiv {
+			margin-top: 1px;
+		    margin-left: 10px;
+		    margin-right: 11px;
+ 		}
+ 			
+ 	</style>           
     
 </head>
 
@@ -143,13 +170,13 @@
                     <h2>주문 상품</h2>
                     <ul class="list">
                       <li>
-                        <a href="#">상품명
+                        <a href="#" >상품명
                           <span>수량</span>
                         </a>
                       </li>
                       <c:forEach var="orderList" items="${orderList}" varStatus="status">
                       <li>
-                        <a href="#">${orderList.pr_name}
+                        <a href="#" class="no_click">${orderList.pr_name}
                           <span class="middle"></span>
                           <span class="last">${orderList.total_num}개</span>
                         </a>
@@ -159,30 +186,52 @@
                     <ul class="list list_2">
                       <li>
                         <a href="#">상품총액
-                          <span><fmt:formatNumber value="${totalProdPrice}" pattern="#,###"/>원</span>
+                          <span><fmt:formatNumber value="${totalProdPrice}" pattern="#,###"/></span>
                         </a>
                       </li>
                       <li>
                         <a href="#">배송료
-                          <span><fmt:formatNumber value="${deliveryFee}" pattern="#,###"/>원</span>
+                          <span><fmt:formatNumber value="${deliveryFee}" pattern="#,###"/></span>
                         </a>
                       </li>
                       <li>
                         <a href="#">결제금액
-                          <span><fmt:formatNumber value="${totalOrderPrice}" pattern="#,###"/>원</span>
+                          <span id="total_order_price"><fmt:formatNumber value="${totalOrderPrice}" pattern="#,###"/></span>
                         </a>
                       </li>
                       <li>
-                        <a href="#">적립금액
-                          <span><fmt:formatNumber value="${purchasePoint}" pattern="#,###"/>원</span>
+                        <a href="#">적립예정포인트
+                          <span id="add_point"><fmt:formatNumber value="${purchasePoint}" pattern="#,###"/></span>
                         </a>
-                      </li>                      
+                      </li>
+                      
+<!-- 2021.11.12 포인트, 쿠폰 기능 추가 작업 시작 -->  
+                    
                       <li>
-                        <a href="#">쿠폰
-                        <span>쿠폰추가</span>
-                        </a>                        
-                      </li>                     
+                        <a href="#" >포인트 사용  [ 보유중인 포인트: <b id="myPoint" style="color:red;"><fmt:formatNumber value="${memberPoint}" pattern="#,###"/></b> ]</a>                        
+                      </li>
+                      <li>
+                        
+                        <div class="col-md-7 form-group p_star" style="padding-left:0px; padding-right:0px;">
+	                     	<input type="number" class="form-control" name="used_point" id="used_point" placeholder="0" value="" style="width:120%;" />
+	                    </div>
+						<div class="col-md-4 form-group p_star" id="addPointDiv">
+							<button type="button" name="applyPointBtn" id="applyPointBtn" onclick="applyPoint();">사용</button>
+						</div> 
+                      </li>
+                      <li>
+                        <a href="#" style="pointer-">쿠폰 추가</a>                        
+                      </li>
+                      <li>                      	
+                        <select name="coupon_price" id="coupon_price" style="width:100%;">
+							<option value="" selected disabled>쿠폰을 선택해주세요.</option>
+							 <option value="0">내가 가지고 있는 쿠폰 종류</option>                    
+						</select>
+						                   
+                      </li>                      
+<!-- 2021.11.12 포인트, 쿠폰 기능 추가 작업 끝 -->                                  
                     </ul>
+                    <br><br><br>
                     <a class="btn_3" href="javascript:orderProduct();">결제하기</a>
                   </div>
                 </div>
@@ -233,6 +282,86 @@
     	
     	document.order_form.submit();
     }
+    
+    
+    
+    //현재 보유중인 포인트 금액만큼 입력되도록 기능 추가
+	
+    
+	function applyPoint() {
+		
+    	let usedPointId = document.getElementById("used_point");
+		let memberPointId = document.getElementById("myPoint");
+		//결제금액
+		var totalOrderPrice = document.getElementById("total_order_price").innerText.split(',').join('');
+		//사용된 포인트
+    	var usedPoint = Number(usedPointId.value);
+    	let memberPoint = Number(memberPointId.innerText.split(',').join('')); 
+    	var applyPointButton = document.getElementById("applyPointBtn").innerText
+    	
+    	
+    	if(usedPoint > memberPoint) {
+    		alert("현재 보유중인 포인트 금액만큼 사용할 수 있습니다.");
+    		usedPointId.focus();
+    	}else {
+    		
+    		if(applyPointButton == "사용") {
+    		 
+       			
+       			totalOrderPrice = Number(totalOrderPrice);
+        		
+       			//포인트 적용 후 결제금액
+       			totalOrderPrice = totalOrderPrice - usedPoint;
+        		  
+        		document.getElementById("total_order_price").innerText = totalOrderPrice;
+        		    	        		
+        		//회원 등급별 적립 예정 포인트 계산
+        		$.ajax({
+    				type: "POST",
+    				url: "${contextPath}/order/ajaxCheckMemberLevel",
+    				async: false,
+    				data: {"userPointStr" : usedPoint, "totalOrderPriceStr" : totalOrderPrice},
+    				success: function(data) {
+    					
+    					//적립예정포인트 금액 변경
+    					document.getElementById("add_point").innerText = data;
+    					
+    				},
+    				error: function(jqXHR, textStatus, errorThrown) {    					
+    					alert("ERROR: " + textStatus + " : " + errorThrown);
+    				}    								
+    			});		        		
+    			        		
+        		document.getElementById("used_point").readOnly = true;
+				document.getElementById("applyPointBtn").innerText = "취소";
+        		
+    		}else if(applyPointButton == "취소") {
+    			
+    			totalOrderPrice = totalOrderPrice + usedPoint;
+    			
+    			document.getElementById("total_order_price").innerText = totalOrderPrice;
+    			
+    			
+    		}
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		//alert("사용 가능!");
+    		
+    	}
+		
+		
+    	
+    	
+    	
+		
+    }
+    
+    
     
     
     
