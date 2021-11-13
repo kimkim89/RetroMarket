@@ -63,7 +63,11 @@ public class CustomerOrderDAO {
 	public void updateCartPrPoint(Map<String, Object> map) {
 		sqlSession.update("mapper.CustomerOrder.updateCartPrPoint", map);
 	}
-	
+		
+	//회원(member)테이블에 point컬럼 값 업데이트 
+	public void updateMemberPoint(Map<String, Object> map) {
+		sqlSession.update("mapper.CustomerOrder.updateMemberPoint", map);
+	}
 	
 	
 	

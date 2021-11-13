@@ -65,29 +65,32 @@ public class CustomerOrderController {
 			}
 			
 			//결제총액
-			totalOrderPrice = totalProdPrice + deliveryFee;
-			
+			totalOrderPrice = totalProdPrice + deliveryFee;			
 						
 			//현재 로그인한 아이디
 			String memberId = (String) request.getSession().getAttribute("user_id");
 			
-			//적립 포인트 계산
-			double purchasePoint = 0;
-			
 			//회원 등급별 적립 금액 계산
 			MemberVO myMemberInfo = csOrderService.selectMyMemberId(memberId);
 			
+			//적립 포인트 계산
+			int purchasePoint = 0;
+			
+			//회원 등급별 포인트 적립률
+			double pointRate = 0;
 			
 			if(myMemberInfo.getLevel() == 1) {
-				purchasePoint = totalOrderPrice * 0.01;
+				pointRate = 0.01;
 			}else if(myMemberInfo.getLevel() == 2) {
-				purchasePoint = totalOrderPrice * 0.03;
+				pointRate = 0.03;
 			}else if(myMemberInfo.getLevel() == 3) {
-				purchasePoint = totalOrderPrice * 0.05;
+				pointRate = 0.05;
 			}else {
-				purchasePoint = 0;
+				pointRate = 0;
 			}
 			
+			purchasePoint = (int) (totalOrderPrice * pointRate); 
+						
 			//상품 주문 페이지의 결제수단 - 은행명 출력에 사용			
 			List<BankNameDTO> bankNameList = csOrderService.selectBankName();
 			
@@ -124,13 +127,12 @@ public class CustomerOrderController {
 		
 		@ResponseBody
 		@RequestMapping(value="ajaxCheckMemberLevel", method=RequestMethod.POST)
-		public int ajaxChkMemLev(String userPointStr, String totalOrderPriceStr, HttpServletRequest request) {
+		public int ajaxChkMemLev(String totalOrderPriceStr, HttpServletRequest request) {
 			
 			System.out.println("들어옴! ");
 			
 			System.out.println("totalOrderPriceStr:: " + totalOrderPriceStr);
 			
-			int userPoint = Integer.parseInt(userPointStr);
 			int totalOrderPrice = Integer.parseInt(totalOrderPriceStr);
 			
 			//현재 로그인한 아이디
