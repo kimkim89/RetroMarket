@@ -264,8 +264,8 @@
 														</select>														
 													</div>
 													<div class="mb-3 col-md-4" style="display:inline-block;">
-														<label class="form-label" for="point">적립금</label>
-														<input type="text" class="form-control" name="point" id="point" placeholder="포인트" value="20000점">
+														<label class="form-label" for="point">포인트</label>
+														<input type="text" class="form-control" name="point" id="point" placeholder="포인트" value="${memInfo.point}">
 													</div>
 												</div>
 												<div class="row">
