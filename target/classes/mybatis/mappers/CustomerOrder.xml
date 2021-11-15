@@ -109,14 +109,18 @@
 		update cart set pr_point = #{prPoint} where cart_idx = #{cartIndex};
 	</update>
 	
-	<!-- 회원(member)테이블에 point컬럼 값 업데이트 -->
-	<update id="updateMemberPoint" parameterType="map">
-		update member set point = #{totalPoint} where id = #{memberId};
-	</update>	
-
-
-
-
+	<!-- 전달받은 주문번호 기준으로 정보 테이블 데이터 받아오기 -->
+	<select id="orderInfoByOrderCode" parameterType="String" resultType="map">
+		select * 
+		from product_order as t1 
+		join bank_name_info as t2
+		where t1.member_id = #{userId} 
+		order by order_idx desc 
+		limit 1;
+	</select>
+	
+	
+	
 
 <!-- 은행 정보 입력용으로만 사용한 후 주석 처리 했음  -->
 <!-- 	<insert id="insertBankInfo" parameterType="hashMap"> -->

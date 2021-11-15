@@ -68,8 +68,6 @@
 				
 			}
 			
-			
-			
 		}
 			document.getElementById("total_price").innerText = finalTotalPrice;	
 	}
@@ -157,7 +155,10 @@
                         <div class="media-body">
                           <a href="${contextPath}/product/productDetail?product_id=${cartList.pr_idx}" >
                           	<p>${cartList.mk_product_name}<span class="${prCheckColor}" id="pr_font_color">${quantityMsg}</span></p>
-                          </a>
+                          </a>                          
+                          <c:if test="${fn:indexOf(quantityMsg,'품절') != -1}">
+                          	<a href="javascript:deleteProd('${cartList.cart_idx}');"><span class="${prCheckColor}" id="pr_font_color">삭제</span></a>
+                          </c:if>
                         </div>
                       </div>
                     </td>
@@ -319,7 +320,7 @@
 
 	
 	/*선택삭제 기능 시작*/
-	function deleteProd() {
+	function deleteProd(cartProdId) {
 		var checkedArray = [];
 		
 		alert("선택한 상품을 삭제하시겠습니까?");
@@ -327,6 +328,10 @@
 		$("input:checkbox[name='del_check']:checked").each(function() {
 			checkedArray.push($(this).val()); // 체크된 것 value만 배열에 push			
 		})
+		
+		if(cartProdId) {
+			checkedArray.push(cartProdId);
+		}
 		
 		console.log(checkedArray);
 		

@@ -119,4 +119,9 @@
 			and check_point = #{checkPoint};
 	</select>
 	
+	<!-- 회원(member)테이블에 point컬럼 값 업데이트 -->
+	<update id="updateMemberPoint" parameterType="map">
+		update member set point = #{totalPoint} where id = #{memberId};
+	</update>	
+	
 </mapper>

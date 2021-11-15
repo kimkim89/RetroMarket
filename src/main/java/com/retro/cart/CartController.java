@@ -1,10 +1,7 @@
 package com.retro.cart;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +42,6 @@ public class CartController {
 		String msg = "";
 		String locationUrl = "";
 		int prQuantity = 0;
-		int ableToSellQuantity = 0;
 		
 		
 		//비회원일 경우 장바구니 기능 사용할 수 없음

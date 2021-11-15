@@ -163,7 +163,7 @@ public class CustomerOrderService {
 		csOrderDAO.insertOrderInfo(csOrderVO);
 		//주문완료 시 회원의 포인트 데이터 변경
 		int totalPoint = memberList.getPoint() - usedPoint + purchasePoint;		
-		updateMemberPoint(totalPoint, userId);
+		
 	}
 	
 	
@@ -195,19 +195,11 @@ public class CustomerOrderService {
 		csOrderDAO.updateCartPrPoint(map);
 	}
 
-	
-	//회원(member)테이블에 point컬럼 값 업데이트 
-	public void updateMemberPoint(int totalPoint, String memberId) {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-			map.put("totalPoint", totalPoint);
-			map.put("memberId", memberId);
-		
-		csOrderDAO.updateMemberPoint(map);
+			
+	//전달받은 주문번호 기준으로 정보 테이블 데이터 받아오기
+	public List<Map<String, Object>> orderInfoByOrderCode(String userId) {
+		return csOrderDAO.orderInfoByOrderCode(userId);
 	}
-		
-		
-	
 	
 	
 	
