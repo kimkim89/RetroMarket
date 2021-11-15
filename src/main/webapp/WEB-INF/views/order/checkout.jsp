@@ -93,7 +93,7 @@
                   	<input type="hidden" name="order_price" id="order_price" value="${totalOrderPrice}"/>
                   	<input type="hidden" name="selected_index" id="selected_index" value="${selectedIndexStr}" />
                   	<input type="hidden" name="p_point" id="p_point" value="<fmt:parseNumber value="${purchasePoint}" integerOnly="true" />"/>
-                  	<input type="hidden" name="u_point" id="u_point" value="" />
+                  	<input type="hidden" name="u_point" id="u_point" value="0" />
                   	
                     <div class="col-md-6 form-group p_star">
                       <input type="text" class="form-control" id=receiver_name name="receiver_name" placeholder="받는사람 이름 *"/>

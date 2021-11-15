@@ -117,8 +117,11 @@ public class CustomerOrderController {
 			//결제버튼 클릭 시 주문 관련 정보 저장
 			csOrderService.insertOrderInfo(csOrderVO, request);
 			
+			//이메일 내용에 쓸 주문 정보 조회
+			List<Map<String, Object>> oneOrderList = csOrderService.orderInfoByOrderCode(getLoginId(request));
+			
 			//주문완료 시 주문 내역 이메일로 전송
-			//mss.sendOrderListMail(csOrderVO.getOrder_code(), csOrderVO.getOrder_email());
+			mss.sendOrderListMail(oneOrderList);
 			
 			String notice = "주문이 완료되었습니다.";
 			
@@ -168,6 +171,21 @@ public class CustomerOrderController {
 		
 		
 			
+		//현재 로그인한 아이디 정보 가져오기
+		public String getLoginId(HttpServletRequest request) {			
+			String userId = (String) request.getSession().getAttribute("user_id");				
+			return userId;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		@RequestMapping(value="test")

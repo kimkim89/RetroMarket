@@ -63,10 +63,10 @@ public class CustomerOrderDAO {
 	public void updateCartPrPoint(Map<String, Object> map) {
 		sqlSession.update("mapper.CustomerOrder.updateCartPrPoint", map);
 	}
-		
-	//회원(member)테이블에 point컬럼 값 업데이트 
-	public void updateMemberPoint(Map<String, Object> map) {
-		sqlSession.update("mapper.CustomerOrder.updateMemberPoint", map);
+			
+	//전달받은 주문번호 기준으로 정보 테이블 데이터 받아오기
+	public List<Map<String, Object>> orderInfoByOrderCode(String userId) {
+		return sqlSession.selectList("mapper.CustomerOrder.orderInfoByOrderCode", userId);
 	}
 	
 	

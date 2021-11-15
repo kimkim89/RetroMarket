@@ -81,6 +81,7 @@ public class AdminOrderService {
 	//배송완료 상태일 경우 상품구매에 따른 포인트 저장
 	if(csOrderVO.getOrder_status() == 3 && pointInfo == null) {
 		insertPointInfo(orderNumber, userId, csOrderVO.getAdded_point(), memberPoint, totalPoint);
+		updateMemberPoint(totalPoint, userId);
 	}
 		return admOrderDAO.updateOrderInfo(csOrderVO);
 	}
@@ -127,6 +128,16 @@ public class AdminOrderService {
 		
 		return admOrderDAO.selectOnePointList(map);
 	}	
+	
+	//회원(member)테이블에 point컬럼 값 업데이트 
+	public void updateMemberPoint(int totalPoint, String memberId) {
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+			map.put("totalPoint", totalPoint);
+			map.put("memberId", memberId);
+		
+		admOrderDAO.updateMemberPoint(map);
+	}
+	
 	
 }
