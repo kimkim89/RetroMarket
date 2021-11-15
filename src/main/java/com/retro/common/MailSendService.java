@@ -119,11 +119,41 @@ public class MailSendService {
 	
 	
 	//주문 완료 이메일 전송
-//	@Async
-//	public String sendOrderList(CustomerOrderVO csOrderVO) {
-//		
-//		return "test";
-//	}
+	@Async
+	public String sendOrderListMail(CustomerOrderVO csOrderVO) {
+				
+		
+		String mailContent = "";
+			   mailContent = "<h2>아맞다매점에서 구매하신 내역을 안내해드립니다. :)</h2>";	
+			   mailContent += "<br>";
+			   mailContent += "";
+		
+		
+		
+		
+		MimeMessage message = mailSender.createMimeMessage();
+		
+		try {
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			
+			messageHelper.setSubject("아맞다매점에서 주문하신 내역을 안내해드립니다.");
+			messageHelper.setText(mailContent, true);
+			messageHelper.setFrom("moonspub0326@gmail.com", "관리자");
+			//messageHelper.setTo(customerEmail);
+			mailSender.send(message);
+			
+		} catch (MessagingException e) {
+			System.out.println("1");
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			System.out.println("2");
+			e.printStackTrace();
+		}
+		System.out.println("이메일 보내기 완료!!!!!!!!!!!!!");
+		
+		
+		return "test";
+	}
 	
 	
 	

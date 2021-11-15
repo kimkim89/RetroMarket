@@ -9,10 +9,10 @@
 
 <style type="text/css">
 
-#profile_img {
-	display: block;
-	margin: 0px auto;
-}
+/* #profile_img { */
+/* 	display: block; */
+/* 	margin: 0px auto; */
+/* } */
 
 .flex-container {
 	display: inline-flex;
@@ -20,7 +20,7 @@
 }
 
 .info-attribute {
-	display:block;
+  display:block;
   overflow: hidden; 
   text-overflow: ellipsis;
   white-space: nowrap; 
@@ -37,9 +37,6 @@
 	pointer-events: none;
 }
 
-.delivery_info {
-/* 	vertical-align: left; */
-}
 
 </style>
 
