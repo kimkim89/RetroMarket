@@ -37,12 +37,15 @@ public class ProductController {
 	
 	//모든 상품 페이지로 이동 및 상품 리스트 조회
 	@RequestMapping(value = "prList")
-	public ModelAndView selectProduct(@RequestParam("prCode") String prCode) {
+	public ModelAndView selectProduct(@RequestParam("prCode") String prCode, HttpServletRequest request) {
 					
 		ModelAndView mav = new ModelAndView();		
 		
-		List<HashMap<String, Object>> productList = productService.selectProdList(prCode);
 		
+		
+		List<HashMap<String, Object>> productList = productService.selectProdList(prCode, "");
+		
+		mav.addObject("prCode", prCode);
 		mav.addObject("productList", productList);				
 		mav.setViewName("product/product");
 		return mav;
@@ -128,6 +131,32 @@ public class ProductController {
 		mav.setViewName("cart");
 		return mav;
 	}
+	
+	
+	
+	//2021.11.17 ajax
+	@RequestMapping(value = "ajaxProdList")
+	@ResponseBody
+	public List<HashMap<String, Object>> ajaxSelectProdList(@RequestParam("prCode") String prCode,
+															@RequestParam("prType") String prType
+															) {
+		List<HashMap<String, Object>> productList = new ArrayList<HashMap<String,Object>>();
+		
+		productList = productService.selectProdList(prCode, prType);
+		
+		return productList;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

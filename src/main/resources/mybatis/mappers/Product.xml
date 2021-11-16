@@ -15,6 +15,12 @@
 	<if test="prCodeNum!=0"> 
 		where mk_product_category = #{prCodeNum} 
 	</if>
+	<if test="prCodeNum!=0 and prTypeNum!=0"> 
+		and mk_product_type = #{prTypeNum}
+	</if>
+	<if test="prCodeNum==0 and prTypeNum!=0"> 
+		where mk_product_type = #{prTypeNum}
+	</if>
 		order by mk_register_date desc;	
 	</select>
 		
@@ -36,7 +42,29 @@
 	</select>
 	
 		
-	<!--  20210811 수정 작업 진행 시작 -->
+	<!--  2021.11.17 신상품, 인기상품, 할인상품별 조회 -->	
+	<select id="selectProdByType" parameterType="int" resultType="map">
+		select *
+		from product_info as t1
+		join product_file as t2
+		on t1.mk_product_id = t2.pf_product_id
+		where t1.mk_product_type = #{productType}
+		order by t1.mk_idx desc;
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<select id="selectAllPopularProd" resultType="java.util.HashMap">		
 		select * 

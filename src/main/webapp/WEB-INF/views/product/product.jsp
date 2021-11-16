@@ -7,6 +7,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>상품 목록</title>
     <%@ include file="../include/Top.jsp" %>
+       
 </head>
 
 <body>
@@ -37,11 +38,14 @@
                 <div class="row product-btn justify-content-between mb-40">
                     <div class="properties__button">
                         <!--Nav Button  -->
-                        <nav>                                                      
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">인기상품</a>
-                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">신상품</a>
-                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">할인상품</a>
+                        <nav>                                                                             
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">             
+                            	<a class="nav-item nav-link" name="pr-tab" id="pr-new-tab"  href="javascript:void(0);" role="tab" aria-controls="nav-home" aria-selected="true" onclick="selProdTypeList('${prCode}','new', 'pr-new-tab');">신상품</a>
+                                <a class="nav-item nav-link" name="pr-tab" id="pr-pop-tab"  href="javascript:void(0);" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="selProdTypeList('${prCode}','pop', 'pr-pop-tab');">인기상품</a>
+                                <a class="nav-item nav-link" name="pr-tab" id="pr-dis-tab"  href="javascript:void(0);" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="selProdTypeList('${prCode}','dis', 'pr-dis-tab');">할인상품</a>               	
+<%--                                 <a class="nav-item nav-link active" id="new-prod-tab" data-toggle="tab" href="${contextPath}/product/prList?prCode=${prCode}&prType=new" role="tab" aria-controls="nav-home" aria-selected="true" >신상품</a> --%>
+<%--                                 <a class="nav-item nav-link" id="pop-prod-tab" data-toggle="tab" href="${contextPath}/product/prList?prCode=${prCode}&prType=pop" role="tab" aria-controls="nav-profile" aria-selected="false">인기상품</a> --%>
+<%--                                 <a class="nav-item nav-link" id="dis-prod-tab" data-toggle="tab" href="${contextPath}/product/prList?prCode=${prCode}&prType=dis" role="tab" aria-controls="nav-contact" aria-selected="false">할인상품</a> --%>
                             </div>
                         </nav>
                         <!--End Nav Button  -->
@@ -50,16 +54,16 @@
                     <div class="grid-list-view">
                     </div>
                     <!-- Select items -->
-<!--                     <div class="select-this"> -->
-<!--                     	<form action="#" style="float: right;"> -->
-<!--                             <div class="select-itms"> -->
-<!--                                 <select name="select" id="select1"> -->
-<!--                                     <option value="">인기순</option> -->
-<!--                                     <option value="">좋아요순</option> -->
-<!--                                     <option value="">구매순</option> -->
-<!--                                 </select> -->
-<!--                             </div> -->
-<!--                         </form> -->
+                    <div class="select-this">
+                    	<form action="" style="float: right;" >
+                            <div class="select-itms">
+                                <select name="select" id="select1">
+                                    <option value="new">신상품</option>
+                                    <option value="pop">인기상품</option>
+                                    <option value="dis">할인상품</option>
+                                </select>
+                            </div>
+                        </form>
 <!--                         <form action="#" style="float: right;" > -->
 <!--                             <div class="select-itms "> -->
 <!--                                 <select name="select" id="select1"> -->
@@ -70,14 +74,14 @@
 <!--                                 </select> -->
 <!--                             </div> -->
 <!--                         </form> -->
-<!--                     </div> -->
+                    </div>
                 </div>
                 <!-- Nav Card 상품리스트 시작 -->
                 
                 <div class="tab-content" id="nav-tabContent">
                     <!-- card one -->
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <div class="row">
+                        <div class="row" id="prLineStart">
                     <c:forEach var="productList" items="${productList}" varStatus="status">
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
@@ -97,223 +101,40 @@
                         </div>
                     </div>
                     </c:forEach>
-                </div>
+               			 </div>
                     </div>
                     <!-- Card two -->
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <div class="row">
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular1.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">ㅋㅋㅋㅋㅋㅋㅋ</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular2.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular3.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular4.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular5.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular6.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <!-- Card three -->
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                        <div class="row">
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular1.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular2.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular3.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular4.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular5.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="single-popular-items mb-50 text-center">
-                                    <div class="popular-img">
-                                        <img src="${contextPath}/resources/assets/img/gallery/popular6.png" alt="">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                        <div class="favorit-items">
-                                            <span class="flaticon-heart"></span>
-                                        </div>
-                                    </div>
-                                    <div class="popular-caption">
-                                        <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                        <span>$ 45,743</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
+								<!-- 페이징 시작 -->				
+								<nav aria-label="Page navigation example">
+									<ul class="pagination pagination-md">
+										<c:if test="${pagingMap.blockFirst != 1}">
+											<li class="page-item"><a class="page-link"
+												href="${contextPath}/mypage/orderInfo?nowPage=${pagingMap.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i
+													class="fas fa-angle-left"></i></a></li>
+										</c:if>
+										<c:forEach begin="${pagingMap.blockFirst}" end="${pagingMap.blockLast}" var="i">
+											<li class="page-item">
+												<a href="${contextPath}/mypage/orderInfo?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
+											</li>
+										</c:forEach>
+										<c:if test="${pagingMap.totalPage != pagingMap.blockLast}">
+											<li class="page-item">
+												<a class="page-link" href="${contextPath}/mypage/orderInfo?nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
+													<i	class="fas fa-angle-right"></i>
+												</a>
+											</li>
+										</c:if>
+									</ul>
+								</nav>
+								<!-- 페이징 끝 -->                
                 <!-- End Nav Card -->
             </div>
         </section>
@@ -350,9 +171,77 @@
         </div>
         <!-- Shop Method End-->
     </main>
-    <footer>
-        
-    </footer>
+    
+   
+   <script type="text/javascript">
+
+   sessionStorage.setItem("contextPath", "${contextPath}");
+   var contextPath = getContextPath();
+   
+   //신상품, 인기상품, 할인상품 조회
+   function selProdTypeList(prCode, prType, prTagId) {
+	  
+	   prTagId = "#" + prTagId;
+	   var tagStr = "";
+	   
+		   $.ajax({
+				type: "post",
+				url: "${contextPath}/product/ajaxProdList",
+				async: false,
+				data: {"prCode" : prCode, "prType" : prType},
+				success: function(data) {		
+										
+					$(prTagId).addClass("active");
+					
+					for(var i=0; i<data.length; i++) {
+	 					tagStr = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">';
+	 	                tagStr += '<div class="single-popular-items mb-50 text-center">';
+	 	                tagStr += '<div class="popular-img">';
+	 	                tagStr += '<img src="' + contextPath + '/resources/images/temporary/' + data[i].mk_stored_thumb + '" alt="">';
+	 	                tagStr += '<div class="img-cap">';
+	 	                tagStr += '<a href="' + contextPath + '/product/productDetail?product_id=' + data[i].mk_idx + '"><span>상품 보기</span></a>';
+	 	                tagStr += '</div>';
+	 	                tagStr += '<div class="favorit-items">';
+	 	                tagStr += '<span class="flaticon-heart"></span>';
+	 	                tagStr += '</div>';
+	 	                tagStr += '</div>';
+	 	                tagStr += '<div class="popular-caption">';
+	 	                tagStr += '<h3><a href="product_details.html">' + data[i].mk_product_name + '</a></h3>';
+	 	                tagStr += '<span>' + data[i].mk_product_price + '원</span>';
+	 	                tagStr += '</div>';
+	 	                tagStr += '</div>';
+	 	                tagStr += '</div>';
+	 	                
+	 	               if(i<=0) { 
+	 	               		$("#prLineStart").html(tagStr);
+	 	               }else {
+	 	            	  	$("#prLineStart").append(tagStr);
+	 	               }
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {    					
+					alert("ERROR: " + textStatus + " : " + errorThrown);
+				}    								
+			});		        		
+	   
+   } 
+   
+   function getContextPath() {
+	   return sessionStorage.getItem("contextPath");
+   }    
+
+	
+   
+
+		
+   
+   
+   </script> 
+    
+    
+    
+    
+   
     <jsp:include page="../include/Footer.jsp" />
     
 </body>
