@@ -114,20 +114,20 @@
                 </div>
 								<!-- 페이징 시작 -->				
 								<nav aria-label="Page navigation example">
-									<ul class="pagination pagination-md">
+									<ul class="pagination pagination-md" style="margin: 0% 50%;">
 										<c:if test="${pagingMap.blockFirst != 1}">
 											<li class="page-item"><a class="page-link"
-												href="${contextPath}/mypage/orderInfo?nowPage=${pagingMap.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i
+												href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${pagingMap.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i
 													class="fas fa-angle-left"></i></a></li>
 										</c:if>
 										<c:forEach begin="${pagingMap.blockFirst}" end="${pagingMap.blockLast}" var="i">
 											<li class="page-item">
-												<a href="${contextPath}/mypage/orderInfo?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
+												<a href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
 											</li>
 										</c:forEach>
 										<c:if test="${pagingMap.totalPage != pagingMap.blockLast}">
 											<li class="page-item">
-												<a class="page-link" href="${contextPath}/mypage/orderInfo?nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
+												<a class="page-link" href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
 													<i	class="fas fa-angle-right"></i>
 												</a>
 											</li>
