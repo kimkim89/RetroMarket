@@ -15,7 +15,14 @@
 	<if test="prCodeNum!=0"> 
 		where mk_product_category = #{prCodeNum} 
 	</if>
-		order by mk_register_date desc;	
+	<if test="prCodeNum!=0 and prTypeNum!=0"> 
+		and mk_product_type = #{prTypeNum}
+	</if>
+	<if test="prCodeNum==0 and prTypeNum!=0"> 
+		where mk_product_type = #{prTypeNum}
+	</if>
+		order by mk_register_date desc
+		limit #{pageFirst}, #{pageSize};
 	</select>
 		
 	<!-- 상품 상세 페이지 select -->
@@ -36,7 +43,32 @@
 	</select>
 	
 		
-	<!--  20210811 수정 작업 진행 시작 -->
+	<!-- 상품 개수 조회 -->
+	<select id="countAllProducts" resultType="int" parameterType="map">		
+		select count(*) 
+		from product_info
+	<if test="prCodeNum!=0"> 
+		where mk_product_category = #{prCodeNum} 
+	</if>
+	<if test="prCodeNum!=0 and prTypeNum!=0"> 
+		and mk_product_type = #{prTypeNum}
+	</if>
+	<if test="prCodeNum==0 and prTypeNum!=0"> 
+		where mk_product_type = #{prTypeNum}
+	</if>						
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<select id="selectAllPopularProd" resultType="java.util.HashMap">		
 		select * 

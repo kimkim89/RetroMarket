@@ -27,6 +27,13 @@ public class ProductDAO {
 		return sqlSession.selectList("mapper.Product.selectEachProd", productId);
 	}
 	
+	// 상품 개수 조회
+	public int countAllProducts(Map<String, Integer> prCodeNumMap) {
+		return sqlSession.selectOne("mapper.Product.countAllProducts", prCodeNumMap);
+	}
+	
+	
+	
 	// 모든 상품 - 인기상품 조회
 	public List<HashMap<String, Object>> selectAllPopularProd() {
 		return sqlSession.selectList("mapper.Product.selectAllPopularProd");

@@ -87,7 +87,6 @@
             </div>
         </div>
         </c:forEach>
-        
     </main>
     
     

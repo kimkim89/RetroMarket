@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.retro.adminProduct.AdminProductImageVO;
 import com.retro.adminProduct.AdminProductService;
+import com.retro.common.PagingService;
 import com.retro.moonmarket.HomeMainService;
 import com.retro.moonmarket.HomeMainVO;
 import com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry;
@@ -37,12 +38,36 @@ public class ProductController {
 	
 	//모든 상품 페이지로 이동 및 상품 리스트 조회
 	@RequestMapping(value = "prList")
-	public ModelAndView selectProduct(@RequestParam("prCode") String prCode) {
+	public ModelAndView selectProduct(	@RequestParam(defaultValue = "1") int nowPage, 
+										@RequestParam("prCode") String prCode,
+										@RequestParam(defaultValue = "") String prType,
+										HttpServletRequest request) {
 					
-		ModelAndView mav = new ModelAndView();		
+		ModelAndView mav = new ModelAndView();	
 		
-		List<HashMap<String, Object>> productList = productService.selectProdList(prCode);
+		System.out.println();
+		System.out.println("nowPage확인중1--------- : " + nowPage);
+		System.out.println();
 		
+		
+		/*페이징처리*/
+		PagingService pagingService = new PagingService();
+		Map<String, Object> pagingMap = new HashMap<String, Object>();
+		
+		int pageSizeToPaging = 12;
+		int blockSizeToBlockSize = 3;
+		
+		int productCount = productService.countAllProducts(prCode, prType);
+		
+		pagingMap = pagingService.pagingList(nowPage, productCount, pageSizeToPaging, blockSizeToBlockSize);
+		int pageFirst = Integer.parseInt(pagingMap.get("pageFirst").toString());
+		int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
+		
+		//상품 데이터 조회
+		List<HashMap<String, Object>> productList = productService.selectProdList(prCode, prType, pageFirst, pageSize);
+		
+		mav.addObject("pagingMap", pagingMap);
+		mav.addObject("prCode", prCode);
 		mav.addObject("productList", productList);				
 		mav.setViewName("product/product");
 		return mav;
@@ -128,6 +153,78 @@ public class ProductController {
 		mav.setViewName("cart");
 		return mav;
 	}
+	
+	
+	
+	//2021.11.17 ajax
+	@RequestMapping(value = "ajaxProdList")
+	@ResponseBody
+	public List<List<HashMap<String, Object>>> ajaxSelectProdList(@RequestParam("prCode") String prCode,
+															@RequestParam("prType") String prType,
+															@RequestParam(defaultValue = "1") int nowPage
+															) {
+		
+		List<HashMap<String, Object>> productList = new ArrayList<HashMap<String,Object>>();
+		
+		/*페이징처리*/
+		PagingService pagingService = new PagingService();
+		Map<String, Object> pagingMap = new HashMap<String, Object>();
+		
+		int pageSizeToPaging = 12;
+		int blockSizeToBlockSize = 3;
+		
+		int productCount = productService.countAllProducts(prCode, prType);
+		
+		System.out.println("productcnt===> " + productCount);
+		
+		pagingMap = pagingService.pagingList(nowPage, productCount, pageSizeToPaging, blockSizeToBlockSize);
+		int pageFirst = Integer.parseInt(pagingMap.get("pageFirst").toString());
+		int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
+		
+		
+		//상품 데이터 조회
+		productList = productService.selectProdList(prCode, prType, pageFirst, pageSize);
+		
+		
+		System.out.println();
+		System.out.println("pageFirst확인중1--------- : " + pageFirst);
+		System.out.println("pageSize확인중1--------- : " + pageSize);
+		System.out.println();		
+		
+		
+		//*****************************************************
+		//테스트중
+		List<List<HashMap<String, Object>>> finalProductList = new ArrayList<List<HashMap<String,Object>>>();
+		
+		//테스트중-------------
+		List pagingMapList = new ArrayList();
+		
+		pagingMapList.add(pagingMap);
+			
+			finalProductList.add(productList);
+			finalProductList.add(pagingMapList);
+		
+			System.out.println();
+			System.out.println("finalProductList확인 중:: " + finalProductList);
+			System.out.println();
+		
+		
+		
+		//*****************************************************
+
+		return finalProductList;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
