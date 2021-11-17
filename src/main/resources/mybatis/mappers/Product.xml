@@ -55,7 +55,7 @@
 	</if>
 	<if test="prCodeNum==0 and prTypeNum!=0"> 
 		where mk_product_type = #{prTypeNum}
-	</if>					
+	</if>						
 	</select>
 	
 	

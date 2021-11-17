@@ -39,10 +39,13 @@ public class ProductController {
 	//모든 상품 페이지로 이동 및 상품 리스트 조회
 	@RequestMapping(value = "prList")
 	public ModelAndView selectProduct(	@RequestParam(defaultValue = "1") int nowPage, 
-										@RequestParam("prCode") String prCode, 
+										@RequestParam("prCode") String prCode,
+										
 										HttpServletRequest request) {
 					
-		ModelAndView mav = new ModelAndView();		
+		ModelAndView mav = new ModelAndView();	
+		
+		//System.out.println("prType확인중--------- : " + prType);
 		
 		/*페이징처리*/
 		PagingService pagingService = new PagingService();
@@ -51,9 +54,9 @@ public class ProductController {
 		int pageSizeToPaging = 12;
 		int blockSizeToBlockSize = 3;
 		
-		int ProductCount = productService.countAllProducts(prCode, "");
+		int productCount = productService.countAllProducts(prCode, "");
 		
-		pagingMap = pagingService.pagingList(nowPage, ProductCount, pageSizeToPaging, blockSizeToBlockSize);
+		pagingMap = pagingService.pagingList(nowPage, productCount, pageSizeToPaging, blockSizeToBlockSize);
 		int pageFirst = Integer.parseInt(pagingMap.get("pageFirst").toString());
 		int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
 		
@@ -153,7 +156,7 @@ public class ProductController {
 	//2021.11.17 ajax
 	@RequestMapping(value = "ajaxProdList")
 	@ResponseBody
-	public List<HashMap<String, Object>> ajaxSelectProdList(@RequestParam("prCode") String prCode,
+	public List<List<HashMap<String, Object>>> ajaxSelectProdList(@RequestParam("prCode") String prCode,
 															@RequestParam("prType") String prType,
 															@RequestParam(defaultValue = "1") int nowPage
 															) {
@@ -164,12 +167,14 @@ public class ProductController {
 		PagingService pagingService = new PagingService();
 		Map<String, Object> pagingMap = new HashMap<String, Object>();
 		
-		int pageSizeToPaging = 12;
+		int pageSizeToPaging = 6;
 		int blockSizeToBlockSize = 3;
 		
-		int ProductCount = productService.countAllProducts(prCode, prType);
+		int productCount = productService.countAllProducts(prCode, prType);
 		
-		pagingMap = pagingService.pagingList(nowPage, ProductCount, pageSizeToPaging, blockSizeToBlockSize);
+		System.out.println("productcnt===> " + productCount);
+		
+		pagingMap = pagingService.pagingList(nowPage, productCount, pageSizeToPaging, blockSizeToBlockSize);
 		int pageFirst = Integer.parseInt(pagingMap.get("pageFirst").toString());
 		int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
 		
@@ -177,7 +182,39 @@ public class ProductController {
 		//상품 데이터 조회
 		productList = productService.selectProdList(prCode, prType, pageFirst, pageSize);
 		
-		return productList;
+		
+		
+		
+		
+		//*****************************************************
+		//테스트중
+		List<List<HashMap<String, Object>>> finalProductList = new ArrayList<List<HashMap<String,Object>>>();
+		
+		//테스트중-------------
+		List pagingMapList = new ArrayList();
+		
+		pagingMapList.add(pagingMap);
+			
+			finalProductList.add(productList);
+			finalProductList.add(pagingMapList);
+		
+			System.out.println();
+			System.out.println("finalProductList확인 중:: " + finalProductList);
+			System.out.println();
+		
+		
+		
+		//*****************************************************
+
+		
+		
+		
+//		System.out.println();
+//		System.out.println("productList확인 중:: " + productList);
+//		System.out.println();
+		
+		
+		return finalProductList;
 	}
 	
 	

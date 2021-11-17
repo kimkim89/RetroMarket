@@ -112,29 +112,31 @@
 
                     </div>
                 </div>
-								<!-- 페이징 시작 -->				
-								<nav aria-label="Page navigation example">
-									<ul class="pagination pagination-md" style="margin: 0% 50%;">
-										<c:if test="${pagingMap.blockFirst != 1}">
-											<li class="page-item"><a class="page-link"
-												href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${pagingMap.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i
-													class="fas fa-angle-left"></i></a></li>
-										</c:if>
-										<c:forEach begin="${pagingMap.blockFirst}" end="${pagingMap.blockLast}" var="i">
-											<li class="page-item">
-												<a href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
-											</li>
-										</c:forEach>
-										<c:if test="${pagingMap.totalPage != pagingMap.blockLast}">
-											<li class="page-item">
-												<a class="page-link" href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
-													<i	class="fas fa-angle-right"></i>
-												</a>
-											</li>
-										</c:if>
-									</ul>
-								</nav>
-								<!-- 페이징 끝 -->                
+				<!-- 페이징 시작 -->				
+				<nav aria-label="Page navigation example">
+					<ul class="pagination pagination-md" id="pagination_id" style="margin: 0% 50%;">
+						<c:if test="${pagingMap.blockFirst != 1}">
+							<li class="page-item">
+								<a class="page-link" href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${pagingMap.blockFirst-1}&searchField=${searchField}&keyword=${keyword}">
+									<i class="fas fa-angle-left"></i>
+								</a>
+							</li>
+						</c:if>
+						<c:forEach begin="${pagingMap.blockFirst}" end="${pagingMap.blockLast}" var="i">
+							<li class="page-item">
+								<a href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
+							</li>
+						</c:forEach>
+						<c:if test="${pagingMap.totalPage != pagingMap.blockLast}">
+							<li class="page-item">
+								<a class="page-link" href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
+									<i class="fas fa-angle-right"></i>
+								</a>
+							</li>
+						</c:if>
+					</ul>
+				</nav>
+				<!-- 페이징 끝 -->                
                 <!-- End Nav Card -->
             </div>
         </section>
@@ -177,12 +179,13 @@
 
    sessionStorage.setItem("contextPath", "${contextPath}");
    var contextPath = getContextPath();
-   
+      
    //신상품, 인기상품, 할인상품 조회
    function selProdTypeList(prCode, prType, prTagId) {
 	  
-	   prTagId = "#" + prTagId;
-	   var tagStr = "";
+	   		prTagId = "#" + prTagId;
+	   	var tagStr = "";
+	   	var pagingStr = "";
 	   
 		   $.ajax({
 				type: "post",
@@ -190,38 +193,81 @@
 				async: false,
 				data: {"prCode" : prCode, "prType" : prType},
 				success: function(data) {		
-										
-					$(prTagId).addClass("active");
+					//alert("test: " + data[1][0].blockFirst);
+					//console.log(data[a][0].blockLast);					
 					
-					for(var i=0; i<data.length; i++) {
-	 					tagStr = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">';
-	 	                tagStr += '<div class="single-popular-items mb-50 text-center">';
-	 	                tagStr += '<div class="popular-img">';
-	 	                tagStr += '<img src="' + contextPath + '/resources/images/temporary/' + data[i].mk_stored_thumb + '" alt="">';
-	 	                tagStr += '<div class="img-cap">';
-	 	                tagStr += '<a href="' + contextPath + '/product/productDetail?product_id=' + data[i].mk_idx + '"><span>상품 보기</span></a>';
-	 	                tagStr += '</div>';
-	 	                tagStr += '<div class="favorit-items">';
-	 	                tagStr += '<span class="flaticon-heart"></span>';
-	 	                tagStr += '</div>';
-	 	                tagStr += '</div>';
-	 	                tagStr += '<div class="popular-caption">';
-	 	                tagStr += '<h3><a href="product_details.html">' + data[i].mk_product_name + '</a></h3>';
-	 	                tagStr += '<span>' + data[i].mk_product_price + '원</span>';
-	 	                tagStr += '</div>';
-	 	                tagStr += '</div>';
-	 	                tagStr += '</div>';
-	 	                
-	 	               if(i<=0) { 
-	 	               		$("#prLineStart").html(tagStr);
-	 	               }else {
-	 	            	  	$("#prLineStart").append(tagStr);
-	 	               }
+					$(prTagId).click(function() {
+						$(prTagId).addClass("active");
+						$("#nav-tab").not(prTagId).removeClass("active");
+					})
+					
+					for(var a=0; a<data.length; a++) {	
+						if(a==0) { 
+							//배열1 - 상품 정보
+							for(var i=0; i<data[a].length; i++) {	 					
+								//상품 목록
+								tagStr = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">';
+			 	                tagStr += '<div class="single-popular-items mb-50 text-center">';
+			 	                tagStr += '<div class="popular-img">';
+			 	                tagStr += '<img src="' + contextPath + '/resources/images/temporary/' + data[a][i].mk_stored_thumb + '" alt="">';
+			 	                tagStr += '<div class="img-cap">';
+			 	                tagStr += '<a href="' + contextPath + '/product/productDetail?product_id=' + data[a][i].mk_idx + '"><span>상품 보기</span></a>';
+			 	                tagStr += '</div>';
+			 	                tagStr += '<div class="favorit-items">';
+			 	                tagStr += '<span class="flaticon-heart"></span>';
+			 	                tagStr += '</div>';
+			 	                tagStr += '</div>';
+			 	                tagStr += '<div class="popular-caption">';
+			 	                tagStr += '<h3><a href="product_details.html">' + data[a][i].mk_product_name + '</a></h3>';
+			 	                tagStr += '<span>' + data[a][i].mk_product_price + '원</span>';
+			 	                tagStr += '</div>';
+			 	                tagStr += '</div>';
+			 	                tagStr += '</div>';
+			 	                
+			 	               if(i<=0) { 
+			 	               		$("#prLineStart").html(tagStr);
+			 	               }else {
+			 	            	  	$("#prLineStart").append(tagStr);
+			 	               }
+							}
+							
+						}else if(a==1) { 		console.log("들어왔음 3 ! : " + data[a][0].blockLast);					
+							//페이징		 	               
+		 	                if(data[a][0].blockFirst != 1) { 
+			 	               	pagingStr = '<li class="page-item">';
+			 	               	pagingStr += '<a class="page-link" href="' + contextPath + '/product/prList?prCode=' + prCode + '&prType=' + prType + '&nowPage=' + data[a][0].blockFirst-1 + '">';
+			 	              	pagingStr += '<i class="fas fa-angle-left"></i>';
+			 	             	pagingStr += '</a>';
+			 	            	pagingStr += '</li>';
+		 	                }
+							
+							for(var j=data[a][0].blockFirst; j<=data[a][0].blockLast; j++) { 								
+								pagingStr += '<li class="page-item">';
+								pagingStr += '<a href="' + contextPath + '/product/prList?prCode=' + prCode + '&prType=' + prType + '&nowPage=' + j + '" class="page-link" >' + j + '</a>';
+								pagingStr += '</li>';
+							}
+							
+							if(data[a][0].totalPage != data[a][0].blockLast) {
+								pagingStr += '<li class="page-item">';
+								pagingStr += '<a class="page-link" href="' + contextPath + '/product/prList?prCode=' + prCode + '&prType=' + prType + '&nowPage=' + data[a][0].blockLast+1 + '">';
+			 	        		pagingStr += '<i class="fas fa-angle-right"></i>';
+			 	       			pagingStr += '</a>';
+			 	      			pagingStr += '</li>';
+							}
+							
+							
+		 	               		$("#pagination_id").html(pagingStr);
+		 	              
+							
+		 	          		
+						}
 					}
-				},
+				},//success function 끝 
 				error: function(jqXHR, textStatus, errorThrown) {    					
 					alert("ERROR: " + textStatus + " : " + errorThrown);
-				}    								
+				}
+					
+					
 			});		        		
 	   
    } 
