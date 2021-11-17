@@ -40,12 +40,15 @@ public class ProductController {
 	@RequestMapping(value = "prList")
 	public ModelAndView selectProduct(	@RequestParam(defaultValue = "1") int nowPage, 
 										@RequestParam("prCode") String prCode,
-										
+										@RequestParam(defaultValue = "") String prType,
 										HttpServletRequest request) {
 					
 		ModelAndView mav = new ModelAndView();	
 		
-		//System.out.println("prType확인중--------- : " + prType);
+		System.out.println();
+		System.out.println("nowPage확인중1--------- : " + nowPage);
+		System.out.println();
+		
 		
 		/*페이징처리*/
 		PagingService pagingService = new PagingService();
@@ -54,14 +57,14 @@ public class ProductController {
 		int pageSizeToPaging = 12;
 		int blockSizeToBlockSize = 3;
 		
-		int productCount = productService.countAllProducts(prCode, "");
+		int productCount = productService.countAllProducts(prCode, prType);
 		
 		pagingMap = pagingService.pagingList(nowPage, productCount, pageSizeToPaging, blockSizeToBlockSize);
 		int pageFirst = Integer.parseInt(pagingMap.get("pageFirst").toString());
 		int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
 		
 		//상품 데이터 조회
-		List<HashMap<String, Object>> productList = productService.selectProdList(prCode, "", pageFirst, pageSize);
+		List<HashMap<String, Object>> productList = productService.selectProdList(prCode, prType, pageFirst, pageSize);
 		
 		mav.addObject("pagingMap", pagingMap);
 		mav.addObject("prCode", prCode);
@@ -167,7 +170,7 @@ public class ProductController {
 		PagingService pagingService = new PagingService();
 		Map<String, Object> pagingMap = new HashMap<String, Object>();
 		
-		int pageSizeToPaging = 6;
+		int pageSizeToPaging = 12;
 		int blockSizeToBlockSize = 3;
 		
 		int productCount = productService.countAllProducts(prCode, prType);
@@ -183,7 +186,10 @@ public class ProductController {
 		productList = productService.selectProdList(prCode, prType, pageFirst, pageSize);
 		
 		
-		
+		System.out.println();
+		System.out.println("pageFirst확인중1--------- : " + pageFirst);
+		System.out.println("pageSize확인중1--------- : " + pageSize);
+		System.out.println();		
 		
 		
 		//*****************************************************
@@ -206,14 +212,6 @@ public class ProductController {
 		
 		//*****************************************************
 
-		
-		
-		
-//		System.out.println();
-//		System.out.println("productList확인 중:: " + productList);
-//		System.out.println();
-		
-		
 		return finalProductList;
 	}
 	

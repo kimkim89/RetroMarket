@@ -117,19 +117,19 @@
 					<ul class="pagination pagination-md" id="pagination_id" style="margin: 0% 50%;">
 						<c:if test="${pagingMap.blockFirst != 1}">
 							<li class="page-item">
-								<a class="page-link" href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${pagingMap.blockFirst-1}&searchField=${searchField}&keyword=${keyword}">
+								<a class="page-link" href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${pagingMap.blockFirst-1}">
 									<i class="fas fa-angle-left"></i>
 								</a>
 							</li>
 						</c:if>
 						<c:forEach begin="${pagingMap.blockFirst}" end="${pagingMap.blockLast}" var="i">
 							<li class="page-item">
-								<a href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
+								<a href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${i}" class="page-link" >${i}</a>
 							</li>
 						</c:forEach>
 						<c:if test="${pagingMap.totalPage != pagingMap.blockLast}">
 							<li class="page-item">
-								<a class="page-link" href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
+								<a class="page-link" href="${contextPath}/product/prList?prCode=${prCode}&prType=${prType}&nowPage=${pagingMap.blockLast+1}">
 									<i class="fas fa-angle-right"></i>
 								</a>
 							</li>

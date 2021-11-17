@@ -24,6 +24,10 @@ public class ProductService {
 		public List<HashMap<String, Object>> selectProdList(String prCode, String prType, int pageFirst, int pageSize) {			
 			Map<String, Integer> prCodeNumMap = new HashMap<String, Integer>();
 			
+			System.out.println();
+			System.out.println("prType확인중1234--------- : " + prType);
+			System.out.println();
+			
 			int prCodeNum = 0;
 			int prTypeNum = 0;
 			
