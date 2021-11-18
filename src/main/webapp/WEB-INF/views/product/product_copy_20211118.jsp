@@ -6,7 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>상품 목록</title>
-    <%@ include file="../include/Top.jsp" %>       
+    <%@ include file="../include/Top.jsp" %>
+       
 </head>
 
 <body>
@@ -41,7 +42,10 @@
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">             
                             	<a class="nav-item nav-link" name="pr-tab" id="pr-new-tab"  href="javascript:void(0);" role="tab" aria-controls="nav-home" aria-selected="true" onclick="selProdTypeList('${prCode}','new', 'pr-new-tab');">신상품</a>
                                 <a class="nav-item nav-link" name="pr-tab" id="pr-pop-tab"  href="javascript:void(0);" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="selProdTypeList('${prCode}','pop', 'pr-pop-tab');">인기상품</a>
-                                <a class="nav-item nav-link" name="pr-tab" id="pr-dis-tab"  href="javascript:void(0);" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="selProdTypeList('${prCode}','dis', 'pr-dis-tab');">할인상품</a>
+                                <a class="nav-item nav-link" name="pr-tab" id="pr-dis-tab"  href="javascript:void(0);" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="selProdTypeList('${prCode}','dis', 'pr-dis-tab');">할인상품</a>               	
+<%--                                 <a class="nav-item nav-link active" id="new-prod-tab" data-toggle="tab" href="${contextPath}/product/prList?prCode=${prCode}&prType=new" role="tab" aria-controls="nav-home" aria-selected="true" >신상품</a> --%>
+<%--                                 <a class="nav-item nav-link" id="pop-prod-tab" data-toggle="tab" href="${contextPath}/product/prList?prCode=${prCode}&prType=pop" role="tab" aria-controls="nav-profile" aria-selected="false">인기상품</a> --%>
+<%--                                 <a class="nav-item nav-link" id="dis-prod-tab" data-toggle="tab" href="${contextPath}/product/prList?prCode=${prCode}&prType=dis" role="tab" aria-controls="nav-contact" aria-selected="false">할인상품</a> --%>
                             </div>
                         </nav>
                         <!--End Nav Button  -->
@@ -50,6 +54,27 @@
                     <div class="grid-list-view">
                     </div>
                     <!-- Select items -->
+<!--                     <div class="select-this"> -->
+<!--                     	<form action="" style="float: right;" > -->
+<!--                             <div class="select-itms"> -->
+<!--                                 <select name="select" id="select1"> -->
+<!--                                     <option value="new">신상품</option> -->
+<!--                                     <option value="pop">인기상품</option> -->
+<!--                                     <option value="dis">할인상품</option> -->
+<!--                                 </select> -->
+<!--                             </div> -->
+<!--                         </form> -->
+<!--                         <form action="#" style="float: right;" > -->
+<!--                             <div class="select-itms "> -->
+<!--                                 <select name="select" id="select1"> -->
+<!--                                     <option value="">스낵류</option> -->
+<!--                                     <option value="">젤리류</option> -->
+<!--                                     <option value="">캔디류</option> -->
+<!--                                     <option value="">기타</option> -->
+<!--                                 </select> -->
+<!--                             </div> -->
+<!--                         </form> -->
+<!--                     </div> -->
                 </div>
                 <!-- Nav Card 상품리스트 시작 -->
                 
@@ -57,25 +82,25 @@
                     <!-- card one -->
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="row" id="prLineStart">
-		                    <c:forEach var="productList" items="${productList}" varStatus="status">
-		                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-		                        <div class="single-popular-items mb-50 text-center">
-		                            <div class="popular-img">
-		                                <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="">
-		                                <div class="img-cap">
-		                                    <a href="${contextPath}/product/productDetail?product_id=${productList.mk_idx}"><span>상품 보기</span></a>
-		                                </div>
-		                                <div class="favorit-items">
-		                                    <span class="flaticon-heart"></span>
-		                                </div>
-		                            </div>
-		                            <div class="popular-caption">
-		                                <h3><a href="product_details.html">${productList.mk_product_name}</a></h3>
-		                                <span>${productList.mk_product_price}원</span>
-		                            </div>
-		                        </div>
-		                    </div>
-		                    </c:forEach>
+                    <c:forEach var="productList" items="${productList}" varStatus="status">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-popular-items mb-50 text-center">
+                            <div class="popular-img">
+                                <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="">
+                                <div class="img-cap">
+                                    <a href="${contextPath}/product/productDetail?product_id=${productList.mk_idx}"><span>상품 보기</span></a>
+                                </div>
+                                <div class="favorit-items">
+                                    <span class="flaticon-heart"></span>
+                                </div>
+                            </div>
+                            <div class="popular-caption">
+                                <h3><a href="product_details.html">${productList.mk_product_name}</a></h3>
+                                <span>${productList.mk_product_price}원</span>
+                            </div>
+                        </div>
+                    </div>
+                    </c:forEach>
                			 </div>
                     </div>
                 </div>
@@ -153,12 +178,7 @@
 	   		prTagId = "#" + prTagId;
 	   	var tagStr = "";
 	   	var pagingStr = "";
-	   	
-	   	if($(prTagId).attr('class').indexOf("active") == -1) {
-	   		$(prTagId).addClass("active");
-	   		$("#nav-tab").find("a").not(prTagId).removeClass("active");
-	   	}
-		
+	   
 		   $.ajax({
 				type: "post",
 				url: "${contextPath}/product/ajaxProdList",
@@ -167,7 +187,11 @@
 				success: function(data) {		
 					//alert("test: " + data[1][0].blockFirst);
 					//console.log(data[a][0].blockLast);					
-		
+					
+					$(prTagId).click(function() {
+						$(prTagId).addClass("active");
+						$("#nav-tab").not(prTagId).removeClass("active");
+					})
 					
 					for(var a=0; a<data.length; a++) {	
 						if(a==0) { 
@@ -199,7 +223,7 @@
 			 	               }
 							}
 							
-						}else if(a==1) {					
+						}else if(a==1) { 		console.log("들어왔음 3 ! : " + data[a][0].blockLast);					
 							//페이징		 	               
 		 	                if(data[a][0].blockFirst != 1) { 
 			 	               	pagingStr = '<li class="page-item">';

@@ -14,5 +14,6 @@
 		<typeAlias type="com.retro.customerOrder.CustomerOrderVO" alias="csOrderVO" />
 		<typeAlias type="com.retro.adminOrder.OrderStatusVO" alias="orderStatusVO" />
 		<typeAlias type="com.retro.mypage.OrderHistoryDTO" alias="orderHistoryDTO" />
+		<typeAlias type="com.retro.product.WishlistVO" alias="wishlistVO" />
 	</typeAliases>
 </configuration>

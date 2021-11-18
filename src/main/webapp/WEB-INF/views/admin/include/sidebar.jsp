@@ -45,9 +45,9 @@
 			            </a>
 					</li>
 
-					<li class="sidebar-header">
-						Tools & Components
-					</li>
+<!-- 					<li class="sidebar-header"> -->
+<!-- 						Tools & Components -->
+<!-- 					</li> -->
 					<li class="sidebar-item">
 
 						<a href="javascript::" data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
@@ -56,8 +56,6 @@
 						<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
 							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/adminProd/adminProduct">상품 관리</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/adminProd/adminInventory">재고 관리</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/adminProd/adminOrder">주문 관리</a></li>
-						
 						</ul>
 					</li>
 
