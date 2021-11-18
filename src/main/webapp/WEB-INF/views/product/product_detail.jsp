@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="zxx">
 <head>
@@ -11,10 +10,16 @@
     <style type="text/css">
 	.outStock {
 		color: red;
-	    background-color: lightgray;
-	    border: 3px solid #2577fd;
+	    background-color: white;
+	    border: 3px solid red;
 	    font-weight: bold;   
-	}	 	
+	}
+	
+	.btn_share {
+		float: left;
+		border: 3px solid;
+	}
+	 	
     </style>
     
 </head>
@@ -68,16 +73,19 @@
                             </div>
                             <p id="prod_price">${productList.mk_product_price}원</p>
                         </div>
-	                    <div class="add_to_cart">
+	                    <div class="add_to_cart" style="margin-left: 30%;">
 	                    	<form name="productForm" method="post" action="${contextPath}/cart/prCart">
 	                    		<input type="hidden" name="productId" value="${productList.mk_idx}" />
 	                    		<input type="hidden" name="productNum" id="productNum" value="1" />	
 	                    		<input type="hidden" name="fromPrPg" id="fromPrPg" value="Y" />
 	                    		<input type="hidden" name="invCnt" id="invCnt" value="${productList.mk_inventory}" /> 	                    	  
-	                    		<input type="submit" class="btn_3 ${prBtnClassName}" ${prBtnBlock} value="${prBtnName}" />	
-	                    	</form>	                        
+	                    		<input type="submit" class="btn_3 ${prBtnClassName} btn_share" ${prBtnBlock} value="${prBtnName}" />	
+	                    	</form>
+	                    	<!-- 찜 기능 추가 -->
+	                    	<a href="javascript:likeProduct('${productList.mk_idx}');" class="btn_3 btn_share btn_like" id="btn_like" style="margin-left: 5%;">찜하기</a>	                        
 	                    </div>
                     </div>
+                    <br><br><br>
                     <p>
                     	${productList.mk_content}
                     </p>                    
@@ -92,11 +100,13 @@
     
         
 <script>
+
 	let defaultPrice = document.getElementById('prod_price').innerText;
 	let	currentPrice = defaultPrice.split("원");
 	var totalCnt = document.getElementById('product_quantity').value;
 	let checkInvVal = document.getElementById("invCnt").value;
-		
+
+	//상품 수량, 가격 변경
 	function changePrice(msg) {
 											
 			if(msg == "minus") {
@@ -130,6 +140,38 @@
 				document.getElementById('productNum').value = totalCnt;
 			}
 	}
+	
+	
+	
+	//좋아요(찜하기) 기능 추가
+	function likeProduct(productIndex) {
+		
+		 $.ajax({
+				type: "post",
+				url: "${contextPath}/product/ajaxLikeProduct",
+				async: false,
+				data: {"productIndex" : productIndex},
+				success: function(data) {
+					alert(data);
+					var successMsg = "";
+					
+					if(data == 1) {
+						successMsg = "찜한 상품에 저장되었습니다.";						
+					}else {						
+						successMsg = "취소되었습니다.";						
+					}					
+						alert(successMsg);
+						location.reload();
+
+				},//success function 끝 
+				error: function(jqXHR, textStatus, errorThrown) {    					
+					alert("ERROR: " + textStatus + " : " + errorThrown);
+				}	
+			});	
+
+	}
+	
+	
 	
 </script> 
     

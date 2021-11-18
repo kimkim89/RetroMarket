@@ -32,6 +32,23 @@ public class ProductDAO {
 		return sqlSession.selectOne("mapper.Product.countAllProducts", prCodeNumMap);
 	}
 	
+	//위시리스트(좋아요) 테이블에 데이터 저장
+	public int insertProdLikeInfo(WishlistVO wishlistVO) {
+		return sqlSession.insert("mapper.Product.insertProdLikeInfo", wishlistVO);
+	}
+	
+	//위시리스트 테이블에 중복된 데이터가 있는지 확인 
+	public int checkDuplicateLike(Map<String, Object> map) {
+		return sqlSession.selectOne("mapper.Product.checkDuplicateLike", map);
+	}
+	
+	//위시리스트 내 데이터 삭제 
+	public void deleteWishlist(Map<String, Object> map) {
+		sqlSession.delete("mapper.Product.deleteWishlist", map);
+	}
+	
+	
+	
 	
 	
 	// 모든 상품 - 인기상품 조회

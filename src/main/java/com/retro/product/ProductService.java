@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ public class ProductService {
 	ProductDAO productDAO;
 	@Autowired
 	AdminProductVO adminProdVO;
+	@Autowired
+	ProductController productController;
 	
 		
 		// 상품 조회
@@ -102,7 +106,57 @@ public class ProductService {
 		}
 		
 		
+		//위시리스트(좋아요) 테이블에 데이터 저장
+		public int insertProdLikeInfo(int prodIdx, HttpServletRequest request) {
+			
+			WishlistVO wishlistVO = new WishlistVO();
+			
+			String userId = productController.getCurrentUserID(request);	
+			
+			
+			//장바구니 데이터 저장하는 아이디의 IP주소 가져오기
+			String memberIP = request.getHeader("X-Forwarded-For");	    
+
+		    if (memberIP == null) {
+		    	memberIP = request.getHeader("Proxy-Client-IP");	        
+		    }
+		    if (memberIP == null) {
+		    	memberIP = request.getHeader("WL-Proxy-Client-IP");	        
+		    }
+		    if (memberIP == null) {
+		    	memberIP = request.getHeader("HTTP_CLIENT_IP");	        
+		    }
+		    if (memberIP == null) {
+		    	memberIP = request.getHeader("HTTP_X_FORWARDED_FOR");	        
+		    }
+		    if (memberIP == null) {
+		    	memberIP = request.getRemoteAddr();	        
+		    }
+			
+			wishlistVO.setUw_user_id(userId);
+			wishlistVO.setUw_prod_idx(prodIdx);
+			wishlistVO.setUw_user_ip(memberIP);
+			
+			return productDAO.insertProdLikeInfo(wishlistVO);
+		}
 		
+		//위시리스트 테이블에 중복된 데이터가 있는지 확인 
+		public int checkDuplicateLike(int prodIdx, String userId) {
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+				map.put("prodIdx", prodIdx);
+				map.put("userId", userId);
+			
+			return productDAO.checkDuplicateLike(map);
+		}
+		
+		//위시리스트 내 데이터 삭제 
+		public void deleteWishlist(int prodIdx, String userId) {
+			Map<String, Object> map = new HashMap<String, Object>();
+				map.put("prodIdx", prodIdx);
+				map.put("userId", userId);
+			productDAO.deleteWishlist(map);
+		}
 		
 		
 		

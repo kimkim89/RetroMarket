@@ -59,12 +59,27 @@
 	</select>
 	
 	
+	<!-- 위시리스트(좋아요) 테이블에 데이터 저장 -->
+	<insert id="insertProdLikeInfo" parameterType="wishlistVO">
+		insert into user_wishlist (	uw_user_id,
+								   	uw_prod_idx,
+								   	uw_user_ip
+								  )
+						   values ( #{uw_user_id},
+						   			#{uw_prod_idx},
+						   			#{uw_user_ip}
+						   		  );
+	</insert>
 	
+	<!-- 위시리스트 테이블에 중복된 데이터가 있는지 확인 -->
+	<select id="checkDuplicateLike" parameterType="map" resultType="int">
+		select count(*) from user_wishlist where uw_user_id = #{userId} and uw_prod_idx = #{prodIdx}; 
+	</select>
 	
-	
-	
-	
-	
+	<!-- 위시리스트 내 데이터 삭제 -->
+	<delete id="deleteWishlist" parameterType="map">
+		delete from user_wishlist where uw_user_id = #{userId} and uw_prod_idx = #{prodIdx}; 
+	</delete>
 	
 	
 	

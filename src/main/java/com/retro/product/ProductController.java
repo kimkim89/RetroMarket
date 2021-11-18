@@ -45,11 +45,6 @@ public class ProductController {
 					
 		ModelAndView mav = new ModelAndView();	
 		
-		System.out.println();
-		System.out.println("nowPage확인중1--------- : " + nowPage);
-		System.out.println();
-		
-		
 		/*페이징처리*/
 		PagingService pagingService = new PagingService();
 		Map<String, Object> pagingMap = new HashMap<String, Object>();
@@ -76,7 +71,7 @@ public class ProductController {
 	
 	//상품 상세보기
 	@RequestMapping(value = "productDetail", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView productDetail(@RequestParam("product_id") String productId) {
+	public ModelAndView productDetail(@RequestParam("product_id") String productId, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -92,7 +87,7 @@ public class ProductController {
 			prBtnBlock = "disabled";
 			prBtnClassName = "outStock";
 		}else {
-			prBtnName = "장바구니 담기";
+			prBtnName = "장바구니";
 		}
 		
 		List<String> prodImgList = new ArrayList<String>();		
@@ -120,6 +115,15 @@ public class ProductController {
 	
 //		System.out.println("테스트중배열: " + prodImgList);
 		
+		//현재 로그인된 아이디 가져오기
+//		String userId = getCurrentUserID(request).toString();
+//		int currentLogin = 0;
+//		if(userId != "") {
+//			currentLogin = 1;
+//		}else {
+//			currentLogin = 0;
+//		}
+//		mav.addObject("currentLogin", currentLogin);
 		mav.addObject("prBtnClassName", prBtnClassName);
 		mav.addObject("prBtnBlock", prBtnBlock);
 		mav.addObject("prBtnName", prBtnName);
@@ -144,9 +148,7 @@ public class ProductController {
 		cartMap.put("productNum", productNum);
 		cartMap.put("totalPrice", totalPrice);
 		
-		System.out.println("productNum타입 확인" + productNum.getClass().getName());
-		
-		
+		//System.out.println("productNum타입 확인" + productNum.getClass().getName());
 		
 		mav.addObject("productList", productList);		
 		mav.addObject("cartMap", cartMap);
@@ -175,22 +177,14 @@ public class ProductController {
 		
 		int productCount = productService.countAllProducts(prCode, prType);
 		
-		System.out.println("productcnt===> " + productCount);
+		//System.out.println("productcnt===> " + productCount);
 		
 		pagingMap = pagingService.pagingList(nowPage, productCount, pageSizeToPaging, blockSizeToBlockSize);
 		int pageFirst = Integer.parseInt(pagingMap.get("pageFirst").toString());
 		int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
 		
-		
 		//상품 데이터 조회
 		productList = productService.selectProdList(prCode, prType, pageFirst, pageSize);
-		
-		
-		System.out.println();
-		System.out.println("pageFirst확인중1--------- : " + pageFirst);
-		System.out.println("pageSize확인중1--------- : " + pageSize);
-		System.out.println();		
-		
 		
 		//*****************************************************
 		//테스트중
@@ -204,11 +198,9 @@ public class ProductController {
 			finalProductList.add(productList);
 			finalProductList.add(pagingMapList);
 		
-			System.out.println();
-			System.out.println("finalProductList확인 중:: " + finalProductList);
-			System.out.println();
-		
-		
+//			System.out.println();
+//			System.out.println("finalProductList확인 중:: " + finalProductList);
+//			System.out.println();
 		
 		//*****************************************************
 
@@ -216,13 +208,34 @@ public class ProductController {
 	}
 	
 	
+	//찜 버튼 클릭 시 위시리스트(좋아요) 테이블에 데이터 저장
+	@RequestMapping(value="ajaxLikeProduct")
+	@ResponseBody
+	public int ajaxLikeProdInfo(@RequestParam("productIndex") int prodIdx, HttpServletRequest request) {
+		
+		String userId = getCurrentUserID(request).toString();		
+		int successCheck = 0;
+		
+		//위시리스트 테이블에 중복된 데이터가 있는지 확인 
+		int checkDupLikeCount = productService.checkDuplicateLike(prodIdx, userId);
+		
+		if(checkDupLikeCount == 0) {
+			productService.insertProdLikeInfo(prodIdx, request);
+			successCheck = 1;
+		}else {
+			//위시리스트 내 데이터 삭제 
+			productService.deleteWishlist(prodIdx, userId);
+			successCheck = 0;
+		}		
+		return successCheck;
+	}
 	
 	
-	
-	
-	
-	
-	
+	//현재 로그인 된 아이디 가져오기
+	public String getCurrentUserID(HttpServletRequest request) {
+		String userId = (String) request.getSession().getAttribute("user_id");
+		return userId;
+	}
 	
 	
 	
