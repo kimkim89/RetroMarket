@@ -30,6 +30,7 @@ import com.google.gson.JsonElement;
 import com.retro.common.PagingService;
 import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.UserSha256;
+import com.retro.product.WishlistVO;
 
 @Controller
 @RequestMapping("mypage")
@@ -265,7 +266,19 @@ public class MyPageController {
 		}			
 		
 		
-		
+		// 위시리스트(= 좋아요 목록) 페이지
+		@RequestMapping(value = "likeProd", method = RequestMethod.GET)
+		public ModelAndView checkLikeList(HttpServletRequest request) {
+			ModelAndView mav = new ModelAndView();
+						
+			//현재 로그인 한 아이디로 찜한 모든 상품 데이터 조회 
+			List<WishlistVO> myLikeList = myPageService.selectLikeProdList(getSessionUserId(request));
+			
+			
+			mav.addObject("myLikeList", myLikeList);
+			mav.setViewName("/mypage/like_prod_list");
+			return mav;
+		}
 		
 		
 		

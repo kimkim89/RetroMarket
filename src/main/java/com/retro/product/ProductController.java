@@ -61,6 +61,7 @@ public class ProductController {
 		//상품 데이터 조회
 		List<HashMap<String, Object>> productList = productService.selectProdList(prCode, prType, pageFirst, pageSize);
 		
+		mav.addObject("prType", prType);
 		mav.addObject("pagingMap", pagingMap);
 		mav.addObject("prCode", prCode);
 		mav.addObject("productList", productList);				
@@ -114,16 +115,20 @@ public class ProductController {
 		}
 	
 //		System.out.println("테스트중배열: " + prodImgList);
+	
+		//찜하기, 찜취소 버튼 표출
+		Object memberId = getCurrentUserIdObj(request);
+		int dupLikeChk = 0;
+		String dupLikeBtb = "찜하기";		
 		
-		//현재 로그인된 아이디 가져오기
-//		String userId = getCurrentUserID(request).toString();
-//		int currentLogin = 0;
-//		if(userId != "") {
-//			currentLogin = 1;
-//		}else {
-//			currentLogin = 0;
-//		}
-//		mav.addObject("currentLogin", currentLogin);
+		if(memberId != null) {
+			dupLikeChk = productService.checkDuplicateLike(Integer.parseInt(productId), memberId.toString());
+			if(dupLikeChk != 0) {
+				dupLikeBtb = "찜취소";
+			}	
+		}
+				
+		mav.addObject("dupLikeBtb", dupLikeBtb);
 		mav.addObject("prBtnClassName", prBtnClassName);
 		mav.addObject("prBtnBlock", prBtnBlock);
 		mav.addObject("prBtnName", prBtnName);
@@ -186,11 +191,8 @@ public class ProductController {
 		//상품 데이터 조회
 		productList = productService.selectProdList(prCode, prType, pageFirst, pageSize);
 		
-		//*****************************************************
-		//테스트중
 		List<List<HashMap<String, Object>>> finalProductList = new ArrayList<List<HashMap<String,Object>>>();
-		
-		//테스트중-------------
+
 		List pagingMapList = new ArrayList();
 		
 		pagingMapList.add(pagingMap);
@@ -213,20 +215,29 @@ public class ProductController {
 	@ResponseBody
 	public int ajaxLikeProdInfo(@RequestParam("productIndex") int prodIdx, HttpServletRequest request) {
 		
-		String userId = getCurrentUserID(request).toString();		
+		Object memberId = getCurrentUserIdObj(request);
 		int successCheck = 0;
 		
-		//위시리스트 테이블에 중복된 데이터가 있는지 확인 
-		int checkDupLikeCount = productService.checkDuplicateLike(prodIdx, userId);
+		if(memberId == null) {
+			
+			successCheck = 2;
 		
-		if(checkDupLikeCount == 0) {
-			productService.insertProdLikeInfo(prodIdx, request);
-			successCheck = 1;
 		}else {
-			//위시리스트 내 데이터 삭제 
-			productService.deleteWishlist(prodIdx, userId);
-			successCheck = 0;
-		}		
+		
+			String userId = getCurrentUserID(request).toString();
+			
+			//위시리스트 테이블에 중복된 데이터가 있는지 확인 
+			int checkDupLikeCount = productService.checkDuplicateLike(prodIdx, userId);
+			
+			if(checkDupLikeCount == 0) {
+				productService.insertProdLikeInfo(prodIdx, request);
+				successCheck = 1;
+			}else {
+				//위시리스트 내 데이터 삭제 
+				productService.deleteWishlist(prodIdx, userId);
+				successCheck = 0;
+			}
+		}
 		return successCheck;
 	}
 	
@@ -234,6 +245,12 @@ public class ProductController {
 	//현재 로그인 된 아이디 가져오기
 	public String getCurrentUserID(HttpServletRequest request) {
 		String userId = (String) request.getSession().getAttribute("user_id");
+		return userId;
+	}
+	
+	//현재 로그인 된 아이디 Object타입으로 가져오기
+	public Object getCurrentUserIdObj(HttpServletRequest request) {
+		Object userId = request.getSession().getAttribute("user_id");
 		return userId;
 	}
 	

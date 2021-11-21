@@ -74,7 +74,22 @@
 	</select>
 	
 	
-
+	<!-- 현재 로그인 한 아이디로 찜한 모든 상품 데이터 조회 -->
+	<select id="selectLikeProdList" parameterType="String" resultType="wishlistVO">
+		select * from user_wishlist where uw_user_id = #{userId};
+	</select>
+	
+	
+	<!-- 찜한 상품 목록 조회 -->
+	<select id="">
+		select *
+		from user_wishlist as t1
+		inner join product_info as t2
+		on t1.uw_prod_idx = t2.mk_idx
+		inner join product_file as t3
+		on t2.mk_product_id = t3.pf_product_id
+		where t1.uw_prod_idx = 24;
+	</select>
 	
 	
 	

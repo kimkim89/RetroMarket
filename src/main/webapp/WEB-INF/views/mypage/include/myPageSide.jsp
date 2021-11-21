@@ -20,8 +20,8 @@
 					</a>
 				</li>
 				<li>
-					<a href="#" class="d-flex">
-						<p>위시리스트</p>
+					<a href="${contextPath}/mypage/likeProd" class="d-flex">
+						<p>찜한 상품</p>
 					</a>
 				</li>
 				<li>

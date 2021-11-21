@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.MemberVO;
+import com.retro.product.WishlistVO;
 
 @Repository
 public class MyPageDAO {
@@ -46,12 +47,17 @@ public class MyPageDAO {
 	public OrderHistoryDTO selectOneOrderHistory(Map<String, Object> map) {
 		return sqlSession.selectOne("mapper.MyPage.selectOneOrderHistory", map);
 	}
-	
-	
+		
 	//특정 주문번호에 관한 주문 상세 정보 조회
 	public CustomerOrderVO selectOrderDetailInfo(String orderNumber) {
 		return sqlSession.selectOne("mapper.MyPage.selectOrderDetailInfo", orderNumber);
 	}
+	
+	//현재 로그인 한 아이디로 찜한 모든 상품 데이터 조회 
+	public List<WishlistVO> selectLikeProdList(String userId) {
+		return sqlSession.selectList("mapper.MyPage.selectLikeProdList", userId);
+	}
+	
 	
 
 }
