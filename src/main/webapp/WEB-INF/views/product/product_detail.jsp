@@ -82,7 +82,7 @@
 	                    		<input type="submit" class="btn_3 ${prBtnClassName} btn_share" ${prBtnBlock} value="${prBtnName}" />	
 	                    	</form>
 	                    	<!-- 찜 기능 추가 -->
-	                    	<a href="javascript:likeProduct('${productList.mk_idx}');" class="btn_3 btn_share btn_like" id="btn_like" style="margin-left: 5%;">찜하기</a>	                        
+	                    	<a href="javascript:likeProduct('${productList.mk_idx}');" class="btn_3 btn_share btn_like" id="btn_like" style="margin-left: 5%;">${dupLikeBtb}</a>	                        
 	                    </div>
                     </div>
                     <br><br><br>
@@ -152,23 +152,26 @@
 				async: false,
 				data: {"productIndex" : productIndex},
 				success: function(data) {
-					alert(data);
+					//alert(data);
 					var successMsg = "";
 					
 					if(data == 1) {
-						successMsg = "찜한 상품에 저장되었습니다.";						
-					}else {						
-						successMsg = "취소되었습니다.";						
-					}					
-						alert(successMsg);
+						successMsg = "찜한 상품에 저장되었습니다.";
 						location.reload();
+					}else if(data == 2) {
+						successMsg = "로그인 후 이용하실 수 있습니다.";
+						location.href = "${contextPath}/member/login";
+					}else {						
+						successMsg = "취소되었습니다.";
+						location.reload();
+					}					
+						alert(successMsg);							
 
 				},//success function 끝 
 				error: function(jqXHR, textStatus, errorThrown) {    					
 					alert("ERROR: " + textStatus + " : " + errorThrown);
 				}	
 			});	
-
 	}
 	
 	

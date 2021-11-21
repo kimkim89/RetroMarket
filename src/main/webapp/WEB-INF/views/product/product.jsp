@@ -61,12 +61,12 @@
 		                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 		                        <div class="single-popular-items mb-50 text-center">
 		                            <div class="popular-img">
-		                                <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="">
+		                                <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="" style="height: 270px;">
 		                                <div class="img-cap">
 		                                    <a href="${contextPath}/product/productDetail?product_id=${productList.mk_idx}"><span>상품 보기</span></a>
 		                                </div>
 		                                <div class="favorit-items">
-		                                    <span class="flaticon-heart"></span>
+		                                    <span class="flaticon-heart" onclick="likeProduct('${productList.mk_idx}');"></span>
 		                                </div>
 		                            </div>
 		                            <div class="popular-caption">
@@ -177,7 +177,7 @@
 								tagStr = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">';
 			 	                tagStr += '<div class="single-popular-items mb-50 text-center">';
 			 	                tagStr += '<div class="popular-img">';
-			 	                tagStr += '<img src="' + contextPath + '/resources/images/temporary/' + data[a][i].mk_stored_thumb + '" alt="">';
+			 	                tagStr += '<img src="' + contextPath + '/resources/images/temporary/' + data[a][i].mk_stored_thumb + '" alt="" style="height: 270px;">';
 			 	                tagStr += '<div class="img-cap">';
 			 	                tagStr += '<a href="' + contextPath + '/product/productDetail?product_id=' + data[a][i].mk_idx + '"><span>상품 보기</span></a>';
 			 	                tagStr += '</div>';
@@ -238,7 +238,36 @@
    }    
 
 	
-   
+ 	//좋아요(찜하기) 기능 추가
+	function likeProduct(productIndex) {
+		
+		 $.ajax({
+				type: "post",
+				url: "${contextPath}/product/ajaxLikeProduct",
+				async: false,
+				data: {"productIndex" : productIndex},
+				success: function(data) {
+					//alert(data);
+					var successMsg = "";
+					
+					if(data == 1) {
+						successMsg = "찜한 상품에 저장되었습니다.";
+						location.reload();
+					}else if(data == 2) {
+						successMsg = "로그인 후 이용하실 수 있습니다.";
+						location.href = "${contextPath}/member/login";
+					}else {						
+						successMsg = "취소되었습니다.";
+						location.reload();
+					}					
+						alert(successMsg);							
+	
+				},//success function 끝 
+				error: function(jqXHR, textStatus, errorThrown) {    					
+					alert("ERROR: " + textStatus + " : " + errorThrown);
+				}	
+			});	
+	}
 
 		
    
