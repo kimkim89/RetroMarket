@@ -61,6 +61,7 @@ public class ProductController {
 		//상품 데이터 조회
 		List<HashMap<String, Object>> productList = productService.selectProdList(prCode, prType, pageFirst, pageSize);
 		
+		mav.addObject("prType", prType);
 		mav.addObject("pagingMap", pagingMap);
 		mav.addObject("prCode", prCode);
 		mav.addObject("productList", productList);				
@@ -114,25 +115,19 @@ public class ProductController {
 		}
 	
 //		System.out.println("테스트중배열: " + prodImgList);
-		
-
-		
-		//************************************************
+	
+		//찜하기, 찜취소 버튼 표출
 		Object memberId = getCurrentUserIdObj(request);
 		int dupLikeChk = 0;
-		String dupLikeBtb = "";		
+		String dupLikeBtb = "찜하기";		
 		
 		if(memberId != null) {
 			dupLikeChk = productService.checkDuplicateLike(Integer.parseInt(productId), memberId.toString());
 			if(dupLikeChk != 0) {
 				dupLikeBtb = "찜취소";
-			}else {
-				dupLikeBtb = "찜하기";
-			}			
+			}	
 		}
-		
-		//************************************************
-		
+				
 		mav.addObject("dupLikeBtb", dupLikeBtb);
 		mav.addObject("prBtnClassName", prBtnClassName);
 		mav.addObject("prBtnBlock", prBtnBlock);
@@ -196,11 +191,8 @@ public class ProductController {
 		//상품 데이터 조회
 		productList = productService.selectProdList(prCode, prType, pageFirst, pageSize);
 		
-		//*****************************************************
-		//테스트중
 		List<List<HashMap<String, Object>>> finalProductList = new ArrayList<List<HashMap<String,Object>>>();
-		
-		//테스트중-------------
+
 		List pagingMapList = new ArrayList();
 		
 		pagingMapList.add(pagingMap);

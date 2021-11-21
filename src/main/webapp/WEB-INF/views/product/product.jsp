@@ -39,9 +39,9 @@
                         <!--Nav Button  -->
                         <nav>                                                                             
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">             
-                            	<a class="nav-item nav-link" name="pr-tab" id="pr-new-tab"  href="javascript:void(0);" role="tab" aria-controls="nav-home" aria-selected="true" onclick="selProdTypeList('${prCode}','new', 'pr-new-tab');">신상품</a>
-                                <a class="nav-item nav-link" name="pr-tab" id="pr-pop-tab"  href="javascript:void(0);" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="selProdTypeList('${prCode}','pop', 'pr-pop-tab');">인기상품</a>
-                                <a class="nav-item nav-link" name="pr-tab" id="pr-dis-tab"  href="javascript:void(0);" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="selProdTypeList('${prCode}','dis', 'pr-dis-tab');">할인상품</a>
+                            	<a class="nav-item nav-link" name="pr-tab" id="pr-new"  href="javascript:void(0);" role="tab" aria-controls="nav-home" aria-selected="true" onclick="selProdTypeList('${prCode}','new', 'pr-new');">신상품</a>
+                                <a class="nav-item nav-link" name="pr-tab" id="pr-pop"  href="javascript:void(0);" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="selProdTypeList('${prCode}','pop', 'pr-pop');">인기상품</a>
+                                <a class="nav-item nav-link" name="pr-tab" id="pr-dis"  href="javascript:void(0);" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="selProdTypeList('${prCode}','dis', 'pr-dis');">할인상품</a>
                             </div>
                         </nav>
                         <!--End Nav Button  -->
@@ -65,9 +65,9 @@
 		                                <div class="img-cap">
 		                                    <a href="${contextPath}/product/productDetail?product_id=${productList.mk_idx}"><span>상품 보기</span></a>
 		                                </div>
-		                                <div class="favorit-items">
-		                                    <span class="flaticon-heart" onclick="likeProduct('${productList.mk_idx}');"></span>
-		                                </div>
+<!-- 		                                <div class="favorit-items"> -->
+<!-- 		                                    <span class="flaticon-heart"></span> -->
+<!-- 		                                </div> -->
 		                            </div>
 		                            <div class="popular-caption">
 		                                <h3><a href="product_details.html">${productList.mk_product_name}</a></h3>
@@ -146,7 +146,14 @@
 
    sessionStorage.setItem("contextPath", "${contextPath}");
    var contextPath = getContextPath();
-      
+
+   $(document).ready(function() {
+	   var prType = "#pr-${prType}";
+	   getActiveProdCate(prType);			
+	});
+   
+   
+   
    //신상품, 인기상품, 할인상품 조회
    function selProdTypeList(prCode, prType, prTagId) {
 	  
@@ -154,10 +161,7 @@
 	   	var tagStr = "";
 	   	var pagingStr = "";
 	   	
-	   	if($(prTagId).attr('class').indexOf("active") == -1) {
-	   		$(prTagId).addClass("active");
-	   		$("#nav-tab").find("a").not(prTagId).removeClass("active");
-	   	}
+	   		getActiveProdCate(prTagId);
 		
 		   $.ajax({
 				type: "post",
@@ -180,10 +184,7 @@
 			 	                tagStr += '<img src="' + contextPath + '/resources/images/temporary/' + data[a][i].mk_stored_thumb + '" alt="" style="height: 270px;">';
 			 	                tagStr += '<div class="img-cap">';
 			 	                tagStr += '<a href="' + contextPath + '/product/productDetail?product_id=' + data[a][i].mk_idx + '"><span>상품 보기</span></a>';
-			 	                tagStr += '</div>';
-			 	                tagStr += '<div class="favorit-items">';
-			 	                tagStr += '<span class="flaticon-heart"></span>';
-			 	                tagStr += '</div>';
+			 	                tagStr += '</div>';			 	                
 			 	                tagStr += '</div>';
 			 	                tagStr += '<div class="popular-caption">';
 			 	                tagStr += '<h3><a href="product_details.html">' + data[a][i].mk_product_name + '</a></h3>';
@@ -237,37 +238,14 @@
 	   return sessionStorage.getItem("contextPath");
    }    
 
-	
- 	//좋아요(찜하기) 기능 추가
-	function likeProduct(productIndex) {
-		
-		 $.ajax({
-				type: "post",
-				url: "${contextPath}/product/ajaxLikeProduct",
-				async: false,
-				data: {"productIndex" : productIndex},
-				success: function(data) {
-					//alert(data);
-					var successMsg = "";
-					
-					if(data == 1) {
-						successMsg = "찜한 상품에 저장되었습니다.";
-						location.reload();
-					}else if(data == 2) {
-						successMsg = "로그인 후 이용하실 수 있습니다.";
-						location.href = "${contextPath}/member/login";
-					}else {						
-						successMsg = "취소되었습니다.";
-						location.reload();
-					}					
-						alert(successMsg);							
-	
-				},//success function 끝 
-				error: function(jqXHR, textStatus, errorThrown) {    					
-					alert("ERROR: " + textStatus + " : " + errorThrown);
-				}	
-			});	
-	}
+
+   function getActiveProdCate(prTagId) {
+	   if($(prTagId).attr('class').indexOf("active") == -1) {
+	   		$(prTagId).addClass("active");
+	   		$("#nav-tab").find("a").not(prTagId).removeClass("active");
+	   	}
+   }
+   
 
 		
    
