@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<%@ include file="../include/Top.jsp"%>
+<%@ include file="../../include/Top.jsp"%>
 <style type="text/css">
 #profile_img {
 	display: block;
@@ -16,7 +16,7 @@
 <body>
 	<header>
 		<!-- Header Start -->
-		<jsp:include page="../include/TopNavi.jsp" />
+		<jsp:include page="../../include/TopNavi.jsp" />
 		<!-- Header End -->
 	</header>
 	<main>
@@ -40,7 +40,7 @@
 			style="margin: 0% 7% 0% 8%;">
 			<div class="gallery-area">
 				<div class="row">
-					<jsp:include page="./include/myPageSide.jsp" />
+					<jsp:include page="../include/myPageSide.jsp" />
 					<div class="col-lg-8 mb-5 mb-lg-0"
 						style="margin: 3%; margin-top: 1%;">
 						<section class="cart_area section_padding" style="padding: 0px;">
@@ -190,6 +190,6 @@
 		<!--================Blog Area =================-->
 	</main>
 	<footer> </footer>
-	<jsp:include page="../include/Footer.jsp" />
+	<jsp:include page="../../include/Footer.jsp" />
 </body>
 </html>

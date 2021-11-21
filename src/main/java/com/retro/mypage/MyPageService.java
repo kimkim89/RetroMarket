@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.MemberVO;
+import com.retro.product.WishlistVO;
 
 @Service
 public class MyPageService {
@@ -67,14 +68,16 @@ public class MyPageService {
 						
 		return mypageDAO.selectOneOrderHistory(map);
 	}
-	
-	
+		
 	//특정 주문번호에 관한 주문 상세 정보 조회
 	public CustomerOrderVO selectOrderDetailInfo(String orderNumber) {
 		return mypageDAO.selectOrderDetailInfo(orderNumber);
 	}
 	
-	
+	//현재 로그인 한 아이디로 찜한 모든 상품 데이터 조회 
+	public List<WishlistVO> selectLikeProdList(String userId) {
+		return mypageDAO.selectLikeProdList(userId);
+	}
 	
 	
 }
