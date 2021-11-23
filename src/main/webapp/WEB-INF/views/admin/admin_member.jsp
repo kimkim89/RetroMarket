@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -8,14 +7,6 @@
 <html lang="en">
 
 <head>
-<!-- 	<meta charset="utf-8"> -->
-<!-- 	<meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-<!-- 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-<!-- 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5"> -->
-<!-- 	<meta name="author" content="AdminKit"> -->
-<!-- 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web"> -->
-<!-- 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
-<!-- 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" /> -->
 
 <%@ include file="./include/admin_top.jsp" %>
 
@@ -33,8 +24,6 @@
 		document.getElementById('memList').submit(); 
 		return false;
 	}
-	
-	
 </script>
 
 </head>
@@ -43,15 +32,13 @@
 		<jsp:include page="./include/sidebar.jsp" />
 			<main class="content">
 				<div class="container-fluid p-0">
-					<h1 class="h3 mb-3">회원정보관리</h1><br>
-					<h2 class="h3 mb-3">Total: ${memCount}</h2>
+					<h1 class="mb-3">회원정보관리</h1>					
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-								<!-- form태그에 id값 넣어주세욜 -->
+								<span class="btn btn-info" style="background-color:lightcoral; border:solid 1px lightcoral;pointer-events: none;">총회원수 ${memCount}명</span>
 								<form name="memList" id="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminMember" method="get">
-																					
 									<div class="input-group input-group-navbar">
 										<select name="searchField" class="form-select" aria-label="Default select example">
 										  
@@ -142,42 +129,15 @@
 				</div>
 			</main>
 
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-left">
-							<p class="mb-0">
-								<a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy;
-							</p>
-						</div>
-						<div class="col-6 text-right">
-							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Support</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Help Center</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Privacy</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Terms</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-
 	<script src="${contextPath}/resources/admin/js/app.js"></script>
-	<!-- 20210403 페이지 이동 -->
+	
 	<script>
-	function registerPage() {
-		location.href="${contextPath}/admin/adminRegister";
-	}
+		function registerPage() {
+			location.href="${contextPath}/admin/adminRegister";
+		}
 	</script>
+	
+<%@ include file="./include/admin_bottom.jsp" %>	
 
 </body>
 

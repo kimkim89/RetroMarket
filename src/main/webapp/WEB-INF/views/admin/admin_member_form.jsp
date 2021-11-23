@@ -293,7 +293,7 @@
 												<div class="row">
 													<div class="mb-3 col-md-6">
 														<label class="form-label" for="pwd">비밀번호</label>
-														<input type="password" class="form-control" name="pwd" id="pwd" >
+														<input type="password" class="form-control" name="pwd" id="pwd" value="">
 													</div>
 												</div>
 												<div class="row">
@@ -354,36 +354,10 @@
 				</div>
 			</main>
 
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-left">
-							<p class="mb-0">
-								<a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy;
-							</p>
-						</div>
-						<div class="col-6 text-right">
-							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Support</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Help Center</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Privacy</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Terms</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
-	</div>
-	
+				
 	<script src="${contextPath}/resources/admin/js/app.js"></script>
+
+<%@ include file="./include/admin_bottom.jsp" %>	
 
 </body>
 

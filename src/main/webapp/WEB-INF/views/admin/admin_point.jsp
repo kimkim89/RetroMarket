@@ -27,14 +27,12 @@
 		<jsp:include page="./include/sidebar.jsp" />
 			<main class="content">
 				<div class="container-fluid p-0">
-					<h1 class="h3 mb-3">포인트 관리</h1>
+					<h1 class="mb-3">포인트 관리</h1>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">회원 적립금 내역</h5>
-								</div>
-								<div class="card-header">
+								<span class="btn btn-info" style="background-color:lightcoral; border:solid 1px lightcoral;pointer-events: none;">포인트내역  ${pointRows}개</span>
 								<form name="memList" class="d-none d-sm-inline-block" action="${contextPath}/admin/adminPoint" method="get">
 																					
 									<div class="input-group input-group-navbar">
@@ -116,36 +114,7 @@
 				</div>
 			</main>
 
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-left">
-							<p class="mb-0">
-								<a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy;
-							</p>
-						</div>
-						<div class="col-6 text-right">
-							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Support</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Help Center</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Privacy</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Terms</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
-
+<%@ include file="./include/admin_bottom.jsp" %>	
 
 	<script src="${contextPath}/resources/admin/js/app.js"></script>
 
