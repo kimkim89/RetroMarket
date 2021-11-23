@@ -65,7 +65,7 @@ public class ProductService {
 		}
 	
 		// 상품 상세 페이지 데이터 조회
-		public List<HashMap<String, Object>> selectEachProd(String productId) {
+		public List<HashMap<String, Object>> selectEachProd(int productId) {
 			return productDAO.selectEachProd(productId);
 		}
 				
@@ -151,11 +151,11 @@ public class ProductService {
 		}
 		
 		//위시리스트 내 데이터 삭제 
-		public void deleteWishlist(int prodIdx, String userId) {
+		public int deleteWishlist(int prodIdx, String userId) {
 			Map<String, Object> map = new HashMap<String, Object>();
 				map.put("prodIdx", prodIdx);
 				map.put("userId", userId);
-			productDAO.deleteWishlist(map);
+			return productDAO.deleteWishlist(map);
 		}
 		
 		

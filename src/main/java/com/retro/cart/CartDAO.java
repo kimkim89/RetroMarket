@@ -2,6 +2,7 @@ package com.retro.cart;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class CartDAO {
 	}
 	
 	//장바구니에 동일한 상품이 있는지 확인
-	public int existProd(CartVO cartVO) {
-		return sqlSession.selectOne("mapper.Cart.existProd", cartVO);
+	public int existProd(Map<String, Object> map) {
+		return sqlSession.selectOne("mapper.Cart.existProd", map);
 	}
 
 }

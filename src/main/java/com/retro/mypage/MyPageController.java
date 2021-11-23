@@ -2,8 +2,10 @@ package com.retro.mypage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +32,7 @@ import com.google.gson.JsonElement;
 import com.retro.common.PagingService;
 import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.UserSha256;
+import com.retro.product.ProductService;
 import com.retro.product.WishlistVO;
 
 @Controller
@@ -38,6 +41,9 @@ public class MyPageController {
 	
 	@Autowired
 	private MyPageService myPageService;
+	@Autowired
+	private ProductService productService;
+	
 	
 	//카카오 테스트
 	@RequestMapping(value= "/y2", method = RequestMethod.GET )
@@ -268,17 +274,63 @@ public class MyPageController {
 		
 		// 위시리스트(= 좋아요 목록) 페이지
 		@RequestMapping(value = "likeProd", method = RequestMethod.GET)
-		public ModelAndView checkLikeList(HttpServletRequest request) {
+		public ModelAndView checkLikeList(@RequestParam(defaultValue = "1") int nowPage, HttpServletRequest request) {
 			ModelAndView mav = new ModelAndView();
 						
+			
+			List<List<Map<String, Object>>> myLikeProdList = new ArrayList<List<Map<String,Object>>>();
+
+			/*페이징처리*/
+			PagingService pagingService = new PagingService();
+			Map<String, Object> pagingMap = new HashMap<String, Object>();
+			
+			int pageSizeToPaging = 5;
+			int blockSizeToBlockSize = 3;
+			
+			int LikeProdCnt = myPageService.CountLikeList(getSessionUserId(request));
+			
+			pagingMap = pagingService.pagingList(nowPage, LikeProdCnt, pageSizeToPaging, blockSizeToBlockSize);
+			int pageFirst = Integer.parseInt(pagingMap.get("pageFirst").toString());
+			int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
+			
 			//현재 로그인 한 아이디로 찜한 모든 상품 데이터 조회 
-			List<WishlistVO> myLikeList = myPageService.selectLikeProdList(getSessionUserId(request));
+			List<WishlistVO> myLikeList = myPageService.selectLikeProdList(getSessionUserId(request), pageFirst, pageSize);
 			
+			for(int i=0; i<myLikeList.size(); i++) {
+				myLikeProdList.add(myPageService.selectEachLikeProd(myLikeList.get(i).getUw_prod_idx()));
+				
+				System.out.println();
+				System.out.println(myLikeProdList);
+				System.out.println();
+			}
 			
+			mav.addObject("pagingMap", pagingMap);
+			mav.addObject("myLikeProdList", myLikeProdList);
 			mav.addObject("myLikeList", myLikeList);
 			mav.setViewName("/mypage/like_prod_list");
 			return mav;
 		}
+		
+		
+		//찜한 상품 목록 페이지 - 찜한 상품 삭제
+		@RequestMapping(value = "deleteLikeProd")
+		public void deleteLikeProduct( @RequestParam("productId") int prodIdx, 
+												RedirectAttributes attributes,
+												HttpServletRequest request,
+												HttpServletResponse response) throws IOException {
+			
+			ModelAndView mav = new ModelAndView();
+			
+			int deleteCnt = productService.deleteWishlist(prodIdx, getSessionUserId(request));
+			
+			if(deleteCnt > 0) {				
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.print("<script>alert('찜한 상품이 삭제되었습니다.'); location.href='" + request.getContextPath() + "/mypage/likeProd'; </script>");
+				out.flush();				
+			}			
+		}
+		
 		
 		
 		

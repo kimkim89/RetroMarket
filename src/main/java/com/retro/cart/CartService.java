@@ -43,8 +43,8 @@ public class CartService {
 			for(Entry<String, Object> ent : productList.get(i).entrySet()) {
 				 //System.out.println( String.format("키 : %s, 값 : %s", ent.getKey(), ent.getValue()) );
 				 if(ent.getKey().equals("mk_idx")) {
-					 String cartIdx = ent.getValue().toString();
-					 cartVO.setPr_idx(Integer.parseInt(cartIdx));
+					 String prIdx = ent.getValue().toString();
+					 cartVO.setPr_idx(Integer.parseInt(prIdx));
 				 }else if(ent.getKey().equals("mk_product_id")) {
 					 String proCode = ent.getValue().toString();
 					 cartVO.setPr_code(proCode);				 
@@ -62,8 +62,11 @@ public class CartService {
 		cartVO.setTotal_num(productNum);
 	    cartVO.setMember_ip(memberIP);
 		
+	    System.out.println();
+	    System.out.println("cartVO.getPRCOde: " + cartVO.getPr_idx());
+	    System.out.println();
 	        
-	    int existProdCheck = cartDAO.existProd(cartVO);
+	    int existProdCheck = existProd(cartVO.getPr_idx(), cartVO.getMember_id());
 	    if(existProdCheck == 0) {
 	    	cartDAO.insertCartInfo(cartVO);
 	    }
@@ -89,8 +92,13 @@ public class CartService {
 	}
 	
 	//장바구니에 동일한 상품이 있는지 확인
-	public int existProd(CartVO cartVO) {
-		return cartDAO.existProd(cartVO);
+	public int existProd(int prIdx, String memberId) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+			map.put("prIdx", prIdx);
+			map.put("memberId", memberId);
+		
+		return cartDAO.existProd(map);
 	} 
 
 }

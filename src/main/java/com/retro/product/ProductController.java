@@ -72,7 +72,7 @@ public class ProductController {
 	
 	//상품 상세보기
 	@RequestMapping(value = "productDetail", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView productDetail(@RequestParam("product_id") String productId, HttpServletRequest request) {
+	public ModelAndView productDetail(@RequestParam("product_id") int productId, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -122,7 +122,7 @@ public class ProductController {
 		String dupLikeBtb = "찜하기";		
 		
 		if(memberId != null) {
-			dupLikeChk = productService.checkDuplicateLike(Integer.parseInt(productId), memberId.toString());
+			dupLikeChk = productService.checkDuplicateLike(productId, memberId.toString());
 			if(dupLikeChk != 0) {
 				dupLikeBtb = "찜취소";
 			}	
@@ -141,7 +141,7 @@ public class ProductController {
 	
 	//장바구니 페이지
 	@RequestMapping(value = "cart")
-	public ModelAndView checkout(@RequestParam("productId") String productId,
+	public ModelAndView checkout(@RequestParam("productId") Integer productId,
 								 @RequestParam("productNum") Integer productNum,
 								 @RequestParam("productPrice") Integer productPrice) {
 					

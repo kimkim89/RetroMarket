@@ -54,8 +54,18 @@ public class MyPageDAO {
 	}
 	
 	//현재 로그인 한 아이디로 찜한 모든 상품 데이터 조회 
-	public List<WishlistVO> selectLikeProdList(String userId) {
-		return sqlSession.selectList("mapper.MyPage.selectLikeProdList", userId);
+	public List<WishlistVO> selectLikeProdList(Map<String, Object> map) {
+		return sqlSession.selectList("mapper.MyPage.selectLikeProdList", map);
+	}
+	
+	//찜한 상품 정보 조회
+	public List<Map<String, Object>> selectEachLikeProd(int productIdx) {
+		return sqlSession.selectList("mapper.MyPage.selectEachLikeProd", productIdx);
+	}
+	
+	//찜한 상품 개수 조회
+	public int CountLikeList(String userId) {
+		return sqlSession.selectOne("mapper.MyPage.CountLikeList", userId);
 	}
 	
 	
