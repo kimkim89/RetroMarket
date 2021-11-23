@@ -23,7 +23,7 @@ public class ProductDAO {
 	}
 		
 	// 상품 상세 페이지 데이터 조회
-	public List<HashMap<String, Object>> selectEachProd(String productId) {
+	public List<HashMap<String, Object>> selectEachProd(int productId) {
 		return sqlSession.selectList("mapper.Product.selectEachProd", productId);
 	}
 	
@@ -43,8 +43,8 @@ public class ProductDAO {
 	}
 	
 	//위시리스트 내 데이터 삭제 
-	public void deleteWishlist(Map<String, Object> map) {
-		sqlSession.delete("mapper.Product.deleteWishlist", map);
+	public int deleteWishlist(Map<String, Object> map) {
+		return sqlSession.delete("mapper.Product.deleteWishlist", map);
 	}
 	
 	

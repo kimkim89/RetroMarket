@@ -75,13 +75,23 @@ public class MyPageService {
 	}
 	
 	//현재 로그인 한 아이디로 찜한 모든 상품 데이터 조회 
-	public List<WishlistVO> selectLikeProdList(String userId) {
-		return mypageDAO.selectLikeProdList(userId);
+	public List<WishlistVO> selectLikeProdList(String userId, int pageFirst, int pageSize) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+			map.put("userId", userId);
+			map.put("pageFirst", pageFirst);
+			map.put("pageSize", pageSize);
+		return mypageDAO.selectLikeProdList(map);
 	}
 
+	//찜한 상품 정보 조회
 	public List<Map<String, Object>> selectEachLikeProd(int productIdx) {
 		return mypageDAO.selectEachLikeProd(productIdx);		
 	}
 	
+	//찜한 상품 개수 조회
+	public int CountLikeList(String userId) {
+		return mypageDAO.CountLikeList(userId);
+	}
 	
 }

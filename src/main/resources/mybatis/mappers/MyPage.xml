@@ -75,18 +75,14 @@
 	
 	
 	<!-- 현재 로그인 한 아이디로 찜한 모든 상품 데이터 조회 -->
-	<select id="selectLikeProdList" parameterType="String" resultType="wishlistVO">
-<!-- 		select * from user_wishlist where uw_user_id = #{userId}; -->
-		select *
-		from user_wishlist as t1
-		inner join product_info as t2
-		on t1.uw_prod_idx = t2.mk_idx
-		inner join product_file as t3
-		on t2.mk_product_id = t3.pf_product_id
-		where t1.uw_user_id = #{userId};
+	<select id="selectLikeProdList" parameterType="map" resultType="wishlistVO">
+		select * 
+		from user_wishlist 
+		where uw_user_id = #{userId}
+		order by uw_register_date desc
+		limit #{pageFirst}, #{pageSize};
 	</select>
-	
-	
+		
 	<!-- 찜한 상품 목록 조회 -->
 	<select id="selectEachLikeProd" resultType="map" parameterType="int">
 		select *
@@ -96,6 +92,9 @@
 		where t1.mk_idx = #{productIdx};
 	</select>
 	
-	
+	<!-- 찜한 상품 개수 조회 -->
+	<select id="CountLikeList" resultType="int" parameterType="String">
+		select count(*) from user_wishlist where uw_user_id = #{userId};
+	</select>
 	
 </mapper>

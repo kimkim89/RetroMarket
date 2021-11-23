@@ -1,8 +1,11 @@
 package com.retro.cart;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +32,8 @@ public class CartController {
 	@RequestMapping(value = "prCart")
 	public ModelAndView cartList(//@RequestParam("productId") String productId,
 								 //@RequestParam("productNum") Integer productNum,								 
-								 HttpServletRequest request) {
+								 HttpServletRequest request,
+								 HttpServletResponse response) throws IOException {
 					
 		ModelAndView mav = new ModelAndView();		
 		
@@ -55,25 +59,32 @@ public class CartController {
 			if(fromPrPg != null) { 
 				
 				Integer productNum = Integer.parseInt(request.getParameter("productNum"));
-				String productId = request.getParameter("productId");	
-				
+				Integer productId = Integer.parseInt(request.getParameter("productId"));	
+								
 				//선택한 상품 정보 조회
 				List<HashMap<String, Object>> productList = productService.selectEachProd(productId);					
 				prQuantity = (Integer) productList.get(0).get("mk_inventory");
 												
 				if(productNum <= prQuantity) {						
+					
+					if(cartService.existProd(productId, userId) > 0) {
+						response.setContentType("text/html; charset=UTF-8");
+						PrintWriter out = response.getWriter();
+						out.print("<script>alert('해당 상품이 이미 장바구니에 담겨있습니다.\\n장바구니에서 수량을 변경해주세요.'); location.href='" + request.getContextPath() + "/cart/prCart'; </script>");
+						out.flush();
+					}
+					
 					//회원 아이디 기준으로 장바구니에 데이터 저장
 					int checkProdExist = cartService.insertCartInfo(productList, productNum, userId, request);
-					
-					if(checkProdExist != 0) {
-						msg = "해당 상품이 이미 장바구니에 담겨있습니다. 장바구니에서 수량을 변경해주세요.";
-						locationUrl = "cart/prCart";
-					}						
+						
 					count++;
 				}//prQuantity if문 끝
-		
-			}
-						
+				
+				//찜한 상품 목록 페이지에서 장바구니 버튼을 클릭했을 경우, 찜한 상품 목록에서 해당 상품 삭제
+				if(fromPrPg.equals("y_like")) {
+					productService.deleteWishlist(productId, userId);
+				}		
+			}						
 				//회원 아이디 기준으로 장바구니 목록 조회
 				List<HashMap<String, Object>> cartList = cartService.selectCartList(userId);
 								

@@ -58,8 +58,8 @@
 	</update>
 
 	<!-- 장바구니에 동일한 상품(상품 인덱스 값으로 구분)이 있는지 확인 -->
-	<select id="existProd" parameterType="cartVO" resultType="int">
-		select count(*) from cart where pr_code = #{pr_code} and member_id = #{member_id} and cart_status = 0;
+	<select id="existProd" parameterType="map" resultType="int">
+		select count(*) from cart where pr_idx = #{prIdx} and member_id = #{memberId} and cart_status = 0;
 	</select>
 
 
