@@ -44,6 +44,7 @@
 				<div class="cart_inner" style="max-width: 92%; margin-left: 2%;">
 					<h3 class="mb-30">회원 가입 하기</h3>
 					<form id="joinForm" action="#" method="post">
+					<input type="hidden" name="map_check" id="map_check" value="memberJoin" />
 						<div class="mt-10">
 							<input type="text" id="name" name="name" placeholder="이름" required class="single-input">
 						<!-- 이름 체크 -->

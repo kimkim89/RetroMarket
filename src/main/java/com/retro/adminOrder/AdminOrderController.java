@@ -54,6 +54,7 @@ public class AdminOrderController {
 			
 		List<CustomerOrderVO> csOrderList = admOrderService.selectAdminOrderList(searchField, keyword, pageFirst, pageSize);
 		
+		mav.addObject("OrderCount", OrderCount);
 		mav.addObject("pagingMap", pagingMap);
 		mav.addObject("searchField", searchField);
 		mav.addObject("keyword", keyword);

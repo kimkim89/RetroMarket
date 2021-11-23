@@ -118,12 +118,16 @@ public class AdminController {
 	public ModelAndView adminMemUpdate(MemberVO memberVO, HttpServletRequest request ,RedirectAttributes attributes) {
 		ModelAndView mav = new ModelAndView();
 		UserSha256 userSha256 = new UserSha256();
-		String pwd = "";
-		pwd = (String)request.getParameter(pwd);
-			
-		// 회원 비밀번호 SHA-256방식 암호화
-		String encrypassword = userSha256.encrypt(memberVO.getPwd());
-		memberVO.setPwd(encrypassword);	
+		
+		MemberVO memberInfo = adminService.adminMemberInfo(memberVO.getId());
+		
+		if(memberVO.getPwd().equals("")) {
+			memberVO.setPwd(memberInfo.getPwd());
+		}else {
+			// 회원 비밀번호 SHA-256방식 암호화
+			String encrypassword = userSha256.encrypt(memberVO.getPwd());
+			memberVO.setPwd(encrypassword);	
+		}
 		
 		adminService.adminMemUpdate(memberVO);
 		
@@ -169,7 +173,8 @@ public class AdminController {
 	
 		List pointList = adminService.pointList(searchField, keyword, pageFirst, pageSize);
 		
-		//mav.addObject("memberList", adminService.adminMemberList());		
+		//mav.addObject("memberList", adminService.adminMemberList());	
+		mav.addObject("pointRows", pointRows);
 		mav.addObject("pointList", pointList);
 		mav.addObject("pointRows", pointRows);
 		mav.addObject("map", map);

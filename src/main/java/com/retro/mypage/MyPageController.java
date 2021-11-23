@@ -176,14 +176,21 @@ public class MyPageController {
 		
 		//회원정보 수정 
 		@RequestMapping(value= "modifyAction/{type}", method = RequestMethod.POST)
-		public ModelAndView modifyAction(MyPageVO mypageVO, 
-				@PathVariable("type") String type) {
+		public void modifyAction( MyPageVO mypageVO, 
+										  @PathVariable("type") String type,
+										  HttpServletRequest request,
+										  HttpServletResponse response) throws IOException {
+			
+			ModelAndView mav = new ModelAndView();
 			
 			UserSha256 userSha256 = new UserSha256();
 			mypageVO.setPwd(userSha256.encrypt(mypageVO.getPwd()));
 			myPageService.modifyAction(mypageVO, type);
 			
-			return null;
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print("<script>alert('회원정보가 수정되었습니다.'); location.href='" + request.getContextPath() + "/mypage/memberInfoModify'; </script>");
+			out.flush();
 		}
 		
 		

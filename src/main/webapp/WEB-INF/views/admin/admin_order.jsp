@@ -34,9 +34,11 @@
 		<%@ include file="./include/sidebar.jsp" %>
 
 			<main class="content">
+				<h1 class="mb-3">주문 목록</h1>
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
+								<span class="btn btn-info" style="background-color:lightcoral; border:solid 1px lightcoral;pointer-events: none;">총주문수 ${OrderCount}개</span>
 								<form name="prodSearch" id="prodSearch" class="d-none d-sm-inline-block" action="${contextPath}/adminOrder/orderList" method="post">									
 									<div class="input-group input-group-navbar">
 										<select name="searchField" class="form-select" aria-label="Default select example">
@@ -53,7 +55,6 @@
 								</form>
 								<button type="button" class="btn btn-info btn_delete" style="float: right;" onclick="">Later</button>								
 							</div>
-<br>
 								<div class="table-responsive">
 									<table class="table mb-0">
 										<thead>
@@ -127,37 +128,9 @@
 						</nav>						
 			</main>
 
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-left">
-							<p class="mb-0">
-								<a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy;
-							</p>
-						</div>
-						<div class="col-6 text-right">
-							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Support</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Help Center</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Privacy</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Terms</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
-
 	<script src="${contextPath}/resources/admin/js/app.js"></script>
+
+<%@ include file="./include/admin_bottom.jsp" %>	
 
 </body>
 
