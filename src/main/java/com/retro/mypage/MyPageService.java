@@ -78,6 +78,10 @@ public class MyPageService {
 	public List<WishlistVO> selectLikeProdList(String userId) {
 		return mypageDAO.selectLikeProdList(userId);
 	}
+
+	public List<Map<String, Object>> selectEachLikeProd(int productIdx) {
+		return mypageDAO.selectEachLikeProd(productIdx);		
+	}
 	
 	
 }

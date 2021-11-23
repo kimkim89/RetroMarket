@@ -57,6 +57,10 @@ public class MyPageDAO {
 	public List<WishlistVO> selectLikeProdList(String userId) {
 		return sqlSession.selectList("mapper.MyPage.selectLikeProdList", userId);
 	}
+
+	public List<Map<String, Object>> selectEachLikeProd(int productIdx) {
+		return sqlSession.selectList("mapper.MyPage.selectEachLikeProd", productIdx);
+	}
 	
 	
 

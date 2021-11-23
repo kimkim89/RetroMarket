@@ -30,6 +30,7 @@ import com.google.gson.JsonElement;
 import com.retro.common.PagingService;
 import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.UserSha256;
+import com.retro.product.ProductService;
 import com.retro.product.WishlistVO;
 
 @Controller
@@ -38,6 +39,9 @@ public class MyPageController {
 	
 	@Autowired
 	private MyPageService myPageService;
+	@Autowired
+	private ProductService productService;
+	
 	
 	//카카오 테스트
 	@RequestMapping(value= "/y2", method = RequestMethod.GET )
@@ -273,8 +277,20 @@ public class MyPageController {
 						
 			//현재 로그인 한 아이디로 찜한 모든 상품 데이터 조회 
 			List<WishlistVO> myLikeList = myPageService.selectLikeProdList(getSessionUserId(request));
+			List<List<Map<String, Object>>> myLikeProdList = new ArrayList<List<Map<String,Object>>>();
+//			List<Map<String, Object>> myLikeProdList = new ArrayList<Map<String,Object>>();
 			
+			for(int i=0; i<myLikeList.size(); i++) {
+//				myPageService.selectEachLikeProd(myLikeList.get(i).getUw_prod_idx());
+
+				myLikeProdList.add(myPageService.selectEachLikeProd(myLikeList.get(i).getUw_prod_idx()));
+				
+				System.out.println();
+				System.out.println(myLikeProdList);
+				System.out.println();
+			}
 			
+			mav.addObject("myLikeProdList", myLikeProdList);
 			mav.addObject("myLikeList", myLikeList);
 			mav.setViewName("/mypage/like_prod_list");
 			return mav;
