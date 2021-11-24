@@ -71,7 +71,9 @@
 		update member set pwd = #{hashPwd} where email = #{email};
 	</update>
 	
-	
-	
+	<!-- 회원/관리자 계정 구분 -->
+	<select id="checkUserStatus" parameterType="String" resultType="int">
+		select status from member where id = #{userId};
+	</select>
 	
 </mapper>

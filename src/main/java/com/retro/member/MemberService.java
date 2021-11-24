@@ -74,6 +74,10 @@ public class MemberService {
 					viewPages = "member/login";
 				} else {
 					request.getSession().setAttribute("user_id", memberVO.getId());
+					// status가 0일 경우 = 회원, status가 1일 경우 = 관리자
+					int checkUserStatus = checkUserStatus(memberVO.getId());
+					memberVO.setStatus(checkUserStatus);
+					request.getSession().setAttribute("checkUserStatus", memberVO.getStatus());
 					viewPages = "redirect:/index/main";
 				}
 			} else {
@@ -119,6 +123,11 @@ public class MemberService {
 			System.out.println("미완료");
 			return notice = "비밀번호변경을 다시 시도해주세요";
 		}
+	}
+	
+	// 회원/관리자 계정 구분
+	public int checkUserStatus(String userId) {
+		return memberDAO.checkUserStatus(userId);
 	}
 
 	

@@ -47,16 +47,21 @@
 		${user_id}님의 마이페이지입니다. 
 	</div>
 	<div align="center" style="margin-top: 1%;">
-	<button id="logout_btn" type="button" style="color: black;"> 로그아웃</button>
+		<button id="logout_btn" type="button" style="color: black;"> 로그아웃</button>
 	</div>
-	<div align="center" style="margin-top: 1%;">
-	<button id="admin_btn" type="button" style="color: black;"> 관리자 페이지 이동</button>
-	</div>
-	<div align="center" style="margin-top: 1%;">
-	<button id="myPage_btn" type="button" style="color: black;"> 마이 페이지 이동</button>
-	</div>
+	<c:choose>
+		<c:when test="${checkUserStatus == 1 }">
+			<div align="center" style="margin-top: 1%;">
+				<button id="admin_btn" type="button" style="color: black;"> 관리자 페이지 이동</button>
+			</div>
+		</c:when>
+		<c:when test="${checkUserStatus == 0 }">
+			<div align="center" style="margin-top: 1%;">
+				<button id="myPage_btn" type="button" style="color: black;"> 마이 페이지 이동</button>
+			</div>
+		</c:when>	
+	</c:choose>
 
-	<footer> </footer>
 	<jsp:include page="../include/Footer2.jsp" />
 </body>
 </html>
