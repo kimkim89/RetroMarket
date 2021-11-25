@@ -52,7 +52,7 @@ public class AdminOrderController {
 			int pageFirst = Integer.parseInt(pagingMap.get("pageFirst").toString());
 			int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
 			
-		List<CustomerOrderVO> csOrderList = admOrderService.selectAdminOrderList(searchField, keyword, pageFirst, pageSize);
+		List<Map<String, Object>> csOrderList = admOrderService.selectAdminOrderList(searchField, keyword, pageFirst, pageSize);
 		
 		mav.addObject("OrderCount", OrderCount);
 		mav.addObject("pagingMap", pagingMap);
@@ -110,6 +110,11 @@ public class AdminOrderController {
 		String msg = "";
 		Timestamp paidDate = null;
 		Timestamp deliveryDate = null;
+		
+		System.out.println();
+		System.out.println("확인중------------------ :  " + paidDateEx);
+		System.out.println("확인중------------------ :  " + deliveryDateEx);
+		System.out.println();
 		
 		if(paidDateEx != "") {
 			paidDate = Timestamp.valueOf(paidDateEx);

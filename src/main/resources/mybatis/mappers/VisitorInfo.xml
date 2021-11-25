@@ -6,13 +6,13 @@
    
 <mapper namespace="mapper.Visitor">
 
-	<insert id="">
+	<insert id="insertVisitInfo" parameterType="visitInfoVO">
 		insert into visit_info ( visit_ip,
-								 visitor_reference,
+								 visit_reference,
 								 visit_browser
 								)
 						values ( #{visit_ip},
-								 #{visitor_reference},
+								 #{visit_reference},
 								 #{visit_browser}	
 								);
 	</insert>

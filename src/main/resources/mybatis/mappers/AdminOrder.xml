@@ -6,9 +6,11 @@
 
 <mapper namespace="mapper.AdminOrder">
 
-	<select id="selectAdminOrderList" resultType="csOrderVO" parameterType="map">
+	<select id="selectAdminOrderList" resultType="map" parameterType="map">
 			select * 
-			from product_order
+			from product_order as t1
+			inner join order_status_info as t2
+			on t1.order_status = t2.order_status_code
 		<if test="searchField != '' ">
 			where ${searchField} like concat('%', #{keyword}, '%')
 		</if>

@@ -27,7 +27,7 @@ public class AdminOrderService {
 	CustomerOrderService csOrderService;
 	
 	
-	public List<CustomerOrderVO> selectAdminOrderList(String searchField, String keyword, int pageFirst, int pageSize) {
+	public List<Map<String, Object>> selectAdminOrderList(String searchField, String keyword, int pageFirst, int pageSize) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 			map.put("searchField", searchField);
