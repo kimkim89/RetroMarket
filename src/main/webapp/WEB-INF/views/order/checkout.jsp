@@ -251,6 +251,7 @@
     	
     	if(selectMsg.options[selectMsg.selectedIndex].value == 5) {
     		document.getElementById("hidden_d_msg").style.display = 'block';
+    		document.getElementById("delivery_msg").value = "";
     	}else {
     		document.getElementById("hidden_d_msg").style.display = 'none'; 
     		
@@ -261,29 +262,6 @@
     		document.getElementById("delivery_msg").value = deliveryMsg;    			   			
     	}    	   
     }
-    
-    
-    //결제하기 기능
-    function orderProduct() {
-    	
-    	/*console.log($("#receiver_name").val() == "");
-    	if($("#receiver_name").val() == "") {
-    		$("#receiver_name").focus();
-    	}else if($("#receiver_phone").val() == "") {
-    		$("#receiver_phone").focus();
-    	}else if($("#receiver_addr1").val() == "") {
-    		$("#receiver_addr1").focus();
-    	}else if($("#receiver_addr2").val() == "") {
-    		$("#receiver_addr2").focus();
-    	}else if($("#receiver_addr3").val() == "") {
-    		$("#receiver_addr3").focus();
-    	}*/
-    	
-    	
-    	
-    	document.order_form.submit();
-    }
-    
     
     
     //현재 보유중인 포인트 금액만큼 입력되도록 기능 추가
@@ -323,12 +301,12 @@
     			document.getElementById("u_point").value = 0;
     			document.getElementById("used_point").readOnly = false;
 				document.getElementById("applyPointBtn").innerText = "사용";    			
-    		}
-    		
+    		}	
     	}
-		
-    	
-    //회원 등급별 적립 예정 포인트 계산
+    }
+    
+    
+	//회원 등급별 적립 예정 포인트 계산
 	function ajaxAddPoint(totalOrderPrice, usedPoint) {
     	$.ajax({
 			type: "POST",
@@ -350,14 +328,55 @@
 			}    								
 		});		        		
     }
+    
+	
+	//유효성 검사 후 주문 결제 완료
+    function orderProduct() {
+		    	
+    	if($("#receiver_name").val() == "") {
+    		alert("받는 사람 이름을 입력해주세요.");
+    		$("#receiver_name").focus();
+    		return false;
+    	}else if($("#receiver_phone").val() == "") {
+    		alert("받는 사람 연락처를 입력해주세요.");
+    		$("#receiver_phone").focus();
+    		return false;
+    	}else if($("#receiver_addr1").val() == "") {
+    		alert("주소를 입력해주세요.");
+    		$("#receiver_addr1").focus();
+    		return false;
+    	}else if($("#receiver_addr2").val() == "") {
+    		alert("주소를 입력해주세요.");
+    		$("#receiver_addr2").focus();
+    		return false;
+    	}else if($("#receiver_addr3").val() == "") {
+    		alert("주소를 입력해주세요.");
+    		$("#receiver_addr3").focus();
+    		return false;
+    	}else if($("#delivery_choice").val() == null) {
+    		alert("배송 요청사항을 선택해주세요.");
+    		$("#delivery_choice").focus();
+    		return false;
+    	}else if($("#od_bank_code").val() == null) {
+    		alert("무통장 입금계좌의 은행명을 선택해주세요.");
+    		$("#od_bank_code").focus();
+    		return false;
+    	}else if($("#od_bank_code").val() == null) {
+    		alert("무통장 입금계좌의 은행명을 선택해주세요.");
+    		$("#od_bank_code").focus();
+    		return false;
+    	}else if($("#bank_acct_num").val() == "") {
+    		alert("계좌번호를 입력해주세요.");
+    		$("#bank_acct_num").focus();
+    		return false;
+    	}else if($("#bank_acct_owner").val() == "") {
+    		alert("예금주명을 입력해주세요.");
+    		$("#bank_acct_owner").focus();
+    		return false;
+    	}
     	
-    	
-    	
-		
+    	document.order_form.submit();
     }
-    
-    
-    
     
     
     

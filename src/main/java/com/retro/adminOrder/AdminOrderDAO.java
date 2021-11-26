@@ -16,7 +16,7 @@ public class AdminOrderDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	public List<CustomerOrderVO> selectAdminOrderList(Map<String, Object> map) {
+	public List<Map<String, Object>> selectAdminOrderList(Map<String, Object> map) {
 		return sqlSession.selectList("mapper.AdminOrder.selectAdminOrderList", map);
 	}
 

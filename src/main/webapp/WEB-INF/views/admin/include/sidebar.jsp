@@ -4,6 +4,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />   
 	
+<script>
+// 관리자가 아닐 경우 접근 불가능하도록 추가
+if("${checkUserStatus}" != 1) {
+	alert("접근 불가능");
+	location.href = "${contextPath}/main/index";
+}
+</script>	
+	
 	<nav id="sidebar" class="sidebar">
 		<div class="sidebar-content js-simplebar">
 			<a class="sidebar-brand" href="index.html">
@@ -76,7 +84,7 @@
                 				<span class="text-dark">관리자</span>
               				</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="${contextPath}/main/index">로그아웃</a>
+								<a class="dropdown-item" href="${contextPath}/member/logout">로그아웃</a>
 							</div>
 						</li>
 					</ul>

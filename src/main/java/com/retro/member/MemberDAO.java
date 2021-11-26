@@ -76,4 +76,10 @@ public class MemberDAO {
 		return sqlSession.update("mapper.Member.pwChange", map);
 	}
 
+	// 회원/관리자 계정 구분
+	public int checkUserStatus(String userId) {
+		return sqlSession.selectOne("mapper.Member.checkUserStatus", userId);
+	}
+	
+	
 }

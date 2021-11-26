@@ -36,8 +36,48 @@
 	
 	
 	
-	// 주문 내역 수정
+	// 유효성 검사 후 주문 내역 수정
 	function updateOrderList() {
+		
+		if($("#order_name").val() == "") {
+    		alert("주문자명을 입력해주세요.");
+    		$("#order_name").focus();
+    		return false;
+    	}else if($("#order_phone").val() == "") {
+    		alert("주문자 연락처를 입력해주세요.");
+    		$("#order_phone").focus();
+    		return false;
+    	}else if($("#order_addr1").val() == "" || $("#order_addr2").val() == "" || $("#order_addr3").val() == "") {
+    		alert("주문자 주소를 입력해주세요.");
+    		$("#order_addr3").focus();
+    		return false;    		
+    	}else if($("#receiver_name").val() == "") {
+    		alert("받는사람 이름을 입력해주세요.");
+    		$("#receiver_name").focus();
+    		return false;
+    	}else if($("#receiver_phone").val() == "") {
+    		alert("받는사람 연락처를 입력해주세요.");
+    		$("#receiver_phone").focus();
+    		return false;
+    	}else if($("#receiver_addr1").val() == "" || $("#receiver_addr2").val() == "" || $("#receiver_addr3").val() == "") {
+    		alert("받는사람 주소를 입력해주세요.");
+    		$("#receiver_addr3").focus();
+    		return false;
+    	}else if($("#bank_acct_owner").val() == "") {
+    		alert("입금자명을 입력해주세요.");
+    		$("#bank_acct_owner").focus();
+    		return false;    		
+    	}else if($("#bank_acct_num").val() == "") {
+    		alert("계좌번호를 입력해주세요.");
+    		$("#bank_acct_num").focus();
+    		return false;
+    	}else if($("#order_email").val() == "") {
+    		alert("주문자 이메일 주소를 입력해주세요.");
+    		$("#order_email").focus();
+    		return false;
+    	}
+		
+		
 		document.order_form.action="${contextPath}/adminOrder/updateOrderForm";
 		document.getElementById('order_form').submit();
 		return false;
@@ -128,7 +168,7 @@
 												</div>
 												
 												<div class="row">
-													<h5> 배송지 주소</h5>
+													<h5> 주문자 주소</h5>
 													<div class="mb-3 col-md-4" style="display:inline-block;">																										
 														<input type="text" class="form-control" name="order_addr1" id="order_addr1" placeholder="우편번호" value="${eachOrderList.order_addr1}" readonly>
 													</div>
@@ -231,7 +271,7 @@
 														<label class="form-label" for="paid_date_ex">입금 확인일시</label>
 														<input type="checkbox" id="add_p_date" name="add_p_date" onclick="addCurrentDate('dateTypeP');"/> 
 														<span class="memo_span">*현재시간설정 시 체크박스 클릭</span>														
-														<input type="text" class="form-control" name="paid_date_ex" id="paid_date_ex" value="<fmt:formatDate value="${eachOrderList.paid_date}" pattern="yyyy-MM-dd HH:mm:ss" />">
+														<input type="text" class="form-control" name="paid_date_ex" id="paid_date_ex" value="<fmt:formatDate value="${eachOrderList.paid_date}" pattern="yyyy-MM-dd HH:mm:ss" />" readonly>
 													</div>																								
 												</div>
 												<div class="row">
@@ -266,7 +306,7 @@
 														<label class="form-label" for="delivery_start_date_ex">배송일시</label>
 														<input type="checkbox" id="add_d_date" name="add_d_date" onclick="addCurrentDate('dateTypeD');"/> 
 														<span class="memo_span">*현재시간설정 시 체크박스 클릭</span>														
-														<input type="text" class="form-control" name="delivery_start_date_ex" id="delivery_start_date_ex" value="<fmt:formatDate value="${eachOrderList.delivery_start_date}" pattern="yyyy-MM-dd HH:mm:ss" />">
+														<input type="text" class="form-control" name="delivery_start_date_ex" id="delivery_start_date_ex" value="<fmt:formatDate value="${eachOrderList.delivery_start_date}" pattern="yyyy-MM-dd HH:mm:ss" />" readonly>
 													</div>													
 													<div class="mb-3 col-md-6" style="display:inline-block;">
 														<label class="form-label" for="point">메일 발송</label>

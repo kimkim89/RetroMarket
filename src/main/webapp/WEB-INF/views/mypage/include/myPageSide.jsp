@@ -3,6 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+<script>
+// 관리자가 아닐 경우 접근 불가능하도록 추가
+if("${user_id}" == "") {
+	alert("로그인 후 사용 가능합니다.");
+	location.href = "${contextPath}/main/index";
+}
+</script>
+
 
 <div class="col-lg-2 mypage-table" >
 	<div class="blog_right_sidebar">
