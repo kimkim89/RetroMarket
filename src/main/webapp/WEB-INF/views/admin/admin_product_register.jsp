@@ -31,6 +31,34 @@
 		
 		function adminProdUpdate() {
 			var form = document.product_form;
+			
+			if($("#mk_product_type").val() == null) {
+	    		alert("상품 분류를 선택해 주세요.");
+	    		$("#mk_product_type").focus();
+	    		return false;
+	    	}else if($("#mk_product_category").val() == null) {
+	    		alert("상품 종류를 선택해 주세요.");
+	    		$("#mk_product_category").focus();
+	    		return false;
+	    	}else if($("#mk_product_name").val() == null) {
+	    		alert("상품명을 입력해 주세요.");
+	    		$("#mk_product_name").focus();
+	    		return false;
+	    	}else if($("#mk_product_price").val() == null) {
+	    		alert("상품 가격을 입력해 주세요.");
+	    		$("#mk_product_price").focus();
+	    		return false;
+	    	}else if($("#mk_product_price").val() == null) {
+	    		alert("상품 가격을 입력해 주세요.");
+	    		$("#mk_product_price").focus();
+	    		return false;
+	    	}else if($("#mk_inventory").val() == null) {
+	    		alert("상품 재고량을 입력해 주세요.");
+	    		$("#mk_inventory").focus();
+	    		return false;
+	    	}
+			
+			
 			form.action="${contextPath}/adminProd/adminProdUpdate"
 			form.submit();
 			//location.href="${contextPath}/adminProd/adminProdUpdate";
