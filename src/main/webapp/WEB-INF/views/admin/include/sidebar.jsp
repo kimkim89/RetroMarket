@@ -56,11 +56,11 @@ if("${checkUserStatus}" != 1) {
 <%-- 							<li class="sidebar-item"><a class="sidebar-link" href="${contextPath}/adminProd/adminInventory">재고 관리</a></li> --%>
 <!-- 						</ul> -->
 <!-- 					</li> -->
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="${contextPath}/admin/adminEvent">
-              				<i class="align-middle" data-feather="coffee"></i> <span class="align-middle">이벤트 관리</span>
-            			</a>
-					</li>
+<!-- 					<li class="sidebar-item"> -->
+<%-- 						<a class="sidebar-link" href="${contextPath}/admin/adminEvent"> --%>
+<!--               				<i class="align-middle" data-feather="coffee"></i> <span class="align-middle">이벤트 관리</span> -->
+<!--             			</a> -->
+<!-- 					</li> -->
 				</ul>
 			</div>
 		</nav>

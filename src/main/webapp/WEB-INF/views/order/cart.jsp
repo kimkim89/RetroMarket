@@ -319,7 +319,7 @@
 	}//changePrice()함수 끝
 
 	
-	/*선택삭제 기능 시작*/
+	/*선택삭제 기능 */
 	function deleteProd(cartProdId) {
 		var checkedArray = [];
 		

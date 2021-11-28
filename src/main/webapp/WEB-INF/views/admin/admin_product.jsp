@@ -84,7 +84,7 @@
 										&nbsp;&nbsp;
 									</div>
 								</form>
-								<button type="button" class="btn btn-info btn_delete" style="float: right;" onclick="">선택 삭제</button>
+								<button type="button" class="btn btn-info btn_delete" style="float: right;" onclick="deleteAdminProd();">선택 삭제</button>
 								<button type="button" class="btn btn-info btn_blue" style="float: right; margin: auto 10px;" onclick="adminProdRegister();">상품 등록</button>
 							</div>
 <br>
@@ -113,7 +113,7 @@
 										<c:forEach var="prodList" items="${productList}" varStatus="status">								
 												
 											<tr>
-												<td><input type="checkbox" name="del_check" id="del_check" /></td>
+												<td><input type="checkbox" name="del_check" id="del_check" value="${prodList.mk_product_id}"/></td>
 												<td style="text-align:center;">${num}</td>
 												<td style="vertical-align: middle;">
 													<div class="flex-container">
@@ -124,7 +124,7 @@
 															<input type="text" class="form-control" value="${prodList.mk_product_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
   															<input type="text" class="form-control" value="${prodList.ps_sort_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
 															<input type="text" class="form-control" value="${prodList.pc_category_name}" readonly style="width:180%;height:auto;margin-left:10px;margin-bottom: -15px;"><br>
-															<select name="" class="form-select" aria-label="Default select example" style="margin-left:10px;">
+															<select name="" class="form-select" aria-label="Default select example" style="margin-left:10px;" disabled>
 																<option value="">게시여부</option>
 																<option value="1" <c:if test="${prodList.mk_status == 1}">selected</c:if>>O</option>
 																<option value="0" <c:if test="${prodList.mk_status == 0}">selected</c:if>>X</option>											
@@ -178,6 +178,36 @@
 					</ul>
 				</nav>
 		</main>
+		
+<script type="text/javascript">
+	/*선택삭제 기능 */
+	function deleteAdminProd() {
+		var checkedArray = [];
+		
+		alert("선택한 상품을 삭제하시겠습니까?");
+		
+		$("input:checkbox[name='del_check']:checked").each(function() {
+			checkedArray.push($(this).val()); // 체크된 것 value만 배열에 push			
+		})
+		
+		console.log(checkedArray);
+		
+// 		$.ajax({
+// 			type : "POST",
+// 			url : "${contextPath}/cart/delEachProdInfo",
+// 			data : {"checkedArray" : checkedArray},			
+// 			success: function(data) {
+// 				alert(data);
+// 				location.href = location.href;
+// 			},
+// 			error: function(xhr, status, error) {
+// 				alert(error);
+// 			}
+// 		});//ajax끝
+		
+	}//deleteEachProd()함수 끝
+</script>	
+
 
 <%@ include file="./include/admin_bottom.jsp" %>
 
