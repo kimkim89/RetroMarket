@@ -70,6 +70,7 @@
 	<update id="adminProdUpdate" parameterType="adminProdVO">
 		update product_info 
 		set mk_product_name = #{mk_product_name}, 
+			mk_product_id = #{mk_product_id},
 			mk_product_price = #{mk_product_price}, 
 			mk_product_category = #{mk_product_category}, 
 			mk_product_type = #{mk_product_type},

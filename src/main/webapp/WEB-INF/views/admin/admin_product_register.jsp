@@ -22,54 +22,54 @@
 	<script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
 	
 	<script type="text/javascript">
-		function adminProdInsert() {
-			var form = document.product_form;
-			form.action="${contextPath}/adminProd/adminProdInsert"
-			form.submit();
-			//location.href="${contextPath}/adminProd/adminProdInsert";
-		}
-		
-		function adminProdUpdate() {
-			var form = document.product_form;
 			
-			if($("#mk_product_type").val() == null) {
+		function adminProdSubmit(type) {
+			var form = document.product_form;			
+			
+			//유효성 검사
+			if($("#mk_product_type").val() == "") {
 	    		alert("상품 분류를 선택해 주세요.");
 	    		$("#mk_product_type").focus();
 	    		return false;
-	    	}else if($("#mk_product_category").val() == null) {
+	    	}else if($("#mk_product_category").val() == "") {
 	    		alert("상품 종류를 선택해 주세요.");
 	    		$("#mk_product_category").focus();
 	    		return false;
-	    	}else if($("#mk_product_name").val() == null) {
+	    	}else if($("#mk_product_name").val() == "") {
 	    		alert("상품명을 입력해 주세요.");
 	    		$("#mk_product_name").focus();
 	    		return false;
-	    	}else if($("#mk_product_price").val() == null) {
+	    	}else if($("#mk_product_price").val() == "") {
 	    		alert("상품 가격을 입력해 주세요.");
 	    		$("#mk_product_price").focus();
 	    		return false;
-	    	}else if($("#mk_product_price").val() == null) {
+	    	}else if($("#mk_product_price").val() == "") {
 	    		alert("상품 가격을 입력해 주세요.");
 	    		$("#mk_product_price").focus();
 	    		return false;
-	    	}else if($("#mk_inventory").val() == null) {
+	    	}else if($("#mk_inventory").val() == "") {
 	    		alert("상품 재고량을 입력해 주세요.");
 	    		$("#mk_inventory").focus();
 	    		return false;
 	    	}
 			
-			
-			form.action="${contextPath}/adminProd/adminProdUpdate"
-			form.submit();
-			//location.href="${contextPath}/adminProd/adminProdUpdate";
+			if(type == "register") {
+				form.action="${contextPath}/adminProd/adminProdInsert";
+				form.submit();
+			}else if(type == "update") {
+				form.action="${contextPath}/adminProd/adminProdUpdate";
+				form.submit();
+			}
+				
 		}
 		
-		/*20210624 상품종류 select 박스 선택 시 상품 코드 자동으로 만들어지도록 작업 진행 중*/
+		
+		
 		function addProdCode(optionValue, totalCategories) {
 			//console.log(optionValue);
 			var productCode = document.getElementById("mk_product_id");			
 			
-			/*20210707 상품수정 페이지에서 이미 선택 되어있는 상품종류는 재선택 불가능하도록 작업 */
+			/*상품수정 페이지에서 이미 선택 되어있는 상품종류는 재선택 불가능하도록 작업 */
 			var wuStatus = document.getElementById("wu").value;
 			var prCate = document.getElementById("prCategory").value;
 			var prCode = document.getElementById("prCode").value;
@@ -102,9 +102,7 @@
 								
 			});										
 		}
-		
-		
-		
+				
 		//상품상세이미지 추가 기능
 		function createPrDetailImg(fileNum) {
 			var parentDivTag = document.getElementById("pr_detail_img");
@@ -130,9 +128,6 @@
 				
 				console.log(newFileTag);
 		}
-		
-		
-		
 		
 	</script>
 	
@@ -185,8 +180,7 @@
 																<option value="" >상품 분류</option>
 															
 															<c:forEach var="sortList" items="${prodSortList}" varStatus="status">														  
-															  	<option value="${sortList.ps_sort_id}" <c:if test="${prodList.mk_product_type==sortList.ps_sort_id}">selected</c:if>>${sortList.ps_sort_name}</option>														  
-															
+															  	<option value="${sortList.ps_sort_id}" <c:if test="${prodList.mk_product_type==sortList.ps_sort_id}">selected</c:if>>${sortList.ps_sort_name}</option>												  															
 															</c:forEach>													   
 															</select>														
 														</div>
@@ -258,14 +252,7 @@
 														<input type="file" class="form-control" name="original_upfile5" id="original_upfile5">
 														<span>저장된 상품 상세 이미지: </span>
 														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile5}&imgRealName=${prodImgList.mk_original_upfile5}">${prodImgList.mk_original_upfile5}</a>
-													</div>
-													
-
-													
-													
-													
-													
-																			
+													</div>				
 													<div class="mb-3">
 														<label class="form-label" for="mk_content">상품 설명</label>
 														<textarea class="form-control" name="mk_content" id="mk_content">${prodList.mk_content}</textarea>
@@ -276,10 +263,12 @@
 													</div>
 													<c:choose>
 													<c:when test="${wu=='u'}">
-														<button type="button" class="btn btn-primary" onclick="adminProdUpdate();">수정</button>
+														<button type="button" class="btn btn-primary" onclick="adminProdSubmit('update');">수정</button>
+<!-- 														<button type="button" class="btn btn-primary" onclick="adminProdUpdate();">수정</button> -->
 													</c:when>	
 													<c:when test="${wu=='i'}">	
-														<button type="button" class="btn btn-primary" onclick="adminProdInsert();">등록</button>
+														<button type="button" class="btn btn-primary" onclick="adminProdSubmit('register');">등록</button>
+<!-- 														<button type="button" class="btn btn-primary" onclick="adminProdInsert();">등록</button> -->
 													</c:when>	
 												</c:choose>
 											
