@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -419,8 +422,17 @@ public class AdminProductService {
 	public void updateCartPrPrice(AdminProductVO adminProdVO) {
 		admProdDAO.updateCartPrPrice(adminProdVO);
 	}
-	
 
+	//관리자 상품관리 페이지 선택삭제 기능 구현
+	public int deleteAdminProdList(String delProdCode) {
+		return admProdDAO.deleteAdminProdList(delProdCode);
+	}
+	
+	//관리자 상품관리 페이지 선택삭제 - 상품상세이미지 테이블에서 delete 
+	public int deleteAdminProdImg(String productCode) {
+		return admProdDAO.deleteAdminProdImg(productCode);
+	}
+	
 	
 	
 }

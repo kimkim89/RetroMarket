@@ -84,7 +84,18 @@ public class AdminProductDAO {
 	public void updateCartPrPrice(AdminProductVO adminProdVO) {
 		sqlSession.update("mapper.AdminProd.updateCartPrPrice", adminProdVO);
 	}
+
+	//관리자 상품관리 페이지 선택삭제 기능 구현
+	public int deleteAdminProdList(String delProdCode) {
+		return sqlSession.delete("mapper.AdminProd.deleteAdminProdList", delProdCode);
+	}
 	
+	//관리자 상품관리 페이지 선택삭제 - 상품상세이미지 테이블에서 delete 
+	public int deleteAdminProdImg(String productCode) {
+		return sqlSession.delete("mapper.AdminProd.deleteAdminProdImg", productCode);
+	}
+	
+ 	
 	
  	
 	

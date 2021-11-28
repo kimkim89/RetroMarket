@@ -372,7 +372,28 @@ public class AdminProductController {
 			return mav;
 		}
 	
+		//관리자 상품관리 페이지 선택삭제 기능 구현
+		@RequestMapping(value="delEachProdInfo", produces = "application/text; charset=utf8") 
+		@ResponseBody
+		public String deleteEachCartProd(@RequestParam(value="checkedArray[]") List<String> chkBoxArr) {
 			
+			String delProdCode = "";
+			int delResult = 0;
+			String delMsg = "";
+			
+			for(String delPrCode : chkBoxArr) {
+				delProdCode = delPrCode;
+				
+				//장바구니 제품 delete
+				delResult = admProdService.deleteAdminProdList(delProdCode);
+				admProdService.deleteAdminProdImg(delProdCode);
+			}
+			
+			if(delResult != 0) {
+				delMsg = "삭제되었습니다.";
+			}
+			return delMsg;
+		}	
 		
 		
 		
