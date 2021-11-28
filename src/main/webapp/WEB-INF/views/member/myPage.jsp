@@ -54,6 +54,9 @@
 			<div align="center" style="margin-top: 1%;">
 				<button id="admin_btn" type="button" style="color: black;"> 관리자 페이지 이동</button>
 			</div>
+			<div align="center" style="margin-top: 1%;">
+				<button id="myPage_btn" type="button" style="color: black;"> 마이 페이지 이동</button>
+			</div>
 		</c:when>
 		<c:when test="${checkUserStatus == 0 }">
 			<div align="center" style="margin-top: 1%;">
