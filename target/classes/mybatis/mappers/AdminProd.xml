@@ -173,4 +173,24 @@
 		delete from product_file where pf_product_id = #{productCode};
 	</delete>
 	
+	<!-- 관리자 상품 수정 페이지에서 첨부된 이미지 파일 삭제 시 해당 이미지 관련 정보 null로 변경 -->
+	<update id="updateProdImgNull" parameterType="map">
+		update product_file
+		set ${origImgColumn} = null,
+			${storedImgColumn} = null,
+			${fileSizeColumn} = 0
+		where pf_product_id = #{prCode};
+	</update>
+	
+	<!-- 관리자 상품 수정 페이지에 첨부된 상품 썸네일 파일 삭제 시 해당 이미지 정보 null로 변경  -->
+	<update id="updateProdThumbNull" parameterType="String">
+		update product_info
+		set mk_original_thumb = null,
+			mk_stored_thumb = null,
+			mk_thumb_size = 0
+		where mk_product_id = #{prCode};
+	</update>
+	
+	
+	
 </mapper>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!doctype html>
 <html lang="en-US" dir="ltr">
@@ -18,6 +17,12 @@
      
 
     </script>
+    
+    <style type="text/css">
+    	.indexPrDesign {
+    		padding-bottom: 50px;
+    	}
+    </style>
 	
 	
 </head>
@@ -65,14 +70,13 @@
  
         
         <!--? New Updated Items Start -->
-        <div class="popular-items section-padding30" style="padding-top:60px;">
+        <div class="popular-items section-padding30 indexPrDesign" style="padding-top:60px;">
             <div class="container">
                 <!-- Section tittle -->
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8 col-md-10">
                         <div class="section-tittle mb-70 text-center">
                             <h2>신상품</h2>
-                            <p>새로운 상품을 확인해보세요!</p>
                         </div>
                     </div>
                 </div>
@@ -81,13 +85,13 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
-                                <img class="snack-img" src="${contextPath}/resources/images/temporary/${listByRegDate.mk_stored_thumb}" alt="">
+                                <img class="snack-img" src="${contextPath}/resources/images/temporary/${listByRegDate.mk_stored_thumb}" alt="" style="height: 270px;">
                                 <div class="img-cap">
                                     <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
                                 </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
+<!--                                 <div class="favorit-items"> -->
+<!--                                     <span class="flaticon-heart"></span> -->
+<!--                                 </div> -->
                             </div>
                             <div class="popular-caption">
                                 <h3><a href="product_details.html">${listByRegDate.mk_product_name}</a></h3>
@@ -97,18 +101,19 @@
                     </div>
                  </c:forEach>
                 </div>
-                <!--? New Updated Items End -->
+            </div>
+        </div>
+        <!--? New Updated Items End -->
                 
                 
         <!--? Popular Items Start -->
-        <div class="popular-items section-padding30" style="padding-top:30px;">
+        <div class="popular-items section-padding30 indexPrDesign" style="padding-top:30px;">
             <div class="container">
                 <!-- Section tittle -->
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8 col-md-10">
                         <div class="section-tittle mb-70 text-center">
                             <h2>인기 상품</h2>
-                            <p>걍 안팔려서 싸게 팝니다.</p>
                         </div>
                     </div>
                 </div>
@@ -117,13 +122,13 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
-                                <img class="snack-img" src="${contextPath}/resources/images/temporary/${listBySoldNum.mk_stored_thumb}" alt="">
+                                <img class="snack-img" src="${contextPath}/resources/images/temporary/${listBySoldNum.mk_stored_thumb}" alt="" style="height: 270px;">
                                 <div class="img-cap">
                                     <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
                                 </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
+<!--                                 <div class="favorit-items"> -->
+<!--                                     <span class="flaticon-heart"></span> -->
+<!--                                 </div> -->
                             </div>
                             <div class="popular-caption">
                                 <h3><a href="product_details.html">${listBySoldNum.mk_product_name}</a></h3>
@@ -145,22 +150,21 @@
                     <div class="col-xl-7 col-lg-8 col-md-10">
                         <div class="section-tittle mb-70 text-center">
                             <h2>할인 상품</h2>
-                            <p>걍 안팔려서 싸게 팝니다.</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                <c:forEach var="listByDiscount" items="${ListByDiscount}" varStatus="status">	
+                <c:forEach var="listByDiscount" items="${listByDiscount}" varStatus="status">	
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
-                                <img class="snack-img" src="${contextPath}/resources/images/temporary/${listByDiscount.mk_stored_thumb}" alt="">
+                                <img class="snack-img" src="${contextPath}/resources/images/temporary/${listByDiscount.mk_stored_thumb}" alt="" style="height: 270px;">
                                 <div class="img-cap">
                                     <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
                                 </div>
-                                <div class="favorit-items">
-                                    <span class="flaticon-heart"></span>
-                                </div>
+<!--                                 <div class="favorit-items"> -->
+<!--                                     <span class="flaticon-heart"></span> -->
+<!--                                 </div> -->
                             </div>
                             <div class="popular-caption">
                                 <h3><a href="product_details.html">${listByDiscount.mk_product_name}</a></h3>
@@ -172,44 +176,10 @@
                 </div>
             </div>
         </div>
-        <!-- On Sale Items End -->        
-
-        
-        <!--? Shop Method Start-->
-        <div class="shop-method-area">
-            <div class="container">
-                <div class="method-wrapper">
-                    <div class="row d-flex justify-content-between">
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-method mb-40">
-                                <i class="ti-package"></i>
-                                <h6>빠르고 정확한 배송</h6>
-                                <p>하루라도 빨리 동심의 세계로 들어갈 수 있도록 빠른 배송 물론 정확하게.</p>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-method mb-40">
-                                <i class="fas fa-cheese"></i>
-                                <h6>달콤 쌉싸름한 추억의 간식</h6>
-                                <p>이 가격에 이 맛이!?.</p>
-                            </div>
-                        </div> 
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-method mb-40">
-                                <i class="far fa-grin"></i>
-                                <h6>옛 추억을 생각하며 함박웃음</h6>
-                                <p>너도 나도 하하호호하하하하호호하하하.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Shop Method End-->
+        <!-- On Sale Items End -->   
     </main>
-    <footer>
-        
-    </footer>
+    
+
     <jsp:include page="./include/Footer.jsp" />
     
 </body>

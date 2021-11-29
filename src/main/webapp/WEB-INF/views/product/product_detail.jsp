@@ -23,8 +23,8 @@
     </style>
     
 </head>
-    
 <body>
+
     <header>
           <!-- Header Start -->
         <jsp:include page="../include/TopNavi.jsp" />
@@ -96,8 +96,6 @@
         </div>
         </c:forEach>
     </main>
-    
-    
         
 <script>
 
@@ -141,8 +139,6 @@
 			}
 	}
 	
-	
-	
 	//좋아요(찜하기) 기능 추가
 	function likeProduct(productIndex) {
 		
@@ -173,17 +169,10 @@
 				}	
 			});	
 	}
-	
-	
-	
+
 </script> 
-    
- 
-    <footer>
-        
-    </footer>
+
     <jsp:include page="../include/Footer.jsp" />
 
 </body>
-
 </html>

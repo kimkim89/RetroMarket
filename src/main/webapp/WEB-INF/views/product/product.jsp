@@ -108,37 +108,6 @@
             </div>
         </section>
         <!-- Latest Products End -->
-        <!--? Shop Method Start-->
-        <div class="shop-method-area">
-            <div class="container">
-                <div class="method-wrapper">
-                    <div class="row d-flex justify-content-between">
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-method mb-40">
-                                <i class="ti-package"></i>
-                                <h6>빠르고 정확한 배송</h6>
-                                <p>하루라도 빨리 동심의 세계로 들어갈 수 있도록 빠른 배송 물론 정확하게.</p>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-method mb-40">
-                                <i class="fas fa-cheese"></i>
-                                <h6>달콤 쌉싸름한 추억의 간식</h6>
-                                <p>이 가격에 이 맛이!?.</p>
-                            </div>
-                        </div> 
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-method mb-40">
-                                <i class="far fa-grin"></i>
-                                <h6>옛 추억을 생각하며 함박웃음</h6>
-                                <p>너도 나도 하하호호하하하하호호하하하.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Shop Method End-->
     </main>
     
    
@@ -246,16 +215,8 @@
 	   	}
    }
    
-
-		
-   
-   
    </script> 
     
-    
-    
-    
-   
     <jsp:include page="../include/Footer.jsp" />
     
 </body>

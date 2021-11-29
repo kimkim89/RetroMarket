@@ -9,18 +9,18 @@
                     <div class="menu-wrapper">
                         <!-- Logo -->
                         <div class="logo" >
-                            <a href="${contextPath}/index/main" id="zzz"><img src="${contextPath}/resources/assets/img/logo/MainLogo1.png" alt="" style="height: 75px; "></a>
+                            <a href="${contextPath}/main/index" id="zzz"><img src="${contextPath}/resources/assets/img/logo/MainLogo1.png" alt="" style="height: 75px; "></a>
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu d-none d-lg-block">
                             <nav>                                                
                                 <ul id="navigation">  
-                                	<li><a href="${contextPath}/index/main">메인</a></li>
+                                	<li><a href="${contextPath}/main/index">메인</a></li>
                                     <li class="hot"><a href="${contextPath}/product/prList?prCode=all">모든 상품</a></li>
                                     <li><a href="${contextPath}/product/prList?prCode=snack">과자</a></li>
                                     <li><a href="${contextPath}/product/prList?prCode=jellycandy">젤리/캔디</a></li>
                                     <li><a href="${contextPath}/product/prList?prCode=etc">기타</a></li>
-                                    <li><a href="#">이벤트</a></li>
+<!--                                     <li><a href="#">이벤트</a></li> -->
                                     <li><a href="#">고객 센터</a></li>
                                     <li><a href="${contextPath}/product/temporary">Contact Developer</a></li>
                                 </ul>

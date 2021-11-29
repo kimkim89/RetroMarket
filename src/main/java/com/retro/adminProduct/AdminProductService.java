@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -433,6 +434,41 @@ public class AdminProductService {
 		return admProdDAO.deleteAdminProdImg(productCode);
 	}
 	
+	//관리자 상품 수정 페이지에서 첨부된 이미지 파일 삭제 시 해당 이미지 파일명 null로 변경 
+	public int updateProdImgNull(String imgType, String imgFileName, String prCode) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		String origImgColumn = "mk_original_" + imgType;
+		String storedImgColumn = "mk_stored_" + imgType;
+		String fileSizeColumn = "mk_upfile_size" ;
+		int resultCnt = 0;
+		
+			if(imgType.equals("thumbnail")) {
+				resultCnt = admProdDAO.updateProdThumbNull(prCode);
+			}else {
+				if(imgType.equals("upfile1")) {
+					fileSizeColumn = fileSizeColumn + "1";
+				}else if(imgType.equals("upfile2")) {
+					fileSizeColumn = fileSizeColumn + "2";
+				}else if(imgType.equals("upfile3")) {
+					fileSizeColumn = fileSizeColumn + "3";
+				}else if(imgType.equals("upfile4")) {
+					fileSizeColumn = fileSizeColumn + "4";
+				}else if(imgType.equals("upfile5")) {
+					fileSizeColumn = fileSizeColumn + "5";
+				}
+				
+				map.put("origImgColumn", origImgColumn);
+				map.put("storedImgColumn", storedImgColumn);
+				map.put("fileSizeColumn", fileSizeColumn);
+				map.put("prCode", prCode);
+				
+				resultCnt = admProdDAO.updateProdImgNull(map);
+			}
+			
+			return resultCnt;		
+	}
 	
-	
+
+
 }

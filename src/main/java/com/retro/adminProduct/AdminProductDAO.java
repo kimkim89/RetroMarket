@@ -2,6 +2,7 @@ package com.retro.adminProduct;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,8 +96,15 @@ public class AdminProductDAO {
 		return sqlSession.delete("mapper.AdminProd.deleteAdminProdImg", productCode);
 	}
 	
- 	
+ 	//관리자 상품 수정 페이지에서 첨부된 이미지 파일 삭제 시 해당 이미지 파일명 null로 변경 
+	public int updateProdImgNull(Map<String, Object> map) {
+		return sqlSession.update("mapper.AdminProd.updateProdImgNull", map);
+	}
 	
- 	
+	//관리자 상품 수정 페이지에 첨부된 상품 썸네일 파일 삭제 시 해당 이미지 정보 null로 변경 
+	public int updateProdThumbNull(String prCode) {
+		return sqlSession.update("mapper.AdminProd.updateProdThumbNull", prCode);
+	}
+	
 	
 }
