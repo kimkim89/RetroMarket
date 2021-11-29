@@ -159,7 +159,7 @@ public class AdminProductController {
 			System.out.println("20210715_테스트입니다.");
 			
 			
-			//서버 물리적 경로
+			//이미지 저장 경로
 			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
 			
 			File makeFolder = new File(uploadPath);
@@ -380,24 +380,57 @@ public class AdminProductController {
 			String delProdCode = "";
 			int delResult = 0;
 			String delMsg = "";
-			
+						
 			for(String delPrCode : chkBoxArr) {
 				delProdCode = delPrCode;
 				
 				//장바구니 제품 delete
 				delResult = admProdService.deleteAdminProdList(delProdCode);
-				admProdService.deleteAdminProdImg(delProdCode);
+							admProdService.deleteAdminProdImg(delProdCode);
 			}
 			
-			if(delResult != 0) {
+			if(delResult != 0 ) {
 				delMsg = "삭제되었습니다.";
 			}
+			
 			return delMsg;
 		}	
 		
+		//관리자 상품수정 페이지 특정 이미지 파일 삭제 기능 구현
+		@RequestMapping(value = "ajaxDelProdImg", produces = "application/text; charset=utf8")
+		@ResponseBody
+		public String ajaxDeleteProdImg(@RequestParam(value="imageType") String imgType, 
+										@RequestParam(value="imageFileName") String imgFileName, 
+										@RequestParam(value="prodCode") String prCode,
+										HttpServletRequest request,
+										HttpServletResponse response) {
+			
+			//이미지 저장 경로
+			String uploadPath = getFileUploadPath(request);
+			String delMsg = "";
+			File imgFile = new File(uploadPath + imgFileName);
+			
+			int delResultCnt = admProdService.updateProdImgNull(imgType, imgFileName, prCode);
+			
+			if(delResultCnt > 0) {
+				if(imgFile.exists()) {
+					imgFile.delete();
+					delMsg = "해당 첨부파일을 삭제했습니다.";
+				}
+			}
+			System.out.println();
+			System.out.println("delMsg 확인중 : " + delMsg);
+			System.out.println();
+			return delMsg;
+		}
 		
 		
-	
+		//이미지 저장 경로 가져오기
+		public String getFileUploadPath(HttpServletRequest request) {
+			//이미지 저장 경로
+			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/temporary/");
+			return uploadPath;
+		}
 
 		
 		

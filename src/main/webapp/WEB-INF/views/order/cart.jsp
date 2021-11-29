@@ -109,7 +109,7 @@
           </div>
       </div>
       <!--================Cart Area =================-->
-      <section class="cart_area section_padding">
+      <section class="cart_area section_padding" style="padding: 125px 0px;">
       <form name="cart_form" id="cart_form" method="post">
         <div class="container" style="max-width: 110%;">
           <div class="cart_inner">

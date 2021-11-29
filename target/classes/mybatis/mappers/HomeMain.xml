@@ -15,15 +15,6 @@
 		limit 3;	
 	</select>
 	
-	<!-- 메인 화면에 상품 정보 출력 (할인상품)-->
-	<select id="selectImageByDiscountRate" resultType="java.util.HashMap">		
-		select * from product_info
-		where mk_product_type = 2
-		or mk_product_discount_rate is not null
-		order by mk_register_date desc
-		limit 3;		
-	</select>
-
 	<!-- 메인 화면에 상품 정보 출력 (인기상품)-->
 	<select id="selectImageBySoldNum" resultType="java.util.HashMap">		
 		select * 
@@ -34,6 +25,14 @@
 <!-- 		order by a.mk_sold_number desc limit 6;		 -->
 	</select>
 
+	<!-- 메인 화면에 상품 정보 출력 (할인상품)-->
+	<select id="selectImageByDiscountRate" resultType="java.util.HashMap">		
+		select * from product_info
+		where mk_product_type = 3
+<!-- 		or mk_product_discount_rate is not null -->
+		order by mk_register_date desc
+		limit 3;		
+	</select>
 	
 	
 	

@@ -90,21 +90,18 @@
 					if(wuStatus == 'u' && prCate == optionValue) {
 						$("#mk_product_id").val(prCode);
 					}
-					
 					if(prCate != optionValue) {
 						$("#mk_product_id").val(data);
 					}
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
-					
 					alert("ERROR: " + textStatus + " : " + errorThrown);
 				}
-								
 			});										
 		}
 				
 		//상품상세이미지 추가 기능
-		function createPrDetailImg(fileNum) {
+		/*function createPrDetailImg(fileNum) {
 			var parentDivTag = document.getElementById("pr_detail_img");
 			
 			var totalFileNum = 0;
@@ -127,13 +124,33 @@
 				fileNum++;
 				
 				console.log(newFileTag);
-		}
+		}*/
 		
-	</script>
+		//첨부파일 삭제
+		function deletePrImg(imageType, imageFileName, prodCode) {
+			
+			var dataArr = {"imageType" : imageType, "imageFileName" : imageFileName, "prodCode" : prodCode};
+		
+			$.ajax({
+				type: "POST",
+				url: "${contextPath}/adminProd/ajaxDelProdImg",
+				async: false,
+				data: dataArr,
+				success: function(data) {
+					alert(data);
+					location.reload();
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert("ERROR: " + textStatus + " : " + errorThrown);
+				}
+			});							
+		}		
+	</script>	
 	
 	<style>
 		.form-control{ width:50%;height:auto; }
 	</style>
+	
 </head>
 
 <body>
@@ -216,51 +233,79 @@
 													<div class="mb-3">
 														<label class="form-label" for=mk_original_thumb>상품 썸네일(상품목록용)</label>
 														<input type="file" class="form-control" name="original_thumb" id="original_thumb">
-														<span class="image_download">저장된 상품 썸네일: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_thumb}&imgRealName=${prodList.mk_original_thumb}">${prodList.mk_original_thumb}</a>
-													</div>
-													
-
-													
-													<!-- 2021.07.13 상세이미지 파일 insert 테스트용 -->
+														<c:if test="${prodList.mk_stored_thumb != null}">
+															<span class="image_download">저장된 상품 썸네일: </span>
+																<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodList.mk_stored_thumb}&imgRealName=${prodList.mk_original_thumb}">${prodList.mk_original_thumb}</a>
+															<span style="font-weight: bold;" id="delPrImg0">
+																<a href="javascript:deletePrImg('thumbnail', '${prodList.mk_stored_thumb}', '${prodList.mk_product_id}');">[삭제]</a>
+ 															</span>
+														</c:if>
+													</div>								
 													<div class="mb-3">
 														<label class="form-label" for="mk_original_upfile1">상품 이미지1(상품상세보기)</label>														
 														<input type="file" class="form-control" name="original_upfile1" id="original_upfile1">
-														<span>저장된 상품 상세 이미지: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile1}&imgRealName=${prodImgList.mk_original_upfile1}">${prodImgList.mk_original_upfile1}</a>
+														<c:if test="${prodImgList.mk_stored_upfile1 != null}">
+															<span>저장된 상품 상세 이미지: </span>
+																<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile1}&imgRealName=${prodImgList.mk_original_upfile1}">${prodImgList.mk_original_upfile1}</a>
+															<span style="font-weight: bold;" id="delPrImg1">
+																<a href="javascript:deletePrImg('upfile1', '${prodImgList.mk_stored_upfile1}', '${prodList.mk_product_id}');">[삭제]</a>
+															</span>
+														</c:if>
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for="mk_original_upfile2">상품 이미지2(상품상세보기)</label>														
 														<input type="file" class="form-control" name="original_upfile2" id="original_upfile2">
-														<span>저장된 상품 상세 이미지: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile2}&imgRealName=${prodImgList.mk_original_upfile2}">${prodImgList.mk_original_upfile2}</a>
+														<c:if test="${prodImgList.mk_stored_upfile2 != null}">
+															<span>저장된 상품 상세 이미지: </span>
+																<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile2}&imgRealName=${prodImgList.mk_original_upfile2}">${prodImgList.mk_original_upfile2}</a>
+															<span style="font-weight: bold;" id="delPrImg2" >
+																<a href="javascript:deletePrImg('upfile2', '${prodImgList.mk_stored_upfile2}', '${prodList.mk_product_id}');">[삭제]</a>
+															</span>																				
+														</c:if>
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for="mk_original_upfile3">상품 이미지3(상품상세보기)</label>														
 														<input type="file" class="form-control" name="original_upfile3" id="original_upfile3">
-														<span>저장된 상품 상세 이미지: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile3}&imgRealName=${prodImgList.mk_original_upfile3}">${prodImgList.mk_original_upfile3}</a>
+														<c:if test="${prodImgList.mk_stored_upfile3 != null}">
+															<span>저장된 상품 상세 이미지: </span>
+															<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile3}&imgRealName=${prodImgList.mk_original_upfile3}">${prodImgList.mk_original_upfile3}</a>
+															<span style="font-weight: bold;" id="delPrImg3">
+																<a href="javascript:deletePrImg('upfile3', '${prodImgList.mk_stored_upfile3}', '${prodList.mk_product_id}');">[삭제]</a>
+															</span>
+														</c:if>
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for="mk_original_upfile4">상품 이미지4(상품상세보기)</label>														
 														<input type="file" class="form-control" name="original_upfile4" id="original_upfile4">
-														<span>저장된 상품 상세 이미지: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile4}&imgRealName=${prodImgList.mk_original_upfile4}">${prodImgList.mk_original_upfile4}</a>
+														<c:if test="${prodImgList.mk_stored_upfile4 != null}">
+															<span>저장된 상품 상세 이미지: </span>
+															<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile4}&imgRealName=${prodImgList.mk_original_upfile4}">${prodImgList.mk_original_upfile4}</a>
+															<span style="font-weight: bold;" id="delPrImg4">
+																<a href="javascript:deletePrImg('upfile4', '${prodImgList.mk_stored_upfile4}', '${prodList.mk_product_id}');">[삭제]</a>
+															</span>
+														</c:if>
 													</div>
 													<div class="mb-3">
 														<label class="form-label" for="mk_original_upfile5">상품 이미지5(상품상세보기)</label>														
 														<input type="file" class="form-control" name="original_upfile5" id="original_upfile5">
-														<span>저장된 상품 상세 이미지: </span>
-														<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile5}&imgRealName=${prodImgList.mk_original_upfile5}">${prodImgList.mk_original_upfile5}</a>
+														<c:if test="${prodImgList.mk_stored_upfile5 != null}">
+															<span>저장된 상품 상세 이미지: </span>
+																<a href="${contextPath}/adminProd/downloadImg?imgFileName=${prodImgList.mk_stored_upfile5}&imgRealName=${prodImgList.mk_original_upfile5}">${prodImgList.mk_original_upfile5}</a>
+															<span style="font-weight: bold;" id="delPrImg5" onclick="deletePrImg('upfile5');">
+																<a href="javascript:deletePrImg('upfile5', '${prodImgList.mk_stored_upfile5}', '${prodList.mk_product_id}');">[삭제]</a>
+															</span>
+														</c:if>
 													</div>				
 													<div class="mb-3">
 														<label class="form-label" for="mk_content">상품 설명</label>
 														<textarea class="form-control" name="mk_content" id="mk_content">${prodList.mk_content}</textarea>
 														<script>														
-															CKEDITOR.replace('mk_content', {filebrowserUploadUrl: '${contextPath}/adminProd/editorFileUpload'});
-															//console.log('${contextPath}/adminProd/editorFileUpload');														
+ 															CKEDITOR.replace('mk_content', {filebrowserUploadUrl: '${contextPath}/adminProd/editorFileUpload'});
+ 															//console.log('${contextPath}/adminProd/editorFileUpload');														
 														</script>
 													</div>
+
+
 													<c:choose>
 													<c:when test="${wu=='u'}">
 														<button type="button" class="btn btn-primary" onclick="adminProdSubmit('update');">수정</button>

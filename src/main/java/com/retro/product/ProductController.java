@@ -166,10 +166,10 @@ public class ProductController {
 	//2021.11.17 ajax
 	@RequestMapping(value = "ajaxProdList")
 	@ResponseBody
-	public List<List<HashMap<String, Object>>> ajaxSelectProdList(@RequestParam("prCode") String prCode,
-															@RequestParam("prType") String prType,
-															@RequestParam(defaultValue = "1") int nowPage
-															) {
+	public List<List<HashMap<String, Object>>> ajaxSelectProdList(	@RequestParam("prCode") String prCode,
+																	@RequestParam("prType") String prType,
+																	@RequestParam(defaultValue = "1") int nowPage
+																	) {
 		
 		List<HashMap<String, Object>> productList = new ArrayList<HashMap<String,Object>>();
 		

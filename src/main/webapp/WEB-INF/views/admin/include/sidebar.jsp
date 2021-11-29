@@ -26,7 +26,7 @@ if("${checkUserStatus}" != 1) {
 					</li>
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="${contextPath}/admin/adminVisitorLog">
-			              <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">방문자로그</span>
+			              <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">회원접속로그</span>
 			            </a>
 					</li>
 					<li class="sidebar-item">

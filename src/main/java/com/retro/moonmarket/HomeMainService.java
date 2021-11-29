@@ -13,22 +13,20 @@ public class HomeMainService {
 	HomeMainDAO homeMainDAO;
 	
 	
-	//최신상품 정렬 by 신상품
+	//메인페이지 - 신상품
 	public List<HashMap<String, Object>> selectImageByRegDate() {				
 		return homeMainDAO.selectImageByRegDate();
 	}
 	
-	//최신상품 정렬 by 할인상품
-	public List<HashMap<String, Object>> selectImageByDiscountRate() {
-		return homeMainDAO.selectImageByDiscountRate();
-	}
-	
-	//최신상품 정렬 by 인기상품
+	//메인페이지 - 인기상품
 	public List<HashMap<String, Object>> selectImageBySoldNum() {
 		return homeMainDAO.selectImageBySoldNum();
 	}
 
-
+	//메인페이지 - 할인상품
+	public List<HashMap<String, Object>> selectImageByDiscountRate() {
+		return homeMainDAO.selectImageByDiscountRate();
+	}
 
 
 
