@@ -379,19 +379,20 @@ public class AdminProductController {
 			
 			String delProdCode = "";
 			int delResult = 0;
-			String delMsg = "";
-			
+			String delMsg = "체크";
+						
 			for(String delPrCode : chkBoxArr) {
 				delProdCode = delPrCode;
 				
 				//장바구니 제품 delete
 				delResult = admProdService.deleteAdminProdList(delProdCode);
-				admProdService.deleteAdminProdImg(delProdCode);
+							admProdService.deleteAdminProdImg(delProdCode);
 			}
 			
-			if(delResult != 0) {
+			if(delResult != 0 ) {
 				delMsg = "삭제되었습니다.";
 			}
+			
 			return delMsg;
 		}	
 		

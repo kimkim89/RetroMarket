@@ -10,15 +10,8 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description"
-	content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-<meta name="author" content="AdminKit">
-<meta name="keywords"
-	content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+<%@ include file="./include/admin_top.jsp" %>
 
 <title>상품 관리</title>
 <script src="${contextPath}/resources/lib/ckeditor/ckeditor.js"></script>
@@ -93,7 +86,7 @@
 									<table class="table table-bordered">
 										<thead>
 											<tr>
-												<th><input type="checkbox" name="del_check_all" id="del_check_all" /></th>													
+												<th><input type="checkbox" name="del_check_all" id="del_check_all" onclick="chooseAllProd();" /></th>													
 												<th style="text-align:center;">#</th>
 												<th style="width: 60%;text-align:center;">상품정보</th>
 												<th style="width: 22%;text-align:center;">가격/재고</th>	
@@ -141,7 +134,7 @@
 													</div>
 												</td>
 												<td style="vertical-align: middle;">
-													<button type="button" class="btn btn-info btn_delete" style="margin-bottom:10px;margin-left:23px;" onclick="adminProdDelete(${prodList.mk_idx});">삭제</button><br>
+<%-- 													<button type="button" class="btn btn-info btn_delete" style="margin-bottom:10px;margin-left:23px;" onclick="adminProdDelete(${prodList.mk_idx});">삭제</button><br> --%>
 													<button type="button" class="btn btn-info btn_blue" style="margin-bottom:10px;margin-left:23px;" onclick="adminProdModify(${prodList.mk_idx});">수정</button>
 												</td>
 											</tr>
@@ -180,6 +173,28 @@
 		</main>
 		
 <script type="text/javascript">
+	
+	/*전체삭제 기능*/
+	let clickCnt = 1;
+	let delChkBoxArray = document.getElementsByName("del_check");	
+	
+	function chooseAllProd() {
+	
+		clickCnt++;
+			
+			if(clickCnt%2 == 0) {
+				for(var j=0; j<delChkBoxArray.length; j++) {
+					if(delChkBoxArray[j].disabled == false) {
+						delChkBoxArray[j].checked = true;
+					}
+				}
+			}else {
+				for(var j=0; j<delChkBoxArray.length; j++) {
+					delChkBoxArray[j].checked = false;
+				}
+			}			
+	}//chooseAllProd()함수 끝
+
 	/*선택삭제 기능 */
 	function deleteAdminProd() {
 		var checkedArray = [];
@@ -192,18 +207,19 @@
 		
 		console.log(checkedArray);
 		
-// 		$.ajax({
-// 			type : "POST",
-// 			url : "${contextPath}/cart/delEachProdInfo",
-// 			data : {"checkedArray" : checkedArray},			
-// 			success: function(data) {
-// 				alert(data);
-// 				location.href = location.href;
-// 			},
-// 			error: function(xhr, status, error) {
-// 				alert(error);
-// 			}
-// 		});//ajax끝
+		$.ajax({
+			type : "POST",
+			url : "${contextPath}/adminProd/delEachProdInfo",
+			data : {"checkedArray" : checkedArray},			
+			success: function(data) {
+				console.log(data);
+				alert(data);
+				location.href = location.href;
+			},
+			error: function(xhr, status, error) {
+				alert(error);
+			}
+		});//ajax끝
 		
 	}//deleteEachProd()함수 끝
 </script>	
