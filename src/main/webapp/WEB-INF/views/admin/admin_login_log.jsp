@@ -38,12 +38,12 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-								<span class="btn btn-info" style="background-color:lightcoral; border:solid 1px lightcoral;pointer-events: none;">접속로그결과: ${OrderCount}개</span>
+								<span class="btn btn-info" style="background-color:lightcoral; border:solid 1px lightcoral;pointer-events: none;">접속로그결과: ${resultCnt}개</span>
 								<form name="prodSearch" id="prodSearch" class="d-none d-sm-inline-block" action="" method="post">									
 									<div class="input-group input-group-navbar">
 										<select name="searchField" class="form-select" aria-label="Default select example">
-											<option value="order_name">회원아이디</option>
-											<option value="order_code">회원IP</option>
+											<option value="login_id">회원아이디</option>
+											<option value="login_ip">회원IP</option>
 										</select>&nbsp;&nbsp; 
 										<input type="text" name="keyword" class="form-control" placeholder="" aria-label="Search">
 										<button type="button" class="btn" onclick="searchOrderList();">
@@ -75,14 +75,14 @@
 											<c:set var="num" value="1"/>
 										</c:when>
 										</c:choose>
-										<c:forEach var="odList" items="${csOrderList}" varStatus="status">
+										<c:forEach var="infoList" items="${infoList}" varStatus="status">
 											<tr>
 												<th scope="row">${num}</th>
-												<td>아이디</td>
-												<td>방문자아이피</td>											
-												<td>사용 브라우저</td>
-												<td>방문자 접속 경로</td>												
-												<td>방문 날짜</td>
+												<td>${infoList.login_id}</td>
+												<td>${infoList.login_ip}</td>											
+												<td>${infoList.login_browser}</td>
+												<td>${infoList.login_reference}</td>												
+												<td><fmt:formatDate value="${infoList.login_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 											</tr>
 										<c:set var="num" value="${num+1}"/>	
 										</c:forEach>												
@@ -95,17 +95,17 @@
 							<ul class="pagination pagination-md">
 								<c:if test="${pagingMap.blockFirst != 1}">
 									<li class="page-item"><a class="page-link"
-										href="${contextPath}/adminOrder/orderList?nowPage=${pagingMap.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i
+										href="${contextPath}/adminLog/loginInfoList?nowPage=${pagingMap.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i
 											class="fas fa-angle-left"></i></a></li>
 								</c:if>
 								<c:forEach begin="${pagingMap.blockFirst}" end="${pagingMap.blockLast}" var="i">
 									<li class="page-item">
-										<a href="${contextPath}/adminOrder/orderList?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
+										<a href="${contextPath}/adminLog/loginInfoList?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
 									</li>
 								</c:forEach>
 								<c:if test="${pagingMap.totalPage != pagingMap.blockLast}">
 									<li class="page-item">
-										<a class="page-link" href="${contextPath}/adminOrder/orderList?nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
+										<a class="page-link" href="${contextPath}/adminLog/loginInfoList?nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
 											<i	class="fas fa-angle-right"></i>
 										</a>
 									</li>

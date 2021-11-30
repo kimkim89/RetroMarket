@@ -185,14 +185,7 @@ public class AdminController {
 		return mav;
 	}	
 	
-	//주문 관리 페이지 이동
-//	@RequestMapping(value = "adminOrder")
-//	public ModelAndView adminSales() {
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("admin/admin_order");
-//		return mav;
-//	}
-	
+
 	//방문자로그 페이지 이동
 	@RequestMapping(value = "adminVisitorLog")
 	public ModelAndView adminVisitorLog() {

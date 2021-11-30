@@ -76,4 +76,18 @@
 		select status from member where id = #{userId};
 	</select>
 	
+	<!-- 회원 접속 시 접속 로그 저장 -->
+	<insert id="insertLoginInfo" parameterType="loginInfoVO">
+		insert into login_info ( login_id,
+								 login_ip,
+								 login_reference,
+								 login_browser
+								)
+						values ( #{login_id},
+								 #{login_ip},
+								 #{login_reference},
+								 #{login_browser}	
+								);
+	</insert>
+	
 </mapper>

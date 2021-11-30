@@ -12,14 +12,15 @@
 		select * 
 		from product_info left join product_file as b 
 		on mk_product_id = b.pf_product_id
+		where mk_status = 1
 	<if test="prCodeNum!=0"> 
-		where mk_product_category = #{prCodeNum} 
+		and mk_product_category = #{prCodeNum} 
 	</if>
 	<if test="prCodeNum!=0 and prTypeNum!=0"> 
 		and mk_product_type = #{prTypeNum}
 	</if>
 	<if test="prCodeNum==0 and prTypeNum!=0"> 
-		where mk_product_type = #{prTypeNum}
+		and mk_product_type = #{prTypeNum}
 	</if>
 		order by mk_register_date desc
 		limit #{pageFirst}, #{pageSize};
@@ -47,14 +48,15 @@
 	<select id="countAllProducts" resultType="int" parameterType="map">		
 		select count(*) 
 		from product_info
+		where mk_status = 1
 	<if test="prCodeNum!=0"> 
-		where mk_product_category = #{prCodeNum} 
+		and mk_product_category = #{prCodeNum} 
 	</if>
 	<if test="prCodeNum!=0 and prTypeNum!=0"> 
 		and mk_product_type = #{prTypeNum}
 	</if>
 	<if test="prCodeNum==0 and prTypeNum!=0"> 
-		where mk_product_type = #{prTypeNum}
+		and mk_product_type = #{prTypeNum}
 	</if>						
 	</select>
 	

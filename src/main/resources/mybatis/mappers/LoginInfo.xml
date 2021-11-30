@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.LoginInfo">
+
+	<!-- 회원 접속 로그 조회 -->
+	<select id="selectAllLoginInfo" resultType="loginInfoVO" parameterType="map">
+			select * 
+			from login_info
+		<if test="searchField != '' ">
+			where ${searchField} like concat('%', #{keyword}, '%')
+		</if>
+			order by login_idx desc
+			limit #{pageFirst}, #{pageSize};
+	</select>
+
+	<!-- 회원 접속 로그 데이터 개수 -->
+	<select id="countLoginInfo" resultType="int" parameterType="map">
+		select count(*) 
+		from login_info
+	<if test="searchField != '' "	>
+		where ${searchField} like concat('%', #{keyword}, '%');
+	</if>
+	</select>
+
+
+</mapper>

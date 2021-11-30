@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.retro.loginInfo.LoginInfoVO;
+
 @Service
 public class MemberService {
 	
@@ -72,13 +74,17 @@ public class MemberService {
 				if(emailCheck != 1) {
 					notice = "이메일 인증이 되지 않았습니다. 메일인증을 진행해주세요.";
 					viewPages = "member/login";
-				} else {
+				} else { //**로그인 되면 하단 코드 실행
 					request.getSession().setAttribute("user_id", memberVO.getId());
 					// status가 0일 경우 = 회원, status가 1일 경우 = 관리자
 					int checkUserStatus = checkUserStatus(memberVO.getId());
 					memberVO.setStatus(checkUserStatus);
 					request.getSession().setAttribute("checkUserStatus", memberVO.getStatus());
-					viewPages = "redirect:/index/main";
+					
+					//회원 접속 시 접속 로그 저장
+					insertLoginInfo(memberVO.getId(), request);
+					
+					viewPages = "redirect:/main/index";
 				}
 			} else {
 				notice = "비밀번호가 틀렸습니다.";
@@ -131,9 +137,74 @@ public class MemberService {
 	}
 
 	
+	//회원 접속 시 접속 로그 저장
+	public int insertLoginInfo(String userId, HttpServletRequest request) {
+		
+		LoginInfoVO loginInfoVO = new LoginInfoVO();
+			
+			String userIP = getMemberCurrentIP(request);
+			String userReference = request.getHeader("referer");
+			String userBrowser = getMemberBrowserInfo(request);
+			
+			loginInfoVO.setLogin_id(userId);
+			loginInfoVO.setLogin_ip(userIP);
+			loginInfoVO.setLogin_reference(userReference);
+			loginInfoVO.setLogin_browser(userBrowser);
+		
+		return memberDAO.insertLoginInfo(loginInfoVO);
+	}
 	
 	
+	//회원IP 정보 가져오기
+	public String getMemberCurrentIP(HttpServletRequest request) {
+		
+		String memberIP = request.getHeader("X-Forwarded-For");	    
+
+	    if (memberIP == null) {
+	    	memberIP = request.getHeader("Proxy-Client-IP");	        
+	    }
+	    if (memberIP == null) {
+	    	memberIP = request.getHeader("WL-Proxy-Client-IP");	        
+	    }
+	    if (memberIP == null) {
+	    	memberIP = request.getHeader("HTTP_CLIENT_IP");	        
+	    }
+	    if (memberIP == null) {
+	    	memberIP = request.getHeader("HTTP_X_FORWARDED_FOR");	        
+	    }
+	    if (memberIP == null) {
+	    	memberIP = request.getRemoteAddr();	        
+	    }
+	    
+	    return memberIP;
+	}
 	
+	//회원 브라우저 정보 가져오기
+	public String getMemberBrowserInfo(HttpServletRequest request) {
+		
+		String currentBrowser = "";
+		String userAgent = request.getHeader("User-Agent");
+		
+		if(userAgent.indexOf("Trident") > -1) { //IE
+			currentBrowser = "IE";
+		}else if(userAgent.indexOf("Edge") > -1) { //Edge
+			currentBrowser = "Edge";
+		}
+		
+		else if(userAgent.indexOf("Whale") > -1) { //Whale
+			currentBrowser = "Whale";
+		}else if(userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1 ) { //Opera
+			currentBrowser = "Opera";
+		}else if(userAgent.indexOf("Firefox") > -1) { //Firefox
+			currentBrowser = "Firefox";
+		}else if(userAgent.indexOf("Safari") > -1 || userAgent.indexOf("Chrome") > -1 ) { //Safari
+			currentBrowser = "Safari";
+		}else if(userAgent.indexOf("Chrome") > -1) { //Chrome
+			currentBrowser = "Chrome";
+		}
+		
+		return currentBrowser;
+	}
 	
 	
 	
