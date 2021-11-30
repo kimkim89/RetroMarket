@@ -469,6 +469,11 @@ public class AdminProductService {
 			return resultCnt;		
 	}
 	
+	
+	//상품관리 목록 페이지 - 상품 삭제 시 저장되어 있던 상품 이미지명 조회 
+	public Map<String, String> selectStoredFileList(String prCode) {
+		return admProdDAO.selectStoredFileList(prCode);
+	}
 
 
 }

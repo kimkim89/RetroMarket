@@ -18,7 +18,7 @@
 			limit #{pageFirst}, #{pageSize};
 	</select>
 
-	<select id="countOrderList" resultType="int">
+	<select id="countOrderList" resultType="int" parameterType="map">
 			select count(*) 
 			from product_order
 		<if test="searchField != '' "	>

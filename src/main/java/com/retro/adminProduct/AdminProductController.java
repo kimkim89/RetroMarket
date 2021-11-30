@@ -8,9 +8,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.security.KeyStore.Entry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -354,36 +356,71 @@ public class AdminProductController {
 		}
 		
 				
-		//20210628 테스트중
-		@RequestMapping(value="/adminProd/test33") 
-		public ModelAndView dynamicTagTest() {
-			ModelAndView mav = new ModelAndView();
-			
-			mav.setViewName("testFolder/test33");
-			return mav;
-		}
 		
-		//20210628 테스트중
-		@RequestMapping(value="/adminProd/testtest") 
-		public ModelAndView dynamicTagTest2() {
-			ModelAndView mav = new ModelAndView();
-			
-			mav.setViewName("testFolder/testtest");
-			return mav;
-		}
 	
 		//관리자 상품관리 페이지 선택삭제 기능 구현
 		@RequestMapping(value="delEachProdInfo", produces = "application/text; charset=utf8") 
 		@ResponseBody
-		public String deleteEachCartProd(@RequestParam(value="checkedArray[]") List<String> chkBoxArr) {
+		public String deleteEachCartProd(@RequestParam(value="checkedArray[]") List<String> chkBoxArr,
+										 HttpServletRequest request) {
+			
+			//이미지 저장 경로
+			String uploadPath = getFileUploadPath(request);	
 			
 			String delProdCode = "";
 			int delResult = 0;
 			String delMsg = "";
+			Map<String, String> storedFileList;
+			
 						
 			for(String delPrCode : chkBoxArr) {
 				delProdCode = delPrCode;
 				
+				//상품관리 목록 페이지 - 상품 삭제 시 저장되어 있던 상품 이미지명 조회 
+				storedFileList = admProdService.selectStoredFileList(delProdCode);
+			
+				if(storedFileList.get("mk_stored_thumb") != null) {
+					File imgFile = new File(uploadPath + storedFileList.get("mk_stored_thumb").toString());
+					if(imgFile.exists()) {
+						imgFile.delete();
+					}
+				}
+				
+				if(storedFileList.get("mk_stored_upfile1") != null) {
+					File imgFile1 = new File(uploadPath + storedFileList.get("mk_stored_upfile1").toString());
+					if(imgFile1.exists()) {
+						imgFile1.delete();
+					}
+				}
+				
+				if(storedFileList.get("mk_stored_upfile2") != null) {
+					File imgFile2 = new File(uploadPath + storedFileList.get("mk_stored_upfile2").toString());
+					if(imgFile2.exists()) {
+						imgFile2.delete();
+					}
+				}
+				
+				if(storedFileList.get("mk_stored_upfile3") != null) {
+					File imgFile3 = new File(uploadPath + storedFileList.get("mk_stored_upfile3").toString());
+					if(imgFile3.exists()) {
+						imgFile3.delete();
+					}
+				}
+				
+				if(storedFileList.get("mk_stored_upfile4") != null) {
+					File imgFile4 = new File(uploadPath + storedFileList.get("mk_stored_upfile4").toString());
+					if(imgFile4.exists()) {
+						imgFile4.delete();
+					}
+				}
+				
+				if(storedFileList.get("mk_stored_upfile5") != null) {
+					File imgFile5 = new File(uploadPath + storedFileList.get("mk_stored_upfile5").toString());
+					if(imgFile5.exists()) {
+						imgFile5.delete();
+					}
+				}
+			
 				//장바구니 제품 delete
 				delResult = admProdService.deleteAdminProdList(delProdCode);
 							admProdService.deleteAdminProdImg(delProdCode);
@@ -405,9 +442,9 @@ public class AdminProductController {
 										HttpServletRequest request,
 										HttpServletResponse response) {
 			
-			//이미지 저장 경로
-			String uploadPath = getFileUploadPath(request);
 			String delMsg = "";
+			//이미지 저장 경로
+			String uploadPath = getFileUploadPath(request);			
 			File imgFile = new File(uploadPath + imgFileName);
 			
 			int delResultCnt = admProdService.updateProdImgNull(imgType, imgFileName, prCode);
@@ -415,8 +452,8 @@ public class AdminProductController {
 			if(delResultCnt > 0) {
 				if(imgFile.exists()) {
 					imgFile.delete();
-					delMsg = "해당 첨부파일을 삭제했습니다.";
 				}
+				delMsg = "해당 첨부파일을 삭제했습니다.";
 			}
 			System.out.println();
 			System.out.println("delMsg 확인중 : " + delMsg);
@@ -432,6 +469,28 @@ public class AdminProductController {
 			return uploadPath;
 		}
 
+		
+		
+		
+		
+		
+		//20210628 테스트중
+		@RequestMapping(value="/adminProd/test33") 
+		public ModelAndView dynamicTagTest() {
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("testFolder/test33");
+			return mav;
+		}
+		
+		//20210628 테스트중
+		@RequestMapping(value="/adminProd/testtest") 
+		public ModelAndView dynamicTagTest2() {
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("testFolder/testtest");
+			return mav;
+		}
 		
 		
 }

@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.retro.loginInfo.LoginInfoVO;
+
 @Repository
 public class MemberDAO {
 
@@ -80,6 +82,13 @@ public class MemberDAO {
 	public int checkUserStatus(String userId) {
 		return sqlSession.selectOne("mapper.Member.checkUserStatus", userId);
 	}
+	
+	//회원 접속 시 접속 로그 저장
+	public int insertLoginInfo(LoginInfoVO loginInfoVO) {
+		return sqlSession.insert("mapper.Member.insertLoginInfo", loginInfoVO);
+	}
+	
+	
 	
 	
 }

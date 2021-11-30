@@ -106,5 +106,15 @@ public class AdminProductDAO {
 		return sqlSession.update("mapper.AdminProd.updateProdThumbNull", prCode);
 	}
 	
+	//상품관리 목록 페이지 - 상품 삭제 시 저장되어 있던 상품 이미지명 조회 
+	public Map<String, String> selectStoredFileList(String prCode) {
+		return sqlSession.selectOne("mapper.AdminProd.selectStoredFileList", prCode);
+	}
+	
+	
+	
+	
+	
+	
 	
 }
