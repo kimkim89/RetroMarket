@@ -32,7 +32,7 @@
 	
 	<!-- 초기 페이지 설정 -->
 	<welcome-file-list>
-		<welcome-file>index/main</welcome-file>
+		<welcome-file>main/index</welcome-file>
 	</welcome-file-list>
 	<!-- 초기 페이지 설정 -->	
 	
