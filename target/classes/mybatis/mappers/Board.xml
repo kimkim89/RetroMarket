@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.Board">
+
+	<!-- 고객센터 내 게시판 게시글 조회 -->
+	<select id="selectCsBoardList" parameterType="map" resultType="boardVO">
+			select * 
+			from cs_board 
+			where cs_type = #{csType}
+		<if test="searchField != '' ">
+			and ${searchField} like concat('%', #{keyword}, '%')
+		</if>
+			order by cs_idx desc
+			limit #{pageFirst}, #{pageSize};
+	</select>
+	
+
+	<!-- 고객센터 내 게시판 게시글 개수 조회 -->
+	<select id="countCsBoardList" parameterType="map" resultType="int">
+			select count(*)
+			from cs_board
+			where cs_type = #{csType} 
+		<if test="searchField != '' "	>
+			and ${searchField} like concat('%', #{keyword}, '%')
+		</if>;
+	</select>
+
+
+	<!-- 문의 사항 및 그 외 정보 저장 -->
+	<insert id="insertInquiryInfo" parameterType="boardVO">
+		insert into cs_board ( cs_type,
+							   cs_writer_id,
+							   cs_writer_name,
+							   cs_writer_email,
+							   cs_subject,
+							   cs_content,
+							   cs_secret,
+							   cs_secret_num,
+							   cs_ip
+							)
+					 values ( #{cs_type},
+							  #{cs_writer_id},
+							  #{cs_writer_name},
+							  #{cs_writer_email},
+							  #{cs_subject},
+							  #{cs_content},
+							  #{cs_secret},
+							  #{cs_secret_num},
+							  #{cs_ip}
+					 		);
+			
+	</insert>
+	
+	<!-- 문의 내역 조회 -->
+	<select id="selectEachBoardInfo" parameterType="String" resultType="boardVO">
+		select * from cs_board where cs_idx = #{csIdx};
+	</select>
+	
+	
+</mapper>

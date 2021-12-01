@@ -21,7 +21,7 @@
                                     <li><a href="${contextPath}/product/prList?prCode=jellycandy">젤리/캔디</a></li>
                                     <li><a href="${contextPath}/product/prList?prCode=etc">기타</a></li>
 <!--                                     <li><a href="#">이벤트</a></li> -->
-                                    <li><a href="#">고객 센터</a></li>
+                                    <li><a href="${contextPath}/board/customerBoardList?board_type=1">고객센터</a></li>
                                     <li><a href="${contextPath}/product/temporary">Contact Developer</a></li>
                                 </ul>
                             </nav>

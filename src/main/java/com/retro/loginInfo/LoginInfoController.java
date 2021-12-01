@@ -31,7 +31,7 @@ public class LoginInfoController {
 		PagingService pagingService = new PagingService();
 		Map<String, Object> pagingMap = new HashMap<String, Object>();
 		
-		int pageSizeToPaging = 4;
+		int pageSizeToPaging = 10;
 		int blockSizeToBlockSize = 3;
 		
 		int resultCnt = loginInfoService.countLoginInfo(searchField, keyword);

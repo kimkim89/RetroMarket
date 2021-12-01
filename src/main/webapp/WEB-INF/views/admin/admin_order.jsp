@@ -74,7 +74,7 @@
 										<tbody>
 										<c:choose>
 										<c:when test="${pagingMap.nowPage!=1}">
-											<c:set var="num" value="${pagingMap.nowPage+(3*(pagingMap.nowPage-1))}" />
+											<c:set var="num" value="${pagingMap.nowPage+(10*(pagingMap.nowPage-1))-(pagingMap.nowPage-1)}" />
 										</c:when>
 										<c:when test="${pagingMap.nowPage == 1}">
 											<c:set var="num" value="1"/>

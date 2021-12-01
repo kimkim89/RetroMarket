@@ -97,7 +97,7 @@
 										
 									<c:choose>
 										<c:when test="${map.nowPage!=1}">
-											<c:set var="num" value="${map.nowPage+(3*(map.nowPage-1))}" />
+											<c:set var="num" value="${map.nowPage+(10*(map.nowPage-1))-(map.nowPage-1)}" />
 										</c:when>
 										<c:when test="${map.nowPage == 1}">
 											<c:set var="num" value="1"/>

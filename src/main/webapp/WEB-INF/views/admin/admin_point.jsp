@@ -43,16 +43,12 @@
 										  <option value="email">이메일</option>
 										</select>&nbsp;&nbsp; 
 										<input type="text" name="keyword" class="form-control" placeholder="" aria-label="Search">																				
-										<button type="submit" class="btn btn-info" onclick="" style="color:blue;">
-				              			검색
+										<button type="submit" class="btn btn-info" onclick="">
+				              				<i class="align-middle" data-feather="search"></i>
 				            			</button>&nbsp;&nbsp; 				            			
 									</div>																	
 								</form>											
 								</div>
-								
-								
-								
-								
 								<div class="table-responsive">
 									<table class="table mb-0">
 										<thead>
@@ -68,7 +64,7 @@
 										<tbody>
 									<c:choose>
 										<c:when test="${map.nowPage!=1}">
-											<c:set var="num" value="${map.nowPage+(3*(map.nowPage-1))}" />
+											<c:set var="num" value="${map.nowPage+(10*(map.nowPage-1))-(map.nowPage-1)}" />
 										</c:when>
 										<c:when test="${map.nowPage == 1}">
 											<c:set var="num" value="1"/>

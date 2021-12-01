@@ -22,8 +22,8 @@
 			select count(*) 
 			from product_order
 		<if test="searchField != '' "	>
-			where ${searchField} like concat('%', #{keyword}, '%');
-		</if>
+			where ${searchField} like concat('%', #{keyword}, '%')
+		</if> ;
 	</select>
 
 	<!-- 주문별 정보 조회 -->
