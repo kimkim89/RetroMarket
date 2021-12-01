@@ -21,7 +21,7 @@
 	<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
 
 	<script type="text/javascript">
-		function searchOrderList() {
+		function searchList() {
 			document.getElementById('prodSearch').submit(); 
 			return false;
 		}
@@ -39,14 +39,14 @@
 							<div class="card">
 								<div class="card-header">
 								<span class="btn btn-info" style="background-color:lightcoral; border:solid 1px lightcoral;pointer-events: none;">접속로그결과: ${resultCnt}개</span>
-								<form name="prodSearch" id="prodSearch" class="d-none d-sm-inline-block" action="" method="post">									
+								<form name="prodSearch" id="prodSearch" class="d-none d-sm-inline-block" action="${contextPath}/adminLog/loginInfoList" method="post">									
 									<div class="input-group input-group-navbar">
 										<select name="searchField" class="form-select" aria-label="Default select example">
 											<option value="login_id">회원아이디</option>
 											<option value="login_ip">회원IP</option>
 										</select>&nbsp;&nbsp; 
 										<input type="text" name="keyword" class="form-control" placeholder="" aria-label="Search">
-										<button type="button" class="btn" onclick="searchOrderList();">
+										<button type="button" class="btn" onclick="searchList();">
 											<i class="align-middle" data-feather="search"></i>
 										</button>
 										&nbsp;&nbsp;
@@ -69,7 +69,7 @@
 										<tbody>
 										<c:choose>
 										<c:when test="${pagingMap.nowPage!=1}">
-											<c:set var="num" value="${pagingMap.nowPage+(3*(pagingMap.nowPage-1))}" />
+											<c:set var="num" value="${pagingMap.nowPage+(10*(pagingMap.nowPage-1))-(pagingMap.nowPage-1)}" />
 										</c:when>
 										<c:when test="${pagingMap.nowPage == 1}">
 											<c:set var="num" value="1"/>

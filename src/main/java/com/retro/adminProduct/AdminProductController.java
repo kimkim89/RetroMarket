@@ -54,7 +54,7 @@ public class AdminProductController {
 			/*페이징처리*/
 			PagingService pagingService = new PagingService();
 			HashMap<String, Object> map = new HashMap<String, Object>();		
-			int pageSizeToPaging = 4;
+			int pageSizeToPaging = 10;
 			int blockSizeToBlockSize = 3;
 			
 			int prodCount = admProdService.countProd(searchField, keyword);
@@ -369,55 +369,23 @@ public class AdminProductController {
 			
 			String delProdCode = "";
 			int delResult = 0;
-			String delMsg = "";
-			Map<String, String> storedFileList;
-			
+			String delMsg = "삭제 오류";
+			Map<String, String> storedFileMap;
 						
 			for(String delPrCode : chkBoxArr) {
 				delProdCode = delPrCode;
 				
 				//상품관리 목록 페이지 - 상품 삭제 시 저장되어 있던 상품 이미지명 조회 
-				storedFileList = admProdService.selectStoredFileList(delProdCode);
-			
-				if(storedFileList.get("mk_stored_thumb") != null) {
-					File imgFile = new File(uploadPath + storedFileList.get("mk_stored_thumb").toString());
+				storedFileMap = admProdService.selectStoredFileList(delProdCode);
+				
+				Map<String, String> fileMap = new HashMap<String, String>();
+				
+				for(Map.Entry<String, String> m : storedFileMap.entrySet()) {
+					fileMap.put(m.getKey(), m.getValue());
+					
+					File imgFile = new File(uploadPath + m.getValue());
 					if(imgFile.exists()) {
 						imgFile.delete();
-					}
-				}
-				
-				if(storedFileList.get("mk_stored_upfile1") != null) {
-					File imgFile1 = new File(uploadPath + storedFileList.get("mk_stored_upfile1").toString());
-					if(imgFile1.exists()) {
-						imgFile1.delete();
-					}
-				}
-				
-				if(storedFileList.get("mk_stored_upfile2") != null) {
-					File imgFile2 = new File(uploadPath + storedFileList.get("mk_stored_upfile2").toString());
-					if(imgFile2.exists()) {
-						imgFile2.delete();
-					}
-				}
-				
-				if(storedFileList.get("mk_stored_upfile3") != null) {
-					File imgFile3 = new File(uploadPath + storedFileList.get("mk_stored_upfile3").toString());
-					if(imgFile3.exists()) {
-						imgFile3.delete();
-					}
-				}
-				
-				if(storedFileList.get("mk_stored_upfile4") != null) {
-					File imgFile4 = new File(uploadPath + storedFileList.get("mk_stored_upfile4").toString());
-					if(imgFile4.exists()) {
-						imgFile4.delete();
-					}
-				}
-				
-				if(storedFileList.get("mk_stored_upfile5") != null) {
-					File imgFile5 = new File(uploadPath + storedFileList.get("mk_stored_upfile5").toString());
-					if(imgFile5.exists()) {
-						imgFile5.delete();
 					}
 				}
 			

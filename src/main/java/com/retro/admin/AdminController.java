@@ -44,7 +44,7 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView();	
 		PagingService pagingService = new PagingService();
 		HashMap<String, Object> map = new HashMap<String, Object>();		
-		int pageSizeToPaging = 4;
+		int pageSizeToPaging = 10;
 		int blockSizeToBlockSize = 3;
 		
 		int memCount = adminService.countMem(searchField, keyword);
@@ -162,7 +162,7 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView();
 		PagingService pagingService = new PagingService();
 		HashMap<String, Object> map = new HashMap<String, Object>();		
-		int pageSizeToPaging = 4;
+		int pageSizeToPaging = 10;
 		int blockSizeToBlockSize = 3;
 		
 		int pointRows = adminService.countPoint(searchField, keyword);

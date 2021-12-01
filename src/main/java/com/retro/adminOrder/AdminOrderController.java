@@ -43,7 +43,7 @@ public class AdminOrderController {
 		PagingService pagingService = new PagingService();
 		Map<String, Object> pagingMap = new HashMap<String, Object>();
 		
-		int pageSizeToPaging = 4;
+		int pageSizeToPaging = 10;
 		int blockSizeToBlockSize = 3;
 		
 		int OrderCount = admOrderService.countOrderList(searchField, keyword);
