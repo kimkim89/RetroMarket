@@ -14,7 +14,7 @@
 		<if test="searchField != '' ">
 			and ${searchField} like concat('%', #{keyword}, '%')
 		</if>
-			order by cs_idx desc
+			order by origin_idx desc, group_order asc
 			limit #{pageFirst}, #{pageSize};
 	</select>
 	
@@ -30,9 +30,12 @@
 	</select>
 
 
-	<!-- 문의 사항 및 그 외 정보 저장 -->
+	<!-- 원글: 문의 사항 및 그 외 정보 저장 -->
 	<insert id="insertInquiryInfo" parameterType="boardVO">
 		insert into cs_board ( cs_type,
+							   origin_idx,
+							   group_order,
+							   group_layer_check,
 							   cs_writer_id,
 							   cs_writer_name,
 							   cs_writer_email,
@@ -43,6 +46,41 @@
 							   cs_ip
 							)
 					 values ( #{cs_type},
+					 	      (select origin_idx from (select max(cs_idx)+1 as origin_idx from cs_board) A),
+					 	      #{group_order},
+					 	      #{group_layer_check},
+							  #{cs_writer_id},
+							  #{cs_writer_name},
+							  #{cs_writer_email},
+							  #{cs_subject},
+							  #{cs_content},
+							  #{cs_secret},
+							  #{cs_secret_num},
+							  #{cs_ip}
+					 		);
+			
+	</insert>
+	
+	
+	<!-- 답변글: 문의 사항 및 그 외 정보 저장 -->
+	<insert id="insertReplyInfo" parameterType="boardVO">
+		insert into cs_board ( cs_type,
+							   origin_idx,
+							   group_order,
+							   group_layer_check,
+							   cs_writer_id,
+							   cs_writer_name,
+							   cs_writer_email,
+							   cs_subject,
+							   cs_content,
+							   cs_secret,
+							   cs_secret_num,
+							   cs_ip
+							)
+					 values ( #{cs_type},
+					 	      #{origin_idx},
+					 	      #{group_order},
+					 	      #{group_layer_check},
 							  #{cs_writer_id},
 							  #{cs_writer_name},
 							  #{cs_writer_email},
@@ -60,5 +98,21 @@
 		select * from cs_board where cs_idx = #{csIdx};
 	</select>
 	
+	<!-- 특정 게시글의 최신 답변글 조회 -->
+	<select id="selectMaxOriginIdx" parameterType="map" resultType="boardVO">
+		select * from cs_board where cs_type = #{csType} and origin_idx = #{originIdx} order by group_order desc limit 1;
+	</select>
+	
+	
+	<!-- 원글: 문의 사항 및 그 외 정보 수정 update -->
+	<insert id="updateInquiryInfo" parameterType="boardVO">
+		update cs_board 
+			set cs_writer_name = #{cs_writer_name},
+				cs_writer_email = #{cs_writer_email},
+				cs_content = #{cs_content},
+				cs_ip = #{cs_ip}
+			where cs_idx = #{cs_idx};
+	</insert>
+
 	
 </mapper>

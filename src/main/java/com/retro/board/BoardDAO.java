@@ -23,9 +23,14 @@ public class BoardDAO {
 		return sqlSession.selectOne("mapper.Board.countCsBoardList", map);
 	} 
 	
-	//문의 사항 및 그 외 정보 저장 
+	//원글: 문의 사항 및 그 외 정보 저장 
 	public int insertInquiryInfo(BoardVO boardVO) {
 		return sqlSession.insert("mapper.Board.insertInquiryInfo", boardVO);
+	}
+	
+	//답변글: 문의 사항 및 그 외 정보 저장
+	public int insertReplyInfo(BoardVO boardVO) {
+		return sqlSession.insert("mapper.Board.insertReplyInfo", boardVO);
 	}
 
 	//문의 내역 조회
@@ -33,7 +38,14 @@ public class BoardDAO {
 		return sqlSession.selectOne("mapper.Board.selectEachBoardInfo", csIdx);
 	} 
 	
+	//특정 게시글의 최신 답변글 조회
+	public BoardVO selectMaxOriginIdx(Map<String, Object> map) {
+		return sqlSession.selectOne("mapper.Board.selectMaxOriginIdx", map);
+	} 
 	
-
+	//원글: 문의 사항 및 그 외 정보 수정 update
+	public int updateInquiryInfo(BoardVO boardVO) {
+		return sqlSession.insert("mapper.Board.updateInquiryInfo", boardVO);
+	}
 
 }

@@ -19,9 +19,9 @@
 			document.getElementById("write_form").submit();
 		}
 		
-		//수정 페이지로 이동
+		//비밀글 확인 여부 페이지로 이동
 		function writeInquiry() {
-			document.getElementById("write_form").action = "${contextPath}/board/csUpdateForm?board_type=${boardType}&board_num=${csIdx}&wu=u";
+			document.getElementById("write_form").action = "${contextPath}/board/checkPass?board_type=${boardType}&board_num=${csIdx}";
 			document.getElementById("write_form").submit();
 		}
 	</script>
@@ -44,35 +44,17 @@
 							style="padding: 0px;">
 							<div class="container" style="max-width: 830px;">
 								<div class="cart_inner" style="max-width: 92%; margin-left: 2%;">
-									<h4 class="mb-30" style="text-align: center;font-weight:bold;">문의 내역 확인</h4>
+									<h4 class="mb-30" style="text-align: center;font-weight:bold;">비밀글 보기</h4>
 									<form id="write_form" action="${contextPath}/board/replyInquiryForm" method="post">
 										<input type="hidden" name="board_type" id="board_type" value="${boardType}" >
 										<input type="hidden" name="board_num" id="board_num" value="${csIdx}" >
+											
 											<div class="mt-10">
-												<input type="text" id="cs_subject" name="cs_subject" value="${boardInfoVO.cs_subject}" readonly required class="single-input">
+												<input type="password" id="entered_pw" name="entered_pw" value="" placeholder="비밀번호를 입력해 주세요." required class="single-input" style="border: solid 1px gray;width: 45%;margin: 0% 26%;">
 											</div> 
-											
-										<c:choose>
-											<c:when test="${user_id == null}">
-												<div class="mt-10">
-													<input type="text" id="cs_writer_name" name="cs_writer_name" placeholder="작성자명"  value="${boardInfoVO.cs_writer_name}" readonly required class="single-input">
-												</div>
-												
-												<div class="mt-10">
-													<input type="text" id="cs_writer_email" name="cs_writer_email" placeholder="이메일"  value="${boardInfoVO.cs_writer_email}" readonly required class="single-input">
-												</div>
-											</c:when>
-										</c:choose>
-											<div class="mt-10">
-												<textarea class="single-input" id="cs_content" name="cs_content" style="height:400px;" placeholder="문의 사항에 관하여 글을 남겨주세요!" readonly>${boardInfoVO.cs_content}</textarea>
-											</div>
 											<div align="center" style="margin-top: 15px;">
-											
-												<a href="javascript:writeInquiry();" class="genric-btn info-border radius" id="join-btn">수정</a>
-											<c:if test="${checkUserStatus == 1 }">
-												<a href="javascript:replyInquiry()" class="genric-btn warning-border radius" style="color:red;border:solid 1px red;">답변</a>
-											</c:if>
 												<a href="javascript:history.back()" class="genric-btn warning-border radius">목록</a>
+												<a href="javascript:writeInquiry();" class="genric-btn info-border radius" id="join-btn">확인</a>
 											</div>
 									</form>
 								</div>

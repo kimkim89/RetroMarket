@@ -37,19 +37,14 @@
 				return false;
 			}
 			
-			if(document.getElementById("wu").value == "u") {
-				document.getElementById("write_form").action = "${contextPath}/board/updateInquiry";
-			}
 			document.getElementById("write_form").submit();
 		}
 	</script>
 	</header>
 	<main>
-	
 		<!--=============== Subtitle 시작 ================-->
 		<jsp:include page="../include/subtitle.jsp" />
 		<!--=============== Subtitle 끝 ================-->
-		
 		<!--================Blog Area =================-->
 		<section class="blog_area section-padding" style="margin: 0% 7% 0% 8%;;">
 			<div class="gallery-area">
@@ -62,27 +57,26 @@
 							style="padding: 0px;">
 							<div class="container" style="max-width: 830px;">
 								<div class="cart_inner" style="max-width: 92%; margin-left: 2%;">
-									<h4 class="mb-30" style="text-align: center;font-weight:bold;">문의 사항 작성</h4>
+									<h4 class="mb-30" style="text-align: center;font-weight:bold;">문의 사항 답변</h4>
 									<form id="write_form" action="${contextPath}/board/registerInquiry" method="post">
+										
 										<input type="hidden" name="board_type" id="board_type" value="${boardType}" >
-										<input type="hidden" name="reply_check" id="reply_check" value="not_reply" >
-										<input type="hidden" name="wu" id="wu" value="${wu}" >
-									<c:if test="${wu == 'u'}">
-										<input type="hidden" name="board_num" id="board_num" value="${board_num}" >
-									</c:if>
+										<input type="hidden" name="board_num" id="board_num" value="${boardNum}" >
+										<input type="hidden" name="reply_check" id="reply_check" value="reply" >
+										
 											<div class="mt-10">
-												<input type="text" id="cs_subject" name="cs_subject" placeholder="제목을 입력해주세요." value="${boardVO.cs_subject}"  required class="single-input">
+												<input type="text" id="cs_subject" name="cs_subject" value="RE: ♥아맞다매점에 문의드립니다 !♥" required class="single-input">
 											</div> 
 											
 										<c:choose>
 											<c:when test="${user_id == null}">
 												<input type="hidden" name="memberExistChk" id="memberExistChk" value="1" >
 												<div class="mt-10">
-													<input type="text" id="cs_writer_name" name="cs_writer_name" placeholder="작성자명"  value="${boardVO.cs_writer_name}" required class="single-input">
+													<input type="text" id="cs_writer_name" name="cs_writer_name" placeholder="작성자명"  value="" required class="single-input">
 												</div>
 												
 												<div class="mt-10">
-													<input type="text" id="cs_writer_email" name="cs_writer_email" placeholder="이메일"  value="${boardVO.cs_writer_email}" required class="single-input">
+													<input type="text" id="cs_writer_email" name="cs_writer_email" placeholder="이메일"  value="" required class="single-input">
 												</div>
 											</c:when>
 											<c:when test="${user_id != null}">
@@ -91,7 +85,7 @@
 											</c:when>
 										</c:choose>
 											<div class="mt-10">
-												<textarea class="single-input" id="cs_content" name="cs_content" style="height:400px;" placeholder="문의 사항에 관하여 글을 남겨주세요!">${boardVO.cs_content}</textarea>
+												<textarea class="single-input" id="cs_content" name="cs_content" style="height:400px;" placeholder="문의 사항에 관하여 글을 남겨주세요!"></textarea>
 											</div>
 											
 											<div class="mt-10">
@@ -108,12 +102,8 @@
 	<%-- 											<input type="text" id="name" name="name" placeholder="이름" readonly="readonly" value="${myInfo.name}" required class="single-input"> --%>
 	<!-- 										</div>					 -->
 											<div align="center" style="margin-top: 15px;">
-											<c:if test="${wu == 'i'}">
-												<a href="javascript:writeInquiry(${wStat});" class="genric-btn info-border radius" id="join-btn">등록</a>
-											</c:if>
-											<c:if test="${wu == 'u'}">
-												<a href="javascript:writeInquiry(${wStat});" class="genric-btn info-border radius" id="join-btn">수정</a>
-											</c:if>	
+											
+												<a href="javascript:writeInquiry();" class="genric-btn info-border radius" id="join-btn">등록</a> 
 												<a href="javascript:history.back()" class="genric-btn warning-border radius">목록</a>
 											</div>
 									</form>

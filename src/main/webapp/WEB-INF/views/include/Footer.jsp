@@ -5,9 +5,9 @@
 
     <footer>
         <!--? Shop Method Start-->
-        <div class="shop-method-area">
+        <div class="shop-method-area" style="background-color: #3a3a3a;">
             <div class="container">
-                <div class="method-wrapper">
+                <div class="method-wrapper" style="background-color: #3a3a3a;">
                     <div class="row d-flex justify-content-between">
                         <div class="col-xl-4 col-lg-4 col-md-6">
                             <div class="single-method mb-40">
