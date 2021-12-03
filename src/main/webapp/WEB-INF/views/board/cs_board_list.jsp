@@ -53,7 +53,9 @@
 										&nbsp;&nbsp;
 									</div>
 								</form>
-								<button type="button" class="btn btn-info" style="float:right;" onclick="writePage();">글쓰기</button>
+								<c:if test="${accChk == 1}">
+									<button type="button" class="btn btn-info" style="float:right;" onclick="writePage();">글쓰기</button>
+								</c:if>
 							</div>
 								<div class="table-responsive">
 									<table class="table mb-0">
@@ -77,9 +79,9 @@
 										<c:forEach var="boardList" items="${boardList}" varStatus="status">
 											<tr>
 												<th scope="row">${num}</th>
-<%-- 												<td><a href="${contextPath}/board/customerBoardRead?board_type=${boardType}&board_num=${boardList.cs_idx}" style="color:black;">${boardList.cs_subject}</a></td> --%>
-													<td><a href="${contextPath}/board/checkPassPage?board_type=${boardType}&board_num=${boardList.cs_idx}" style="color:black;">${boardList.cs_subject}</a></td>
-												<td>${boardList.cs_writer_id}</td>					
+												<td><a href="${contextPath}/board/customerBoardRead?board_type=${boardType}&board_num=${boardList.cs_idx}" style="color:black;">${boardList.cs_subject}</a></td>
+<%-- 													<td><a href="${contextPath}/board/checkPassPage?board_type=${boardType}&board_num=${boardList.cs_idx}" style="color:black;">${boardList.cs_subject}</a></td> --%>
+												<td>${boardList.cs_writer_name}</td>					
 												<td><fmt:formatDate value="${boardList.cs_wdate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 											</tr>
 										<c:set var="num" value="${num+1}"/>	

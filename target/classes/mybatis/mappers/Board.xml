@@ -41,8 +41,6 @@
 							   cs_writer_email,
 							   cs_subject,
 							   cs_content,
-							   cs_secret,
-							   cs_secret_num,
 							   cs_ip
 							)
 					 values ( #{cs_type},
@@ -54,11 +52,8 @@
 							  #{cs_writer_email},
 							  #{cs_subject},
 							  #{cs_content},
-							  #{cs_secret},
-							  #{cs_secret_num},
 							  #{cs_ip}
 					 		);
-			
 	</insert>
 	
 	
@@ -73,9 +68,8 @@
 							   cs_writer_email,
 							   cs_subject,
 							   cs_content,
-							   cs_secret,
-							   cs_secret_num,
-							   cs_ip
+							   cs_ip,
+							   cs_reply
 							)
 					 values ( #{cs_type},
 					 	      #{origin_idx},
@@ -86,15 +80,20 @@
 							  #{cs_writer_email},
 							  #{cs_subject},
 							  #{cs_content},
-							  #{cs_secret},
-							  #{cs_secret_num},
-							  #{cs_ip}
+							  #{cs_ip},
+							  1
 					 		);
 			
 	</insert>
 	
+	<!-- 원글 insert 후에 origin_idx를 cs_idx와 동일하게 update -->
+	<update id="updateOriginIdx" parameterType="int">
+		update cs_board set origin_idx = #{csIdx} where cs_idx = #{csIdx};
+	</update>
+	
+	
 	<!-- 문의 내역 조회 -->
-	<select id="selectEachBoardInfo" parameterType="String" resultType="boardVO">
+	<select id="selectEachBoardInfo" parameterType="int" resultType="boardVO">
 		select * from cs_board where cs_idx = #{csIdx};
 	</select>
 	
@@ -107,12 +106,31 @@
 	<!-- 원글: 문의 사항 및 그 외 정보 수정 update -->
 	<insert id="updateInquiryInfo" parameterType="boardVO">
 		update cs_board 
-			set cs_writer_name = #{cs_writer_name},
+			set cs_subject = #{cs_subject},
+				cs_writer_name = #{cs_writer_name},
 				cs_writer_email = #{cs_writer_email},
 				cs_content = #{cs_content},
 				cs_ip = #{cs_ip}
 			where cs_idx = #{cs_idx};
 	</insert>
 
+	<!-- 게시글 삭제 -->
+	<delete id="deleteInquiry" parameterType="Integer">
+		delete from cs_board where cs_idx = #{csIdx};
+	</delete>
+	
+	<!-- 답변글 달려 있는지 확인 -->
+	<select id="checkReplyExist" parameterType="Integer" resultType="Integer">
+		select count(*)
+		from cs_board
+		where origin_idx = #{csIdx}
+		and cs_reply = 1;
+	</select>
+	
+	<!-- 각 고객센터게시판별 최신글 조회 -->
+	<select id="selectNewestCsIdx" parameterType="Integer" resultType="boardVO">
+		select * from cs_board where cs_type = #{csType} order by cs_idx desc limit 1;
+	</select>
+	
 	
 </mapper>
