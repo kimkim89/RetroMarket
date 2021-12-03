@@ -55,5 +55,16 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<!-- 2021.12.03 URL 직접 접근 막기 (Security-Constraint(JSP 접근제한)) -->
+<!-- 	<security-constraint> -->
+<!--         <display-name>Forbidden</display-name> -->
+<!--         <web-resource-collection> -->
+<!--             <web-resource-name>Protected Context</web-resource-name> -->
+<!--             <url-pattern>/board/*</url-pattern> -->
+<!--             <http-method>GET</http-method> -->
+<!--         </web-resource-collection> -->
+<!--         <auth-constraint/> -->
+<!--     </security-constraint> -->
 
 </web-app>

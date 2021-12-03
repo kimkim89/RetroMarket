@@ -32,6 +32,11 @@ public class BoardDAO {
 	public int insertReplyInfo(BoardVO boardVO) {
 		return sqlSession.insert("mapper.Board.insertReplyInfo", boardVO);
 	}
+	
+	//원글 insert 후에 origin_idx를 cs_idx와 동일하게 update -->
+	public int updateOriginIdx(Integer csIdx) {
+		return sqlSession.update("mapper.Board.updateOriginIdx", csIdx);
+	}
 
 	//문의 내역 조회
 	public BoardVO selectEachBoardInfo(Integer csIdx) {
@@ -48,4 +53,22 @@ public class BoardDAO {
 		return sqlSession.insert("mapper.Board.updateInquiryInfo", boardVO);
 	}
 
+	//게시글 삭제
+	public int deleteInquiry(Integer csIdx) {
+		return sqlSession.delete("mapper.Board.deleteInquiry", csIdx);
+	}
+
+	//답변글 달려 있는지 확인
+	public int checkReplyExist(Integer csIdx) {
+		return sqlSession.selectOne("mapper.Board.checkReplyExist", csIdx);
+	}
+	
+	//각 고객센터게시판별 최신글 조회 
+	public BoardVO selectNewestCsIdx(Integer csType) {
+		return sqlSession.selectOne("mapper.Board.selectNewestCsIdx", csType);
+	}
+	
+	
+	
+	
 }

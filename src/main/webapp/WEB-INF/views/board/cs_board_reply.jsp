@@ -8,32 +8,24 @@
 <%@ include file="../include/Top.jsp"%>
 </head>
 <body>
+	
+	<script>
+	<c:if test="${!(memberStatus == 1 && user_id == boardInfoVO.cs_writer_id)}">
+		alert("접근할 수 없습니다.");
+		location.href = "${contextPath}/board/customerBoardList?board_type=${boardType}";
+	</c:if>
+	</script>
+
+
 	<header>
 		<!-- Header Start -->
 		<jsp:include page="../include/TopNavi.jsp" />
 		<!-- Header End -->
 		<script type="text/javascript">
 		function writeInquiry() {
-			
-			if(document.getElementById("memberExistChk").value == 1) {
-				if(document.getElementById("cs_writer_name").value == "") {
-					alert("작성자명을 입력해 주세요.");
-					document.getElementById("cs_writer_name").focus();
-					return false;
-				}else if(document.getElementById("cs_writer_email").value == "") {
-					alert("이메일을 입력해 주세요.");
-					document.getElementById("cs_writer_email").focus();
-					return false;
-				}
-			}
-			
 			if(document.getElementById("cs_content").value == "") {
 				alert("문의 사항 내용을 작성해 주세요.");
 				document.getElementById("cs_content").focus();
-				return false;
-			}else if(document.getElementById("cs_secret2").checked == true & document.getElementById("cs_secret_num").value == "") {
-				alert("비밀번호를 입력해 주세요.");
-				document.getElementById("cs_secret_num").focus();
 				return false;
 			}
 			
@@ -65,44 +57,14 @@
 										<input type="hidden" name="reply_check" id="reply_check" value="reply" >
 										
 											<div class="mt-10">
-												<input type="text" id="cs_subject" name="cs_subject" value="RE: ♥아맞다매점에 문의드립니다 !♥" required class="single-input">
+												<input type="text" id="cs_subject" name="cs_subject" value="${boardInfoVO.cs_subject}" required class="single-input">
 											</div> 
 											
-										<c:choose>
-											<c:when test="${user_id == null}">
-												<input type="hidden" name="memberExistChk" id="memberExistChk" value="1" >
-												<div class="mt-10">
-													<input type="text" id="cs_writer_name" name="cs_writer_name" placeholder="작성자명"  value="" required class="single-input">
-												</div>
-												
-												<div class="mt-10">
-													<input type="text" id="cs_writer_email" name="cs_writer_email" placeholder="이메일"  value="" required class="single-input">
-												</div>
-											</c:when>
-											<c:when test="${user_id != null}">
-												<input type="hidden" name="memberExistChk" id="memberExistChk" value="0" >
-												<input type="hidden" name="cs_writer_name" id="cs_writer_name" value="" >
-											</c:when>
-										</c:choose>
 											<div class="mt-10">
 												<textarea class="single-input" id="cs_content" name="cs_content" style="height:400px;" placeholder="문의 사항에 관하여 글을 남겨주세요!"></textarea>
 											</div>
-											
-											<div class="mt-10">
-												<input type="password" id="cs_secret_num" name="cs_secret_num" placeholder="비밀번호"  value="" required class="single-input">
-											</div>					
-											
-											<div class="mt-10" style="border-bottom: solid 1px black;">
-												<span><b>비밀글 설정</b></span>&nbsp;&nbsp;&nbsp;
-												<input type="radio" id="cs_secret1" name="cs_secret" value="0" />공개글 &nbsp;&nbsp;&nbsp;
-												<input type="radio" id="cs_secret2" name="cs_secret" value="1" checked/>비밀글
-											</div>
-											
-	<!-- 										<div class="mt-10"> -->
-	<%-- 											<input type="text" id="name" name="name" placeholder="이름" readonly="readonly" value="${myInfo.name}" required class="single-input"> --%>
-	<!-- 										</div>					 -->
+												
 											<div align="center" style="margin-top: 15px;">
-											
 												<a href="javascript:writeInquiry();" class="genric-btn info-border radius" id="join-btn">등록</a> 
 												<a href="javascript:history.back()" class="genric-btn warning-border radius">목록</a>
 											</div>

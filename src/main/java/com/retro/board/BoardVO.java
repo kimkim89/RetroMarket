@@ -19,10 +19,9 @@ public class BoardVO {
 	private String cs_writer_email;
 	private String cs_subject;
 	private String cs_content;
-	private int cs_secret;
-	private String cs_secret_num;
 	private Timestamp cs_wdate;
 	private Timestamp cs_udate;
 	private String cs_ip;
+	private int cs_reply;
 }
 

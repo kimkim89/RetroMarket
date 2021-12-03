@@ -8,6 +8,14 @@
 <%@ include file="../include/Top.jsp"%>
 </head>
 <body>
+	<script type="text/javascript">
+		<c:if test="${!(memberStatus == 1 || (memberStatus == 0 && user_id == boardInfoVO.cs_writer_id))}">
+			alert("본인이 작성한 글만 확인할 수 있습니다.");
+			location.href = "${contextPath}/board/customerBoardList?board_type=${boardType}";
+		</c:if>
+	</script>
+	
+	
 	<header>
 		<!-- Header Start -->
 		<jsp:include page="../include/TopNavi.jsp" />
@@ -21,7 +29,17 @@
 		
 		//수정 페이지로 이동
 		function writeInquiry() {
-			document.getElementById("write_form").action = "${contextPath}/board/csUpdateForm?board_type=${boardType}&board_num=${csIdx}&wu=u";
+			if(document.getElementById("check_reply").value == 1) {
+				document.getElementById("write_form").action = "${contextPath}/board/csReplyUpdateForm?board_type=${boardType}&board_num=${csIdx}&wu=u";
+			}else {
+				document.getElementById("write_form").action = "${contextPath}/board/csUpdateForm?board_type=${boardType}&board_num=${csIdx}&wu=u";
+			}
+			document.getElementById("write_form").submit();
+		}
+		
+		//삭제 기능
+		function deleteInquiry() {
+			document.getElementById("write_form").action = "${contextPath}/board/deleteInquiryInfo";
 			document.getElementById("write_form").submit();
 		}
 	</script>
@@ -48,6 +66,9 @@
 									<form id="write_form" action="${contextPath}/board/replyInquiryForm" method="post">
 										<input type="hidden" name="board_type" id="board_type" value="${boardType}" >
 										<input type="hidden" name="board_num" id="board_num" value="${csIdx}" >
+										<input type="hidden" name="check_reply" id="check_reply" value="${boardInfoVO.cs_reply}" >
+										
+										
 											<div class="mt-10">
 												<input type="text" id="cs_subject" name="cs_subject" value="${boardInfoVO.cs_subject}" readonly required class="single-input">
 											</div> 
@@ -67,11 +88,13 @@
 												<textarea class="single-input" id="cs_content" name="cs_content" style="height:400px;" placeholder="문의 사항에 관하여 글을 남겨주세요!" readonly>${boardInfoVO.cs_content}</textarea>
 											</div>
 											<div align="center" style="margin-top: 15px;">
-											
+											<c:if test="${(user_id == boardInfoVO.cs_writer_id)}">
 												<a href="javascript:writeInquiry();" class="genric-btn info-border radius" id="join-btn">수정</a>
-											<c:if test="${checkUserStatus == 1 }">
+											</c:if>
+											<c:if test="${(checkUserStatus == 1 && boardInfoVO.cs_reply == 0)}">
 												<a href="javascript:replyInquiry()" class="genric-btn warning-border radius" style="color:red;border:solid 1px red;">답변</a>
 											</c:if>
+												<a href="javascript:deleteInquiry()" class="genric-btn warning-border radius" style="color:green;border:solid 1px green;">삭제</a>
 												<a href="javascript:history.back()" class="genric-btn warning-border radius">목록</a>
 											</div>
 									</form>
