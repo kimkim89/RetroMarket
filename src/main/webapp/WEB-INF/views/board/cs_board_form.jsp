@@ -9,10 +9,14 @@
 </head>
 <body>
 	<script>
-	<c:if test="${!(memberStatus == 1 || (memberStatus == 0 && user_id == boardInfoVO.cs_writer_id))}">
-		alert("접근할 수 없습니다.");
-		location.href = "${contextPath}/board/customerBoardList?board_type=${boardType}";
-	</c:if>
+	<c:choose>
+		<c:when test="${wu == 'i' || wu == 'u'}">
+			<c:if test="${accChk != 1}">
+				alert("정상적인 경로를 통해 접근하여 주십시오.");
+				location.href = "${contextPath}/member/login";
+			</c:if>
+		</c:when>
+	</c:choose>
 	</script>
 	
 	<header>

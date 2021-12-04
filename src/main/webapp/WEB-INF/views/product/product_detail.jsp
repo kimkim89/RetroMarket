@@ -19,6 +19,16 @@
 		float: left;
 		border: 3px solid;
 	}
+	
+	.product_img {
+		display: block;
+    	margin: auto;
+    	height: 340px;
+	}
+	
+	.owl-carousel .owl-item img {
+		width: 50%;
+	}
 	 	
     </style>
     
@@ -31,21 +41,9 @@
         <!-- Header End -->
     </header>
     <main>
-        <!-- Hero Area Start-->
-        <div class="slider-area ">
-            <div class="single-slider slider-height2 d-flex align-items-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="hero-cap text-center">
-                                <h2>상품 상세보기</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Hero Area End-->
+        <!--=============== Subtitle 시작 ================-->
+		<jsp:include page="../include/product_subtitle.jsp" />
+		<!--=============== Subtitle 끝 ================-->
         <!--================Single Product Area =================-->
         <c:forEach var="productList" items="${productList}">
         <div class="product_image_area">
@@ -55,7 +53,7 @@
                 <div class="product_img_slide owl-carousel">
                 <c:forEach var="prodImgList" items="${prodImgList}" varStatus="status">
                     <div class="single_product_img">
-                        <img src="${contextPath}/resources/images/temporary/${prodImgList}" alt="#" class="img-fluid">
+                        <img src="${contextPath}/resources/images/temporary/${prodImgList}" alt="#" class="img-fluid product_img">
                     </div>
                 </c:forEach>
                 </div>

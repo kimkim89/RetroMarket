@@ -10,7 +10,7 @@
 <body>
 	
 	<script>
-	<c:if test="${!(memberStatus == 1 && user_id == boardInfoVO.cs_writer_id)}">
+	<c:if test="${(memberStatus != 1 && user_id != boardInfoVO.cs_writer_id)}">
 		alert("접근할 수 없습니다.");
 		location.href = "${contextPath}/board/customerBoardList?board_type=${boardType}";
 	</c:if>

@@ -37,22 +37,21 @@
     </header>
     <main>
         <!--? slider Area Start -->
-        <div class="slider-area ">
+        <div class="slider-area " style="height: 721px;">
             <div class="slider-active">
                 <!-- Single Slider -->
-                <div class="single-slider slider-height d-flex align-items-center slide-bg" style="background-color: rgb(236 234 245);">
-                    <div class="container">
-                        <div class="row justify-content-between align-items-center">
+                <div class="single-slider slider-height d-flex align-items-center slide-bg" style="background-color: #F3DCAA;">
+                    <div class="container" style="margin-bottom: 270px;">
+                        <div class="row justify-content-between align-items-center" style="margin-right: 228px;">
                             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                                 <div class="hero__caption">
                                     <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">
                                     <font style="color:#1187CF">그 때</font> 
                                     <font style="color:#D23460">그시절</font>  <br><font style="color:#D23460">추억의</font> 
                                     <font style="color:#1187CF">매점</font> </h1>
-                                    <p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">브이콘 먹는 소리 내지마라.</p>
-                                    <!-- Hero-btn -->
+<!--                                     <p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">브이콘 먹는 소리 내지마라.</p> -->
                                     <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s" data-duration="2000ms">
-                                        <a href="${contextPath}/product/productList" class="btn hero-btn">간식 메뉴 보러가기</a>
+                                        <a href="${contextPath}/product/prList?prCode=all" class="btn hero-btn">간식 메뉴 보러가기</a>
                                     </div>
                                 </div>
                             </div>
@@ -89,9 +88,6 @@
                                 <div class="img-cap">
                                     <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
                                 </div>
-<!--                                 <div class="favorit-items"> -->
-<!--                                     <span class="flaticon-heart"></span> -->
-<!--                                 </div> -->
                             </div>
                             <div class="popular-caption">
                                 <h3><a href="product_details.html">${listByRegDate.mk_product_name}</a></h3>
@@ -113,7 +109,7 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8 col-md-10">
                         <div class="section-tittle mb-70 text-center">
-                            <h2>인기 상품</h2>
+                            <h2>인기상품</h2>
                         </div>
                     </div>
                 </div>
@@ -126,9 +122,6 @@
                                 <div class="img-cap">
                                     <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
                                 </div>
-<!--                                 <div class="favorit-items"> -->
-<!--                                     <span class="flaticon-heart"></span> -->
-<!--                                 </div> -->
                             </div>
                             <div class="popular-caption">
                                 <h3><a href="product_details.html">${listBySoldNum.mk_product_name}</a></h3>
@@ -149,7 +142,7 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8 col-md-10">
                         <div class="section-tittle mb-70 text-center">
-                            <h2>할인 상품</h2>
+                            <h2>할인상품</h2>
                         </div>
                     </div>
                 </div>
@@ -162,9 +155,6 @@
                                 <div class="img-cap">
                                     <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
                                 </div>
-<!--                                 <div class="favorit-items"> -->
-<!--                                     <span class="flaticon-heart"></span> -->
-<!--                                 </div> -->
                             </div>
                             <div class="popular-caption">
                                 <h3><a href="product_details.html">${listByDiscount.mk_product_name}</a></h3>

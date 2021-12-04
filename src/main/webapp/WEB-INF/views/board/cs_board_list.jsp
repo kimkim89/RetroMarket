@@ -7,14 +7,15 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 	<%@ include file="../include/Top.jsp"%>
-	
-	<link href="/moonmarket/resources/assets/admin/css/app.css" rel="stylesheet">
-	
+	<link href="${contextPath}/resources/assets/admin/css/app.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style type="text/css">
 		.list { width: 100%; }
+		.btn::before {background:transparent;}
+		.form-select {background-image: url("")}
 	</style>
-
 </head>
+
 <body style="background-color:white;">
 	<header>
 		<!-- Header Start -->
@@ -40,15 +41,16 @@
 							<div class="card">
 								<div class="card-header">
 								<span class="btn btn-info" style="background-color:lightcoral; border:solid 1px lightcoral;pointer-events: none;">Total : ${dataCnt}</span>
-								<form name="prodSearch" id="prodSearch" class="d-none d-sm-inline-block" action="${contextPath}/board/customerBoardList?board_type=${boardType}" method="post">									
+								<form name="searchForm" id="searchForm" class="d-none d-sm-inline-block" action="${contextPath}/board/customerBoardList?board_type=${boardType}" method="post">									
 									<div class="input-group input-group-navbar">
-										<select name="searchField" class="form-select" aria-label="Default select example" >
+										<select name="searchField" id="searchField" class="form-select" aria-label="Default select example" >
 											<option value="cs_writer_id">작성자ID</option>
 											<option value="cs_subject">제목</option>
 										</select>&nbsp;&nbsp; 
 										<input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요!" aria-label="Search">
-										<button type="button" class="btn" onclick="searchList();">
-											<i class="align-middle" data-feather="search"></i>
+										<button type="button" class="btn" id="searchBtn" onclick="searchList();">
+<!-- 											<i class="align-middle" data-feather="search"></i> -->
+												<i class="fa fa-search"></i>
 										</button>
 										&nbsp;&nbsp;
 									</div>
@@ -106,7 +108,7 @@
 								<c:if test="${pagingMap.totalPage != pagingMap.blockLast}">
 									<li class="page-item">
 										<a class="page-link" href="${contextPath}/board/customerBoardList?board_type=${boardType}&nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
-											<i	class="fas fa-angle-right"></i>
+											<i class="fas fa-angle-right"></i>
 										</a>
 									</li>
 								</c:if>
@@ -121,6 +123,12 @@
 		function writePage() {
 			location.href="${contextPath}/board/customerBoardForm?board_type=${boardType}&wu=i";
 		}
+		
+		function searchList() {
+			document.getElementById('searchForm').submit();
+		}
+		
+		
 	</script>	
 		
 		<!--================Blog Area =================-->
