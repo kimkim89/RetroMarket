@@ -160,30 +160,43 @@ public class BoardController {
 		int memberStatus = 0;
 		BoardVO boardInfoVO = boardService.selectEachBoardInfo(csIdx);
 		Object userIdObj = getCurrentUserIdObj(request);
+		//답변글일 경우, 원글 작성자의 정보 데이터를 찾아서 저장할 VO
+		BoardVO anotherBoardVO = null;
 		
-		//20211204 수정 시작***********************************************************************************
 		//비회원 접근 금지 확인을 위한 변수
 		int accChk = 0;
-		
 		
 		if(userIdObj != null) { //비회원일 경우
 			accChk = 1;
 		}
-		//20211204 수정 끝***********************************************************************************
-		
-		
 		
 		if(userIdObj != null) { //비회원 아닐 경우
 			//회원 or 관리자 확인
 			memberStatus = memberService.checkUserStatus(userIdObj.toString());
 		
-			//본인 글일 경우 비밀번호 입력 페이지가 아닌 Read 페이지로 이동, 관리자는 모든 글 확인 가능
-			if(!(userIdObj.toString().equals(boardInfoVO.getCs_writer_id()) || memberStatus == 1)) { 
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.print("<script> alert('본인이 작성한 글만 확인할 수 있습니다.'); location.href='" + request.getContextPath() + "/board/customerBoardList?board_type=" + csType + "'; </script>");
-				out.flush();
+			//답변글일 경우, 원글 작성자도 읽을 수 있도록 작업
+			if(boardInfoVO.getCs_reply() == 1) {
+				anotherBoardVO = boardService.selectEachBoardInfo(boardInfoVO.getOrigin_idx());
 			}
+			
+			if(memberStatus == 0 ) { //회원일 경우
+				if( boardInfoVO.getCs_reply() == 0 && !userIdObj.toString().equals(boardInfoVO.getCs_writer_id())) { //원글 클릭 시 현재 로그인한 아이디와 글 작성자의 아이디가 동일하지 않을 경우
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script> alert('본인이 작성한 글만 확인할 수 있습니다.'); location.href='" + request.getContextPath() + "/board/customerBoardList?board_type=" + csType + "'; </script>");
+					out.flush();
+				}else if(boardInfoVO.getCs_reply() == 1 && !userIdObj.toString().equals(anotherBoardVO.getCs_writer_id())) { //답변글 클릭 시 현재 로그인한 아이디가 원글의 작성자 아이디와 동일하지 않을 경우
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script> alert('본인이 작성한 글만 확인할 수 있습니다.'); location.href='" + request.getContextPath() + "/board/customerBoardList?board_type=" + csType + "'; </script>");
+					out.flush();
+				}
+			}
+		}else { //비회원일 경우
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print("<script> alert('정상적인 경로를 통해 접근하여 주십시오.'); location.href='" + request.getContextPath() + "/board/customerBoardList?board_type=" + csType + "'; </script>");
+			out.flush();
 		}
 		
 		
@@ -236,7 +249,6 @@ public class BoardController {
 			//회원 or 관리자 확인
 			memberStatus = memberService.checkUserStatus(userIdObj.toString());
 		
-			//본인 글일 경우 비밀번호 입력 페이지가 아닌 Read 페이지로 이동, 관리자는 모든 글 확인 가능
 			if(!(userIdObj.toString().equals(boardInfoVO.getCs_writer_id()) || memberStatus == 1)) { 
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
@@ -288,9 +300,9 @@ public class BoardController {
 			//회원 or 관리자 확인
 			memberStatus = memberService.checkUserStatus(userIdObj.toString());
 		
-			System.out.println("확인중1: " + memberStatus);
-			System.out.println("확인중2: " + !(userIdObj.toString().equals(boardInfoVO.getCs_writer_id()) || memberStatus == 1));
-			System.out.println("확인중3: " + !(userIdObj.toString().equals(boardInfoVO.getCs_writer_id()) || memberStatus == 1));
+//			System.out.println("확인중1: " + memberStatus);
+//			System.out.println("확인중2: " + !(userIdObj.toString().equals(boardInfoVO.getCs_writer_id()) || memberStatus == 1));
+//			System.out.println("확인중3: " + !(userIdObj.toString().equals(boardInfoVO.getCs_writer_id()) || memberStatus == 1));
 		
 			//작성자, 관리자만 수정 페이지 접근 가능
 			if(!(userIdObj.toString().equals(boardInfoVO.getCs_writer_id()) || memberStatus == 1)) { 

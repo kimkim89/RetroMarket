@@ -8,12 +8,12 @@
 <%@ include file="../include/Top.jsp"%>
 </head>
 <body>
-	<script type="text/javascript">
+<!--  	<script type="text/javascript">
 		<c:if test="${!(memberStatus == 1 || (memberStatus == 0 && user_id == boardInfoVO.cs_writer_id))}">
 			alert("본인이 작성한 글만 확인할 수 있습니다.");
 			location.href = "${contextPath}/board/customerBoardList?board_type=${boardType}";
 		</c:if>
-	</script>
+	</script> -->
 	
 	
 	<header>
