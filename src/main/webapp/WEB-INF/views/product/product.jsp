@@ -16,21 +16,9 @@
         <!-- Header End -->
     </header>
     <main>
-        <!-- Hero Area Start-->
-        <div class="slider-area ">
-            <div class="single-slider slider-height2 d-flex align-items-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="hero-cap text-center">
-                                <h2>상품 목록</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Hero Area End-->
+        <!--=============== Subtitle 시작 ================-->
+		<jsp:include page="../include/product_subtitle.jsp" />
+		<!--=============== Subtitle 끝 ================-->
         <!-- Latest Products Start -->
         <section class="popular-items latest-padding">        
             <div class="container">
@@ -63,7 +51,7 @@
 		                            <div class="popular-img">
 		                                <img src="${contextPath}/resources/images/temporary/${productList.mk_stored_thumb}" alt="" style="height: 270px;">
 		                                <div class="img-cap">
-		                                    <a href="${contextPath}/product/productDetail?product_id=${productList.mk_idx}"><span>상품 보기</span></a>
+		                                    <a href="${contextPath}/product/productDetail?prCode=${prCode}&product_id=${productList.mk_idx}"><span>상품 보기</span></a>
 		                                </div>
 <!-- 		                                <div class="favorit-items"> -->
 <!-- 		                                    <span class="flaticon-heart"></span> -->
