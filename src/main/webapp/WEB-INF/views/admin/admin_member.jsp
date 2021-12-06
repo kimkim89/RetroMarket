@@ -99,6 +99,9 @@
 														<c:when test="${List.level == 3}">
 															VVIP회원
 														</c:when>
+														<c:otherwise>
+															관리자
+													</c:otherwise>
 													</c:choose>
 												</td>
 												<td>${List.point}</td>											

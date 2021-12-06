@@ -97,4 +97,5 @@
 		select count(*) from user_wishlist where uw_user_id = #{userId};
 	</select>
 	
+	
 </mapper>

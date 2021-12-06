@@ -120,6 +120,14 @@
 	</select>
 	
 	
+	<!-- 주문폼 페이지로 넘어가기 전, 재고 수량 체크 -->
+	<select id="checkProductInventory" parameterType="int" resultType="int">
+		select t2.mk_inventory
+			from cart as t1
+			inner join product_info as t2
+			where t1.cart_idx = #{cartIdx};
+	</select>
+	
 	
 
 <!-- 은행 정보 입력용으로만 사용한 후 주석 처리 했음  -->

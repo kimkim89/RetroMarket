@@ -69,8 +69,10 @@ public class CustomerOrderDAO {
 		return sqlSession.selectList("mapper.CustomerOrder.orderInfoByOrderCode", userId);
 	}
 	
-	
-	
+	//주문폼 페이지로 넘어가기 전, 재고 수량 체크
+	public int checkProductInventory(int cartIdx) {
+		return sqlSession.selectOne("mapper.CustomerOrder.checkProductInventory", cartIdx);
+	}
 	
 	
 	

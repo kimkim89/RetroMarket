@@ -116,9 +116,7 @@
 								</table>
 								<hr>							
 <br><br>							
-<!-- 받는 사람 정보 끝 -->
-
-												
+<!-- 받는 사람 정보 끝 -->						
 								<table class="table">
 									<thead style="background: background: #fbf9ff;">
 										<tr align="center">
@@ -165,8 +163,7 @@
 									</tbody>									
 								</table>
 								<hr>
-<br><br>								
-
+<br><br>						
 <!-- 결제 정보 시작 -->
 								<table class="table">
 									<thead style="background: background: #fbf9ff;">
@@ -204,11 +201,9 @@
 											</tr>	
 									</tbody>									
 								</table>
-								<hr>				
-
+								<hr>		
 <br><br>
-<!-- 결제 정보 끝 -->																
-							
+<!-- 결제 정보 끝 -->			
 						</div>
 					</div>
 				</div>

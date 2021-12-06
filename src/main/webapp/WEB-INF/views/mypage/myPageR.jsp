@@ -72,8 +72,8 @@
 										<div class="col-xl-4 col-lg-4 col-md-6">
 											<div class="single-method mb-40">
 												<i class="fas fa-cheese"></i>
-												<h6><b>닉네임</b></h6>
-												<p>${myInfo.nickname}</p>
+												<h6><b>이름(닉네임)</b></h6>
+												<p>${myInfo.name}(${myInfo.nickname})</p>
 											</div>
 										</div>
 										<div class="col-xl-4 col-lg-4 col-md-6">
@@ -82,22 +82,20 @@
 												<h6>
 												<b >회원 등급</b>
 												</h6>
-<%-- 												<c:if test="${myInfo.level == 1}"> --%>
-<!-- 													<p>1학년</p> -->
-<%-- 												</c:if> --%>
-<%-- 												<c:if test="${myInfo.level == 2}"> --%>
-<!-- 													<p>2학년</p> -->
-<%-- 												</c:if> --%>
-<%-- 												<c:if test="${myInfo.level == 3}"> --%>
-<!-- 													<p>3학년</p> -->
-<%-- 												</c:if> --%>
-												<c:forEach var="i" begin="1" end="3">
-													<c:if test="${myInfo.level == i}">
-														<p>${myInfo.level} 학년</p>
-													</c:if>
-												</c:forEach>
-												
-												
+												<c:choose>
+													<c:when test="${myInfo.level == 1}">
+														<p>일반회원</p>
+													</c:when>
+													<c:when test="${myInfo.level == 2}">
+														<p>VIP회원</p>
+													</c:when>
+													<c:when test="${myInfo.level == 3}">
+														<p>VVIP회원</p>
+													</c:when>
+													<c:otherwise>
+														<p>관리자</p>
+													</c:otherwise>
+												</c:choose>
 											</div>
 										</div>
 									</div>

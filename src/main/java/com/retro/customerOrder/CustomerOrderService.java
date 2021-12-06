@@ -152,8 +152,8 @@ public class CustomerOrderService {
 				//장바구니 내 상품별 적립 포인트 금액 저장
 				updateCartPrPoint(cartIndex, prPoint);
 				
-				//주문된 상품의 수량을 상품 재고량에서 빼기, 상품별 적립금액 저장
-				updateProductInventory(cartList.get(0).getTotal_num(), cartList.get(0).getPr_idx());	
+//				//주문된 상품의 수량을 상품 재고량에서 빼기, 상품별 적립금액 저장
+//				updateProductInventory(cartList.get(0).getTotal_num(), cartList.get(0).getPr_idx());	
 				
 				//System.out.println("selectedIdxMap 확인중--------------------:: " + selectedIdxMap);					
 			}
@@ -202,6 +202,10 @@ public class CustomerOrderService {
 	}
 	
 	
+	//주문폼 페이지로 넘어가기 전, 재고 수량 체크
+	public int checkProductInventory(int cartIdx) {
+		return csOrderDAO.checkProductInventory(cartIdx);
+	}
 	
 	
 	

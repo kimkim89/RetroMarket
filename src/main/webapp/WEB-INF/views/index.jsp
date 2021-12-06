@@ -86,7 +86,7 @@
                             <div class="popular-img">
                                 <img class="snack-img" src="${contextPath}/resources/images/temporary/${listByRegDate.mk_stored_thumb}" alt="" style="height: 270px;">
                                 <div class="img-cap">
-                                    <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
+                                    <a href="${contextPath}/product/productDetail?prCode=all&product_id=${listByRegDate.mk_idx}"><span>상품 보기</span></a>
                                 </div>
                             </div>
                             <div class="popular-caption">
@@ -120,7 +120,7 @@
                             <div class="popular-img">
                                 <img class="snack-img" src="${contextPath}/resources/images/temporary/${listBySoldNum.mk_stored_thumb}" alt="" style="height: 270px;">
                                 <div class="img-cap">
-                                    <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
+                                    <a href="${contextPath}/product/productDetail?prCode=all&product_id=${listBySoldNum.mk_idx}"><span>상품 보기</span></a>
                                 </div>
                             </div>
                             <div class="popular-caption">
@@ -153,7 +153,7 @@
                             <div class="popular-img">
                                 <img class="snack-img" src="${contextPath}/resources/images/temporary/${listByDiscount.mk_stored_thumb}" alt="" style="height: 270px;">
                                 <div class="img-cap">
-                                    <a href="${contextPath}/product/temporary"><span>상품 보기</span></a>
+                                    <a href="${contextPath}/product/productDetail?prCode=all&product_id=${listByDiscount.mk_idx}"><span>상품 보기</span></a>
                                 </div>
                             </div>
                             <div class="popular-caption">
