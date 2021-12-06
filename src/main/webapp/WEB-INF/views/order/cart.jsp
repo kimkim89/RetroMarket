@@ -152,6 +152,7 @@
                   <tr id="pr_tr${status.index}" name="pr_tr">          	
                     <td>
                       <div class="media">
+                      <input type="hidden" name="product_index" id="product_index${status.index}" value="${cartList.pr_idx}"/>
                       <input type="hidden" name="cart_index" id="cart_index" value="${cartList.cart_idx}" />  
                       <input type="hidden" name="selected_index" id="selected_index" value="" />
                       <input type="checkbox" class="delete_box" name="del_check" id="del_check${status.index}" value="${cartList.cart_idx}" />                    	
@@ -188,13 +189,13 @@
                     <td>
                       <h5 name="product_price" id="product_price${status.index}">${cartList.mk_product_price}</h5>
                     </td>
-                    <td>
-                      <div class="product_count" id="product_count${status.index}">
-                        <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'minus', 'product_price${status.index}', '${cartList.cart_idx}', '${cartList.mk_inventory}')">
+                    <td>                      
+                      <div class="product_count" id="product_count${status.index}">                      	
+                        <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'minus', 'product_price${status.index}', '${cartList.cart_idx}', '${cartList.mk_inventory}', '${cartList.pr_idx}')">
                         	<i class="ti-minus"></i>
                         </span>
                         <input class="" name="product_num" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10" readonly>
-                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'plus', 'product_price${status.index}', '${cartList.cart_idx}', '${cartList.mk_inventory}')">
+                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'plus', 'product_price${status.index}', '${cartList.cart_idx}', '${cartList.mk_inventory}', '${cartList.pr_idx}')">
                         	<i class="ti-plus"></i>
                         </span>
                       </div>
@@ -205,10 +206,10 @@
                     <td style="border-bottom: 1px solid #dee2e6;">
                     <c:choose>
                     <c:when test="${fn:indexOf(quantityMsg,'품절') != -1}">                    
-                      	<a href="javascript:deleteProd('${cartList.cart_idx}');"><span class="${prCheckColor}" id="pr_font_color">삭제</span></a>
+                      	<a href="javascript:deleteProd('${cartList.cart_idx}', 'sold_out');"><span class="${prCheckColor}" id="pr_font_color">삭제</span></a>
                     </c:when>
                     <c:otherwise>
-                      	<a href="javascript:deleteProd('${cartList.cart_idx}');"><span class="${prCheckColor}" id="pr_font_color"></span></a>
+                      	<a href=""><span class="${prCheckColor}" id="pr_font_color"></span></a>
 				    </c:otherwise>
                     </c:choose>
                     </td>
@@ -235,7 +236,7 @@
                     </td>
                     <td>
                       <div class="cupon_text float-right">
-                        <a class="btn_1" href="javascript:deleteProd();">선택삭제</a>
+                        <a class="btn_1" href="javascript:deleteProd(0, 'each_delete');">선택삭제</a>
                       </div>
                     </td>
                   </tr>
@@ -257,7 +258,7 @@
   
   <script type="text/javascript">
 	//상품수량변경
-	function changePrice(nameType, tagNumber, totalNumber, inputId, keyType, prPrice, cartIndex, currentInv) {
+	function changePrice(nameType, tagNumber, totalNumber, inputId, keyType, prPrice, cartIndex, currentInv, productIndex) {
 		
 		let totalCnt = Number(totalNumber);
 		let buttonName = "";
@@ -294,9 +295,9 @@
 					prTotalPrice += prodPrice;
 					
 					//onclick plus
-					onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "', '" + cartIndex + "', '"  + currentInv + "')";
+					onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "', '" + cartIndex + "', '"  + currentInv + "', '"  + productIndex + "')";
 					//onclick minus
-					onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'minus', '" + prPrice + "', '" + cartIndex  + "', '"  + currentInv + "')";
+					onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'minus', '" + prPrice + "', '" + cartIndex  + "', '"  + currentInv + "', '"  + productIndex + "')";
 									
 					buttonName = "minus" + tagNumber;
 					
@@ -312,7 +313,7 @@
 					document.getElementById("product_count" + tagNumber).innerHTML = quantityCode;
 					
 					//상품 수량 변경 시 장바구니 테이블 데이터 수정
-					changeCartData(totalCnt, cartIndex);
+					changeCartData(totalCnt, cartIndex, productIndex, 'plus');
 				}
 			}		
 			
@@ -330,9 +331,9 @@
 				prTotalPrice -= prodPrice;
 				
 				//onclick minus
-				onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "', '" + cartIndex  + "', '"  + currentInv + "')";
+				onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "', '" + cartIndex  + "', '"  + currentInv + "', '"  + productIndex + "')";
 				//onclick plus
-				onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'plus', '" + prPrice + "', '" + cartIndex  + "', '"  + currentInv + "')";
+				onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'plus', '" + prPrice + "', '" + cartIndex  + "', '"  + currentInv + "', '"  + productIndex + "')";
 						
 				buttonName = "plus" + tagNumber;
 				
@@ -352,7 +353,7 @@
 				
 								
 				//상품 수량 변경 시 장바구니 테이블 데이터 수정
-				changeCartData(totalCnt, cartIndex);
+				changeCartData(totalCnt, cartIndex, productIndex, 'minus');
 		
 			}
 		}//onclick함수에서 plus/minus값 넘어오는지 확인하는 if문 끝
@@ -361,25 +362,35 @@
 
 	
 	/*선택삭제 기능 */
-	function deleteProd(cartProdId) {
+	function deleteProd(cartProdId, deleteType) {
 		var checkedArray = [];
+		var totalNumArray = [];
+		var deleteTypeArray = [];
+		var productIndexArray = [];
 		
 		alert("선택한 상품을 삭제하시겠습니까?");
 		
 		$("input:checkbox[name='del_check']:checked").each(function() {
 			checkedArray.push($(this).val()); // 체크된 것 value만 배열에 push			
+			//상품 체크박스 선택 시 장바구니 내 해당 상품의 총 수량만 배열에 추가
+			
+			totalNumArray.push($(this).parents("tr").children("td").eq(2).children(".product_count").children("input[name=product_num]").val());			
+			//$("input:checkbox[name='del_check']:checked").parents("tr").children("td").eq(2).children(".product_count").children("input[name=product_num]").val();
+			productIndexArray.push($(this).parents("tr").children("td").eq(0).children("div.media").children("input[name=product_index]").val());
+			deleteTypeArray.push(deleteType);
 		})
 		
-		if(cartProdId) {
+		if(cartProdId && deleteType == "sold_out") {
 			checkedArray.push(cartProdId);
 		}
 		
-		console.log(checkedArray);
+
+ 		console.log(productIndexArray);
 		
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/cart/delEachCartProd",
-			data : {"checkedArray" : checkedArray},			
+			data : {"checkedArray" : checkedArray, "deleteTypeArray" : deleteTypeArray, "totalNumArray" : totalNumArray, "productIndexArray" : productIndexArray},			
 			success: function(data) {
 				alert(data);
 				location.href = location.href;
@@ -393,12 +404,12 @@
 	
 	
 	/*수량 변경 시 장바구니 테이블 내 데이터 수정*/
-	function changeCartData(totalCount, cartId) {
+	function changeCartData(totalCount, cartId, productIndex, minPlusSign) {
 						
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/cart/updateCartList",
-			data : { "totalCount" : totalCount, "cartId" : cartId },			
+			data : { "totalCount" : totalCount, "cartId" : cartId, "productIndex" : productIndex, "minPlusSign" : minPlusSign },			
 			success: function(data) {
 				alert(data);
 				location.href = location.href;

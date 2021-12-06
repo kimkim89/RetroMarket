@@ -168,14 +168,15 @@ public class CustomerOrderService {
 	
 	
 	//상품 재고량에서 주문된 수량만큼 빼기
-	public void updateProductInventory(int inventoryNum, int productNumber) {
+	public void updateProductInventory(int inventoryNum, int productNumber, String minPlusSign) {
 		
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Object> map = new HashMap<String, Object>();
 						
 		map.put("inventoryNum", inventoryNum);
-		map.put("productNumber", productNumber);		
+		map.put("productNumber", productNumber);
+		map.put("minPlusSign", minPlusSign);
 		
-		csOrderDAO.updateProductInventory((HashMap<String, Integer>) map);
+		csOrderDAO.updateProductInventory((HashMap<String, Object>) map);
 	}
 	
 	
