@@ -76,7 +76,7 @@
 	</main>
 	
 <br><br><br>
-<%-- 	<jsp:include page="../include/Footer2.jsp" /> --%>
-	<jsp:include page="../include/Footer.jsp" />
+	<jsp:include page="../include/Footer2.jsp" />
+<%-- 	<jsp:include page="../include/Footer.jsp" /> --%>
 </body>
 </html>

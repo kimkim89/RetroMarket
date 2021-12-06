@@ -8,6 +8,13 @@
   <title>장바구니</title>
   <%@ include file="../include/Top.jsp" %>
   
+  <style type="text/css">
+  	.img_size_class {
+  		width: 150px;
+    	height: 102px;
+  	}
+  </style>
+  
   <script type="text/javascript">
 	//알림 메시지
 	if("${msg}" != "") {
@@ -121,6 +128,7 @@
                     <th scope="col">가격</th>
                     <th scope="col">수량</th>
                     <th scope="col">총액</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -135,7 +143,7 @@
                 		<c:set var="checkInvStatus" value="none" />              		
                 	</c:when>
                 	<c:when test="${cartList.mk_inventory < cartList.total_num}">
-                		<c:set var="quantityMsg" value=" 현재 구매 가능한 수량은  ${cartList.mk_inventory}개 입니다." /> 
+<%--                 		<c:set var="quantityMsg" value=" 현재 구매 가능한 수량은  ${cartList.mk_inventory}개 입니다." />  --%>
                 		<c:set var="prCheckColor" value="prCheckColor" />
                 		<c:set var="checkInvStatus" value="few" />               		
                 	</c:when>
@@ -144,40 +152,66 @@
                   <tr id="pr_tr${status.index}" name="pr_tr">          	
                     <td>
                       <div class="media">
+                      <input type="hidden" name="product_index" id="product_index${status.index}" value="${cartList.pr_idx}"/>
                       <input type="hidden" name="cart_index" id="cart_index" value="${cartList.cart_idx}" />  
                       <input type="hidden" name="selected_index" id="selected_index" value="" />
                       <input type="checkbox" class="delete_box" name="del_check" id="del_check${status.index}" value="${cartList.cart_idx}" />                    	
                         <div class="d-flex">
-                          <a href="${contextPath}/product/productDetail?product_id=${cartList.pr_idx}" >
-                          	<img src="${contextPath}/resources/images/temporary/${cartList.mk_stored_thumb}" alt="" />
+                        
+                        <c:choose>
+                        	<c:when test="${cartList.mk_product_category == 1}">
+                        		<c:set var="prCode" value="snack"></c:set>
+                        	</c:when>
+                        	<c:when test="${cartList.mk_product_category == 2}">
+                        		<c:set var="prCode" value="jellycandy"></c:set>
+                        	</c:when>
+                        	<c:when test="${cartList.mk_product_category == 3}">
+                        		<c:set var="prCode" value="etc"></c:set>
+                        	</c:when>
+                        </c:choose>
+                        
+                          <a href="${contextPath}/product/productDetail?prCode=${prCode}&product_id=${cartList.pr_idx}" >
+                          	<img src="${contextPath}/resources/images/temporary/${cartList.mk_stored_thumb}" class="img_size_class" alt=""/>
                           </a>
                         </div>
                         <div class="media-body">
-                          <a href="${contextPath}/product/productDetail?product_id=${cartList.pr_idx}" >
-                          	<p>${cartList.mk_product_name}<span class="${prCheckColor}" id="pr_font_color">${quantityMsg}</span></p>
+                          <a href="${contextPath}/product/productDetail?prCode=${prCode}&product_id=${cartList.pr_idx}" >
+                          	<p>${cartList.mk_product_name}
+                          		<span class="${prCheckColor}" id="pr_font_color">${quantityMsg}</span>
+                          	</p>
                           </a>                          
-                          <c:if test="${fn:indexOf(quantityMsg,'품절') != -1}">
-                          	<a href="javascript:deleteProd('${cartList.cart_idx}');"><span class="${prCheckColor}" id="pr_font_color">삭제</span></a>
-                          </c:if>
+<%--                           <c:if test="${fn:indexOf(quantityMsg,'품절') != -1}"> --%>
+<%--                           	<a href="javascript:deleteProd('${cartList.cart_idx}');"><span class="${prCheckColor}" id="pr_font_color">삭제</span></a> --%>
+<%--                           </c:if> --%>
                         </div>
                       </div>
-                    </td>
+                    </td>                    
                     <td>
                       <h5 name="product_price" id="product_price${status.index}">${cartList.mk_product_price}</h5>
                     </td>
-                    <td>
-                      <div class="product_count" id="product_count${status.index}">
-                        <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'minus', 'product_price${status.index}', '${cartList.cart_idx}')">
+                    <td>                      
+                      <div class="product_count" id="product_count${status.index}">                      	
+                        <span class="input-number-decrement" name="minus_btn${status.index}" id="minus_btn${status.index}" onclick="changePrice('minus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'minus', 'product_price${status.index}', '${cartList.cart_idx}', '${cartList.mk_inventory}', '${cartList.pr_idx}')">
                         	<i class="ti-minus"></i>
                         </span>
-                        <input class="" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10" readonly>
-                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'plus', 'product_price${status.index}', '${cartList.cart_idx}')">
+                        <input class="" name="product_num" id="product_num${status.index}" type="text" value="${cartList.total_num}" min="0" max="10" readonly>
+                        <span class="input-number-increment" name="plus_btn${status.index}" id="plus_btn${status.index}" onclick="changePrice('plus_btn${status.index}', ${status.index}, '${cartList.total_num}', 'product_num${status.index}', 'plus', 'product_price${status.index}', '${cartList.cart_idx}', '${cartList.mk_inventory}', '${cartList.pr_idx}')">
                         	<i class="ti-plus"></i>
                         </span>
                       </div>
                     </td>
                     <td>
                       <h5 name="product_total" id="product_total${status.index}"></h5>
+                    </td>
+                    <td style="border-bottom: 1px solid #dee2e6;">
+                    <c:choose>
+                    <c:when test="${fn:indexOf(quantityMsg,'품절') != -1}">                    
+                      	<a href="javascript:deleteProd('${cartList.cart_idx}', 'sold_out');"><span class="${prCheckColor}" id="pr_font_color">삭제</span></a>
+                    </c:when>
+                    <c:otherwise>
+                      	<a href=""><span class="${prCheckColor}" id="pr_font_color"></span></a>
+				    </c:otherwise>
+                    </c:choose>
                     </td>
                   </tr>
                  </c:forEach>
@@ -190,6 +224,8 @@
                     <td>
                       <h5 id="total_price"></h5>
                     </td>
+                    <td style="border-bottom: 1px solid #dee2e6;">
+                    </td>
                   </tr>
                   <tr class="bottom_button">
                     <td>
@@ -200,7 +236,7 @@
                     </td>
                     <td>
                       <div class="cupon_text float-right">
-                        <a class="btn_1" href="javascript:deleteProd();">선택삭제</a>
+                        <a class="btn_1" href="javascript:deleteProd(0, 'each_delete');">선택삭제</a>
                       </div>
                     </td>
                   </tr>
@@ -222,13 +258,13 @@
   
   <script type="text/javascript">
 	//상품수량변경
-	function changePrice(nameType, tagNumber, totalNumber, inputId, keyType, prPrice, cartIndex) {
+	function changePrice(nameType, tagNumber, totalNumber, inputId, keyType, prPrice, cartIndex, currentInv, productIndex) {
 		
 		let totalCnt = Number(totalNumber);
 		let buttonName = "";
 		let quantityCode = "";
 		let productNumValue = document.getElementById(inputId).value;
-		let prodPrice = document.getElementById(prPrice).innerText; 		
+		let prodPrice = Number(document.getElementById(prPrice).innerText); 		
 		var epTotalPrice = 0;
 		var prTotalPrice = document.getElementById("total_price").innerText;
 			prTotalPrice = Number(prTotalPrice);
@@ -246,33 +282,39 @@
 				totalCnt++;					
 				productNumValue = totalCnt;
 				
-				//개별 상품 * 수량 총액
-				epTotalPrice = prodPrice * totalCnt;
+				//장바구니 수량  > 상품 재고량 
+				if(productNumValue > currentInv) { //장바구니 수량이 상품 재고량보다 클 때
+					alert("현재 남은 수량은 " + currentInv + "개 입니다.");
+					return false;
+				}else { //장바구니 수량이 상품 재고량과 같거나 작을 때
+
+					//개별 상품 * 수량 총액
+					epTotalPrice = prodPrice * totalCnt;
+					
+					//장바구니 모든 상품 총액
+					prTotalPrice += prodPrice;
+					
+					//onclick plus
+					onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "', '" + cartIndex + "', '"  + currentInv + "', '"  + productIndex + "')";
+					//onclick minus
+					onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'minus', '" + prPrice + "', '" + cartIndex  + "', '"  + currentInv + "', '"  + productIndex + "')";
+									
+					buttonName = "minus" + tagNumber;
+					
+					//onclick 클릭 시 해당 코드로 변경되도록 작업				
+					quantityCode = '<span class="input-number-decrement" name="'+ buttonName + '" id="' + buttonName + '" onclick="' + onclickMinusFunc + '">';
+					quantityCode += '<i class="ti-minus"></i></span>';
+					quantityCode += '<input class="" name="product_num" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10" readonly>';
+					quantityCode += '<span class="input-number-increment" name="'+ nameType + '" id="' + nameType + '" onclick="' + onclickPlusFunc + '">';
+					quantityCode += '<i class="ti-plus"></i></span>';
 				
-				//장바구니 모든 상품 총액
-				prTotalPrice += epTotalPrice;
-				
-				//onclick plus
-				onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "', '" + cartIndex  + "')";
-				//onclick minus
-				onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'minus', '" + prPrice + "', '" + cartIndex  + "')";
-								
-				buttonName = "minus" + tagNumber;
-				
-				//onclick 클릭 시 해당 코드로 변경되도록 작업				
-				quantityCode = '<span class="input-number-decrement" name="'+ buttonName + '" id="' + buttonName + '" onclick="' + onclickMinusFunc + '">';
-				quantityCode += '<i class="ti-minus"></i></span>';
-				quantityCode += '<input class="" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10" readonly>';
-				quantityCode += '<span class="input-number-increment" name="'+ nameType + '" id="' + nameType + '" onclick="' + onclickPlusFunc + '">';
-				quantityCode += '<i class="ti-plus"></i></span>';
-			
-				document.getElementById("product_total" + tagNumber).innerText = epTotalPrice;
-				document.getElementById("total_price").innerText = prTotalPrice;
-				document.getElementById("product_count" + tagNumber).innerHTML = quantityCode;
-				
-				//상품 수량 변경 시 장바구니 테이블 데이터 수정
-				changeCartData(totalCnt, cartIndex);
-				
+					document.getElementById("product_total" + tagNumber).innerText = epTotalPrice;
+					document.getElementById("total_price").innerText = prTotalPrice;
+					document.getElementById("product_count" + tagNumber).innerHTML = quantityCode;
+					
+					//상품 수량 변경 시 장바구니 테이블 데이터 수정
+					changeCartData(totalCnt, cartIndex, productIndex, 'plus');
+				}
 			}		
 			
 		}else if(keyType == "minus") {				
@@ -286,12 +328,12 @@
 				epTotalPrice = prodPrice * totalCnt;
 				
 				//장바구니 모든 상품 총액
-				prTotalPrice += epTotalPrice;
+				prTotalPrice -= prodPrice;
 				
 				//onclick minus
-				onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "', '" + cartIndex  + "')";
+				onclickMinusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "' , " + "'"  +  keyType + "', '" + prPrice + "', '" + cartIndex  + "', '"  + currentInv + "', '"  + productIndex + "')";
 				//onclick plus
-				onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'plus', '" + prPrice + "', '" + cartIndex  + "')";
+				onclickPlusFunc = "changePrice(" + "'" + nameType + "', " + tagNumber + ", " + totalCnt + ", '" + inputId + "', 'plus', '" + prPrice + "', '" + cartIndex  + "', '"  + currentInv + "', '"  + productIndex + "')";
 						
 				buttonName = "plus" + tagNumber;
 				
@@ -301,7 +343,7 @@
 				//onclick 클릭 시 해당 코드로 변경되도록 작업				
 				quantityCode = '<span class="input-number-decrement" name="'+ nameType + '" id="' + nameType + '" onclick="' + onclickMinusFunc + '">';
 				quantityCode += '<i class="ti-minus"></i></span>';
-				quantityCode += '<input class="" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10" readonly>';
+				quantityCode += '<input class="" name="product_num" id="' + inputId + '" type="text" value="' + totalCnt + '" min="0" max="10" readonly>';
 				quantityCode += '<span class="input-number-increment" name="'+ buttonName + '" id="' + buttonName + '" onclick="' + onclickPlusFunc + '">';
 				quantityCode += '<i class="ti-plus"></i></span>';
 				
@@ -311,7 +353,7 @@
 				
 								
 				//상품 수량 변경 시 장바구니 테이블 데이터 수정
-				changeCartData(totalCnt, cartIndex);
+				changeCartData(totalCnt, cartIndex, productIndex, 'minus');
 		
 			}
 		}//onclick함수에서 plus/minus값 넘어오는지 확인하는 if문 끝
@@ -320,25 +362,35 @@
 
 	
 	/*선택삭제 기능 */
-	function deleteProd(cartProdId) {
+	function deleteProd(cartProdId, deleteType) {
 		var checkedArray = [];
+		var totalNumArray = [];
+		var deleteTypeArray = [];
+		var productIndexArray = [];
 		
 		alert("선택한 상품을 삭제하시겠습니까?");
 		
 		$("input:checkbox[name='del_check']:checked").each(function() {
 			checkedArray.push($(this).val()); // 체크된 것 value만 배열에 push			
+			//상품 체크박스 선택 시 장바구니 내 해당 상품의 총 수량만 배열에 추가
+			
+			totalNumArray.push($(this).parents("tr").children("td").eq(2).children(".product_count").children("input[name=product_num]").val());			
+			//$("input:checkbox[name='del_check']:checked").parents("tr").children("td").eq(2).children(".product_count").children("input[name=product_num]").val();
+			productIndexArray.push($(this).parents("tr").children("td").eq(0).children("div.media").children("input[name=product_index]").val());
+			deleteTypeArray.push(deleteType);
 		})
 		
-		if(cartProdId) {
+		if(cartProdId && deleteType == "sold_out") {
 			checkedArray.push(cartProdId);
 		}
 		
-		console.log(checkedArray);
+
+ 		console.log(productIndexArray);
 		
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/cart/delEachCartProd",
-			data : {"checkedArray" : checkedArray},			
+			data : {"checkedArray" : checkedArray, "deleteTypeArray" : deleteTypeArray, "totalNumArray" : totalNumArray, "productIndexArray" : productIndexArray},			
 			success: function(data) {
 				alert(data);
 				location.href = location.href;
@@ -352,12 +404,12 @@
 	
 	
 	/*수량 변경 시 장바구니 테이블 내 데이터 수정*/
-	function changeCartData(totalCount, cartId) {
+	function changeCartData(totalCount, cartId, productIndex, minPlusSign) {
 						
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/cart/updateCartList",
-			data : { "totalCount" : totalCount, "cartId" : cartId },			
+			data : { "totalCount" : totalCount, "cartId" : cartId, "productIndex" : productIndex, "minPlusSign" : minPlusSign },			
 			success: function(data) {
 				alert(data);
 				location.href = location.href;
@@ -394,8 +446,8 @@
 	/* 상품주문 페이지로 이동*/
 	function orderProds(orderType) {
 		
-		var cartIndexValue = [];		
-				
+		var cartIndexValue = [];	
+		
 		$("input:checkbox[name='del_check']:checked").each(function() {
 			cartIndexValue.push($(this).val()); // 체크된 것 value만 배열에 push				
 		});

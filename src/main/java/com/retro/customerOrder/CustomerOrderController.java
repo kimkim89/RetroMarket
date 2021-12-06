@@ -1,10 +1,14 @@
 package com.retro.customerOrder;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -31,7 +35,7 @@ public class CustomerOrderController {
 	
 	//선택구매 페이지 이동
 		@RequestMapping(value="orderSomeProd")
-		public ModelAndView selectSomeOrderList(HttpServletRequest request) {
+		public ModelAndView selectSomeOrderList(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			ModelAndView mav = new ModelAndView();
 			
 			//상품총액 변수
@@ -53,7 +57,10 @@ public class CustomerOrderController {
 			if(selectedIndexStr != "") {
 				for(int i=0; i<selectedIndexArr.length; i++) {
 					cartIndex = Integer.parseInt(selectedIndexArr[i]);
-					orderList.addAll(csOrderService.selectSomeOrderList(cartIndex));
+					List<CartVO> someCartList = csOrderService.selectSomeOrderList(cartIndex);
+					
+					orderList.addAll(someCartList);
+//					orderList.addAll(csOrderService.selectSomeOrderList(cartIndex));
 					totalProdPrice += orderList.get(i).getPr_price() * orderList.get(i).getTotal_num();
 				}				
 			}

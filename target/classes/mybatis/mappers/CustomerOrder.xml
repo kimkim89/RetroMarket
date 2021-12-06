@@ -96,7 +96,14 @@
 
 	<!-- 상품 재고량에서 주문된 수량만큼 빼기 -->
 	<update id="updateProductInventory" parameterType="map">
-		update product_info set mk_inventory = mk_inventory - #{inventoryNum} where mk_idx = #{productNumber};
+		<choose>
+			<when test="minPlusSign == 'minus'">
+				update product_info set mk_inventory = mk_inventory + #{inventoryNum} where mk_idx = #{productNumber};
+			</when>
+			<when test="minPlusSign == 'plus'">
+				update product_info set mk_inventory = mk_inventory - #{inventoryNum} where mk_idx = #{productNumber};
+			</when>
+		</choose>		
 	</update>
 
 	<!-- 회원 등급 조회 -->
@@ -119,6 +126,14 @@
 		limit 1;
 	</select>
 	
+	
+	<!-- 주문폼 페이지로 넘어가기 전, 재고 수량 체크 -->
+	<select id="checkProductInventory" parameterType="int" resultType="int">
+		select t2.mk_inventory
+			from cart as t1
+			inner join product_info as t2
+			where t1.cart_idx = #{cartIdx};
+	</select>
 	
 	
 

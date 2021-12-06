@@ -50,7 +50,7 @@ public class CustomerOrderDAO {
 	}
 	
 	//상품 재고량에서 주문된 수량만큼 빼기
-	public void updateProductInventory(HashMap<String, Integer> map) {
+	public void updateProductInventory(HashMap<String, Object> map) {
 		sqlSession.update("mapper.CustomerOrder.updateProductInventory", map);
 	}
 	
@@ -69,8 +69,10 @@ public class CustomerOrderDAO {
 		return sqlSession.selectList("mapper.CustomerOrder.orderInfoByOrderCode", userId);
 	}
 	
-	
-	
+	//주문폼 페이지로 넘어가기 전, 재고 수량 체크
+	public int checkProductInventory(int cartIdx) {
+		return sqlSession.selectOne("mapper.CustomerOrder.checkProductInventory", cartIdx);
+	}
 	
 	
 	

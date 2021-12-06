@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.retro.customerOrder.CustomerOrderService;
+
 @Service
 public class CartService {
 
@@ -17,12 +19,16 @@ public class CartService {
 	private CartDAO cartDAO;
 	@Autowired
 	private CartVO cartVO;
+	@Autowired
+	CustomerOrderService csOrderService;
 	
 	public int insertCartInfo(List<HashMap<String, Object>> productList, Integer productNum, String userId, HttpServletRequest request) {
 					
 		//장바구니 데이터 저장하는 아이디의 IP주소 가져오기
 		String memberIP = request.getHeader("X-Forwarded-For");	    
-
+		//상품번호
+		Integer prIdx = 0;
+		
 	    if (memberIP == null) {
 	    	memberIP = request.getHeader("Proxy-Client-IP");	        
 	    }
@@ -43,8 +49,8 @@ public class CartService {
 			for(Entry<String, Object> ent : productList.get(i).entrySet()) {
 				 //System.out.println( String.format("키 : %s, 값 : %s", ent.getKey(), ent.getValue()) );
 				 if(ent.getKey().equals("mk_idx")) {
-					 String prIdx = ent.getValue().toString();
-					 cartVO.setPr_idx(Integer.parseInt(prIdx));
+					 prIdx = Integer.parseInt(ent.getValue().toString());
+					 cartVO.setPr_idx(prIdx);
 				 }else if(ent.getKey().equals("mk_product_id")) {
 					 String proCode = ent.getValue().toString();
 					 cartVO.setPr_code(proCode);				 
@@ -69,6 +75,9 @@ public class CartService {
 	    int existProdCheck = existProd(cartVO.getPr_idx(), cartVO.getMember_id());
 	    if(existProdCheck == 0) {
 	    	cartDAO.insertCartInfo(cartVO);
+	    	//주문된 상품의 수량을 상품 재고량에서 빼기, 상품별 적립금액 저장
+			csOrderService.updateProductInventory(productNum, prIdx, "plus");
+	    	
 	    }
 	    
 	    return existProdCheck;
