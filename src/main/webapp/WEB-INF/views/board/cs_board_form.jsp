@@ -6,6 +6,11 @@
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <%@ include file="../include/Top.jsp"%>
+<style type="text/css">
+	.single-input {
+		border: solid 1px #3a3a3a;
+	}
+</style>
 </head>
 <body>
 	<script>
@@ -63,7 +68,14 @@
 							style="padding: 0px;">
 							<div class="container" style="max-width: 830px;">
 								<div class="cart_inner" style="max-width: 92%; margin-left: 2%;">
-									<h4 class="mb-30" style="text-align: center;font-weight:bold;">문의 사항 작성</h4>
+									<h4 class="mb-30" style="text-align: center;font-weight:bold;">
+										<c:if test="${wu == 'i'}">
+										문의 사항 작성
+										</c:if>
+										<c:if test="${wu == 'u'}">
+										문의 사항 수정
+										</c:if>
+									</h4>
 									<form id="write_form" action="${contextPath}/board/registerInquiry" method="post">
 										<input type="hidden" name="board_type" id="board_type" value="${boardType}" >
 										<input type="hidden" name="reply_check" id="reply_check" value="not_reply" >
@@ -104,7 +116,6 @@
 								</div>
 							</div>
 						</section>
-						<!--================ 회원 가입 끝 =================-->
 					</div>
 				</div>
 			</div>

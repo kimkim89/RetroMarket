@@ -72,6 +72,11 @@
 				<div class="row">
 					<jsp:include page="./include/myPageSide.jsp" />
 						<div class="col-lg-8 mb-5 mb-lg-0" style="margin-left: 3%;">
+<c:choose>
+<c:when test="${fn:length(myPageOrderList) <= 0}">
+	<h3 style="font-weight:bold;text-align:center;">주문 내역이 없습니다.</h3>
+</c:when>
+<c:otherwise>						
 							<form name="order_history_form" id="order_history_form" action="" method="post" >
 							
 							<c:forEach var="orderList" items="${myPageOrderList}" varStatus="orderStatus">
@@ -85,8 +90,8 @@
 													[주문번호] ${orderList.order_code}
 												</a>
 											</th>
-											<th class="d-none d-md-table-cell" style="width:20%">상품 금액</th>
-											<th>주문 상태</th>
+											<th class="d-none d-md-table-cell" style="width:20%">상품금액</th>
+											<th>주문상태</th>
 										</tr>
 									</thead>
 									<c:forEach var="fOrderProdList" items="${finalOrderProdList}" varStatus="status">																	
@@ -125,8 +130,7 @@
 											</tr>
 										</c:if>
 										</c:forEach>
-									</c:forEach>		
-									
+									</c:forEach>
 									</tbody>									
 								</table>
 								<hr>
@@ -155,7 +159,9 @@
 									</ul>
 								</nav>
 								<!-- 페이징 끝 -->
-							</form>									
+							</form>	
+</c:otherwise>
+</c:choose>							
 						</div>
 					</div>
 				</div>

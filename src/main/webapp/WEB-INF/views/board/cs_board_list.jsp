@@ -46,13 +46,12 @@
 										<select name="searchField" id="searchField" class="form-select" aria-label="Default select example" >
 											<option value="cs_writer_id">작성자ID</option>
 											<option value="cs_subject">제목</option>
+											<option value="cs_content">내용</option>
 										</select>&nbsp;&nbsp; 
 										<input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요!" aria-label="Search">
 										<button type="button" class="btn" id="searchBtn" onclick="searchList();">
-<!-- 											<i class="align-middle" data-feather="search"></i> -->
-												<i class="fa fa-search"></i>
+											<i class="fa fa-search"></i>
 										</button>
-										&nbsp;&nbsp;
 									</div>
 								</form>
 								<c:if test="${accChk == 1}">
@@ -83,7 +82,17 @@
 												<th scope="row">${num}</th>
 												<td><a href="${contextPath}/board/customerBoardRead?board_type=${boardType}&board_num=${boardList.cs_idx}" style="color:black;">${boardList.cs_subject}</a></td>
 <%-- 													<td><a href="${contextPath}/board/checkPassPage?board_type=${boardType}&board_num=${boardList.cs_idx}" style="color:black;">${boardList.cs_subject}</a></td> --%>
-												<td>${boardList.cs_writer_name}</td>					
+												<td>
+													<c:choose>
+														<c:when test="${boardList.cs_reply == 1}">
+															${boardList.cs_writer_name}
+														</c:when>
+														<c:otherwise>
+															<c:set var="writer_name" value="${boardList.cs_writer_name}" />
+															${fn:substring(writer_name, 0,1) }○○
+														</c:otherwise>
+													</c:choose>
+												</td>					
 												<td><fmt:formatDate value="${boardList.cs_wdate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 											</tr>
 										<c:set var="num" value="${num+1}"/>	

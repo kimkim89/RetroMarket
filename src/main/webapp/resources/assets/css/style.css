@@ -9550,7 +9550,7 @@ input:focus {
 	border-top: 0px;
 	font-size: 14px;
 	font-weight: 500;
-	font-family: "Playfair Display", serif;
+/* 	font-family: "Playfair Display", serif; */
 	color: #828bb2;
 	border-bottom: 0px !important
 }
@@ -9584,7 +9584,7 @@ input:focus {
 .cart_inner .table tbody tr td h5 {
 	font-size: 14px;
 	color: #415094;
-	font-family: "Playfair Display", serif;
+/* 	font-family: "Playfair Display", serif; */
 	margin-bottom: 0px
 }
 

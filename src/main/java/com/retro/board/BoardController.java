@@ -67,7 +67,7 @@ public class BoardController {
 		int accChk = 0;
 		Object userIdObj = getCurrentUserIdObj(request);
 		
-		if(userIdObj != null) { //비회원일 경우
+		if(userIdObj != null) { //비회원이 아닐 경우
 			accChk = 1;
 		}
 		//20211203 수정 끝***********************************************************************************
@@ -104,7 +104,7 @@ public class BoardController {
 		//비회원 접근 금지 확인을 위한 변수
 		int accChk = 0;
 		
-		if(userIdObj != null) { //비회원일 경우
+		if(userIdObj != null) { //비회원이 아닐 경우
 			accChk = 1;
 		}
 		//===================접근 제한 작업 끝 ==============================		
@@ -166,11 +166,9 @@ public class BoardController {
 		//비회원 접근 금지 확인을 위한 변수
 		int accChk = 0;
 		
-		if(userIdObj != null) { //비회원일 경우
-			accChk = 1;
-		}
 		
 		if(userIdObj != null) { //비회원 아닐 경우
+			accChk = 1;
 			//회원 or 관리자 확인
 			memberStatus = memberService.checkUserStatus(userIdObj.toString());
 		
@@ -241,11 +239,8 @@ public class BoardController {
 		//비회원 접근 금지 확인을 위한 변수
 		int accChk = 0;
 		
-		if(userIdObj != null) { //비회원일 경우
-			accChk = 1;
-		}
-		
 		if(userIdObj != null) { //비회원 아닐 경우
+			accChk = 1;
 			//회원 or 관리자 확인
 			memberStatus = memberService.checkUserStatus(userIdObj.toString());
 		
@@ -292,11 +287,9 @@ public class BoardController {
 		//비회원 접근 금지 확인을 위한 변수
 		int accChk = 0;
 		
-		if(userIdObj != null) { //비회원일 경우
-			accChk = 1;
-		}
 		
 		if(userIdObj != null) { //비회원 아닐 경우
+			accChk = 1;
 			//회원 or 관리자 확인
 			memberStatus = memberService.checkUserStatus(userIdObj.toString());
 		
@@ -388,11 +381,8 @@ public class BoardController {
 		//비회원 접근 금지 확인을 위한 변수
 		int accChk = 0;
 		
-		if(userIdObj != null) { //비회원일 경우
-			accChk = 1;
-		}
-		
 		if(userIdObj != null) { //비회원 아닐 경우
+			accChk = 1;
 			//회원 or 관리자 확인
 			memberStatus = memberService.checkUserStatus(userIdObj.toString());
 		
@@ -413,7 +403,7 @@ public class BoardController {
 		mav.addObject("boardInfoVO", boardInfoVO);
 		mav.addObject("boardName", boardName);
 		mav.addObject("boardType", csType);
-		mav.setViewName("board/cs_board_form");
+		mav.setViewName("board/cs_board_reply");
 		return mav;
 	}
 

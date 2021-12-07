@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonElement;
+import com.retro.board.BoardController;
 import com.retro.common.PagingService;
 import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.UserSha256;
@@ -43,6 +44,8 @@ public class MyPageController {
 	private MyPageService myPageService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private BoardController boardController;
 	
 	
 	//카카오 테스트
@@ -253,7 +256,7 @@ public class MyPageController {
 		
 		//주문번호별 상세 내역 페이지
 		@RequestMapping(value = "orderInfoDetail", method = {RequestMethod.POST, RequestMethod.GET})
-		public ModelAndView buyInfo(HttpServletRequest request, OrderHistoryDTO orderHistoryDTO) {
+		public ModelAndView buyInfo(HttpServletRequest request, OrderHistoryDTO orderHistoryDTO, HttpServletResponse response) throws IOException {
 			ModelAndView mav = new ModelAndView();
 			
 			List<Map<String, Object>> myPgOdProdList = new ArrayList<Map<String,Object>>();
@@ -268,9 +271,21 @@ public class MyPageController {
 			
 			CustomerOrderVO csOrderInfo = myPageService.selectOrderDetailInfo(orderCode);
 			
-			//System.out.println("myPgOdProdList배열 확인: " + myPgOdProdList);
+			//20211203 수정 시작***********************************************************************************
+			//비회원 접근 금지 확인을 위한 변수
+			int accChk = 0;
+			Object userIdObj = boardController.getCurrentUserIdObj(request);
 			
+			if(userIdObj == null || !(userIdObj.toString().equals(csOrderInfo.getMember_id()))) { //비회원일 경우
+				accChk = 1;
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.print("<script> alert('접근이 불가능 합니다.'); location.href='" + request.getContextPath() + "/main/index'; </script>");
+				out.flush();
+			}
+			//20211203 수정 끝***********************************************************************************
 			
+			mav.addObject("accChk", accChk);
 			mav.addObject("csOrderInfo", csOrderInfo);			
 			mav.addObject("myPgOdProdList", myPgOdProdList);
 			mav.addObject("myPageOrderList", myPageOrderList);
