@@ -9,16 +9,21 @@
 <%@ include file="../include/Top.jsp" %>
 
 	<!-- 다음 우편 API -->
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	<script src="${contextPath}/resources/assets/js/DaumApi/AddressApi.js"></script>
-	<script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="${contextPath}/resources/assets/js/DaumApi/AddressApi.js"></script>
+<script>
 	//우편번호 , 주소 검색 API
 	function addressFind() {
 		execPostCode();
 	};
-	</script>
-    
- 	<style type="text/css">
+	
+	//뒤로가기X
+	window.history.forward();
+	function noBack(){window.history.forward();}	
+	
+</script>
+   
+<style type="text/css">
  		.nice-select {
  			width: 100%;
  		}
@@ -43,11 +48,11 @@
 		    margin-right: 11px;
  		}
  			
- 	</style>           
+</style>           
     
 </head>
 
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 
   <header>
     <!-- Header Start -->
@@ -62,7 +67,7 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="hero-cap text-center">
-                                <h2>Checkout</h2>
+                                <h2>주문/결제</h2>
                             </div>
                         </div>
                     </div>
@@ -205,14 +210,10 @@
                           <span id="add_point"><fmt:formatNumber value="${purchasePoint}" pattern="#,###"/></span>
                         </a>
                       </li>
-                      
-<!-- 2021.11.12 포인트, 쿠폰 기능 추가 작업 시작 -->  
-                    
                       <li>
                         <a href="#" >포인트 사용  [ 보유중인 포인트: <b id="myPoint" style="color:red;"><fmt:formatNumber value="${memberPoint}" pattern="#,###"/></b> ]</a>                        
                       </li>
-                      <li>
-                        
+                      <li>                      
                         <div class="col-md-7 form-group p_star" style="padding-left:0px; padding-right:0px;">
 	                     	<input type="number" class="form-control" name="used_point" id="used_point" placeholder="0" value="" style="width:120%;" />
 	                    </div>
@@ -220,19 +221,19 @@
 							<button type="button" name="applyPointBtn" id="applyPointBtn" onclick="applyPoint();">사용</button>
 						</div> 
                       </li>
-                      <li>
-                        <a href="#" style="pointer-">쿠폰 추가</a>                        
-                      </li>
-                      <li>                      	
-                        <select name="coupon_price" id="coupon_price" style="width:100%;">
-							<option value="" selected disabled>쿠폰을 선택해주세요.</option>
-							 <option value="0">내가 가지고 있는 쿠폰 종류</option>                    
-						</select>
+<!--                       <li> -->
+<!--                         <a href="#" style="pointer-">쿠폰 추가</a>                         -->
+<!--                       </li> -->
+<!--                       <li>                      	 -->
+<!--                         <select name="coupon_price" id="coupon_price" style="width:100%;"> -->
+<!-- 							<option value="" selected disabled>쿠폰을 선택해주세요.</option> -->
+<!-- 							 <option value="0">내가 가지고 있는 쿠폰 종류</option>                     -->
+<!-- 						</select> -->
 						                   
-                      </li>                      
-<!-- 2021.11.12 포인트, 쿠폰 기능 추가 작업 끝 -->                                  
+<!--                       </li>                       -->
+                                
                     </ul>
-                    <br><br><br>
+                    <br>
                     <a class="btn_3" href="javascript:orderProduct();">결제하기</a>
                   </div>
                 </div>

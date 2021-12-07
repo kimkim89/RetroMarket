@@ -6,6 +6,13 @@
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <%@ include file="../include/Top.jsp"%>
+
+<style type="text/css">
+	.single-input {
+		border: solid 1px #3a3a3a;
+	}
+</style>
+
 </head>
 <body>
 <!--  	<script type="text/javascript">
@@ -24,6 +31,7 @@
 		
 		//답변 페이지로 이동
 		function replyInquiry() {
+			document.getElementById("write_form").action = "${contextPath}/board/csReplyUpdateForm?board_type=${boardType}&board_num=${csIdx}&wu=u";
 			document.getElementById("write_form").submit();
 		}
 		
@@ -62,13 +70,13 @@
 							style="padding: 0px;">
 							<div class="container" style="max-width: 830px;">
 								<div class="cart_inner" style="max-width: 92%; margin-left: 2%;">
-									<h4 class="mb-30" style="text-align: center;font-weight:bold;">문의 내역 확인</h4>
-									<form id="write_form" action="${contextPath}/board/replyInquiryForm" method="post">
+									<h4 class="mb-30" style="text-align: center;font-weight:bold;">
+										문의 내역 <c:if test="${boardInfoVO.cs_reply == 1}">답변</c:if> 확인
+									</h4>
+									<form id="write_form" action="" method="post">
 										<input type="hidden" name="board_type" id="board_type" value="${boardType}" >
 										<input type="hidden" name="board_num" id="board_num" value="${csIdx}" >
 										<input type="hidden" name="check_reply" id="check_reply" value="${boardInfoVO.cs_reply}" >
-										
-										
 											<div class="mt-10">
 												<input type="text" id="cs_subject" name="cs_subject" value="${boardInfoVO.cs_subject}" readonly required class="single-input">
 											</div> 
@@ -101,7 +109,6 @@
 								</div>
 							</div>
 						</section>
-						<!--================ 회원 가입 끝 =================-->
 					</div>
 				</div>
 			</div>

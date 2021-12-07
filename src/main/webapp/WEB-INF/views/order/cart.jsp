@@ -13,6 +13,22 @@
   		width: 150px;
     	height: 102px;
   	}
+  	
+  	.delete_box {
+  		vertical-align: top !important;
+  		display : block;
+        margin : auto;
+        margin-right: 15px;
+  	}
+  	
+  	.prCheckColor {
+  		color: red;
+  		font-weight: bold;
+  	}
+  	
+  	.font_design {
+  		font-weight: bold !important;
+  	}
   </style>
   
   <script type="text/javascript">
@@ -58,6 +74,7 @@
 			
 			//상품 품절일 경우 
 			if(chkInvStatArr[i].value.indexOf("none") != -1 ) {
+				
 				chkInvIndexArr = chkInvStatArr[i].value.split("none");
 				prTrId = "pr_tr" + chkInvIndexArr[1];
 				delChkId = "del_check" + chkInvIndexArr[1];
@@ -79,19 +96,9 @@
 			document.getElementById("total_price").innerText = finalTotalPrice;	
 	}
 	
-			
+		
   </script>
   
-  <style>
-  	.delete_box {
-  		vertical-align: top !important;
-  	}
-  	
-  	.prCheckColor {
-  		color: red;
-  		font-weight: bold;
-  	}
-  </style>
 </head>
 
 <body>
@@ -124,38 +131,44 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">상품</th>
-                    <th scope="col">가격</th>
-                    <th scope="col">수량</th>
-                    <th scope="col">총액</th>
-                    <th scope="col"></th>
+                    <th scope="col" class="font_design">상품</th>
+                    <th scope="col" class="font_design">가격</th>
+                    <th scope="col" class="font_design">수량</th>
+                    <th scope="col" class="font_design">총액</th>
+                    <th scope="col" class="font_design"></th>
                   </tr>
                 </thead>
                 <tbody>
                 
                 <c:forEach var="cartList" items="${cartList}" varStatus="status">
-                <input type="hidden" name="inventoryCnt" value="${cartList.mk_inventory }" /> 
-                
+                <input type="hidden" name="inventoryCnt" value="${cartList.mk_inventory}" /> 
                 <c:choose>
-                	<c:when test="${cartList.mk_inventory < 1}">
+                	<c:when test="${cartList.mk_inventory < 0}">
                 		<c:set var="quantityMsg" value=" [품절]" /> 
                 		<c:set var="prCheckColor" value="prCheckColor" /> 
                 		<c:set var="checkInvStatus" value="none" />              		
                 	</c:when>
-                	<c:when test="${cartList.mk_inventory < cartList.total_num}">
-<%--                 		<c:set var="quantityMsg" value=" 현재 구매 가능한 수량은  ${cartList.mk_inventory}개 입니다." />  --%>
-                		<c:set var="prCheckColor" value="prCheckColor" />
-                		<c:set var="checkInvStatus" value="few" />               		
-                	</c:when>
+                	<c:otherwise>
+                		<c:set var="quantityMsg" value="" /> 
+                		<c:set var="prCheckColor" value="" /> 
+                		<c:set var="checkInvStatus" value="" /> 
+                	</c:otherwise>
                 </c:choose>
+<%--                 	<c:if test="${cartList.mk_inventory < cartList.total_num}"> --%>
+<%--                 		<c:set var="quantityMsg" value=" 현재 구매 가능한 수량은  ${cartList.mk_inventory}개 입니다." />  --%>
+<%--                 		<c:set var="prCheckColor" value="prCheckColor" /> --%>
+<%--                 		<c:set var="checkInvStatus" value="few" />               		 --%>
+<%--                 	</c:if> --%>
+               
                 <input type="hidden" name="checkInvStatus" id="checkInvStatus" value="${checkInvStatus}${status.index}" />
+                
                   <tr id="pr_tr${status.index}" name="pr_tr">          	
                     <td>
                       <div class="media">
                       <input type="hidden" name="product_index" id="product_index${status.index}" value="${cartList.pr_idx}"/>
                       <input type="hidden" name="cart_index" id="cart_index" value="${cartList.cart_idx}" />  
                       <input type="hidden" name="selected_index" id="selected_index" value="" />
-                      <input type="checkbox" class="delete_box" name="del_check" id="del_check${status.index}" value="${cartList.cart_idx}" />                    	
+                      <input type="checkbox" class="delete_box" name="del_check" id="del_check${status.index}" value="${cartList.cart_idx}" />                 	
                         <div class="d-flex">
                         
                         <c:choose>
@@ -174,7 +187,7 @@
                           	<img src="${contextPath}/resources/images/temporary/${cartList.mk_stored_thumb}" class="img_size_class" alt=""/>
                           </a>
                         </div>
-                        <div class="media-body">
+                        <div class="media-body"> 
                           <a href="${contextPath}/product/productDetail?prCode=${prCode}&product_id=${cartList.pr_idx}" >
                           	<p>${cartList.mk_product_name}
                           		<span class="${prCheckColor}" id="pr_font_color">${quantityMsg}</span>
@@ -206,7 +219,7 @@
                     <td style="border-bottom: 1px solid #dee2e6;">
                     <c:choose>
                     <c:when test="${fn:indexOf(quantityMsg,'품절') != -1}">                    
-                      	<a href="javascript:deleteProd('${cartList.cart_idx}', 'sold_out');"><span class="${prCheckColor}" id="pr_font_color">삭제</span></a>
+                      	<a href="javascript:deleteProd('${cartList.cart_idx}', 'sold_out', '${cartList.pr_idx}');"><span class="${prCheckColor}" id="pr_font_color">삭제</span></a>
                     </c:when>
                     <c:otherwise>
                       	<a href=""><span class="${prCheckColor}" id="pr_font_color"></span></a>
@@ -219,7 +232,7 @@
                     <td></td>
                     <td></td>
                     <td>
-                      <h5>총 상품금액</h5>
+                      <h5 class="font_design">총 상품금액</h5>
                     </td>
                     <td>
                       <h5 id="total_price"></h5>
@@ -362,7 +375,7 @@
 
 	
 	/*선택삭제 기능 */
-	function deleteProd(cartProdId, deleteType) {
+	function deleteProd(cartProdId, deleteType, productIndex) {
 		var checkedArray = [];
 		var totalNumArray = [];
 		var deleteTypeArray = [];
@@ -376,16 +389,18 @@
 			
 			totalNumArray.push($(this).parents("tr").children("td").eq(2).children(".product_count").children("input[name=product_num]").val());			
 			//$("input:checkbox[name='del_check']:checked").parents("tr").children("td").eq(2).children(".product_count").children("input[name=product_num]").val();
+			
 			productIndexArray.push($(this).parents("tr").children("td").eq(0).children("div.media").children("input[name=product_index]").val());
 			deleteTypeArray.push(deleteType);
 		})
 		
 		if(cartProdId && deleteType == "sold_out") {
 			checkedArray.push(cartProdId);
+			totalNumArray.push(1);
+			productIndexArray.push(productIndex);
+			deleteTypeArray.push(deleteType);			
 		}
 		
-
- 		console.log(productIndexArray);
 		
 		$.ajax({
 			type : "POST",

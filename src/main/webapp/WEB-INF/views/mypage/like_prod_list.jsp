@@ -41,9 +41,8 @@
 }
 
 </style>
-
-
 </head>
+
 <body>
 	<header>
 		<!-- Header Start -->
@@ -66,12 +65,17 @@
 			</div>
 		</div>
 		<!--? Hero Area End-->
-		<!--================Blog Area =================-->
+		<!--================Blog Area =================-->	
 		<section class="blog_area section-padding" style="margin: 0% 7% 0% 8%;">
 			<div class="gallery-area">
 				<div class="row">
 					<jsp:include page="./include/myPageSide.jsp" />
 						<div class="col-lg-8 mb-5 mb-lg-0" style="margin-left: 3%;">
+<c:choose>
+<c:when test="${fn:length(myLikeProdList) <= 0}">
+	<h3 style="font-weight:bold;text-align:center;">찜한 상품이 없습니다.</h3>
+</c:when>
+<c:otherwise>
 							<form name="like_form" id="like_form" action="" method="post" >
 								<input type="hidden" name="productId" id="productId" value="" /> 
 								<input type="hidden" name="productNum" id="productNum" value="1" />
@@ -151,7 +155,9 @@
 									</ul>
 								</nav>
 								<!-- 페이징 끝 -->
-							</form>									
+							</form>
+</c:otherwise>
+</c:choose>															
 						</div>
 					</div>
 				</div>
