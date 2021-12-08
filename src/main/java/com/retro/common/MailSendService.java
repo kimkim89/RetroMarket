@@ -275,4 +275,197 @@ public class MailSendService {
 	
 	
 	
+	//*********************************************************
+	
+	//주문 완료 이메일 전송
+		@Async
+		public String sendReceiveMoneyEmail(List<Map<String, Object>> oneOrderList) {
+					
+			int deliveryFee = (Integer) oneOrderList.get(0).get("delivery_fee");
+			
+			String paymentMethodStr = "";
+			
+			if((Integer)oneOrderList.get(0).get("payment_method") == 1) {
+				paymentMethodStr = "무통장입금";
+			}
+			
+			//상품 정보 가져오기
+			List<Map<String, Object>> myOrderProdList = myPageService.selectMyOrderProdList(oneOrderList.get(0).get("order_code").toString());
+			
+			String mailContent = "";
+				   mailContent = "<h2>아맞다매점에서 주문하신 상품이 발송되었습니다:)</h2>";	
+				   mailContent += "<br>";
+				   mailContent += "<h4><b>[구매정보]</b></h4>" + 
+				   		"				<table class='table' style='border: solid lightgray 1px;border-collapse: collapse;width:100%;'>" + 
+				   		"					<thead style='background: background: #fbf9ff;'>" + 
+				   		"						<tr>											" + 
+				   		"							<th style='width:30%; border: solid lightgray 1px;'>상품명</th>" + 
+				   		"							<th style='width:10%; border: solid lightgray 1px;'>수량</th>" + 
+				   		"							<th style='width:20%; border: solid lightgray 1px;'>상품가격</th>" + 
+				   		"							<th style='width:20%; border: solid lightgray 1px;'>판매자</th>" + 
+				   		"						</tr>" + 
+				   		"					</thead>";
+				   
+			for(int i = 0; i<myOrderProdList.size(); i++) {	   
+				   mailContent += "						<tbody>" + 
+				   		"							<tr>" + 
+				   		"								<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"									<div>" + 
+				   		"										<p>" + myOrderProdList.get(i).get("pr_name") + "</p>" + 
+				   		"									</div>" + 
+				   		"								</td>" + 
+				   		"								<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"									<div>" + 
+				   		"										<span>" + myOrderProdList.get(i).get("total_num") + "</span>" + 
+				   		"									</div>" + 
+				   		"								</td>" + 
+				   		"								<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"									<div>" + 
+				   		"										<p>" + myOrderProdList.get(i).get("pr_price") + "</p>" + 
+				   		"									</div>" + 
+				   		"								</td>" + 
+				   		"								<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"									<div>" + 
+				   		"										<span>아맞다매점</span>" + 
+				   		"									</div>" + 
+				   		"								</td>" + 
+				   		"							</tr>						" + 
+				   		"					</tbody>									"; 			   
+			}
+				   
+				   mailContent += 		"				</table><br><br>"; 		
+				   mailContent += "	<h4><b>[배송지 정보]</b></h4>" + 
+				   		"				<table class='table' style='border: solid lightgray 1px;border-collapse: collapse;width:100%;'>" + 
+				   		"					<thead style='background: background: #fbf9ff;'>" + 
+				   		"						<tr>											" + 
+				   		"							<th style='width:20%; border: solid lightgray 1px;'>받는 사람</th>" + 
+				   		"							<th style='width:20%; border: solid lightgray 1px;'>연락처</th>" + 
+				   		"							<th style='width:20%; border: solid lightgray 1px;'>배송지</th>" + 
+				   		"							" + 
+				   		"						</tr>" + 
+				   		"					</thead>" + 
+				   		"						<tbody>																			" + 
+				   		"							<tr>" + 
+				   		"								<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"									<div>" + 
+				   		"										<p>" + oneOrderList.get(0).get("receiver_name") + "</p>" + 
+				   		"									</div>" + 
+				   		"								</td>" + 
+				   		"								<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"									<div>" + 
+				   		"										<span>" + oneOrderList.get(0).get("receiver_phone") + "</span>" + 
+				   		"									</div>" + 
+				   		"								</td>" + 
+				   		"								<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"									<div>" + 
+				   		"										<p>[" + oneOrderList.get(0).get("receiver_addr1") + "] " + oneOrderList.get(0).get("receiver_addr2") + oneOrderList.get(0).get("receiver_addr3") + "</p>" + 
+				   		"									</div>" + 
+				   		"								</td>" + 
+				   		"							</tr>" + 
+				   		"					</tbody>" + 
+				   		"				</table><br><br>";
+
+				   
+				   	mailContent += "<h4><b>[배송 정보]</b></h4>" + 
+				   		"				<table class='table' style='border: solid lightgray 1px;border-collapse: collapse;width:100%;'>" + 
+				   		"					<thead style='background: background: #fbf9ff;'>" + 
+				   		"						<tr>											" + 
+				   		"							<th style='width:20%; border: solid lightgray 1px;'>배송사</th>" + 
+				   		"							<th style='width:20%; border: solid lightgray 1px;'>운송장번호</th>" + 
+				   		"							<th style='width:20%; border: solid lightgray 1px;'>배송시작일</th>" + 
+				   		"							" + 
+				   		"						</tr>" + 
+				   		"					</thead>" + 
+				   		"						<tbody>																			" + 
+				   		"							<tr>" + 
+				   		"								<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"									<div>" + 
+				   		"										<p>" + oneOrderList.get(0).get("delivery_company") + "</p>" + 
+				   		"									</div>" + 
+				   		"								</td>" + 
+				   		"								<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"									<div>" + 
+				   		"										<span>" + oneOrderList.get(0).get("tracking_number") + "</span>" + 
+				   		"									</div>" + 
+				   		"								</td>" + 
+				   		"								<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"									<div>" + 
+				   		"										<span>" + oneOrderList.get(0).get("delivery_start_date") + "</span>" + 
+				   		"									</div>" + 
+				   		"								</td>" + 
+				   		"							</tr>" + 
+				   		"					</tbody>" + 
+				   		"				</table><br><br>";				   
+				   
+				   mailContent += "								<h4><b>[결제정보]</b></h4>" + 
+				   		"								<table class='table' style='border: solid lightgray 1px;border-collapse: collapse;width:100%;'>" + 
+				   		"									<thead style='background: background: #fbf9ff;'>" + 
+				   		"										<tr>											" + 
+				   		"											<th style='width:20%; border: solid lightgray 1px;'>주문금액</th>" + 
+				   		"											<th style='width:20%; border: solid lightgray 1px;'>배송비</th>" + 
+				   		"											<th style='width:20%; border: solid lightgray 1px;'>결제금액</th>" + 
+				   		"											<th style='width:40%; border: solid lightgray 1px;'>결제종류</th>" + 
+				   		"										</tr>" + 
+				   		"									</thead>" + 
+				   		"										<tbody>" + 
+				   		"											<tr>" + 
+				   		"												<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"													<div>" + 
+				   		"														<p>" + oneOrderList.get(0).get("total_order_price") + oneOrderList.get(0).get("used_point") + "</p>" + 
+				   		"													</div>" + 
+				   		"												</td>" + 
+				   		"												<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"													<div>" + 
+				   		"														<span>" + deliveryFee + "</span>" + 
+				   		"													</div>" + 
+				   		"												</td>" + 
+				   		"												<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"													<div>" + 
+				   		"														<p>" + oneOrderList.get(0).get("total_order_price") + "</p>" + 
+				   		"													</div>" + 
+				   		"												</td>" + 
+				   		"												<td align='center' style='vertical-align: middle;border: solid lightgray 1px;'>" + 
+				   		"													<div>" + 
+				   		"														<span><b>" + paymentMethodStr + "</b><br>입금자명: " + oneOrderList.get(0).get("bank_acct_owner") +"<br>입금계좌:  (" + oneOrderList.get(0).get("bank_name") + ")" + oneOrderList.get(0).get("bank_acct_num") + "</span>	 													" + 
+				   		"													</div>" + 
+				   		"												</td>" + 
+				   		"											</tr>" + 
+				   		"									</tbody>" + 
+				   		"								</table>";
+				   
+		
+			
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			
+			try {
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+				
+				messageHelper.setSubject("아맞다매점에서 주문하신 상품이 발송되었습니다.");
+				messageHelper.setText(mailContent, true);
+				messageHelper.setFrom("moonspub0326@gmail.com", "아맞다매점");
+				messageHelper.setTo(oneOrderList.get(0).get("order_email").toString());
+				mailSender.send(message);
+				
+			} catch (MessagingException e) {
+				System.out.println("1");
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				System.out.println("2");
+				e.printStackTrace();
+			}
+			System.out.println("이메일 보내기 완료!!!!!!!!!!!!!");
+			
+			
+			return "test";
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

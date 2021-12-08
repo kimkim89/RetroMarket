@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.retro.common.MailSendService;
 import com.retro.common.PagingService;
 import com.retro.customerOrder.BankNameDTO;
+import com.retro.customerOrder.CustomerOrderController;
 import com.retro.customerOrder.CustomerOrderService;
 import com.retro.customerOrder.CustomerOrderVO;
 
@@ -28,7 +30,11 @@ public class AdminOrderController {
 	@Autowired
 	CustomerOrderVO csOrderVO;
 	@Autowired
+	CustomerOrderController csOrderController;
+	@Autowired
 	CustomerOrderService csOrderService;
+	@Autowired
+	private MailSendService mss;
 	
 	
 	//주문 관리 목록 페이지 이동
@@ -111,10 +117,10 @@ public class AdminOrderController {
 		Timestamp paidDate = null;
 		Timestamp deliveryDate = null;
 		
-		System.out.println();
-		System.out.println("확인중------------------ :  " + paidDateEx);
-		System.out.println("확인중------------------ :  " + deliveryDateEx);
-		System.out.println();
+//		System.out.println();
+//		System.out.println("확인중------------------ :  " + paidDateEx);
+//		System.out.println("확인중------------------ :  " + deliveryDateEx);
+//		System.out.println();
 		
 		if(paidDateEx != "") {
 			paidDate = Timestamp.valueOf(paidDateEx);
@@ -130,6 +136,17 @@ public class AdminOrderController {
 		int resultCnt = admOrderService.updateOrderInfo(csOrderVO, request);
 		
 		if(resultCnt >= 1) {
+			//이메일 내용에 쓸 주문 정보 조회
+			List<Map<String, Object>> oneOrderList = csOrderService.orderInfoByOrderCode(csOrderVO.getMember_id());
+			
+//			System.out.println("확인 중234 " + (Integer.parseInt(oneOrderList.get(0).get("order_status").toString())));
+//			System.out.println();
+			
+			if(Integer.parseInt(oneOrderList.get(0).get("order_status").toString()) == 2) {
+				
+				//주문완료 시 주문 내역 이메일로 전송
+				mss.sendReceiveMoneyEmail(oneOrderList);
+			}
 			msg = "주문 내역이 수정되었습니다.";
 		}else {
 			msg = "수정된 주문 내역이 없습니다.";

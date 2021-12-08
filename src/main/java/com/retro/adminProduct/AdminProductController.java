@@ -370,28 +370,33 @@ public class AdminProductController {
 			String delProdCode = "";
 			int delResult = 0;
 			String delMsg = "삭제 오류";
-			Map<String, String> storedFileMap;
+			Map<String, String> storedFileMap = new HashMap<String, String>();
 						
 			for(String delPrCode : chkBoxArr) {
 				delProdCode = delPrCode;
 				
 				//상품관리 목록 페이지 - 상품 삭제 시 저장되어 있던 상품 이미지명 조회 
 				storedFileMap = admProdService.selectStoredFileList(delProdCode);
-				
-				Map<String, String> fileMap = new HashMap<String, String>();
-				
-				for(Map.Entry<String, String> m : storedFileMap.entrySet()) {
-					fileMap.put(m.getKey(), m.getValue());
+
+				if(storedFileMap != null) {
 					
-					File imgFile = new File(uploadPath + m.getValue());
-					if(imgFile.exists()) {
-						imgFile.delete();
+					Map<String, String> fileMap = new HashMap<String, String>();
+					
+					for(Map.Entry<String, String> m : storedFileMap.entrySet()) {
+						fileMap.put(m.getKey(), m.getValue());
+						
+						File imgFile = new File(uploadPath + m.getValue());
+						if(imgFile.exists()) {
+							imgFile.delete();
+						}
 					}
+					admProdService.deleteAdminProdImg(delProdCode);
 				}
-			
-				//장바구니 제품 delete
-				delResult = admProdService.deleteAdminProdList(delProdCode);
-							admProdService.deleteAdminProdImg(delProdCode);
+				
+					//장바구니 제품 delete								
+					delResult = admProdService.deleteAdminProdList(delProdCode);
+				
+							
 			}
 			
 			if(delResult != 0 ) {
