@@ -160,7 +160,7 @@
  
  	<!-- 상품코드 ajax -->
  	<select id="ajaxProductCode" resultType="String" parameterType="int">
- 		select mk_product_id from product_info where mk_product_category = #{prodCategoryValue} order by mk_idx desc limit 0, 1;
+ 		select mk_product_id from product_info where mk_product_category = #{prodCategoryValue} order by mk_product_id desc limit 0, 1;
  	</select>
  
  	<!-- 상품 금액 변경 시 주문번호(order_num)가 null, 장바구니상태(cart_status)가 0인 row의 pr_price 데이터 일괄 변경 -->

@@ -62,8 +62,8 @@
 												<th scope="col">회원아이디</th>
 												<th scope="col">회원IP</th>												
 												<th scope="col">사용 브라우저</th>
-												<th scope="col">방문자 접속경로</th>
-												<th scope="col">방문 날짜</th>
+												<th scope="col">접속경로</th>
+												<th scope="col">로그인 일시</th>
 											</tr>
 										</thead>
 										<tbody>

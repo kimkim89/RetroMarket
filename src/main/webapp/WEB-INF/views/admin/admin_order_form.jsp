@@ -309,10 +309,8 @@
 														<input type="text" class="form-control" name="delivery_start_date_ex" id="delivery_start_date_ex" value="<fmt:formatDate value="${eachOrderList.delivery_start_date}" pattern="yyyy-MM-dd HH:mm:ss" />" readonly>
 													</div>													
 													<div class="mb-3 col-md-6" style="display:inline-block;">
-														<label class="form-label" for="point">메일 발송</label>
-														<input type="checkbox" id="" name="" value="" /> 
-														<span class="memo_span">*주문상태: 입금, 배송시작 시 이메일 전송</span>	
-														<input type="text" class="form-control" name="order_email" id="order_email" value="${eachOrderList.order_email}" placeholder="주문자이메일">
+														<label class="form-label" for="point"><span class="memo_span">  *배송시작 시 주문자에게 이메일 전송</span></label>
+														<input type="text" class="form-control" name="order_email" id="order_email" value="${eachOrderList.order_email}" placeholder="주문자이메일" readonly>
 													</div>													
 												</div>
 <br><br><br>
@@ -325,7 +323,7 @@
 									<table class="table mb-0 od_table">
 										<thead>
 											<tr>
-												<th scope="col"><input type="checkbox" name="" id="" /></th>
+<!-- 												<th scope="col"><input type="checkbox" name="" id="" /></th> -->
 												<th scope="col">상품명</th>
 												<th scope="col">수량</th>
 												<th scope="col">판매가</th>
@@ -336,7 +334,7 @@
 										<tbody>										
 										<c:forEach var="odProdList" items="${odProdList}" varStatus="status">
 											<tr>
-												<th scope="row"><input type="checkbox" name="" id="" /></th>
+<!-- 												<th scope="row"><input type="checkbox" name="" id="" /></th> -->
 												<td>${odProdList.pr_name}</td>
 												<td>${odProdList.total_num}</td>
 												<td><fmt:formatNumber value="${odProdList.pr_price}" pattern="#,###"/>원</td>

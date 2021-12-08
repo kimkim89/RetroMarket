@@ -84,7 +84,7 @@
 												</td>
 												<td>${List.mp_detail}</td>
 												<td>${List.mp_point}</td>
-												<td>${List.mp_datetime}</td>																							
+												<td><fmt:formatDate value="${List.mp_datetime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>																							
 											</tr>
 											<c:set var="num" value="${num+1}"/>
 										</c:forEach>

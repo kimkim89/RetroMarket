@@ -184,20 +184,21 @@ public class MemberService {
 		
 		String currentBrowser = "";
 		String userAgent = request.getHeader("User-Agent");
-		
+		System.out.println("확인중");
+		System.out.println(userAgent);
+		System.out.println();
 		if(userAgent.indexOf("Trident") > -1) { //IE
 			currentBrowser = "IE";
 		}else if(userAgent.indexOf("Edge") > -1) { //Edge
 			currentBrowser = "Edge";
-		}
-		
-		else if(userAgent.indexOf("Whale") > -1) { //Whale
+		}else if(userAgent.indexOf("Whale") > -1) { //Whale
 			currentBrowser = "Whale";
 		}else if(userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1 ) { //Opera
 			currentBrowser = "Opera";
 		}else if(userAgent.indexOf("Firefox") > -1) { //Firefox
 			currentBrowser = "Firefox";
-		}else if(userAgent.indexOf("Safari") > -1 || userAgent.indexOf("Chrome") > -1 ) { //Safari
+//		}else if(userAgent.indexOf("Safari") > -1 || userAgent.indexOf("Chrome") > -1 ) { //Safari
+		}else if(userAgent.indexOf("Safari") > -1 ) { //Safari
 			currentBrowser = "Safari";
 		}else if(userAgent.indexOf("Chrome") > -1) { //Chrome
 			currentBrowser = "Chrome";
