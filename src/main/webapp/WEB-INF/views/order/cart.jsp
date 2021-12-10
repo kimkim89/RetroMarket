@@ -75,16 +75,16 @@
 			//상품 품절일 경우 
 			if(chkInvStatArr[i].value.indexOf("none") != -1 ) {
 				
-				chkInvIndexArr = chkInvStatArr[i].value.split("none");
-				prTrId = "pr_tr" + chkInvIndexArr[1];
-				delChkId = "del_check" + chkInvIndexArr[1];
-				plusBtnId = "plus_btn" + chkInvIndexArr[1];
-				minusBtnId = "minus_btn" + chkInvIndexArr[1];
+// 				chkInvIndexArr = chkInvStatArr[i].value.split("none");
+// 				prTrId = "pr_tr" + chkInvIndexArr[1];
+// 				delChkId = "del_check" + chkInvIndexArr[1];
+// 				plusBtnId = "plus_btn" + chkInvIndexArr[1];
+// 				minusBtnId = "minus_btn" + chkInvIndexArr[1];
 				
-				document.getElementById(prTrId).style.opacity = "0.3";				
-				document.getElementById(delChkId).disabled = true;
-				document.getElementById(plusBtnId).removeAttribute("onclick");
-				document.getElementById(minusBtnId).removeAttribute("onclick");
+// 				document.getElementById(prTrId).style.opacity = "0.3";				
+// 				document.getElementById(delChkId).disabled = true;
+// 				document.getElementById(plusBtnId).removeAttribute("onclick");
+// 				document.getElementById(minusBtnId).removeAttribute("onclick");
 				
 			}else {
 				finalTotalPrice += eachProdPrice;
@@ -144,9 +144,9 @@
                 <input type="hidden" name="inventoryCnt" value="${cartList.mk_inventory}" /> 
                 <c:choose>
                 	<c:when test="${cartList.mk_inventory < 0}">
-                		<c:set var="quantityMsg" value=" [품절]" /> 
-                		<c:set var="prCheckColor" value="prCheckColor" /> 
-                		<c:set var="checkInvStatus" value="none" />              		
+<%--                 		<c:set var="quantityMsg" value=" [품절]" />  --%>
+<%--                 		<c:set var="prCheckColor" value="prCheckColor" />  --%>
+<%--                 		<c:set var="checkInvStatus" value="none" />              		 --%>
                 	</c:when>
                 	<c:otherwise>
                 		<c:set var="quantityMsg" value="" /> 
@@ -294,10 +294,11 @@
 			}else {
 				totalCnt++;					
 				productNumValue = totalCnt;
-				
+// 				alert("PNV: " + productNumValue + ", CI: " + currentInv);
+
 				//장바구니 수량  > 상품 재고량 
-				if(productNumValue > currentInv) { //장바구니 수량이 상품 재고량보다 클 때
-					alert("현재 남은 수량은 " + currentInv + "개 입니다.");
+				if(currentInv == 0) {
+					alert("현재 구매 가능한 수량은 " + totalNumber + "개 입니다.");
 					return false;
 				}else { //장바구니 수량이 상품 재고량과 같거나 작을 때
 

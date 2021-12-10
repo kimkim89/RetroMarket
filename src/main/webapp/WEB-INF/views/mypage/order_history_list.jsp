@@ -103,13 +103,13 @@
 												<td style="vertical-align: middle;">
 													<div class="flex-container">
 														<div class= "flex-item">
-															<a href="${contextPath}/product/productDetail?product_id=${myPgOdProdList.pr_idx}">
+															<a href="${contextPath}/product/productDetail?prCode=all&product_id=${myPgOdProdList.pr_idx}">
 																<img src="${contextPath}/resources/images/temporary/${myPgOdProdList.mk_stored_thumb}" style="border: solid lightgray; 1px; width: 110px; height: 110px;"/>
 															</a>
 														</div>
 														&nbsp;&nbsp;
 														<div class= "flex-item" style="margin: 5%; width: 380px">
-															<a href="${contextPath}/product/productDetail?product_id=${myPgOdProdList.pr_idx}">
+															<a href="${contextPath}/product/productDetail?prCode=all&product_id=${myPgOdProdList.pr_idx}">
 																<input type="text" name="pr_name" id="pr_name" class="single-input-secondary info-attribute" value="${myPgOdProdList.pr_name}(${myPgOdProdList.total_num}개)" >
 															</a>
 														</div>

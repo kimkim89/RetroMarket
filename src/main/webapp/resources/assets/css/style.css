@@ -3191,9 +3191,10 @@ input:hover, input:focus {
 }
 
 .slider-height2 {
-	background-image: url(../img/hero/about_hero.png);
+/* 	background-image: url(../img/hero/about_hero.png); */
 /* 	min-height: 500px; */
-	min-height: 250px;
+	min-height: 160px;
+	background-color: antiquewhite;
 	background-repeat: no-repeat;
 	background-position: center center
 }
