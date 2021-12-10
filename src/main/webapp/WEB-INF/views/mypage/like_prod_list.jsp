@@ -135,7 +135,14 @@
 												</td>
 												<td align="center" class="table-action" style="vertical-align: middle;">
 													<div>
-														<button class="btn btn_like" onclick="addToCart('${myLikeProdList.mk_idx}');">장바구니</button>
+														<c:choose>
+															<c:when test="${myLikeProdList.mk_inventory < 1}">
+																<button class="btn btn_like" style="background-color:red;pointer-events:none;">품절</button>
+															</c:when>
+															<c:otherwise>
+																<button class="btn btn_like" onclick="addToCart('${myLikeProdList.mk_idx}');">장바구니</button>
+															</c:otherwise>
+														</c:choose>
 													</div>
 												</td>
 											</tr>

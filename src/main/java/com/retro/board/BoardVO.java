@@ -23,5 +23,6 @@ public class BoardVO {
 	private Timestamp cs_udate;
 	private String cs_ip;
 	private int cs_reply;
+	private String origin_writer_id;
 }
 

@@ -32,6 +32,11 @@ if("${user_id}" == "") {
 						<p>찜한 상품</p>
 					</a>
 				</li>
+				<li>
+					<a href="${contextPath}/mypage/myInquiry" class="d-flex">
+						<p>문의내역조회</p>
+					</a>
+				</li>				
 <!-- 				<li> -->
 <%-- 					<a href="${contextPath}/mypage/couponAdd" class="d-flex"> --%>
 <!-- 						<p>할인쿠폰</p> -->

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.retro.board.BoardVO;
 import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.MemberVO;
 import com.retro.product.WishlistVO;
@@ -92,6 +93,21 @@ public class MyPageService {
 	//찜한 상품 개수 조회
 	public int CountLikeList(String userId) {
 		return mypageDAO.CountLikeList(userId);
+	}
+	
+	
+	//나의 주문 내역 확인 
+	public List<BoardVO> selectMyInquiryList(String userId, int pageFirst, int pageSize) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("pageFirst", pageFirst);
+		map.put("pageSize", pageSize);
+		return mypageDAO.selectMyInquiryList(map);
+	}
+	
+	//나의 주문 내역 게시글 개수
+	public int countMyInquiryList(String userId) {
+		return mypageDAO.countMyInquiryList(userId);
 	}
 	
 }
