@@ -41,7 +41,8 @@
 							   cs_writer_email,
 							   cs_subject,
 							   cs_content,
-							   cs_ip
+							   cs_ip,
+							   origin_writer_id
 							)
 					 values ( #{cs_type},
 					 	      (select origin_idx from (select max(cs_idx)+1 as origin_idx from cs_board) A),
@@ -52,7 +53,8 @@
 							  #{cs_writer_email},
 							  #{cs_subject},
 							  #{cs_content},
-							  #{cs_ip}
+							  #{cs_ip},
+							  #{cs_writer_id}
 					 		);
 	</insert>
 	
@@ -69,7 +71,8 @@
 							   cs_subject,
 							   cs_content,
 							   cs_ip,
-							   cs_reply
+							   cs_reply,
+							   origin_writer_id
 							)
 					 values ( #{cs_type},
 					 	      #{origin_idx},
@@ -81,7 +84,8 @@
 							  #{cs_subject},
 							  #{cs_content},
 							  #{cs_ip},
-							  1
+							  1,
+							  #{origin_writer_id}
 					 		);
 			
 	</insert>
@@ -131,6 +135,7 @@
 	<select id="selectNewestCsIdx" parameterType="Integer" resultType="boardVO">
 		select * from cs_board where cs_type = #{csType} order by cs_idx desc limit 1;
 	</select>
+	
 	
 	
 </mapper>

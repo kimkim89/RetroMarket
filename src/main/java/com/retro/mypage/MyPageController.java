@@ -30,6 +30,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonElement;
 import com.retro.board.BoardController;
+import com.retro.board.BoardService;
+import com.retro.board.BoardVO;
 import com.retro.common.PagingService;
 import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.UserSha256;
@@ -46,6 +48,8 @@ public class MyPageController {
 	private ProductService productService;
 	@Autowired
 	private BoardController boardController;
+	@Autowired
+	private BoardService boardService;
 	
 	
 	//카카오 테스트
@@ -352,6 +356,75 @@ public class MyPageController {
 				out.flush();				
 			}			
 		}
+		
+		
+		
+		//2021.12.11 나의 문의 내역 조회 시작 ========================================
+		@RequestMapping(value = "myInquiry")
+		public ModelAndView selectMyInquiry(	//@RequestParam(value="board_type") Integer csType,
+												@RequestParam(defaultValue = "1") int nowPage,												
+												HttpServletRequest request) {
+			
+			ModelAndView mav = new ModelAndView();
+			
+			/*페이징처리*/
+			PagingService pagingService = new PagingService();
+			Map<String, Object> pagingMap = new HashMap<String, Object>();
+			
+			
+			//20211203 수정 시작***********************************************************************************
+			//비회원 접근 금지 확인을 위한 변수
+			int accChk = 0;
+			Object userIdObj = boardController.getCurrentUserIdObj(request);
+			String userId = userIdObj.toString();
+			
+			if(userIdObj != null) { //비회원이 아닐 경우
+				accChk = 1;
+			}
+			//20211203 수정 끝***********************************************************************************
+			
+			int pageSizeToPaging = 10;
+			int blockSizeToBlockSize = 3;
+			
+			int dataCnt = myPageService.countMyInquiryList(userId);
+			
+			pagingMap = pagingService.pagingList(nowPage, dataCnt, pageSizeToPaging, blockSizeToBlockSize);
+			int pageFirst = Integer.parseInt(pagingMap.get("pageFirst").toString());
+			int pageSize = Integer.parseInt(pagingMap.get("pageSize").toString());
+			
+			//고객센터 내 게시판 게시글 조회
+			List<BoardVO> boardList = myPageService.selectMyInquiryList(userId, pageFirst, pageSize);
+			//List<BoardVO> boardList = boardService.selectCsBoardList(csType, searchField, keyword, pageFirst, pageSize);
+			
+			
+			
+		
+			mav.addObject("accChk", accChk);
+//			mav.addObject("boardName", boardName);
+//			mav.addObject("boardType", csType);
+			mav.addObject("dataCnt", dataCnt);
+			mav.addObject("pagingMap", pagingMap);
+//			mav.addObject("searchField", searchField);
+//			mav.addObject("keyword", keyword);
+			mav.addObject("boardList", boardList);
+			mav.setViewName("mypage/my_inquiry_list");
+			return mav;
+		}	
+		
+		
+	//2021.12.11 나의 문의 내역 조회 끝	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

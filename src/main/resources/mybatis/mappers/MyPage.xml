@@ -98,4 +98,21 @@
 	</select>
 	
 	
+	<!-- 나의 주문 내역 확인 -->
+	<select id="selectMyInquiryList" parameterType="map" resultType="boardVO">
+		select * 
+		from cs_board 
+		where origin_writer_id = #{userId}
+		order by origin_idx desc, group_order asc
+		limit #{pageFirst}, #{pageSize};
+	</select>
+	
+	
+	<!-- 나의 주문 내역 게시글 개수-->
+	<select id="countMyInquiryList" parameterType="String" resultType="int">
+		select count(*) from cs_board where origin_writer_id = #{userId};
+	</select>
+	
+	
+	
 </mapper>

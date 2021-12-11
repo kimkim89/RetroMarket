@@ -21,7 +21,7 @@
 		<jsp:include page="../include/product_subtitle.jsp" />
 		<!--=============== Subtitle 끝 ================-->
         <!-- Latest Products Start -->
-        <section class="popular-items latest-padding">        
+        <section class="popular-items latest-padding" style="padding-top: 50px;">        
             <div class="container">
                 <div class="row product-btn justify-content-between mb-40">
                     <div class="properties__button">

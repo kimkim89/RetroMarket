@@ -91,7 +91,7 @@
                             </div>
                             <div class="popular-caption">
                                 <h3><a href="product_details.html">${listByRegDate.mk_product_name}</a></h3>
-                                <span>${listByRegDate.mk_product_price}</span>
+                                <span>${listByRegDate.mk_product_price}원</span>
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                             </div>
                             <div class="popular-caption">
                                 <h3><a href="product_details.html">${listBySoldNum.mk_product_name}</a></h3>
-                                <span>${listBySoldNum.mk_product_price}</span>
+                                <span>${listBySoldNum.mk_product_price}원</span>
                             </div>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                             </div>
                             <div class="popular-caption">
                                 <h3><a href="product_details.html">${listByDiscount.mk_product_name}</a></h3>
-                                <span>${listByDiscount.mk_product_price}</span>
+                                <span>${listByDiscount.mk_product_price}원</span>
                             </div>
                         </div>
                     </div>

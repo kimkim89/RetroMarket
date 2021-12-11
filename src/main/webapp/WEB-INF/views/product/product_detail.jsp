@@ -29,9 +29,18 @@
 	.owl-carousel .owl-item img {
 		width: 50%;
 	}
-	 	
-    </style>
+	</style>
     
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+   		if(document.getElementById("btn_like").innerText == "찜취소") {
+   			document.getElementById("btn_like").style.borderColor = "red";
+   			document.getElementById("btn_like").style.color = "red";
+   			document.getElementById("btn_like").style.fontWeight = "bold";
+    	}			
+    });
+    </script>
 </head>
 <body>
 

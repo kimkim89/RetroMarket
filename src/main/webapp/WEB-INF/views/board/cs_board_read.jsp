@@ -31,7 +31,7 @@
 		
 		//답변 페이지로 이동
 		function replyInquiry() {
-			document.getElementById("write_form").action = "${contextPath}/board/csReplyUpdateForm?board_type=${boardType}&board_num=${csIdx}&wu=u";
+			document.getElementById("write_form").action = "${contextPath}/board/csReplyUpdateForm?board_type=${boardType}&board_num=${csIdx}&wu=i";
 			document.getElementById("write_form").submit();
 		}
 		
@@ -102,7 +102,9 @@
 											<c:if test="${(checkUserStatus == 1 && boardInfoVO.cs_reply == 0)}">
 												<a href="javascript:replyInquiry()" class="genric-btn warning-border radius" style="color:red;border:solid 1px red;">답변</a>
 											</c:if>
+											<c:if test="${(checkUserStatus == 1 || (user_id == boardInfoVO.cs_writer_id))}">
 												<a href="javascript:deleteInquiry()" class="genric-btn warning-border radius" style="color:green;border:solid 1px green;">삭제</a>
+											</c:if>
 												<a href="javascript:history.back()" class="genric-btn warning-border radius">목록</a>
 											</div>
 									</form>

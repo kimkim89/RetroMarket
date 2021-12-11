@@ -183,6 +183,9 @@
 														<p class="delivery_info">배송비</p>
 														<p class="delivery_info">결제 종류</p>
 														<p class="delivery_info">입금 계좌</p>
+													<c:if test="${csOrderInfo.used_point > 0}">	
+														<p class="delivery_info">포인트 사용</p>
+													</c:if>	
 														<p class="delivery_info">총 결제금액</p>
 													</div>													
 												</td>
@@ -194,6 +197,9 @@
 													<c:set var="payment" value="무통장입금"></c:set>
 														<p class="delivery_info">${payment}</p>
 														<p class="delivery_info">${csOrderInfo.bank_acct_num} (입금자명: ${csOrderInfo.bank_acct_owner})</p>
+													</c:if>
+													<c:if test="${csOrderInfo.used_point > 0}">
+														<p class="delivery_info"><fmt:formatNumber value="${csOrderInfo.used_point}" pattern="#,###"/>원</p>
 													</c:if>
 														<p class="delivery_info"><fmt:formatNumber value="${csOrderInfo.total_order_price}" pattern="#,###"/>원</p>
 													</div>													

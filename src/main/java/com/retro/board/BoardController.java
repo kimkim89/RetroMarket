@@ -370,6 +370,10 @@ public class BoardController {
 		//수정할 글의 저장된 데이터 불러오기
 		BoardVO boardInfoVO = boardService.selectEachBoardInfo(csIdx);
 		
+		//답변글 제목
+		String csSubject = boardInfoVO.getCs_subject();
+		boardInfoVO.setCs_subject("→RE: " + csSubject);
+		
 		//고객센터게시판명 가져오기
 		String boardName = getBoardName(csType);
 		
@@ -399,7 +403,7 @@ public class BoardController {
 		mav.addObject("memberStatus", memberStatus);
 		mav.addObject("accChk", accChk);
 		mav.addObject("wu", wu); //원본 수정페이지인지 새글 작성 페이지 인지 구분
-		mav.addObject("board_num", csIdx);
+		mav.addObject("boardNum", csIdx);
 		mav.addObject("boardInfoVO", boardInfoVO);
 		mav.addObject("boardName", boardName);
 		mav.addObject("boardType", csType);
@@ -441,6 +445,8 @@ public class BoardController {
 
 		//===========================================================================================================
 	
+	
+
 	
 	
 	

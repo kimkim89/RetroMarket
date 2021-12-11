@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.retro.board.BoardVO;
 import com.retro.customerOrder.CustomerOrderVO;
 import com.retro.member.MemberVO;
 import com.retro.product.WishlistVO;
@@ -67,6 +68,18 @@ public class MyPageDAO {
 	public int CountLikeList(String userId) {
 		return sqlSession.selectOne("mapper.MyPage.CountLikeList", userId);
 	}
+	
+	//나의 주문 내역 확인 
+	public List<BoardVO> selectMyInquiryList(Map<String, Object> map) {
+		return sqlSession.selectList("mapper.MyPage.selectMyInquiryList", map);
+	}
+	
+	//나의 주문 내역 게시글 개수
+	public int countMyInquiryList(String userId) {
+		return sqlSession.selectOne("mapper.MyPage.countMyInquiryList", userId);
+	}
+	
+
 	
 	
 

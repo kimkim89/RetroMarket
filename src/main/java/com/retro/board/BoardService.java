@@ -66,6 +66,10 @@ public class BoardService {
 			}
 			boardVO.setOrigin_idx(csIdx);
 			
+			//2021.12.11
+			BoardVO cBoardVO = selectEachBoardInfo(csIdx);
+			boardVO.setOrigin_writer_id(cBoardVO.getCs_writer_id());
+			
 			return boardDAO.insertReplyInfo(boardVO);
 			
 		}else { //원글 저장할 경우 ******* 

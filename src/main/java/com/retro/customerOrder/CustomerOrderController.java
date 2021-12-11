@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.retro.board.BoardController;
 import com.retro.cart.CartVO;
 import com.retro.common.MailSendService;
 import com.retro.member.MemberVO;
@@ -31,12 +32,24 @@ public class CustomerOrderController {
 	private CustomerOrderService csOrderService;
 	@Autowired
 	private MailSendService mss;
-	
+	@Autowired
+	BoardController boardController;
 	
 	//선택구매 페이지 이동
 		@RequestMapping(value="orderSomeProd")
 		public ModelAndView selectSomeOrderList(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			ModelAndView mav = new ModelAndView();
+			
+			//로그인 되어 있지 않을 경우 로그인 페이지로 이동 작업 시작***********************************************************************************
+			Object userIdObj = boardController.getCurrentUserIdObj(request);
+			
+			if(userIdObj == null) { //비회원이 아닐 경우
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.print("<script> alert('로그인 후 이용해 주십시오.'); location.href='" + request.getContextPath() + "/member/login'; </script>");
+				out.flush();
+			}
+			//로그인 되어 있지 않을 경우 로그인 페이지로 이동 작업 끝***********************************************************************************
 			
 			//상품총액 변수
 			Integer totalProdPrice = 0;
