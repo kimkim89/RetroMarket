@@ -25,7 +25,19 @@
 	<main style="background-color: white;">
 	
 		<!--=============== Subtitle 시작 ================-->
-		<jsp:include page="../include/subtitle.jsp" />
+		<div class="slider-area ">
+			<div class="single-slider slider-height2 d-flex align-items-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="hero-cap text-center">
+								<h2>나의 문의 내역</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!--=============== Subtitle 끝 ================-->
 		
 		<!--================Blog Area =================-->

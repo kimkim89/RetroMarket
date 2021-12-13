@@ -57,8 +57,9 @@
 	<!-- 페이징 처리 후 회원 조회 -->
 	<select id="pagingList" resultType="memberVO" parameterType="java.util.HashMap">
 		select * from member
+		where status = 0
 		<if test="searchField != '' ">
-		where ${searchField} like concat('%', #{keyword}, '%')
+		and ${searchField} like concat('%', #{keyword}, '%')
 		</if>
 		order by joindate desc limit #{pageFirst}, #{pageSize};
 	</select>

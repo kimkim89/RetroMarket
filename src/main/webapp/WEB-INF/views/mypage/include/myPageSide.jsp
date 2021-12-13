@@ -34,7 +34,7 @@ if("${user_id}" == "") {
 				</li>
 				<li>
 					<a href="${contextPath}/mypage/myInquiry" class="d-flex">
-						<p>문의내역조회</p>
+						<p>나의문의내역</p>
 					</a>
 				</li>				
 <!-- 				<li> -->

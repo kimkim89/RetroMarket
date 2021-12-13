@@ -400,7 +400,7 @@ public class MyPageController {
 			
 		
 			mav.addObject("accChk", accChk);
-//			mav.addObject("boardName", boardName);
+			mav.addObject("boardName", "나의문의내역");
 //			mav.addObject("boardType", csType);
 			mav.addObject("dataCnt", dataCnt);
 			mav.addObject("pagingMap", pagingMap);
