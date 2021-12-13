@@ -50,6 +50,12 @@
 			document.getElementById("write_form").action = "${contextPath}/board/deleteInquiryInfo";
 			document.getElementById("write_form").submit();
 		}
+		
+		//목록페이지로 이동
+		function moveToInquiryList() {
+			document.getElementById("write_form").action = "${contextPath}/board/customerBoardList?board_type=${boardType}";
+			document.getElementById("write_form").submit();
+		}
 	</script>
 	
 	
@@ -78,6 +84,9 @@
 										<input type="hidden" name="board_num" id="board_num" value="${csIdx}" >
 										<input type="hidden" name="check_reply" id="check_reply" value="${boardInfoVO.cs_reply}" >
 											<div class="mt-10">
+												<input type="text" id="cs_writer_name" name="cs_writer_name" value="${boardInfoVO.cs_writer_name}" readonly required class="single-input">
+											</div> 
+											<div class="mt-10">
 												<input type="text" id="cs_subject" name="cs_subject" value="${boardInfoVO.cs_subject}" readonly required class="single-input">
 											</div> 
 											
@@ -105,7 +114,7 @@
 											<c:if test="${(checkUserStatus == 1 || (user_id == boardInfoVO.cs_writer_id))}">
 												<a href="javascript:deleteInquiry()" class="genric-btn warning-border radius" style="color:green;border:solid 1px green;">삭제</a>
 											</c:if>
-												<a href="javascript:history.back()" class="genric-btn warning-border radius">목록</a>
+												<a href="javascript:moveToInquiryList()" class="genric-btn warning-border radius">목록</a>
 											</div>
 									</form>
 								</div>

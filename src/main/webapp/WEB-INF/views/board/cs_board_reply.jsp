@@ -23,19 +23,37 @@
 
 
 	<header>
-		<!-- Header Start -->
-		<jsp:include page="../include/TopNavi.jsp" />
-		<!-- Header End -->
-		<script type="text/javascript">
-		function writeInquiry() {
-			if(document.getElementById("cs_content").value == "") {
-				alert("문의 사항 내용을 작성해 주세요.");
-				document.getElementById("cs_content").focus();
-				return false;
-			}
-			
-			document.getElementById("write_form").submit();
+	<!-- Header Start -->
+	<jsp:include page="../include/TopNavi.jsp" />
+	<!-- Header End -->
+	<script type="text/javascript">
+	
+	function writeInquiry() {
+		if(document.getElementById("cs_content").value == "") {
+			alert("문의 사항 내용을 작성해 주세요.");
+			document.getElementById("cs_content").focus();
+			return false;
 		}
+		document.getElementById("write_form").action = "${contextPath}/board/registerInquiry";
+		document.getElementById("write_form").submit();
+	}
+	
+	//목록페이지로 이동
+	function moveToInquiryList() {
+		document.getElementById("write_form").action = "${contextPath}/board/customerBoardList?board_type=${boardType}";
+		document.getElementById("write_form").submit();
+	}
+	
+	//수정 데이터 저장
+	function updateInquiry() {
+		if(document.getElementById("cs_content").value == "") {
+			alert("문의 사항 내용을 작성해 주세요.");
+			document.getElementById("cs_content").focus();
+			return false;
+		}
+		document.getElementById("write_form").action = "${contextPath}/board/updateInquiry";
+		document.getElementById("write_form").submit();
+	}
 	</script>
 	</header>
 	<main>
@@ -62,23 +80,28 @@
 										문의 사항 답변 수정
 										</c:if>
 									</h4>
-									<form id="write_form" action="${contextPath}/board/registerInquiry" method="post">
+									<form id="write_form" action="" method="post">
 										
 										<input type="hidden" name="board_type" id="board_type" value="${boardType}" >
 										<input type="hidden" name="board_num" id="board_num" value="${boardNum}" >
 										<input type="hidden" name="reply_check" id="reply_check" value="reply" >
 										
 											<div class="mt-10">
-												<input type="text" id="cs_subject" name="cs_subject" value="${boardInfoVO.cs_subject}" required class="single-input">
+												<input type="text" id="cs_subject" name="cs_subject" value="${boardInfoVO.cs_subject}" maxlength="30" required class="single-input">
 											</div> 
 											
 											<div class="mt-10">
-												<textarea class="single-input" id="cs_content" name="cs_content" style="height:400px;" placeholder="문의 사항에 관하여 글을 남겨주세요!"></textarea>
+												<textarea class="single-input" id="cs_content" name="cs_content" style="height:400px;" placeholder="문의 사항에 관하여 글을 남겨주세요!">${boardInfoVO.cs_content}</textarea>
 											</div>
 												
 											<div align="center" style="margin-top: 15px;">
-												<a href="javascript:writeInquiry();" class="genric-btn info-border radius" id="join-btn">등록</a> 
-												<a href="javascript:history.back()" class="genric-btn warning-border radius">목록</a>
+												<c:if test="${wu == 'u'}">
+													<a href="javascript:updateInquiry();" class="genric-btn info-border radius" id="join-btn">수정</a>
+												</c:if>
+												<c:if test="${wu == 'i'}">
+													<a href="javascript:writeInquiry();" class="genric-btn info-border radius" id="join-btn">등록</a>
+												</c:if>												 
+												<a href="javascript:moveToInquiryList()" class="genric-btn warning-border radius">목록</a>
 											</div>
 									</form>
 								</div>
