@@ -47,6 +47,13 @@
 				document.getElementById("write_form").action = "${contextPath}/board/updateInquiry";
 			}
 			document.getElementById("write_form").submit();
+			
+		}
+		
+		//목록페이지로 이동
+		function moveToInquiryList() {
+			document.getElementById("write_form").action = "${contextPath}/board/customerBoardList?board_type=${boardType}";
+			document.getElementById("write_form").submit();
 		}
 	</script>
 	</header>
@@ -84,7 +91,7 @@
 										<input type="hidden" name="board_num" id="board_num" value="${board_num}" >
 									</c:if>
 											<div class="mt-10">
-												<input type="text" id="cs_subject" name="cs_subject" placeholder="제목을 입력해주세요." value="${boardInfoVO.cs_subject}"  required class="single-input">
+												<input type="text" id="cs_subject" name="cs_subject" placeholder="제목을 입력해주세요." value="${boardInfoVO.cs_subject}" maxlength="30" required class="single-input">
 											</div> 
 											<div class="mt-10">
 												<textarea class="single-input" id="cs_content" name="cs_content" style="height:400px;" placeholder="문의 사항에 관하여 글을 남겨주세요!">${boardInfoVO.cs_content}</textarea>
@@ -110,7 +117,7 @@
 											<c:if test="${wu == 'u'}">
 												<a href="javascript:writeInquiry(${wStat});" class="genric-btn info-border radius" id="join-btn">저장</a>
 											</c:if>	
-												<a href="javascript:history.back()" class="genric-btn warning-border radius">목록</a>
+												<a href="javascript:moveToInquiryList();" class="genric-btn warning-border radius">목록</a>
 											</div>
 									</form>
 								</div>

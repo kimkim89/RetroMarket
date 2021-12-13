@@ -25,7 +25,19 @@
 	<main style="background-color: white;">
 	
 		<!--=============== Subtitle 시작 ================-->
-		<jsp:include page="../include/subtitle.jsp" />
+		<div class="slider-area ">
+			<div class="single-slider slider-height2 d-flex align-items-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="hero-cap text-center">
+								<h2>나의 문의 내역</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!--=============== Subtitle 끝 ================-->
 		
 		<!--================Blog Area =================-->
@@ -72,8 +84,9 @@
 															${boardList.cs_writer_name}
 														</c:when>
 														<c:otherwise>
-															<c:set var="writer_name" value="${boardList.cs_writer_name}" />
-															${fn:substring(writer_name, 0,1) }○○
+															${boardList.cs_writer_name}
+<%-- 															<c:set var="writer_name" value="${boardList.cs_writer_name}" /> --%>
+<%-- 															${fn:substring(writer_name, 0,1) }○○ --%>
 														</c:otherwise>
 													</c:choose>
 												</td>					
@@ -90,17 +103,17 @@
 							<ul class="pagination pagination-md">
 								<c:if test="${pagingMap.blockFirst != 1}">
 									<li class="page-item"><a class="page-link"
-										href="${contextPath}/board/customerBoardList?board_type=${boardType}&nowPage=${pagingMap.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i
+										href="${contextPath}/mypage/myInquiry?nowPage=${pagingMap.blockFirst-1}&searchField=${searchField}&keyword=${keyword}"><i
 											class="fas fa-angle-left"></i></a></li>
 								</c:if>
 								<c:forEach begin="${pagingMap.blockFirst}" end="${pagingMap.blockLast}" var="i">
 									<li class="page-item">
-										<a href="${contextPath}/board/customerBoardList?board_type=${boardType}&nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
+										<a href="${contextPath}/mypage/myInquiry?nowPage=${i}&searchField=${searchField}&keyword=${keyword}" class="page-link" >${i}</a>
 									</li>
 								</c:forEach>
 								<c:if test="${pagingMap.totalPage != pagingMap.blockLast}">
 									<li class="page-item">
-										<a class="page-link" href="${contextPath}/board/customerBoardList?board_type=${boardType}&nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
+										<a class="page-link" href="${contextPath}/mypage/myInquiry?nowPage=${pagingMap.blockLast+1}&searchField=${searchField}&keyword=${keyword}">
 											<i class="fas fa-angle-right"></i>
 										</a>
 									</li>

@@ -372,7 +372,10 @@ public class BoardController {
 		
 		//답변글 제목
 		String csSubject = boardInfoVO.getCs_subject();
-		boardInfoVO.setCs_subject("→RE: " + csSubject);
+		
+		if(wu.equals("i")) {
+			boardInfoVO.setCs_subject("→RE: " + csSubject);
+		}
 		
 		//고객센터게시판명 가져오기
 		String boardName = getBoardName(csType);
