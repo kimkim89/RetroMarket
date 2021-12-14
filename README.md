@@ -1,6 +1,7 @@
-Oò# RetroSnackMarket
+아맞다마켓 온라인 쇼핑몰 프로젝트
 
-옛날 과자 상점(쇼핑몰 프로젝트)
+
+<!-- 옛날 과자 상점(쇼핑몰 프로젝트)
 
 #서버주소 (www.--완성후 공개 예정!!)
 
@@ -35,3 +36,4 @@ Json 파싱, Http통신 (Rest Api)에 대한 공부 더 필요
 () => JSON OBJ를 response값으로 return받을 때 DTO객체를 만들면 훨씬 쉽게 데이터 파싱가능
 오픈 API활용 
 Spring Security 활용!!! 
+-->
