@@ -3,7 +3,7 @@ Oò# RetroSnackMarket
 옛날 과자 상점(쇼핑몰 프로젝트)
 
 #서버주소 (www.--완성후 공개 예정!!)
-
+<!--
 ModelAndView객체 @Autowired 의존성 주입으로 전역객체로 사용하던 오류(안좋은 코딩)를 감지 후 메서드 내부 일회성 객체로 코드 리팩토링 
 싱글톤 개념 공부하면 좋을 것
 
@@ -35,3 +35,4 @@ Json 파싱, Http통신 (Rest Api)에 대한 공부 더 필요
 () => JSON OBJ를 response값으로 return받을 때 DTO객체를 만들면 훨씬 쉽게 데이터 파싱가능
 오픈 API활용 
 Spring Security 활용!!! 
+-->
