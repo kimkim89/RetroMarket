@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Geeks in the Purple</title>
+    <title>아맞다마켓</title>
     
     <%@ include file="./include/Top.jsp" %>
     

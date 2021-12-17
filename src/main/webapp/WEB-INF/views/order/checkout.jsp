@@ -101,26 +101,26 @@
                   	<input type="hidden" name="u_point" id="u_point" value="0" />
                   	
                     <div class="col-md-6 form-group p_star">
-                      <input type="text" class="form-control" id=receiver_name name="receiver_name" placeholder="받는사람 이름 *"/>
+                      <input type="text" class="form-control" id=receiver_name name="receiver_name" placeholder="받는사람 이름 *" maxlength="20"/>
 <!--                       <span class="placeholder" data-placeholder="받는사람 이름"></span> -->
                     </div>
                     <div class="col-md-7 form-group p_star">
-                      <input type="text" class="form-control" id="receiver_phone" name="receiver_phone" placeholder="연락처 *"/>
+                      <input type="number" class="form-control" id="receiver_phone" name="receiver_phone" placeholder="연락처 *" maxlength="20"/>
 <!--                       <span class="placeholder" data-placeholder="연락처"></span> -->
                     </div>
                     <div class="col-md-7 form-group p_star">
-                      <input type="text" class="form-control" id="receiver_addr1" name="receiver_addr1" placeholder="우편번호 *"/>
+                      <input type="text" class="form-control" id="receiver_addr1" name="receiver_addr1" placeholder="우편번호 *" readonly/>
 <!--                       <span class="placeholder" data-placeholder="우편번호"></span> -->
                     </div>
 					<div class="col-md-2 form-group p_star">
 						<button type="button" id="addr_btn" style="color: black; padding: 4px;" onclick="addressFind();">주소 검색</button>
 					</div>                                        
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="receiver_addr2" name="receiver_addr2" placeholder="주소 *"/>
+                      <input type="text" class="form-control" id="receiver_addr2" name="receiver_addr2" placeholder="주소 *" readonly/>
 <!--                       <span class="placeholder" data-placeholder="주소"></span> -->
                     </div>
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="receiver_addr3" name="receiver_addr3" placeholder="상세주소 *"/>
+                      <input type="text" class="form-control" id="receiver_addr3" name="receiver_addr3" placeholder="상세주소 *" maxlength="40"/>
 <!--                       <span class="placeholder" data-placeholder="상세주소"></span> -->
                     </div>
                     <div class="col-md-12 form-group p_star">
@@ -162,11 +162,11 @@
                       </select>                      
                     </div>
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="bank_acct_num" name="bank_acct_num" placeholder="계좌번호 *"/>
+                      <input type="number" class="form-control" id="bank_acct_num" name="bank_acct_num" placeholder="계좌번호 *" maxlength="50"/>
 <!--                       <span class="placeholder" data-placeholder="계좌번호"></span> -->
                     </div> 
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="bank_acct_owner" name="bank_acct_owner" placeholder="예금주명 *"/>
+                      <input type="text" class="form-control" id="bank_acct_owner" name="bank_acct_owner" placeholder="예금주명 *" maxlength="20"/>
 <!--                       <span class="placeholder" data-placeholder="예금주명"></span> -->
                     </div>    
                   </form>
