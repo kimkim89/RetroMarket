@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.retro.admin.PointVO;
 import com.retro.adminProduct.AdminProductVO;
+import com.retro.board.BoardService;
 import com.retro.cart.CartVO;
 import com.retro.member.MemberVO;
 import com.retro.mypage.MyPageService;
@@ -27,6 +28,8 @@ public class CustomerOrderService {
 	private CustomerOrderDAO csOrderDAO;
 	@Autowired
 	private MyPageService mypageService;
+	@Autowired
+	private BoardService boardService;
 	
 	
 	
@@ -110,6 +113,20 @@ public class CustomerOrderService {
 		csOrderVO.setAdded_point(purchasePoint);
 		csOrderVO.setUsed_point(usedPoint);
 		
+		//XSS 방지 start ==========================
+		//받는사람이름
+		csOrderVO.setReceiver_name(boardService.CheckXSS(csOrderVO.getReceiver_name()));
+		//연락처
+		csOrderVO.setReceiver_phone(boardService.CheckXSS(csOrderVO.getReceiver_phone()));
+		//상세주소
+		csOrderVO.setReceiver_addr3(boardService.CheckXSS(csOrderVO.getReceiver_addr3()));
+		//요청사항 직접 입력칸
+		csOrderVO.setDelivery_msg(boardService.CheckXSS(csOrderVO.getDelivery_msg()));
+		//계좌번호
+		csOrderVO.setBank_acct_num(boardService.CheckXSS(csOrderVO.getBank_acct_num()));
+		//예금주명
+		csOrderVO.setBank_acct_owner(boardService.CheckXSS(csOrderVO.getBank_acct_owner()));
+		//XSS 방지 end ============================
 		
 		//주문할 상품 인덱스 번호
 		String selectedIndexStr = request.getParameter("selected_index");

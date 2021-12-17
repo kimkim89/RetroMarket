@@ -52,6 +52,11 @@ public class BoardService {
 		boardVO.setCs_ip(writerIP);
 		boardVO.setCs_type(csType);
 		
+		String csSubject = CheckXSS(boardVO.getCs_subject());
+		String csContent = CheckXSS(boardVO.getCs_content());
+		boardVO.setCs_subject(csSubject);
+		boardVO.setCs_content(csContent);
+		
 		if(request.getParameter("reply_check").equals("reply")) { //답변글 저장할 경우*************
 			csIdx = Integer.parseInt(request.getParameter("board_num"));
 			//특정 게시글의 최신 답변글 조회
@@ -121,6 +126,20 @@ public class BoardService {
 	//각 고객센터게시판별 최신글 조회 
 	public BoardVO selectNewestCsIdx(Integer csType) {
 		return boardDAO.selectNewestCsIdx(csType);
+	}
+	
+	//XSS 방지 
+	public String CheckXSS(String str) {
+		
+		if(str.indexOf("<") > -1 || str.indexOf(">") > -1) {
+			str = str.replaceAll("<", "&lt;");
+			str = str.replaceAll(">", "&gt;");
+		}
+		
+		if(str.toLowerCase().indexOf("script") > -1 ) {
+			str = str.replaceAll("(?i)script", "");
+		}
+		return str;
 	}
 	
 }
